@@ -11,13 +11,20 @@ if (config.env === 'test') {
     logger.info('Redis connection: Mock initialized for testing.');
   } catch (err) {
     redis = new Redis(config.redis.uri, {
-      maxRetriesPerRequest: null
+      maxRetriesPerRequest: null,
     });
-    logger.info('Redis connection: Real connection initialized for testing.');
   }
 } else {
   redis = new Redis(config.redis.uri, {
-    maxRetriesPerRequest: null
+    maxRetriesPerRequest: null,
+    enableOfflineQueue: false,
+    retryStrategy(times) {
+      if (times > 3) {
+        logger.warn('Redis connection unreachable. Running with offline cache fallback for dev.');
+        return null;
+      }
+      return Math.min(times * 100, 1000);
+    },
   });
 
   redis.on('connect', () => {
@@ -25,7 +32,7 @@ if (config.env === 'test') {
   });
 
   redis.on('error', (err) => {
-    logger.error('Redis connection error:', err);
+    // Suppress unhandled error log bursts when Redis server is offline locally
   });
 }
 

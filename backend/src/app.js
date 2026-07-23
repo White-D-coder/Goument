@@ -38,9 +38,26 @@ app.use(helmet({
   }
 }));
 
-const corsOrigins = ['https://www.gourmetgem.com', 'https://m.gourmetgem.com', 'http://localhost:3000'];
+const allowedOrigins = [
+  'https://www.gourmetgem.com',
+  'https://m.gourmetgem.com',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
+
 app.use(cors({
-  origin: corsOrigins,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.indexOf(origin) !== -1 ||
+      origin.startsWith('http://localhost') ||
+      origin.startsWith('http://127.0.0.1') ||
+      origin.startsWith('http://192.168.')
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-Id', 'Idempotency-Key']

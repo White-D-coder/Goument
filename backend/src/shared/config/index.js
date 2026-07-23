@@ -10,7 +10,7 @@ const isTest = process.env.NODE_ENV === 'test';
 const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').default('development'),
-    PORT: Joi.number().default(5000),
+    PORT: Joi.number().default(5001),
     MONGODB_URI: isTest ? Joi.string().default('mongodb://127.0.0.1:27017/gourmetgem-test') : Joi.string().required().description('MongoDB connection URI'),
     REDIS_URI: Joi.string().default('redis://127.0.0.1:6379').description('Redis connection URI'),
     JWT_ACCESS_SECRET: isTest ? Joi.string().default('test_jwt_access_secret_key_12345') : Joi.string().required().description('JWT access token secret key'),

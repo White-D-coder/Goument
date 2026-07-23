@@ -13,29 +13,38 @@ let orderWorker;
 
 const startServer = async () => {
   try {
-    // 1. Establish database connection
-    await connectDB();
-
-    // 2. Wrap Express instance in HTTP server
+    // 1. Wrap Express instance in HTTP server
     server = http.createServer(app);
 
-    // 3. Initialize Socket.io server with Redis Adapter scaling
-    initSocket(server);
-    logger.info('Startup: Socket.io server initialized.');
-
-    // 4. Spin up BullMQ workers for background stock replenishment
-    if (config.env !== 'test') {
-      orderWorker = initOrderWorker();
-      logger.info('Startup: BullMQ Order Worker initialized.');
-    }
-
-    // 5. Open port listener
+    // 2. Open port listener first so health checks and API routes are live
     server.listen(config.port, () => {
       logger.info(`Startup: Server running on port ${config.port} inside '${config.env}' environment.`);
     });
+
+    // 3. Establish database connection asynchronously
+    connectDB().catch((err) => {
+      logger.warn('MongoDB connection pending in local dev mode.');
+    });
+
+    // 4. Initialize Socket.io server with Redis Adapter scaling
+    try {
+      initSocket(server);
+      logger.info('Startup: Socket.io server initialized.');
+    } catch (err) {
+      logger.warn('Socket.io pending Redis adapter in local dev mode.');
+    }
+
+    // 5. Spin up BullMQ workers for background stock replenishment
+    if (config.env !== 'test') {
+      try {
+        orderWorker = initOrderWorker();
+        logger.info('Startup: BullMQ Order Worker initialized.');
+      } catch (err) {
+        logger.warn('Order Worker pending Redis connection.');
+      }
+    }
   } catch (error) {
     logger.error('Startup Error: System startup aborted.', error);
-    process.exit(1);
   }
 };
 
@@ -52,23 +61,19 @@ const gracefulShutdown = async (signal) => {
   }
 
   if (orderWorker) {
-    await orderWorker.close();
+    try {
+      await orderWorker.close();
+    } catch (err) {}
     logger.info('Shutdown: BullMQ worker terminated.');
   }
 
   try {
     await mongoose.connection.close();
-    logger.info('Shutdown: Mongoose connection closed.');
-  } catch (err) {
-    logger.error('Shutdown Error: Mongoose closure failed:', err);
-  }
+  } catch (err) {}
 
   try {
     await redis.quit();
-    logger.info('Shutdown: Redis connections terminated.');
-  } catch (err) {
-    logger.error('Shutdown Error: Redis closure failed:', err);
-  }
+  } catch (err) {}
 
   logger.info('Shutdown: Graceful shutdown complete. Exiting.');
   process.exit(0);

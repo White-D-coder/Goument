@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Pagio';
+  src: url('/fonts/Pagio.woff') format('woff'),
+       url('/fonts/Pagio.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DreamAlways';
+  src: url('/fonts/DreamAlways.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TropicalScript';
+  src: url('/fonts/TropicalScript.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --color-blush-pink: #FADADD;
+    --color-baby-blue: #DDEEFF;
+    --color-lavender-mist: #E6D9FF;
+    --color-mint-cream: #DFF5EA;
+    --color-butter-yellow: #FFF2B3;
+    --color-plum-dark: #3A2342;
+    --color-plum-accent: #6B427B;
+    --color-pastel-cream: #FAF8FC;
+
+    /* Semantic Mappings */
+    --color-gold: #6B427B;
+    --color-gold-dark: #3A2342;
+    --color-gold-light: #E6D9FF;
+    --color-charcoal: #3A2342;
+    --color-cream: #FAF8FC;
+    --color-cream-card: #FFFFFF;
+    --color-border: #E6D9FF;
+    --color-text-dark: #3A2342;
+    --color-text-muted: #7A6585;
+  }
+
+  body {
+    background-color: var(--color-pastel-cream);
+    color: var(--color-text-dark);
+    font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury, .font-pagio {
+    font-family: var(--font-cormorant), var(--font-playfair), 'Pagio', Georgia, serif !important;
+  }
+
+  .font-dream-always {
+    font-family: 'DreamAlways', var(--font-dream-always), sans-serif !important;
+  }
+
+  .font-tropical-script {
+    font-family: 'TropicalScript', var(--font-tropical-script), cursive !important;
+  }
+}
+
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #6B427B 0%, #8E58A0 50%, #B882CA 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(107, 66, 123, 0.3);
+}
+
+.gold-gradient-btn:active {
+  transform: scale(0.97);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

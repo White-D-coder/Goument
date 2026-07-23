@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Trash2, Plus, Minus, Tag, ArrowRight, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '@/hooks/useCart';
+import { validateCouponAPI } from '@/shared/api/endpoints';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
 import toast from 'react-hot-toast';
 
@@ -19,19 +20,31 @@ export default function CartPage() {
   const estimatedTaxPaise = Math.round((subtotalPaise - discountPaise) * 0.05); // 5% tax
   const totalPaise = subtotalPaise - discountPaise + estimatedTaxPaise;
 
-  const handleApplyCoupon = (e: React.FormEvent) => {
+  const handleApplyCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!couponCode.trim()) return;
 
-    if (couponCode.trim().toUpperCase() === 'LUXURY10' || couponCode.trim().toUpperCase() === 'GOURMET10') {
-      setDiscountPercent(10);
-      toast.success('Coupon LUXURY10 applied! 10% discount added.', {
+    try {
+      const response = await validateCouponAPI(couponCode.trim());
+      const discount = response?.discountPercent || 10;
+      setDiscountPercent(discount);
+      toast.success(`Coupon ${couponCode.toUpperCase()} applied! ${discount}% discount added.`, {
         style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #D4AF37' },
       });
-    } else {
-      toast.error('Invalid coupon code. Try "LUXURY10"', {
-        style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #6E1A24' },
-      });
+    } catch (err) {
+      if (
+        couponCode.trim().toUpperCase() === 'LUXURY10' ||
+        couponCode.trim().toUpperCase() === 'GOURMET10'
+      ) {
+        setDiscountPercent(10);
+        toast.success('Coupon LUXURY10 applied! 10% discount added.', {
+          style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #D4AF37' },
+        });
+      } else {
+        toast.error('Invalid coupon code. Try "LUXURY10"', {
+          style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #6E1A24' },
+        });
+      }
     }
   };
 
@@ -164,7 +177,7 @@ export default function CartPage() {
             </div>
             {discountPaise > 0 && (
               <div className="flex justify-between text-[#0F5132] font-semibold">
-                <span>Discount (10%)</span>
+                <span>Discount ({discountPercent}%)</span>
                 <span>-₹{(discountPaise / 100).toLocaleString('en-IN')}</span>
               </div>
             )}

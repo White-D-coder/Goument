@@ -1,0 +1,12 @@
+/* Webfont: Avocalipss-Regular */@font-face {
+    font-family: 'Avocalipss';
+    src: url('Avocalipss-Regular.eot'); /* IE9 Compat Modes */
+    src: url('Avocalipss-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('Avocalipss-Regular.woff') format('woff'), /* Modern Browsers */
+         url('Avocalipss-Regular.woff2') format('woff2'), /* Modern Browsers */
+         url('Avocalipss-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

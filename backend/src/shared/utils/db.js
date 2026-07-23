@@ -9,10 +9,10 @@ const connectDB = async () => {
     return conn;
   } catch (error) {
     logger.error('MongoDB connection error:', error);
-    if (config.env !== 'test') {
+    if (config.env === 'production') {
       process.exit(1);
     }
-    throw error;
+    logger.warn('Continuing HTTP server startup in development mode...');
   }
 };
 

@@ -1,73 +1,93 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Pagio';
+  src: url('/fonts/Pagio.woff') format('woff'),
+       url('/fonts/Pagio.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DreamAlways';
+  src: url('/fonts/DreamAlways.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TropicalScript';
+  src: url('/fonts/TropicalScript.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    --color-gold: #D4AF37;
-    --color-gold-dark: #B8860B;
-    --color-gold-light: #F3E5AB;
-    --color-charcoal: #1A1A1A;
-    --color-cream: #FAF7F2;
+    /* AURA French Luxury Color Palette */
+    --color-aura-sand: #F7F6F2;
+    --color-aura-sage: #5A6B56;
+    --color-aura-sage-dark: #455342;
+    --color-aura-charcoal: #2C3228;
+    --color-aura-muted: #7A8275;
+    --color-aura-border: #E4E0D7;
+    --color-aura-cream-card: #FFFFFF;
+
+    /* Semantic Mappings */
+    --color-gold: #5A6B56;
+    --color-gold-dark: #2C3228;
+    --color-gold-light: #E4E0D7;
+    --color-charcoal: #2C3228;
+    --color-cream: #F7F6F2;
     --color-cream-card: #FFFFFF;
-    --color-burgundy: #6E1A24;
-    --color-emerald: #0F5132;
-    --color-border: #E8DFC8;
-    --color-text-dark: #2A231F;
-    --color-text-muted: #6E6259;
+    --color-burgundy: #5A6B56;
+    --color-emerald: #5A6B56;
+    --color-border: #E4E0D7;
+    --color-text-dark: #2C3228;
+    --color-text-muted: #7A8275;
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-text-dark);
+    background-color: #F7F6F2;
+    color: #2C3228;
     font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, .font-serif-luxury {
-    font-family: var(--font-playfair), Georgia, serif;
+  h1, h2, h3, h4, .font-serif-luxury, .font-pagio {
+    font-family: var(--font-cormorant), var(--font-playfair), 'Pagio', Georgia, serif !important;
+  }
+
+  .font-dream-always {
+    font-family: 'DreamAlways', var(--font-dream-always), sans-serif !important;
+  }
+
+  .font-tropical-script {
+    font-family: 'TropicalScript', var(--font-tropical-script), cursive !important;
   }
 }
 
-/* Glassmorphism & Micro-effects */
-.glass-gold {
-  background: rgba(253, 251, 247, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-}
-
-.gold-gradient-btn {
-  background: linear-gradient(135deg, #E5C158 0%, #B8860B 100%);
+/* AURA Luxury Sage Olive Button Utility */
+.aura-sage-btn, .gold-gradient-btn {
+  background-color: #5A6B56;
   color: #FFFFFF;
-  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.25);
+  box-shadow: 0 4px 14px rgba(90, 107, 86, 0.25);
+  transition: all 0.25s ease;
 }
 
-.gold-gradient-btn:active {
+.aura-sage-btn:hover, .gold-gradient-btn:hover {
+  background-color: #455342;
+  box-shadow: 0 6px 18px rgba(69, 83, 66, 0.35);
+}
+
+.aura-sage-btn:active, .gold-gradient-btn:active {
   transform: scale(0.97);
 }
 
-/* Shimmer Loader Keyframe */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    #f4efe6 0%,
-    #ffffff 50%,
-    #f4efe6 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.8s infinite linear;
-}
-
-/* Custom Hide Scrollbar for Carousels */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

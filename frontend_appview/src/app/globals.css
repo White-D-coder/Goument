@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-gold: #D4AF37;
+    --color-gold-dark: #B8860B;
+    --color-gold-light: #F3E5AB;
+    --color-charcoal: #1A1A1A;
+    --color-cream: #FAF7F2;
+    --color-cream-card: #FFFFFF;
+    --color-burgundy: #6E1A24;
+    --color-emerald: #0F5132;
+    --color-border: #E8DFC8;
+    --color-text-dark: #2A231F;
+    --color-text-muted: #6E6259;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-text-dark);
+    font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
+}
+
+/* Glassmorphism & Micro-effects */
+.glass-gold {
+  background: rgba(253, 251, 247, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.gold-gradient-btn {
+  background: linear-gradient(135deg, #E5C158 0%, #B8860B 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.25);
+}
+
+.gold-gradient-btn:active {
+  transform: scale(0.97);
+}
+
+/* Shimmer Loader Keyframe */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f4efe6 0%,
+    #ffffff 50%,
+    #f4efe6 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* Custom Hide Scrollbar for Carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

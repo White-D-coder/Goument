@@ -118,4 +118,4 @@ export const CATALOG_PRODUCTS = [
   },
 ];
 
-export const DEMO_BESTSELLERS = CATALOG_PRODUCTS.slice(0, 4);
+export const DEMO_BESTSELLERS = CATALOG_PRODUCTS;

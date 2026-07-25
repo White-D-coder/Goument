@@ -67,7 +67,7 @@ export const GiftBoxingCards: React.FC<GiftBoxingCardsProps> = ({ cards }) => {
                     {/* Dedicated Non-Overlapping Bottom Row */}
                     <div className="flex items-center justify-between pt-2.5 border-t border-[#E6D9FF]/50 mt-2">
                       <span className="text-[10px] font-bold tracking-wider text-[#6B427B] uppercase bg-[#E6D9FF]/40 px-2.5 py-1 rounded-full border border-[#6B427B]/20 shrink-0">
-                        {card.surcharge > 0 ? `+₹${card.surcharge}` : 'Included'}
+                        Luxury Packaging
                       </span>
                       <span className="text-xs font-bold text-[#6B427B] inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                         <span>View Collection</span>

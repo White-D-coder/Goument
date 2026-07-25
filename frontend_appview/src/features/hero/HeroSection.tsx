@@ -2,17 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Heart, ShieldCheck, Gift } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const HERO_IMAGES = [
   {
-    url: '/images/hero/hero_highres_1.png',
-    alt: 'Luxury Gourmet Gift Box Collection',
+    url: '/images/small_anipics/velvet_tray_hero.jpg',
+    alt: 'Luxury Velvet Tray Hero Collection',
   },
   {
-    url: '/images/hero/hero_highres_2.png',
-    alt: 'Artisanal Gourmet Luxury Hamper',
+    url: '/images/small_anipics/framee.png',
+    alt: 'Artisanal Gourmet Luxury Frame',
   },
 ];
 
@@ -27,16 +27,9 @@ export const HeroSection: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const valueProps = [
-    { icon: Sparkles, title: 'Clean Ingredients' },
-    { icon: Heart, title: 'Visible Quality' },
-    { icon: ShieldCheck, title: 'Handcrafted Care' },
-    { icon: Gift, title: 'Sustainable Packaging' },
-  ];
-
   return (
-    <section className="relative w-full h-[540px] md:h-[620px] lg:h-[680px] overflow-hidden border-b border-[#E4E0D7] rounded-none">
-      {/* 8K High-Resolution Auto-Sliding Background Images (Zero Over-Zooming) */}
+    <section className="relative w-full h-[540px] md:h-[620px] lg:h-[680px] overflow-hidden rounded-none">
+      {/* 8K High-Resolution Auto-Sliding Background Images */}
       <div className="absolute inset-0 z-0 bg-black">
         <AnimatePresence mode="popLayout">
           <motion.img
@@ -52,62 +45,34 @@ export const HeroSection: React.FC = () => {
         </AnimatePresence>
 
         {/* Dark Vignette Overlay for High Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/40 z-10" />
       </div>
 
-      {/* Hero Content Overlay (Sharp Rectangle Edges, Zero Round Corners) */}
-      <div className="relative z-10 max-w-7xl mx-auto h-full flex flex-col justify-center px-6 md:px-12 py-12">
-        <div className="max-w-2xl space-y-6">
-          <div className="space-y-3">
-            <span
-              style={{
-                fontFamily: 'TropicalScript, var(--font-tropical-script), cursive',
-                WebkitTextStroke: '0.8px #FFF2B3',
-              }}
-              className="text-3xl md:text-4xl text-[#FFF2B3] block drop-shadow-md"
-            >
-              Gourmet Luxury
-            </span>
-
-            <h1 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white drop-shadow-lg tracking-tight">
-              L&apos;essentiel, en harmonie <br />
-              avec vos moments.
+      {/* Hero Content Overlay (Centered Text & Button) */}
+      <div className="relative z-10 max-w-7xl mx-auto h-full flex flex-col items-center justify-center text-center px-6 md:px-12 py-12">
+        <div className="max-w-3xl space-y-6 flex flex-col items-center">
+          <div className="space-y-4 flex flex-col items-center text-center">
+            <h1 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] text-white drop-shadow-lg tracking-tight text-center">
+              The art of being thought of.
             </h1>
-
-            <p className="text-sm md:text-base text-white/90 leading-relaxed max-w-lg pt-1 font-normal drop-shadow-xs">
-              Des produits naturels, concentrés en actifs gourmands, pour révéler l&apos;équilibre et l&apos;éclat de vos cadeaux.
+            <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl font-normal leading-relaxed text-center drop-shadow-md">
+              Thoughtfully chosen gifts, beautifully presented, for people and moments that matter.
             </p>
           </div>
 
-          {/* Sharp Rectangle Dual CTA Buttons */}
-          <div className="flex items-center gap-5 pt-2">
+          {/* Sleek Animated Underline Luxury CTA */}
+          <div className="pt-4 flex justify-center">
             <Link
               href="/gift-boxing"
-              className="aura-sage-btn px-8 py-4 rounded-none text-xs md:text-sm font-bold tracking-wider uppercase inline-flex items-center justify-center shadow-2xl active:scale-95 transition-transform"
+              className="relative group inline-flex items-center justify-center gap-3 py-2 text-white text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap cursor-pointer"
             >
-              Découvrir La Boutique
+              <span className="font-sans group-hover:text-[#a6bd93] transition-colors duration-300">
+                Discover Collection
+              </span>
+              <ArrowRight className="w-4 h-4 text-[#a6bd93] group-hover:translate-x-2 transition-transform duration-300" />
+              {/* Expanding Underline Animation */}
+              <span className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#a6bd93] transition-all duration-500 ease-out" />
             </Link>
-            <Link
-              href="/gift-boxing/classics"
-              className="text-xs md:text-sm font-bold text-white hover:text-[#FFF2B3] inline-flex items-center gap-2 group transition-colors drop-shadow-xs"
-            >
-              <span>Découvrir Toute La Collection</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          {/* 4 Icon Value Props Grid */}
-          <div className="grid grid-cols-4 gap-4 pt-8 border-t border-white/20 max-w-xl">
-            {valueProps.map((vp) => (
-              <div key={vp.title} className="flex flex-col items-center text-center gap-2">
-                <div className="w-10 h-10 rounded-none bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-xs">
-                  <vp.icon className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] md:text-[11px] font-semibold text-white/95 leading-tight uppercase tracking-wider drop-shadow-xs">
-                  {vp.title}
-                </span>
-              </div>
-            ))}
           </div>
         </div>
       </div>

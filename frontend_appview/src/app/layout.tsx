@@ -1,10 +1,16 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
-import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond } from 'next/font/google';
+import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond, Geist } from 'next/font/google';
 import localFont from 'next/font/local';
 import './globals.css';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import { QueryProvider } from '@/shared/QueryProvider';
+
+const geist = Geist({
+  subsets: ['latin'],
+  variable: '--font-geist',
+  display: 'swap',
+});
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -73,7 +79,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${jakarta.variable} ${pagio.variable} ${avocalipss.variable} ${dreamAlways.variable} ${tropicalScript.variable}`}
+      className={`${geist.variable} ${playfair.variable} ${cormorant.variable} ${jakarta.variable} ${pagio.variable} ${avocalipss.variable} ${dreamAlways.variable} ${tropicalScript.variable}`}
     >
       <body className="antialiased bg-[#FAF8FC] text-[#3A2342] selection:bg-[#6B427B]/20 font-sans min-h-screen flex flex-col">
         <QueryProvider>

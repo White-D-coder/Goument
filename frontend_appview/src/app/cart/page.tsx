@@ -116,8 +116,8 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="font-sans text-xs font-bold text-[#2A231F]">
-                      ₹{((item.price * item.quantity) / 100).toLocaleString('en-IN')}
+                    <span className="font-sans text-xs font-bold text-[#a6bd93]">
+                      Handcrafted Selection
                     </span>
 
                     {/* Quantity controls */}
@@ -146,50 +146,19 @@ export default function CartPage() {
             ))}
           </div>
 
-          {/* Coupon Form */}
-          <form
-            onSubmit={handleApplyCoupon}
-            className="bg-[#FFFFFF] rounded-2xl border border-[#E8DFC8]/60 p-3 flex gap-2"
-          >
-            <div className="relative flex-1">
-              <Tag className="w-4 h-4 text-[#D4AF37] absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                placeholder="Coupon (e.g. LUXURY10)"
-                value={couponCode}
-                onChange={(e) => setCouponCode(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs uppercase bg-[#FAF7F2] border border-[#E8DFC8]/70 rounded-xl focus:outline-none focus:border-[#D4AF37]"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-[#1A1A1A] text-[#FAF7F2] px-4 py-2 rounded-xl text-xs font-bold tracking-wide"
-            >
-              APPLY
-            </button>
-          </form>
-
-          {/* Order Summary */}
+          {/* Order Summary (No Monetary Price Displayed) */}
           <div className="bg-[#FFFFFF] rounded-2xl border border-[#E8DFC8]/60 p-4 space-y-2 text-xs">
             <div className="flex justify-between text-[#6E6259]">
-              <span>Subtotal</span>
-              <span>₹{(subtotalPaise / 100).toLocaleString('en-IN')}</span>
+              <span>Selected Items</span>
+              <span className="font-bold text-[#2A231F]">{items.reduce((sum, i) => sum + i.quantity, 0)} Items</span>
             </div>
-            {discountPaise > 0 && (
-              <div className="flex justify-between text-[#0F5132] font-semibold">
-                <span>Discount ({discountPercent}%)</span>
-                <span>-₹{(discountPaise / 100).toLocaleString('en-IN')}</span>
-              </div>
-            )}
             <div className="flex justify-between text-[#6E6259]">
-              <span>Est. Tax (5%)</span>
-              <span>₹{(estimatedTaxPaise / 100).toLocaleString('en-IN')}</span>
+              <span>Express Shipping</span>
+              <span className="font-semibold text-[#a6bd93]">Complimentary</span>
             </div>
             <div className="border-t border-[#E8DFC8]/50 pt-2 flex justify-between text-sm font-bold text-[#2A231F]">
-              <span>Total</span>
-              <span className="text-[#D4AF37]">
-                ₹{(totalPaise / 100).toLocaleString('en-IN')}
-              </span>
+              <span>Gift Selection</span>
+              <span className="text-[#a6bd93]">Ready For Dispatch</span>
             </div>
           </div>
 

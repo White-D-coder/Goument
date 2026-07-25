@@ -170,7 +170,7 @@ export const GiftBoxCustomizerModal: React.FC<GiftBoxCustomizerModalProps> = ({
                           <p className="text-[10px] text-[#6E6259]">{box.subtitle}</p>
                         </div>
                         <span className="text-xs font-bold text-[#D4AF37]">
-                          {box.surcharge > 0 ? `+₹${box.surcharge}` : 'Included'}
+                          Included
                         </span>
                       </div>
                     ))}
@@ -299,7 +299,7 @@ export const GiftBoxCustomizerModal: React.FC<GiftBoxCustomizerModalProps> = ({
                   onClick={handleAddToCart}
                   className="gold-gradient-btn px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-md"
                 >
-                  <span>ADD TO BAG (₹{(totalPricePaise / 100).toLocaleString('en-IN')})</span>
+                  <span>ADD TO BAG</span>
                 </button>
               )}
             </div>

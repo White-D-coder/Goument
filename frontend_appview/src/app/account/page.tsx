@@ -226,8 +226,8 @@ export default function AccountPage() {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="font-bold text-[#D4AF37]">
-                  ₹{(ord.total / 100).toLocaleString('en-IN')}
+                <span className="font-bold text-[#a6bd93]">
+                  Verified
                 </span>
                 <ChevronRight className="w-4 h-4 text-[#6E6259]" />
               </div>

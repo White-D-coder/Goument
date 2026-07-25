@@ -1,15 +1,43 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
 import { DEMO_BESTSELLERS } from '@/utils/constants';
 import { useCartStore } from '@/hooks/useCart';
-import { Star, Plus, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export const BestsellersCarousel: React.FC = () => {
   const addItem = useCartStore((state) => state.addItem);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Mouse Drag & Touch Swipe Scrolling State
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftState, setScrollLeftState] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!carouselRef.current) return;
+    setIsMouseDown(true);
+    setStartX(e.pageX - carouselRef.current.offsetLeft);
+    setScrollLeftState(carouselRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isMouseDown || !carouselRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX) * 1.8;
+    carouselRef.current.scrollLeft = scrollLeftState - walk;
+  };
 
   const handleQuickAdd = async (product: typeof DEMO_BESTSELLERS[0], e: React.MouseEvent) => {
     e.preventDefault();
@@ -22,82 +50,61 @@ export const BestsellersCarousel: React.FC = () => {
       image: product.image,
     });
     toast.success(`Added ${product.name} to bag!`, {
-      style: { background: '#2C3228', color: '#F7F6F2', border: '1px solid #5A6B56' },
+      style: { background: '#2C3228', color: '#FAF7F2', border: '1px solid #a6bd93' },
     });
   };
 
   return (
-    <section className="bg-[#F7F6F2] py-12 border-b border-[#E4E0D7] rounded-none">
+    <section className="bg-[#FAF7F2] py-6 md:py-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-6">
-        {/* Section Header */}
-        <div className="flex items-center justify-between px-1">
-          <div>
-            <h2 className="font-serif-luxury text-2xl md:text-3xl font-bold text-[#2C3228] tracking-tight">
-              Bestsellers
-            </h2>
-            <p className="text-xs md:text-sm text-[#7A8275] mt-0.5 font-medium hidden md:block">
-              Our most loved handcrafted gourmet gift collections.
-            </p>
-          </div>
-          <Link
-            href="/gift-boxing"
-            className="text-xs md:text-sm font-bold text-[#5A6B56] uppercase tracking-wider inline-flex items-center gap-1.5 hover:translate-x-1 transition-transform"
-          >
-            <span>View All</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+        {/* Section Header: Increased Font Size (+2px), Compact Padding */}
+        <div className="pb-1 text-center flex items-center justify-center">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2C3228] tracking-tight text-center">
+            Bestsellers
+          </h2>
         </div>
 
-        {/* Bestsellers Sharp Rectangle Grid (Zero Round Corners) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {/* Swipeable / Drag-Scrollable Cards Carousel Track */}
+        <div
+          ref={carouselRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          className="flex gap-5 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 px-0.5 cursor-grab active:cursor-grabbing select-none"
+        >
           {DEMO_BESTSELLERS.map((item) => (
             <div
               key={item._id}
-              className="bg-[#FFFFFF] rounded-none border border-[#E4E0D7] p-3.5 shadow-2xs hover:shadow-md hover:border-[#5A6B56] transition-all flex flex-col justify-between group"
+              onClick={(e) => handleQuickAdd(item, e)}
+              className="w-[280px] sm:w-[320px] md:w-[340px] shrink-0 snap-start relative overflow-hidden rounded-3xl border border-[#E4E0D7]/80 shadow-2xs hover:shadow-2xl transition-all duration-500 bg-[#2C3228] group cursor-pointer flex flex-col justify-between p-4 sm:p-5 text-white"
             >
-              <Link href="/gift-boxing/classics" className="block space-y-3">
-                {/* Image Container */}
-                <div className="w-full aspect-square relative rounded-none overflow-hidden bg-[#EFECE6] border border-[#E4E0D7]/60">
-                  <ImageWithShimmer
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
-                  />
-                  <span className="absolute top-2.5 left-2.5 bg-[#5A6B56] text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-none shadow-xs">
-                    Bestseller
-                  </span>
-                </div>
+              {/* Inner Rounded Image Container */}
+              <div className="w-full aspect-[4/3] relative rounded-2xl overflow-hidden bg-[#EFECE6] border border-white/10 shrink-0">
+                <ImageWithShimmer
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover rounded-2xl"
+                />
+              </div>
 
-                {/* Content */}
-                <div className="space-y-1">
-                  <h3 className="font-sans text-xs md:text-sm font-bold text-[#2C3228] line-clamp-1 leading-snug group-hover:text-[#5A6B56] transition-colors">
+              {/* In-Card Information */}
+              <div className="pt-4 pb-1 space-y-3 flex-1 flex flex-col justify-between text-white">
+                <div className="space-y-1.5">
+                  <h3 className="font-serif-luxury text-xl md:text-2xl font-bold tracking-tight text-white leading-snug">
                     {item.name}
                   </h3>
-
-                  {/* Star Rating */}
-                  <div className="flex items-center gap-1 pt-0.5">
-                    <div className="flex items-center text-[#5A6B56]">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-current" />
-                      ))}
-                    </div>
-                    <span className="text-[10px] text-[#7A8275] font-semibold">(4.9)</span>
-                  </div>
+                  <p className="text-xs text-white/75 font-normal leading-snug line-clamp-1">
+                    Handcrafted artisanal luxury delicacy
+                  </p>
                 </div>
-              </Link>
 
-              {/* Bottom Price & Square Add Button Row */}
-              <div className="pt-3 flex items-center justify-between border-t border-[#E4E0D7]/70 mt-2">
-                <span className="font-sans text-sm md:text-base font-bold text-[#2C3228]">
-                  ₹{(item.basePrice / 100).toLocaleString('en-IN')}
-                </span>
-                <button
-                  onClick={(e) => handleQuickAdd(item, e)}
-                  className="bg-[#5A6B56] text-white hover:bg-[#455342] w-8 h-8 rounded-none flex items-center justify-center font-bold text-xs shadow-sm active:scale-90 transition-all"
-                  aria-label={`Add ${item.name} to cart`}
-                >
-                  <Plus className="w-4 h-4 stroke-[3]" />
-                </button>
+                {/* Centered SHOP NOW! Action Link */}
+                <div className="flex items-center justify-center text-center w-full pt-3 border-t border-white/15">
+                  <span className="text-xs font-bold uppercase tracking-wider text-white underline underline-offset-4 group-hover:text-[#a6bd93] transition-colors">
+                    SHOP NOW!
+                  </span>
+                </div>
               </div>
             </div>
           ))}

@@ -136,8 +136,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                         <h4 className="font-serif-luxury text-xs font-bold text-[#2A231F]">
                           {product.name}
                         </h4>
-                        <span className="font-sans text-[11px] font-bold text-[#D4AF37]">
-                          ₹{((product.basePrice || 249900) / 100).toLocaleString('en-IN')}
+                        <span className="font-sans text-[11px] font-bold text-[#a6bd93]">
+                          Handcrafted
                         </span>
                       </div>
                     </div>

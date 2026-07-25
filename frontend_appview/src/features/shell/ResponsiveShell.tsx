@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Search, User, Home, Package, Menu, X, Sparkles, ShieldCheck, Heart, Truck, Gift } from 'lucide-react';
+import { Search, User, Home, Package, Menu, X, ShoppingBag } from 'lucide-react';
 import { CartIcon } from './CartIcon';
 import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
+import { Footer } from './Footer';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { useCartSync } from '@/shared/useCartSync';
+import { useCartStore } from '@/hooks/useCart';
 import { Toaster } from 'react-hot-toast';
 import { SearchModal } from '@/features/search/SearchModal';
 
@@ -19,6 +21,9 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const cartItems = useCartStore((state) => state.items);
+  const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const isOnline = useOnlineStatus(() => {
     setShowReconnectedToast(true);
@@ -34,23 +39,26 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Desktop Navigation Links Matching Phone View Exactly
+  const isHomepage = pathname === '/';
+  const showSolidHeader = !isHomepage || isScrolled;
+
+  // Navigation Links Aligned Left
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Products', href: '/gift-boxing' },
-    { label: 'Bag', href: '/cart' },
-    { label: 'Account', href: '/account' },
+    { label: 'Collections', href: '/gift-boxing' },
+    { label: 'Customize', href: '/customize' },
+    { label: 'Bulk Enquire', href: '/inquire' },
   ];
 
   const mobileTabs = [
     { label: 'Home', href: '/', icon: Home },
-    { label: 'Products', href: '/gift-boxing', icon: Package },
+    { label: 'Collections', href: '/gift-boxing', icon: Package },
     { label: 'Bag', href: '/cart', isBag: true },
     { label: 'Account', href: '/account', icon: User },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7F6F2] text-[#2C3228] relative font-sans flex flex-col justify-between selection:bg-[#5A6B56]/20">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#2C3228] relative font-sans flex flex-col justify-between selection:bg-[#a6bd93]/30">
       <Toaster position="top-center" />
 
       <OfflineBanner isOnline={isOnline} />
@@ -61,68 +69,36 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-      {/* AURA Top Announcement Bar */}
-      <div className="bg-[#5A6B56] text-white/95 text-[11px] font-medium py-2 px-4 border-b border-white/10 hidden md:block tracking-wide">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5 text-[#F7F6F2]" /> Clean Ingredients</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-[#F7F6F2]" /> Handcrafted Quality</span>
-            <span className="flex items-center gap-1.5"><Gift className="w-3.5 h-3.5 text-[#F7F6F2]" /> Made for Real Moments</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-[#F7F6F2] font-semibold">
-            <Truck className="w-3.5 h-3.5" /> Free Express Shipping on Orders Over ₹2000
-          </div>
-        </div>
-      </div>
-
-      {/* Top Main Navigation Header */}
+      {/* Main Navigation Header (Transparent on top of Homepage Hero, Visible Solid on scroll or other pages) */}
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[#F7F6F2]/95 backdrop-blur-md border-b border-[#E4E0D7] shadow-xs py-3'
-            : 'bg-[#F7F6F2]/90 backdrop-blur-xs border-b border-[#E4E0D7]/60 py-3.5 md:py-4'
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-out ${
+          showSolidHeader
+            ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E4E0D7] py-3 text-[#2C3228] shadow-xs'
+            : 'bg-transparent border-b border-transparent py-5 text-white'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          {/* Brand Logo on Left */}
-          <Link href="/" className="flex flex-col items-start group">
-            <span
-              style={{
-                fontFamily: 'TropicalScript, var(--font-tropical-script), cursive',
-                WebkitTextStroke: '0.4px #5A6B56',
-              }}
-              className="text-sm md:text-base font-medium text-[#5A6B56] leading-none mb-0.5"
-            >
-              The
-            </span>
-            <span
-              style={{ fontFamily: 'Pagio, var(--font-pagio), var(--font-playfair), serif' }}
-              className="text-lg md:text-2xl tracking-[0.16em] font-bold text-[#2C3228] uppercase leading-tight group-hover:text-[#5A6B56] transition-colors"
-            >
-              GOURMET
-            </span>
-            <span className="text-[7.5px] md:text-[9px] tracking-[0.34em] font-bold text-[#5A6B56] uppercase leading-none mt-0.5">
-              GIFTS CO.
-            </span>
-          </Link>
-
-          {/* Desktop Mega Navigation Menu Matching Phone Options (Home, Products, Bag, Account) */}
-          <nav className="hidden md:flex items-center gap-10">
+          {/* 1. LEFT SIDE: Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 flex-1 justify-start">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`text-sm font-semibold transition-colors relative py-1 ${
-                    isActive ? 'text-[#5A6B56] font-bold' : 'text-[#7A8275] hover:text-[#2C3228]'
+                  className={`text-xs uppercase tracking-wider font-medium transition-all duration-300 relative py-1 ${
+                    isActive
+                      ? showSolidHeader ? 'text-[#52604D] font-bold' : 'text-[#a6bd93] font-bold'
+                      : showSolidHeader ? 'text-[#52604D]/80 hover:text-[#2C3228]' : 'text-white/85 hover:text-white'
                   }`}
                 >
                   <span>{link.label}</span>
                   {isActive && (
                     <motion.div
                       layoutId="desktopNavUnderline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#5A6B56] rounded-full"
+                      className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-full ${
+                        showSolidHeader ? 'bg-[#52604D]' : 'bg-[#a6bd93]'
+                      }`}
                     />
                   )}
                 </Link>
@@ -130,29 +106,69 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             })}
           </nav>
 
-          {/* Right Actions Bar */}
-          <div className="flex items-center gap-3.5 md:gap-5">
+          {/* 2. CENTER: Serif Luxury Brand Logo */}
+          <div className="flex-1 flex justify-start md:justify-center">
+            <Link href="/" className="group inline-flex items-center py-0.5">
+              <span
+                className={`font-serif-luxury text-xl md:text-2xl lg:text-3xl font-bold tracking-tight transition-colors ${
+                  showSolidHeader ? 'text-[#2C3228] group-hover:text-[#52604D]' : 'text-white group-hover:text-[#a6bd93]'
+                }`}
+              >
+                Gourmet Gifts.
+              </span>
+            </Link>
+          </div>
+
+          {/* 3. RIGHT SIDE: Action Items (Search, Cart (0), Account/Login) */}
+          <div className="flex-1 flex items-center justify-end gap-5 md:gap-7">
+            {/* Search Action */}
             <button
               onClick={() => setIsSearchOpen(true)}
               aria-label="Open search"
-              className="p-2 text-[#2C3228] hover:text-[#5A6B56] transition-colors flex items-center gap-2 text-xs font-semibold md:bg-[#FFFFFF] md:border md:border-[#E4E0D7] md:rounded-full md:px-4 md:py-2 shadow-2xs"
+              className={`text-xs uppercase tracking-wider font-medium transition-colors flex items-center gap-1.5 ${
+                showSolidHeader ? 'text-[#2C3228] hover:text-[#52604D]' : 'text-white/90 hover:text-[#a6bd93]'
+              }`}
             >
-              <Search className="w-5 h-5 md:w-4 md:h-4 stroke-[2]" />
-              <span className="hidden md:inline">Search gifts...</span>
+              <Search className={`w-4 h-4 ${showSolidHeader ? 'text-[#52604D]' : 'text-[#a6bd93]'}`} />
+              <span className="hidden sm:inline">Search</span>
             </button>
 
-            <Link href="/cart" aria-label="View shopping bag" className="p-1 flex items-center justify-center">
-              <CartIcon className="w-5.5 h-5.5 text-[#2C3228]" />
+            {/* Cart Action: ShoppingBag Icon on Mobile, Text on Desktop */}
+            <Link
+              href="/cart"
+              aria-label="View Shopping Cart"
+              className={`text-xs uppercase tracking-wider font-medium transition-colors flex items-center gap-1.5 relative whitespace-nowrap ${
+                showSolidHeader ? 'text-[#2C3228] hover:text-[#52604D]' : 'text-white/90 hover:text-[#a6bd93]'
+              }`}
+            >
+              {/* Phone View: ShoppingBag Icon + Counter Badge */}
+              <div className="relative flex items-center justify-center sm:hidden">
+                <ShoppingBag className={`w-5 h-5 ${showSolidHeader ? 'text-[#2C3228]' : 'text-white'}`} />
+                {totalCartCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 bg-[#a6bd93] text-[#2C3228] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-2xs">
+                    {totalCartCount}
+                  </span>
+                )}
+              </div>
+
+              {/* Desktop View: Text */}
+              <span className="hidden sm:inline">Cart ( {totalCartCount} )</span>
             </Link>
 
-            <Link href="/account" aria-label="Account" className="hidden md:flex p-1 text-[#2C3228] hover:text-[#5A6B56]">
-              <User className="w-5 h-5" />
+            {/* Account / Login Action with Underline */}
+            <Link
+              href="/account"
+              className={`text-xs uppercase tracking-wider font-bold underline underline-offset-4 transition-colors hidden sm:inline-block ${
+                showSolidHeader ? 'text-[#2C3228] hover:text-[#52604D]' : 'text-white hover:text-[#a6bd93]'
+              }`}
+            >
+              Account
             </Link>
 
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1 text-[#2C3228]"
+              className={`md:hidden p-1 ${showSolidHeader ? 'text-[#2C3228]' : 'text-white'}`}
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -162,13 +178,13 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
         {/* Mobile Dropdown Menu Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#F7F6F2] border-b border-[#E4E0D7] px-6 py-4 space-y-3">
+          <div className="md:hidden bg-[#FAF7F2] border-b border-[#E4E0D7] px-6 py-4 space-y-3 text-[#2C3228]">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm font-semibold text-[#2C3228] py-1 border-b border-[#E4E0D7]/60"
+                className="block text-sm font-semibold text-[#2C3228] py-1 border-b border-[#E4E0D7]"
               >
                 {link.label}
               </Link>
@@ -177,12 +193,17 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
         )}
       </header>
 
-      {/* Main Page Content */}
-      <main className="flex-1 w-full flex flex-col">{children}</main>
+      {/* Main Page Content (Padded at top for non-homepage pages to prevent header overlap) */}
+      <main className={`flex-1 w-full flex flex-col ${isHomepage ? '' : 'pt-20 md:pt-24'}`}>
+        {children}
+      </main>
+
+      {/* Luxury Footer */}
+      <Footer />
 
       {/* Mobile Bottom Navigation Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-3 pointer-events-none">
-        <nav className="pointer-events-auto relative w-full max-w-md mx-auto bg-[#F7F6F2]/95 backdrop-blur-xl rounded-2xl border border-[#E4E0D7] shadow-xl py-2 px-3 flex items-center justify-around">
+        <nav className="pointer-events-auto relative w-full max-w-md mx-auto bg-[#FAF7F2]/95 backdrop-blur-xl rounded-2xl border border-[#E4E0D7] shadow-xl py-2 px-3 flex items-center justify-around text-[#2C3228]">
           {mobileTabs.map((item) => {
             const isActive =
               pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -195,19 +216,19 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               >
                 <div
                   className={`flex flex-col items-center gap-0.5 transition-colors relative ${
-                    isActive ? 'text-[#5A6B56]' : 'text-[#7A8275] group-hover:text-[#2C3228]'
+                    isActive ? 'text-[#52604D]' : 'text-[#7A8275] group-hover:text-[#2C3228]'
                   }`}
                 >
                   {item.isBag ? (
-                    <CartIcon className="w-5 h-5" />
+                    <CartIcon className="w-5 h-5 text-current" />
                   ) : (
                     item.icon && <item.icon className="w-5 h-5 stroke-[2]" />
                   )}
-                  <span className={`text-[10px] tracking-tight ${isActive ? 'font-bold text-[#5A6B56]' : 'font-semibold'}`}>
+                  <span className={`text-[10px] tracking-tight ${isActive ? 'font-bold text-[#52604D]' : 'font-semibold'}`}>
                     {item.label}
                   </span>
                   {isActive && (
-                    <div className="absolute -bottom-1 w-4 h-0.5 bg-[#5A6B56] rounded-full" />
+                    <div className="absolute -bottom-1 w-4 h-0.5 bg-[#52604D] rounded-full" />
                   )}
                 </div>
               </Link>

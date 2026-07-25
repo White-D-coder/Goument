@@ -29,22 +29,22 @@
   :root {
     /* AURA French Luxury Color Palette */
     --color-aura-sand: #F7F6F2;
-    --color-aura-sage: #5A6B56;
-    --color-aura-sage-dark: #455342;
+    --color-aura-sage: #a6bd93;
+    --color-aura-sage-dark: #8ba278;
     --color-aura-charcoal: #2C3228;
     --color-aura-muted: #7A8275;
     --color-aura-border: #E4E0D7;
     --color-aura-cream-card: #FFFFFF;
 
     /* Semantic Mappings */
-    --color-gold: #5A6B56;
+    --color-gold: #a6bd93;
     --color-gold-dark: #2C3228;
     --color-gold-light: #E4E0D7;
     --color-charcoal: #2C3228;
     --color-cream: #F7F6F2;
     --color-cream-card: #FFFFFF;
-    --color-burgundy: #5A6B56;
-    --color-emerald: #5A6B56;
+    --color-burgundy: #a6bd93;
+    --color-emerald: #a6bd93;
     --color-border: #E4E0D7;
     --color-text-dark: #2C3228;
     --color-text-muted: #7A8275;
@@ -56,6 +56,10 @@
     font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
+  }
+
+  .font-geist {
+    font-family: var(--font-geist), system-ui, -apple-system, sans-serif !important;
   }
 
   h1, h2, h3, h4, .font-serif-luxury, .font-pagio {
@@ -73,15 +77,15 @@
 
 /* AURA Luxury Sage Olive Button Utility */
 .aura-sage-btn, .gold-gradient-btn {
-  background-color: #5A6B56;
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(90, 107, 86, 0.25);
+  background-color: #a6bd93;
+  color: #2C3228;
+  box-shadow: 0 4px 14px rgba(166, 189, 147, 0.25);
   transition: all 0.25s ease;
 }
 
 .aura-sage-btn:hover, .gold-gradient-btn:hover {
-  background-color: #455342;
-  box-shadow: 0 6px 18px rgba(69, 83, 66, 0.35);
+  background-color: #8ba278;
+  box-shadow: 0 6px 18px rgba(139, 162, 120, 0.35);
 }
 
 .aura-sage-btn:active, .gold-gradient-btn:active {

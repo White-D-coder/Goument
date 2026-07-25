@@ -225,7 +225,7 @@ export default function CheckoutPage() {
           disabled={loading || items.length === 0}
           className="w-full gold-gradient-btn py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
         >
-          {loading ? 'PROCESSING...' : `PLACE ORDER (₹${(subtotalPaise / 100).toLocaleString('en-IN')})`}
+          {loading ? 'PROCESSING...' : 'PLACE ORDER'}
         </button>
       </form>
     </div>

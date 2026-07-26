@@ -33,7 +33,7 @@ const CATEGORY_ITEMS: CategoryItem[] = [
 
 export const CategoryCircles: React.FC = () => {
   return (
-    <section className="relative bg-[#FAF7F2] py-6 md:py-10 overflow-hidden">
+    <section className="relative bg-[#FAF7F2] pt-12 pb-6 md:pt-20 md:pb-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-6 relative z-10">
         {/* Section Header: Increased Font Size (+2px), Compact Padding */}
         <div className="pb-1 text-center flex items-center justify-center">

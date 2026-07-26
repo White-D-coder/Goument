@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
         <div className="max-w-3xl space-y-6 flex flex-col items-center">
           <div className="space-y-4 flex flex-col items-center text-center">
             <h1 className="font-serif-luxury text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.15] text-white drop-shadow-lg tracking-tight text-center">
-              The art of being thought of.
+              The Art Of Being Thought Of.
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl font-normal leading-relaxed text-center drop-shadow-md">
               Thoughtfully chosen gifts, beautifully presented, for people and moments that matter.

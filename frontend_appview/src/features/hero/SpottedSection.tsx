@@ -123,7 +123,7 @@ export const SpottedSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-12 md:space-y-16">
         
         {/* Minimalist 4-Column Feature Highlight Row (Matching Reference Image) */}
-        <div className="pt-2 pb-6 border-b border-[#E4E0D7]/60">
+        <div className="pt-2 pb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 py-4">
             
             {/* Item 1 */}
@@ -162,7 +162,7 @@ export const SpottedSection: React.FC = () => {
         </div>
 
         {/* Section Header */}
-        <div className="relative border-b border-[#E4E0D7]/60 pb-5 text-center flex flex-col items-center justify-center space-y-1">
+        <div className="relative pb-5 text-center flex flex-col items-center justify-center space-y-1">
           <span className="text-[10px] font-sans font-bold tracking-[0.25em] text-[#52604D] uppercase block">
             Real Gifting Moments
           </span>

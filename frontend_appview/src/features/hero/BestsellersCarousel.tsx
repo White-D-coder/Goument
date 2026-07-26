@@ -35,14 +35,14 @@ export const BestsellersCarousel: React.FC = () => {
         </div>
 
         {/* Minimalist Frameless 5-Item Bestsellers Grid */}
-        <div className="space-y-10 md:space-y-12">
+        <div className="space-y-6 sm:space-y-10 md:space-y-12">
           {/* Row 1: Top 2 Large Frameless Feature Items */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-3.5 sm:gap-8 md:gap-12">
             {DEMO_BESTSELLERS.slice(0, 2).map((item) => (
               <div
                 key={item._id}
                 onClick={(e) => handleQuickAdd(item, e)}
-                className="group cursor-pointer flex flex-col items-center text-center space-y-3"
+                className="group cursor-pointer flex flex-col items-center text-center space-y-2 sm:space-y-3"
               >
                 {/* Frameless Image Container */}
                 <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#EFECE6] rounded-none">
@@ -54,7 +54,7 @@ export const BestsellersCarousel: React.FC = () => {
                 </div>
 
                 {/* Minimalist Serif Title */}
-                <h3 className="font-serif-luxury text-lg sm:text-xl md:text-2xl font-bold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors">
+                <h3 className="font-serif-luxury text-xs sm:text-xl md:text-2xl font-bold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors line-clamp-2">
                   {item.name}
                 </h3>
               </div>
@@ -62,12 +62,12 @@ export const BestsellersCarousel: React.FC = () => {
           </div>
 
           {/* Row 2: Bottom 3 Frameless Items */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-8 md:gap-10">
             {DEMO_BESTSELLERS.slice(2, 5).map((item) => (
               <div
                 key={item._id}
                 onClick={(e) => handleQuickAdd(item, e)}
-                className="group cursor-pointer flex flex-col items-center text-center space-y-3"
+                className="group cursor-pointer flex flex-col items-center text-center space-y-2 sm:space-y-3"
               >
                 {/* Frameless Image Container */}
                 <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#EFECE6] rounded-none">
@@ -79,7 +79,7 @@ export const BestsellersCarousel: React.FC = () => {
                 </div>
 
                 {/* Minimalist Serif Title */}
-                <h3 className="font-serif-luxury text-base sm:text-lg md:text-xl font-semibold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors">
+                <h3 className="font-serif-luxury text-xs sm:text-lg md:text-xl font-semibold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors line-clamp-2">
                   {item.name}
                 </h3>
               </div>

@@ -10,8 +10,8 @@ export const ExperienceHighlightsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-16 md:space-y-24">
         {/* Block 1: Image Left, Content Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
-          {/* Left Wavy Photo: Full stretch fixed without edge box line */}
-          <div className="relative lg:col-span-6 bg-transparent border-0 outline-none shadow-none md:border md:border-[#E4E0D7]/80 md:shadow-md md:rounded-3xl md:bg-[#EFECE6] h-[360px] sm:h-[420px] md:h-[480px] w-[calc(100%+2rem)] -ml-4 md:ml-0 md:w-full">
+          {/* Left Wavy Photo: Mobile Overflow Visible (No Line) | Desktop Overflow Hidden & Rounded */}
+          <div className="relative lg:col-span-6 bg-transparent border-0 outline-none shadow-none md:border md:border-[#E4E0D7]/80 md:shadow-md md:rounded-3xl md:bg-[#EFECE6] overflow-visible md:overflow-hidden h-[360px] sm:h-[420px] md:h-[480px] w-[calc(100%+2rem)] -ml-4 md:ml-0 md:w-full">
             
             {/* Top Wavy Edge (Mobile Only) */}
             <div className="block md:hidden absolute -top-[2px] left-0 right-0 z-20 pointer-events-none leading-none">
@@ -27,7 +27,7 @@ export const ExperienceHighlightsSection: React.FC = () => {
             <img
               src="/images/small_anipics/velvet_tray_hero.jpg"
               alt="Delivering the finest gifting experience"
-              className="w-full h-full object-cover border-0 outline-none ring-0 block m-0 p-0"
+              className="w-full h-full object-cover border-0 outline-none ring-0 block m-0 p-0 md:rounded-3xl"
             />
 
             {/* Bottom Wavy Edge (Mobile Only) */}
@@ -121,8 +121,8 @@ export const ExperienceHighlightsSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Wavy Photo: Full stretch fixed without edge box line */}
-          <div className="relative lg:col-span-6 bg-transparent border-0 outline-none shadow-none md:border md:border-[#E4E0D7]/80 md:shadow-md md:rounded-3xl md:bg-[#EFECE6] h-[380px] sm:h-[440px] md:h-[500px] w-[calc(100%+2rem)] -ml-4 md:ml-0 md:w-full">
+          {/* Right Wavy Photo: Mobile Overflow Visible (No Line) | Desktop Overflow Hidden & Rounded */}
+          <div className="relative lg:col-span-6 bg-transparent border-0 outline-none shadow-none md:border md:border-[#E4E0D7]/80 md:shadow-md md:rounded-3xl md:bg-[#EFECE6] overflow-visible md:overflow-hidden h-[380px] sm:h-[440px] md:h-[500px] w-[calc(100%+2rem)] -ml-4 md:ml-0 md:w-full">
             
             {/* Top Wavy Edge (Mobile Only) */}
             <div className="block md:hidden absolute -top-[2px] left-0 right-0 z-20 pointer-events-none leading-none">
@@ -138,7 +138,7 @@ export const ExperienceHighlightsSection: React.FC = () => {
             <img
               src="/images/Category_image/premium_velvet/thumb.jpeg"
               alt="Our highlights craftsmanship"
-              className="w-full h-full object-cover border-0 outline-none ring-0 block m-0 p-0"
+              className="w-full h-full object-cover border-0 outline-none ring-0 block m-0 p-0 md:rounded-3xl"
             />
 
             {/* Bottom Wavy Edge (Mobile Only) */}

@@ -3,6 +3,7 @@
 import React from 'react';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
 import { DEMO_BESTSELLERS } from '@/utils/constants';
+import { formatTitleWithBrackets } from '@/utils/format';
 import { useCartStore } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 
@@ -55,7 +56,7 @@ export const BestsellersCarousel: React.FC = () => {
 
                 {/* Minimalist Serif Title */}
                 <h3 className="font-serif-luxury text-xs sm:text-xl md:text-2xl font-bold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors line-clamp-2">
-                  {item.name}
+                  {formatTitleWithBrackets(item.name)}
                 </h3>
               </div>
             ))}
@@ -80,7 +81,7 @@ export const BestsellersCarousel: React.FC = () => {
 
                 {/* Minimalist Serif Title */}
                 <h3 className="font-serif-luxury text-xs sm:text-lg md:text-xl font-semibold text-[#2C3228] tracking-wide pt-1 group-hover:text-[#7A1C29] transition-colors line-clamp-2">
-                  {item.name}
+                  {formatTitleWithBrackets(item.name)}
                 </h3>
               </div>
             ))}

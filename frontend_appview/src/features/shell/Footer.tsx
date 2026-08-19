@@ -2,135 +2,103 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+
+const FOOTER_NAV = [
+  {
+    title: 'Navigate',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Collections', href: '/collections' },
+      { label: 'Our Story', href: '/story' },
+      { label: 'Contact', href: '/contact' },
+    ],
+  },
+  {
+    title: 'Collections',
+    links: [
+      { label: 'Keepsake Vessels', href: '/collections#keepsake-vessels' },
+      { label: 'Tactile Velvet Suites', href: '/collections#velvet-suites' },
+      { label: 'Heritage Hampers', href: '/collections#heritage-hampers' },
+      { label: 'Atelier Accents', href: '/collections#atelier-accents' },
+    ],
+  },
+  {
+    title: 'Corporate',
+    links: [
+      { label: 'Corporate Gifting', href: '/corporate' },
+      { label: 'Custom Branding', href: '/corporate' },
+      { label: 'Bulk Orders', href: '/corporate' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'concierge@thegourmetgiftsco.com', href: 'mailto:concierge@thegourmetgiftsco.com' },
+      { label: '+91 98765 43210', href: 'tel:+919876543210' },
+      { label: 'Mumbai & Delhi NCR', href: '/contact' },
+    ],
+  },
+];
 
 export const Footer: React.FC = () => {
   return (
-    <footer
-      className="relative z-10 text-[#2C3228] border-t border-[#a6bd93]/40 rounded-none font-sans overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/footer_bg_pattern.jpg')" }}
-    >
-      {/* Top Left to Bottom Right Pastel Gradient Overlay */}
-      <div className="bg-gradient-to-br from-[#EAF0E6]/95 via-[#DFE8DB]/90 to-[#EAF0E6]/95 backdrop-blur-[1px] w-full h-full">
-        {/* Main Footer Links Grid */}
-        <div className="max-w-7xl mx-auto px-4 md:px-12 py-8 md:py-16">
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-10">
-            {/* Brand Info Column */}
-            <div className="col-span-2 lg:col-span-2 space-y-3 md:space-y-5 border-b md:border-none border-[#a6bd93]/20 pb-5 md:pb-0">
-              <Link href="/" className="inline-flex items-center group">
-                <span className="font-serif-luxury text-xl md:text-2xl font-bold text-[#2C3228] tracking-widest uppercase group-hover:text-[#52604D] transition-colors">
-                  GOURMET <span className="text-[#6B855A] font-normal">GIFTS CO.</span>
-                </span>
-              </Link>
-
-              <p className="text-xs text-[#52604D] leading-relaxed font-normal max-w-sm">
-                Handcrafted luxury gourmet hampers &amp; bespoke keepsake collections created for life’s most memorable celebrations.
-              </p>
-
-              <div className="pt-1 flex items-center gap-4 text-[11px] font-sans text-[#52604D] font-medium">
-                <span className="inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#6B855A]" />
-                  Handcrafted Care
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#6B855A]" />
-                  Pan-India Express
-                </span>
-              </div>
-            </div>
-
-            {/* Column 1: Collections */}
-            <div className="space-y-2 md:space-y-4">
-              <h4 className="font-serif-luxury text-xs md:text-sm font-bold text-[#2C3228] uppercase tracking-wider">
-                Collections
-              </h4>
-              <ul className="space-y-1.5 md:space-y-2.5 text-[11px] md:text-xs text-[#52604D] font-medium">
-                <li>
-                  <Link href="/gift-boxing/classics" className="hover:text-[#2C3228] transition-colors">
-                    The Classics Edition
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/gift-boxing/premium-velvet" className="hover:text-[#2C3228] transition-colors">
-                    Premium Velvet Chests
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/gift-boxing/royale-tin" className="hover:text-[#2C3228] transition-colors">
-                    Royale Tin Keepsakes
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/gift-boxing" className="hover:text-[#2C3228] transition-colors">
-                    Wooden Trays &amp; Decor
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Client Services */}
-            <div className="space-y-2 md:space-y-4">
-              <h4 className="font-serif-luxury text-xs md:text-sm font-bold text-[#2C3228] uppercase tracking-wider">
-                Client Care
-              </h4>
-              <ul className="space-y-1.5 md:space-y-2.5 text-[11px] md:text-xs text-[#52604D] font-medium">
-                <li>
-                  <Link href="/customize" className="hover:text-[#2C3228] transition-colors">
-                    Customize Box
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/inquire" className="hover:text-[#2C3228] transition-colors">
-                    Bulk Enquire
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/account" className="hover:text-[#2C3228] transition-colors">
-                    Wedding Favors
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/account" className="hover:text-[#2C3228] transition-colors">
-                    Track Order Status
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Concierge */}
-            <div className="col-span-2 lg:col-span-1 space-y-2 md:space-y-4 pt-2 md:pt-0 border-t md:border-none border-[#a6bd93]/20">
-              <h4 className="font-serif-luxury text-xs md:text-sm font-bold text-[#2C3228] uppercase tracking-wider">
-                Concierge
-              </h4>
-              <div className="flex flex-row md:flex-col justify-between gap-4 text-[11px] md:text-xs text-[#52604D] font-medium">
-                <div>
-                  <strong className="text-[#2C3228] block font-sans font-bold text-[10px] uppercase tracking-wider">Email</strong>
-                  concierge@gourmetgem.com
-                </div>
-                <div>
-                  <strong className="text-[#2C3228] block font-sans font-bold text-[10px] uppercase tracking-wider">Phone</strong>
-                  +91 98765 43210
-                </div>
-              </div>
-            </div>
+    <footer className="bg-[#1A1A18] text-[#F6F4EF] relative z-30">
+      {/* Top — Brand + Descriptor */}
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-[120px] pb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20">
+          <div>
+            <Link href="/">
+              <span
+                className="block text-[32px] md:text-[40px] leading-none tracking-[-0.02em]"
+                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 600 }}
+              >
+                The Gourmet Gifts Co.
+              </span>
+            </Link>
+            <p className="type-body text-[#B5AFA6] mt-3 max-w-sm text-sm">
+              Gifts that mean something.
+            </p>
           </div>
+
+          <Link
+            href="#"
+            className="editorial-link type-meta text-[#B5AFA6] hover:text-[#F6F4EF] inline-flex items-center gap-2"
+          >
+            <span>Explore House of Sutra</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
 
-        {/* Bottom Bar & Copyright */}
-        <div className="border-t border-[#a6bd93]/30 bg-[#DFE8DB]/90 py-4 md:py-6 px-4 md:px-12 text-[10px] md:text-xs text-[#52604D] font-medium">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5 md:gap-4 text-center md:text-left">
-            <p>© {new Date().getFullYear()} The Gourmet Gifts Co. All rights reserved.</p>
-
-            <div className="flex items-center gap-4 text-[#52604D]">
-              <Link href="/account" className="hover:text-[#2C3228] transition-colors">
-                Privacy Policy
-              </Link>
-              <span>•</span>
-              <Link href="/account" className="hover:text-[#2C3228] transition-colors">
-                Terms of Service
-              </Link>
+        {/* Middle — 4 Column Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 pb-20 border-b border-white/10">
+          {FOOTER_NAV.map((col) => (
+            <div key={col.title}>
+              <h4 className="type-meta text-[#B5AFA6] mb-5">{col.title}</h4>
+              <ul className="space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="type-body text-[#8A8680] hover:text-[#F6F4EF] transition-colors duration-200 text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Bottom — Copyright */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-10">
+          <p className="type-micro text-[#8A8680]/60">
+            © {new Date().getFullYear()} The Gourmet Gifts Co. All rights reserved.
+          </p>
+          <p className="type-micro text-[#8A8680]/40">
+            A House of Sutra brand.
+          </p>
         </div>
       </div>
     </footer>

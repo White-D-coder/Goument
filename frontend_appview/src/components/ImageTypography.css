@@ -1,0 +1,309 @@
+/* ═══════════════════════════════════════════════
+   IMAGE-FILLED TYPOGRAPHY — The Gourmet Gifts Co.
+   50% Center Partition & Right-Aligned Stencil on Scroll
+   ═══════════════════════════════════════════════ */
+
+.image-type-hero {
+  --ivory: #F6F4EF;
+
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 700px;
+  overflow: hidden;
+  background: var(--ivory);
+  border: none !important;
+}
+
+
+/* ─── FIXED BACKGROUND IMAGE (STATIONARY ON SCROLL) ─── */
+
+.image-type-media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url('/images/hero/hero_highres_1.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.image-type-dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 65%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+/* ─── EXACT 50% CENTER PARTITION (IVORY LEFT PANEL) ─── */
+
+.image-type-panel {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--ivory);
+  pointer-events: none;
+}
+
+
+/* ─── LEFT CONTAINER: RIGHT-ALIGNED TO CENTER PARTITION ─── */
+
+.image-type-left-container {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5vw;
+  pointer-events: none;
+}
+
+.image-type-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, sans-serif;
+  font-size: clamp(75px, 11vw, 200px);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.075em;
+  text-transform: uppercase;
+  color: transparent;
+}
+
+/* Fixed background inside letters — extracts the exact stationary background on scroll */
+.image-type-title span {
+  display: block;
+  width: max-content;
+  color: transparent;
+  background-image: url('/images/hero/hero_highres_1.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ─── RIGHT EDITORIAL COPY (CRISP PURE WHITE) ─── */
+
+.image-type-copy {
+  position: absolute;
+  z-index: 10;
+  left: 54%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 270px;
+  color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+.image-type-copy .copy-line {
+  display: block;
+  width: 38px;
+  height: 2px;
+  background: #FFFFFF;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.image-type-copy .copy-label {
+  display: block;
+  margin-bottom: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  opacity: 0.95;
+}
+
+.image-type-copy p {
+  margin: 0;
+  font-family: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  font-weight: 400;
+}
+
+
+/* ─── SCROLL INDICATOR (CRISP BRIGHT WHITE) ─── */
+
+.image-type-scroll {
+  position: absolute;
+  z-index: 10;
+  bottom: 6%;
+  right: 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #FFFFFF;
+}
+
+.image-type-scroll span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: #FFFFFF;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.image-type-scroll .scroll-line {
+  width: 1.5px;
+  height: 44px;
+  background: linear-gradient(to bottom, #FFFFFF, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+
+/* ═══════════════════════════════════════════════
+   DESKTOP ≥ 1200px
+   ═══════════════════════════════════════════════ */
+
+@media (min-width: 1200px) {
+  .image-type-left-container {
+    padding-right: 2vw;
+  }
+
+  .image-type-title {
+    font-size: clamp(110px, 12vw, 210px);
+  }
+
+  .image-type-copy {
+    left: 55%;
+    width: 300px;
+  }
+
+  .image-type-copy p {
+    font-size: 26px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════
+   TABLET ≤ 900px
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .image-type-panel {
+    width: 50%;
+  }
+
+  .image-type-left-container {
+    width: 50%;
+    padding-right: 1.5vw;
+  }
+
+  .image-type-title {
+    font-size: clamp(65px, 12vw, 120px);
+  }
+
+  .image-type-copy {
+    left: 54%;
+    width: 200px;
+  }
+
+  .image-type-copy p {
+    font-size: 17px;
+  }
+
+  .image-type-copy .copy-label {
+    font-size: 10px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════
+   MOBILE ≤ 600px
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .image-type-hero {
+    min-height: 640px;
+    height: 100svh;
+  }
+
+  .image-type-panel {
+    width: 54%;
+  }
+
+  .image-type-left-container {
+    width: 54%;
+    padding-right: 1.5vw;
+  }
+
+  .image-type-title {
+    font-size: clamp(46px, 15vw, 80px);
+    line-height: 0.78;
+    letter-spacing: -0.08em;
+  }
+
+  .image-type-copy {
+    top: auto;
+    left: auto;
+    right: 5%;
+    bottom: 8%;
+    width: 140px;
+    transform: none;
+  }
+
+  .image-type-copy .copy-label {
+    margin-bottom: 6px;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .image-type-copy p {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .image-type-copy .copy-line {
+    width: 22px;
+    margin-bottom: 8px;
+  }
+
+  .image-type-scroll {
+    display: none;
+  }
+}
+
+
+/* ─── REDUCED MOTION ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-line {
+    animation: none !important;
+  }
+}

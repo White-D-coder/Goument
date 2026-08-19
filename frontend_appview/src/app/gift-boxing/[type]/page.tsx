@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Heart, Plus } from 'lucide-react';
 import { GIFT_BOX_TYPES, CATALOG_PRODUCTS } from '@/utils/constants';
+import { formatTitleWithBrackets } from '@/utils/format';
 import { useCartStore } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 
@@ -155,7 +156,7 @@ export default function GiftBoxingPage() {
                       {matchedType.name}
                     </p>
                     <h3 className="font-serif-luxury text-xs sm:text-sm md:text-base font-bold text-[#2C3228] line-clamp-2 leading-snug">
-                      {item.name}
+                      {formatTitleWithBrackets(item.name)}
                     </h3>
                   </div>
 

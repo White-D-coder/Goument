@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
-import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond, Geist } from 'next/font/google';
-import localFont from 'next/font/local';
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Geist } from 'next/font/google';
 import './globals.css';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import { QueryProvider } from '@/shared/QueryProvider';
@@ -12,15 +11,9 @@ const geist = Geist({
   display: 'swap',
 });
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
-
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-cormorant',
   display: 'swap',
 });
@@ -31,41 +24,16 @@ const jakarta = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
-const pagio = localFont({
-  src: '../../public/fonts/Pagio.woff',
-  variable: '--font-pagio',
-  display: 'swap',
-});
-
-const avocalipss = localFont({
-  src: '../../public/fonts/Avocalipss-Regular.woff2',
-  variable: '--font-avocalipss',
-  display: 'swap',
-});
-
-const dreamAlways = localFont({
-  src: '../../public/fonts/DreamAlways.otf',
-  variable: '--font-dream-always',
-  display: 'swap',
-});
-
-const tropicalScript = localFont({
-  src: '../../public/fonts/TropicalScript.otf',
-  variable: '--font-tropical-script',
-  display: 'swap',
-});
-
 export const metadata: Metadata = {
-  title: 'The Gourmet Gifts Co. | Luxury Gourmet Gifts',
-  description: 'Luxury gourmet gifts, beautifully packaged for every occasion.',
+  title: 'The Gourmet Gifts Co.',
+  description: 'Gifts that mean something.',
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: '#FAF8FC',
+  maximumScale: 5,
+  themeColor: '#F6F4EF',
 };
 
 export default async function RootLayout({
@@ -73,15 +41,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = await headers();
-  const deviceType = headersList.get('x-device-type') || 'mobile';
-
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${playfair.variable} ${cormorant.variable} ${jakarta.variable} ${pagio.variable} ${avocalipss.variable} ${dreamAlways.variable} ${tropicalScript.variable}`}
+      className={`${geist.variable} ${cormorant.variable} ${jakarta.variable}`}
     >
-      <body className="antialiased bg-[#FAF8FC] text-[#3A2342] selection:bg-[#6B427B]/20 font-sans min-h-screen flex flex-col">
+      <body>
         <QueryProvider>
           <ResponsiveShell>{children}</ResponsiveShell>
         </QueryProvider>

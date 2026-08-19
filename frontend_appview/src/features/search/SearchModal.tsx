@@ -7,6 +7,7 @@ import { getProducts } from '@/shared/api/endpoints';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
 import { useCartStore } from '@/hooks/useCart';
 import { DEMO_BESTSELLERS } from '@/utils/constants';
+import { formatTitleWithBrackets } from '@/utils/format';
 import toast from 'react-hot-toast';
 
 interface SearchModalProps {
@@ -134,7 +135,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                       </div>
                       <div>
                         <h4 className="font-serif-luxury text-xs font-bold text-[#2A231F]">
-                          {product.name}
+                          {formatTitleWithBrackets(product.name)}
                         </h4>
                         <span className="font-sans text-[11px] font-bold text-[#a6bd93]">
                           Handcrafted

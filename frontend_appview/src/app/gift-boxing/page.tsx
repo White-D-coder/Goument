@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Heart, Plus } from 'lucide-react';
 import { CATALOG_PRODUCTS } from '@/utils/constants';
+import { formatTitleWithBrackets } from '@/utils/format';
 import { useCartStore } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
 
@@ -122,7 +123,7 @@ export default function AllGiftBoxingPage() {
                 <div className="p-3 sm:p-4 space-y-2 flex-1 flex flex-col justify-between items-center text-center bg-white rounded-none">
                   <div className="w-full">
                     <h3 className="font-serif-luxury text-xs sm:text-sm md:text-base font-bold text-[#2C3228] line-clamp-2 leading-snug text-center">
-                      {item.name}
+                      {formatTitleWithBrackets(item.name)}
                     </h3>
                   </div>
 

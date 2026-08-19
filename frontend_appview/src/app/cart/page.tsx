@@ -7,6 +7,7 @@ import { Trash2, Plus, Minus, Tag, ArrowRight, ShoppingBag } from 'lucide-react'
 import { useCartStore } from '@/hooks/useCart';
 import { validateCouponAPI } from '@/shared/api/endpoints';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
+import { formatTitleWithBrackets } from '@/utils/format';
 import toast from 'react-hot-toast';
 
 export default function CartPage() {
@@ -103,8 +104,8 @@ export default function CartPage() {
 
                 <div className="flex-1 min-w-0 flex flex-col justify-between h-20 py-0.5">
                   <div className="flex items-start justify-between gap-1">
-                    <h3 className="font-serif-luxury text-xs font-bold text-[#2A231F] truncate">
-                      {item.name}
+                    <h3 className="font-serif-luxury text-xs font-bold text-[#2A231F] leading-snug">
+                      {formatTitleWithBrackets(item.name)}
                     </h3>
                     <button
                       onClick={() => removeItem(item.id)}

@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════
-   THE GOURMET — Design System
-   Luxury Editorial Catalogue
+   HOUSE OF SATRA — Design System
+   Sovereign Luxury Maison & Guild Ecosystem
    ═══════════════════════════════════════════════ */
 
 /* ─── Custom Fonts ─── */
@@ -75,7 +75,22 @@
 /* ─── Design Tokens ─── */
 @layer base {
   :root {
-    /* Color System — Restrained Warm Luxury */
+    /* ── House of Satra — Sovereign Palette ── */
+    --satra-obsidian: #141413;
+    --satra-charcoal: #1A1A18;
+    --satra-ivory: #F6F4EF;
+    --satra-silk: #FAF8F5;
+    --satra-emerald: #243325;
+    --satra-emerald-soft: #7A8B6F;
+    --satra-linen: #E0DDD6;
+    --satra-border: #DDD8CE;
+    --satra-gold: #D4AF37;
+    --satra-taupe: #B5AFA6;
+    --satra-stone: #8A8680;
+    --satra-warm-gray: #6E6B65;
+    --satra-text-secondary: #78746D;
+
+    /* Legacy aliases (backward compat) */
     --gourmet-ivory: #F6F4EF;
     --gourmet-cream: #EFEDE7;
     --gourmet-charcoal: #1A1A18;
@@ -103,22 +118,24 @@
     --space-40: 160px;
 
     /* Layout */
-    --container-max: 1280px;
-    --container-narrow: 960px;
+    --container-max: 1440px;
+    --container-narrow: 1080px;
     --container-text: 720px;
     --nav-height: 64px;
     --nav-height-mobile: 56px;
 
-    /* Easing */
+    /* Easing — Luxury curves */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Transitions */
     --transition-fast: 200ms var(--ease-out-quart);
     --transition-base: 400ms var(--ease-out-expo);
     --transition-slow: 700ms var(--ease-out-expo);
     --transition-image: 900ms var(--ease-out-expo);
+    --transition-reveal: 1000ms var(--ease-luxury);
   }
 
   /* ─── Base Styles ─── */
@@ -129,8 +146,8 @@
   }
 
   body {
-    background-color: var(--gourmet-ivory);
-    color: var(--gourmet-charcoal);
+    background-color: var(--satra-ivory);
+    color: var(--satra-charcoal);
     font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
     font-size: 15px;
     line-height: 1.7;
@@ -222,7 +239,7 @@
   /* Heading hierarchy override */
   h1, h2, h3, h4 {
     font-family: var(--font-cormorant), Georgia, serif;
-    color: var(--gourmet-charcoal);
+    color: var(--satra-charcoal);
   }
 }
 
@@ -256,9 +273,24 @@
   transform: translateY(0) translateX(0) scale(1);
 }
 
-/* Mask reveal — clip from bottom */
+/* ─── Clip-Path Mask Reveals ─── */
 .mask-hidden {
   clip-path: inset(100% 0 0 0);
+  will-change: clip-path;
+}
+
+.mask-hidden-left {
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+}
+
+.mask-hidden-right {
+  clip-path: inset(0 0 0 100%);
+  will-change: clip-path;
+}
+
+.mask-hidden-top {
+  clip-path: inset(0 0 100% 0);
   will-change: clip-path;
 }
 
@@ -278,6 +310,47 @@
 
 .img-hover-scale:hover img {
   transform: scale(1.03);
+}
+
+/* ─── Grayscale → Color Hover ─── */
+.img-grayscale-hover {
+  overflow: hidden;
+}
+
+.img-grayscale-hover img {
+  filter: grayscale(100%);
+  transition: filter 650ms var(--ease-luxury), transform 900ms var(--ease-out-expo);
+  will-change: filter, transform;
+}
+
+.img-grayscale-hover:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+/* ─── Product Card Image Swap ─── */
+.product-card-images {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card-images .img-primary {
+  transition: opacity 500ms var(--ease-luxury);
+}
+
+.product-card-images .img-secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-luxury);
+}
+
+.product-card-images:hover .img-primary {
+  opacity: 0;
+}
+
+.product-card-images:hover .img-secondary {
+  opacity: 1;
 }
 
 /* ─── Editorial Link ─── */
@@ -337,11 +410,21 @@
     transform: none;
   }
 
-  .mask-hidden {
+  .mask-hidden,
+  .mask-hidden-left,
+  .mask-hidden-right,
+  .mask-hidden-top {
     clip-path: inset(0 0 0 0);
   }
 
-  .img-hover-scale img {
+  .img-hover-scale img,
+  .img-grayscale-hover img {
+    transition: none;
+    filter: none;
+  }
+
+  .product-card-images .img-primary,
+  .product-card-images .img-secondary {
     transition: none;
   }
 

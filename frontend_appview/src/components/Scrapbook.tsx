@@ -31,7 +31,7 @@ export default function Scrapbook() {
         {/* Vintage Circular Postage & Postal Seal Watermark */}
         <div className="absolute top-[8%] right-[6%] md:right-[12%] w-48 h-48 sm:w-64 sm:h-64 rounded-full border-[3px] border-dashed border-[#1A1A18]/[0.08] flex items-center justify-center p-4 rotate-12">
           <div className="w-full h-full rounded-full border border-[#1A1A18]/[0.08] flex flex-col items-center justify-center text-center">
-            <span className="type-micro text-[#1A1A18]/25 tracking-widest uppercase">THE GOURMET GIFTS CO.</span>
+            <span className="type-micro text-[#1A1A18]/25 tracking-widest uppercase">THE GOURMET GIFTS</span>
             <span className="text-xl sm:text-2xl font-serif text-[#1A1A18]/30 my-1 font-bold">EST. 2024</span>
             <span className="type-micro text-[#1A1A18]/25 tracking-wider uppercase">ARCHIVE NO. 84</span>
           </div>

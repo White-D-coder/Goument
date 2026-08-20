@@ -2,85 +2,120 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
-const FOOTER_NAV = [
+const FOOTER_COLUMNS = [
   {
-    title: 'Navigate',
+    title: 'Maison & Divisions',
     links: [
-      { label: 'Home', href: '/' },
-      { label: 'Collections', href: '/collections' },
-      { label: 'Our Story', href: '/story' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'The Gourmet Gifts', href: '/gourmet-gifts' },
+      { label: 'Satra Atelier', href: '/collections' },
+      { label: 'Satra Living', href: '/story' },
+      { label: 'Our Story & Guilds', href: '/story' },
     ],
   },
   {
-    title: 'Collections',
+    title: 'Corporate Curation',
     links: [
-      { label: 'Keepsake Vessels', href: '/collections#keepsake-vessels' },
-      { label: 'Tactile Velvet Suites', href: '/collections#velvet-suites' },
-      { label: 'Heritage Hampers', href: '/collections#heritage-hampers' },
-      { label: 'Atelier Accents', href: '/collections#atelier-accents' },
+      { label: 'Private Concierge', href: '/corporate' },
+      { label: 'Custom Crest Embossing', href: '/corporate' },
+      { label: 'Institutional Orders', href: '/corporate' },
+      { label: 'Corporate Dossier', href: '/corporate' },
     ],
   },
   {
-    title: 'Corporate',
+    title: 'Client Services',
     links: [
-      { label: 'Corporate Gifting', href: '/corporate' },
-      { label: 'Custom Branding', href: '/corporate' },
-      { label: 'Bulk Orders', href: '/corporate' },
+      { label: 'Bespoke Inquiries', href: '/contact' },
+      { label: 'Artisanal Gift Boxing', href: '/gift-boxing' },
+      { label: 'Pan-India Dispatch', href: '/contact' },
     ],
   },
   {
-    title: 'Contact',
+    title: 'Concierge Direct',
     links: [
-      { label: 'concierge@thegourmetgiftsco.com', href: 'mailto:concierge@thegourmetgiftsco.com' },
+      { label: 'concierge@houseofsatra.com', href: 'mailto:concierge@houseofsatra.com' },
       { label: '+91 98765 43210', href: 'tel:+919876543210' },
-      { label: 'Mumbai & Delhi NCR', href: '/contact' },
+      { label: 'Delhi NCR • Mumbai • Jaipur', href: '/contact' },
     ],
   },
 ];
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#1A1A18] text-[#F6F4EF] relative z-30">
-      {/* Top — Brand + Descriptor */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 pt-[120px] pb-16">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-20">
-          <div>
-            <Link href="/">
-              <span
-                className="block text-[32px] md:text-[40px] leading-none tracking-[-0.02em]"
-                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 600 }}
-              >
-                The Gourmet Gifts Co.
-              </span>
-            </Link>
-            <p className="type-body text-[#B5AFA6] mt-3 max-w-sm text-sm">
-              Gifts that mean something.
-            </p>
-          </div>
+    <footer className="relative overflow-hidden bg-[#121211] text-[#F6F4EF] border-t border-white/10">
 
-          <Link
-            href="#"
-            className="editorial-link type-meta text-[#B5AFA6] hover:text-[#F6F4EF] inline-flex items-center gap-2"
-          >
-            <span>Explore House of Sutra</span>
-            <ArrowRight className="w-3 h-3" />
+      {/* ─── Background Texture Image ─── */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12] mix-blend-luminosity">
+        <Image
+          src="/images/footer_bg_pattern.jpg"
+          alt="Atelier Background Texture"
+          fill
+          className="object-cover object-center filter grayscale"
+        />
+      </div>
+
+      {/* ─── Top-Left Atmospheric Glow Gradient ─── */}
+      <div 
+        className="absolute top-0 left-0 w-[350px] sm:w-[500px] h-[250px] sm:h-[350px] pointer-events-none z-0 opacity-60"
+        style={{
+          background: 'radial-gradient(circle at 10% 10%, rgba(122, 139, 111, 0.28) 0%, rgba(36, 51, 37, 0.10) 40%, transparent 75%)',
+          filter: 'blur(25px)',
+        }}
+      />
+
+      {/* ─── Bottom-Left Warm Patina Glow Gradient ─── */}
+      <div 
+        className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] h-[200px] sm:h-[300px] pointer-events-none z-0 opacity-50"
+        style={{
+          background: 'radial-gradient(circle at 15% 90%, rgba(212, 175, 55, 0.16) 0%, rgba(181, 175, 166, 0.06) 35%, transparent 70%)',
+          filter: 'blur(30px)',
+        }}
+      />
+
+      {/* ─── Ambient Vignette ─── */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+
+      {/* ─── Compact Sleek Container ─── */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 sm:pt-10 pb-6 sm:pb-8">
+        
+        {/* Top Header: Compact Brand Row */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-6 border-b border-white/10">
+          <Link href="/" className="inline-flex items-center gap-2.5 group">
+            <div className="relative w-7 h-5 sm:w-8 sm:h-6 transition-transform group-hover:scale-105 duration-300">
+              <Image
+                src="/images/brand/logo-vector.pdf.png"
+                alt="House of Satra"
+                fill
+                className="object-contain brightness-0 invert"
+              />
+            </div>
+            <span
+              className="text-xl sm:text-2xl tracking-[-0.01em] uppercase font-light leading-none text-[#F6F4EF]"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500 }}
+            >
+              House of Satra
+            </span>
           </Link>
+
+          <p className="font-serif italic text-xs sm:text-sm text-[#C7C3BB]/80 tracking-wide">
+            “Form &amp; Permanence.”
+          </p>
         </div>
 
-        {/* Middle — 4 Column Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 pb-20 border-b border-white/10">
-          {FOOTER_NAV.map((col) => (
-            <div key={col.title}>
-              <h4 className="type-meta text-[#B5AFA6] mb-5">{col.title}</h4>
-              <ul className="space-y-3">
+        {/* Middle: 4 Compact Nav Columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-b border-white/10">
+          {FOOTER_COLUMNS.map((col) => (
+            <div key={col.title} className="space-y-2.5">
+              <h4 className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.22em] text-[#7A8B6F] font-mono font-bold">
+                {col.title}
+              </h4>
+              <ul className="space-y-1.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="type-body text-[#8A8680] hover:text-[#F6F4EF] transition-colors duration-200 text-sm"
+                      className="inline-block text-xs sm:text-[12.5px] text-[#A6A29A] hover:text-[#FFFFFF] transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -91,15 +126,19 @@ export const Footer: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom — Copyright */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-10">
-          <p className="type-micro text-[#8A8680]/60">
-            © {new Date().getFullYear()} The Gourmet Gifts Co. All rights reserved.
-          </p>
-          <p className="type-micro text-[#8A8680]/40">
-            A House of Sutra brand.
-          </p>
+        {/* Bottom Bar: Compact Meta & Copyright */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] text-[#8A8680]">
+          <div className="flex items-center gap-2.5">
+            <span>© {new Date().getFullYear()} House of Satra.</span>
+            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span>All rights reserved.</span>
+          </div>
+
+          <span className="text-[#B5AFA6]/60 uppercase tracking-widest text-[8.5px]">
+            Sovereign Luxury Maison &amp; Guild Ecosystem
+          </span>
         </div>
+
       </div>
     </footer>
   );

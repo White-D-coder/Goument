@@ -20,7 +20,10 @@ export const ParallaxImage: React.FC<ParallaxImageProps> = ({
   className = '',
   priority = false,
 }) => {
-  const ref = useParallax<HTMLDivElement>(speed);
+  // Reduce parallax on mobile for performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const effectiveSpeed = isMobile ? speed * 0.5 : speed;
+  const ref = useParallax<HTMLDivElement>(effectiveSpeed);
 
   return (
     <div className={`overflow-hidden ${aspect} ${className}`}>

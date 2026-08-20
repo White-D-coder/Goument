@@ -1,461 +1,619 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
-import { TextReveal } from '@/components/motion/TextReveal';
-import { ParallaxImage } from '@/components/motion/ParallaxImage';
-import { ImageReveal } from '@/components/motion/ImageReveal';
-import { ProductShowcase } from '@/components/editorial/ProductShowcase';
-import { SectionHeader } from '@/components/editorial/SectionHeader';
-import { EditorialCTA } from '@/components/editorial/EditorialCTA';
-import Scrapbook from '@/components/Scrapbook';
-import ImageTypography from '@/components/ImageTypography';
+import { ArrowRight, Eye, ShoppingBag, Check } from 'lucide-react';
+import { useCartStore } from '@/hooks/useCart';
+import HouseOfSatraIntro from '@/components/editorial/HouseOfSatraIntro';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ═══ CRAFTSMANSHIP STORIES (No legacy product names) ═══ */
-const MATERIAL_STORIES = [
+/* ═══════════════════════════════════════════════
+   PRODUCT DATA
+   ═══════════════════════════════════════════════ */
+
+type BrandDivision = 'all' | 'gourmet-gifts' | 'satra-atelier' | 'satra-living';
+
+interface MaisonProduct {
+  id: string;
+  name: string;
+  brand: string;
+  brandCategory: BrandDivision;
+  price: number;
+  image: string;
+  secondaryImage?: string;
+  description: string;
+}
+
+const MAISON_PRODUCTS: MaisonProduct[] = [
   {
-    image: '/images/Category_image/premium_velvet/thumb.jpeg',
-    label: 'Materiality',
-    title: 'High-Pile Velvet',
-    body: 'Upholstered by hand over solid kiln-dried wood chassis with seamless corner tucks and brushed gold-plated fixtures.',
+    id: 'tgg-velvet-suite',
+    name: 'Royal Velvet Keepsake Suite',
+    brand: 'Gourmet Gifts',
+    brandCategory: 'gourmet-gifts',
+    price: 14500,
+    image: '/images/small_anipics/velvet_tray_hero.jpg',
+    secondaryImage: '/images/Category_image/premium_velvet/vel1.jpeg',
+    description: 'Multi-tier bespoke keepsake chest in deep royal velvet.',
   },
   {
-    image: '/images/Category_image/Royale_tin_tin/tin1.jpeg',
-    label: 'Metalcraft',
-    title: 'Gilded Tinplate',
-    body: 'Architectural octagonal vessels embossed with botanical filigree, designed to serve as heirloom chests for generations.',
+    id: 'tgg-botanical-tin',
+    name: 'Royale Botanical Keepsake Tin',
+    brand: 'Gourmet Gifts',
+    brandCategory: 'gourmet-gifts',
+    price: 4850,
+    image: '/images/Category_image/Royale_tin_tin/tinnew1.png',
+    secondaryImage: '/images/Category_image/Royale_tin_tin/tin7.jpeg',
+    description: 'Architectural tinplate with 24k gold filigree.',
   },
   {
+    id: 'tgg-burgundy-chest',
+    name: 'Imperial Burgundy Velvet Chest',
+    brand: 'Gourmet Gifts',
+    brandCategory: 'gourmet-gifts',
+    price: 9800,
+    image: '/images/Category_image/premium_velvet/vel1.jpeg',
+    secondaryImage: '/images/Category_image/premium_velvet/vel2.jpeg',
+    description: 'Heirloom velvet memory box with gold-plated hardware.',
+  },
+  {
+    id: 'sat-octagonal-tray',
+    name: 'Heritage Octagonal Valet Tray',
+    brand: 'Satra Atelier',
+    brandCategory: 'satra-atelier',
+    price: 3800,
+    image: '/images/small_anipics/framee.png',
+    secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/frame.jpg',
+    description: 'Architectural brass and teak desk organizer.',
+  },
+  {
+    id: 'sat-teak-frame',
+    name: 'Heritage Artisanal Teak Frame',
+    brand: 'Satra Atelier',
+    brandCategory: 'satra-atelier',
+    price: 5200,
+    image: '/images/small_anipics/frame.png',
+    secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/frame.jpg',
+    description: 'Museum-grade photographic keepsake frame.',
+  },
+  {
+    id: 'sl-candle',
+    name: 'Botanical Amber Soy Candle',
+    brand: 'Satra Living',
+    brandCategory: 'satra-living',
+    price: 2400,
     image: '/images/Product_images/CRAFTED IN-HOUSE/candle_120.png',
-    label: 'Atelier',
-    title: 'Botanical Soy Wax',
-    body: 'Hand-poured in small batches using pure organic soy and therapeutic essential oil formulations in heavy amber glass.',
+    secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
+    description: 'Hand-poured soy candle with Himalayan cedar and amber.',
+  },
+  {
+    id: 'sl-coasters',
+    name: 'Marbled Resin Coasters',
+    brand: 'Satra Living',
+    brandCategory: 'satra-living',
+    price: 2100,
+    image: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
+    description: 'Hand-cast resin with organic pigment flows.',
+  },
+  {
+    id: 'sl-velvet-chest',
+    name: 'Heirloom Velvet Memory Chest',
+    brand: 'Satra Living',
+    brandCategory: 'satra-living',
+    price: 8900,
+    image: '/images/Product_images/CRAFTED IN-HOUSE/velvet-lined_box_large.jpg',
+    secondaryImage: '/images/Category_image/premium_velvet/royale3.jpeg',
+    description: 'Permanent keepsake box for personal treasures.',
   },
 ];
 
-export default function HomePage() {
-  const heroImageRef = useRef<HTMLImageElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
+/* ═══════════════════════════════════════════════
+   HOMEPAGE
+   ═══════════════════════════════════════════════ */
 
-  /* ─── Hero Animations ─── */
+export default function HouseOfSatraHomePage() {
+  const [selectedDivision, setSelectedDivision] = useState<BrandDivision>('all');
+  const [quickViewProduct, setQuickViewProduct] = useState<MaisonProduct | null>(null);
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const addItem = useCartStore((state) => state.addItem);
+
+  const filteredProducts = selectedDivision === 'all'
+    ? MAISON_PRODUCTS
+    : MAISON_PRODUCTS.filter((p) => p.brandCategory === selectedDivision);
+
+  const handleAddToCart = (product: MaisonProduct) => {
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price * 100,
+      image: product.image,
+      quantity: 1,
+    });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
+
+  /* ─── Hero Parallax ─── */
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = gsap.context(() => {
-      // Ken Burns slow atmospheric zoom on hero image
-      if (heroImageRef.current) {
-        gsap.fromTo(
-          heroImageRef.current,
+      const heroImg = heroRef.current?.querySelector('.hero-img');
+      if (heroImg) {
+        gsap.fromTo(heroImg,
           { scale: 1.0 },
-          { scale: 1.08, duration: 16, ease: 'none', repeat: -1, yoyo: true }
-        );
-      }
-
-      // Staggered hero text entrance
-      if (heroTextRef.current) {
-        const children = heroTextRef.current.children;
-        gsap.fromTo(
-          children,
-          { y: 35, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            stagger: 0.18,
-            ease: 'power3.out',
-            delay: 0.2,
-          }
+          { scale: 1.06, duration: 14, ease: 'none', repeat: -1, yoyo: true }
         );
       }
     });
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="w-full relative bg-[#1A1A18]">
+    <div className="w-full relative selection:bg-[var(--satra-charcoal)] selection:text-[var(--satra-ivory)]">
+      <HouseOfSatraIntro />
 
-      {/* ═══════════════════════════════════════════════
-          SECTION 1 — STATIC HERO BACKGROUND (Sticky / Fixed)
-          ═══════════════════════════════════════════════ */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-end">
-        {/* Full-bleed background image with slow Ken Burns effect */}
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            ref={heroImageRef}
+      {/* ═══════════════════════════════════════════════════════════════
+          1. HERO — Full Viewport, Image-First
+          ═══════════════════════════════════════════════════════════════ */}
+      <section ref={heroRef} className="relative w-full h-screen min-h-[600px] overflow-hidden">
+        {/* Hero Image */}
+        <div className="absolute inset-0">
+          <Image
             src="/images/hero/hero_highres_1.png"
-            alt="The Gourmet Gifts Co. — Luxury Gifting"
-            className="w-full h-full object-cover will-change-transform filter brightness-[0.82]"
+            alt="House of Satra — Form & Permanence"
+            fill
+            className="hero-img object-cover object-center"
+            priority
+            sizes="100vw"
           />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
         </div>
 
-        {/* Ambient luxury gradient overlay for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/95 via-[#1A1A18]/30 to-black/40 pointer-events-none" />
-
-        {/* Hero Content positioned inside the sticky hero */}
-        <div className="relative z-10 pb-24 md:pb-32 px-6 lg:px-12 max-w-[1280px] mx-auto w-full">
-          <div ref={heroTextRef} className="max-w-2xl space-y-4 text-left">
-            <span className="type-meta text-[#B5AFA6] block opacity-0">
-              Curated Gifting • Maison de Haute Curiosités
-            </span>
-            <h1
-              className="text-white leading-[0.95] tracking-[-0.03em] opacity-0"
-              style={{
-                fontFamily: 'var(--font-cormorant), Georgia, serif',
-                fontWeight: 300,
-                fontSize: 'clamp(44px, 8.5vw, 96px)',
-              }}
-            >
-              Gifts that mean something.
-            </h1>
-            <p className="type-body text-white/70 max-w-md text-sm md:text-base opacity-0 font-light leading-relaxed">
-              Objects of permanence, crafted in limited artisanal editions for moments of lasting remembrance.
-            </p>
-            <div className="opacity-0 pt-4">
-              <a
-                href="#content-sheet"
-                className="editorial-link type-meta text-white/80 hover:text-white inline-flex items-center gap-2 transition-colors cursor-pointer"
-              >
-                <span>Discover The Curation</span>
-                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════
-          SECTION 2 & BEYOND — THE OVERLAPPING WHITE / IVORY SHEET
-          Slides smoothly UP and covers the static background image on scroll
-          ═══════════════════════════════════════════════ */}
-      <div
-        id="content-sheet"
-        className="relative z-20 bg-[#F6F4EF] text-[#1A1A18] rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-25px_60px_rgba(0,0,0,0.35)] border-t border-[#E0DDD6]"
-      >
-        
-        {/* ─── PULL BAR / ACCENT INDICATOR ─── */}
-        <div className="pt-6 pb-2 flex justify-center">
-          <div className="w-12 h-1 bg-[#E0DDD6] rounded-full" />
-        </div>
-
-        {/* ─── 1. BRAND MANIFESTO STATEMENT ─── */}
-        <section className="py-[90px] md:py-[130px] px-6 lg:px-12 max-w-[960px] mx-auto text-center">
-          <span className="type-meta text-[#8A8680] block mb-5">
-            Philosophy of Permanence
-          </span>
-          <TextReveal
-            as="h2"
-            className="type-serif-body text-[#1A1A18] max-w-[760px] mx-auto leading-relaxed"
-            stagger={0.03}
-            duration={0.7}
-          >
-            We don't make disposable gifts. We craft enduring keepsakes meant to be preserved across generations.
-          </TextReveal>
-        </section>
-
-        {/* ─── IMAGE-FILLED TYPOGRAPHY HERO ─── */}
-        <ImageTypography />
-
-        {/* ─── 2. FEATURED SHOWCASE — ASYMMETRIC EDITORIAL ─── */}
-        <section className="py-[100px] md:py-[140px] px-6 lg:px-12 max-w-[1280px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-            {/* Left — Large Full-Bleed Image Reveal */}
-            <div className="lg:col-span-7">
-              <ImageReveal
-                src="/images/Category_image/Royale_tin_tin/tinnew1.png"
-                alt="Keepsake Metalcraft Vessel"
-                aspect="aspect-[4/3] md:aspect-[16/11]"
-              />
-            </div>
-
-            {/* Right — Editorial Copy */}
-            <div className="lg:col-span-5 text-left">
-              <ScrollReveal animation="fadeUp" delay={0.15}>
-                <div className="space-y-5 max-w-md">
-                  <span className="type-meta text-[#8A8680] block">Series 01 • Metalcraft</span>
-                  <h2 className="type-heading text-[#1A1A18]">
-                    Heirloom Keepsake Vessels
-                  </h2>
-                  <p className="type-body text-[#8A8680] text-sm leading-relaxed">
-                    Custom-cast octagonal tinplate finished in forest emerald with 24k gilded botanical filigree. Designed to transcend the moment of celebration and serve as a permanent memory chest.
-                  </p>
-                  <div className="pt-2">
-                    <EditorialCTA label="Explore The Series" href="/collections#keepsake-vessels" />
-                  </div>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 3. EDITORIAL SERIES CHAPTERS (Magazine Spread, Not Product Grid) ─── */}
-
-        {/* Chapter A — Velvet: Full-Bleed Hero Image with Overlapping Text Card */}
-        <section className="relative py-0 border-t border-[#E0DDD6]">
-          <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden">
-            <img
-              src="/images/small_anipics/velvet_tray_hero.jpg"
-              alt="Velvet Keepsake Chest — Hero"
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18]/70 via-[#1A1A18]/20 to-transparent" />
-          </div>
-
-          {/* Overlapping Editorial Card */}
+        {/* Hero Text — Minimal, Editorial */}
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-28 md:pb-32 px-6 z-10">
           <ScrollReveal animation="fadeUp">
-            <div className="relative max-w-[1280px] mx-auto px-6 lg:px-12">
-              <div className="md:absolute md:bottom-0 md:left-12 lg:left-12 md:-translate-y-[-40px] bg-[#F6F4EF] p-8 md:p-12 max-w-lg shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#E0DDD6]">
-                <span className="type-meta text-[#8A8680] block mb-4">Series 02 • Tactile Upholstery</span>
-                <h2 
-                  className="text-[#1A1A18] leading-[1.05] tracking-[-0.02em] mb-4"
-                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500, fontSize: 'clamp(28px, 4vw, 48px)' }}
-                >
-                  The Velvet Keepsake Chest
-                </h2>
-                <p className="type-body text-[#8A8680] text-sm leading-relaxed mb-6">
-                  Plush royal velvet stretched by hand over kiln-dried hardwood frames. Brushed gold-plated brass latches, satin-lined compartments, and magnetic closures. Each chest is designed to outlive the celebration and serve as jewellery storage, a memory box, or a permanent display piece.
-                </p>
-                <EditorialCTA label="Discover The Series" href="/collections#velvet-suites" />
-              </div>
+            <div className="text-center max-w-3xl">
+              <h1
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.05em] sm:tracking-[0.08em] text-white uppercase leading-[0.95] mb-5"
+                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+              >
+                Form &amp;<br />Permanence
+              </h1>
+
+              <Link
+                href="#divisions"
+                className="inline-flex items-center gap-2 text-white/80 hover:text-white text-[11px] uppercase tracking-[0.25em] font-medium transition-colors duration-300 group"
+              >
+                <span>Explore Collection</span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </ScrollReveal>
-          <div className="h-12 md:h-16" />
-        </section>
+        </div>
+      </section>
 
-        {/* Chapter B — Heritage Hamper: Reversed Asymmetric Layout */}
-        <section className="py-[100px] md:py-[140px] px-6 lg:px-12">
-          <div className="max-w-[1280px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
-              {/* Left — Editorial Copy (takes less space, offset down) */}
-              <div className="lg:col-span-4 lg:pr-12 order-2 lg:order-1">
-                <ScrollReveal animation="fadeUp">
-                  <div className="space-y-5 max-w-sm">
-                    <span className="type-meta text-[#8A8680] block">Series 03 • Heritage Botanicals</span>
-                    <h2 
-                      className="text-[#1A1A18] leading-[1.05] tracking-[-0.02em]"
-                      style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500, fontSize: 'clamp(28px, 3.5vw, 44px)' }}
-                    >
-                      Epicurean Hampers
-                    </h2>
-                    <p className="type-body text-[#8A8680] text-sm leading-relaxed">
-                      400gsm Italian linen wrap with gold foil typography. Inside: single-origin Darjeeling, artisanal confitures, hand-roasted nuts, and botanical tea canisters — each item chosen for provenance and character.
-                    </p>
-                    <div className="pt-3 space-y-2.5 border-t border-[#E0DDD6]">
-                      <div className="flex justify-between">
-                        <span className="type-micro text-[#B5AFA6]">Materials</span>
-                        <span className="type-micro text-[#1A1A18]">FSC Linen, Gold Foil</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="type-micro text-[#B5AFA6]">Origin</span>
-                        <span className="type-micro text-[#1A1A18]">Pan-India Guild</span>
-                      </div>
-                    </div>
-                    <EditorialCTA label="Explore Heritage" href="/collections#heritage-hampers" />
-                  </div>
-                </ScrollReveal>
-              </div>
+      {/* ═══════════════════════════════════════════════════════════════
+          2. THREE DIVISIONS — Asymmetric Editorial Grid
+          ═══════════════════════════════════════════════════════════════ */}
+      <section id="divisions" className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-10" style={{ borderBottom: '1px solid var(--satra-linen)' }}>
+        <div className="max-w-[1440px] mx-auto">
 
-              {/* Right — Stacked/Overlapping Dual Image Composition */}
-              <div className="lg:col-span-8 relative order-1 lg:order-2">
-                <ScrollReveal animation="fadeUp">
-                  <div className="relative">
-                    {/* Primary Large Image */}
-                    <div className="overflow-hidden aspect-[4/3] bg-[#EFEDE7]">
-                      <img
-                        src="/images/Category_image/Classics/classics_hero.png"
-                        alt="Heritage Hamper Collection"
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    {/* Overlapping Detail Image (desktop only) */}
-                    <div className="hidden md:block absolute -bottom-10 -left-8 w-[45%] aspect-[3/4] overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.12)] border-4 border-white">
-                      <img
-                        src="/images/Category_image/Classics/classic.jpeg"
-                        alt="Heritage Hamper Detail"
-                        loading="lazy"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </section>
+          {/* Asymmetric Grid: Gourmet (60%) | Atelier + Living stacked (40%) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-[3px] sm:gap-1">
 
-        {/* Chapter C — Atelier Accents: Triptych with Editorial Overlay */}
-        <section className="py-[80px] md:py-[120px] px-6 lg:px-12 bg-[#1A1A18]">
-          <div className="max-w-[1280px] mx-auto">
-            <ScrollReveal animation="fadeUp">
-              <div className="text-center mb-14 md:mb-20">
-                <span className="type-meta text-[#B5AFA6] block mb-4">Series 04 • In-House Atelier</span>
-                <h2 
-                  className="text-[#F6F4EF] leading-[1.05] tracking-[-0.02em] max-w-lg mx-auto"
-                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500, fontSize: 'clamp(28px, 4vw, 48px)' }}
+            {/* Division 01: The Gourmet Gifts — Large */}
+            <Link
+              href="/gourmet-gifts"
+              className="group relative lg:col-span-7 aspect-[4/5] sm:aspect-[3/4] lg:aspect-auto lg:min-h-[640px] overflow-hidden img-grayscale-hover"
+            >
+              <Image
+                src="/images/small_anipics/velvet_tray_hero.jpg"
+                alt="The Gourmet Gifts"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 58vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10 z-10">
+                <span className="type-meta text-white/60 block mb-2">Division 01</span>
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl text-white font-light uppercase tracking-tight mb-3"
+                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                 >
-                  Objects Made by Hand, Meant to Remain
+                  The Gourmet<br />Gifts
                 </h2>
+                <span className="inline-flex items-center gap-2 text-white/70 group-hover:text-white text-[11px] uppercase tracking-[0.2em] font-medium transition-colors">
+                  <span>Explore</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
               </div>
-            </ScrollReveal>
+            </Link>
 
-            {/* Triptych — Three varied aspect ratios, no uniform grid */}
-            <div className="grid grid-cols-12 gap-4 md:gap-6 items-end">
-              {/* Tall portrait */}
-              <ScrollReveal animation="fadeUp" className="col-span-12 sm:col-span-4">
-                <Link href="/collections#atelier-accents" className="block group">
-                  <div className="overflow-hidden aspect-[3/4] bg-[#2C2B28]">
-                    <img
-                      src="/images/Category_image/Royale_tin_tin/tin7.jpeg"
-                      alt="Emerald Botanical Vessel"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Emerald Botanical Vessel</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Airtight friction seal with embossed crest</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+            {/* Right Column: Atelier (top) + Living (bottom) */}
+            <div className="lg:col-span-5 grid grid-cols-2 lg:grid-cols-1 gap-[3px] sm:gap-1">
 
-              {/* Wide landscape — offset higher */}
-              <ScrollReveal animation="fadeUp" delay={0.15} className="col-span-12 sm:col-span-5">
-                <Link href="/collections#atelier-accents" className="block group sm:-mt-16">
-                  <div className="overflow-hidden aspect-[5/4] bg-[#2C2B28]">
-                    <img
-                      src="/images/small_anipics/framee.png"
-                      alt="Hand-Carved Teak Frame"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Hand-Carved Teak Frame</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Solid reclaimed teak, velvet-backed</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+              {/* Division 02: Satra Atelier */}
+              <Link
+                href="/collections"
+                className="group relative aspect-[4/5] sm:aspect-[3/2] lg:aspect-auto lg:min-h-[318px] overflow-hidden img-grayscale-hover"
+              >
+                <Image
+                  src="/images/small_anipics/framee.png"
+                  alt="Satra Atelier"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 42vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-10">
+                  <span className="type-meta text-white/60 block mb-1.5">Division 02</span>
+                  <h3
+                    className="text-xl sm:text-2xl lg:text-3xl text-white font-light uppercase tracking-tight mb-2"
+                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                  >
+                    Satra Atelier
+                  </h3>
+                  <span className="inline-flex items-center gap-1.5 text-white/60 group-hover:text-white text-[10px] uppercase tracking-[0.2em] font-medium transition-colors">
+                    Explore <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </Link>
 
-              {/* Square — sits flush at bottom */}
-              <ScrollReveal animation="fadeUp" delay={0.3} className="col-span-12 sm:col-span-3">
-                <Link href="/collections#atelier-accents" className="block group">
-                  <div className="overflow-hidden aspect-square bg-[#2C2B28]">
-                    <img
-                      src="/images/Product_images/CRAFTED IN-HOUSE/candle_120.png"
-                      alt="Botanical Amber Soy Candle"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Botanical Soy Candle</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Pure essential oils, amber glass</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+              {/* Division 03: Satra Living */}
+              <Link
+                href="/story"
+                className="group relative aspect-[4/5] sm:aspect-[3/2] lg:aspect-auto lg:min-h-[318px] overflow-hidden img-grayscale-hover"
+              >
+                <Image
+                  src="/images/Product_images/CRAFTED IN-HOUSE/candle_120.png"
+                  alt="Satra Living"
+                  fill
+                  className="object-contain p-8 sm:object-cover sm:p-0"
+                  style={{ backgroundColor: 'var(--satra-charcoal)' }}
+                  sizes="(max-width: 1024px) 50vw, 42vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-10">
+                  <span className="type-meta text-white/60 block mb-1.5">Division 03</span>
+                  <h3
+                    className="text-xl sm:text-2xl lg:text-3xl text-white font-light uppercase tracking-tight mb-2"
+                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                  >
+                    Satra Living
+                  </h3>
+                  <span className="inline-flex items-center gap-1.5 text-white/60 group-hover:text-white text-[10px] uppercase tracking-[0.2em] font-medium transition-colors">
+                    Explore <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+              </Link>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ─── 4. MATERIALITY & CRAFTSMANSHIP GRID ─── */}
-        <section className="py-[100px] md:py-[140px] px-6 lg:px-12 bg-white border-y border-[#E0DDD6]">
-          <div className="max-w-[1280px] mx-auto space-y-14">
-            <SectionHeader
-              label="Provenance"
-              heading="The Anatomy of Materiality"
-              body="Every element is chosen for tactile excellence and multi-generational longevity."
-              align="center"
-              className="max-w-none flex flex-col items-center"
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10">
-              {MATERIAL_STORIES.map((story, idx) => (
-                <div key={idx} className="space-y-4 text-left">
-                  <ParallaxImage
-                    src={story.image}
-                    alt={story.title}
-                    aspect="aspect-[4/5]"
-                    speed={0.08}
-                  />
-                  <div className="space-y-1.5 pt-2">
-                    <span className="type-meta text-[#8A8680] block">{story.label}</span>
-                    <h3 className="type-title text-[#1A1A18]">{story.title}</h3>
-                    <p className="type-body text-[#8A8680] text-sm leading-relaxed">{story.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── 5. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
-        <Scrapbook />
-
-        {/* ─── 6. BRAND VALUES (Dark Contrast Section) ─── */}
-        <section className="bg-[#1A1A18] text-[#F6F4EF] py-[100px] md:py-[140px] px-6 lg:px-12">
-          <div className="max-w-[1280px] mx-auto">
-            <SectionHeader
-              label="Our Commitment"
-              heading="Made to Be Kept"
-              body="We honour the ritual of gifting through uncompromising artisanal integrity."
-              align="center"
-              dark
-              className="mb-16 max-w-none flex flex-col items-center"
-            />
-
-            <ScrollReveal staggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 max-w-[960px] mx-auto text-center md:text-left">
-              {[
-                {
-                  title: 'Generational Craft',
-                  body: 'Crafted by master fabricators, upholsterers, and woodworkers across India.',
-                },
-                {
-                  title: 'Epicurean Distinction',
-                  body: 'Single-origin Darjeeling teas, artisanal confitures, and hand-roasted nuts.',
-                },
-                {
-                  title: 'Second Life Utility',
-                  body: 'Every packaging vessel is engineered to serve as keepsake home decor for decades.',
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="space-y-2">
-                  <h4 className="type-title text-[#F6F4EF]">{item.title}</h4>
-                  <p className="type-body text-[#B5AFA6] text-sm leading-relaxed">{item.body}</p>
-                </div>
-              ))}
-            </ScrollReveal>
-          </div>
-        </section>
-
-        {/* ─── 6. CORPORATE & CONCIERGE CTA ─── */}
-        <section className="py-[110px] md:py-[150px] px-6 lg:px-12 text-center">
-          <div className="max-w-[720px] mx-auto space-y-6">
-            <ScrollReveal animation="fadeUp">
-              <span className="type-meta text-[#8A8680] block">Private Concierge</span>
-              <h2 className="type-heading text-[#1A1A18]">
-                For those who give at scale.
+      {/* ═══════════════════════════════════════════════════════════════
+          3. EDITORIAL MOODBOARD COLLAGE — 7 Tiles
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-10" style={{ borderBottom: '1px solid var(--satra-linen)' }}>
+        <div className="max-w-[1440px] mx-auto">
+          <ScrollReveal animation="fadeUp">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2
+                className="text-3xl sm:text-5xl md:text-6xl font-light tracking-tight uppercase"
+                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: 'var(--satra-charcoal)' }}
+              >
+                The Art of Giving
               </h2>
-              <p className="type-body text-[#8A8680] text-sm max-w-md mx-auto leading-relaxed">
-                Bespoke corporate gifting, custom crest monograms, and curated presentations for institutions that value meaningful relationships.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
-                <EditorialCTA label="Request Corporate Dossier" href="/corporate" />
-                <EditorialCTA label="Contact Concierge" href="/contact" />
+            </div>
+          </ScrollReveal>
+
+          {/* 7-Tile Asymmetric Grid */}
+          <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-[3px] sm:gap-1 auto-rows-[140px] sm:auto-rows-[180px] lg:auto-rows-[200px]">
+            {[
+              { src: '/images/collage/01.jpg', hover: '/images/collage/01-hover.jpg', col: 'col-span-2 lg:col-span-4', row: 'row-span-2' },
+              { src: '/images/collage/02.jpg', hover: '/images/collage/02-hover.jpg', col: 'col-span-2 lg:col-span-3', row: 'row-span-1' },
+              { src: '/images/collage/03.jpg', hover: '/images/collage/03-hover.jpg', col: 'col-span-2 sm:col-span-2 lg:col-span-5', row: 'row-span-2' },
+              { src: '/images/collage/04.jpg', hover: '/images/collage/04-hover.jpg', col: 'col-span-2 lg:col-span-3', row: 'row-span-1' },
+              { src: '/images/collage/05.jpg', hover: '/images/collage/05-hover.jpg', col: 'col-span-2 lg:col-span-5', row: 'row-span-1' },
+              { src: '/images/collage/06.jpg', hover: '/images/collage/06-hover.jpg', col: 'col-span-2 lg:col-span-4', row: 'row-span-1' },
+              { src: '/images/collage/07.jpg', hover: '/images/collage/07-hover.jpg', col: 'col-span-2 sm:col-span-2 lg:col-span-3', row: 'row-span-1' },
+            ].map((tile, i) => (
+              <div
+                key={i}
+                className={`${tile.col} ${tile.row} relative overflow-hidden img-grayscale-hover group cursor-pointer`}
+              >
+                <Image
+                  src={tile.src}
+                  alt={`Editorial ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 50vw, 33vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          4. PRODUCT CATALOG — Asymmetric Editorial Grid
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-10" id="maison-catalog" style={{ borderBottom: '1px solid var(--satra-linen)' }}>
+        <div className="max-w-[1440px] mx-auto">
+
+          {/* Header + Filter */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 sm:mb-14">
+            <h2
+              className="text-3xl sm:text-5xl font-light tracking-tight uppercase"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: 'var(--satra-charcoal)' }}
+            >
+              Creations
+            </h2>
+
+            <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
+              {[
+                { id: 'all', label: 'All' },
+                { id: 'gourmet-gifts', label: 'Gourmet Gifts' },
+                { id: 'satra-atelier', label: 'Atelier' },
+                { id: 'satra-living', label: 'Living' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedDivision(tab.id as BrandDivision)}
+                  className={`px-3.5 py-2 text-[10px] uppercase tracking-[0.15em] font-medium transition-all duration-300 whitespace-nowrap cursor-pointer border-b-[1.5px] ${
+                    selectedDivision === tab.id
+                      ? 'border-[var(--satra-charcoal)] text-[var(--satra-charcoal)]'
+                      : 'border-transparent text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Asymmetric Product Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-[3px] sm:gap-1">
+            {filteredProducts.map((product, i) => (
+              <div
+                key={product.id}
+                className={`group bg-[var(--satra-silk)] overflow-hidden cursor-pointer ${
+                  i === 0 ? 'col-span-2 lg:col-span-2 row-span-1' : ''
+                }`}
+                onClick={() => setQuickViewProduct(product)}
+              >
+                {/* Image Container — Swap on Hover */}
+                <div className={`relative w-full overflow-hidden product-card-images ${
+                  i === 0 ? 'aspect-[16/9] sm:aspect-[2/1]' : 'aspect-[3/4] sm:aspect-[4/5]'
+                }`} style={{ backgroundColor: 'var(--satra-linen)' }}>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="img-primary object-cover object-center"
+                    sizes={i === 0 ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 640px) 50vw, 33vw'}
+                  />
+                  {product.secondaryImage && (
+                    <Image
+                      src={product.secondaryImage}
+                      alt={product.name}
+                      fill
+                      className="img-secondary object-cover object-center"
+                      sizes={i === 0 ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 640px) 50vw, 33vw'}
+                    />
+                  )}
+
+                  {/* Quick View Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-white font-medium bg-black/50 backdrop-blur-sm px-4 py-2">
+                      Quick View
+                    </span>
+                  </div>
+                </div>
+
+                {/* Product Info — Minimal */}
+                <div className="p-3 sm:p-4">
+                  <h3
+                    className="text-sm sm:text-base font-medium mb-0.5 line-clamp-1"
+                    style={{ color: 'var(--satra-charcoal)' }}
+                  >
+                    {product.name}
+                  </h3>
+                  <span className="text-sm" style={{ color: 'var(--satra-stone)' }}>
+                    ₹{product.price.toLocaleString('en-IN')}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          5. ARTISAN PROVENANCE — Dark Editorial Section
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 lg:px-10" style={{ backgroundColor: 'var(--satra-obsidian)', color: 'var(--satra-ivory)' }}>
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+            {/* Left — Image */}
+            <ScrollReveal animation="fadeUp">
+              <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+                <Image
+                  src="/images/Category_image/premium_velvet/vel2.jpeg"
+                  alt="Guild Craftsmanship"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Right — Copy */}
+            <ScrollReveal animation="fadeUp">
+              <div className="space-y-6 lg:pl-4">
+                <span className="type-meta block" style={{ color: 'var(--satra-emerald-soft)' }}>
+                  Provenance
+                </span>
+                <h2
+                  className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight leading-[1.1] text-white uppercase"
+                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                >
+                  Master Guilds<br />Across India
+                </h2>
+                <p className="text-sm leading-relaxed font-light max-w-md" style={{ color: 'var(--satra-taupe)' }}>
+                  Each piece passes through specialized generational ateliers — from Delhi metalcraft to Jaipur velvet upholstery.
+                </p>
+
+                <div className="grid grid-cols-2 gap-3 pt-4">
+                  {[
+                    { name: 'Delhi NCR Metalcraft', desc: 'Precision tinplate & 24k filigree' },
+                    { name: 'Jaipur Velvet Guild', desc: 'Royal velvet over kiln-dried hardwood' },
+                    { name: 'Mumbai Teak Guild', desc: 'Heritage timber joinery & relief' },
+                    { name: 'Himalayan Botanicals', desc: 'Small-batch soy waxes & teas' },
+                  ].map((guild) => (
+                    <div key={guild.name} className="p-4 border border-white/8">
+                      <h4 className="text-white text-xs font-semibold mb-1">{guild.name}</h4>
+                      <p className="text-[11px]" style={{ color: 'var(--satra-stone)' }}>{guild.desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </ScrollReveal>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
+      {/* ═══════════════════════════════════════════════════════════════
+          6. CORPORATE CTA — Minimal Banner
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32 md:py-40 px-4 sm:px-6 lg:px-10 text-center" style={{ borderBottom: '1px solid var(--satra-linen)' }}>
+        <ScrollReveal animation="fadeUp">
+          <div className="max-w-2xl mx-auto">
+            <span className="type-meta block mb-4" style={{ color: 'var(--satra-stone)' }}>Corporate</span>
+            <h2
+              className="text-3xl sm:text-5xl md:text-6xl font-light tracking-tight uppercase mb-5"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: 'var(--satra-charcoal)' }}
+            >
+              Gifting,<br />made meaningful.
+            </h2>
+            <Link
+              href="/corporate"
+              className="inline-flex items-center gap-2.5 text-[11px] uppercase tracking-[0.25em] font-semibold transition-all duration-300 group px-8 py-4 border"
+              style={{
+                backgroundColor: 'var(--satra-charcoal)',
+                color: 'var(--satra-ivory)',
+                borderColor: 'var(--satra-charcoal)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--satra-charcoal)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--satra-charcoal)';
+                e.currentTarget.style.color = 'var(--satra-ivory)';
+              }}
+            >
+              <span>Make an Enquiry</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          QUICK VIEW MODAL
+          ═══════════════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {quickViewProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            style={{ backgroundColor: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)' }}
+            onClick={() => setQuickViewProduct(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-xl w-full border shadow-2xl"
+              style={{ backgroundColor: 'var(--satra-silk)', borderColor: 'var(--satra-border)' }}
+            >
+              {/* Close */}
+              <button
+                onClick={() => setQuickViewProduct(null)}
+                className="absolute top-4 right-4 text-xs font-mono cursor-pointer z-10"
+                style={{ color: 'var(--satra-stone)' }}
+              >
+                ✕
+              </button>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                {/* Image */}
+                <div className="relative aspect-square overflow-hidden" style={{ backgroundColor: 'var(--satra-linen)' }}>
+                  <Image
+                    src={quickViewProduct.image}
+                    alt={quickViewProduct.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                {/* Details */}
+                <div className="p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <span className="type-meta block mb-2" style={{ color: 'var(--satra-emerald-soft)' }}>
+                      {quickViewProduct.brand}
+                    </span>
+                    <h3
+                      className="text-xl sm:text-2xl font-normal mb-3"
+                      style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: 'var(--satra-charcoal)' }}
+                    >
+                      {quickViewProduct.name}
+                    </h3>
+                    <p className="text-xs leading-relaxed mb-6" style={{ color: 'var(--satra-warm-gray)' }}>
+                      {quickViewProduct.description}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--satra-linen)' }}>
+                    <span className="text-lg font-semibold" style={{ color: 'var(--satra-charcoal)' }}>
+                      ₹{quickViewProduct.price.toLocaleString('en-IN')}
+                    </span>
+                    <button
+                      onClick={() => {
+                        handleAddToCart(quickViewProduct);
+                        setTimeout(() => setQuickViewProduct(null), 600);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[10px] uppercase tracking-widest font-semibold transition-all duration-300 cursor-pointer"
+                      style={{ backgroundColor: 'var(--satra-charcoal)', color: 'var(--satra-ivory)' }}
+                    >
+                      <ShoppingBag className="w-3 h-3" />
+                      <span>Add to Bag</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function ImageTypography() {
       {/* Right 50% Section: Crisp Pure White Editorial Copy */}
       <div className="image-type-copy">
         <span className="copy-line" />
-        <span className="copy-label">The Gourmet Gifts Co.</span>
+        <span className="copy-label">The Gourmet Gifts</span>
         <p>
           Objects of permanence,
           <br />

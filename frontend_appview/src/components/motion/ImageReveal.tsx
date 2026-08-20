@@ -9,7 +9,16 @@ interface ImageRevealProps {
   aspect?: string;
   className?: string;
   priority?: boolean;
+  direction?: 'bottom' | 'left' | 'right' | 'top';
+  duration?: number;
 }
+
+const directionMap = {
+  bottom: 'maskReveal' as const,
+  left: 'maskReveal' as const,
+  right: 'maskReveal' as const,
+  top: 'maskReveal' as const,
+};
 
 export const ImageReveal: React.FC<ImageRevealProps> = ({
   src,
@@ -17,10 +26,12 @@ export const ImageReveal: React.FC<ImageRevealProps> = ({
   aspect = 'aspect-[4/5]',
   className = '',
   priority = false,
+  direction = 'bottom',
+  duration = 1.0,
 }) => {
   const ref = useScrollReveal<HTMLDivElement>({
-    animation: 'maskReveal',
-    duration: 1.1,
+    animation: directionMap[direction],
+    duration,
   });
 
   return (

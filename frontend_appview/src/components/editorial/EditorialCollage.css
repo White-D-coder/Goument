@@ -1,0 +1,107 @@
+/* =========================================================
+   EDITORIAL KEEPSAKE COLLAGE — Full Bleed 4-Column Layout
+   ========================================================= */
+
+.keepsake-collage-wrap {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  background: #f6f4ef;
+}
+
+.keepsake-collage-grid {
+  width: 100%;
+  height: 420px;
+  display: grid;
+  grid-template-columns: 24% 16% 18% 42%;
+  gap: 3px;
+  background: #eae7e0;
+}
+
+@media (min-width: 768px) {
+  .keepsake-collage-grid {
+    height: 460px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .keepsake-collage-grid {
+    height: 500px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .keepsake-collage-grid {
+    height: 540px;
+  }
+}
+
+/* Individual Column flex containers */
+.collage-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Single Tile */
+.collage-tile {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #deddd8;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.collage-tile-img {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  filter: grayscale(100%) contrast(1.05);
+  transition:
+    filter 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collage-tile:hover .collage-tile-img {
+  filter: grayscale(0%) contrast(1.02);
+  transform: scale(1.03);
+}
+
+/* Mobile Fallback (< 768px) */
+@media (max-width: 767px) {
+  .keepsake-collage-grid {
+    height: auto;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 180px;
+  }
+
+  .collage-col {
+    display: contents;
+  }
+
+  .collage-tile {
+    height: 180px;
+  }
+
+  .collage-tile.hero-tile {
+    grid-column: 1 / -1;
+    height: 240px;
+  }
+}
+
+@media (hover: none) {
+  .collage-tile-img {
+    filter: grayscale(0%) !important;
+  }
+}

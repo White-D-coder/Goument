@@ -10,7 +10,7 @@ const STORY_SECTIONS = [
   {
     label: 'Origin',
     heading: 'Born from the belief that a gift should outlast the occasion.',
-    body: 'The Gourmet Gifts Co. was founded with a singular conviction: that the act of giving deserves the same care, craft, and attention to detail as the finest objects in the world. We set out to create presentations that honour both the giver and the receiver.',
+    body: 'The Gourmet Gifts was founded with a singular conviction: that the act of giving deserves the same care, craft, and attention to detail as the finest objects in the world. We set out to create presentations that honour both the giver and the receiver.',
     image: '/images/hero/hero_highres_1.png',
   },
   {

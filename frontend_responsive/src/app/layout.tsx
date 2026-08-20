@@ -42,7 +42,7 @@ const tropicalScript = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'The Gourmet Gifts Co. | Responsive Luxury E-Commerce',
+  title: 'The Gourmet Gifts | Responsive Luxury E-Commerce',
   description: 'Luxury gourmet gifts, beautifully packaged for every occasion. Responsive desktop & mobile store.',
 };
 

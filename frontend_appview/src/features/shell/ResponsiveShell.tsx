@@ -167,18 +167,25 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           {/* ─── Right: Brand Switcher + Utilities + Mobile Menu ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
             
-            {/* Brand Switcher Badge (Desktop) */}
+            {/* Brand Switcher Link with Smooth Underline Reveal on Hover (Desktop) */}
             <Link
               href={isGourmetStorefront ? '/' : '/gourmet-gifts'}
-              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 cursor-pointer ${
+              className={`hidden sm:inline-flex items-center gap-1.5 relative py-1 text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-200 group ${
                 isTransparentHero
-                  ? 'border-white/30 bg-white/10 text-white hover:bg-white/20'
-                  : 'border-[var(--satra-border)] bg-[var(--satra-silk)] text-[var(--satra-charcoal)] hover:bg-[var(--satra-charcoal)] hover:text-[var(--satra-ivory)]'
+                  ? 'text-white/80 hover:text-white'
+                  : 'text-[var(--satra-warm-gray)] hover:text-[var(--satra-charcoal)]'
               }`}
               title={isGourmetStorefront ? 'Switch to House of Satra Maison' : 'Switch to The Gourmet Gifts Storefront'}
             >
-              <span>{isGourmetStorefront ? 'House of Satra' : 'The Gourmet Gifts'}</span>
-              <ArrowRight className="w-3 h-3 opacity-60" />
+              <span className="relative">
+                {isGourmetStorefront ? 'House of Satra' : 'The Gourmet Gifts'}
+                <span
+                  className={`absolute left-0 bottom-[-2px] w-0 h-[1.2px] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full ${
+                    isTransparentHero ? 'bg-white' : 'bg-[var(--satra-charcoal)]'
+                  }`}
+                />
+              </span>
+              <ArrowRight className="w-3 h-3 opacity-60 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
             </Link>
 
             {/* Search */}

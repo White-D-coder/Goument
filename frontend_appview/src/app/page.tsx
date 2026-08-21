@@ -162,41 +162,92 @@ export default function HouseOfSatraHomePage() {
       <HouseOfSatraIntro />
 
       {/* ═══════════════════════════════════════════════════════════════
-          1. HERO — Full Viewport, Image-First
+          1. HERO — Sovereign Maison Grand Stage (Distinct from Gourmet Gifts)
           ═══════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full h-screen min-h-[600px] overflow-hidden">
-        {/* Hero Image */}
+      <section ref={heroRef} className="relative w-full h-screen min-h-[640px] overflow-hidden bg-[#121211]">
+        {/* Background Image: Deep Sovereign Executive Atelier */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero/hero_highres_1.png"
-            alt="House of Satra — Form & Permanence"
+            src="/images/Category_image/premium_velvet/vel2.jpeg"
+            alt="House of Satra — Sovereign Luxury Maison"
             fill
-            className="hero-img object-cover object-center"
+            className="hero-img object-cover object-center filter brightness-[0.68] contrast-[1.08]"
             priority
             sizes="100vw"
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+          {/* Multi-tier Noir Ambient Vignette & Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#121211] via-black/40 to-black/60 pointer-events-none" />
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle at center, transparent 20%, rgba(10,10,9,0.7) 100%)',
+            }}
+          />
         </div>
 
-        {/* Hero Text — Minimal, Editorial */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-28 md:pb-32 px-6 z-10">
+        {/* ─── Architectural Grayscale Diagonal Parallelogram Lens (Desktop) ─── */}
+        <div 
+          className="hidden lg:block absolute top-0 bottom-0 right-[10%] xl:right-[14%] w-[160px] xl:w-[210px] pointer-events-none z-[5] overflow-hidden"
+          style={{
+            clipPath: 'polygon(38% 0%, 100% 0%, 62% 100%, 0% 100%)',
+            boxShadow: '0 0 40px rgba(0,0,0,0.6)',
+          }}
+        >
+          {/* Grayscale Background Slice */}
+          <div className="absolute inset-0 w-[100vw] h-full right-0" style={{ transform: 'translateX(calc(-100vw + 100% + 14vw))' }}>
+            <Image
+              src="/images/Category_image/premium_velvet/vel2.jpeg"
+              alt="House of Satra Monochrome Lens"
+              fill
+              className="object-cover object-center filter grayscale contrast-[1.25] brightness-[0.88]"
+              priority
+            />
+          </div>
+
+          {/* Frosted Lens Lighting & Hairline Borders */}
+          <div className="absolute inset-0 bg-black/10 border-x border-white/20 backdrop-contrast-125" />
+          
+          {/* Subtle Vertical Guild Caption along the diagonal */}
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 rotate-[-90deg] origin-center whitespace-nowrap text-[8.5px] uppercase tracking-[0.35em] text-white/50 font-mono">
+            Maison Atelier • Monochrome Lens
+          </div>
+        </div>
+
+        {/* Hero Content — Grand Centered Sovereign Identity */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
           <ScrollReveal animation="fadeUp">
-            <div className="text-center max-w-3xl">
+            <div className="max-w-3xl flex flex-col items-center space-y-4 sm:space-y-5">
+              
+              {/* Grand Brand Wordmark */}
               <h1
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.05em] sm:tracking-[0.08em] text-white uppercase leading-[0.95] mb-5"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-[0.06em] sm:tracking-[0.1em] text-white uppercase leading-[0.92]"
                 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
               >
-                Form &amp;<br />Permanence
+                House of Satra
               </h1>
 
-              <Link
-                href="#divisions"
-                className="inline-flex items-center gap-2 text-white/80 hover:text-white text-[11px] uppercase tracking-[0.25em] font-medium transition-colors duration-300 group"
-              >
-                <span>Explore Collection</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </Link>
+              {/* Poetic Line */}
+              <p className="font-serif italic text-base sm:text-lg md:text-xl text-white/75 max-w-lg">
+                “Form &amp; Permanence.”
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-3 sm:pt-5">
+                <Link
+                  href="#divisions"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#1A1A18] text-[10.5px] uppercase tracking-[0.25em] font-semibold hover:bg-[#F6F4EF] hover:shadow-[0_8px_25px_rgba(255,255,255,0.15)] transition-all duration-300 group"
+                >
+                  <span>Explore Divisions</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/gourmet-gifts"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 bg-black/30 backdrop-blur-md text-white text-[10.5px] uppercase tracking-[0.25em] font-semibold hover:bg-white/10 hover:border-white transition-all duration-300"
+                >
+                  <span>The Gourmet Gifts ⟶</span>
+                </Link>
+              </div>
+
             </div>
           </ScrollReveal>
         </div>

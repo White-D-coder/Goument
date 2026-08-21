@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   height: 100svh;
-  min-height: 700px;
+  min-height: 600px;
   overflow: hidden;
   background: var(--ivory);
   border: none !important;
@@ -35,8 +35,8 @@
   background: linear-gradient(
     to right,
     transparent 50%,
-    rgba(0, 0, 0, 0.25) 65%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgba(0, 0, 0, 0.35) 55%,
+    rgba(0, 0, 0, 0.65) 100%
   );
   pointer-events: none;
   z-index: 2;
@@ -82,12 +82,12 @@
   font-size: clamp(75px, 11vw, 200px);
   font-weight: 900;
   line-height: 0.78;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.06em;
   text-transform: uppercase;
   color: transparent;
 }
 
-/* Fixed background inside letters — extracts the exact stationary background on scroll */
+/* Fixed background inside letters */
 .image-type-title span {
   display: block;
   width: max-content;
@@ -111,9 +111,9 @@
   left: 54%;
   top: 50%;
   transform: translateY(-50%);
-  width: 270px;
+  width: min(320px, 42vw);
   color: #FFFFFF;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
 }
 
 .image-type-copy .copy-line {
@@ -121,13 +121,13 @@
   width: 38px;
   height: 2px;
   background: #FFFFFF;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
 }
 
 .image-type-copy .copy-label {
   display: block;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 11px;
   font-weight: 700;
@@ -140,7 +140,7 @@
 .image-type-copy p {
   margin: 0;
   font-family: var(--font-cormorant), Georgia, 'Times New Roman', serif;
-  font-size: 24px;
+  font-size: clamp(20px, 2.4vw, 26px);
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: #FFFFFF;
@@ -202,7 +202,7 @@
 
   .image-type-copy {
     left: 55%;
-    width: 300px;
+    width: 320px;
   }
 
   .image-type-copy p {
@@ -222,20 +222,21 @@
 
   .image-type-left-container {
     width: 50%;
-    padding-right: 1.5vw;
+    padding-right: 2vw;
   }
 
   .image-type-title {
-    font-size: clamp(65px, 12vw, 120px);
+    font-size: clamp(60px, 11vw, 110px);
+    line-height: 0.8;
   }
 
   .image-type-copy {
     left: 54%;
-    width: 200px;
+    width: min(240px, 42vw);
   }
 
   .image-type-copy p {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .image-type-copy .copy-label {
@@ -245,53 +246,59 @@
 
 
 /* ═══════════════════════════════════════════════
-   MOBILE ≤ 600px
+   MOBILE ≤ 680px (FLAWLESS REFINED PROPORTIONS)
    ═══════════════════════════════════════════════ */
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
   .image-type-hero {
-    min-height: 640px;
-    height: 100svh;
+    min-height: 520px;
+    height: 90svh;
   }
 
   .image-type-panel {
-    width: 54%;
+    width: 50%;
   }
 
   .image-type-left-container {
-    width: 54%;
+    width: 50%;
     padding-right: 1.5vw;
   }
 
+  /* Refined, well-proportioned stencil title */
   .image-type-title {
-    font-size: clamp(46px, 15vw, 80px);
-    line-height: 0.78;
-    letter-spacing: -0.08em;
+    font-size: clamp(40px, 11.5vw, 64px);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
   }
 
+  /* Right-hand side copy perfectly centered and readable */
   .image-type-copy {
-    top: auto;
-    left: auto;
-    right: 5%;
-    bottom: 8%;
-    width: 140px;
-    transform: none;
+    top: 50%;
+    left: 53%;
+    right: auto;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: calc(47vw - 16px);
+    max-width: 190px;
   }
 
   .image-type-copy .copy-label {
     margin-bottom: 6px;
-    font-size: 9px;
+    font-size: 8.5px;
     letter-spacing: 0.16em;
+    font-weight: 700;
   }
 
   .image-type-copy p {
-    font-size: 13px;
-    line-height: 1.25;
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.3;
+    font-weight: 400;
   }
 
   .image-type-copy .copy-line {
     width: 22px;
-    margin-bottom: 8px;
+    height: 1.5px;
+    margin-bottom: 10px;
   }
 
   .image-type-scroll {

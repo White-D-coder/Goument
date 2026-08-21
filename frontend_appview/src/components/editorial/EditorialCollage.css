@@ -1,5 +1,5 @@
 /* =========================================================
-   EDITORIAL KEEPSAKE COLLAGE — Full Bleed 4-Column Layout
+   EDITORIAL KEEPSAKE COLLAGE — Luxury Full Bleed Layout
    ========================================================= */
 
 .keepsake-collage-wrap {
@@ -13,43 +13,80 @@
   background: #f6f4ef;
 }
 
-.keepsake-collage-grid {
-  width: 100%;
-  height: 420px;
-  display: grid;
-  grid-template-columns: 24% 16% 18% 42%;
-  gap: 3px;
-  background: #eae7e0;
-}
-
+/* ─── DESKTOP (≥ 768px): 4-Column Asymmetric Proportions ─── */
 @media (min-width: 768px) {
   .keepsake-collage-grid {
-    height: 460px;
+    width: 100%;
+    height: 480px;
+    display: grid;
+    grid-template-columns: 24% 17% 19% 40%;
+    gap: 3px;
+    background: #eae7e0;
   }
+
+  .collage-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .tile-h-60 { height: 60%; }
+  .tile-h-40 { height: 40%; }
+  .tile-h-44 { height: 44%; }
+  .tile-h-56 { height: 56%; }
+  .tile-h-58 { height: 58%; }
+  .tile-h-42 { height: 42%; }
+  .tile-h-100 { height: 100%; }
 }
 
 @media (min-width: 1200px) {
   .keepsake-collage-grid {
-    height: 500px;
+    height: 520px;
   }
 }
 
 @media (min-width: 1600px) {
   .keepsake-collage-grid {
-    height: 540px;
+    height: 560px;
   }
 }
 
-/* Individual Column flex containers */
-.collage-col {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  height: 100%;
-  min-height: 0;
+/* ─── MOBILE (< 768px): Consistent, Clean 2-Column Grid ─── */
+@media (max-width: 767px) {
+  .keepsake-collage-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: #dedcd5;
+    padding: 0;
+  }
+
+  .collage-col {
+    display: contents;
+  }
+
+  .collage-tile {
+    height: auto !important;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* Consistent mobile hero cards */
+  .mobile-hero-top {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+
+  .mobile-hero-bottom {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
 }
 
-/* Single Tile */
+/* ─── Single Tile Base Styles ─── */
 .collage-tile {
   position: relative;
   width: 100%;
@@ -76,28 +113,6 @@
 .collage-tile:hover .collage-tile-img {
   filter: grayscale(0%) contrast(1.02);
   transform: scale(1.03);
-}
-
-/* Mobile Fallback (< 768px) */
-@media (max-width: 767px) {
-  .keepsake-collage-grid {
-    height: auto;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 180px;
-  }
-
-  .collage-col {
-    display: contents;
-  }
-
-  .collage-tile {
-    height: 180px;
-  }
-
-  .collage-tile.hero-tile {
-    grid-column: 1 / -1;
-    height: 240px;
-  }
 }
 
 @media (hover: none) {

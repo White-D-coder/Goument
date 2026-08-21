@@ -8,33 +8,24 @@ import EditorialCollage from './EditorialCollage';
 
 export default function EditorialSpread() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#F6F4EF] pt-8 pb-10 sm:pt-10 sm:pb-12 md:pt-12 md:pb-14 px-0">
+    <section className="relative w-full overflow-hidden bg-[#F6F4EF] pt-16 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 px-0">
       
-      {/* ─── COMPACT EDITORIAL SECTION HEADER ─── */}
+      {/* ─── SPACIOUS MINIMAL EDITORIAL SECTION HEADER ─── */}
       <ScrollReveal animation="fadeUp">
-        <div className="mx-auto mb-6 sm:mb-8 max-w-2xl text-center px-4">
-          <div className="mb-2 inline-flex items-center justify-center gap-3">
-            <span className="h-px w-6 bg-[#B5AFA6]" />
-            <span className="type-meta text-[#8A8680] text-[9px] tracking-[0.3em] uppercase">
-              The Art of the Keepsake • A House of Satra Brand
-            </span>
-            <span className="h-px w-6 bg-[#B5AFA6]" />
-          </div>
-
+        <div className="mx-auto mb-10 sm:mb-14 md:mb-16 max-w-xl text-center px-6">
+          <span className="type-meta text-[#8A8680] text-[9.5px] sm:text-[10.5px] tracking-[0.32em] uppercase font-semibold block mb-3">
+            Keepsake Archive
+          </span>
           <h2
-            className="text-2xl sm:text-4xl md:text-5xl font-light tracking-[-0.03em] text-[#1A1A18] leading-[1.1] mb-1.5"
+            className="text-3xl sm:text-4xl md:text-5xl font-light tracking-[-0.02em] text-[#1A1A18] leading-[1.05]"
             style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
           >
-            The Gourmet Gifts
+            The Art of the Keepsake
           </h2>
-
-          <p className="font-script text-[#8A8680] text-lg sm:text-xl md:text-2xl rotate-[-0.5deg]">
-            “Crafted by hand, preserved forever.”
-          </p>
         </div>
       </ScrollReveal>
 
-      {/* ─── 100% FULL-BLEED 4-COLUMN KEEPSAKE COLLAGE (EXACT SCREENSHOT LAYOUT) ─── */}
+      {/* ─── 100% FULL-BLEED 4-COLUMN KEEPSAKE COLLAGE ─── */}
       <ScrollReveal animation="fadeUp" delay={0.05}>
         <div className="w-full">
           <EditorialCollage />
@@ -42,16 +33,16 @@ export default function EditorialSpread() {
       </ScrollReveal>
 
       {/* ─── COMPACT BOTTOM ARCHIVE LINK ─── */}
-      <div className="mt-4 pt-3 flex items-center justify-between px-4 sm:px-8 max-w-[1400px] mx-auto">
+      <div className="mt-5 pt-4 flex items-center justify-between px-5 sm:px-10 max-w-[1440px] mx-auto">
         <span className="type-meta text-[9px] uppercase tracking-[0.25em] text-[#8A8680]">
-          House of Satra Atelier // Keepsake Series
+          Series 01 &amp; 02 // Heirloom Suite
         </span>
         <Link
           href="/collections#keepsake-vessels"
-          className="inline-flex items-center gap-1.5 text-[9.5px] uppercase tracking-[0.25em] font-bold text-[#1A1A18] hover:text-[#7A8B6F] transition-colors"
+          className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] font-bold text-[#1A1A18] hover:text-[#7A8B6F] transition-colors"
         >
           <span>Explore Archive</span>
-          <ArrowUpRight className="w-3 h-3" />
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>
 

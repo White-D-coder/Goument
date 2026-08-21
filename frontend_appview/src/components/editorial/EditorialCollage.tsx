@@ -10,23 +10,22 @@ export default function EditorialCollage() {
     <div className="keepsake-collage-wrap">
       <div className="keepsake-collage-grid">
         
-        {/* ─── COLUMN 1: 60% Top / 40% Bottom ─── */}
+        {/* ─── COLUMN 1: Desktop 60% / 40% ─── */}
         <div className="collage-col">
-          {/* Tile 01: Open Velvet Hamper Suite */}
+          {/* Tile 01: Open Velvet Hamper Suite (Mobile: Hero Top) */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '60%' }}
+            className="collage-tile tile-h-60 mobile-hero-top"
           >
             <Image
               src="/images/small_anipics/velvet_tray_hero.jpg"
               alt="The Velvet Tray Hamper Suite"
               fill
               priority
-              sizes="(max-width: 768px) 50vw, 25vw"
+              sizes="(max-width: 768px) 100vw, 25vw"
               className="collage-tile-img"
             />
           </motion.div>
@@ -37,8 +36,7 @@ export default function EditorialCollage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '40%' }}
+            className="collage-tile tile-h-40 mobile-tile-portrait"
           >
             <Image
               src="/images/Category_image/premium_velvet/royale3.jpeg"
@@ -50,7 +48,7 @@ export default function EditorialCollage() {
           </motion.div>
         </div>
 
-        {/* ─── COLUMN 2: 44% Top / 56% Bottom ─── */}
+        {/* ─── COLUMN 2: Desktop 44% / 56% ─── */}
         <div className="collage-col">
           {/* Tile 03: Amber Botanical Candle */}
           <motion.div
@@ -58,8 +56,7 @@ export default function EditorialCollage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '44%' }}
+            className="collage-tile tile-h-44 mobile-tile-square"
           >
             <Image
               src="/images/Product_images/CRAFTED IN-HOUSE/candle_120.png"
@@ -76,8 +73,7 @@ export default function EditorialCollage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '56%' }}
+            className="collage-tile tile-h-56 mobile-tile-square"
           >
             <Image
               src="/images/Category_image/Royale_tin_tin/tinnew1.png"
@@ -89,7 +85,7 @@ export default function EditorialCollage() {
           </motion.div>
         </div>
 
-        {/* ─── COLUMN 3: 58% Top / 42% Bottom ─── */}
+        {/* ─── COLUMN 3: Desktop 58% / 42% ─── */}
         <div className="collage-col">
           {/* Tile 05: White & Gold Embossed Tinplate Hamper */}
           <motion.div
@@ -97,8 +93,7 @@ export default function EditorialCollage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '58%' }}
+            className="collage-tile tile-h-58 mobile-tile-portrait"
           >
             <Image
               src="/images/Category_image/Royale_tin_tin/tin1.jpeg"
@@ -115,8 +110,7 @@ export default function EditorialCollage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile"
-            style={{ height: '42%' }}
+            className="collage-tile tile-h-42 mobile-tile-square"
           >
             <Image
               src="/images/Product_images/CRAFTED IN-HOUSE/velvet-lined_box_large.jpg"
@@ -128,23 +122,22 @@ export default function EditorialCollage() {
           </motion.div>
         </div>
 
-        {/* ─── COLUMN 4: 100% Full-Height Hero ─── */}
+        {/* ─── COLUMN 4: Desktop 100% Full-Height Hero ─── */}
         <div className="collage-col">
-          {/* Tile 07: The C-Suite Executive Velvet Suite with Decanter */}
+          {/* Tile 07: The C-Suite Executive Velvet Suite with Decanter (Mobile: Hero Bottom) */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="collage-tile hero-tile"
-            style={{ height: '100%' }}
+            className="collage-tile tile-h-100 mobile-hero-bottom"
           >
             <Image
               src="/images/Category_image/premium_velvet/vel2.jpeg"
               alt="The C-Suite Executive Velvet Suite"
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 42vw"
+              sizes="(max-width: 768px) 100vw, 40vw"
               className="collage-tile-img"
             />
           </motion.div>

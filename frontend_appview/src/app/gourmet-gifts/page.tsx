@@ -50,15 +50,6 @@ export default function HomePage() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Ken Burns slow atmospheric zoom on hero image
-      if (heroImageRef.current) {
-        gsap.fromTo(
-          heroImageRef.current,
-          { scale: 1.0 },
-          { scale: 1.08, duration: 16, ease: 'none', repeat: -1, yoyo: true }
-        );
-      }
-
       // Staggered hero text entrance
       if (heroTextRef.current) {
         const children = heroTextRef.current.children;
@@ -86,43 +77,42 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════
           SECTION 1 — STATIC HERO BACKGROUND (Sticky / Fixed)
           ═══════════════════════════════════════════════ */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-end">
-        {/* Full-bleed background image with slow Ken Burns effect */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-center items-center">
+        {/* Full-bleed static background image */}
         <div className="absolute inset-0 overflow-hidden">
           <img
             ref={heroImageRef}
             src="/images/hero/hero_highres_1.png"
             alt="The Gourmet Gifts — Luxury Gifting"
-            className="w-full h-full object-cover will-change-transform filter brightness-[0.82]"
+            className="w-full h-full object-cover filter brightness-[0.82]"
           />
         </div>
 
         {/* Ambient luxury gradient overlay for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/95 via-[#1A1A18]/30 to-black/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/85 via-black/30 to-black/50 pointer-events-none" />
 
-        {/* Hero Content positioned inside the sticky hero */}
-        <div className="relative z-10 pb-24 md:pb-32 px-6 lg:px-12 max-w-[1280px] mx-auto w-full">
-          <div ref={heroTextRef} className="max-w-2xl space-y-4 text-left">
-            <span className="type-meta text-[#B5AFA6] block opacity-0">
-              Curated Gifting • Maison de Haute Curiosités
+        {/* Hero Content positioned inside the sticky hero — Perfectly Vertically & Horizontally Centered */}
+        <div className="relative z-10 px-5 sm:px-8 lg:px-12 max-w-[1280px] mx-auto w-full flex flex-col items-center justify-center text-center">
+          <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-center text-center mx-auto">
+            <span className="type-meta text-[#B5AFA6] block opacity-0 text-[10px] sm:text-[11.5px] tracking-[0.28em] uppercase font-medium">
+              Curated Gifting • Haute Curiosités
             </span>
             <h1
-              className="text-white leading-[0.95] tracking-[-0.03em] opacity-0"
+              className="text-white leading-[1.02] sm:leading-[0.95] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light"
               style={{
                 fontFamily: 'var(--font-cormorant), Georgia, serif',
                 fontWeight: 300,
-                fontSize: 'clamp(44px, 8.5vw, 96px)',
               }}
             >
               Gifts that mean something.
             </h1>
-            <p className="type-body text-white/70 max-w-md text-sm md:text-base opacity-0 font-light leading-relaxed">
-              Objects of permanence, crafted in limited artisanal editions for moments of lasting remembrance.
+            <p className="text-white/80 max-w-sm sm:max-w-lg text-xs sm:text-sm md:text-base opacity-0 font-light leading-relaxed mx-auto">
+              Crafted for moments of lasting remembrance.
             </p>
-            <div className="opacity-0 pt-4">
+            <div className="opacity-0 pt-2 sm:pt-4">
               <a
                 href="#content-sheet"
-                className="editorial-link type-meta text-white/80 hover:text-white inline-flex items-center gap-2 transition-colors cursor-pointer"
+                className="editorial-link type-meta text-white/90 hover:text-white inline-flex items-center justify-center gap-2 transition-colors cursor-pointer text-[10px] sm:text-[11.5px]"
               >
                 <span>Discover The Curation</span>
                 <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
@@ -147,8 +137,8 @@ export default function HomePage() {
         </div>
 
         {/* ─── 1. BRAND MANIFESTO STATEMENT ─── */}
-        <section className="py-[90px] md:py-[130px] px-6 lg:px-12 max-w-[960px] mx-auto text-center">
-          <span className="type-meta text-[#8A8680] block mb-5">
+        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 max-w-[960px] mx-auto text-center">
+          <span className="type-meta text-[#8A8680] block mb-3 text-[10px] tracking-[0.28em] uppercase">
             Philosophy of Permanence
           </span>
           <TextReveal
@@ -168,14 +158,14 @@ export default function HomePage() {
         <EditorialSpread />
 
         {/* Chapter B — Heritage Hamper: Reversed Asymmetric Layout */}
-        <section className="py-[100px] md:py-[140px] px-6 lg:px-12">
+        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 lg:px-12 border-t border-[#E0DDD6]">
           <div className="max-w-[1280px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center">
               {/* Left — Editorial Copy (takes less space, offset down) */}
               <div className="lg:col-span-4 lg:pr-12 order-2 lg:order-1">
                 <ScrollReveal animation="fadeUp">
                   <div className="space-y-5 max-w-sm">
-                    <span className="type-meta text-[#8A8680] block">Series 03 • Heritage Botanicals</span>
+                    <span className="type-meta text-[#8A8680] block text-[9.5px] tracking-[0.25em] uppercase">Series 03 • Heritage Botanicals</span>
                     <h2 
                       className="text-[#1A1A18] leading-[1.05] tracking-[-0.02em]"
                       style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500, fontSize: 'clamp(28px, 3.5vw, 44px)' }}
@@ -229,83 +219,144 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Chapter C — Atelier Accents: Triptych with Editorial Overlay */}
-        <section className="py-[80px] md:py-[120px] px-6 lg:px-12 bg-[#1A1A18]">
-          <div className="max-w-[1280px] mx-auto">
+        {/* Chapter C — Atelier Accents: Luxury Refined Specimen Gallery */}
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] border-y border-[#E0DDD6]">
+          <div className="max-w-[1040px] mx-auto">
+            
+            {/* Section Header */}
             <ScrollReveal animation="fadeUp">
-              <div className="text-center mb-14 md:mb-20">
-                <span className="type-meta text-[#B5AFA6] block mb-4">Series 04 • In-House Atelier</span>
+              <div className="text-center mb-8 sm:mb-10 max-w-xl mx-auto px-4">
+                <span className="type-meta text-[#7A8B6F] text-[9.5px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-2">
+                  Series 04 • In-House Atelier
+                </span>
                 <h2 
-                  className="text-[#F6F4EF] leading-[1.05] tracking-[-0.02em] max-w-lg mx-auto"
-                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500, fontSize: 'clamp(28px, 4vw, 48px)' }}
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A18] leading-[1.1] tracking-[-0.02em] font-light"
+                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                 >
-                  Objects Made by Hand, Meant to Remain
+                  Objects Made by Hand,<br className="hidden sm:inline" /> Meant to Remain
                 </h2>
               </div>
             </ScrollReveal>
 
-            {/* Triptych — Three varied aspect ratios, no uniform grid */}
-            <div className="grid grid-cols-12 gap-4 md:gap-6 items-end">
-              {/* Tall portrait */}
-              <ScrollReveal animation="fadeUp" className="col-span-12 sm:col-span-4">
-                <Link href="/collections#atelier-accents" className="block group">
-                  <div className="overflow-hidden aspect-[3/4] bg-[#2C2B28]">
-                    <img
-                      src="/images/Category_image/Royale_tin_tin/tin7.jpeg"
-                      alt="Emerald Botanical Vessel"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Emerald Botanical Vessel</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Airtight friction seal with embossed crest</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+            {/* Specimen Showcase: Tight Sleek Grid */}
+            <div className="flex sm:grid sm:grid-cols-3 gap-2.5 sm:gap-3.5 lg:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2 sm:pb-0 no-scrollbar">
+              
+              {/* Card 01: Emerald Botanical Keepsake Vessel */}
+              <div className="w-[78vw] max-w-[320px] sm:w-auto shrink-0 snap-center">
+                <ScrollReveal animation="fadeUp" delay={0.05}>
+                  <Link
+                    href="/collections#keepsake-vessels"
+                    className="group block bg-white border border-[#DDD8CE] overflow-hidden hover:shadow-[0_16px_36px_rgba(0,0,0,0.06)] hover:border-[#7A8B6F] transition-all duration-500"
+                  >
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#ECE8E1]">
+                      <img
+                        src="/images/Category_image/Royale_tin_tin/tinnew1.png"
+                        alt="Emerald Botanical Keepsake Vessel"
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#1A1A18]/85 backdrop-blur-md px-2.5 py-1 text-[8.5px] uppercase tracking-widest text-[#F6F4EF] font-bold">
+                        Tinplate Guild
+                      </span>
+                    </div>
+                    <div className="p-4 sm:p-5">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#7A8B6F] font-bold block mb-1">
+                        Series 04.1
+                      </span>
+                      <h3
+                        className="text-base sm:text-lg text-[#1A1A18] group-hover:text-[#7A8B6F] transition-colors font-medium line-clamp-1"
+                        style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                      >
+                        Emerald Keepsake Vessel
+                      </h3>
+                      <p className="text-xs text-[#78746D] line-clamp-1 mt-1">
+                        Octagonal lacquer with 24k gold filigree
+                      </p>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              </div>
 
-              {/* Wide landscape — offset higher */}
-              <ScrollReveal animation="fadeUp" delay={0.15} className="col-span-12 sm:col-span-5">
-                <Link href="/collections#atelier-accents" className="block group sm:-mt-16">
-                  <div className="overflow-hidden aspect-[5/4] bg-[#2C2B28]">
-                    <img
-                      src="/images/small_anipics/framee.png"
-                      alt="Hand-Carved Teak Frame"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Hand-Carved Teak Frame</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Solid reclaimed teak, velvet-backed</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+              {/* Card 02: Hand-Carved Teak Frame */}
+              <div className="w-[78vw] max-w-[320px] sm:w-auto shrink-0 snap-center">
+                <ScrollReveal animation="fadeUp" delay={0.12}>
+                  <Link
+                    href="/collections#atelier-accents"
+                    className="group block bg-white border border-[#DDD8CE] overflow-hidden hover:shadow-[0_16px_36px_rgba(0,0,0,0.06)] hover:border-[#7A8B6F] transition-all duration-500"
+                  >
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#ECE8E1]">
+                      <img
+                        src="/images/Product_images/CRAFTED IN-HOUSE/frame.jpg"
+                        alt="Hand-Carved Teak Frame"
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#1A1A18]/85 backdrop-blur-md px-2.5 py-1 text-[8.5px] uppercase tracking-widest text-[#F6F4EF] font-bold">
+                        Joinery Guild
+                      </span>
+                    </div>
+                    <div className="p-4 sm:p-5">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#7A8B6F] font-bold block mb-1">
+                        Series 04.2
+                      </span>
+                      <h3
+                        className="text-base sm:text-lg text-[#1A1A18] group-hover:text-[#7A8B6F] transition-colors font-medium line-clamp-1"
+                        style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                      >
+                        Hand-Carved Teak Frame
+                      </h3>
+                      <p className="text-xs text-[#78746D] line-clamp-1 mt-1">
+                        Solid reclaimed teak with velvet back
+                      </p>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              </div>
 
-              {/* Square — sits flush at bottom */}
-              <ScrollReveal animation="fadeUp" delay={0.3} className="col-span-12 sm:col-span-3">
-                <Link href="/collections#atelier-accents" className="block group">
-                  <div className="overflow-hidden aspect-square bg-[#2C2B28]">
-                    <img
-                      src="/images/Product_images/CRAFTED IN-HOUSE/candle_120.png"
-                      alt="Botanical Amber Soy Candle"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="type-title text-[#F6F4EF] group-hover:text-white transition-colors">Botanical Soy Candle</h3>
-                    <span className="type-micro text-[#8A8680] mt-1 block">Pure essential oils, amber glass</span>
-                  </div>
-                </Link>
-              </ScrollReveal>
+              {/* Card 03: Carved Wood Velvet Keepsake Chest */}
+              <div className="w-[78vw] max-w-[320px] sm:w-auto shrink-0 snap-center">
+                <ScrollReveal animation="fadeUp" delay={0.2}>
+                  <Link
+                    href="/collections#atelier-accents"
+                    className="group block bg-white border border-[#DDD8CE] overflow-hidden hover:shadow-[0_16px_36px_rgba(0,0,0,0.06)] hover:border-[#7A8B6F] transition-all duration-500"
+                  >
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#ECE8E1]">
+                      <img
+                        src="/images/Product_images/CRAFTED IN-HOUSE/velvet-lined_box_large.jpg"
+                        alt="Carved Wooden Keepsake Chest"
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#1A1A18]/85 backdrop-blur-md px-2.5 py-1 text-[8.5px] uppercase tracking-widest text-[#F6F4EF] font-bold">
+                        Atelier Relic
+                      </span>
+                    </div>
+                    <div className="p-4 sm:p-5">
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#7A8B6F] font-bold block mb-1">
+                        Series 04.3
+                      </span>
+                      <h3
+                        className="text-base sm:text-lg text-[#1A1A18] group-hover:text-[#7A8B6F] transition-colors font-medium line-clamp-1"
+                        style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                      >
+                        Heirloom Velvet Memory Chest
+                      </h3>
+                      <p className="text-xs text-[#78746D] line-clamp-1 mt-1">
+                        Carved woodwork with brass hardware latch
+                      </p>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              </div>
+
             </div>
+
           </div>
         </section>
 
         {/* ─── 4. MATERIALITY & CRAFTSMANSHIP GRID ─── */}
-        <section className="py-[100px] md:py-[140px] px-6 lg:px-12 bg-white border-y border-[#E0DDD6]">
-          <div className="max-w-[1280px] mx-auto space-y-14">
+        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 lg:px-12 bg-white border-y border-[#E0DDD6]">
+          <div className="max-w-[1280px] mx-auto space-y-10">
             <SectionHeader
               label="Provenance"
               heading="The Anatomy of Materiality"
@@ -314,7 +365,7 @@ export default function HomePage() {
               className="max-w-none flex flex-col items-center"
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
               {MATERIAL_STORIES.map((story, idx) => (
                 <div key={idx} className="space-y-4 text-left">
                   <ParallaxImage
@@ -337,55 +388,24 @@ export default function HomePage() {
         {/* ─── 5. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
         <Scrapbook />
 
-        {/* ─── 6. BRAND VALUES (Dark Contrast Section) ─── */}
-        <section className="bg-[#1A1A18] text-[#F6F4EF] py-[100px] md:py-[140px] px-6 lg:px-12">
-          <div className="max-w-[1280px] mx-auto">
-            <SectionHeader
-              label="Our Commitment"
-              heading="Made to Be Kept"
-              body="We honour the ritual of gifting through uncompromising artisanal integrity."
-              align="center"
-              dark
-              className="mb-16 max-w-none flex flex-col items-center"
-            />
-
-            <ScrollReveal staggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 max-w-[960px] mx-auto text-center md:text-left">
-              {[
-                {
-                  title: 'Generational Craft',
-                  body: 'Crafted by master fabricators, upholsterers, and woodworkers across India.',
-                },
-                {
-                  title: 'Epicurean Distinction',
-                  body: 'Single-origin Darjeeling teas, artisanal confitures, and hand-roasted nuts.',
-                },
-                {
-                  title: 'Second Life Utility',
-                  body: 'Every packaging vessel is engineered to serve as keepsake home decor for decades.',
-                },
-              ].map((item, idx) => (
-                <div key={idx} className="space-y-2">
-                  <h4 className="type-title text-[#F6F4EF]">{item.title}</h4>
-                  <p className="type-body text-[#B5AFA6] text-sm leading-relaxed">{item.body}</p>
-                </div>
-              ))}
-            </ScrollReveal>
-          </div>
-        </section>
-
-        {/* ─── 6. CORPORATE & CONCIERGE CTA ─── */}
-        <section className="py-[110px] md:py-[150px] px-6 lg:px-12 text-center">
-          <div className="max-w-[720px] mx-auto space-y-6">
+        {/* ─── 6. PRIVATE CONCIERGE & BESPOKE GIFTING (Minimal Single Section) ─── */}
+        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 lg:px-12 text-center bg-[#F6F4EF] border-t border-[#E0DDD6]">
+          <div className="max-w-[720px] mx-auto space-y-5">
             <ScrollReveal animation="fadeUp">
-              <span className="type-meta text-[#8A8680] block">Private Concierge</span>
-              <h2 className="type-heading text-[#1A1A18]">
+              <span className="type-meta text-[#7A8B6F] text-[9.5px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-2">
+                Private Concierge
+              </span>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A18] tracking-[-0.02em] leading-[1.08]"
+                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+              >
                 For those who give at scale.
               </h2>
-              <p className="type-body text-[#8A8680] text-sm max-w-md mx-auto leading-relaxed">
-                Bespoke corporate gifting, custom crest monograms, and curated presentations for institutions that value meaningful relationships.
+              <p className="font-serif italic text-sm sm:text-base text-[#78746D] max-w-md mx-auto">
+                Bespoke corporate curations, custom crest monograms, and institutional gifting.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
-                <EditorialCTA label="Request Corporate Dossier" href="/corporate" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <EditorialCTA label="Request Dossier" href="/corporate" />
                 <EditorialCTA label="Contact Concierge" href="/contact" />
               </div>
             </ScrollReveal>

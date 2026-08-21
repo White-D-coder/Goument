@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function Scrapbook() {
   return (
-    <section className="relative w-full py-[120px] md:py-[180px] px-4 sm:px-6 lg:px-12 bg-[#F3EFE6] overflow-hidden border-t border-[#DFD9CE]">
+    <section className="relative w-full py-14 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-12 bg-[#F3EFE6] overflow-hidden border-t border-[#DFD9CE]">
       {/* ─── REALISTIC TEXTURED JOURNAL BACKGROUND & WATERMARKS ─── */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
         {/* Subtle vintage parchment grid lines */}
@@ -47,7 +47,7 @@ export default function Scrapbook() {
       </div>
 
       {/* ─── SECTION HEADER ─── */}
-      <div className="relative z-10 max-w-[800px] mx-auto text-center mb-16 md:mb-24 space-y-4">
+      <div className="relative z-10 max-w-[800px] mx-auto text-center mb-8 sm:mb-12 space-y-3">
         <span className="type-meta text-[#8A8680] block tracking-widest uppercase text-xs">
           The Living Archive • Real Stories &amp; Moments
         </span>

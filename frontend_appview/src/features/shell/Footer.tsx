@@ -3,12 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-const FOOTER_COLUMNS = [
+const SATRA_FOOTER_COLUMNS = [
   {
     title: 'Maison & Divisions',
     links: [
-      { label: 'The Gourmet Gifts', href: '/gourmet-gifts' },
       { label: 'Satra Atelier', href: '/collections' },
       { label: 'Satra Living', href: '/story' },
       { label: 'Our Story & Guilds', href: '/story' },
@@ -41,7 +41,48 @@ const FOOTER_COLUMNS = [
   },
 ];
 
+const GOURMET_FOOTER_COLUMNS = [
+  {
+    title: 'Gourmet Curations',
+    links: [
+      { label: 'Master Catalogue', href: '/gourmet-gifts' },
+      { label: 'Corporate Gifting', href: '/corporate' },
+      { label: 'Bespoke Customizer', href: '/customize' },
+      { label: 'Our Heritage Story', href: '/story' },
+    ],
+  },
+  {
+    title: 'Corporate & Bulk',
+    links: [
+      { label: 'Custom Brand QR Solutions', href: '/gourmet-gifts' },
+      { label: '3D Miniature Milestone Sets', href: '/gourmet-gifts' },
+      { label: 'Bespoke Packaging Design', href: '/corporate' },
+      { label: 'Direct Corporate Enquiries', href: '/inquire' },
+    ],
+  },
+  {
+    title: 'Customer Care',
+    links: [
+      { label: 'Pan-India Temperature Logistics', href: '/contact' },
+      { label: 'Freshness & Shelf Life Guarantee', href: '/contact' },
+      { label: 'Corporate Concierge', href: '/inquire' },
+    ],
+  },
+  {
+    title: 'Concierge Direct',
+    links: [
+      { label: 'concierge@thegourmetgifts.com', href: 'mailto:concierge@thegourmetgifts.com' },
+      { label: '+91 98765 43210', href: 'tel:+919876543210' },
+      { label: 'Pan-India Delivery & Corporate Bulk', href: '/contact' },
+    ],
+  },
+];
+
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
+  const isGourmetStorefront = pathname.startsWith('/gourmet-gifts') || pathname.startsWith('/gourmet');
+  const footerColumns = isGourmetStorefront ? GOURMET_FOOTER_COLUMNS : SATRA_FOOTER_COLUMNS;
+
   return (
     <footer className="relative overflow-hidden bg-[#121211] text-[#F6F4EF] border-t border-white/10">
 
@@ -49,7 +90,7 @@ export const Footer: React.FC = () => {
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12] mix-blend-luminosity">
         <Image
           src="/images/footer_bg_pattern.jpg"
-          alt="Atelier Background Texture"
+          alt="Background Texture"
           fill
           className="object-cover object-center filter grayscale"
         />
@@ -58,15 +99,6 @@ export const Footer: React.FC = () => {
       {/* ─── Top-Left Atmospheric Glow Gradient ─── */}
       <div 
         className="absolute top-0 left-0 w-[350px] sm:w-[500px] h-[250px] sm:h-[350px] pointer-events-none z-0 opacity-60"
-        style={{
-          background: 'radial-gradient(circle at 10% 10%, rgba(122, 139, 111, 0.28) 0%, rgba(36, 51, 37, 0.10) 40%, transparent 75%)',
-          filter: 'blur(25px)',
-        }}
-      />
-
-      {/* ─── Bottom-Left Warm Patina Glow Gradient ─── */}
-      <div 
-        className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] h-[200px] sm:h-[300px] pointer-events-none z-0 opacity-50"
         style={{
           background: 'radial-gradient(circle at 15% 90%, rgba(212, 175, 55, 0.16) 0%, rgba(181, 175, 166, 0.06) 35%, transparent 70%)',
           filter: 'blur(30px)',
@@ -81,11 +113,11 @@ export const Footer: React.FC = () => {
         
         {/* Top Header: Compact Brand Row */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-6 border-b border-white/10">
-          <Link href="/" className="inline-flex items-center gap-2.5 group">
+          <Link href={isGourmetStorefront ? '/gourmet-gifts' : '/'} className="inline-flex items-center gap-2.5 group">
             <div className="relative w-7 h-5 sm:w-8 sm:h-6 transition-transform group-hover:scale-105 duration-300">
               <Image
                 src="/images/brand/logo-vector.pdf.png"
-                alt="House of Satra"
+                alt={isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
                 fill
                 className="object-contain brightness-0 invert"
               />
@@ -94,18 +126,18 @@ export const Footer: React.FC = () => {
               className="text-xl sm:text-2xl tracking-[-0.01em] uppercase font-light leading-none text-[#F6F4EF]"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500 }}
             >
-              House of Satra
+              {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
             </span>
           </Link>
 
           <p className="font-serif italic text-xs sm:text-sm text-[#C7C3BB]/80 tracking-wide">
-            “Form &amp; Permanence.”
+            {isGourmetStorefront ? '“Thoughtfully Curated, Beautifully Presented.”' : '“Form & Permanence.”'}
           </p>
         </div>
 
         {/* Middle: 4 Compact Nav Columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-b border-white/10">
-          {FOOTER_COLUMNS.map((col) => (
+          {footerColumns.map((col) => (
             <div key={col.title} className="space-y-2.5">
               <h4 className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.22em] text-[#7A8B6F] font-mono font-bold">
                 {col.title}
@@ -129,13 +161,13 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Compact Meta & Copyright */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] text-[#8A8680]">
           <div className="flex items-center gap-2.5">
-            <span>© {new Date().getFullYear()} House of Satra.</span>
+            <span>© {new Date().getFullYear()} {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}.</span>
             <span className="w-1 h-1 rounded-full bg-white/20" />
             <span>All rights reserved.</span>
           </div>
 
           <span className="text-[#B5AFA6]/60 uppercase tracking-widest text-[8.5px]">
-            Sovereign Luxury Maison &amp; Guild Ecosystem
+            {isGourmetStorefront ? 'Luxury Artisanal Gifting & Curations' : 'Sovereign Luxury Maison & Guild Ecosystem'}
           </span>
         </div>
 

@@ -28,18 +28,7 @@ interface CartState {
 export const useCartStore = create<CartState>()(
   persist(
     (setStore, getStore) => ({
-      items: [
-        // Default luxury demo item matching screenshot badge = 2
-        {
-          id: 'demo_prod_1_classics',
-          productId: 'prod_1',
-          giftBoxingType: 'classics',
-          quantity: 2,
-          name: 'The Classics Gift Box',
-          price: 249900,
-          image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600&auto=format&fit=crop',
-        },
-      ],
+      items: [],
       get totalItems() {
         return getStore().items.reduce((sum, item) => sum + item.quantity, 0);
       },

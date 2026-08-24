@@ -15,16 +15,17 @@ import { Toaster } from 'react-hot-toast';
 
 /* ── House of Satra Nav Links ── */
 const SATRA_NAV_LINKS = [
-  { label: 'The Gourmet Gifts', href: '/gourmet-gifts' },
   { label: 'Atelier', href: '/collections' },
   { label: 'Living', href: '/story' },
   { label: 'Corporate', href: '/corporate' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /* ── The Gourmet Gifts Nav Links ── */
 const GOURMET_NAV_LINKS = [
-  { label: 'Collections', href: '/collections' },
-  { label: 'Corporate', href: '/corporate' },
+  { label: 'Gourmet Catalogue', href: '/gourmet-gifts' },
+  { label: 'Corporate Gifting', href: '/corporate' },
+  { label: 'Bespoke Studio', href: '/customize' },
   { label: 'Our Story', href: '/story' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -177,30 +178,8 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             </Link>
           </div>
 
-          {/* ─── Right: Brand Switcher + Utilities + Mobile Menu ─── */}
+          {/* ─── Right: Utilities + Mobile Menu ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
-            
-            {/* Brand Switcher Link with Smooth Underline Reveal on Hover (Desktop) */}
-            <Link
-              href={isGourmetStorefront ? '/' : '/gourmet-gifts'}
-              className={`hidden sm:inline-flex items-center gap-1.5 relative py-1 text-[11px] uppercase tracking-[0.2em] font-medium transition-colors duration-200 group ${
-                isTransparentHero
-                  ? 'text-white/80 hover:text-white'
-                  : 'text-[var(--satra-warm-gray)] hover:text-[var(--satra-charcoal)]'
-              }`}
-              title={isGourmetStorefront ? 'Switch to House of Satra Maison' : 'Switch to The Gourmet Gifts Storefront'}
-            >
-              <span className="relative">
-                {isGourmetStorefront ? 'House of Satra' : 'The Gourmet Gifts'}
-                <span
-                  className={`absolute left-0 bottom-[-2px] w-0 h-[1.2px] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full ${
-                    isTransparentHero ? 'bg-white' : 'bg-[var(--satra-charcoal)]'
-                  }`}
-                />
-              </span>
-              <ArrowRight className="w-3 h-3 opacity-60 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
-            </Link>
-
             {/* Search */}
             <button
               className={`hidden lg:flex items-center justify-center transition-colors duration-200 cursor-pointer ${
@@ -279,54 +258,11 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             style={{ backgroundColor: 'var(--satra-silk)' }}
           >
             {/* Spacer */}
-            <div className="h-16 shrink-0" />
-
-            {/* Brand Portals Switcher */}
-            <div className="px-6 pt-5 pb-5 border-b" style={{ borderColor: 'var(--satra-linen)' }}>
-              <div className="grid grid-cols-2 gap-2.5">
-                <Link
-                  href="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`py-3 px-3 text-center border transition-all duration-200 ${
-                    pathname === '/'
-                      ? 'border-[var(--satra-charcoal)] bg-[var(--satra-charcoal)] text-[var(--satra-ivory)]'
-                      : 'border-[var(--satra-border)] bg-white text-[var(--satra-charcoal)]'
-                  }`}
-                >
-                  <span className="block text-[8px] uppercase tracking-[0.2em] mb-0.5 opacity-50 font-bold">Maison</span>
-                  <span className="block text-[11px] font-semibold uppercase tracking-wider">House of Satra</span>
-                </Link>
-                <Link
-                  href="/gourmet-gifts"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`py-3 px-3 text-center border transition-all duration-200 ${
-                    isGourmetStorefront
-                      ? 'border-[var(--satra-charcoal)] bg-[var(--satra-charcoal)] text-[var(--satra-ivory)]'
-                      : 'border-[var(--satra-border)] bg-white text-[var(--satra-charcoal)]'
-                  }`}
-                >
-                  <span className="block text-[8px] uppercase tracking-[0.2em] mb-0.5 opacity-50 font-bold">Flagship</span>
-                  <span className="block text-[11px] font-semibold uppercase tracking-wider">The Gourmet Gifts</span>
-                </Link>
-              </div>
-            </div>
+            <div className="h-20 shrink-0" />
 
             {/* Nav Links */}
-            <nav className="flex-1 flex flex-col justify-center px-8 gap-1">
-              {(isGourmetStorefront ? [
-                { label: 'Collections', href: '/collections' },
-                { label: 'Corporate Gifting', href: '/corporate' },
-                { label: 'Our Story', href: '/story' },
-                { label: 'Contact Concierge', href: '/contact' },
-                { label: 'House of Satra Maison ⟶', href: '/' },
-              ] : [
-                { label: 'The Gourmet Gifts', href: '/gourmet-gifts' },
-                { label: 'Satra Atelier', href: '/collections' },
-                { label: 'Satra Living', href: '/story' },
-                { label: 'Corporate Gifting', href: '/corporate' },
-                { label: 'Our Story', href: '/story' },
-                { label: 'Contact', href: '/contact' },
-              ]).map((link, i) => (
+            <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
+              {currentNavLinks.map((link, i) => (
                 <motion.div
                   key={link.href + link.label}
                   initial={{ opacity: 0, x: 25 }}
@@ -364,7 +300,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 </Link>
               </div>
               <span className="type-micro text-[var(--satra-taupe)]">
-                {isGourmetStorefront ? 'The Gourmet Gifts Co.' : 'House of Satra'}
+                {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
               </span>
             </div>
           </motion.div>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, Compass, ShieldCheck, Feather, ArrowRight } from 'lucide-react';
+import { X, PackageCheck, Compass, ShieldCheck, Feather, ArrowRight } from 'lucide-react';
 
 export interface EditionData {
   id: string;

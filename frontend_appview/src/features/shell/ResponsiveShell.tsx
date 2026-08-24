@@ -4,30 +4,22 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Search, User, ArrowRight } from 'lucide-react';
+import { Search, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
 import { Footer } from './Footer';
-import { CartIcon } from './CartIcon';
+import { SearchModal } from '@/features/search/SearchModal';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
 
-/* ── House of Satra Nav Links ── */
-const SATRA_NAV_LINKS = [
-  { label: 'Atelier', href: '/collections' },
-  { label: 'Living', href: '/story' },
-  { label: 'Corporate', href: '/corporate' },
-  { label: 'Contact', href: '/contact' },
-];
-
-/* ── The Gourmet Gifts Nav Links ── */
+/* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
-  { label: 'Gourmet Catalogue', href: '/gourmet-gifts' },
-  { label: 'Corporate Gifting', href: '/corporate' },
-  { label: 'Bespoke Studio', href: '/customize' },
-  { label: 'Our Story', href: '/story' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Catalogue', href: '/gourmet-gifts' },
+  { label: 'Boxes', href: '/gourmet-gifts#boxes' },
+  { label: 'Corporate', href: '/corporate' },
+  { label: 'Customise', href: '/customize' },
+  { label: 'Inquiry', href: '/gourmet-gifts#curation-inquiry' },
 ];
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -35,6 +27,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const [showReconnectedToast, setShowReconnectedToast] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const isOnline = useOnlineStatus(() => {
     setShowReconnectedToast(true);
@@ -67,12 +60,8 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  const isGourmetStorefront = pathname.startsWith('/gourmet-gifts') || pathname.startsWith('/gourmet');
-  const isGourmetHeroPage = pathname === '/gourmet-gifts' || pathname === '/gourmet';
-  const isHomepage = pathname === '/' || pathname === '/house-of-satra';
-  const isTransparentHero = (isHomepage || isGourmetHeroPage) && !isScrolled && !mobileMenuOpen;
-
-  const currentNavLinks = isGourmetStorefront ? GOURMET_NAV_LINKS : SATRA_NAV_LINKS;
+  const isTransparentHero = (pathname === '/' || pathname === '/gourmet-gifts') && !isScrolled && !mobileMenuOpen;
+  const currentNavLinks = GOURMET_NAV_LINKS;
 
   return (
     <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: 'var(--satra-ivory)' }}>
@@ -82,9 +71,10 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       />
       <OfflineBanner isOnline={isOnline} />
       <OnlineToast shouldTrigger={showReconnectedToast} onHandled={() => setShowReconnectedToast(false)} />
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* ═══════════════════════════════════════════════════
-          NAVIGATION BAR — Dynamic Multi-Brand Maison
+          NAVIGATION BAR — The Gourmet Gifts
           ═══════════════════════════════════════════════════ */}
       <header
         className="fixed top-0 left-0 right-0 z-50 w-full"
@@ -120,14 +110,14 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           {/* ─── Center: Active Brand Identity (Logo on Top -> Text Name on Scroll) ─── */}
           <div className="flex-1 flex justify-start lg:justify-center">
             <Link
-              href={isGourmetStorefront ? '/gourmet-gifts' : '/'}
+              href="/gourmet-gifts"
               className="relative flex items-center justify-start lg:justify-center group"
             >
-              {/* Mobile View: ONLY the Logo (No text name) */}
+              {/* Mobile View: ONLY the Logo */}
               <div className="relative lg:hidden w-10 h-7 flex items-center justify-start">
                 <Image
                   src="/images/brand/logo-vector.pdf.png"
-                  alt={isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+                  alt="The Gourmet Gifts"
                   fill
                   className={`object-contain transition-all duration-300 ${
                     isTransparentHero ? 'brightness-0 invert' : ''
@@ -150,7 +140,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                     >
                       <Image
                         src="/images/brand/logo-vector.pdf.png"
-                        alt={isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+                        alt="The Gourmet Gifts"
                         fill
                         className={`object-contain transition-all duration-300 ${
                           isTransparentHero ? 'brightness-0 invert' : ''
@@ -170,7 +160,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                       }`}
                       style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                     >
-                      {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+                      The Gourmet Gifts
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -178,14 +168,15 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             </Link>
           </div>
 
-          {/* ─── Right: Utilities + Mobile Menu ─── */}
+          {/* ─── Right: Utilities + Mobile Menu (Search, Account, Menu) ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
             {/* Search */}
             <button
-              className={`hidden lg:flex items-center justify-center transition-colors duration-200 cursor-pointer ${
+              onClick={() => setSearchOpen(true)}
+              className={`flex items-center justify-center transition-colors duration-200 cursor-pointer ${
                 isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
               }`}
-              aria-label="Search"
+              aria-label="Search catalogue"
             >
               <Search className="w-[18px] h-[18px]" strokeWidth={1.5} />
             </button>
@@ -193,7 +184,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             {/* Account */}
             <Link
               href="/account"
-              className={`hidden lg:flex items-center justify-center transition-colors duration-200 ${
+              className={`hidden sm:flex items-center justify-center transition-colors duration-200 ${
                 isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
               }`}
               aria-label="Account"
@@ -201,18 +192,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               <User className="w-[18px] h-[18px]" strokeWidth={1.5} />
             </Link>
 
-            {/* Bag */}
-            <Link
-              href="/cart"
-              className={`flex items-center justify-center transition-colors duration-200 ${
-                isTransparentHero ? 'text-white/80 hover:text-white' : 'text-[var(--satra-charcoal)] hover:text-[var(--satra-emerald-soft)]'
-              }`}
-              aria-label="Shopping Bag"
-            >
-              <CartIcon className="w-[18px] h-[18px]" />
-            </Link>
-
-            {/* Mobile Menu Toggle — Refined Hamburger */}
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`lg:hidden relative w-6 h-4 flex flex-col justify-between items-end cursor-pointer ml-1 ${
@@ -295,12 +275,12 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="text-[var(--satra-stone)]" aria-label="Account">
                   <User className="w-5 h-5" strokeWidth={1.5} />
                 </Link>
-                <Link href="/cart" onClick={() => setMobileMenuOpen(false)} className="text-[var(--satra-stone)]" aria-label="Bag">
-                  <CartIcon className="w-5 h-5" />
-                </Link>
+                <button onClick={() => { setMobileMenuOpen(false); setSearchOpen(true); }} className="text-[var(--satra-stone)]" aria-label="Search">
+                  <Search className="w-5 h-5" strokeWidth={1.5} />
+                </button>
               </div>
               <span className="type-micro text-[var(--satra-taupe)]">
-                {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+                The Gourmet Gifts
               </span>
             </div>
           </motion.div>

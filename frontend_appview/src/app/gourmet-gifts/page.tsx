@@ -12,6 +12,7 @@ import Scrapbook from '@/components/Scrapbook';
 import ImageTypography from '@/components/ImageTypography';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
+import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -142,8 +143,11 @@ export default function HomePage() {
         {/* ─── 5. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
         <Scrapbook />
 
-        {/* ─── 6. PRIVATE CONCIERGE & BESPOKE GIFTING (Minimal Single Section) ─── */}
-        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 lg:px-12 text-center bg-[#F6F4EF] border-t border-[#E0DDD6]">
+        {/* ─── 6. BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
+        <CuratedInquirySection />
+
+        {/* ─── 6. PRIVATE CONCIERGE & BESPOKE GIFTING (Clean Seamless Flow) ─── */}
+        <section className="pt-4 sm:pt-6 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 text-center bg-[#F6F4EF]">
           <div className="max-w-[720px] mx-auto space-y-5">
             <ScrollReveal animation="fadeUp">
               <span className="type-meta text-[#7A8B6F] text-[9.5px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-2">

@@ -11,9 +11,9 @@ export const BottomNav: React.FC = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { label: 'Home', href: '/', icon: Home },
-    { label: 'Products', href: '/gift-boxing/classics', icon: Package },
-    { label: 'Bag', href: '/cart', isBag: true },
+    { label: 'Gourmet', href: '/gourmet-gifts', icon: Home },
+    { label: 'Customizer', href: '/customize', icon: Package },
+    { label: 'Curation Tray', href: '/cart', isBag: true },
     { label: 'Account', href: '/account', icon: User },
   ];
 

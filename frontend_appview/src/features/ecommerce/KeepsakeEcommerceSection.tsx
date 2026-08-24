@@ -39,14 +39,13 @@ export default function KeepsakeEcommerceSection() {
         giftBoxingType: item.category,
         quantity: 1,
         name: item.name,
-        price: item.price * 100, // in paise
+        price: 0,
         image: item.image,
       });
     }
 
-    toast.success(`Added ${item.name} to bag!`, {
+    toast.success(`Added ${item.name} to Curation Tray`, {
       style: { background: '#2C1820', color: '#FAF8F5', border: '1px solid #BFA267' },
-      icon: '🎁',
       duration: 1500,
     });
   };
@@ -59,7 +58,7 @@ export default function KeepsakeEcommerceSection() {
     if (existing) {
       if (existing.quantity <= 1) {
         removeItem(existing.id);
-        toast('Item removed from bag', { icon: '🗑️', duration: 1200 });
+        toast('Item removed from curation tray', { duration: 1200 });
       } else {
         updateQuantity(existing.id, existing.quantity - 1);
       }
@@ -67,30 +66,28 @@ export default function KeepsakeEcommerceSection() {
   };
 
   return (
-    <section className="py-8 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] border-y border-[#E0DDD6]">
-      <div className="max-w-[1360px] mx-auto space-y-6 sm:space-y-12">
+    <section className="pt-2 sm:pt-8 md:pt-12 pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18]">
+      <div className="max-w-[1360px] mx-auto space-y-2.5 sm:space-y-6">
         
-        {/* ─── SECTION HEADER ─── */}
+        {/* ─── SECTION HEADER (CLEAN & COMPACT WITH +10PX DESKTOP PADDING) ─── */}
         <ScrollReveal animation="fadeUp">
-          <div className="text-center max-w-2xl mx-auto px-2">
-            <span className="type-meta text-[#7A8B6F] text-[9px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-1 sm:mb-2">
-              Curated Gifting Catalogue
-            </span>
+          <div className="text-center max-w-4xl mx-auto px-2 py-2 sm:py-5 md:py-6 space-y-1.5 sm:space-y-2">
             <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1A1A18] leading-[1.1] tracking-[-0.02em] font-light"
+              className="text-lg sm:text-3xl md:text-4xl lg:text-[44px] text-[#1A1A18] leading-tight tracking-tight font-light whitespace-normal md:whitespace-nowrap"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              Curated Gifting, Beautifully Presented
+              <span className="sm:hidden">Curated Keepsakes</span>
+              <span className="hidden sm:inline">Curated Gifting</span>
             </h2>
-            <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-[#78746D] font-light max-w-lg mx-auto">
-              Luxury gifting thoughtfully crafted for clients, employees, festive celebrations and meaningful occasions.
+            <p className="hidden sm:block text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal whitespace-normal md:whitespace-nowrap">
+              Luxury gifting thoughtfully crafted for clients, festive celebrations and meaningful occasions.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* ─── ASYMMETRIC FACETED POLYGON CATEGORIES (OFFICIAL CATALOGUE TAXONOMY) ─── */}
-        <div className="pt-2 pb-2">
-          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-3 px-2">
+        {/* ─── ASYMMETRIC FACETED POLYGON CATEGORIES (OFFICIAL CATALOGUE TAXONOMY) (+10px bottom padding) ─── */}
+        <div className="pt-1 pb-4 sm:pb-6">
+          <div className="flex items-center justify-start sm:justify-center gap-3.5 sm:gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-1.5 sm:py-3 px-1 sm:px-2">
             {CATALOGUE_CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat.id;
 
@@ -156,15 +153,6 @@ export default function KeepsakeEcommerceSection() {
               );
             })}
           </div>
-
-          {/* Active Category Tagline Subheading */}
-          {activeCategoryMeta && (
-            <div className="text-center pt-2">
-              <span className="text-[11px] text-[#7A8B6F] font-medium tracking-wide">
-                ✦ {activeCategoryMeta.tagline}
-              </span>
-            </div>
-          )}
         </div>
 
         {/* ─── MOBILE SWIPE HINT / COUNT (MOBILE ONLY) ─── */}
@@ -201,17 +189,20 @@ export default function KeepsakeEcommerceSection() {
                 {/* Body Content */}
                 <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-3 sm:space-y-4">
                   <div className="space-y-1.5">
-                    <span className="text-[9px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
+                    <span className="text-[9px] font-bold text-[#7A8B6F] uppercase tracking-wider block font-sans">
                       {item.categoryLabel}
                     </span>
-                    <h3
-                      className="text-base sm:text-lg font-bold text-[#451B27] leading-snug line-clamp-2 group-hover:text-[#7A1C29] transition-colors"
-                      style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                    <h3 
+                      className="text-[17px] sm:text-[19px] font-semibold text-[#1A1A18] leading-snug line-clamp-2 group-hover:text-[#7A1C29] transition-colors tracking-tight font-sans"
+                      style={{ fontFamily: 'var(--font-jakarta), system-ui, -apple-system, sans-serif' }}
                     >
                       {item.name}
                     </h3>
-                    <p className="text-xs sm:text-[13px] text-[#7A7268] font-normal">
-                      from ₹{item.price.toLocaleString('en-IN')} / curation
+                    <p 
+                      className="text-xs sm:text-[13px] text-[#7A7268] font-normal line-clamp-1 font-sans"
+                      style={{ fontFamily: 'var(--font-jakarta), system-ui, -apple-system, sans-serif' }}
+                    >
+                      {item.packaging_style || 'Bespoke Keepsake'}
                     </p>
                   </div>
 

@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Heart, Gift, Award } from 'lucide-react';
+import { PackageCheck, Heart, Gift, Award } from 'lucide-react';
 
 export const FeatureBadges: React.FC = () => {
   const badges = [
-    { icon: Sparkles, title: 'Premium Ingredients', bg: 'bg-[#FFF6D6]', border: 'border-[#F4D9A6]', color: 'text-[#D98A2B]' },
+    { icon: PackageCheck, title: 'Premium Ingredients', bg: 'bg-[#FFF6D6]', border: 'border-[#F4D9A6]', color: 'text-[#D98A2B]' },
     { icon: Heart, title: 'Handcrafted with Care', bg: 'bg-[#FFB5A7]/40', border: 'border-[#FFB5A7]', color: 'text-[#E07A5F]' },
     { icon: Gift, title: 'Beautifully Packaged', bg: 'bg-[#B7DCD6]/40', border: 'border-[#B7DCD6]', color: 'text-[#3E8077]' },
     { icon: Award, title: 'Perfect for Every Occasion', bg: 'bg-[#D6E4FA]/60', border: 'border-[#D6E4FA]', color: 'text-[#3B6DB0]' },

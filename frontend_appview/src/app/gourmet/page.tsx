@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Compass, ShieldCheck, Feather, Eye, BookOpen, Layers } from 'lucide-react';
+import { ArrowRight, PackageCheck, Compass, ShieldCheck, Feather, Eye, BookOpen, Layers } from 'lucide-react';
 import { PrivateCatalogueModal } from '@/features/gourmet/PrivateCatalogueModal';
 import { EditionDetailModal, EditionData } from '@/features/gourmet/EditionDetailModal';
 
@@ -133,7 +133,7 @@ export default function GourmetShowcasePage() {
       {/* Editorial Header */}
       <section className="pt-24 pb-16 sm:pt-32 sm:pb-24 px-6 max-w-5xl mx-auto text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-[9px] sm:text-[11px] uppercase tracking-[0.35em] text-[#a6bd93] font-bold">
-          <Sparkles className="w-3.5 h-3.5" />
+          <PackageCheck className="w-3.5 h-3.5" />
           <span>The Atelier Catalogue</span>
         </div>
 

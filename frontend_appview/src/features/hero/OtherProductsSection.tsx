@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ImageWithShimmer } from '@/shared/ImageWithShimmer';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, PackageCheck } from 'lucide-react';
 
 interface OtherProductItem {
   id: string;

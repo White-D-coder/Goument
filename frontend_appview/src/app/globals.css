@@ -101,6 +101,22 @@
     --gourmet-sage: #7A8B6F;
     --gourmet-white: #FDFCFA;
 
+    /* ─── Architectural Stone Palette (Natural Limestone & Travertine System) ─── */
+    --stone-50: #F1F0EB;
+    --stone-100: #E8E5DE;
+    --stone-200: #D9D5CC;
+    --stone-300: #C7C1B7;
+    --stone-400: #A9A39A;
+    --stone-500: #77736C;
+    --stone-700: #45433F;
+    --stone-900: #242321;
+    --stone-black: #11110F;
+
+    /* ─── Architectural Daylight & Surface Shadows ─── */
+    --shadow-plinth: 0 32px 64px -16px rgba(36, 35, 33, 0.07), 0 2px 8px rgba(36, 35, 33, 0.03);
+    --shadow-slab: 0 20px 40px -12px rgba(36, 35, 33, 0.06), inset 1px 1px 0px rgba(255, 255, 255, 0.7);
+    --shadow-daylight: -12px 24px 48px -8px rgba(36, 35, 33, 0.06), 0 1px 2px rgba(36, 35, 33, 0.04);
+
     /* Spacing — 4px base unit */
     --space-1: 4px;
     --space-2: 8px;

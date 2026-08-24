@@ -60,8 +60,8 @@ export default function AccountPage() {
       setIsAuthenticated(true);
       toast.success(
         authMode === 'login'
-          ? `Welcome back, ${userData.name}! 👋`
-          : `Account created! Welcome to Gourmet Gem VIP. 🎁`,
+          ? `Welcome back, ${userData.name}! `
+          : `Account created! Welcome to Gourmet Gem VIP. `,
         { style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #D4AF37' } }
       );
     } catch (err: any) {

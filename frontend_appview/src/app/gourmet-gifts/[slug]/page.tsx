@@ -1,32 +1,26 @@
 'use client';
 
-import React, { use, useState } from 'react';
+import React, { useState, use } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { 
   ArrowLeft, 
-  ArrowRight, 
-  Check, 
-  Package, 
-  ShieldCheck, 
-  Sparkles, 
-  Truck, 
   Leaf, 
-  Minus, 
+  ShieldCheck, 
+  Truck, 
+  Gift, 
+  PackageCheck, 
   Plus, 
-  Gift 
+  Minus, 
+  Check, 
+  ArrowRight
 } from 'lucide-react';
-import { getHamperBySlug, HAMPERS_CATALOG, HamperData } from '@/data/hampersData';
+import { HAMPERS_CATALOG, getHamperBySlug } from '@/data/hampersData';
 import { useCartStore } from '@/hooks/useCart';
-import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import toast from 'react-hot-toast';
 
-export default function HamperDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default function HamperDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const hamper = getHamperBySlug(resolvedParams.slug);
 
@@ -35,101 +29,103 @@ export default function HamperDetailPage({
   }
 
   const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(hamper.image);
   const [isAdded, setIsAdded] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
 
-  const relatedHampers = HAMPERS_CATALOG.filter(
-    (h) => h.slug !== hamper.slug && (h.category === hamper.category || true)
-  ).slice(0, 4);
+  // Gallery items (fallback to main product images)
+  const galleryImages = [
+    hamper.image,
+    '/images/infinity/bookmarks.jpg',
+    '/images/personalisation/festive.jpg',
+  ];
 
   const handleAddToCart = async () => {
     setIsAdded(true);
-    setTimeout(() => setIsAdded(false), 1500);
+    setTimeout(() => setIsAdded(false), 2500);
 
     await addItem({
       productId: hamper._id,
       giftBoxingType: hamper.category,
       quantity: quantity,
       name: hamper.name,
-      price: hamper.price * 100, // in paise
+      price: 0,
       image: hamper.image,
     });
 
-    toast.success(`Added ${quantity} × ${hamper.name} to bag!`, {
+    toast.success(`Added ${quantity} × ${hamper.name} to Curation Tray`, {
       style: { background: '#2C1820', color: '#FAF8F5', border: '1px solid #BFA267' },
-      icon: '🎁',
+      duration: 2000,
     });
   };
+
+  const relatedHampers = HAMPERS_CATALOG.filter(
+    (h) => h.category === hamper.category && h._id !== hamper._id
+  ).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1A1A18] pt-24 sm:pt-28 pb-20">
       
       {/* ─── BREADCRUMB & BACK NAVIGATION ─── */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 mb-6 sm:mb-10">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 mb-6 sm:mb-8">
         <Link
           href="/gourmet-gifts"
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#78746D] hover:text-[#1A1A18] transition-colors group"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#78746D] hover:text-[#1A1A18] transition-colors group font-semibold"
         >
           <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
           <span>Back to Curated Hampers</span>
         </Link>
       </div>
 
-      {/* ─── MAIN PRODUCT PRESENTATION ─── */}
+      {/* ─── MAIN PRODUCT PRESENTATION (STICKY LEFT COLUMN) ─── */}
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* ── LEFT COLUMN: HIGH-RES PRODUCT GALLERY & PACKAGING BADGE ── */}
-          <div className="lg:col-span-6 space-y-5 sticky lg:top-28">
+          {/* ── LEFT COLUMN: STICKY GALLERY & THUMBNAILS ── */}
+          <div className="lg:col-span-6 space-y-4 lg:sticky lg:top-24">
+            {/* Main Stage Image */}
             <div className="bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-[#EADBCA] relative">
               <div className="w-full aspect-[4/3] sm:aspect-[1/1] relative bg-[#F8F5EE]">
-                <img
-                  src={hamper.image}
+                <Image
+                  src={selectedImage}
                   alt={hamper.name}
-                  className="w-full h-full object-cover"
+                  fill
+                  priority
+                  className="object-cover transition-all duration-300"
                 />
               </div>
 
               {/* Floating Dietary Badge */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-[#451B27] flex items-center gap-1.5 shadow-xs border border-[#EADBCA]">
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold tracking-wider text-[#451B27] flex items-center gap-1.5 shadow-xs border border-[#EADBCA]">
                 <Leaf className="w-3 h-3 text-[#7A8B6F]" />
                 <span>{hamper.dietary}</span>
               </div>
             </div>
 
-            {/* Packaging Highlight Banner */}
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#F0ECE1] shadow-xs flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FAF5EC] border border-[#EADBCA] flex items-center justify-center shrink-0">
-                <Package className="w-6 h-6 text-[#9E7B35]" />
-              </div>
-              <div className="space-y-0.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8B6F] block">
-                  Keepsake Packaging Style
-                </span>
-                <p className="text-xs sm:text-sm font-semibold text-[#451B27]">
-                  {hamper.packaging_style}
-                </p>
-              </div>
-            </div>
-
-            {/* Highlights List */}
-            <div className="flex flex-wrap gap-2 pt-1">
-              {hamper.highlights.map((h, i) => (
-                <span
-                  key={i}
-                  className="text-[11px] font-medium text-[#78746D] bg-[#F2EDE4] px-3 py-1 rounded-lg border border-[#E0D9CC]"
+            {/* Thumbnail Row instead of text box */}
+            <div className="flex items-center gap-3 pt-1">
+              {galleryImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedImage(img)}
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 transition-all cursor-pointer bg-white relative ${
+                    selectedImage === img
+                      ? 'border-[#9E7B35] ring-2 ring-[#9E7B35]/25 shadow-sm scale-105'
+                      : 'border-[#E0DDD6] opacity-70 hover:opacity-100'
+                  }`}
+                  aria-label={`View image thumbnail ${idx + 1}`}
                 >
-                  ✦ {h}
-                </span>
+                  <Image src={img} alt={`${hamper.name} thumbnail ${idx + 1}`} fill className="object-cover" />
+                </button>
               ))}
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN: DETAILS, CONTENTS, ADD TO BAG & ENQUIRY ── */}
-          <div className="lg:col-span-6 space-y-7">
+          {/* ── RIGHT COLUMN: DETAILS, CURATED CONTENTS, HIGHLIGHTS & ACTIONS ── */}
+          <div className="lg:col-span-6 space-y-6">
             
             {/* Title & Category Header */}
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <span className="type-meta text-[#7A8B6F] text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-bold block">
                 {hamper.categoryLabel}
               </span>
@@ -139,16 +135,8 @@ export default function HamperDetailPage({
               >
                 {hamper.name}
               </h1>
-              <div className="pt-2 flex items-baseline gap-3">
-                <span className="text-2xl sm:text-3xl font-semibold text-[#451B27]">
-                  ₹{hamper.price.toLocaleString('en-IN')}
-                </span>
-                <span className="text-xs text-[#78746D]">
-                  / curated keepsake hamper
-                </span>
-              </div>
-              <p className="text-[11px] text-[#8A8680]">
-                Inclusive of all luxury gift presentation, personalized wax-sealed note card & taxes.
+              <p className="text-xs text-[#8A8680] pt-1">
+                Inclusive of signature presentation, personalized wax-sealed note card &amp; white-glove packaging.
               </p>
             </div>
 
@@ -157,42 +145,52 @@ export default function HamperDetailPage({
               {hamper.description}
             </p>
 
-            {/* ── WHAT'S INSIDE / CURATED SPECIFICATIONS ── */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1A1A18] flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#9E7B35]" />
-                  <span>Curated Contents ({hamper.inside_items.length} Delicacies):</span>
-                </h2>
-                <span className="text-[11px] text-[#7A8B6F] font-semibold">
-                  Shelf Life: {hamper.shelfLife}
-                </span>
-              </div>
+            {/* ── CURATED CONTENTS & HIGHLIGHTS ── */}
+            <div className="space-y-3.5">
+              <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1A1A18] flex items-center gap-2">
+                <PackageCheck className="w-4 h-4 text-[#9E7B35]" />
+                <span>Curated Contents:</span>
+              </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {/* Items Inside Table (Left: Item Name, Right: Quantity) */}
+              <div className="border-t border-b border-[#EADBCA] divide-y divide-[#EADBCA]/60">
                 {hamper.inside_items.map((it, idx) => (
                   <div
                     key={idx}
-                    className="bg-white p-3.5 rounded-xl border border-[#F0ECE1] shadow-2xs flex items-center justify-between"
+                    className="py-3 flex items-center justify-between gap-4 text-left"
                   >
-                    <div className="space-y-0.5">
-                      <span className="text-[9.5px] font-bold text-[#8A8680] uppercase tracking-wider block">
-                        Item 0{idx + 1}
+                    <div className="flex items-center gap-3">
+                      <span className="text-[10.5px] font-mono text-[#8A8680] uppercase tracking-wider">
+                        0{idx + 1}
                       </span>
-                      <p className="text-xs font-semibold text-[#451B27]">
+                      <span className="text-xs sm:text-sm font-medium text-[#1A1A18]">
                         {it.item}
-                      </p>
+                      </span>
                     </div>
-                    <span className="text-[11px] font-bold text-[#9E7B35] bg-[#FAF5EC] px-2.5 py-1 rounded-md border border-[#EADBCA]">
+                    <span className="text-xs sm:text-sm font-mono font-medium text-[#78746D] shrink-0">
                       {it.weight}
                     </span>
                   </div>
                 ))}
               </div>
+
+              {/* Sensory Highlights List Under Curated Contents */}
+              {hamper.highlights && hamper.highlights.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {hamper.highlights.map((h, i) => (
+                    <span
+                      key={i}
+                      className="text-[11px] font-medium text-[#6B655D] bg-[#F2EDE4] px-3 py-1.5 rounded-lg border border-[#E0D9CC]"
+                    >
+                      {h}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* ── QUANTITY SELECTOR & CTAS ── */}
-            <div className="space-y-4 pt-2">
+            <div className="space-y-4 pt-3 border-t border-[#EADBCA]">
               <div className="flex items-center gap-4">
                 {/* Quantity Pill */}
                 <div className="inline-flex items-center border border-[#D6D1C7] bg-white rounded-xl p-1 shadow-2xs">
@@ -216,7 +214,7 @@ export default function HamperDetailPage({
                   </button>
                 </div>
 
-                {/* Add to Bag Button */}
+                {/* Add to Curation Tray Button */}
                 <button
                   onClick={handleAddToCart}
                   className={`flex-1 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-98 ${
@@ -228,13 +226,11 @@ export default function HamperDetailPage({
                   {isAdded ? (
                     <>
                       <Check className="w-4 h-4" />
-                      <span>Added to Bag</span>
+                      <span>Added to Curation Tray</span>
                     </>
                   ) : (
                     <>
-                      <span>Add to Bag</span>
-                      <span>•</span>
-                      <span>₹{(hamper.price * quantity).toLocaleString('en-IN')}</span>
+                      <span>Add to Curation Tray</span>
                     </>
                   )}
                 </button>
@@ -271,7 +267,7 @@ export default function HamperDetailPage({
       </div>
 
       {/* ─── RELATED HAMPERS SECTION ─── */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 mt-20 sm:mt-28 pt-12 border-t border-[#EADBCA]">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 mt-16 sm:mt-24 pt-12 border-t border-[#EADBCA]">
         <div className="flex items-end justify-between mb-8">
           <div>
             <span className="type-meta text-[#7A8B6F] text-[10px] tracking-[0.25em] uppercase font-bold block mb-1">
@@ -286,43 +282,52 @@ export default function HamperDetailPage({
           </div>
           <Link
             href="/gourmet-gifts"
-            className="text-xs font-semibold text-[#9E7B35] hover:text-[#451B27] inline-flex items-center gap-1 transition-colors"
+            className="text-xs uppercase font-semibold text-[#9E7B35] hover:text-[#7A1C29] flex items-center gap-1 transition-colors"
           >
             <span>View All</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {relatedHampers.map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedHampers.map((rel) => (
             <Link
-              key={item._id}
-              href={`/gourmet-gifts/${item.slug}`}
-              className="bg-white rounded-2xl overflow-hidden shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between border border-[#F0ECE1] group"
+              key={rel._id}
+              href={`/gourmet-gifts/${rel.slug}`}
+              className="group bg-white rounded-2xl overflow-hidden border border-[#EADBCA] shadow-2xs hover:shadow-md transition-all flex flex-col"
             >
-              <div className="w-full aspect-[4/3] overflow-hidden bg-[#FBF7F0]">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              <div className="aspect-[4/3] bg-[#FAF6F0] relative overflow-hidden">
+                <Image
+                  src={rel.image}
+                  alt={rel.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
                 <div className="space-y-1">
+                  <span className="text-[9px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
+                    {rel.categoryLabel}
+                  </span>
                   <h3
-                    className="text-base font-bold text-[#451B27] leading-snug line-clamp-1 group-hover:text-[#7A1C29] transition-colors"
+                    className="text-lg font-bold text-[#451B27] group-hover:text-[#7A1C29] transition-colors"
                     style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                   >
-                    {item.name}
+                    {rel.name}
                   </h3>
-                  <p className="text-xs text-[#7A7268]">
-                    from ₹{item.price.toLocaleString('en-IN')} / hamper
+                  <p className="text-xs text-[#78746D] line-clamp-2 font-light">
+                    {rel.description}
                   </p>
                 </div>
-                <span className="text-xs font-semibold text-[#9E7B35] group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3 h-3" />
-                </span>
+                <div className="pt-2 border-t border-[#F0ECE1] flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#7A8B6F] uppercase tracking-wider">
+                    Bespoke Keepsake
+                  </span>
+                  <span className="text-xs font-bold text-[#9E7B35] group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                    <span>Discover</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

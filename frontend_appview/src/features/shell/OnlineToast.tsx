@@ -24,7 +24,7 @@ export const OnlineToast: React.FC<OnlineToastProps> = ({ shouldTrigger, onHandl
         // Fall back gracefully if canvas is blocked
       }
 
-      toast.success('You’re back online! 👋', {
+      toast.success('You’re back online.', {
         duration: 3000,
         style: {
           background: '#1A1A1A',

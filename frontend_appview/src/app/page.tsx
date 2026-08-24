@@ -36,7 +36,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Royal Velvet Keepsake Suite',
     brand: 'Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 14500,
+    price: 0,
     image: '/images/small_anipics/velvet_tray_hero.jpg',
     secondaryImage: '/images/Category_image/premium_velvet/vel1.jpeg',
     description: 'Multi-tier bespoke keepsake chest in deep royal velvet.',
@@ -46,7 +46,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Royale Botanical Keepsake Tin',
     brand: 'Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 4850,
+    price: 0,
     image: '/images/Category_image/Royale_tin_tin/tinnew1.png',
     secondaryImage: '/images/Category_image/Royale_tin_tin/tin7.jpeg',
     description: 'Architectural tinplate with 24k gold filigree.',
@@ -56,7 +56,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Imperial Burgundy Velvet Chest',
     brand: 'Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 9800,
+    price: 0,
     image: '/images/Category_image/premium_velvet/vel1.jpeg',
     secondaryImage: '/images/Category_image/premium_velvet/vel2.jpeg',
     description: 'Heirloom velvet memory box with gold-plated hardware.',
@@ -66,7 +66,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Heritage Octagonal Valet Tray',
     brand: 'Satra Atelier',
     brandCategory: 'satra-atelier',
-    price: 3800,
+    price: 0,
     image: '/images/small_anipics/framee.png',
     secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/frame.jpg',
     description: 'Architectural brass and teak desk organizer.',
@@ -76,7 +76,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Heritage Artisanal Teak Frame',
     brand: 'Satra Atelier',
     brandCategory: 'satra-atelier',
-    price: 5200,
+    price: 0,
     image: '/images/small_anipics/frame.png',
     secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/frame.jpg',
     description: 'Museum-grade photographic keepsake frame.',
@@ -86,7 +86,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Botanical Amber Soy Candle',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 2400,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/candle_120.png',
     secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
     description: 'Hand-poured soy candle with Himalayan cedar and amber.',
@@ -96,7 +96,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Marbled Resin Coasters',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 2100,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
     description: 'Hand-cast resin with organic pigment flows.',
   },
@@ -105,7 +105,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Heirloom Velvet Memory Chest',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 8900,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/velvet-lined_box_large.jpg',
     secondaryImage: '/images/Category_image/premium_velvet/royale3.jpeg',
     description: 'Permanent keepsake box for personal treasures.',
@@ -480,8 +480,8 @@ export default function HouseOfSatraHomePage() {
                   >
                     {product.name}
                   </h3>
-                  <span className="text-sm" style={{ color: 'var(--satra-stone)' }}>
-                    ₹{product.price.toLocaleString('en-IN')}
+                  <span className="text-xs font-semibold text-[#7A8B6F] uppercase tracking-wider">
+                    Bespoke Keepsake
                   </span>
                 </div>
               </div>
@@ -611,7 +611,7 @@ export default function HouseOfSatraHomePage() {
                 className="absolute top-4 right-4 text-xs font-mono cursor-pointer z-10"
                 style={{ color: 'var(--satra-stone)' }}
               >
-                ✕
+                
               </button>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
@@ -643,8 +643,8 @@ export default function HouseOfSatraHomePage() {
                   </div>
 
                   <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--satra-linen)' }}>
-                    <span className="text-lg font-semibold" style={{ color: 'var(--satra-charcoal)' }}>
-                      ₹{quickViewProduct.price.toLocaleString('en-IN')}
+                    <span className="text-xs font-semibold text-[#7A8B6F] uppercase tracking-wider">
+                      Bespoke Curation
                     </span>
                     <button
                       onClick={() => {

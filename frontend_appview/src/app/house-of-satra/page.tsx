@@ -5,17 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
-import { 
-  ArrowRight, 
-  ArrowUpRight, 
-  ShoppingBag, 
-  Sparkles, 
-  Check, 
-  Eye, 
-  SlidersHorizontal,
-  Layers,
-  ShieldCheck
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ShoppingBag, PackageCheck, Check, Eye, SlidersHorizontal, Layers, ShieldCheck } from 'lucide-react';
 import { useCartStore } from '@/hooks/useCart';
 
 type BrandDivision = 'all' | 'gourmet-gifts' | 'satra-atelier' | 'satra-living';
@@ -41,7 +31,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'The Royal Velvet Keepsake Suite',
     brand: 'The Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 14500,
+    price: 0,
     image: '/images/small_anipics/velvet_tray_hero.jpg',
     secondaryImage: '/images/Category_image/premium_velvet/vel1.jpeg',
     provenance: 'Jaipur Velvet Guild • Delhi NCR Metalcraft',
@@ -54,7 +44,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'The Royale Botanical Keepsake Tin',
     brand: 'The Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 4850,
+    price: 0,
     image: '/images/Category_image/Royale_tin_tin/tinnew1.png',
     secondaryImage: '/images/Category_image/Royale_tin_tin/tin7.jpeg',
     provenance: 'Delhi NCR Atelier',
@@ -67,7 +57,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'The Imperial Burgundy Velvet Chest',
     brand: 'The Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 9800,
+    price: 0,
     image: '/images/Category_image/premium_velvet/vel1.jpeg',
     secondaryImage: '/images/Category_image/premium_velvet/vel2.jpeg',
     provenance: 'Jaipur Upholstery Guild',
@@ -79,7 +69,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Heritage Cylindrical Keepsake',
     brand: 'The Gourmet Gifts',
     brandCategory: 'gourmet-gifts',
-    price: 3600,
+    price: 0,
     image: '/images/Category_image/Royale_tin_tin/tin7.jpeg',
     secondaryImage: '/images/Category_image/Royale_tin_tin/tin1.jpeg',
     provenance: 'Delhi NCR Metalcraft',
@@ -93,7 +83,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Hand-Carved Teakwood Memory Vault',
     brand: 'Satra Atelier',
     brandCategory: 'satra-atelier',
-    price: 18500,
+    price: 0,
     image: '/images/small_anipics/framee.png',
     secondaryImage: '/images/small_anipics/frame.png',
     provenance: 'Mumbai Master Woodcraft Guild',
@@ -106,7 +96,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'The Octagonal Emerald Keepsake Tray',
     brand: 'Satra Atelier',
     brandCategory: 'satra-atelier',
-    price: 7200,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/keepsake_small.png',
     secondaryImage: '/images/Category_image/premium_velvet/royale2.jpeg',
     provenance: 'Satra Atelier Studio',
@@ -118,7 +108,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Heritage Artisanal Teak Frame',
     brand: 'Satra Atelier',
     brandCategory: 'satra-atelier',
-    price: 5200,
+    price: 0,
     image: '/images/small_anipics/frame.png',
     secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/frame.jpg',
     provenance: 'Mumbai Joinery Guild',
@@ -132,7 +122,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'Botanical Amber Soy Candle Relic',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 2400,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/candle_120.png',
     secondaryImage: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
     provenance: 'Himachal Wild Herb Guild',
@@ -145,7 +135,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'House Signature Marbled Resin Coasters (Set of 2)',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 2100,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/Resin_Coaster_Setof2(Brand Colours).jpg',
     provenance: 'Satra Creative Lab',
     materials: 'Food-Grade Resin, Gold Pigment Infusions, Cork Base',
@@ -156,7 +146,7 @@ const MAISON_PRODUCTS: MaisonProduct[] = [
     name: 'The Heirloom Velvet-Lined Memory Chest',
     brand: 'Satra Living',
     brandCategory: 'satra-living',
-    price: 8900,
+    price: 0,
     image: '/images/Product_images/CRAFTED IN-HOUSE/velvet-lined_box_large.jpg',
     secondaryImage: '/images/Category_image/premium_velvet/royale3.jpeg',
     provenance: 'Pan-India Master Guild',
@@ -492,8 +482,8 @@ export default function HouseOfSatraPage() {
 
                 {/* Pricing & Add to Cart */}
                 <div className="p-5 pt-0 flex items-center justify-between border-t border-[#EAE6DE] mt-auto">
-                  <span className="text-base font-semibold text-[#1A1A18]">
-                    ₹{product.price.toLocaleString('en-IN')}
+                  <span className="text-xs font-semibold text-[#7A8B6F] uppercase tracking-wider">
+                    Bespoke Keepsake
                   </span>
 
                   <button
@@ -615,7 +605,7 @@ export default function HouseOfSatraPage() {
                 onClick={() => setQuickViewProduct(null)}
                 className="absolute top-4 right-4 text-[#8A8680] hover:text-[#1A1A18] text-sm font-mono cursor-pointer"
               >
-                ✕ Close
+                 Close
               </button>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
@@ -650,8 +640,8 @@ export default function HouseOfSatraPage() {
                   </div>
 
                   <div className="pt-4 flex items-center justify-between">
-                    <span className="text-xl font-bold text-[#1A1A18]">
-                      ₹{quickViewProduct.price.toLocaleString('en-IN')}
+                    <span className="text-xs font-semibold text-[#7A8B6F] uppercase tracking-wider">
+                      Bespoke Keepsake
                     </span>
 
                     <button

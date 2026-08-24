@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Home, Search, Bell, User, Settings, Bookmark } from "lucide-react";
+import { Home, Search, Bell, User, Settings, Bookmark } from 'lucide-react';
 
 interface NavItem {
   id: number;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, PackageCheck, CheckCircle2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function InquirePage() {
@@ -33,7 +33,7 @@ export default function InquirePage() {
         {/* Header */}
         <div className="text-center space-y-3">
           <span className="text-xs font-bold tracking-[0.25em] text-[#52604D] uppercase inline-flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-[#6B855A]" />
+            <PackageCheck className="w-4 h-4 text-[#6B855A]" />
             Bespoke Concierge
           </span>
           <h1 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold text-[#2C3228] tracking-tight">

@@ -79,9 +79,7 @@ const GOURMET_FOOTER_COLUMNS = [
 ];
 
 export const Footer: React.FC = () => {
-  const pathname = usePathname();
-  const isGourmetStorefront = pathname.startsWith('/gourmet-gifts') || pathname.startsWith('/gourmet');
-  const footerColumns = isGourmetStorefront ? GOURMET_FOOTER_COLUMNS : SATRA_FOOTER_COLUMNS;
+  const footerColumns = GOURMET_FOOTER_COLUMNS;
 
   return (
     <footer className="relative overflow-hidden bg-[#121211] text-[#F6F4EF] border-t border-white/10">
@@ -113,11 +111,11 @@ export const Footer: React.FC = () => {
         
         {/* Top Header: Compact Brand Row */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-6 border-b border-white/10">
-          <Link href={isGourmetStorefront ? '/gourmet-gifts' : '/'} className="inline-flex items-center gap-2.5 group">
+          <Link href="/gourmet-gifts" className="inline-flex items-center gap-2.5 group">
             <div className="relative w-7 h-5 sm:w-8 sm:h-6 transition-transform group-hover:scale-105 duration-300">
               <Image
                 src="/images/brand/logo-vector.pdf.png"
-                alt={isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+                alt="The Gourmet Gifts"
                 fill
                 className="object-contain brightness-0 invert"
               />
@@ -126,12 +124,12 @@ export const Footer: React.FC = () => {
               className="text-xl sm:text-2xl tracking-[-0.01em] uppercase font-light leading-none text-[#F6F4EF]"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500 }}
             >
-              {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}
+              The Gourmet Gifts
             </span>
           </Link>
 
           <p className="font-serif italic text-xs sm:text-sm text-[#C7C3BB]/80 tracking-wide">
-            {isGourmetStorefront ? '“Thoughtfully Curated, Beautifully Presented.”' : '“Form & Permanence.”'}
+            “Thoughtfully Curated, Beautifully Presented.”
           </p>
         </div>
 
@@ -161,13 +159,13 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Compact Meta & Copyright */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] text-[#8A8680]">
           <div className="flex items-center gap-2.5">
-            <span>© {new Date().getFullYear()} {isGourmetStorefront ? 'The Gourmet Gifts' : 'House of Satra'}.</span>
+            <span>© {new Date().getFullYear()} The Gourmet Gifts.</span>
             <span className="w-1 h-1 rounded-full bg-white/20" />
             <span>All rights reserved.</span>
           </div>
 
           <span className="text-[#B5AFA6]/60 uppercase tracking-widest text-[8.5px]">
-            {isGourmetStorefront ? 'Luxury Artisanal Gifting & Curations' : 'Sovereign Luxury Maison & Guild Ecosystem'}
+            Luxury Artisanal Gifting &amp; Curations
           </span>
         </div>
 

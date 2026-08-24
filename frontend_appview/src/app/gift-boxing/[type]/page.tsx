@@ -160,16 +160,16 @@ export default function GiftBoxingPage() {
                     </h3>
                   </div>
 
-                  {/* Bottom Action Row: Price & Oxblood Plus Add Button */}
+                  {/* Bottom Action Row: Curation Tag & Plus Add Button */}
                   <div className="flex items-center justify-between pt-2.5 border-t border-[#E4E0D7]/50 mt-2">
-                    <span className="font-sans text-xs sm:text-sm font-bold text-[#2C3228]">
-                      ₹{item.basePrice ? item.basePrice.toLocaleString() : '1,299'}
+                    <span className="text-[11px] font-bold text-[#7A8B6F] uppercase tracking-wider">
+                      Bespoke Format
                     </span>
 
                     <button
                       onClick={(e) => handleAddToCart(item, e)}
                       aria-label="Quick add to bag"
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-none bg-[#7A1C29] hover:bg-[#5C141F] text-white flex items-center justify-center font-bold shadow-2xs active:scale-90 transition-all cursor-pointer"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-none bg-[#1A1A18] hover:bg-[#451B27] text-white flex items-center justify-center font-bold shadow-2xs active:scale-90 transition-all cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                     </button>

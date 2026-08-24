@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Gift, PackageCheck, ShieldCheck, Truck } from 'lucide-react';
+import { PackageCheck, Gift, ShieldCheck, Truck } from 'lucide-react';
 
 const VALUE_PROPS = [
   {
-    icon: Sparkles,
+    icon: PackageCheck,
     title: 'Curated Elegance',
   },
   {

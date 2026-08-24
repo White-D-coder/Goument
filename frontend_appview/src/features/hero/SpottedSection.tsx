@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Sparkles, Palette, PackageCheck, Award } from 'lucide-react';
+import { Send, PackageCheck, Palette, Award } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const COLUMN_1_IMAGES = [
@@ -128,7 +128,7 @@ export const SpottedSection: React.FC = () => {
             
             {/* Item 1 */}
             <div className="flex flex-col items-center justify-center text-center space-y-3 sm:space-y-4 group">
-              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] text-[#2C3228] group-hover:scale-110 transition-transform duration-300" />
+              <PackageCheck className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] text-[#2C3228] group-hover:scale-110 transition-transform duration-300" />
               <span className="font-sans text-xs sm:text-sm md:text-base font-medium text-[#2C3228] tracking-tight sm:tracking-normal">
                 Curated Elegance
               </span>

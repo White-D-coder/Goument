@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Gift, Check, ArrowRight, ArrowLeft, Sparkles, Heart } from 'lucide-react';
+import { X, Gift, Check, ArrowRight, ArrowLeft, PackageCheck, Heart } from 'lucide-react';
 import { GIFT_BOX_TYPES } from '@/utils/constants';
 import { useCartStore } from '@/hooks/useCart';
 import toast from 'react-hot-toast';
@@ -35,8 +35,8 @@ export const GiftBoxCustomizerModal: React.FC<GiftBoxCustomizerModalProps> = ({
     Object.values(GIFT_BOX_TYPES).find((b) => b.type === selectedBoxType) ||
     GIFT_BOX_TYPES.ROYALE_TIN;
 
-  const basePricePaise = 299900; // ₹2,999 base price
-  const totalPricePaise = basePricePaise + matchedBox.surcharge * 100;
+  const basePricePaise = 0;
+  const totalPricePaise = 0;
 
   const delicaciesList = [
     { id: 'truffle-honey', name: 'Raw Truffle Honey', category: 'Honey' },
@@ -73,7 +73,7 @@ export const GiftBoxCustomizerModal: React.FC<GiftBoxCustomizerModalProps> = ({
       image: matchedBox.heroImage,
     });
 
-    toast.success('Custom Gift Box added to your bag! 🎁', {
+    toast.success('Custom Gift Box added to your bag! ', {
       style: { background: '#1A1A1A', color: '#FAF7F2', border: '1px solid #D4AF37' },
     });
 
@@ -102,7 +102,7 @@ export const GiftBoxCustomizerModal: React.FC<GiftBoxCustomizerModalProps> = ({
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-3 border-b border-[#E8DFC8]/60">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#D4AF37]" />
+                <PackageCheck className="w-5 h-5 text-[#D4AF37]" />
                 <h2 className="font-serif-luxury text-lg font-bold text-[#2A231F]">
                   Custom Gift Box Builder
                 </h2>

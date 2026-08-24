@@ -62,7 +62,7 @@ export default function CuratedInquirySection() {
   };
 
   return (
-    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-12 px-3 sm:px-6 lg:px-10 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18]">
+    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-12 px-3 sm:px-6 lg:px-10 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
       
       {/* ── LUXURY SATRA WATERMARK BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden select-none">

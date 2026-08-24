@@ -15,7 +15,7 @@ import { Toaster } from 'react-hot-toast';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
-  { label: 'Catalogue', href: '/gourmet-gifts' },
+  { label: 'Catalogue', href: '/gourmet-gifts#catalogue' },
   { label: 'Boxes', href: '/gourmet-gifts#boxes' },
   { label: 'Corporate', href: '/corporate' },
   { label: 'Enquire', href: '/gourmet-gifts#curation-inquiry' },
@@ -49,7 +49,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !window.location.hash) {
       window.scrollTo(0, 0);
     }
   }, [pathname]);
@@ -61,6 +61,18 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
   const isTransparentHero = (pathname === '/' || pathname === '/gourmet-gifts') && !isScrolled && !mobileMenuOpen;
   const currentNavLinks = GOURMET_NAV_LINKS;
+
+  const scrollToHeroOrTop = (e: React.MouseEvent) => {
+    if (pathname === '/' || pathname === '/gourmet-gifts') {
+      e.preventDefault();
+      const hero = document.getElementById('hero');
+      if (hero) {
+        hero.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: 'var(--satra-ivory)' }}>
@@ -122,6 +134,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           <div className="flex-1 flex justify-start lg:justify-center">
             <Link
               href="/gourmet-gifts"
+              onClick={scrollToHeroOrTop}
               className="relative flex items-center justify-start lg:justify-center group"
             >
               {/* Mobile View: ONLY the Logo */}

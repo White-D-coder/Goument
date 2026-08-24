@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
+/* 
 const SATRA_FOOTER_COLUMNS = [
   {
     title: 'Maison & Divisions',
@@ -40,6 +41,7 @@ const SATRA_FOOTER_COLUMNS = [
     ],
   },
 ];
+*/
 
 const GOURMET_FOOTER_COLUMNS = [
   {

@@ -25,8 +25,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'House of Satra — Sovereign Luxury Maison',
-  description: 'Form & Permanence. Sovereign luxury maison uniting India\'s finest artisanal craft guilds.',
+  title: 'The Gourmet Gifts — Artisanal Luxury Gifting & Keepsakes',
+  description: 'Artisanal delicacies, bespoke keepsake vessels, and executive corporate gifting systems.',
 };
 
 export const viewport: Viewport = {

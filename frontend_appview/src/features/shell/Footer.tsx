@@ -47,7 +47,7 @@ const GOURMET_FOOTER_COLUMNS = [
     links: [
       { label: 'Master Catalogue', href: '/gourmet-gifts' },
       { label: 'Corporate Gifting', href: '/corporate' },
-      { label: 'Bespoke Customizer', href: '/customize' },
+      { label: 'Artisanal Gift Boxing', href: '/gift-boxing' },
       { label: 'Our Heritage Story', href: '/story' },
     ],
   },

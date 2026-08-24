@@ -12,7 +12,7 @@ export const BottomNav: React.FC = () => {
 
   const navItems = [
     { label: 'Gourmet', href: '/gourmet-gifts', icon: Home },
-    { label: 'Customizer', href: '/customize', icon: Package },
+    { label: 'Corporate', href: '/corporate', icon: Package },
     { label: 'Curation Tray', href: '/cart', isBag: true },
     { label: 'Account', href: '/account', icon: User },
   ];

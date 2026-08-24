@@ -127,9 +127,11 @@ export default function CustomGiftBoxesSection() {
     });
   };
 
-  const handleIncrement = (box: CustomBoxItem, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleIncrement = (box: CustomBoxItem, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     const existing = cartItems.find((i) => i.productId === box.id);
     if (existing) {
@@ -154,9 +156,11 @@ export default function CustomGiftBoxesSection() {
     }
   };
 
-  const handleDecrement = (box: CustomBoxItem, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleDecrement = (box: CustomBoxItem, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     const existing = cartItems.find((i) => i.productId === box.id);
     if (!existing) return;
@@ -172,7 +176,7 @@ export default function CustomGiftBoxesSection() {
   };
 
   return (
-    <section className="pt-2 sm:pt-8 md:pt-12 pb-10 sm:pb-14 md:pb-16 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
+    <section id="boxes" className="pt-2 sm:pt-8 md:pt-12 pb-10 sm:pb-14 md:pb-16 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
       <div className="max-w-[1360px] mx-auto space-y-5 sm:space-y-7">
 
         {/* ─── SECTION HEADER (SINGLE LINE TITLE + RIGHT-ALIGNED NAVIGATION ARROWS) ─── */}
@@ -271,15 +275,19 @@ export default function CustomGiftBoxesSection() {
                     </p>
                   </div>
 
-                  {/* Golden View/Fill Button + Dynamic Bag Stepper (Exact Reference Match) */}
+                  {/* Enquire Box Button + Dynamic Stepper */}
                   <div className="pt-2 flex items-center justify-between gap-2">
-                    <Link
-                      href={`/customize?box=${box.id}`}
+                    <button
+                      onClick={() => {
+                        handleIncrement(box);
+                        const el = document.getElementById('curation-inquiry');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
                       className="inline-flex items-center gap-1.5 border border-[#C5A880] text-[#9E7B35] hover:bg-[#C5A880] hover:text-white rounded-lg px-3 sm:px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
                     >
-                      <span>Fill Box</span>
+                      <span>Enquire Box</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                    </button>
 
                     {/* Dynamic Quantity Stepper Counter */}
                     {currentQty > 0 ? (

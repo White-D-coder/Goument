@@ -112,7 +112,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {results.map((item: any) => {
                     const isBox = 'capacitySlots' in item;
-                    const href = isBox ? `/customize?box=${item.id}` : `/gourmet-gifts/${item.slug}`;
+                    const href = isBox ? `/gourmet-gifts#boxes` : `/gourmet-gifts/${item.slug}`;
 
                     return (
                       <Link

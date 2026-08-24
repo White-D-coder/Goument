@@ -28,7 +28,7 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[540px] md:h-[620px] lg:h-[680px] overflow-hidden rounded-none">
+    <section id="hero" className="relative w-full h-[540px] md:h-[620px] lg:h-[680px] overflow-hidden rounded-none scroll-mt-24">
       {/* 8K High-Resolution Auto-Sliding Background Images */}
       <div className="absolute inset-0 z-0 bg-black">
         <AnimatePresence mode="popLayout">

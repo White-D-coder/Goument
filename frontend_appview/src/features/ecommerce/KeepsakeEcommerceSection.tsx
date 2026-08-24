@@ -66,7 +66,7 @@ export default function KeepsakeEcommerceSection() {
   };
 
   return (
-    <section className="pt-2 sm:pt-8 md:pt-12 pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18]">
+    <section id="catalogue" className="pt-2 sm:pt-8 md:pt-12 pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
       <div className="max-w-[1360px] mx-auto space-y-2.5 sm:space-y-6">
         
         {/* ─── SECTION HEADER (CLEAN & COMPACT WITH +10PX DESKTOP PADDING) ─── */}

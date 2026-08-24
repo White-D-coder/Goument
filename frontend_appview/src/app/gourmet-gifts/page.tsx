@@ -147,7 +147,7 @@ export default function HomePage() {
         <CuratedInquirySection />
 
         {/* ─── 6. PRIVATE CONCIERGE & BESPOKE GIFTING (Clean Seamless Flow) ─── */}
-        <section className="pt-4 sm:pt-6 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 text-center bg-[#F6F4EF]">
+        <section className="pt-4 sm:pt-6 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 text-center bg-[#FAF8F5]">
           <div className="max-w-[720px] mx-auto space-y-5">
             <ScrollReveal animation="fadeUp">
               <span className="type-meta text-[#7A8B6F] text-[9.5px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-2">

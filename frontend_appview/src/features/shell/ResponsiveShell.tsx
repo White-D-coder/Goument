@@ -18,8 +18,7 @@ const GOURMET_NAV_LINKS = [
   { label: 'Catalogue', href: '/gourmet-gifts' },
   { label: 'Boxes', href: '/gourmet-gifts#boxes' },
   { label: 'Corporate', href: '/corporate' },
-  { label: 'Customise', href: '/customize' },
-  { label: 'Inquiry', href: '/gourmet-gifts#curation-inquiry' },
+  { label: 'Enquire', href: '/gourmet-gifts#curation-inquiry' },
 ];
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -93,6 +92,18 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href.includes('#')) {
+                    const [targetPath, hash] = link.href.split('#');
+                    if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts')) {
+                      e.preventDefault();
+                      const element = document.getElementById(hash);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }
+                }}
                 className={`type-nav transition-colors duration-200 ${
                   isTransparentHero
                     ? 'text-white/75 hover:text-white'
@@ -251,7 +262,19 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 >
                   <Link
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      setMobileMenuOpen(false);
+                      if (link.href.includes('#')) {
+                        const [targetPath, hash] = link.href.split('#');
+                        if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts')) {
+                          e.preventDefault();
+                          const element = document.getElementById(hash);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }
+                      }
+                    }}
                     className={`block py-2.5 transition-colors duration-200 ${
                       pathname === link.href
                         ? 'text-[var(--satra-charcoal)] font-semibold'

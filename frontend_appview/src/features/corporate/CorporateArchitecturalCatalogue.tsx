@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Minus, Package, Plus } from 'lucide-react';
 import { useCartStore } from '@/hooks/useCart';
-import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import toast from 'react-hot-toast';
 
 export interface CorporateCategory {
@@ -30,7 +29,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     id: 'office-travel-bags',
     code: '01',
     label: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/category_icons/travelss.jpg',
     clipPath: 'polygon(50% 0%, 100% 25%, 85% 100%, 15% 100%, 0% 25%)',
     pastelActive: 'bg-[#D6C2A9]',
     pastelHover: 'group-hover:bg-[#D6C2A9]/50',
@@ -39,7 +38,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     id: 'electronics-audio',
     code: '02',
     label: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/category_icons/Electronics.jpg',
     clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
     pastelActive: 'bg-[#C7C3B7]',
     pastelHover: 'group-hover:bg-[#C7C3B7]/50',
@@ -48,7 +47,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     id: 'stationery-desk',
     code: '03',
     label: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/category_icons/Stationery & Desk Accessories.jpg',
     clipPath: 'polygon(50% 0%, 95% 35%, 80% 100%, 20% 100%, 5% 35%)',
     pastelActive: 'bg-[#D2C8B8]',
     pastelHover: 'group-hover:bg-[#D2C8B8]/50',
@@ -57,7 +56,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     id: 'corporate-apparel',
     code: '04',
     label: 'Apparel',
-    image: '/images/corporate/cat_04_apparel.png',
+    image: '/images/corporate/category_icons/Apparel.jpg',
     clipPath: 'polygon(30% 0%, 70% 0%, 100% 40%, 85% 100%, 15% 100%, 0% 40%)',
     pastelActive: 'bg-[#C5CCC5]',
     pastelHover: 'group-hover:bg-[#C5CCC5]/50',
@@ -66,7 +65,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     id: 'awards-recognition',
     code: '05',
     label: 'Recognition',
-    image: '/images/corporate/cat_05_recognition.png',
+    image: '/images/corporate/category_icons/Recognition.jpg',
     clipPath: 'polygon(50% 0%, 100% 30%, 80% 100%, 20% 100%, 0% 30%)',
     pastelActive: 'bg-[#D7CEC2]',
     pastelHover: 'group-hover:bg-[#D7CEC2]/50',
@@ -81,7 +80,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Structured Full-Grain Leather Briefcase',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/office_bag.jpg',
   },
   {
     id: 'corp-laptop-bag',
@@ -89,7 +88,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Espresso Leather Messenger Sleeve',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/LaptopBag.jpg',
   },
   {
     id: 'corp-luggage',
@@ -97,7 +96,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Impact-Resistant Ribbed Cabin Case',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/Luggage.jpg',
   },
   {
     id: 'corp-trolley-bag',
@@ -105,7 +104,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Executive Wheeled Carry-On Suitcase',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/TrolleyBag.jpg',
   },
   {
     id: 'corp-duffel-bag',
@@ -113,7 +112,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Textured Leather Weekender Duffel',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/Duffel Bag.jpg',
   },
   {
     id: 'corp-backpack',
@@ -121,7 +120,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Ergonomic Commute Tech Backpack',
     category: 'office-travel-bags',
     categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/cat_01_bags.png',
+    image: '/images/corporate/OfficeTravelBags/Backpack.jpg',
   },
 
   // ── 02 ELECTRONICS ──
@@ -131,7 +130,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Active Noise Cancelling Studio Audio',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/Headphones.jpg',
   },
   {
     id: 'corp-bluetooth-speaker',
@@ -139,7 +138,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Acoustic Fabric Executive Soundbar',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/Bluetooth Speaker.jpg',
   },
   {
     id: 'corp-power-bank',
@@ -147,7 +146,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Slim 10,000mAh Fast Charging Alloy',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/powerbank.jpg',
   },
   {
     id: 'corp-tws-earbuds',
@@ -155,7 +154,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Low-Latency Wireless In-Ear Acoustics',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/TWS Earbuds.jpg',
   },
   {
     id: 'corp-wireless-charger',
@@ -163,7 +162,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Circular Leatherette Fast Induction Pad',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/Wireless Charger.jpg',
   },
   {
     id: 'corp-desk-gadgets',
@@ -171,7 +170,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: '3-in-1 Phone, Watch & Earbud Dock',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
-    image: '/images/corporate/cat_02_electronics.png',
+    image: '/images/corporate/electronics/Desk Gadgets.jpg',
   },
 
   // ── 03 STATIONERY & DESK ACCESSORIES ──
@@ -181,7 +180,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Dual Rollerball & Fountain Brass Casing',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Premium Pen Set.jpg',
   },
   {
     id: 'corp-paper-weight',
@@ -189,7 +188,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Faceted Optic Crystal Sphere on Brass',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Paper Weight.jpg',
   },
   {
     id: 'corp-table-clock',
@@ -197,7 +196,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Heritage Architectural Desk Timepiece',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Table Clock.jpg',
   },
   {
     id: 'corp-diary-2026',
@@ -205,7 +204,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Midnight Bound Executive Journal',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Diary 2026.jpg',
   },
   {
     id: 'corp-desk-organizer',
@@ -213,7 +212,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Tiered Full-Grain Leather Utility Caddy',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Desk Organizer.jpg',
   },
   {
     id: 'corp-passport-holder',
@@ -221,7 +220,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Travel Passport & Boarding Wallet',
     category: 'stationery-desk',
     categoryLabel: 'Stationery & Desk',
-    image: '/images/corporate/cat_03_stationery.png',
+    image: '/images/corporate/stationary/Passport Holder.jpg',
   },
 
   // ── 04 APPAREL ──
@@ -231,7 +230,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Bio-Washed Organic Cotton Corporate Apparel',
     category: 'corporate-apparel',
     categoryLabel: 'Apparel',
-    image: '/images/corporate/cat_04_apparel.png',
+    image: '/images/corporate/customtees/custom.jpg',
   },
 
   // ── 05 RECOGNITION ──
@@ -241,7 +240,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     subtitle: 'Custom Commemorative Recognition Award',
     category: 'awards-recognition',
     categoryLabel: 'Recognition',
-    image: '/images/corporate/cat_05_recognition.png',
+    image: '/images/corporate/customtees/awards.jpg',
   },
 ];
 
@@ -301,23 +300,8 @@ export default function CorporateArchitecturalCatalogue() {
   };
 
   return (
-    <section className="pt-2 sm:pt-8 md:pt-12 pb-6 sm:pb-10 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18]">
+    <section className="pt-2 sm:pt-4 pb-6 sm:pb-10 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18]">
       <div className="max-w-[1360px] mx-auto space-y-2.5 sm:space-y-6">
-        
-        {/* ─── SECTION HEADER (CLEAN & COMPACT) ─── */}
-        <ScrollReveal animation="fadeUp">
-          <div className="text-center max-w-4xl mx-auto px-2 py-2 sm:py-5 md:py-6 space-y-1.5 sm:space-y-2">
-            <h2
-              className="text-lg sm:text-3xl md:text-4xl lg:text-[44px] text-[#1A1A18] leading-tight tracking-tight font-light whitespace-normal md:whitespace-nowrap"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Curated Corporate Essentials
-            </h2>
-            <p className="hidden sm:block text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal whitespace-normal md:whitespace-nowrap">
-              Executive gifting systems designed around material, presentation and long-term utility.
-            </p>
-          </div>
-        </ScrollReveal>
 
         {/* ─── ASYMMETRIC FACETED POLYGON CATEGORIES (5 CORPORATE DIVISIONS) ─── */}
         <div className="pt-1 pb-4 sm:pb-6">
@@ -349,13 +333,13 @@ export default function CorporateArchitecturalCatalogue() {
                         clipPath: cat.clipPath,
                         WebkitClipPath: cat.clipPath,
                       }}
-                      className="w-full h-full bg-[#FAF8F5] overflow-hidden relative"
+                      className="w-full h-full bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center"
                     >
                       <img
                         src={cat.image}
                         alt={cat.label}
-                        className={`w-full h-full object-cover transition-transform duration-700 ${
-                          isSelected ? 'scale-115' : 'group-hover:scale-115'
+                        className={`w-full h-full object-cover transition-transform duration-500 ${
+                          isSelected ? 'scale-[0.92]' : 'scale-[0.84] group-hover:scale-[0.90]'
                         }`}
                       />
                       <div

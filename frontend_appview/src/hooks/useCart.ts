@@ -18,6 +18,10 @@ interface CartState {
   items: CartItem[];
   totalItems: number;
   totalAmount: number; // in paise
+  isDrawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
+  toggleDrawer: () => void;
   addItem: (item: Omit<CartItem, 'id'>) => Promise<void>;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -29,6 +33,11 @@ export const useCartStore = create<CartState>()(
   persist(
     (setStore, getStore) => ({
       items: [],
+      isDrawerOpen: false,
+      openDrawer: () => setStore({ isDrawerOpen: true }),
+      closeDrawer: () => setStore({ isDrawerOpen: false }),
+      toggleDrawer: () => setStore({ isDrawerOpen: !getStore().isDrawerOpen }),
+
       get totalItems() {
         return getStore().items.reduce((sum, item) => sum + item.quantity, 0);
       },
@@ -49,7 +58,8 @@ export const useCartStore = create<CartState>()(
           updatedItems = [...currentItems, { ...newItemData, id: compositeId }];
         }
 
-        setStore({ items: updatedItems });
+        // Update items and automatically slide open the right sidebar drawer
+        setStore({ items: updatedItems, isDrawerOpen: true });
 
         // Queue action for offline replay if offline, else call API directly
         if (!navigator.onLine) {
@@ -113,6 +123,7 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'gourmet_cart_storage',
+      partialize: (state) => ({ items: state.items }), // don't persist drawer open state across reload
     }
   )
 );

@@ -24,7 +24,7 @@ export default function CuratedInquirySection() {
     phone: '',
     city: '',
     occasion: 'Festive / Corporate Gifting',
-    quantity: '50 - 200 units',
+    quantity: '50 units',
     targetDate: '',
     message: '',
   });
@@ -297,21 +297,42 @@ export default function CuratedInquirySection() {
                     />
                   </div>
 
-                  {/* Estimated Units */}
-                  <div className="space-y-1">
+                  {/* Estimated Units Counter */}
+                  <div className="space-y-1.5">
                     <label className="text-[9.5px] sm:text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
                       Estimated Units
                     </label>
-                    <select
-                      value={formData.quantity}
-                      onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                      className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-1.5 sm:py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none transition-colors cursor-pointer"
-                    >
-                      <option>25 - 50 units</option>
-                      <option>50 - 200 units</option>
-                      <option>200 - 500 units</option>
-                      <option>500+ units (Institutional Scale)</option>
-                    </select>
+                    <div className="flex items-center gap-2 pt-0.5">
+                      <div className="inline-flex items-center bg-[#FAF8F5] border border-[#DDD8CE] rounded-lg p-0.5 shadow-2xs">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const current = parseInt(formData.quantity) || 50;
+                            const next = Math.max(10, current - 25);
+                            setFormData({ ...formData, quantity: `${next} units` });
+                          }}
+                          className="w-7 h-7 rounded-md flex items-center justify-center text-[#1A1A18] hover:bg-[#BFA267] hover:text-white transition-colors cursor-pointer active:scale-90"
+                          title="Decrease units"
+                        >
+                          <Minus className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="min-w-[70px] text-center text-xs font-semibold text-[#1A1A18] select-none px-2">
+                          {formData.quantity || '50 units'}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const current = parseInt(formData.quantity) || 50;
+                            const next = current + 25;
+                            setFormData({ ...formData, quantity: `${next} units` });
+                          }}
+                          className="w-7 h-7 rounded-md bg-[#1A1A18] text-white flex items-center justify-center hover:bg-[#BFA267] transition-colors cursor-pointer active:scale-90"
+                          title="Increase units"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Delivery Location */}
@@ -343,13 +364,15 @@ export default function CuratedInquirySection() {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-3.5 sm:py-4 bg-[#1A1A18] hover:bg-[#38332B] text-white text-xs font-mono uppercase tracking-[0.16em] sm:tracking-[0.2em] transition-all shadow-none flex items-center justify-center gap-2 cursor-pointer active:scale-98 rounded-none"
-                >
-                  <Send className="w-3.5 h-3.5 text-[#DFC299]" />
-                  <span>SEND CURATION PROPOSAL</span>
-                </button>
+                <div className="pt-1">
+                  <button
+                    type="submit"
+                    className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#1A1A18] hover:bg-[#38332B] text-white text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] transition-all shadow-2xs hover:shadow-xs flex sm:inline-flex items-center justify-center gap-2 cursor-pointer active:scale-95 rounded-none"
+                  >
+                    <Send className="w-3 h-3 text-[#DFC299]" />
+                    <span>SEND CURATION PROPOSAL</span>
+                  </button>
+                </div>
 
               </form>
             )}

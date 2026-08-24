@@ -67,8 +67,9 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   }, [mobileMenuOpen]);
 
   const isGourmetStorefront = pathname.startsWith('/gourmet-gifts') || pathname.startsWith('/gourmet');
+  const isGourmetHeroPage = pathname === '/gourmet-gifts' || pathname === '/gourmet';
   const isHomepage = pathname === '/' || pathname === '/house-of-satra';
-  const isTransparentHero = (isHomepage || isGourmetStorefront) && !isScrolled && !mobileMenuOpen;
+  const isTransparentHero = (isHomepage || isGourmetHeroPage) && !isScrolled && !mobileMenuOpen;
 
   const currentNavLinks = isGourmetStorefront ? GOURMET_NAV_LINKS : SATRA_NAV_LINKS;
 

@@ -18,8 +18,12 @@ export default function HomePage() {
   const heroImageRef = useRef<HTMLImageElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
 
-  /* ─── Hero Animations ─── */
+  /* ─── Hero Animations & Scroll Reset ─── */
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 

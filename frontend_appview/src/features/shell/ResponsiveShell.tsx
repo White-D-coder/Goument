@@ -46,7 +46,19 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  useEffect(() => {
     setMobileMenuOpen(false);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   useEffect(() => {

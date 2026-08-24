@@ -11,6 +11,7 @@ import { EditorialCTA } from '@/components/editorial/EditorialCTA';
 import Scrapbook from '@/components/Scrapbook';
 import ImageTypography from '@/components/ImageTypography';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
+import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -132,8 +133,11 @@ export default function HomePage() {
         {/* ─── IMAGE-FILLED TYPOGRAPHY HERO ─── */}
         <ImageTypography />
 
-        {/* ─── ATELIER LUXURY E-COMMERCE SECTION ─── */}
+        {/* ─── ATELIER LUXURY E-COMMERCE SECTION (7 CATEGORIES) ─── */}
         <KeepsakeEcommerceSection />
+
+        {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
+        <CustomGiftBoxesSection />
 
         {/* ─── 5. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
         <Scrapbook />

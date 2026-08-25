@@ -9,7 +9,6 @@ import {
   Trash2, 
   Plus, 
   Minus,
-  Sparkles,
   ArrowRight,
 } from 'lucide-react';
 import { useCartStore } from '@/hooks/useCart';
@@ -35,6 +34,10 @@ export default function CuratedInquirySection() {
   const [submittedSnapshot, setSubmittedSnapshot] = useState<{
     name: string;
     email: string;
+    phone: string;
+    company?: string;
+    quantity: string;
+    boxName?: string;
     itemsList: string[];
   } | null>(null);
 
@@ -55,13 +58,13 @@ export default function CuratedInquirySection() {
 
   const handleQtyChange = (val: number) => {
     const safeVal = Math.max(1, isNaN(val) ? 1 : val);
-    setFormData({ ...formData, quantity: `${safeVal} sets` });
+    setFormData({ ...formData, quantity: `${safeVal} ${safeVal === 1 ? 'set' : 'sets'}` });
   };
 
   const handleStepQty = (delta: number) => {
     const current = parseInt(formData.quantity) || 1;
     const next = Math.max(1, current + delta);
-    setFormData({ ...formData, quantity: `${next} sets` });
+    setFormData({ ...formData, quantity: `${next} ${next === 1 ? 'set' : 'sets'}` });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,15 +74,28 @@ export default function CuratedInquirySection() {
       return;
     }
 
-    const attachedItemsSummary = cartItems.map(
-      (item) => `${item.name} (${item.quantity} units)`
+    const attachedItemsSummary = productItems.map(
+      (item) => `${item.name} (${item.quantity} ${item.quantity === 1 ? 'unit' : 'units'})`
     );
 
-    setSubmittedSnapshot({
+    const snapshot = {
       name: formData.name,
       email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      quantity: formData.quantity,
+      boxName: boxItems[0]?.name,
       itemsList: attachedItemsSummary,
-    });
+    };
+
+    setSubmittedSnapshot(snapshot);
+
+    // Save to localStorage for real client-side tracking
+    try {
+      const past = JSON.parse(localStorage.getItem('gourmet_inquiries') || '[]');
+      past.unshift({ ...snapshot, date: new Date().toISOString() });
+      localStorage.setItem('gourmet_inquiries', JSON.stringify(past));
+    } catch (e) {}
 
     setSubmitted(true);
 
@@ -145,8 +161,7 @@ export default function CuratedInquirySection() {
 
               {/* ── PART 1: OPTIONAL KEEPSAKE BOX SELECTION ── */}
               <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#9E7B35] block flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-[#9E7B35]" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#9E7B35] block">
                   1. Keepsake Box (Optional)
                 </span>
 
@@ -304,28 +319,59 @@ export default function CuratedInquirySection() {
                   </p>
                 </div>
 
-                {submittedSnapshot.itemsList.length > 0 && (
-                  <div className="bg-[#FAF8F5] p-3.5 border border-[#E0DDD6] max-w-md mx-auto text-left space-y-1">
-                    <span className="text-[9.5px] font-mono uppercase tracking-wider text-[#7A8B6F] block font-bold">
-                      Attached Samples:
-                    </span>
-                    <ul className="text-xs text-[#1A1A18] space-y-0.5 list-disc list-inside">
-                      {submittedSnapshot.itemsList.map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
+                {/* Summary Card */}
+                <div className="bg-[#FAF8F5] p-4 border border-[#E0DDD6] max-w-md mx-auto text-left space-y-2.5 rounded-xl shadow-2xs">
+                  <div className="flex items-center justify-between border-b border-[#E8E4DC] pb-2 text-xs">
+                    <span className="text-[#78746D]">Estimated Gift Sets:</span>
+                    <span className="font-bold text-[#1A1A18]">{submittedSnapshot.quantity}</span>
                   </div>
-                )}
+                  
+                  {submittedSnapshot.boxName && (
+                    <div className="flex items-center justify-between border-b border-[#E8E4DC] pb-2 text-xs">
+                      <span className="text-[#78746D]">Signature Vessel:</span>
+                      <span className="font-semibold text-[#9E7B35] truncate max-w-[200px]">
+                        {submittedSnapshot.boxName}
+                      </span>
+                    </div>
+                  )}
 
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    clearCart();
-                  }}
-                  className="px-5 py-2.5 rounded-none bg-[#1A1A18] hover:bg-[#451B27] text-white text-xs font-mono uppercase tracking-wider transition-all cursor-pointer"
-                >
-                  Start Another Curation
-                </button>
+                  {submittedSnapshot.itemsList.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#7A8B6F] block font-bold">
+                        Attached Delicacies &amp; Keepsakes ({submittedSnapshot.itemsList.length}):
+                      </span>
+                      <ul className="text-xs text-[#1A1A18] space-y-1 list-disc list-inside">
+                        {submittedSnapshot.itemsList.map((item, idx) => (
+                          <li key={idx} className="truncate">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2 max-w-md mx-auto">
+                  <a
+                    href={`https://api.whatsapp.com/send?phone=919876543210&text=${encodeURIComponent(
+                      `Hello The Gourmet Gifts! I would like to enquire about bespoke curation:\n\n• Name: ${submittedSnapshot.name}\n• Phone: ${submittedSnapshot.phone}\n• Email: ${submittedSnapshot.email}\n• Estimated Sets: ${submittedSnapshot.quantity}\n• Box: ${submittedSnapshot.boxName || 'Standard Packaging'}\n• Items: ${submittedSnapshot.itemsList.join(', ')}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-5 py-2.5 bg-[#3D5244] hover:bg-[#2F4034] text-white text-xs font-mono uppercase tracking-wider transition-all flex items-center justify-center gap-2 rounded-xl shadow-xs"
+                  >
+                    <span>Send Copy on WhatsApp</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#DFC299]" />
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      clearCart();
+                    }}
+                    className="w-full sm:w-auto px-5 py-2.5 border border-[#DDD5C7] hover:bg-[#EAE5DC] text-[#1A1A18] text-xs font-mono uppercase tracking-wider transition-all cursor-pointer rounded-xl"
+                  >
+                    Start Another Curation
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
@@ -410,7 +456,7 @@ export default function CuratedInquirySection() {
                       <div className="inline-flex items-center bg-[#FAF8F5] border border-[#DDD8CE] rounded-lg p-0.5 shadow-2xs">
                         <button
                           type="button"
-                          onClick={() => handleStepQty(-25)}
+                          onClick={() => handleStepQty(-1)}
                           className="w-7 h-7 rounded-md flex items-center justify-center text-[#1A1A18] hover:bg-[#BFA267] hover:text-white transition-colors cursor-pointer active:scale-90"
                           title="Decrease gift sets"
                         >
@@ -428,13 +474,13 @@ export default function CuratedInquirySection() {
                             className="w-12 text-center text-xs sm:text-sm font-semibold text-[#1A1A18] bg-transparent border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           />
                           <span className="text-[11px] font-medium text-[#78746D] select-none pr-1">
-                            sets
+                            {parsedQtyNumber === 1 ? 'set' : 'sets'}
                           </span>
                         </div>
 
                         <button
                           type="button"
-                          onClick={() => handleStepQty(25)}
+                          onClick={() => handleStepQty(1)}
                           className="w-7 h-7 rounded-md bg-[#1A1A18] text-white flex items-center justify-center hover:bg-[#BFA267] transition-colors cursor-pointer active:scale-90"
                           title="Increase gift sets"
                         >

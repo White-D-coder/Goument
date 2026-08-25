@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Package, Plus, ArrowRight, Sparkles } from 'lucide-react';
+import { X, Package, Plus, ArrowRight } from 'lucide-react';
 import { useCartStore, isBoxItemKey, BOX_CAPACITIES } from '@/hooks/useCart';
 import { usePathname, useRouter } from 'next/navigation';
 

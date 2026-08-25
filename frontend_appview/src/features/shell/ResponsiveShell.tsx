@@ -20,7 +20,7 @@ import { Toaster } from 'react-hot-toast';
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
   { label: 'Catalogue', href: '/gourmet-gifts#catalogue' },
-  { label: 'Boxes', href: '/gourmet-gifts#boxes' },
+  { label: 'Curated Packages', href: '/gourmet-gifts#boxes' },
   { label: 'Corporate', href: '/corporate' },
   { label: 'Enquire', href: '/gourmet-gifts#curation-inquiry' },
 ];

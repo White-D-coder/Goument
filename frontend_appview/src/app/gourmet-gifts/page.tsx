@@ -76,9 +76,7 @@ export default function HomePage() {
         {/* Hero Content positioned inside the sticky hero — Perfectly Vertically & Horizontally Centered */}
         <div className="relative z-10 px-5 sm:px-8 lg:px-12 max-w-[1280px] mx-auto w-full flex flex-col items-center justify-center text-center">
           <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-center text-center mx-auto">
-            <span className="type-meta text-[#B5AFA6] block opacity-0 text-[10px] sm:text-[11.5px] tracking-[0.28em] uppercase font-medium">
-              Curated Gifting • Haute Curiosités
-            </span>
+            
             <h1
               className="text-white leading-[1.02] sm:leading-[0.95] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light"
               style={{
@@ -86,11 +84,8 @@ export default function HomePage() {
                 fontWeight: 300,
               }}
             >
-              Gifts that mean something.
+              Thoughtful Gifts. Beautifully Curated.
             </h1>
-            <p className="text-white/80 max-w-sm sm:max-w-lg text-xs sm:text-sm md:text-base opacity-0 font-light leading-relaxed mx-auto">
-              Crafted for moments of lasting remembrance.
-            </p>
             <div className="opacity-0 pt-2 sm:pt-4">
               <a
                 href="#catalogue"
@@ -124,19 +119,19 @@ export default function HomePage() {
         {/* ─── IMAGE-FILLED TYPOGRAPHY HERO ─── */}
         <ImageTypography />
 
-        {/* ─── WHY CHOOSE THE GOURMET GIFTS (BEFORE CURATED GIFTING) ─── */}
-        <WhyChooseSection />
-
         {/* ─── ATELIER LUXURY E-COMMERCE SECTION (7 CATEGORIES) ─── */}
         <KeepsakeEcommerceSection />
 
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
         <CustomGiftBoxesSection />
 
-        {/* ─── 5. BESPOKE CURATION & QUOTATION INQUIRY FORM (ABOVE SCRAPBOOK) ─── */}
+        {/* ─── 5. BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
         <CuratedInquirySection />
 
-        {/* ─── 6. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
+        {/* ─── 6. WHY CHOOSE THE GOURMET GIFTS (BELOW ENQUIRY) ─── */}
+        <WhyChooseSection />
+
+        {/* ─── 7. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
         <Scrapbook />
 
         {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (WITH USER BACKGROUND IMAGE) ─── */}

@@ -7,9 +7,9 @@ import { ScrollReveal } from '@/components/motion/ScrollReveal';
 export const WhyChooseSection: React.FC = () => {
   return (
     <section className="pt-4 sm:pt-8 md:pt-10 pb-6 sm:pb-10 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
-      <div className="max-w-[1360px] mx-auto space-y-2 sm:space-y-3">
+      <div className="max-w-[1360px] mx-auto">
 
-        {/* ─── 3-COLUMN ASYMMETRIC FLUSH MOSAIC (NO ICONS, NO NUMBER BADGES, TIGHT GAP) ─── */}
+        {/* ─── 3-COLUMN ASYMMETRIC FLUSH MOSAIC ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-1 sm:gap-1.5 items-stretch">
           
           {/* ══ COLUMN 1: LEFT (2 STACKED CARDS) (3.5 COLS) ══ */}
@@ -131,97 +131,6 @@ export const WhyChooseSection: React.FC = () => {
           </div>
 
         </div>
-
-        {/* ─── 4. ORDERING GUIDELINES & MOQ BANNER (SLEEK, REFINED, SUBTLE DELICATE SEPARATORS) ─── */}
-        <ScrollReveal animation="fadeUp" delay={0.22}>
-          <div className="bg-[#F8F5EE] text-[#1A1A18] p-5 sm:p-7 md:p-8 rounded-none border border-[#E2DDD3] space-y-4">
-            
-            {/* Top Row: Gifting For (Subtle, sleek, non-intrusive) */}
-            <div className="border-b border-[#E2DDD3] pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#9E7B35]">
-                Gifting For
-              </span>
-              <p className="text-xs text-[#6B665E] font-normal tracking-wide flex items-center flex-wrap gap-x-2 gap-y-1">
-                <span>Clients</span>
-                <span className="text-[#C5A880]/60 font-light">•</span>
-                <span>Employees</span>
-                <span className="text-[#C5A880]/60 font-light">•</span>
-                <span>Festive Celebrations</span>
-                <span className="text-[#C5A880]/60 font-light">•</span>
-                <span>Events</span>
-              </p>
-            </div>
-
-            {/* Ordering Guidelines */}
-            <div className="space-y-2">
-              <span className="text-[9.5px] sm:text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8B6F] font-bold block">
-                ORDERING GUIDELINES
-              </span>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-0.5">
-                
-                {/* MOQ 10 */}
-                <div className="md:border-r border-[#E2DDD3] md:pr-4 space-y-0.5">
-                  <span 
-                    className="text-2xl sm:text-[26px] font-light text-[#9E7B35]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    MOQ 10
-                  </span>
-                  <h4 
-                    className="text-xs sm:text-sm font-semibold text-[#1A1A18]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    Ready-to-gift orders
-                  </h4>
-                  <p className="text-[11px] text-[#78746D] leading-relaxed">
-                    Without custom branding or personalization.
-                  </p>
-                </div>
-
-                {/* MOQ 50 */}
-                <div className="md:border-r border-[#E2DDD3] md:pr-4 space-y-0.5">
-                  <span 
-                    className="text-2xl sm:text-[26px] font-light text-[#9E7B35]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    MOQ 50
-                  </span>
-                  <h4 
-                    className="text-xs sm:text-sm font-semibold text-[#1A1A18]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    Printed stationery
-                  </h4>
-                  <p className="text-[11px] text-[#78746D] leading-relaxed">
-                    Custom printing for stationery items &amp; cards.
-                  </p>
-                </div>
-
-                {/* MOQ 100 */}
-                <div className="space-y-0.5">
-                  <span 
-                    className="text-2xl sm:text-[26px] font-light text-[#9E7B35]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    MOQ 100
-                  </span>
-                  <h4 
-                    className="text-xs sm:text-sm font-semibold text-[#1A1A18]"
-                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                  >
-                    Branding &amp; personalisation
-                  </h4>
-                  <p className="text-[11px] text-[#78746D] leading-relaxed">
-                    Including custom / personalised keepsake boxes.
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </ScrollReveal>
 
       </div>
     </section>

@@ -15,6 +15,7 @@ export default function KeepsakeEcommerceSection() {
   const addItem = useCartStore((state) => state.addItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
+  const openDrawer = useCartStore((state) => state.openDrawer);
 
   const filteredHampers = HAMPERS_CATALOG.filter(
     (item) => item.category === selectedCategory

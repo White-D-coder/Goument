@@ -58,8 +58,12 @@ export const useCartStore = create<CartState>()(
           updatedItems = [...currentItems, { ...newItemData, id: compositeId }];
         }
 
-        // Update items and automatically slide open the right sidebar drawer
-        setStore({ items: updatedItems, isDrawerOpen: true });
+        // Auto-open sliding door ONLY on the very first item added
+        const isFirstItem = currentItems.length === 0;
+        setStore({ 
+          items: updatedItems, 
+          isDrawerOpen: isFirstItem ? true : getStore().isDrawerOpen 
+        });
 
         // Queue action for offline replay if offline, else call API directly
         if (!navigator.onLine) {

@@ -8,8 +8,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { TextReveal } from '@/components/motion/TextReveal';
 import { EditorialCTA } from '@/components/editorial/EditorialCTA';
+import Image from 'next/image';
 import Scrapbook from '@/components/Scrapbook';
 import ImageTypography from '@/components/ImageTypography';
+import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
@@ -57,7 +59,7 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════
           SECTION 1 — STATIC HERO BACKGROUND (Sticky / Fixed)
           ═══════════════════════════════════════════════ */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-center items-center">
+      <div id="hero" className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-center items-center">
         {/* Full-bleed static background image */}
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -91,7 +93,7 @@ export default function HomePage() {
             </p>
             <div className="opacity-0 pt-2 sm:pt-4">
               <a
-                href="#content-sheet"
+                href="#catalogue"
                 className="editorial-link type-meta text-white/90 hover:text-white inline-flex items-center justify-center gap-2 transition-colors cursor-pointer text-[10px] sm:text-[11.5px]"
               >
                 <span>Discover The Curation</span>
@@ -103,24 +105,12 @@ export default function HomePage() {
       </div>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 2 & BEYOND — THE OVERLAPPING WHITE / IVORY SHEET
-          Slides smoothly UP and covers the static background image on scroll
+          SECTION 2 & REST — SCROLLS OVER THE HERO
           ═══════════════════════════════════════════════ */}
-      <div
-        id="content-sheet"
-        className="relative z-20 bg-[#F6F4EF] text-[#1A1A18] rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-25px_60px_rgba(0,0,0,0.35)] border-t border-[#E0DDD6]"
-      >
-        
-        {/* ─── PULL BAR / ACCENT INDICATOR ─── */}
-        <div className="pt-6 pb-2 flex justify-center">
-          <div className="w-12 h-1 bg-[#E0DDD6] rounded-full" />
-        </div>
+      <div className="relative z-10 bg-[#FAF8F5] shadow-[0_-20px_60px_rgba(0,0,0,0.5)]">
 
-        {/* ─── 1. BRAND MANIFESTO STATEMENT ─── */}
-        <section className="py-12 sm:py-16 md:py-20 px-5 sm:px-8 max-w-[960px] mx-auto text-center">
-          <span className="type-meta text-[#8A8680] block mb-3 text-[10px] tracking-[0.28em] uppercase">
-            Philosophy of Permanence
-          </span>
+        {/* ─── EDITORIAL STATEMENT STRIP ─── */}
+        <section className="py-12 sm:py-16 md:py-20 px-6 sm:px-10 text-center border-b border-[#EAE5DC]">
           <TextReveal
             as="h2"
             className="type-serif-body text-[#1A1A18] max-w-[760px] mx-auto leading-relaxed"
@@ -134,23 +124,42 @@ export default function HomePage() {
         {/* ─── IMAGE-FILLED TYPOGRAPHY HERO ─── */}
         <ImageTypography />
 
+        {/* ─── WHY CHOOSE THE GOURMET GIFTS (BEFORE CURATED GIFTING) ─── */}
+        <WhyChooseSection />
+
         {/* ─── ATELIER LUXURY E-COMMERCE SECTION (7 CATEGORIES) ─── */}
         <KeepsakeEcommerceSection />
 
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
         <CustomGiftBoxesSection />
 
-        {/* ─── 5. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
-        <Scrapbook />
-
-        {/* ─── 6. BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
+        {/* ─── 5. BESPOKE CURATION & QUOTATION INQUIRY FORM (ABOVE SCRAPBOOK) ─── */}
         <CuratedInquirySection />
 
-        {/* ─── 6. PRIVATE CONCIERGE & BESPOKE GIFTING (Clean Seamless Flow) ─── */}
-        <section className="pt-4 sm:pt-6 pb-12 sm:pb-16 md:pb-20 px-5 sm:px-8 lg:px-12 text-center bg-[#FAF8F5]">
-          <div className="max-w-[720px] mx-auto space-y-5">
+        {/* ─── 6. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
+        <Scrapbook />
+
+        {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (WITH USER BACKGROUND IMAGE) ─── */}
+        <section className="py-16 sm:py-20 md:py-28 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden text-[#1A1A18]">
+          
+          {/* High-Resolution Background Image */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <Image
+              src="/images/small_anipics/pexels-beyzaa-yurtkuran-279977530-18689658.jpg"
+              alt="Private Concierge Artisanal Geometry"
+              fill
+              priority
+              unoptimized
+              sizes="100vw"
+              className="w-full h-full object-cover object-center filter brightness-[1.02]"
+            />
+            {/* Soft Warm Limestone Veil for High Contrast Legibility */}
+            <div className="absolute inset-0 bg-white/65 backdrop-blur-[2px]" />
+          </div>
+
+          <div className="max-w-[720px] mx-auto space-y-5 relative z-10">
             <ScrollReveal animation="fadeUp">
-              <span className="type-meta text-[#7A8B6F] text-[9.5px] sm:text-[10.5px] tracking-[0.3em] uppercase font-bold block mb-2">
+              <span className="type-meta text-[#7A8B6F] text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-bold block mb-2">
                 Private Concierge
               </span>
               <h2
@@ -159,7 +168,7 @@ export default function HomePage() {
               >
                 For those who give at scale.
               </h2>
-              <p className="font-serif italic text-sm sm:text-base text-[#78746D] max-w-md mx-auto">
+              <p className="font-serif italic text-sm sm:text-base text-[#5A564F] max-w-md mx-auto">
                 Bespoke corporate curations, custom crest monograms, and institutional gifting.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">

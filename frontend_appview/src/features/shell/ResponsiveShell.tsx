@@ -10,6 +10,9 @@ import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
 import { Footer } from './Footer';
 import { SearchModal } from '@/features/search/SearchModal';
+import { CurationDrawer } from '@/features/cart/CurationDrawer';
+import { CartIcon } from '@/features/shell/CartIcon';
+import { useCartStore } from '@/hooks/useCart';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
 
@@ -31,6 +34,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const isOnline = useOnlineStatus(() => {
     setShowReconnectedToast(true);
   });
+  const openDrawer = useCartStore((state) => state.openDrawer);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -83,6 +87,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       <OfflineBanner isOnline={isOnline} />
       <OnlineToast shouldTrigger={showReconnectedToast} onHandled={() => setShowReconnectedToast(false)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <CurationDrawer />
 
       {/* ═══════════════════════════════════════════════════
           NAVIGATION BAR — The Gourmet Gifts
@@ -116,13 +121,14 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                     }
                   }
                 }}
-                className={`type-nav transition-colors duration-200 ${
-                  isTransparentHero
-                    ? 'text-white/75 hover:text-white'
-                    : 'text-[var(--satra-warm-gray)] hover:text-[var(--satra-charcoal)]'
-                } ${pathname === link.href
-                    ? (isTransparentHero ? '!text-white font-semibold' : '!text-[var(--satra-charcoal)] font-semibold')
-                    : ''
+                className={`type-meta transition-all duration-200 cursor-pointer ${
+                  pathname === link.href
+                    ? isTransparentHero
+                      ? 'text-white font-medium border-b border-white'
+                      : 'text-[var(--satra-charcoal)] font-semibold border-b border-[var(--satra-charcoal)]'
+                    : isTransparentHero
+                      ? 'text-white/80 hover:text-white'
+                      : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
                 }`}
               >
                 {link.label}
@@ -130,37 +136,24 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             ))}
           </div>
 
-          {/* ─── Center: Active Brand Identity (Logo on Top -> Text Name on Scroll) ─── */}
-          <div className="flex-1 flex justify-start lg:justify-center">
+          {/* ─── Center: Brand Identity / Monogram ─── */}
+          <div className="flex-shrink-0 flex items-center justify-center">
             <Link
               href="/gourmet-gifts"
               onClick={scrollToHeroOrTop}
-              className="relative flex items-center justify-start lg:justify-center group"
+              className="flex items-center gap-2 sm:gap-3 group py-1 cursor-pointer"
+              aria-label="The Gourmet Gifts Home"
             >
-              {/* Mobile View: ONLY the Logo */}
-              <div className="relative lg:hidden w-10 h-7 flex items-center justify-start">
-                <Image
-                  src="/images/brand/logo-vector.pdf.png"
-                  alt="The Gourmet Gifts"
-                  fill
-                  className={`object-contain transition-all duration-300 ${
-                    isTransparentHero ? 'brightness-0 invert' : ''
-                  }`}
-                  priority
-                />
-              </div>
-
-              {/* Desktop View: Logo at Top -> Transitions to Text Name on Scroll */}
-              <div className="hidden lg:flex items-center justify-center relative min-h-[38px] min-w-[210px]">
+              <div className="relative flex items-center h-9 sm:h-10">
                 <AnimatePresence mode="wait">
                   {!isScrolled ? (
                     <motion.div
-                      key="nav-brand-logo"
-                      initial={{ opacity: 0, scale: 0.9, y: -4 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, y: -4 }}
+                      key="nav-monogram-img"
+                      initial={{ opacity: 0, scale: 0.94 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.94 }}
                       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className="relative w-14 h-9 flex items-center justify-center"
+                      className="relative w-9 h-9 sm:w-10 sm:h-10"
                     >
                       <Image
                         src="/images/brand/logo-vector.pdf.png"
@@ -192,7 +185,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             </Link>
           </div>
 
-          {/* ─── Right: Utilities + Mobile Menu (Search, Account, Menu) ─── */}
+          {/* ─── Right: Utilities + Mobile Menu (Curation Tray, Search, Account, Menu) ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
             {/* Search */}
             <button
@@ -203,6 +196,18 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               aria-label="Search catalogue"
             >
               <Search className="w-[18px] h-[18px]" strokeWidth={1.5} />
+            </button>
+
+            {/* Curation Tray / Cart Drawer Trigger */}
+            <button
+              onClick={() => openDrawer()}
+              className={`relative flex items-center justify-center transition-colors duration-200 cursor-pointer ${
+                isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
+              }`}
+              aria-label="View Curation Tray"
+              title="View Curation Tray"
+            >
+              <CartIcon className="w-[19px] h-[19px]" />
             </button>
 
             {/* Account */}

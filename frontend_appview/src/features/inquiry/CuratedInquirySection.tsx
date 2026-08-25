@@ -9,6 +9,8 @@ import {
   Trash2, 
   Plus, 
   Minus,
+  Sparkles,
+  ArrowRight,
 } from 'lucide-react';
 import { useCartStore } from '@/hooks/useCart';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -24,7 +26,7 @@ export default function CuratedInquirySection() {
     phone: '',
     city: '',
     occasion: 'Festive / Corporate Gifting',
-    quantity: '50 units',
+    quantity: '50 sets',
     targetDate: '',
     message: '',
   });
@@ -35,6 +37,32 @@ export default function CuratedInquirySection() {
     email: string;
     itemsList: string[];
   } | null>(null);
+
+  // Split into 2 parts: (1) Keepsake Box, (2) Products & Delicacies
+  const isBoxItem = (name: string, productId: string) => {
+    return (
+      name.startsWith('Signature Box:') ||
+      productId.startsWith('box_') ||
+      productId.startsWith('box-') ||
+      productId.startsWith('custom-box')
+    );
+  };
+
+  const boxItems = cartItems.filter((i) => isBoxItem(i.name, i.productId));
+  const productItems = cartItems.filter((i) => !isBoxItem(i.name, i.productId));
+
+  const parsedQtyNumber = parseInt(formData.quantity) || 50;
+
+  const handleQtyChange = (val: number) => {
+    const safeVal = Math.max(1, isNaN(val) ? 1 : val);
+    setFormData({ ...formData, quantity: `${safeVal} sets` });
+  };
+
+  const handleStepQty = (delta: number) => {
+    const current = parseInt(formData.quantity) || 50;
+    const next = Math.max(1, current + delta);
+    setFormData({ ...formData, quantity: `${next} sets` });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +87,12 @@ export default function CuratedInquirySection() {
       style: { background: '#1A1A18', color: '#FAF8F5', border: '1px solid #BFA267' },
       duration: 3500,
     });
+  };
+
+  const scrollToBoxes = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('boxes');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -88,90 +122,160 @@ export default function CuratedInquirySection() {
           </ScrollReveal>
         </div>
 
-        {/* ─── MAIN CONTAINER (RESPONSIVE CORNERS & COMPACT MOBILE SPACING) ─── */}
+        {/* ─── MAIN CONTAINER (RESPONSIVE CORNERS & COMPACT SPACING) ─── */}
         <div className="relative rounded-2xl sm:rounded-tl-[40px] sm:rounded-br-[40px] sm:rounded-tr-none sm:rounded-bl-none border border-[#D9D5CC] shadow-none overflow-hidden grid grid-cols-1 lg:grid-cols-12 bg-white/95 backdrop-blur-md">
 
-          {/* ── LEFT COLUMN: ATTACHED SAMPLES (5 Cols - Compact on Mobile) ── */}
-          <div className="lg:col-span-5 bg-[#FAF8F5]/90 p-4 sm:p-7 md:p-9 flex flex-col justify-between space-y-4 sm:space-y-6">
+          {/* ── LEFT COLUMN: 2-PART ATTACHED SAMPLES (Top: Box Selection, Bottom: Products) ── */}
+          <div className="lg:col-span-5 bg-[#FAF8F5]/90 p-4 sm:p-6 md:p-8 flex flex-col justify-between space-y-5">
             
-            <div className="space-y-3 sm:space-y-4">
-              <div className="flex items-center justify-between pb-0.5">
+            <div className="space-y-5">
+              
+              {/* Header */}
+              <div className="flex items-center justify-between pb-1 border-b border-[#E8E4DC]">
                 <h3
-                  className="text-lg sm:text-2xl font-light text-[#1A1A18]"
+                  className="text-lg sm:text-xl font-light text-[#1A1A18]"
                   style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                 >
-                  Attached Samples
+                  Attached Curation
                 </h3>
-                <span className="text-[11px] sm:text-xs font-semibold text-[#7A8B6F] bg-[#EBF3E8] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-[#7A8B6F]/20">
+                <span className="text-[11px] font-semibold text-[#7A8B6F] bg-[#EBF3E8] px-2.5 py-0.5 rounded-full border border-[#7A8B6F]/20">
                   {cartItems.reduce((acc, i) => acc + i.quantity, 0)} Items
                 </span>
               </div>
 
-              {/* Items List */}
-              {cartItems.length > 0 ? (
-                <div className="space-y-2.5 max-h-[220px] sm:max-h-[340px] overflow-y-auto pr-1">
-                  {cartItems.map((item) => (
-                    <div
-                      key={item.id}
-                      className="bg-white rounded-none border-b border-[#E0DDD6] p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-none"
-                    >
-                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                        {item.image && (
-                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-none overflow-hidden bg-[#FAF6F0] relative shrink-0 border border-[#EADBCA]">
-                            <Image src={item.image} alt={item.name} fill className="object-cover" />
+              {/* ── PART 1: OPTIONAL KEEPSAKE BOX SELECTION ── */}
+              <div className="space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#9E7B35] block flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-[#9E7B35]" />
+                  1. Keepsake Box (Optional)
+                </span>
+
+                {boxItems.length > 0 ? (
+                  <div className="space-y-2">
+                    {boxItems.map((box) => (
+                      <div
+                        key={box.id}
+                        className="bg-white rounded-xl border border-[#C5A880]/50 p-2.5 sm:p-3 flex items-center justify-between gap-3 shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          {box.image && (
+                            <div className="w-11 h-11 rounded-lg overflow-hidden bg-[#FAF6F0] relative shrink-0 border border-[#EADBCA]">
+                              <Image src={box.image} alt={box.name} fill className="object-cover" />
+                            </div>
+                          )}
+                          <div className="text-left min-w-0">
+                            <h4 className="text-xs sm:text-sm font-semibold text-[#1A1A18] truncate">
+                              {box.name}
+                            </h4>
+                            <span className="text-[9.5px] text-[#9E7B35] font-semibold block">
+                              Signature Vessel Selected
+                            </span>
                           </div>
-                        )}
-                        <div className="text-left space-y-0.5 min-w-0">
-                          <h4 className="text-xs sm:text-sm font-semibold text-[#1A1A18] truncate">
-                            {item.name}
-                          </h4>
-                          <span className="text-[9.5px] sm:text-[10px] text-[#7A8B6F] font-semibold block">
-                            Qty: {item.quantity} sample{item.quantity > 1 ? 's' : ''}
-                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <button
+                            onClick={() => removeItem(box.id)}
+                            className="w-6 h-6 rounded flex items-center justify-center text-[#9E9A92] hover:text-[#9A2C2C] transition-colors cursor-pointer"
+                            title="Remove box"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <button
-                          onClick={() => {
-                            if (item.quantity <= 1) {
-                              removeItem(item.id);
-                            } else {
-                              updateQuantity(item.id, item.quantity - 1);
-                            }
-                          }}
-                          className="w-6 h-6 rounded bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#1A1A18] hover:bg-[#BFA267] hover:text-white transition-colors"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="text-xs font-bold text-[#1A1A18] min-w-[16px] text-center">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-6 h-6 rounded bg-[#1A1A18] text-white flex items-center justify-center hover:bg-[#451B27] transition-colors"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="w-6 h-6 ml-0.5 flex items-center justify-center text-[#8A8680] hover:text-[#7A1C29] transition-colors"
-                          title="Remove sample"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </button>
-                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-white/70 border border-dashed border-[#DDD8CE] rounded-xl p-3 flex items-center justify-between gap-2 text-left">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <Package className="w-4 h-4 text-[#9E7B35] shrink-0 opacity-80" />
+                      <p className="text-[11px] text-[#78746D] leading-tight truncate">
+                        No box selected (Standard packaging)
+                      </p>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="bg-white/60 sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-6 text-center flex sm:flex-col items-center justify-center gap-2">
-                  <Package className="w-4 h-4 sm:w-6 sm:h-6 text-[#BFA267] shrink-0 opacity-70" />
-                  <p className="text-[11px] sm:text-xs text-[#78746D]">
-                    No samples attached yet.
-                  </p>
-                </div>
-              )}
+                    <a
+                      href="#boxes"
+                      onClick={scrollToBoxes}
+                      className="shrink-0 text-[10.5px] font-semibold text-[#9E7B35] hover:text-[#1A1A18] inline-flex items-center gap-1 transition-colors cursor-pointer"
+                    >
+                      <span>Select Box</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {/* ── PART 2: SELECTED DELICACIES & PRODUCTS ── */}
+              <div className="space-y-2 pt-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A8B6F] block">
+                  2. Selected Delicacies &amp; Keepsakes
+                </span>
+
+                {productItems.length > 0 ? (
+                  <div className="space-y-2 max-h-[190px] sm:max-h-[220px] overflow-y-auto pr-1">
+                    {productItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="bg-white rounded-xl border border-[#E0DDD6] p-2.5 flex items-center justify-between gap-2.5 shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          {item.image && (
+                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-[#FAF6F0] relative shrink-0 border border-[#EADBCA]">
+                              <Image src={item.image} alt={item.name} fill className="object-cover" />
+                            </div>
+                          )}
+                          <div className="text-left min-w-0">
+                            <h4 className="text-xs font-semibold text-[#1A1A18] truncate">
+                              {item.name}
+                            </h4>
+                            <span className="text-[9.5px] text-[#7A8B6F] font-semibold block">
+                              Qty: {item.quantity} sample{item.quantity > 1 ? 's' : ''}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            onClick={() => {
+                              if (item.quantity <= 1) {
+                                removeItem(item.id);
+                              } else {
+                                updateQuantity(item.id, item.quantity - 1);
+                              }
+                            }}
+                            className="w-5.5 h-5.5 rounded bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#1A1A18] hover:bg-[#BFA267] hover:text-white transition-colors cursor-pointer"
+                          >
+                            <Minus className="w-2.5 h-2.5" />
+                          </button>
+                          <span className="text-xs font-bold text-[#1A1A18] min-w-[16px] text-center select-none">
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="w-5.5 h-5.5 rounded bg-[#1A1A18] text-white flex items-center justify-center hover:bg-[#451B27] transition-colors cursor-pointer"
+                          >
+                            <Plus className="w-2.5 h-2.5" />
+                          </button>
+                          <button
+                            onClick={() => removeItem(item.id)}
+                            className="w-5.5 h-5.5 ml-0.5 flex items-center justify-center text-[#9E9A92] hover:text-[#9A2C2C] transition-colors cursor-pointer"
+                            title="Remove sample"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-white/60 rounded-xl p-3 text-center flex items-center justify-center gap-2">
+                    <p className="text-[11px] text-[#78746D]">
+                      No individual delicacies attached yet.
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
 
           </div>
@@ -297,42 +401,51 @@ export default function CuratedInquirySection() {
                     />
                   </div>
 
-                  {/* Estimated Units Counter */}
-                  <div className="space-y-1.5">
+                  {/* ESTIMATED GIFT SETS (WITH DIRECT TYPING & STEPPER) */}
+                  <div className="space-y-1">
                     <label className="text-[9.5px] sm:text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
-                      Estimated Units
+                      Estimated Gift Sets
                     </label>
                     <div className="flex items-center gap-2 pt-0.5">
                       <div className="inline-flex items-center bg-[#FAF8F5] border border-[#DDD8CE] rounded-lg p-0.5 shadow-2xs">
                         <button
                           type="button"
-                          onClick={() => {
-                            const current = parseInt(formData.quantity) || 50;
-                            const next = Math.max(10, current - 25);
-                            setFormData({ ...formData, quantity: `${next} units` });
-                          }}
+                          onClick={() => handleStepQty(-25)}
                           className="w-7 h-7 rounded-md flex items-center justify-center text-[#1A1A18] hover:bg-[#BFA267] hover:text-white transition-colors cursor-pointer active:scale-90"
-                          title="Decrease units"
+                          title="Decrease gift sets"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="min-w-[70px] text-center text-xs font-semibold text-[#1A1A18] select-none px-2">
-                          {formData.quantity || '50 units'}
-                        </span>
+                        
+                        {/* Direct Editable Number Input */}
+                        <div className="flex items-center px-1">
+                          <input
+                            type="number"
+                            min="1"
+                            max="50000"
+                            value={parsedQtyNumber}
+                            onChange={(e) => handleQtyChange(parseInt(e.target.value))}
+                            className="w-12 text-center text-xs sm:text-sm font-semibold text-[#1A1A18] bg-transparent border-0 focus:outline-none p-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          />
+                          <span className="text-[11px] font-medium text-[#78746D] select-none pr-1">
+                            sets
+                          </span>
+                        </div>
+
                         <button
                           type="button"
-                          onClick={() => {
-                            const current = parseInt(formData.quantity) || 50;
-                            const next = current + 25;
-                            setFormData({ ...formData, quantity: `${next} units` });
-                          }}
+                          onClick={() => handleStepQty(25)}
                           className="w-7 h-7 rounded-md bg-[#1A1A18] text-white flex items-center justify-center hover:bg-[#BFA267] transition-colors cursor-pointer active:scale-90"
-                          title="Increase units"
+                          title="Increase gift sets"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
+                    {/* Helper Subtext */}
+                    <span className="text-[9.5px] sm:text-[10px] text-[#78746D] block font-light leading-tight pt-0.5">
+                      How many complete gift sets would you like to create?
+                    </span>
                   </div>
 
                   {/* Delivery Location */}
@@ -364,6 +477,7 @@ export default function CuratedInquirySection() {
                   />
                 </div>
 
+                {/* Compact Left-Aligned Submit Button */}
                 <div className="pt-1">
                   <button
                     type="submit"

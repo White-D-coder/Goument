@@ -16,11 +16,11 @@ export default function ImageTypography() {
 
       {/* Left 50% Container: Right-aligned stencil cut-out typography */}
       <div className="image-type-left-container">
-        <div className="image-type-title" aria-label="THE ART OF GIVING">
+        <div className="image-type-title" aria-label="THE ART OF GIFTING">
           <span>THE</span>
           <span>ART</span>
           <span>OF</span>
-          <span>GIVING</span>
+          <span>GIFTING</span>
         </div>
       </div>
 
@@ -29,11 +29,11 @@ export default function ImageTypography() {
         <span className="copy-line" />
         <span className="copy-label">The Gourmet Gifts</span>
         <p>
-          Objects of permanence,
+          Premium gifting solutions for clients,
           <br />
-          crafted for moments
+          teams and special occasions.
           <br />
-          of lasting remembrance.
+          Curated hampers, branded merchandise and bespoke presentation.
         </p>
       </div>
 

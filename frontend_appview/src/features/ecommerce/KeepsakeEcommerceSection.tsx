@@ -163,6 +163,23 @@ export default function KeepsakeEcommerceSection() {
           </div>
         </div>
 
+        {/* ─── ACTIVE CATEGORY SUBTITLE & INTRO (ONLY IF PROVIDED BY USER) ─── */}
+        {activeCategoryMeta?.subtitle && (
+          <div className="text-center max-w-2xl mx-auto space-y-1 pb-1 sm:pb-2">
+            <h3
+              className="text-lg sm:text-2xl font-light text-[#1A1A18] tracking-tight"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              {activeCategoryMeta.subtitle}
+            </h3>
+            {activeCategoryMeta.intro && (
+              <p className="text-xs sm:text-sm text-[#78746D] leading-relaxed font-light">
+                {activeCategoryMeta.intro}
+              </p>
+            )}
+          </div>
+        )}
+
         {/* ─── MOBILE SWIPE HINT / COUNT (MOBILE ONLY) ─── */}
         <div className="flex sm:hidden items-center justify-between text-[11px] text-[#8A8680] font-medium px-1 pt-1">
           <span>{filteredHampers.length} Curated Items</span>
@@ -186,31 +203,20 @@ export default function KeepsakeEcommerceSection() {
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  
-                  {/* Subtle Floating Contents Pill */}
-                  <div className="absolute bottom-2.5 left-2.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[9.5px] text-white flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Package className="w-3 h-3 text-[#EADBCA]" />
-                    <span>{item.inside_items.length} Delicacies Inside</span>
-                  </div>
                 </div>
 
                 {/* Body Content */}
                 <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between space-y-3 sm:space-y-4">
                   <div className="space-y-1.5">
-                    <span className="text-[9px] font-bold text-[#7A8B6F] uppercase tracking-wider block font-sans">
-                      {item.categoryLabel}
-                    </span>
                     <h3 
-                      className="text-[17px] sm:text-[19px] font-semibold text-[#1A1A18] leading-snug line-clamp-2 group-hover:text-[#7A1C29] transition-colors tracking-tight font-sans"
-                      style={{ fontFamily: 'var(--font-jakarta), system-ui, -apple-system, sans-serif' }}
+                      className="text-[17px] sm:text-[19px] font-semibold text-[#1A1A18] leading-snug line-clamp-1 group-hover:text-[#7A1C29] transition-colors tracking-tight font-sans"
                     >
                       {item.name}
                     </h3>
                     <p 
-                      className="text-xs sm:text-[13px] text-[#7A7268] font-normal line-clamp-1 font-sans"
-                      style={{ fontFamily: 'var(--font-jakarta), system-ui, -apple-system, sans-serif' }}
+                      className="text-xs sm:text-[13px] text-[#7A7268] font-normal line-clamp-2 font-sans leading-relaxed"
                     >
-                      {item.packaging_style || 'Bespoke Keepsake'}
+                      {item.subCopy}
                     </p>
                   </div>
 

@@ -93,9 +93,9 @@ export default function KeepsakeEcommerceSection() {
           </div>
         </ScrollReveal>
 
-        {/* ─── ASYMMETRIC FACETED POLYGON CATEGORIES (OFFICIAL CATALOGUE TAXONOMY) (+10px bottom padding) ─── */}
+        {/* ─── ASYMMETRIC FACETED POLYGON CATEGORIES (OFFICIAL CATALOGUE TAXONOMY) ─── */}
         <div className="pt-1 pb-4 sm:pb-6">
-          <div className="flex items-center justify-start sm:justify-center gap-3.5 sm:gap-6 md:gap-8 lg:gap-10 overflow-x-auto no-scrollbar py-1.5 sm:py-3 px-1 sm:px-2">
+          <div className="flex items-center justify-start gap-4 sm:gap-6 md:gap-8 lg:gap-9 overflow-x-auto no-scrollbar py-1.5 sm:py-3 px-3 sm:px-6">
             {CATALOGUE_CATEGORIES.map((cat) => {
               const isSelected = selectedCategory === cat.id;
 

@@ -60,13 +60,13 @@ export default function HomePage() {
           SECTION 1 — STATIC HERO BACKGROUND (Sticky / Fixed)
           ═══════════════════════════════════════════════ */}
       <div id="hero" className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-center items-center">
-        {/* Full-bleed unzoomed image */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+        {/* Full-bleed cover background image (No blank margins) */}
+        <div className="absolute inset-0 overflow-hidden">
           <img
             ref={heroImageRef}
-            src="/images/hero/hero_luxury_bg.jpg"
+            src="/images/hero/hero_main.jpg"
             alt="The Gourmet Gifts — Luxury Gifting"
-            className="w-full h-full object-contain filter brightness-[0.88]"
+            className="w-full h-full object-cover object-center filter brightness-[0.88]"
           />
         </div>
 

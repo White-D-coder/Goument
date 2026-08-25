@@ -22,7 +22,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-image: url('/images/hero/hero_luxury_bg.jpg');
+  background-image: url('/images/brand/img1.jpg');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -92,7 +92,7 @@
   display: block;
   width: max-content;
   color: transparent;
-  background-image: url('/images/hero/hero_luxury_bg.jpg');
+  background-image: url('/images/brand/img1.jpg');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Trash2, ArrowRight, Package, ShoppingBag } from 'lucide-react';
-import { useCartStore } from '@/hooks/useCart';
+import { useCartStore, isBoxItemKey, BOX_CAPACITIES } from '@/hooks/useCart';
 import { usePathname, useRouter } from 'next/navigation';
 
 export const CurationDrawer: React.FC = () => {
@@ -20,6 +20,16 @@ export const CurationDrawer: React.FC = () => {
 
   const pathname = usePathname();
   const router = useRouter();
+
+  const selectedBoxes = cartItems.filter((i) => isBoxItemKey(i.name, i.productId));
+  const totalBoxCapacity = selectedBoxes.reduce((acc, box) => {
+    const cap = BOX_CAPACITIES[box.productId] || 4;
+    return acc + cap * box.quantity;
+  }, 0);
+
+  const totalDelicacies = cartItems
+    .filter((i) => !isBoxItemKey(i.name, i.productId))
+    .reduce((acc, i) => acc + i.quantity, 0);
 
   // Close drawer on Escape key
   useEffect(() => {
@@ -130,6 +140,23 @@ export const CurationDrawer: React.FC = () => {
 
               {/* ── 2. SCROLLABLE SAMPLES LIST ── */}
               <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3">
+                {/* Box Capacity Status Banner */}
+                {totalBoxCapacity > 0 && (
+                  <div className="bg-[#FAF3E6] border border-[#EADBCA] rounded-xl p-3 flex items-center justify-between text-xs shadow-2xs">
+                    <div className="flex items-center gap-2 text-[#9E7B35] font-medium">
+                      <Package className="w-4 h-4 shrink-0" />
+                      <span>Box Capacity:</span>
+                    </div>
+                    <span className={`font-bold px-2 py-0.5 rounded-md ${
+                      totalDelicacies >= totalBoxCapacity 
+                        ? 'bg-[#9A2C2C]/10 text-[#9A2C2C]' 
+                        : 'bg-[#EBF3E8] text-[#7A8B6F]'
+                    }`}>
+                      {totalDelicacies} / {totalBoxCapacity} Items {totalDelicacies >= totalBoxCapacity ? '• Full' : ''}
+                    </span>
+                  </div>
+                )}
+
                 {cartItems.length > 0 ? (
                   <>
                     <div className="space-y-3">

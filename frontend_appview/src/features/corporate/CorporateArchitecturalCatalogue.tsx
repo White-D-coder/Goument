@@ -266,9 +266,15 @@ export default function CorporateArchitecturalCatalogue() {
 
     const existing = getItemCartEntry(item.id);
     if (existing) {
-      updateQuantity(existing.id, existing.quantity + 1);
+      const ok = updateQuantity(existing.id, existing.quantity + 1);
+      if (ok) {
+        toast.success(`Updated ${item.name} in Curation Tray`, {
+          style: { background: '#242321', color: '#FAF8F5', border: '1px solid #BFA267' },
+          duration: 1500,
+        });
+      }
     } else {
-      await addItem({
+      const ok = await addItem({
         productId: item.id,
         giftBoxingType: item.category,
         quantity: 1,
@@ -276,12 +282,13 @@ export default function CorporateArchitecturalCatalogue() {
         price: 0,
         image: item.image,
       });
+      if (ok) {
+        toast.success(`Added ${item.name} to Curation Tray`, {
+          style: { background: '#242321', color: '#FAF8F5', border: '1px solid #BFA267' },
+          duration: 1500,
+        });
+      }
     }
-
-    toast.success(`Added ${item.name} to Curation Tray`, {
-      style: { background: '#242321', color: '#FAF8F5', border: '1px solid #BFA267' },
-      duration: 1500,
-    });
   };
 
   const handleDecrement = (item: CorporateProduct, e: React.MouseEvent) => {

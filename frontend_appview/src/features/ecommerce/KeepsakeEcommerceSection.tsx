@@ -33,9 +33,15 @@ export default function KeepsakeEcommerceSection() {
 
     const existing = getItemCartEntry(item._id);
     if (existing) {
-      updateQuantity(existing.id, existing.quantity + 1);
+      const ok = updateQuantity(existing.id, existing.quantity + 1);
+      if (ok) {
+        toast.success(`Updated ${item.name} in Curation Tray`, {
+          style: { background: '#2C1820', color: '#FAF8F5', border: '1px solid #BFA267' },
+          duration: 1500,
+        });
+      }
     } else {
-      await addItem({
+      const ok = await addItem({
         productId: item._id,
         giftBoxingType: item.category,
         quantity: 1,
@@ -43,12 +49,13 @@ export default function KeepsakeEcommerceSection() {
         price: 0,
         image: item.image,
       });
+      if (ok) {
+        toast.success(`Added ${item.name} to Curation Tray`, {
+          style: { background: '#2C1820', color: '#FAF8F5', border: '1px solid #BFA267' },
+          duration: 1500,
+        });
+      }
     }
-
-    toast.success(`Added ${item.name} to Curation Tray`, {
-      style: { background: '#2C1820', color: '#FAF8F5', border: '1px solid #BFA267' },
-      duration: 1500,
-    });
   };
 
   const handleDecrement = (item: HamperData, e: React.MouseEvent) => {

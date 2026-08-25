@@ -26,7 +26,7 @@ export default function CuratedInquirySection() {
     phone: '',
     city: '',
     occasion: 'Festive / Corporate Gifting',
-    quantity: '50 sets',
+    quantity: '1 set',
     targetDate: '',
     message: '',
   });
@@ -51,7 +51,7 @@ export default function CuratedInquirySection() {
   const boxItems = cartItems.filter((i) => isBoxItem(i.name, i.productId));
   const productItems = cartItems.filter((i) => !isBoxItem(i.name, i.productId));
 
-  const parsedQtyNumber = parseInt(formData.quantity) || 50;
+  const parsedQtyNumber = parseInt(formData.quantity) || 1;
 
   const handleQtyChange = (val: number) => {
     const safeVal = Math.max(1, isNaN(val) ? 1 : val);
@@ -59,7 +59,7 @@ export default function CuratedInquirySection() {
   };
 
   const handleStepQty = (delta: number) => {
-    const current = parseInt(formData.quantity) || 50;
+    const current = parseInt(formData.quantity) || 1;
     const next = Math.max(1, current + delta);
     setFormData({ ...formData, quantity: `${next} sets` });
   };

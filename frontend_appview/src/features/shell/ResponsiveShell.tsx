@@ -11,6 +11,7 @@ import { OnlineToast } from './OnlineToast';
 import { Footer } from './Footer';
 import { SearchModal } from '@/features/search/SearchModal';
 import { CurationDrawer } from '@/features/cart/CurationDrawer';
+import { BoxCapacityModal } from '@/features/ecommerce/BoxCapacityModal';
 import { CartIcon } from '@/features/shell/CartIcon';
 import { useCartStore } from '@/hooks/useCart';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
@@ -88,6 +89,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       <OnlineToast shouldTrigger={showReconnectedToast} onHandled={() => setShowReconnectedToast(false)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <CurationDrawer />
+      <BoxCapacityModal />
 
       {/* ═══════════════════════════════════════════════════
           NAVIGATION BAR — The Gourmet Gifts
@@ -121,13 +123,13 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                     }
                   }
                 }}
-                className={`type-meta transition-all duration-200 cursor-pointer ${
+                className={`text-[11.5px] uppercase tracking-[0.16em] font-medium transition-all duration-200 cursor-pointer ${
                   pathname === link.href
                     ? isTransparentHero
-                      ? 'text-white font-medium border-b border-white'
+                      ? 'text-white font-semibold border-b border-white'
                       : 'text-[var(--satra-charcoal)] font-semibold border-b border-[var(--satra-charcoal)]'
                     : isTransparentHero
-                      ? 'text-white/80 hover:text-white'
+                      ? 'text-white/85 hover:text-white'
                       : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
                 }`}
               >

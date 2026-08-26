@@ -10,7 +10,8 @@ export interface CorporateCategory {
   code: string;
   label: string;
   image: string;
-  clipPath: string;
+  clipPath?: string;
+  borderRadius: string;
   pastelActive: string;
   pastelHover: string;
 }
@@ -30,7 +31,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     code: '01',
     label: 'Office & Travel Bags',
     image: '/images/corporate/category_icons/travelss.jpg',
-    clipPath: 'polygon(50% 0%, 100% 25%, 85% 100%, 15% 100%, 0% 25%)',
+    borderRadius: '56% 44% 58% 42% / 46% 59% 41% 54%',
     pastelActive: 'bg-[#D6C2A9]',
     pastelHover: 'group-hover:bg-[#D6C2A9]/50',
   },
@@ -39,7 +40,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     code: '02',
     label: 'Electronics',
     image: '/images/corporate/category_icons/Electronics.jpg',
-    clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+    borderRadius: '46% 54% 38% 62% / 62% 44% 56% 38%',
     pastelActive: 'bg-[#C7C3B7]',
     pastelHover: 'group-hover:bg-[#C7C3B7]/50',
   },
@@ -48,7 +49,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     code: '03',
     label: 'Stationery & Desk',
     image: '/images/corporate/category_icons/Stationery & Desk Accessories.jpg',
-    clipPath: 'polygon(50% 0%, 95% 35%, 80% 100%, 20% 100%, 5% 35%)',
+    borderRadius: '58% 42% 64% 36% / 40% 58% 42% 60%',
     pastelActive: 'bg-[#D2C8B8]',
     pastelHover: 'group-hover:bg-[#D2C8B8]/50',
   },
@@ -57,7 +58,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     code: '04',
     label: 'Apparel',
     image: '/images/corporate/category_icons/Apparel.jpg',
-    clipPath: 'polygon(30% 0%, 70% 0%, 100% 40%, 85% 100%, 15% 100%, 0% 40%)',
+    borderRadius: '38% 62% 48% 52% / 52% 38% 62% 48%',
     pastelActive: 'bg-[#C5CCC5]',
     pastelHover: 'group-hover:bg-[#C5CCC5]/50',
   },
@@ -66,7 +67,7 @@ export const CORPORATE_CATEGORIES: CorporateCategory[] = [
     code: '05',
     label: 'Recognition',
     image: '/images/corporate/category_icons/Recognition.jpg',
-    clipPath: 'polygon(50% 0%, 100% 30%, 80% 100%, 20% 100%, 0% 30%)',
+    borderRadius: '52% 48% 60% 40% / 44% 60% 40% 56%',
     pastelActive: 'bg-[#D7CEC2]',
     pastelHover: 'group-hover:bg-[#D7CEC2]/50',
   },
@@ -322,16 +323,20 @@ export default function CorporateArchitecturalCatalogue() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-none transition-all duration-300"
                 >
-                  {/* Outer Soft Rounded Squircle Frame */}
+                  {/* Outer Organic Pebble Frame */}
                   <div
-                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-[24px] sm:rounded-[30px] md:rounded-[34px] p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
+                    style={{ borderRadius: cat.borderRadius }}
+                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
                       isSelected
-                        ? `${cat.pastelActive} scale-110 shadow-[0_12px_28px_rgba(0,0,0,0.1)] ring-2 ring-[#BFA267]/40`
+                        ? `${cat.pastelActive} scale-110 shadow-[0_12px_28px_rgba(0,0,0,0.12)] ring-2 ring-[#BFA267]/40`
                         : `bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-105`
                     }`}
                   >
-                    {/* Inner Soft Rounded Image Container */}
-                    <div className="w-full h-full rounded-[22px] sm:rounded-[27px] md:rounded-[31px] bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center">
+                    {/* Inner Organic Pebble Image Container */}
+                    <div 
+                      style={{ borderRadius: cat.borderRadius }}
+                      className="w-full h-full bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center"
+                    >
                       <img
                         src={cat.image}
                         alt={cat.label}

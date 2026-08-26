@@ -9,7 +9,6 @@ import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { TextReveal } from '@/components/motion/TextReveal';
 import { EditorialCTA } from '@/components/editorial/EditorialCTA';
 import Image from 'next/image';
-import Scrapbook from '@/components/Scrapbook';
 import ImageTypography from '@/components/ImageTypography';
 import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
@@ -130,9 +129,6 @@ export default function HomePage() {
 
         {/* ─── 6. WHY CHOOSE THE GOURMET GIFTS (BELOW ENQUIRY) ─── */}
         <WhyChooseSection />
-
-        {/* ─── 7. THE SCRAPBOOK (Moments, Polaroids, In-View Reveals) ─── */}
-        <Scrapbook />
 
         {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (WITH USER BACKGROUND IMAGE) ─── */}
         <section className="py-16 sm:py-20 md:py-28 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden text-[#1A1A18]">

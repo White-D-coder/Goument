@@ -105,16 +105,20 @@ export default function KeepsakeEcommerceSection() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-none transition-all duration-300"
                 >
-                  {/* Outer Soft Rounded Squircle Frame */}
+                  {/* Outer Organic Pebble Frame */}
                   <div
-                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-[24px] sm:rounded-[30px] md:rounded-[34px] p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
+                    style={{ borderRadius: cat.borderRadius }}
+                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
                       isSelected
-                        ? `${cat.pastelActive} scale-110 shadow-[0_12px_28px_rgba(0,0,0,0.1)] ring-2 ring-[#BFA267]/40`
+                        ? `${cat.pastelActive} scale-110 shadow-[0_12px_28px_rgba(0,0,0,0.12)] ring-2 ring-[#BFA267]/40`
                         : `bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-105`
                     }`}
                   >
-                    {/* Inner Soft Rounded Image Container */}
-                    <div className="w-full h-full rounded-[22px] sm:rounded-[27px] md:rounded-[31px] bg-[#FAF8F5] overflow-hidden relative">
+                    {/* Inner Organic Pebble Image Container */}
+                    <div 
+                      style={{ borderRadius: cat.borderRadius }}
+                      className="w-full h-full bg-[#FAF8F5] overflow-hidden relative"
+                    >
                       <img
                         src={cat.image}
                         alt={cat.label}
@@ -163,7 +167,7 @@ export default function KeepsakeEcommerceSection() {
               {activeCategoryMeta.subtitle}
             </h3>
             {activeCategoryMeta.intro && (
-              <p className="text-xs sm:text-sm text-[#78746D] leading-relaxed font-light">
+              <p className="hidden sm:block text-xs sm:text-sm text-[#78746D] leading-relaxed font-light">
                 {activeCategoryMeta.intro}
               </p>
             )}

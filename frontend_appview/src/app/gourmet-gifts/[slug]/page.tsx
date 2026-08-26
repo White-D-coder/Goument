@@ -135,15 +135,12 @@ export default function HamperDetailPage({ params }: { params: Promise<{ slug: s
               >
                 {hamper.name}
               </h1>
-              <p className="text-xs text-[#8A8680] pt-1">
-                Inclusive of signature presentation, personalized wax-sealed note card &amp; white-glove packaging.
-              </p>
+              {(hamper.subCopy || hamper.description) && (
+                <p className="text-sm sm:text-base text-[#5A564F] leading-relaxed font-light pt-1">
+                  {hamper.subCopy || hamper.description}
+                </p>
+              )}
             </div>
-
-            {/* Narrative Editorial Description */}
-            <p className="text-sm sm:text-base text-[#5A564F] leading-relaxed font-light border-y border-[#EADBCA] py-4">
-              {hamper.description}
-            </p>
 
             {/* ── CURATED CONTENTS & HIGHLIGHTS ── */}
             <div className="space-y-3.5">

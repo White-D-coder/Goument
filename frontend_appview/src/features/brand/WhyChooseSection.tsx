@@ -48,28 +48,30 @@ export const WhyChooseSection: React.FC = () => {
           </div>
 
           {/* ══ COLUMN 2: CENTER (TALL VERTICAL FEATURE PHOTO) (4 COLS) ══ */}
-          <div className="lg:col-span-4 min-h-[380px] sm:min-h-[475px] rounded-none overflow-hidden relative border border-[#E8E2D8]">
-            <Image
-              src="/images/brand/why_choose_feature.jpg"
-              alt="The Gourmet Gifts Curated Box"
-              fill
-              sizes="(max-width: 1024px) 100vw, 450px"
-              className="object-cover object-center transition-transform duration-700 hover:scale-105"
-            />
-            {/* Subtle Overlay & Caption (Centre Image Caption) */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/70 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-              <span className="text-[9.5px] uppercase tracking-[0.24em] font-bold text-[#DFC299] block">
-                CURATED WITH INTENT
-              </span>
-              <p 
-                className="text-lg sm:text-xl font-light text-white leading-snug drop-shadow-sm"
-                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-              >
-                More than a box of products. Every hamper is built around the recipient, the occasion and the story you want your gift to tell.
-              </p>
+          <ScrollReveal animation="fadeUp" delay={0.08} className="lg:col-span-4 h-full">
+            <div className="h-full min-h-[380px] sm:min-h-[475px] rounded-none overflow-hidden relative border border-[#E8E2D8]">
+              <Image
+                src="/images/brand/why_choose_feature.jpg"
+                alt="The Gourmet Gifts Curated Box"
+                fill
+                sizes="(max-width: 1024px) 100vw, 450px"
+                className="object-cover object-center transition-transform duration-700 hover:scale-105"
+              />
+              {/* Subtle Overlay & Caption (Centre Image Caption) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/70 via-transparent to-black/20" />
+              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
+                <span className="text-[9.5px] uppercase tracking-[0.24em] font-bold text-[#DFC299] block">
+                  CURATED WITH INTENT
+                </span>
+                <p 
+                  className="text-lg sm:text-xl font-light text-white leading-snug drop-shadow-sm"
+                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                >
+                  More than a box of products. Every hamper is built around the recipient, the occasion and the story you want your gift to tell.
+                </p>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* ══ COLUMN 3: RIGHT (TOP HEADING + 2 SIDE-BY-SIDE BOXES) (5 COLS) ══ */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-1 sm:gap-1.5">

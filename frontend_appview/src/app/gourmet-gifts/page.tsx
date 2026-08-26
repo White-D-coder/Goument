@@ -130,41 +130,29 @@ export default function HomePage() {
         {/* ─── 6. WHY CHOOSE THE GOURMET GIFTS (BELOW ENQUIRY) ─── */}
         <WhyChooseSection />
 
-        {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (WITH USER BACKGROUND IMAGE) ─── */}
-        <section className="py-16 sm:py-20 md:py-28 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden text-[#1A1A18]">
+        {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (#6B001A THEME) ─── */}
+        <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#6B001A] text-[#FAF8F5]">
           
-          {/* High-Resolution Background Image */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <Image
-              src="/images/small_anipics/pexels-beyzaa-yurtkuran-279977530-18689658.jpg"
-              alt="Private Concierge Artisanal Geometry"
-              fill
-              priority
-              unoptimized
-              sizes="100vw"
-              className="w-full h-full object-cover object-center filter brightness-[1.02]"
-            />
-            {/* Soft Warm Limestone Veil for High Contrast Legibility */}
-            <div className="absolute inset-0 bg-white/65 backdrop-blur-[2px]" />
-          </div>
+          {/* Rich #6B001A Radial Depth Aura */}
+          <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#850126] via-[#6B001A] to-[#45000F]" />
 
-          <div className="max-w-[720px] mx-auto space-y-5 relative z-10">
+          <div className="max-w-[760px] mx-auto space-y-5 relative z-10">
             <ScrollReveal animation="fadeUp">
-              <span className="type-meta text-[#7A8B6F] text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-bold block mb-2">
+              <span className="type-meta text-[#DFC299] text-[10.5px] sm:text-[11.5px] tracking-[0.32em] uppercase font-bold block mb-2.5">
                 Private Concierge
               </span>
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A18] tracking-[-0.02em] leading-[1.08]"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-[-0.02em] leading-[1.08]"
                 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
               >
                 For those who give at scale.
               </h2>
-              <p className="font-serif italic text-sm sm:text-base text-[#5A564F] max-w-md mx-auto">
+              <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#EDE6DC]/90 max-w-lg mx-auto leading-relaxed">
                 Bespoke corporate curations, custom crest monograms, and institutional gifting.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                <EditorialCTA label="Request Dossier" href="/corporate" />
-                <EditorialCTA label="Contact Concierge" href="/contact" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 pt-6">
+                <EditorialCTA label="Request Dossier" href="/corporate" dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
+                <EditorialCTA label="Contact Concierge" href="/contact" dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
               </div>
             </ScrollReveal>
           </div>

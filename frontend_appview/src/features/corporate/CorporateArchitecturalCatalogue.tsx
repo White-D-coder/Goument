@@ -92,14 +92,6 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
     image: '/images/corporate/OfficeTravelBags/LaptopBag.jpg',
   },
   {
-    id: 'corp-luggage',
-    name: 'Luggage',
-    subtitle: 'Impact-Resistant Ribbed Cabin Case',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
-    image: '/images/corporate/OfficeTravelBags/Luggage.jpg',
-  },
-  {
     id: 'corp-trolley-bag',
     name: 'Trolley Bag',
     subtitle: 'Executive Wheeled Carry-On Suitcase',
@@ -323,20 +315,16 @@ export default function CorporateArchitecturalCatalogue() {
                   onClick={() => setSelectedCategory(cat.id)}
                   className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-none transition-all duration-300"
                 >
-                  {/* Outer Organic Pebble Frame */}
+                  {/* Outer Rounded Squircle / Square Frame */}
                   <div
-                    style={{ borderRadius: cat.borderRadius }}
-                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
+                    className={`w-20 h-20 sm:w-26 sm:h-26 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-[24px] sm:rounded-[28px] md:rounded-[32px] p-[2.5px] sm:p-[3.5px] transition-all duration-500 ${
                       isSelected
                         ? `${cat.pastelActive} scale-110 shadow-[0_12px_28px_rgba(0,0,0,0.12)] ring-2 ring-[#BFA267]/40`
                         : `bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-105`
                     }`}
                   >
-                    {/* Inner Organic Pebble Image Container */}
-                    <div 
-                      style={{ borderRadius: cat.borderRadius }}
-                      className="w-full h-full bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center"
-                    >
+                    {/* Inner Rounded Squircle Image Container */}
+                    <div className="w-full h-full rounded-[21px] sm:rounded-[25px] md:rounded-[29px] bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center">
                       <img
                         src={cat.image}
                         alt={cat.label}

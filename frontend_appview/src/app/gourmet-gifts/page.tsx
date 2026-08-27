@@ -10,6 +10,7 @@ import { TextReveal } from '@/components/motion/TextReveal';
 import { EditorialCTA } from '@/components/editorial/EditorialCTA';
 import Image from 'next/image';
 import ImageTypography from '@/components/ImageTypography';
+import OccasionGiftingCarousel from '@/components/OccasionGiftingCarousel';
 import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
@@ -104,7 +105,7 @@ export default function HomePage() {
       <div className="relative z-10 bg-[#FAF8F5] shadow-[0_-20px_60px_rgba(0,0,0,0.5)]">
 
         {/* ─── EDITORIAL STATEMENT STRIP ─── */}
-        <section className="py-12 sm:py-16 md:py-20 px-6 sm:px-10 text-center border-b border-[#EAE5DC]">
+        <section className="py-6 sm:py-8 md:py-10 px-6 sm:px-10 text-center">
           <TextReveal
             as="h2"
             className="type-serif-body text-[#1A1A18] max-w-[760px] mx-auto leading-relaxed"
@@ -115,10 +116,13 @@ export default function HomePage() {
           </TextReveal>
         </section>
 
-        {/* ─── IMAGE-FILLED TYPOGRAPHY HERO ─── */}
-        <ImageTypography />
+        {/* ─── 8-CARD OCCASIONS CAROUSEL ─── */}
+        <OccasionGiftingCarousel />
 
-        {/* ─── ATELIER LUXURY E-COMMERCE SECTION (7 CATEGORIES) ─── */}
+        {/* ─── IMAGE-FILLED TYPOGRAPHY HERO (COMMENTED OUT AS REQUESTED) ─── */}
+        {/* <ImageTypography /> */}
+
+        {/* ─── ATELIER LUXURY E-COMMERCE SECTION ─── */}
         <KeepsakeEcommerceSection />
 
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}

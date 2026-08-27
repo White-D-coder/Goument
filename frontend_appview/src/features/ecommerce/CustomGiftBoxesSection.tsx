@@ -176,26 +176,24 @@ export default function CustomGiftBoxesSection() {
   };
 
   return (
-    <section id="boxes" className="pt-2 sm:pt-8 md:pt-12 pb-10 sm:pb-14 md:pb-16 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
-      <div className="max-w-[1360px] mx-auto space-y-5 sm:space-y-7">
+    <section id="boxes" className="pt-2 sm:pt-8 md:pt-12 pb-10 sm:pb-14 md:pb-16 px-2 sm:px-4 lg:px-6 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
+      <div className="max-w-[1580px] mx-auto space-y-5 sm:space-y-7">
 
-        {/* ─── SECTION HEADER (SINGLE LINE TITLE + RIGHT-ALIGNED NAVIGATION ARROWS) ─── */}
-        <div className="px-4 sm:px-6 lg:px-8 py-2 sm:py-5 md:py-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div className="space-y-1.5 text-center md:text-left">
-            <h2
-              className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight whitespace-normal md:whitespace-nowrap"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Designed to Delight, Made to Impress.
-            </h2>
+        {/* ─── SECTION HEADER (CENTERED TITLE + BALANCED SUBTITLE) ─── */}
+        <div className="px-4 sm:px-6 lg:px-8 py-2 sm:py-4 flex flex-col items-center text-center relative max-w-4xl mx-auto space-y-1.5 sm:space-y-2">
+          <h2
+            className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight whitespace-normal md:whitespace-nowrap"
+            style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+          >
+            Designed to Delight, Made to Impress.
+          </h2>
 
-            <p className="text-xs sm:text-sm text-[#78746D] font-light leading-relaxed max-w-xl whitespace-normal md:whitespace-nowrap">
-              Our signature collection of designer gift boxes crafted to elevate every gifting experience.
-            </p>
-          </div>
+          <p className="text-xs sm:text-sm text-[#78746D] font-light leading-relaxed max-w-xl mx-auto whitespace-normal md:whitespace-nowrap">
+            Our signature collection of designer gift boxes crafted to elevate every gifting experience.
+          </p>
 
-          {/* Right-Aligned Apple Style Nav Arrows */}
-          <div className="flex items-center gap-2.5 justify-center md:justify-end shrink-0 pb-1">
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-2.5 justify-center pt-2">
             <button
               onClick={() => scroll('left')}
               disabled={!canScrollLeft}

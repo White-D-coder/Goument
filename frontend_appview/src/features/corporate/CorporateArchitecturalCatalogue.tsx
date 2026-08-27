@@ -160,7 +160,7 @@ export const CORPORATE_PRODUCTS: CorporateProduct[] = [
   {
     id: 'corp-desk-gadgets',
     name: 'Desk Gadgets',
-    subtitle: '3-in-1 Phone, Watch & Earbud Dock',
+    subtitle: 'Executive 3-in-1 Magnetic Workspace Dock',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
     image: '/images/corporate/electronics/Desk Gadgets.jpg',

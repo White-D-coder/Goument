@@ -1028,17 +1028,17 @@ export const HAMPERS_CATALOG: HamperData[] = [
     _id: 'corp_desk_gadgets',
     slug: 'corporate-desk-gadgets',
     name: 'Desk Gadgets',
-    subCopy: '3-in-1 Phone, Watch & Earbud Dock for clutter-free workspaces.',
+    subCopy: 'Executive 3-in-1 Magnetic Charging Station & Workspace Dock.',
     category: 'electronics-audio',
     categoryLabel: 'Electronics',
     inside_items: [
-      { item: '3-in-1 Wireless Charging Desk Dock', weight: '1 Unit' },
+      { item: '3-in-1 Executive Magnetic Charging Station', weight: '1 Unit' },
     ],
-    packaging_style: '3-in-1 Phone, Watch & Earbud Dock',
-    description: '3-in-1 Phone, Watch & Earbud Dock designed for executive desks and nightstands.',
+    packaging_style: 'Executive 3-in-1 Workspace Charging Dock',
+    description: 'Executive 3-in-1 Workspace Charging Dock crafted with matte alloy and soft-touch pads for cable-free executive workspaces.',
     price: 0,
     image: '/images/corporate/electronics/Desk Gadgets.jpg',
-    highlights: ['Simultaneous 3-Device Charging', 'Mag-Safe Compatible', 'Cable Management Base'],
+    highlights: ['Multi-Device Mag Charging', 'Matte Alloy Finish', 'Smart Cable Management'],
   },
 
   /* ═══════════════════════════════════════════════

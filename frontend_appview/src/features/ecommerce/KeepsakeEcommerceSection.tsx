@@ -74,14 +74,14 @@ export default function KeepsakeEcommerceSection() {
   };
 
   return (
-    <section id="catalogue" className="pt-2 sm:pt-8 md:pt-12 pb-2 sm:pb-6 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
-      <div className="max-w-[1360px] mx-auto space-y-2.5 sm:space-y-6">
+    <section id="catalogue" className="pt-2 sm:pt-8 md:pt-12 pb-2 sm:pb-6 px-2 sm:px-4 lg:px-6 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
+      <div className="max-w-[1580px] mx-auto space-y-2.5 sm:space-y-6">
         
         {/* ─── SECTION HEADER (CLEAN & COMPACT WITH +10PX DESKTOP PADDING) ─── */}
         <ScrollReveal animation="fadeUp">
           <div className="text-center max-w-4xl mx-auto px-2 py-2 sm:py-5 md:py-6 space-y-1.5 sm:space-y-2">
             <h2
-              className="text-lg sm:text-3xl md:text-4xl lg:text-[44px] text-[#1A1A18] leading-tight tracking-tight font-light whitespace-normal md:whitespace-nowrap"
+              className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               <span className="sm:hidden">Curated Keepsakes</span>

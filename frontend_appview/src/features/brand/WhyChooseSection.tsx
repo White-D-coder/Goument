@@ -6,14 +6,14 @@ import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const WhyChooseSection: React.FC = () => {
   return (
-    <section className="pt-4 sm:pt-8 md:pt-10 pb-6 sm:pb-10 px-3 sm:px-6 lg:px-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
-      <div className="max-w-[1360px] mx-auto">
+    <section className="pt-4 sm:pt-8 md:pt-10 pb-6 sm:pb-10 px-2 sm:px-4 lg:px-6 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
+      <div className="max-w-[1580px] mx-auto">
 
         {/* ─── 3-COLUMN ASYMMETRIC FLUSH MOSAIC ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-1 sm:gap-1.5 items-stretch">
           
           {/* ══ COLUMN 1: LEFT (2 STACKED CARDS) (3.5 COLS) ══ */}
-          <div className="lg:col-span-3 flex flex-col gap-1 sm:gap-1.5 justify-between">
+          <div className="order-2 lg:order-1 lg:col-span-3 flex flex-col gap-1 sm:gap-1.5 justify-between">
             
             {/* Box 1: Deep Sage Green (Top Left — Green Block) */}
             <ScrollReveal animation="fadeUp" delay={0.05} className="h-full">
@@ -48,7 +48,7 @@ export const WhyChooseSection: React.FC = () => {
           </div>
 
           {/* ══ COLUMN 2: CENTER (TALL VERTICAL FEATURE PHOTO) (4 COLS) ══ */}
-          <ScrollReveal animation="fadeUp" delay={0.08} className="lg:col-span-4 h-full">
+          <ScrollReveal animation="fadeUp" delay={0.08} className="order-3 lg:order-2 lg:col-span-4 h-full">
             <div className="h-full min-h-[380px] sm:min-h-[475px] rounded-none overflow-hidden relative border border-[#E8E2D8]">
               <Image
                 src="/images/brand/why_choose_feature.jpg"
@@ -74,7 +74,7 @@ export const WhyChooseSection: React.FC = () => {
           </ScrollReveal>
 
           {/* ══ COLUMN 3: RIGHT (TOP HEADING + 2 SIDE-BY-SIDE BOXES) (5 COLS) ══ */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-1 sm:gap-1.5">
+          <div className="order-1 lg:order-3 lg:col-span-5 flex flex-col justify-between gap-1 sm:gap-1.5">
             
             {/* Top Heading Box (Top Right — Main Heading) */}
             <ScrollReveal animation="fadeUp" delay={0.12} className="h-full">

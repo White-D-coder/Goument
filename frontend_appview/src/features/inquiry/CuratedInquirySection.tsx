@@ -112,7 +112,7 @@ export default function CuratedInquirySection() {
   };
 
   return (
-    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-12 px-3 sm:px-6 lg:px-10 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
+    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-12 px-2 sm:px-4 lg:px-6 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
       
       {/* ── LUXURY SATRA WATERMARK BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden select-none">
@@ -124,7 +124,7 @@ export default function CuratedInquirySection() {
         </span>
       </div>
 
-      <div className="max-w-[1360px] mx-auto space-y-4 sm:space-y-8 relative z-10">
+      <div className="max-w-[1580px] mx-auto space-y-4 sm:space-y-8 relative z-10">
 
         {/* ─── SECTION HEADER (CLEAN & MINIMAL) ─── */}
         <div className="text-center max-w-2xl mx-auto py-1 sm:py-2 space-y-1">
@@ -530,7 +530,7 @@ export default function CuratedInquirySection() {
                     className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#1A1A18] hover:bg-[#38332B] text-white text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] transition-all shadow-2xs hover:shadow-xs flex sm:inline-flex items-center justify-center gap-2 cursor-pointer active:scale-95 rounded-none"
                   >
                     <Send className="w-3 h-3 text-[#DFC299]" />
-                    <span>SEND CURATION PROPOSAL</span>
+                    <span>SEND CURATION ENQUIRY</span>
                   </button>
                 </div>
 

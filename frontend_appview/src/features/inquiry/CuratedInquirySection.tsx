@@ -30,6 +30,7 @@ export default function CuratedInquirySection() {
     message: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedSnapshot, setSubmittedSnapshot] = useState<{
     name: string;
@@ -67,12 +68,14 @@ export default function CuratedInquirySection() {
     setFormData({ ...formData, quantity: `${next} ${next === 1 ? 'set' : 'sets'}` });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error('Please provide your name, email, and phone number.');
       return;
     }
+
+    setIsSubmitting(true);
 
     const attachedItemsSummary = productItems.map(
       (item) => `${item.name} (${item.quantity} ${item.quantity === 1 ? 'unit' : 'units'})`
@@ -90,19 +93,33 @@ export default function CuratedInquirySection() {
 
     setSubmittedSnapshot(snapshot);
 
-    // Save to localStorage for real client-side tracking
     try {
+      // 1. Send via Nodemailer API to hello@thegourmetgifts.co
+      await fetch('/api/send-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          boxItem: boxItems[0] ? { name: boxItems[0].name, image: boxItems[0].image } : null,
+          productItems: productItems.map((p) => ({ name: p.name, quantity: p.quantity })),
+          source: 'The Gourmet Gifts — Curation Inquiry Form',
+        }),
+      });
+
+      // 2. Save to localStorage for client-side tracking
       const past = JSON.parse(localStorage.getItem('gourmet_inquiries') || '[]');
       past.unshift({ ...snapshot, date: new Date().toISOString() });
       localStorage.setItem('gourmet_inquiries', JSON.stringify(past));
-    } catch (e) {}
-
-    setSubmitted(true);
-
-    toast.success('Your Curation Enquiry has been dispatched to our Concierge!', {
-      style: { background: '#1A1A18', color: '#FAF8F5', border: '1px solid #BFA267' },
-      duration: 3500,
-    });
+    } catch (err) {
+      console.error('Inquiry dispatch error:', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      toast.success('Your Curation Enquiry has been dispatched to hello@thegourmetgifts.co!', {
+        style: { background: '#1A1A18', color: '#FAF8F5', border: '1px solid #BFA267' },
+        duration: 4000,
+      });
+    }
   };
 
   const scrollToBoxes = (e: React.MouseEvent) => {
@@ -527,10 +544,13 @@ export default function CuratedInquirySection() {
                 <div className="pt-1">
                   <button
                     type="submit"
-                    className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#1A1A18] hover:bg-[#38332B] text-white text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] transition-all shadow-2xs hover:shadow-xs flex sm:inline-flex items-center justify-center gap-2 cursor-pointer active:scale-95 rounded-none"
+                    disabled={isSubmitting}
+                    className={`px-6 sm:px-8 py-2.5 sm:py-3 bg-[#1A1A18] hover:bg-[#38332B] text-white text-[11px] sm:text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.18em] transition-all shadow-2xs hover:shadow-xs flex sm:inline-flex items-center justify-center gap-2 rounded-none ${
+                      isSubmitting ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer active:scale-95'
+                    }`}
                   >
                     <Send className="w-3 h-3 text-[#DFC299]" />
-                    <span>SEND CURATION ENQUIRY</span>
+                    <span>{isSubmitting ? 'DISPATCHING TO CONCIERGE...' : 'SEND CURATION ENQUIRY'}</span>
                   </button>
                 </div>
 

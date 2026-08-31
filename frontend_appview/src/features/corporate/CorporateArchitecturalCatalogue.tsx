@@ -324,12 +324,12 @@ export default function CorporateArchitecturalCatalogue() {
                     }`}
                   >
                     {/* Inner Rounded Squircle Image Container */}
-                    <div className="w-full h-full rounded-[21px] sm:rounded-[25px] md:rounded-[29px] bg-[#FAF8F5] overflow-hidden relative flex items-center justify-center">
+                    <div className="w-full h-full rounded-[21px] sm:rounded-[25px] md:rounded-[29px] bg-[#FAF8F5] overflow-hidden relative">
                       <img
                         src={cat.image}
                         alt={cat.label}
                         className={`w-full h-full object-cover transition-transform duration-500 ${
-                          isSelected ? 'scale-[0.92]' : 'scale-[0.84] group-hover:scale-[0.90]'
+                          isSelected ? 'scale-110' : 'group-hover:scale-105'
                         }`}
                       />
                       <div

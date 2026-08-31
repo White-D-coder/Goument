@@ -16,58 +16,58 @@ export interface OccasionCard {
 
 export const OCCASION_CARDS: OccasionCard[] = [
   {
-    id: 'client-gifting',
-    title: 'CLIENT GIFTING',
-    subtitle: 'Stay remembered after the meeting.',
+    id: 'employee-gifting',
+    title: 'EMPLOYEE GIFTING',
+    subtitle: 'Make people feel valued.',
     image: '/images/boxes/box_1.png',
-    href: '/corporate#curation-inquiry',
+    href: '/employee-gifting',
   },
   {
-    id: 'employee-appreciation',
-    title: 'EMPLOYEE APPRECIATION',
-    subtitle: 'Reward loyalty & inspire top performers.',
+    id: 'onboarding-kits',
+    title: 'ONBOARDING KITS',
+    subtitle: 'Make Day One feel like Day One.',
     image: '/images/boxes/box_2.png',
     href: '/corporate#curation-inquiry',
   },
   {
-    id: 'leadership-executive',
-    title: 'EXECUTIVE & LEADERSHIP',
-    subtitle: 'Refined luxury crafted for decision makers.',
+    id: 'client-gifting',
+    title: 'CLIENT GIFTING',
+    subtitle: 'Stay remembered after the meeting.',
     image: '/images/boxes/box_3.png',
     href: '/corporate#curation-inquiry',
   },
   {
-    id: 'festive-celebrations',
-    title: 'FESTIVE CELEBRATIONS',
-    subtitle: 'Elevate Diwali, New Year & festive moments.',
+    id: 'festive-gifting',
+    title: 'FESTIVE GIFTING',
+    subtitle: 'Celebrate without sending the predictable.',
     image: '/images/boxes/box_4.png',
     href: '/gourmet-gifts#curation-inquiry',
   },
   {
-    id: 'onboarding-welcome',
-    title: 'ONBOARDING & WELCOME',
-    subtitle: 'Make day one truly unforgettable.',
+    id: 'events-conferences',
+    title: 'EVENTS & CONFERENCES',
+    subtitle: 'Give them something worth taking home.',
     image: '/images/boxes/box_5.png',
     href: '/corporate#curation-inquiry',
   },
   {
-    id: 'milestones-anniversaries',
-    title: 'MILESTONES & AWARDS',
-    subtitle: 'Commemorate anniversaries & company growth.',
+    id: 'milestones-recognition',
+    title: 'MILESTONES & RECOGNITION',
+    subtitle: 'Mark the moment properly.',
     image: '/images/boxes/box_6.png',
+    href: '/milestones-recognition',
+  },
+  {
+    id: 'cx-gifting',
+    title: 'CX GIFTING',
+    subtitle: 'Create lasting customer delight at every touchpoint.',
+    image: '/images/boxes/box_7.png',
     href: '/corporate#curation-inquiry',
   },
   {
-    id: 'weddings-bespoke',
-    title: 'WEDDINGS & BESPOKE',
-    subtitle: 'Heirloom keepsakes for sacred celebrations.',
-    image: '/images/boxes/box_7.png',
-    href: '/gourmet-gifts#curation-inquiry',
-  },
-  {
-    id: 'vip-conferences',
-    title: 'VIP & CONFERENCES',
-    subtitle: 'Distinguished delegate hampers for summits.',
+    id: 'dealer-partner-gifting',
+    title: 'DEALER & PARTNER GIFTING',
+    subtitle: 'For relationships that drive the business.',
     image: '/images/boxes/box_8.png',
     href: '/corporate#curation-inquiry',
   },
@@ -135,15 +135,12 @@ export default function OccasionGiftingCarousel() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/55 group-hover:via-black/25 transition-colors duration-500" />
               </div>
 
-              {/* Top Text Content (White on Full Image with Larger Heading) */}
-              <div className="relative z-10 space-y-2 text-left">
-                <h3
-                  className="text-xl sm:text-2xl md:text-[25px] font-bold text-white uppercase tracking-tight leading-tight drop-shadow-md group-hover:text-[#DFC299] transition-colors"
-                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                >
+              {/* Top Text Content (Bold Sans-Serif Font as requested) */}
+              <div className="relative z-10 space-y-1.5 text-left">
+                <h3 className="font-sans text-lg sm:text-xl md:text-[22px] font-bold text-white uppercase tracking-tight leading-tight drop-shadow-md group-hover:text-[#DFC299] transition-colors">
                   {card.title}
                 </h3>
-                <p className="text-xs sm:text-[13.5px] text-white/90 font-light leading-relaxed drop-shadow-sm max-w-[240px]">
+                <p className="font-sans text-xs sm:text-[13px] text-white/90 font-normal leading-relaxed drop-shadow-sm max-w-[240px]">
                   {card.subtitle}
                 </p>
               </div>
@@ -154,7 +151,7 @@ export default function OccasionGiftingCarousel() {
                   <ArrowRight className="w-4 h-4" />
                 </div>
 
-                <span className="text-[11px] font-mono uppercase tracking-[0.16em] text-white/70 group-hover:text-white font-medium transition-colors">
+                <span className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/70 group-hover:text-white font-medium transition-colors">
                   Explore
                 </span>
               </div>

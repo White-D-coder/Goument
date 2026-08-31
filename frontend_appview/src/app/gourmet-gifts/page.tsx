@@ -15,6 +15,7 @@ import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
+import { TrustedBusinessesMarquee } from '@/components/brand/TrustedBusinessesMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -134,7 +135,10 @@ export default function HomePage() {
         {/* ─── 6. WHY CHOOSE THE GOURMET GIFTS (BELOW ENQUIRY) ─── */}
         <WhyChooseSection />
 
-        {/* ─── 7. PRIVATE CONCIERGE & BESPOKE GIFTING (#6B001A THEME) ─── */}
+        {/* ─── 7. TRUSTED BY BUSINESSES ACROSS INDIA (MARQUEE) ─── */}
+        <TrustedBusinessesMarquee />
+
+        {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (#6B001A THEME) ─── */}
         <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#6B001A] text-[#FAF8F5]">
           
           {/* Rich #6B001A Radial Depth Aura */}

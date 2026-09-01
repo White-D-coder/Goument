@@ -129,7 +129,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
     id: 'stationery-desk',
     label: 'Stationery & Desk',
-    image: '/images/corporate/category_icons/Stationery & Desk Accessories.jpg',
+    image: '/images/catalogue_items/category/stationaries.png',
     borderRadius: '58% 42% 64% 36% / 40% 58% 42% 60%',
     pastelActive: 'bg-[#D2C8B8]',
     pastelHover: 'group-hover:bg-[#D2C8B8]/50',

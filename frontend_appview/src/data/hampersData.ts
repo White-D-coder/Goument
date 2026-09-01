@@ -113,7 +113,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
     id: 'office-travel-bags',
     label: 'Office & Travel Bags',
-    image: '/images/corporate/category_icons/travelss.jpg',
+    image: '/images/catalogue_items/category/office.png',
     borderRadius: '56% 44% 58% 42% / 46% 59% 41% 54%',
     pastelActive: 'bg-[#D6C2A9]',
     pastelHover: 'group-hover:bg-[#D6C2A9]/50',
@@ -121,7 +121,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
     id: 'electronics-audio',
     label: 'Electronics',
-    image: '/images/corporate/category_icons/Electronics.jpg',
+    image: '/images/catalogue_items/category/electronics.png',
     borderRadius: '46% 54% 38% 62% / 62% 44% 56% 38%',
     pastelActive: 'bg-[#C7C3B7]',
     pastelHover: 'group-hover:bg-[#C7C3B7]/50',

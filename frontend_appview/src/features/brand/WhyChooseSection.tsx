@@ -17,7 +17,7 @@ export const WhyChooseSection: React.FC = () => {
             
             {/* Box 1: Deep Sage Green (Top Left — Green Block) */}
             <ScrollReveal animation="fadeUp" delay={0.05} className="h-full">
-              <div className="bg-[#3D5244] text-white p-6 sm:p-7 rounded-none flex flex-col justify-center h-[210px] sm:h-[235px] border border-[#34473A] space-y-2.5">
+              <div className="bg-[#3D5244] text-white p-6 sm:p-7 rounded-tl-2xl sm:rounded-tl-3xl flex flex-col justify-center h-[210px] sm:h-[235px] border border-[#34473A] space-y-2.5">
                 <h3
                   className="text-xl sm:text-2xl font-medium tracking-tight text-white leading-snug line-clamp-2"
                   style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
@@ -32,7 +32,7 @@ export const WhyChooseSection: React.FC = () => {
 
             {/* Box 2: White / Ivory (Bottom Left — White Block) */}
             <ScrollReveal animation="fadeUp" delay={0.1} className="h-full">
-              <div className="bg-white border border-[#E8E2D8] text-[#1A1A18] p-6 sm:p-7 rounded-none flex flex-col justify-center h-[210px] sm:h-[235px] space-y-2.5">
+              <div className="bg-white border border-[#E8E2D8] text-[#1A1A18] p-6 sm:p-7 rounded-bl-2xl sm:rounded-bl-3xl flex flex-col justify-center h-[210px] sm:h-[235px] space-y-2.5">
                 <h3
                   className="text-xl sm:text-2xl font-medium tracking-tight text-[#1A1A18] leading-snug line-clamp-2"
                   style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
@@ -78,7 +78,7 @@ export const WhyChooseSection: React.FC = () => {
             
             {/* Top Heading Box (Top Right — Main Heading) */}
             <ScrollReveal animation="fadeUp" delay={0.12} className="h-full">
-              <div className="bg-white border border-[#E8E2D8] p-6 sm:p-8 md:p-10 rounded-none space-y-3 h-full flex flex-col justify-center">
+              <div className="bg-white border border-[#E8E2D8] p-6 sm:p-8 md:p-10 rounded-tr-2xl sm:rounded-tr-3xl space-y-3 h-full flex flex-col justify-center">
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-bold text-[#7A8B6F] block">
                   THE GOURMET GIFTS STANDARD
                 </span>
@@ -115,7 +115,7 @@ export const WhyChooseSection: React.FC = () => {
 
               {/* Box 4: Warm Taupe / Cream Tone (Bottom Right — Ivory Block) */}
               <ScrollReveal animation="fadeUp" delay={0.2}>
-                <div className="bg-[#EFEAE2] border border-[#DDD5C7] text-[#1A1A18] p-5 sm:p-6 rounded-none space-y-2 h-[180px] sm:h-[195px] flex flex-col justify-center">
+                <div className="bg-[#EFEAE2] border border-[#DDD5C7] text-[#1A1A18] p-5 sm:p-6 rounded-br-2xl sm:rounded-br-3xl space-y-2 h-[180px] sm:h-[195px] flex flex-col justify-center">
                   <h3
                     className="text-lg sm:text-xl font-medium text-[#1A1A18] leading-snug line-clamp-2"
                     style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}

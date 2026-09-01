@@ -12,10 +12,11 @@ import Image from 'next/image';
 import ImageTypography from '@/components/ImageTypography';
 import OccasionGiftingCarousel from '@/components/OccasionGiftingCarousel';
 import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
+import { IndustriesSection } from '@/features/brand/IndustriesSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
-import { TrustedBusinessesMarquee } from '@/components/brand/TrustedBusinessesMarquee';
+// import { TrustedBusinessesMarquee } from '@/components/brand/TrustedBusinessesMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,7 +107,7 @@ export default function HomePage() {
       <div className="relative z-10 bg-[#FAF8F5] shadow-[0_-20px_60px_rgba(0,0,0,0.5)]">
 
         {/* ─── EDITORIAL STATEMENT STRIP ─── */}
-        <section className="py-6 sm:py-8 md:py-10 px-6 sm:px-10 text-center">
+        {/* <section className="py-6 sm:py-8 md:py-10 px-6 sm:px-10 text-center">
           <TextReveal
             as="h2"
             className="type-serif-body text-[#1A1A18] max-w-[760px] mx-auto leading-relaxed"
@@ -115,7 +116,7 @@ export default function HomePage() {
           >
             We don't make disposable gifts. We craft enduring keepsakes meant to be preserved across generations.
           </TextReveal>
-        </section>
+        </section> */}
 
         {/* ─── 8-CARD OCCASIONS CAROUSEL ─── */}
         <OccasionGiftingCarousel />
@@ -123,11 +124,14 @@ export default function HomePage() {
         {/* ─── IMAGE-FILLED TYPOGRAPHY HERO (COMMENTED OUT AS REQUESTED) ─── */}
         {/* <ImageTypography /> */}
 
-        {/* ─── ATELIER LUXURY E-COMMERCE SECTION ─── */}
+        {/* ─── INDUSTRIES WE UNDERSTAND SECTION ─── */}
+        <IndustriesSection />
+
+        {/* ─── ATELIER LUXURY E-COMMERCE SECTION (WHAT WE CAN CURATE) ─── */}
         <KeepsakeEcommerceSection />
 
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
-        <CustomGiftBoxesSection />
+        {/* <CustomGiftBoxesSection /> */}
 
         {/* ─── 5. BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
         <CuratedInquirySection />
@@ -136,7 +140,7 @@ export default function HomePage() {
         <WhyChooseSection />
 
         {/* ─── 7. TRUSTED BY BUSINESSES ACROSS INDIA (MARQUEE) ─── */}
-        <TrustedBusinessesMarquee />
+        {/* <TrustedBusinessesMarquee /> */}
 
         {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (#6B001A THEME) ─── */}
         <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#6B001A] text-[#FAF8F5]">

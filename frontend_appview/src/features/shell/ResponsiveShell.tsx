@@ -16,6 +16,7 @@ import { CartIcon } from '@/features/shell/CartIcon';
 import { useCartStore } from '@/hooks/useCart';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
+import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
@@ -64,6 +65,16 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
+  const isGourmetRoute = 
+    pathname === '/' || 
+    pathname.startsWith('/gourmet-gifts') || 
+    pathname.startsWith('/gift-boxing') || 
+    pathname.startsWith('/collections') ||
+    pathname.startsWith('/cart') ||
+    pathname.startsWith('/checkout') ||
+    pathname.startsWith('/account') ||
+    pathname.startsWith('/corporate');
+
   const isTransparentHero = (pathname === '/' || pathname === '/gourmet-gifts') && !isScrolled && !mobileMenuOpen;
   const currentNavLinks = GOURMET_NAV_LINKS;
 
@@ -81,6 +92,9 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
   return (
     <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: 'var(--satra-ivory)' }}>
+      {/* ─── TOP-MID GOLD POPPER & FALLING GOLDEN LEAF SPRINKLE (ON EVERY REFRESH) ─── */}
+      <GoldPopperSprinkle />
+
       <Toaster
         position="top-center"
         toastOptions={{ style: { fontFamily: 'var(--font-jakarta)', fontSize: '13px' } }}

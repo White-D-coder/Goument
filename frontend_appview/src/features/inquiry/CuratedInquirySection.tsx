@@ -129,7 +129,7 @@ export default function CuratedInquirySection() {
   };
 
   return (
-    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-12 px-2 sm:px-4 lg:px-6 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
+    <section id="curation-inquiry" className="pt-4 sm:pt-8 md:pt-4 pb-6 sm:pb-12 px-2 sm:px-4 lg:px-6 relative overflow-hidden bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
       
       {/* ── LUXURY SATRA WATERMARK BACKGROUND ── */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden select-none">
@@ -156,7 +156,7 @@ export default function CuratedInquirySection() {
         </div>
 
         {/* ─── MAIN CONTAINER (RESPONSIVE CORNERS & COMPACT SPACING) ─── */}
-        <div className="relative rounded-2xl sm:rounded-tl-[40px] sm:rounded-br-[40px] sm:rounded-tr-none sm:rounded-bl-none border border-[#D9D5CC] shadow-none overflow-hidden grid grid-cols-1 lg:grid-cols-12 bg-white/95 backdrop-blur-md">
+        <div className="relative rounded-[40px] border border-[#D9D5CC] shadow-none overflow-hidden grid grid-cols-1 lg:grid-cols-12 bg-white/95 backdrop-blur-md">
 
           {/* ── LEFT COLUMN: 2-PART ATTACHED SAMPLES (Top: Box Selection, Bottom: Products) ── */}
           <div className="lg:col-span-5 bg-[#FAF8F5]/90 p-4 sm:p-6 md:p-8 flex flex-col justify-between space-y-5">

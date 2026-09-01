@@ -73,9 +73,8 @@ const GOURMET_FOOTER_COLUMNS = [
   {
     title: 'Concierge Direct',
     links: [
-      { label: 'concierge@thegourmetgifts.com', href: 'mailto:concierge@thegourmetgifts.com' },
-      { label: '+91 98765 43210', href: 'tel:+919876543210' },
-      { label: 'Pan-India Delivery & Corporate Bulk', href: '/contact' },
+      { label: 'hello@thegourmetgifts.co', href: 'mailto:hello@thegourmetgifts.co' },
+      { label: 'Pan-India Delivery & Corporate Bulk', href: '/gourmet-gifts#curation-inquiry' },
     ],
   },
 ];

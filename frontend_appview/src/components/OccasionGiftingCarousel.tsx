@@ -19,56 +19,56 @@ export const OCCASION_CARDS: OccasionCard[] = [
     id: 'employee-gifting',
     title: 'EMPLOYEE GIFTING',
     subtitle: 'Make people feel valued.',
-    image: '/images/occasions/occasion_1.png',
+    image: '/images/brand/topcards/card_1.png',
     href: '/employee-gifting',
   },
   {
     id: 'onboarding-kits',
     title: 'ONBOARDING KITS',
     subtitle: 'Make Day One feel like Day One.',
-    image: '/images/occasions/occasion_2.png',
+    image: '/images/brand/topcards/card_2.png',
     href: '/corporate#curation-inquiry',
   },
   {
     id: 'client-gifting',
     title: 'CLIENT GIFTING',
     subtitle: 'Stay remembered after the meeting.',
-    image: '/images/occasions/occasion_3.png',
+    image: '/images/brand/topcards/card_3.png',
     href: '/corporate#curation-inquiry',
   },
   {
     id: 'festive-gifting',
     title: 'FESTIVE GIFTING',
     subtitle: 'Celebrate without sending the predictable.',
-    image: '/images/occasions/occasion_4.png',
+    image: '/images/brand/topcards/card_4.png',
     href: '/gourmet-gifts#curation-inquiry',
   },
   {
     id: 'events-conferences',
     title: 'EVENTS & CONFERENCES',
     subtitle: 'Give them something worth taking home.',
-    image: '/images/occasions/occasion_5.png',
+    image: '/images/brand/topcards/card_5.png',
     href: '/corporate#curation-inquiry',
   },
   {
     id: 'milestones-recognition',
     title: 'MILESTONES & RECOGNITION',
     subtitle: 'Mark the moment properly.',
-    image: '/images/occasions/occasion_6.png',
+    image: '/images/brand/topcards/card_6.png',
     href: '/milestones-recognition',
   },
   {
     id: 'cx-gifting',
     title: 'CX GIFTING',
     subtitle: 'Create lasting customer delight at every touchpoint.',
-    image: '/images/occasions/occasion_7.png',
+    image: '/images/brand/topcards/card_7.png',
     href: '/corporate#curation-inquiry',
   },
   {
     id: 'dealer-partner-gifting',
     title: 'DEALER & PARTNER GIFTING',
     subtitle: 'For relationships that drive the business.',
-    image: '/images/occasions/occasion_8.png',
+    image: '/images/brand/topcards/card_8.png',
     href: '/corporate#curation-inquiry',
   },
 ];
@@ -163,16 +163,19 @@ export default function OccasionGiftingCarousel() {
       <div className="max-w-[1580px] mx-auto px-2 sm:px-4 lg:px-6 space-y-4 sm:space-y-6">
         
         {/* ─── SECTION HEADER ─── */}
-        <div className="text-center max-w-4xl mx-auto py-1 sm:py-2">
-          <ScrollReveal animation="fadeUp">
+        <ScrollReveal animation="fadeUp">
+          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2">
             <h2
               className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               For Every Occasion That Matters
             </h2>
-          </ScrollReveal>
-        </div>
+            <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
+              Thoughtfully curated keepsakes designed for corporate milestones, celebrations, and meaningful relationships.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* ─── CAROUSEL WRAPPER WITH NAVIGATION BUTTONS ─── */}
         <div className="relative group/carousel">
@@ -229,25 +232,35 @@ export default function OccasionGiftingCarousel() {
                     sizes="(max-width: 768px) 240px, (max-width: 1200px) 280px, 320px"
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-108 filter brightness-[0.98]"
                   />
-                  {/* Subtle Contrast Gradient Overlay (Lightened for vibrant image clarity) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-black/40 group-hover:from-black/50 group-hover:via-transparent group-hover:to-black/30 transition-colors duration-500" />
+                  {/* Bottom Vignette Gradient (Expands on Hover for High-Contrast Text Legibility) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent group-hover:from-black/92 group-hover:via-black/50 group-hover:to-transparent transition-all duration-500" />
                 </div>
 
-                {/* Top Text Content (Centered Title and Subtitle) */}
-                <div className="relative z-10 space-y-1.5 text-center flex flex-col items-center justify-start w-full pointer-events-none">
-                  <h3 className="font-sans text-base sm:text-lg md:text-[19px] font-bold text-white uppercase tracking-tight leading-tight drop-shadow-md group-hover:text-[#DFC299] transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="font-sans text-xs sm:text-[13px] text-white/90 font-normal leading-relaxed drop-shadow-sm max-w-[220px] mx-auto">
-                    {card.subtitle}
-                  </p>
-                </div>
+                {/* Bottom Center Content */}
+                <div className="relative z-10 w-full mt-auto pointer-events-none flex flex-col items-center justify-end text-center">
+                  
+                  {/* Default State (img 1): Title with Explore's exact font, uppercase & letter-spacing */}
+                  <div className="transform transition-all duration-400 ease-out sm:group-hover:opacity-0 sm:group-hover:-translate-y-2 pb-1">
+                    <span className="text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-white/95 font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                      {card.title}
+                    </span>
+                  </div>
 
-                {/* Bottom Row: Centered Explore CTA */}
-                <div className="relative z-10 flex items-center justify-center pt-4 pointer-events-none">
-                  <span className="text-[11px] font-sans uppercase tracking-[0.2em] text-white/75 group-hover:text-[#DFC299] font-semibold transition-colors">
-                    Explore
-                  </span>
+                  {/* Hover State (img 2): Full Detailed Block (Title + Subtitle + Explore) Animating from Bottom to Top */}
+                  <div className="space-y-1.5 transform transition-all duration-500 ease-out opacity-100 translate-y-0 sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 pb-1">
+                    <h3 className="font-sans text-base sm:text-lg md:text-[19px] font-bold text-[#DFC299] uppercase tracking-wider leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+                      {card.title}
+                    </h3>
+                    <p className="font-sans text-xs sm:text-[12.5px] text-[#EDE6DC] font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] max-w-[215px] mx-auto">
+                      {card.subtitle}
+                    </p>
+                    <div className="pt-1 flex items-center justify-center">
+                      <span className="text-[11px] font-sans uppercase tracking-[0.22em] text-[#DFC299] font-semibold drop-shadow-md">
+                        EXPLORE
+                      </span>
+                    </div>
+                  </div>
+
                 </div>
               </Link>
             ))}

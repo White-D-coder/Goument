@@ -273,54 +273,15 @@ export default function CustomGiftBoxesSection() {
                     </p>
                   </div>
 
-                  {/* Enquire Box Button + Dynamic Stepper */}
-                  <div className="pt-2 flex items-center justify-between gap-2">
-                    <button
-                      onClick={() => {
-                        handleIncrement(box);
-                        const el = document.getElementById('curation-inquiry');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="inline-flex items-center gap-1.5 border border-[#C5A880] text-[#9E7B35] hover:bg-[#C5A880] hover:text-white rounded-lg px-3 sm:px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
+                  {/* Enquire Box Button */}
+                  <div className="pt-2">
+                    <a
+                      href="#curation-inquiry"
+                      className="inline-flex items-center justify-center gap-1.5 w-full border border-[#C5A880] text-[#9E7B35] hover:bg-[#1A1A18] hover:border-[#1A1A18] hover:text-white rounded-lg py-2 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer text-center"
                     >
-                      <span>Enquire Box</span>
+                      <span>ENQUIRE VESSEL</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-
-                    {/* Dynamic Quantity Stepper Counter */}
-                    {currentQty > 0 ? (
-                      <div 
-                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                        className="flex items-center bg-[#FAF5EC] border border-[#C5A880] rounded-lg p-0.5 shadow-xs"
-                      >
-                        <button
-                          onClick={(e) => handleDecrement(box, e)}
-                          aria-label="Decrease quantity"
-                          className="w-6 h-6 rounded flex items-center justify-center text-[#7A1C29] hover:bg-[#C5A880] hover:text-white transition-colors active:scale-90 cursor-pointer"
-                        >
-                          <Minus className="w-3.5 h-3.5" />
-                        </button>
-                        <span className="w-6 text-center text-xs font-bold text-[#451B27] select-none">
-                          {currentQty}
-                        </span>
-                        <button
-                          onClick={(e) => handleIncrement(box, e)}
-                          aria-label="Increase quantity"
-                          className="w-6 h-6 rounded flex items-center justify-center text-[#7A1C29] hover:bg-[#C5A880] hover:text-white transition-colors active:scale-90 cursor-pointer"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={(e) => handleIncrement(box, e)}
-                        aria-label="Add to curation"
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer bg-[#FAF5EC] hover:bg-[#F2E8D7] text-[#9E7B35] border border-[#EADBCA] flex items-center gap-1 active:scale-95 shadow-2xs"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                        <span>Bag</span>
-                      </button>
-                    )}
+                    </a>
                   </div>
                 </div>
 

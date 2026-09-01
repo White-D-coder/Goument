@@ -51,8 +51,8 @@ export default function KeepsakeEcommerceSection() {
                     </div>
                   </div>
 
-                  {/* Category Title Below Image */}
-                  <span className="text-[11px] sm:text-xs md:text-[13px] font-bold uppercase tracking-wider mt-3 max-w-[140px] text-center leading-tight transition-colors text-[#5A554D] group-hover:text-[#1A1A18]">
+                  {/* Category Title Below Image — EXACT Jakarta Sans uppercase tracking-[0.22em] */}
+                  <span className="text-[11px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.22em] text-[#1A1A18] mt-3 max-w-[140px] text-center leading-tight transition-colors group-hover:text-[#8C6228]">
                     {cat.label}
                   </span>
                 </Link>

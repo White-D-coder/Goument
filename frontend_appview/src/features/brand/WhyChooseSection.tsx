@@ -6,7 +6,7 @@ import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const WhyChooseSection: React.FC = () => {
   return (
-    <section className="pt-4 sm:pt-8 md:pt-10 pb-6 sm:pb-10 px-2 sm:px-4 lg:px-6 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
+    <section className="pt-4 sm:pt-8 md:pt-12 pb-6 sm:pb-10 px-2 sm:px-4 lg:px-6 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
       <div className="max-w-[1580px] mx-auto">
 
         {/* ─── 3-COLUMN ASYMMETRIC FLUSH MOSAIC ─── */}

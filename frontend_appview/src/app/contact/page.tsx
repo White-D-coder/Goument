@@ -137,20 +137,10 @@ export default function ContactPage() {
                   <div className="space-y-2">
                     <span className="type-meta text-[#B5AFA6] block">Email</span>
                     <a
-                      href="mailto:concierge@thegourmetgiftsco.com"
+                      href="mailto:hello@thegourmetgifts.co"
                       className="type-body text-[#1A1A18] text-sm hover:text-[#8A8680] transition-colors"
                     >
-                      concierge@thegourmetgiftsco.com
-                    </a>
-                  </div>
-
-                  <div className="space-y-2">
-                    <span className="type-meta text-[#B5AFA6] block">Phone</span>
-                    <a
-                      href="tel:+919876543210"
-                      className="type-body text-[#1A1A18] text-sm hover:text-[#8A8680] transition-colors"
-                    >
-                      +91 98765 43210
+                      hello@thegourmetgifts.co
                     </a>
                   </div>
 

@@ -13,6 +13,7 @@ import ImageTypography from '@/components/ImageTypography';
 import OccasionGiftingCarousel from '@/components/OccasionGiftingCarousel';
 import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import { IndustriesSection } from '@/features/brand/IndustriesSection';
+import { GiftingProcessSection } from '@/features/brand/GiftingProcessSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
@@ -130,23 +131,36 @@ export default function HomePage() {
         {/* ─── ATELIER LUXURY E-COMMERCE SECTION (WHAT WE CAN CURATE) ─── */}
         <KeepsakeEcommerceSection />
 
+        {/* ─── HOW OUR GIFTING PROCESS WORKS ─── */}
+        <GiftingProcessSection />
+
+        {/* ─── WHY CHOOSE THE GOURMET GIFTS (ABOVE ENQUIRY) ─── */}
+        <WhyChooseSection />
+
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
         {/* <CustomGiftBoxesSection /> */}
 
-        {/* ─── 5. BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
-        <CuratedInquirySection />
-
-        {/* ─── 6. WHY CHOOSE THE GOURMET GIFTS (BELOW ENQUIRY) ─── */}
-        <WhyChooseSection />
+        {/* ─── BESPOKE CURATION & QUOTATION INQUIRY FORM ─── */}
+        {/* <CuratedInquirySection /> */}
 
         {/* ─── 7. TRUSTED BY BUSINESSES ACROSS INDIA (MARQUEE) ─── */}
         {/* <TrustedBusinessesMarquee /> */}
 
-        {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (#6B001A THEME) ─── */}
-        <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#6B001A] text-[#FAF8F5]">
+        {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (TEXTURED VELVET PLUM THEME) ─── */}
+        <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#4E3544] text-[#FAF8F5]">
           
-          {/* Rich #6B001A Radial Depth Aura */}
-          <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#850126] via-[#6B001A] to-[#45000F]" />
+          {/* Textured Swatch Background Overlay */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-overlay">
+            <Image
+              src="/images/brand/cta_texture.png"
+              alt="Velvet Texture"
+              fill
+              className="object-cover object-center"
+            />
+          </div>
+
+          {/* Rich Plum & Aubergine Radial Depth Aura */}
+          <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#6B465B]/90 via-[#4E3544] to-[#2B1B26]" />
 
           <div className="max-w-[760px] mx-auto space-y-5 relative z-10">
             <ScrollReveal animation="fadeUp">

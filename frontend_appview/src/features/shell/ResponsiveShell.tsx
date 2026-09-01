@@ -10,10 +10,6 @@ import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
 import { Footer } from './Footer';
 import { SearchModal } from '@/features/search/SearchModal';
-import { CurationDrawer } from '@/features/cart/CurationDrawer';
-import { BoxCapacityModal } from '@/features/ecommerce/BoxCapacityModal';
-import { CartIcon } from '@/features/shell/CartIcon';
-import { useCartStore } from '@/hooks/useCart';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
 import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
@@ -36,7 +32,6 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const isOnline = useOnlineStatus(() => {
     setShowReconnectedToast(true);
   });
-  const openDrawer = useCartStore((state) => state.openDrawer);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -102,8 +97,6 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       <OfflineBanner isOnline={isOnline} />
       <OnlineToast shouldTrigger={showReconnectedToast} onHandled={() => setShowReconnectedToast(false)} />
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      <CurationDrawer />
-      <BoxCapacityModal />
 
       {/* ═══════════════════════════════════════════════════
           NAVIGATION BAR — The Gourmet Gifts
@@ -214,27 +207,16 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               <Search className="w-[18px] h-[18px]" strokeWidth={1.5} />
             </button>
 
-            {/* Curation Tray / Cart Drawer Trigger */}
-            <button
-              onClick={() => openDrawer()}
-              className={`relative flex items-center justify-center transition-colors duration-200 cursor-pointer ${
-                isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
-              }`}
-              aria-label="View Curation Tray"
-              title="View Curation Tray"
-            >
-              <CartIcon className="w-[19px] h-[19px]" />
-            </button>
-
-            {/* Account */}
+            {/* Quick Enquire CTA */}
             <Link
-              href="/account"
-              className={`hidden sm:flex items-center justify-center transition-colors duration-200 ${
-                isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
+              href="/gourmet-gifts#curation-inquiry"
+              className={`hidden sm:inline-flex items-center px-3.5 py-1.5 text-[10.5px] font-mono font-semibold uppercase tracking-[0.16em] transition-all rounded-sm ${
+                isTransparentHero 
+                  ? 'bg-white text-[#1A1A18] hover:bg-white/90 shadow-xs' 
+                  : 'bg-[#1A1A18] text-[#FAF8F5] hover:bg-[#38332B]'
               }`}
-              aria-label="Account"
             >
-              <User className="w-[18px] h-[18px]" strokeWidth={1.5} />
+              ENQUIRE
             </Link>
 
             {/* Mobile Menu Toggle */}

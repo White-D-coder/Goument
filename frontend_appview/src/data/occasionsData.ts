@@ -431,6 +431,8 @@ export const getOccasionData = (slug: string): OccasionPageData => {
     title: name,
     tagline: `Thoughtfully curated ${name.toLowerCase()} for meaningful impact.`,
     description: `Elevate your ${name.toLowerCase()} with bespoke keepsake boxes, gourmet delicacies, and white-glove corporate fulfillment.`,
+    solvesTitle: `What ${name} Solves`,
+    solvesSubtitle: `Elevate your ${name.toLowerCase()} relationships with bespoke keepsakes and curated luxury gifting.`,
     heroImage: OCCASION_HERO_IMAGE_MAP[slug] || DEFAULT_OCCASION.heroImage,
     categoryIds: OCCASION_CATEGORY_MAP[slug] || DEFAULT_OCCASION.categoryIds,
   };

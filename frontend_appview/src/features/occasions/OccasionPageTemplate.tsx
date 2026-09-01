@@ -153,7 +153,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       {/* ══════════════════════════════════════════════════════════════════
           1. HERO SECTION (2-COLUMN EDITORIAL SHOWCASE)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14 md:py-18">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-12 sm:pb-16 md:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Left Column: Headline, Tagline, CTAs & Trust Badges */}
@@ -194,7 +194,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
               </div>
 
               {/* 3 Trust Badges */}
-              <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-6 border-t border-[#EAE5DC] text-xs text-[#6B655E] font-medium">
+              <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4 text-xs text-[#6B655E] font-medium">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#8C6228]" />
                   <span>Premium Quality</span>
@@ -362,12 +362,12 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4 md:gap-5 lg:gap-6 max-w-[1380px] mx-auto justify-items-center">
+        <div className="flex flex-wrap items-start justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 max-w-[1400px] mx-auto">
           {displayCategories.map((cat, idx) => (
-            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)} className="w-full flex justify-center">
+            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
               <Link
                 href={`/collections?category=${cat.id}`}
-                className="flex flex-col items-center group cursor-pointer w-full max-w-[125px] focus:outline-none transition-all duration-300"
+                className="flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-28 lg:w-30 focus:outline-none transition-all duration-300"
               >
                 {/* Outer Prominent Rounded Squircle Frame (Homepage Design) */}
                 <div

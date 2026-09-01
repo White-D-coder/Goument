@@ -32,7 +32,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'The Gourmet Gifts — Artisanal Luxury Gifting & Keepsakes',
+  title: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
   description: 'Artisanal delicacies, bespoke keepsake vessels, and executive corporate gifting systems.',
   icons: {
     icon: '/images/brand/LOGOs.svg',

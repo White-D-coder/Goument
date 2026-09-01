@@ -15,21 +15,12 @@ import { useCartStore } from '@/hooks/useCart';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import toast from 'react-hot-toast';
 
-const PRICE_RANGES = [
-  { id: 'all', title: 'All', subtitle: 'Ranges', min: 0, max: Infinity, pastel: 'bg-[#DFC299] text-[#1A1A18] ring-2 ring-[#BFA267]' },
-  { id: 'under-1500', title: 'Under', subtitle: '₹1,500', min: 0, max: 1500, pastel: 'bg-[#FADCD5] text-[#1A1A18] ring-2 ring-[#F4A896]' },
-  { id: '1500-3000', title: '₹1.5k –', subtitle: '₹3,000', min: 1500, max: 3000, pastel: 'bg-[#D5E8DD] text-[#1A1A18] ring-2 ring-[#98C1A9]' },
-  { id: '3000-5000', title: '₹3k –', subtitle: '₹5,000', min: 3000, max: 5000, pastel: 'bg-[#FCF0CE] text-[#1A1A18] ring-2 ring-[#F6D07A]' },
-  { id: 'above-5000', title: 'Above', subtitle: '₹5,000+', min: 5000, max: Infinity, pastel: 'bg-[#F5DCDE] text-[#1A1A18] ring-2 ring-[#E3A8BC]' },
-];
-
 function CollectionsCatalogueContent() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
 
   // Default to first category if requested or specific category
   const [selectedCategory, setSelectedCategory] = useState<string>('gourmet-food');
-  const [selectedPriceRange, setSelectedPriceRange] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-low' | 'price-high' | 'name'>('featured');
 
   useEffect(() => {
@@ -98,16 +89,6 @@ function CollectionsCatalogueContent() {
       list = list.filter((item) => item.category === selectedCategory);
     }
 
-    // Price Range Filter
-    const activeRange = PRICE_RANGES.find((r) => r.id === selectedPriceRange);
-    if (activeRange && activeRange.id !== 'all') {
-      list = list.filter((item) => {
-        const p = item.price || 0;
-        if (p === 0) return true;
-        return p >= activeRange.min && p <= activeRange.max;
-      });
-    }
-
     // Sorting
     return [...list].sort((a, b) => {
       if (sortBy === 'price-low') return (a.price || 0) - (b.price || 0);
@@ -115,51 +96,24 @@ function CollectionsCatalogueContent() {
       if (sortBy === 'name') return a.name.localeCompare(b.name);
       return 0;
     });
-  }, [selectedCategory, selectedPriceRange, sortBy]);
+  }, [selectedCategory, sortBy]);
 
   const activeCategoryMeta = CATALOGUE_CATEGORIES.find((c) => c.id === selectedCategory);
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1A1A18] pt-20 sm:pt-24 pb-16">
       
-      {/* ─── TOP HEADER SECTION: CENTERED TITLE + CENTERED PASTEL CIRCLE PRICE RANGES ─── */}
-      <section className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 space-y-5">
+      {/* ─── TOP HEADER SECTION: CENTERED TITLE ─── */}
+      <section className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8">
         
-        {/* Centered Title (No item badge) */}
-        <div className="text-center max-w-2xl mx-auto">
+        {/* Centered Title */}
+        <div className="text-center max-w-2xl mx-auto py-2">
           <h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A18] tracking-tight leading-tight"
             style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
           >
             {activeCategoryMeta?.label || 'Curated Catalogue'}
           </h1>
-        </div>
-
-        {/* ── 100% DEAD-CENTERED PASTEL CIRCULAR PRICE RANGES (NO CLIPPING) ── */}
-        <div className="w-full flex items-center justify-center pt-2 pb-2 px-4 sm:px-8">
-          <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 py-3 px-6 overflow-x-auto sm:overflow-visible no-scrollbar">
-            {PRICE_RANGES.map((range) => {
-              const isRangeActive = selectedPriceRange === range.id;
-              return (
-                <button
-                  key={range.id}
-                  onClick={() => setSelectedPriceRange(range.id)}
-                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 flex flex-col items-center justify-center p-1 text-center transition-all duration-300 cursor-pointer ${
-                    isRangeActive
-                      ? `${range.pastel} shadow-md font-bold ring-2 ring-offset-2 ring-[#BFA267]/50`
-                      : 'bg-white text-[#5A554D] hover:bg-[#FAF5EC] hover:text-[#1A1A18] border border-[#E2DDD3] shadow-xs'
-                  }`}
-                >
-                  <span className="text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-wider block leading-none">
-                    {range.title}
-                  </span>
-                  <span className="text-[10px] sm:text-[11.5px] font-sans font-bold block mt-1 leading-none">
-                    {range.subtitle}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
         </div>
 
       </section>
@@ -234,15 +188,15 @@ function CollectionsCatalogueContent() {
             {filteredProducts.length === 0 ? (
               <div className="bg-white rounded-2xl border border-dashed border-[#D5CFBF] p-12 text-center space-y-3">
                 <p className="text-base text-[#7A7268] font-light">
-                  No curations found in this price range.
+                  No curations found in this category.
                 </p>
                 <button
                   onClick={() => {
-                    setSelectedPriceRange('all');
+                    setSelectedCategory('gourmet-food');
                   }}
                   className="text-xs font-bold uppercase tracking-wider text-[#9E7B35] underline cursor-pointer"
                 >
-                  Reset price filter
+                  View Gourmet Food
                 </button>
               </div>
             ) : (

@@ -76,28 +76,48 @@ export default function HomePage() {
         {/* Ambient luxury gradient overlay for legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/85 via-black/30 to-black/50 pointer-events-none" />
 
-        {/* Hero Content positioned inside the sticky hero — Perfectly Vertically & Horizontally Centered */}
-        <div className="relative z-10 px-5 sm:px-8 lg:px-12 max-w-[1280px] mx-auto w-full flex flex-col items-center justify-center text-center">
-          <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-center text-center mx-auto">
+        {/* Hero Content positioned inside the sticky hero — Left Aligned */}
+        <div className="relative z-10 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto w-full flex flex-col items-start justify-center text-left">
+          <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-start text-left">
             
+            {/* Title */}
             <h1
-              className="text-white leading-[1.02] sm:leading-[0.95] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light"
+              className="text-white leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-left"
               style={{
                 fontFamily: 'var(--font-cormorant), Georgia, serif',
                 fontWeight: 300,
               }}
             >
-              Thoughtful Gifts. Beautifully Curated.
+              B2B Gifting, curated around your brand and requirements.
             </h1>
-            <div className="opacity-0 pt-2 sm:pt-4">
+
+            {/* Subtitle */}
+            <p
+              className="text-[#DFC299] opacity-0 text-base sm:text-xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-left"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              We don’t start with a catalogue, We start with who you&apos;re gifting to.
+            </p>
+
+            {/* Buttons */}
+            <div className="opacity-0 flex flex-wrap items-center justify-start gap-3 sm:gap-4 pt-3">
+              <a
+                href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20get%203%20gifting%20concepts%20curated%20for%20our%20brand."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 sm:px-7 py-3 sm:py-3.5 bg-[#8C6228] hover:bg-[#A37330] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-[0_8px_20px_rgba(140,98,40,0.35)] hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                GET 3 GIFTING CONCEPTS
+              </a>
+              
               <a
                 href="#catalogue"
-                className="editorial-link type-meta text-white/90 hover:text-white inline-flex items-center justify-center gap-2 transition-colors cursor-pointer text-[10px] sm:text-[11.5px]"
+                className="px-6 sm:px-7 py-3 sm:py-3.5 border border-white/60 hover:border-white text-white hover:text-[#DFC299] hover:bg-white/10 font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 backdrop-blur-xs cursor-pointer"
               >
-                <span>Discover The Curation</span>
-                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+                SEE WHAT WE CAN CURATE
               </a>
             </div>
+
           </div>
         </div>
       </div>

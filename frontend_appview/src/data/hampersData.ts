@@ -241,7 +241,7 @@ export const HAMPERS_CATALOG: HamperData[] = [
     packaging_style: 'Traditional favourites made with pure ingredients.',
     description: 'Traditional favourites made with pure ingredients.',
     price: 0,
-    image: '/images/catalogue_items/indian_gourmet_sweets.jpg',
+    image: '/images/catalogue_items/sweets.jpg',
     highlights: ['100% Desi Ghee', 'No Preservatives', 'Fresh Handcrafted Batch'],
     shelfLife: '25 Days',
     dietary: '100% Vegetarian',

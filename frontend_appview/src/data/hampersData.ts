@@ -145,7 +145,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
     id: 'awards-recognition',
     label: 'Recognition',
-    image: '/images/corporate/category_icons/Recognition.jpg',
+    image: '/images/catalogue_items/category/recognition.png',
     borderRadius: '52% 48% 60% 40% / 44% 60% 40% 56%',
     pastelActive: 'bg-[#D7CEC2]',
     pastelHover: 'group-hover:bg-[#D7CEC2]/50',

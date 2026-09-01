@@ -653,9 +653,21 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                     <span>{isSubmitting ? 'DISPATCHING TO CONCIERGE...' : 'SEND CURATION ENQUIRY'}</span>
                   </button>
 
-                  <p className="text-xs text-[#78746D] font-light">
-                    Direct concierge: <a href="mailto:hello@thegourmetgifts.co" className="text-[#1A1A18] font-medium underline underline-offset-4 hover:text-[#BFA267] transition-colors">hello@thegourmetgifts.co</a>
-                  </p>
+                  <div className="flex flex-wrap items-center gap-2.5 text-xs text-[#78746D] font-light">
+                    <span>Direct concierge:</span>
+                    <a 
+                      href={`https://wa.me/917021463609?text=Hi%20The%20Gourmet%20Gifts%2C%20I%20would%20like%20to%20enquire%20about%20${encodeURIComponent(data.title)}.`}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-[#1A1A18] font-semibold hover:underline flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-1 rounded-sm border border-[#D9D5CC]"
+                    >
+                      WhatsApp: +91 70214 63609
+                    </a>
+                    <span className="hidden sm:inline">•</span>
+                    <a href="mailto:hello@thegourmetgifts.co" className="text-[#1A1A18] font-medium underline underline-offset-4 hover:text-[#BFA267] transition-colors">
+                      hello@thegourmetgifts.co
+                    </a>
+                  </div>
                 </div>
 
               </form>

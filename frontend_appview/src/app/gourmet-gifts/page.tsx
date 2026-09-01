@@ -196,9 +196,8 @@ export default function HomePage() {
               <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#EDE6DC]/90 max-w-lg mx-auto leading-relaxed">
                 Bespoke corporate curations, custom crest monograms, and institutional gifting.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 pt-6">
-                <EditorialCTA label="Request Dossier" href="/corporate" dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
-                <EditorialCTA label="Contact Concierge" href="/contact" dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
+              <div className="flex items-center justify-center pt-6">
+                <EditorialCTA label="Contact Concierge" href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting%20at%20scale." dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
               </div>
             </ScrollReveal>
           </div>

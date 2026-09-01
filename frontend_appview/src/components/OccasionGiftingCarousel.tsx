@@ -159,7 +159,7 @@ export default function OccasionGiftingCarousel() {
   };
 
   return (
-    <section className="pt-4 sm:pt-8 md:pt-12 pb-4 sm:pb-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden">
+    <section id="occasions" className="pt-4 sm:pt-8 md:pt-12 pb-4 sm:pb-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
       <div className="max-w-[1580px] mx-auto px-2 sm:px-4 lg:px-6 space-y-4 sm:space-y-6">
         
         {/* ─── SECTION HEADER ─── */}

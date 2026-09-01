@@ -123,22 +123,22 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
     budgetTiers: [
       {
-        range: 'Under ₹1,000',
+        range: 'Under ₹999',
         description: 'Thoughtful & delightful gifts that make an immediate impact.',
         iconName: 'Wallet',
       },
       {
-        range: '₹1,000 – ₹1,500',
+        range: '₹999 – ₹1,499',
         description: 'Premium picks for everyday appreciation and high-frequency gifting.',
         iconName: 'Gift',
       },
       {
-        range: '₹1,500 – ₹2,500',
+        range: '₹1,499 – ₹2,499',
         description: 'Curated favourites for special promotions and quarterly awards.',
         iconName: 'Award',
       },
       {
-        range: '₹2,500+',
+        range: '₹2,499+',
         description: 'Luxury bespoke keepsakes for unforgettable executive impressions.',
         iconName: 'Gem',
       },
@@ -246,7 +246,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     title: 'Onboarding Kits',
     tagline: 'Make Day One feel like Day One.',
     description: 'Transform new hire excitement into long-term belonging with welcome kits that impress from the moment they unbox.',
-    heroImage: '/images/brand/topcards/card_2.png',
+    heroImage: '/cards/employeecard.png',
 
     solvesTitle: 'What Welcoming Onboarding Solves',
     solvesSubtitle: 'A memorable first impression accelerates team integration, instills brand pride, and reduces early-stage turnover.',
@@ -270,10 +270,10 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     ],
 
     budgetTiers: [
-      { range: 'Under ₹1,200', description: 'Essential stationery & drinkware starter packs.', iconName: 'Wallet' },
-      { range: '₹1,200 – ₹2,000', description: 'Complete kits with notebook, bottle & treats.', iconName: 'Gift' },
-      { range: '₹2,000 – ₹3,500', description: 'Premium backpacks, tech sleeves & gourmet snacks.', iconName: 'Award' },
-      { range: '₹3,500+', description: 'Executive suites with luxury accessories & ANC headphones.', iconName: 'Gem' },
+      { range: 'Under ₹1,199', description: 'Essential stationery & drinkware starter packs.', iconName: 'Wallet' },
+      { range: '₹1,199 – ₹1,999', description: 'Complete kits with notebook, bottle & treats.', iconName: 'Gift' },
+      { range: '₹1,999 – ₹3,499', description: 'Premium backpacks, tech sleeves & gourmet snacks.', iconName: 'Award' },
+      { range: '₹3,499+', description: 'Executive suites with luxury accessories & ANC headphones.', iconName: 'Gem' },
     ],
 
     categoryIds: [
@@ -318,7 +318,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     title: 'Client Gifting',
     tagline: 'Stay remembered after the meeting.',
     description: 'Nurture high-value partnerships with luxury keepsake hampers that leave an indelible mark of distinction.',
-    heroImage: '/images/brand/topcards/card_3.png',
+    heroImage: '/cards/clientcard.png',
 
     solvesTitle: 'What Client Gifting Solves',
     solvesSubtitle: 'Stand out from generic corporate swag with high-calibre artisanal hampers that reinforce executive relationships.',
@@ -342,10 +342,10 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     ],
 
     budgetTiers: [
-      { range: '₹1,500 – ₹2,500', description: 'Signature confections and premium roast coffee sets.', iconName: 'Wallet' },
-      { range: '₹2,500 – ₹5,000', description: 'Handmade leather vessels with imported delicacies.', iconName: 'Gift' },
-      { range: '₹5,000 – ₹10,000', description: 'Exclusive wooden chests with heirloom brass keepsakes.', iconName: 'Award' },
-      { range: '₹10,000+', description: 'Ultra-luxury bespoke curations for top tier clients.', iconName: 'Gem' },
+      { range: 'Under ₹1,499', description: 'Signature confections and premium roast coffee sets.', iconName: 'Wallet' },
+      { range: '₹1,499 – ₹2,499', description: 'Handmade leather vessels with imported delicacies.', iconName: 'Gift' },
+      { range: '₹2,499 – ₹4,999', description: 'Exclusive wooden chests with heirloom brass keepsakes.', iconName: 'Award' },
+      { range: '₹4,999+', description: 'Ultra-luxury bespoke curations for top tier clients.', iconName: 'Gem' },
     ],
 
     categoryIds: [
@@ -394,6 +394,16 @@ const OCCASION_CATEGORY_MAP: Record<string, string[]> = {
   'dealer-partner-gifting': ['awards-recognition', 'electronics-audio', 'office-travel-bags', 'gourmet-food', 'beverages', 'decor-spiritual', 'personalisation'],
 };
 
+// Hero image mapping helper for dynamic occasion pages
+const OCCASION_HERO_IMAGE_MAP: Record<string, string> = {
+  'festive-gifting': '/cards/festivecard.png',
+  'weddings-celebrations': '/cards/wedding.png',
+  'events-conferences': '/cards/events.png',
+  'milestones-recognition': '/cards/milestones.png',
+  'cx-gifting': '/cards/cx.png',
+  'dealer-partner-gifting': '/cards/dealer.png',
+};
+
 // Fallback generator for other categories ensuring seamless support
 const DEFAULT_OCCASION = OCCASIONS_DATA['employee-gifting'];
 
@@ -421,6 +431,7 @@ export const getOccasionData = (slug: string): OccasionPageData => {
     title: name,
     tagline: `Thoughtfully curated ${name.toLowerCase()} for meaningful impact.`,
     description: `Elevate your ${name.toLowerCase()} with bespoke keepsake boxes, gourmet delicacies, and white-glove corporate fulfillment.`,
+    heroImage: OCCASION_HERO_IMAGE_MAP[slug] || DEFAULT_OCCASION.heroImage,
     categoryIds: OCCASION_CATEGORY_MAP[slug] || DEFAULT_OCCASION.categoryIds,
   };
 };

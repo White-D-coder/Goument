@@ -95,7 +95,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   },
   {
     id: 'infinity-beyond',
-    label: 'Infinity & Beyond',
+    label: 'Eternal Paper Co',
     image: '/images/catalogue_items/category/infinity.png',
     borderRadius: '53% 47% 41% 59% / 68% 66% 34% 32%',
     pastelActive: 'bg-[#F6D07A]',

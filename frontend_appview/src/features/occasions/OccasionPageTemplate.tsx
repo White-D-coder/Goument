@@ -319,24 +319,24 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (NO BOXES) ── */}
+        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (DEEP LUXURY GRADIENTS & WHITE TEXT) ── */}
         <div className="w-full flex items-center justify-center pt-1 pb-2 px-4 sm:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
             {data.budgetTiers.map((tier, idx) => {
-              const pastelColors = [
-                'bg-[#F6EFE6] hover:bg-[#EFE5D8]',
-                'bg-[#F8EBE8] hover:bg-[#F2DCD8]',
-                'bg-[#EEF3EA] hover:bg-[#DFEAD7]',
-                'bg-[#FBF4E4] hover:bg-[#F5E8C8]',
+              const deepTiers = [
+                'bg-gradient-to-br from-[#4A624E] to-[#2E4233] text-white shadow-[0_8px_20px_rgba(46,66,51,0.28)] hover:shadow-[0_12px_28px_rgba(46,66,51,0.38)] border border-[#6B856F]/40',
+                'bg-gradient-to-br from-[#8C524F] to-[#603330] text-white shadow-[0_8px_20px_rgba(96,51,48,0.28)] hover:shadow-[0_12px_28px_rgba(96,51,48,0.38)] border border-[#AC716E]/40',
+                'bg-gradient-to-br from-[#8E652E] to-[#5C3E14] text-white shadow-[0_8px_20px_rgba(92,62,20,0.28)] hover:shadow-[0_12px_28px_rgba(92,62,20,0.38)] border border-[#B3874C]/40',
+                'bg-gradient-to-br from-[#4E3544] to-[#2B1B25] text-white shadow-[0_8px_20px_rgba(43,27,37,0.32)] hover:shadow-[0_12px_28px_rgba(43,27,37,0.42)] border border-[#714E63]/40',
               ];
-              const pastelBg = pastelColors[idx % pastelColors.length];
+              const pillStyle = deepTiers[idx % deepTiers.length];
 
               return (
                 <ScrollReveal key={idx} animation="fadeUp" delay={0.04 * (idx + 1)}>
                   <div
-                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-30 md:h-30 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 shadow-2xs hover:shadow-md hover:scale-105 border border-[#E2DDD3] cursor-pointer ${pastelBg}`}
+                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-30 md:h-30 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:scale-108 cursor-pointer ${pillStyle}`}
                   >
-                    <span className="text-[11px] sm:text-xs md:text-[13px] font-sans font-bold text-[#1A1A18] tracking-tight leading-snug px-1">
+                    <span className="text-[11px] sm:text-xs md:text-[13px] font-sans font-bold text-white tracking-tight leading-snug px-1 drop-shadow-xs">
                       {tier.range}
                     </span>
                   </div>

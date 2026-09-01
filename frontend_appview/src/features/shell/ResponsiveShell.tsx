@@ -17,7 +17,7 @@ import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
   { label: 'Catalogue', href: '/gourmet-gifts#catalogue' },
-  { label: 'Curated Packages', href: '/gourmet-gifts#boxes' },
+  { label: 'Occasions', href: '/gourmet-gifts#occasions' },
 ];
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -74,12 +74,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const scrollToHeroOrTop = (e: React.MouseEvent) => {
     if (pathname === '/' || pathname === '/gourmet-gifts') {
       e.preventDefault();
-      const hero = document.getElementById('hero');
-      if (hero) {
-        hero.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   };
 

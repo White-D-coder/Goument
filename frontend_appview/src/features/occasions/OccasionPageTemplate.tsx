@@ -353,19 +353,19 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="flex flex-wrap justify-center items-start gap-4 sm:gap-6 md:gap-7 lg:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4 md:gap-5 lg:gap-6 max-w-[1380px] mx-auto justify-items-center">
           {displayCategories.map((cat, idx) => (
-            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
+            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)} className="w-full flex justify-center">
               <Link
                 href={`/collections?category=${cat.id}`}
-                className="flex flex-col items-center group cursor-pointer w-24 sm:w-28 md:w-32 focus:outline-none transition-all duration-300"
+                className="flex flex-col items-center group cursor-pointer w-full max-w-[125px] focus:outline-none transition-all duration-300"
               >
                 {/* Outer Prominent Rounded Squircle Frame (Homepage Design) */}
                 <div
-                  className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-[22px] sm:rounded-[26px] md:rounded-[30px] p-[3px] sm:p-[3.5px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] group-hover:ring-2 group-hover:ring-[#BFA267]/50`}
+                  className={`w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[30px] p-[2.5px] sm:p-[3px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] group-hover:ring-2 group-hover:ring-[#BFA267]/50`}
                 >
                   {/* Inner Rounded Squircle Image Container */}
-                  <div className="w-full h-full rounded-[19px] sm:rounded-[23px] md:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
+                  <div className="w-full h-full rounded-[17px] sm:rounded-[21px] md:rounded-[25px] lg:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
                     <img
                       src={cat.image}
                       alt={cat.label}
@@ -376,7 +376,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                 </div>
 
                 {/* Category Title Below Image — EXACT Jakarta Sans uppercase tracking-[0.22em] */}
-                <span className="text-[10.5px] sm:text-[11.5px] font-sans font-semibold uppercase tracking-[0.22em] text-[#1A1A18] mt-2.5 text-center leading-tight transition-colors group-hover:text-[#8C6228] max-w-[120px]">
+                <span className="text-[10px] sm:text-[10.5px] md:text-[11px] font-sans font-semibold uppercase tracking-[0.2em] text-[#1A1A18] mt-2.5 text-center leading-tight transition-colors group-hover:text-[#8C6228] w-full px-0.5">
                   {cat.label}
                 </span>
               </Link>

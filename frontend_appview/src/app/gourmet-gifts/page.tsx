@@ -197,7 +197,7 @@ export default function HomePage() {
                 Bespoke corporate curations, custom crest monograms, and institutional gifting.
               </p>
               <div className="flex items-center justify-center pt-6">
-                <EditorialCTA label="Contact Concierge" href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting%20at%20scale." dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
+                <EditorialCTA label="Contact" href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting%20at%20scale." dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />
               </div>
             </ScrollReveal>
           </div>

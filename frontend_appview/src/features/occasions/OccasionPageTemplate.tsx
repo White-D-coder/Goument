@@ -305,11 +305,11 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          4. GIFTS FOR EVERY BUDGET (4 TIERED CARDS)
+          4. GIFTS FOR EVERY BUDGET (CIRCULAR PILLS)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-10">
+          <div className="text-center space-y-2 mb-6 sm:mb-8">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
@@ -319,31 +319,40 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {data.budgetTiers.map((tier, idx) => {
-            const Icon = IconMap[tier.iconName] || Gift;
-            return (
-              <ScrollReveal key={idx} animation="fadeUp" delay={0.05 * (idx + 1)}>
-                <div className="bg-white border border-[#EAE5DC] rounded-2xl p-5 sm:p-6 shadow-2xs hover:shadow-md transition-all text-center flex flex-col items-center justify-center gap-2.5 group hover:border-[#8C6228]/50">
-                  <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#8C6228] group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5 stroke-[1.5]" />
+        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (NO BOXES) ── */}
+        <div className="w-full flex items-center justify-center pt-1 pb-2 px-4 sm:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
+            {data.budgetTiers.map((tier, idx) => {
+              const pastelColors = [
+                'bg-[#F6EFE6] hover:bg-[#EFE5D8]',
+                'bg-[#F8EBE8] hover:bg-[#F2DCD8]',
+                'bg-[#EEF3EA] hover:bg-[#DFEAD7]',
+                'bg-[#FBF4E4] hover:bg-[#F5E8C8]',
+              ];
+              const pastelBg = pastelColors[idx % pastelColors.length];
+
+              return (
+                <ScrollReveal key={idx} animation="fadeUp" delay={0.04 * (idx + 1)}>
+                  <div
+                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-30 md:h-30 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 shadow-2xs hover:shadow-md hover:scale-105 border border-[#E2DDD3] cursor-pointer ${pastelBg}`}
+                  >
+                    <span className="text-[11px] sm:text-xs md:text-[13px] font-sans font-bold text-[#1A1A18] tracking-tight leading-snug px-1">
+                      {tier.range}
+                    </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#1A1A18] tracking-tight">
-                    {tier.range}
-                  </h3>
-                </div>
-              </ScrollReveal>
-            );
-          })}
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           5. RECOMMENDED PRODUCT MIX (8 SQUIRCLE CATEGORIES)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 border-t border-[#EAE5DC]">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-10">
+          <div className="text-center space-y-2 mb-8 sm:mb-10">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}

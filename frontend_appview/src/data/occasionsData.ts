@@ -82,7 +82,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     title: 'Employee Gifting',
     tagline: 'Thoughtful gifts. Stronger teams. Lasting impact.',
     description: 'Celebrate your people with premium, thoughtful gifts that inspire, engage and make every milestone memorable.',
-    heroImage: '/images/brand/topcards/card_2.png',
+    heroImage: '/cards/employeecard.png',
 
     solvesTitle: 'What Employee Gifting Solves',
     solvesSubtitle: 'Great teams are built on appreciation, recognition and connection. Our employee gifting solutions help you strengthen relationships, boost morale and celebrate every moment that matters.',

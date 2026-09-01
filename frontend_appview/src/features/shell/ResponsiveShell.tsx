@@ -209,7 +209,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
             {/* Quick Enquire WhatsApp CTA */}
             <a
-              href="https://wa.me/917021463609?text=Hi%20The%20Gourmet%20Gifts%2C%20I%20would%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting%20and%20curations."
+              href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting."
               target="_blank"
               rel="noopener noreferrer"
               className={`hidden sm:inline-flex items-center px-3.5 py-1.5 text-[10.5px] font-mono font-semibold uppercase tracking-[0.16em] transition-all rounded-sm ${

@@ -6,6 +6,7 @@ import {
   CheckCircle2, 
 } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
+import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
 
 export default function CuratedInquirySection() {
@@ -78,12 +79,32 @@ export default function CuratedInquirySection() {
       const past = JSON.parse(localStorage.getItem('gourmet_inquiries') || '[]');
       past.unshift({ ...snapshot, date: new Date().toISOString() });
       localStorage.setItem('gourmet_inquiries', JSON.stringify(past));
+
+      // 3. Open WhatsApp with structured format
+      openWhatsAppInquiry({
+        pageName: 'Bespoke Curation Concierge',
+        occasion: formData.occasion,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        quantity: formData.quantity,
+      }, '917021463609');
+
     } catch (err) {
       console.error('Inquiry dispatch error:', err);
+      // Still open WhatsApp if email API fails
+      openWhatsAppInquiry({
+        pageName: 'Bespoke Curation Concierge',
+        occasion: formData.occasion,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        quantity: formData.quantity,
+      }, '917021463609');
     } finally {
       setIsSubmitting(false);
       setSubmitted(true);
-      toast.success('Your Curation Enquiry has been dispatched to hello@thegourmetgifts.co!', {
+      toast.success('Your Curation Enquiry has been dispatched via WhatsApp & Email!', {
         style: { background: '#1A1A18', color: '#FAF8F5', border: '1px solid #BFA267' },
         duration: 4000,
       });

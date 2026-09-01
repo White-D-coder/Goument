@@ -125,17 +125,14 @@ function CollectionsCatalogueContent() {
       {/* ─── TOP HEADER SECTION: CENTERED TITLE + CENTERED PASTEL CIRCLE PRICE RANGES ─── */}
       <section className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8 space-y-5">
         
-        {/* Centered Title & Subtitle (No item badge) */}
-        <div className="text-center max-w-2xl mx-auto space-y-1.5">
+        {/* Centered Title (No item badge) */}
+        <div className="text-center max-w-2xl mx-auto">
           <h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A18] tracking-tight leading-tight"
             style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
           >
             {activeCategoryMeta?.label || 'Curated Catalogue'}
           </h1>
-          <p className="text-xs sm:text-sm text-[#78746D] font-light max-w-lg mx-auto">
-            {activeCategoryMeta?.subtitle || activeCategoryMeta?.tagline || 'Bespoke items curated for meaningful celebration.'}
-          </p>
         </div>
 
         {/* ── 100% DEAD-CENTERED PASTEL CIRCULAR PRICE RANGES (NO CLIPPING) ── */}

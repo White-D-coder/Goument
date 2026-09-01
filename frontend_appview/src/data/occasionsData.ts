@@ -61,7 +61,8 @@ export interface OccasionPageData {
   budgetTiers: BudgetTier[];
 
   // Section 5: Recommended Product Mix
-  productMix: ProductMixItem[];
+  categoryIds?: string[];
+  productMix?: ProductMixItem[];
 
   // Section 6: Curated Concepts
   curatedConcepts: CuratedConcept[];
@@ -81,7 +82,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     title: 'Employee Gifting',
     tagline: 'Thoughtful gifts. Stronger teams. Lasting impact.',
     description: 'Celebrate your people with premium, thoughtful gifts that inspire, engage and make every milestone memorable.',
-    heroImage: '/images/brand/topcards/card_1.png',
+    heroImage: '/images/brand/topcards/card_2.png',
 
     solvesTitle: 'What Employee Gifting Solves',
     solvesSubtitle: 'Great teams are built on appreciation, recognition and connection. Our employee gifting solutions help you strengthen relationships, boost morale and celebrate every moment that matters.',
@@ -143,15 +144,15 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       },
     ],
 
-    productMix: [
-      { name: 'Gourmet', image: '/images/occasions/occasion_1.png' },
-      { name: 'Drinkware', image: '/images/brand/topcards/card_2.png' },
-      { name: 'Bags', image: '/images/brand/topcards/card_1.png' },
-      { name: 'Stationery', image: '/images/occasions/occasion_2.png' },
-      { name: 'Tech', image: '/images/occasions/occasion_5.png' },
-      { name: 'Apparel', image: '/images/occasions/occasion_3.png' },
-      { name: 'Home & Lifestyle', image: '/images/occasions/occasion_4.png' },
-      { name: 'Keepsakes', image: '/images/occasions/occasion_6.png' },
+    categoryIds: [
+      'office-travel-bags',
+      'stationery-desk',
+      'electronics-audio',
+      'gourmet-food',
+      'beverages',
+      'corporate-apparel',
+      'personalisation',
+      'wellness-lifestyle',
     ],
 
     curatedConcepts: [
@@ -275,15 +276,15 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { range: '₹3,500+', description: 'Executive suites with luxury accessories & ANC headphones.', iconName: 'Gem' },
     ],
 
-    productMix: [
-      { name: 'Stationery', image: '/images/occasions/occasion_2.png' },
-      { name: 'Drinkware', image: '/images/brand/topcards/card_2.png' },
-      { name: 'Bags & Sleeves', image: '/images/brand/topcards/card_1.png' },
-      { name: 'Tech & Cables', image: '/images/occasions/occasion_5.png' },
-      { name: 'Apparel', image: '/images/occasions/occasion_3.png' },
-      { name: 'Snacks & Bites', image: '/images/occasions/occasion_4.png' },
-      { name: 'Desk Accessories', image: '/images/occasions/occasion_6.png' },
-      { name: 'Welcome Books', image: '/images/occasions/occasion_1.png' },
+    categoryIds: [
+      'office-travel-bags',
+      'stationery-desk',
+      'electronics-audio',
+      'corporate-apparel',
+      'beverages',
+      'gourmet-food',
+      'personalisation',
+      'wellness-lifestyle',
     ],
 
     curatedConcepts: [
@@ -347,15 +348,15 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { range: '₹10,000+', description: 'Ultra-luxury bespoke curations for top tier clients.', iconName: 'Gem' },
     ],
 
-    productMix: [
-      { name: 'Reserve Treats', image: '/images/occasions/occasion_3.png' },
-      { name: 'Artisanal Teas', image: '/images/occasions/occasion_1.png' },
-      { name: 'Brass Accents', image: '/images/occasions/occasion_6.png' },
-      { name: 'Fine Glassware', image: '/images/brand/topcards/card_3.png' },
-      { name: 'Leather Goods', image: '/images/brand/topcards/card_1.png' },
-      { name: 'Saffron & Honey', image: '/images/occasions/occasion_4.png' },
-      { name: 'Handmade Ceramics', image: '/images/occasions/occasion_2.png' },
-      { name: 'Luxury Confections', image: '/images/occasions/occasion_5.png' },
+    categoryIds: [
+      'gourmet-food',
+      'beverages',
+      'decor-spiritual',
+      'office-travel-bags',
+      'personalisation',
+      'infinity-beyond',
+      'wellness-lifestyle',
+      'awards-recognition',
     ],
 
     curatedConcepts: [
@@ -383,6 +384,16 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
   },
 };
 
+// Category mapping helper for dynamic occasion pages
+const OCCASION_CATEGORY_MAP: Record<string, string[]> = {
+  'festive-gifting': ['gourmet-food', 'decor-spiritual', 'beverages', 'personalisation', 'wellness-lifestyle', '3d-miniatures', 'infinity-beyond'],
+  'weddings-celebrations': ['decor-spiritual', 'gourmet-food', 'personalisation', '3d-miniatures', 'beverages', 'wellness-lifestyle', 'infinity-beyond'],
+  'events-conferences': ['office-travel-bags', 'stationery-desk', 'electronics-audio', 'corporate-apparel', 'gourmet-food', 'beverages', 'personalisation', 'awards-recognition'],
+  'milestones-recognition': ['awards-recognition', 'office-travel-bags', 'electronics-audio', 'infinity-beyond', 'personalisation', 'gourmet-food', 'wellness-lifestyle', 'stationery-desk'],
+  'cx-gifting': ['gourmet-food', 'beverages', 'personalisation', 'wellness-lifestyle', 'decor-spiritual', 'office-travel-bags'],
+  'dealer-partner-gifting': ['awards-recognition', 'electronics-audio', 'office-travel-bags', 'gourmet-food', 'beverages', 'decor-spiritual', 'personalisation'],
+};
+
 // Fallback generator for other categories ensuring seamless support
 const DEFAULT_OCCASION = OCCASIONS_DATA['employee-gifting'];
 
@@ -393,6 +404,7 @@ export const getOccasionData = (slug: string): OccasionPageData => {
 
   const titles: Record<string, string> = {
     'festive-gifting': 'Festive Gifting',
+    'weddings-celebrations': 'Weddings & Celebrations',
     'events-conferences': 'Events & Conferences',
     'milestones-recognition': 'Milestones & Recognition',
     'cx-gifting': 'CX Gifting',
@@ -409,5 +421,6 @@ export const getOccasionData = (slug: string): OccasionPageData => {
     title: name,
     tagline: `Thoughtfully curated ${name.toLowerCase()} for meaningful impact.`,
     description: `Elevate your ${name.toLowerCase()} with bespoke keepsake boxes, gourmet delicacies, and white-glove corporate fulfillment.`,
+    categoryIds: OCCASION_CATEGORY_MAP[slug] || DEFAULT_OCCASION.categoryIds,
   };
 };

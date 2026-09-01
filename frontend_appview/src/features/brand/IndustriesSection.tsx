@@ -15,7 +15,8 @@ import { ScrollReveal } from '@/components/motion/ScrollReveal';
 export interface IndustryItem {
   id: string;
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon?: React.ComponentType<{ className?: string }>;
+  imageIcon?: string;
   iconColor: string;
   bulletColor: string;
   points: string[];
@@ -25,7 +26,7 @@ export const INDUSTRIES_ROW_1: IndustryItem[] = [
   {
     id: 'real-estate',
     title: 'Real Estate',
-    icon: Building2,
+    imageIcon: '/icons/residential.png',
     iconColor: 'text-[#3D5244]', // Heritage Sage
     bulletColor: 'text-[#3D5244]',
     points: [
@@ -39,7 +40,7 @@ export const INDUSTRIES_ROW_1: IndustryItem[] = [
   {
     id: 'industrial-oem',
     title: 'Industrial / OEM',
-    icon: Factory,
+    imageIcon: '/icons/factory.png',
     iconColor: 'text-[#A67C46]', // Antique Gold / Ochre
     bulletColor: 'text-[#A67C46]',
     points: [
@@ -98,7 +99,7 @@ export const INDUSTRIES_ROW_2: IndustryItem[] = [
   {
     id: 'weddings-celebrations',
     title: 'Weddings & Celebrations',
-    icon: Sparkles,
+    imageIcon: '/icons/arch.png',
     iconColor: 'text-[#9B5368]', // Luxury Dusty Rose
     bulletColor: 'text-[#9B5368]',
     points: [
@@ -164,9 +165,17 @@ export const IndustriesSection: React.FC = () => {
                   <div className="flex flex-col space-y-2.5 group w-full">
                     {/* Refined Icon */}
                     <div className="h-9 sm:h-10 flex items-start transition-transform duration-300 group-hover:scale-105">
-                      <Icon
-                        className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] ${industry.iconColor} opacity-90 group-hover:opacity-100 transition-opacity`}
-                      />
+                      {industry.imageIcon ? (
+                        <img
+                          src={industry.imageIcon}
+                          alt={industry.title}
+                          className="w-7 h-7 sm:w-8 sm:h-8 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                        />
+                      ) : Icon ? (
+                        <Icon
+                          className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] ${industry.iconColor} opacity-90 group-hover:opacity-100 transition-opacity`}
+                        />
+                      ) : null}
                     </div>
 
                     {/* Aligned Title */}
@@ -210,9 +219,17 @@ export const IndustriesSection: React.FC = () => {
                   <div className="flex flex-col space-y-2.5 group w-full">
                     {/* Refined Icon */}
                     <div className="h-9 sm:h-10 flex items-start transition-transform duration-300 group-hover:scale-105">
-                      <Icon
-                        className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] ${industry.iconColor} opacity-90 group-hover:opacity-100 transition-opacity`}
-                      />
+                      {industry.imageIcon ? (
+                        <img
+                          src={industry.imageIcon}
+                          alt={industry.title}
+                          className="w-7 h-7 sm:w-8 sm:h-8 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                        />
+                      ) : Icon ? (
+                        <Icon
+                          className={`w-7 h-7 sm:w-8 sm:h-8 stroke-[1.25] ${industry.iconColor} opacity-90 group-hover:opacity-100 transition-opacity`}
+                        />
+                      ) : null}
                     </div>
 
                     {/* Aligned Title */}

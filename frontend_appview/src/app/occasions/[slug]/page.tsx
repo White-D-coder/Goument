@@ -13,6 +13,7 @@ export async function generateStaticParams() {
     { slug: 'onboarding-kits' },
     { slug: 'client-gifting' },
     { slug: 'festive-gifting' },
+    { slug: 'weddings-celebrations' },
     { slug: 'events-conferences' },
     { slug: 'milestones-recognition' },
     { slug: 'cx-gifting' },

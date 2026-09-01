@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { 
   Send, 
   CheckCircle2, 
@@ -32,6 +33,8 @@ import {
 } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { OccasionPageData } from '@/data/occasionsData';
+import { CATALOGUE_CATEGORIES } from '@/data/hampersData';
+import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
 
 // Dynamic Lucide Icon Mapper
@@ -64,40 +67,71 @@ const IconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ data }) => {
   const [formData, setFormData] = useState({
     name: '',
-    company: '',
     email: '',
     phone: '',
     budget: '₹1,000 - ₹1,500 per set',
     quantity: '50 - 100 sets',
-    message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Categories for this specific occasion
+  const displayCategories = useMemo(() => {
+    if (data.categoryIds && data.categoryIds.length > 0) {
+      return data.categoryIds
+        .map((id) => CATALOGUE_CATEGORIES.find((c) => c.id === id))
+        .filter(Boolean) as typeof CATALOGUE_CATEGORIES;
+    }
+    return CATALOGUE_CATEGORIES.slice(0, 8);
+  }, [data.categoryIds]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) {
-      toast.error('Please provide your name and email address.');
+    if (!formData.name || !formData.email || !formData.phone) {
+      toast.error('Please provide your name, email, and phone number.');
       return;
     }
 
     setIsSubmitting(true);
     try {
+      // 1. Send via email API
       await fetch('/api/send-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           occasion: data.title,
-          source: `Occasion Landing Page: ${data.title}`,
+          source: `Occasion Page: ${data.title}`,
         }),
       });
 
+      // 2. Open WhatsApp with formatted text
+      openWhatsAppInquiry({
+        pageName: data.title,
+        occasion: data.title,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        budget: formData.budget,
+        quantity: formData.quantity,
+      }, '917021463609');
+
       setSubmitted(true);
-      toast.success('Your curation enquiry has been dispatched to hello@thegourmetgifts.co!');
+      toast.success('Your enquiry has been dispatched via WhatsApp & Email!');
     } catch {
-      toast.error('Could not dispatch enquiry. Please email hello@thegourmetgifts.co directly.');
+      // Still open WhatsApp if email API fails
+      openWhatsAppInquiry({
+        pageName: data.title,
+        occasion: data.title,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        budget: formData.budget,
+        quantity: formData.quantity,
+      }, '917021463609');
+      setSubmitted(true);
+      toast.success('Opening WhatsApp Concierge...');
     } finally {
       setIsSubmitting(false);
     }
@@ -285,21 +319,18 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {data.budgetTiers.map((tier, idx) => {
             const Icon = IconMap[tier.iconName] || Gift;
             return (
               <ScrollReveal key={idx} animation="fadeUp" delay={0.05 * (idx + 1)}>
-                <div className="bg-white border border-[#EAE5DC] rounded-2xl p-6 space-y-3 shadow-2xs hover:shadow-md transition-shadow text-center flex flex-col items-center">
-                  <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#8C6228] mb-1">
+                <div className="bg-white border border-[#EAE5DC] rounded-2xl p-5 sm:p-6 shadow-2xs hover:shadow-md transition-all text-center flex flex-col items-center justify-center gap-2.5 group hover:border-[#8C6228]/50">
+                  <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#8C6228] group-hover:scale-110 transition-transform">
                     <Icon className="w-5 h-5 stroke-[1.5]" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#1A1A18] tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold text-[#1A1A18] tracking-tight">
                     {tier.range}
                   </h3>
-                  <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                    {tier.description}
-                  </p>
                 </div>
               </ScrollReveal>
             );
@@ -322,23 +353,33 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-5 justify-items-center">
-          {data.productMix.map((item, idx) => (
-            <ScrollReveal key={idx} animation="fadeUp" delay={0.025 * (idx + 1)}>
-              <div className="flex flex-col items-center space-y-2.5 group cursor-pointer text-center">
-                <div className="w-22 h-22 sm:w-26 sm:h-26 rounded-2xl overflow-hidden bg-white border border-[#DDD8CE] shadow-2xs group-hover:shadow-md transition-all relative">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 15vw"
-                    className="object-cover object-center group-hover:scale-108 transition-transform duration-500"
-                  />
+        <div className="flex flex-wrap justify-center items-start gap-4 sm:gap-6 md:gap-7 lg:gap-8 max-w-6xl mx-auto">
+          {displayCategories.map((cat, idx) => (
+            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
+              <Link
+                href={`/collections?category=${cat.id}`}
+                className="flex flex-col items-center group cursor-pointer w-24 sm:w-28 md:w-32 focus:outline-none transition-all duration-300"
+              >
+                {/* Outer Prominent Rounded Squircle Frame (Homepage Design) */}
+                <div
+                  className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-[22px] sm:rounded-[26px] md:rounded-[30px] p-[3px] sm:p-[3.5px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] group-hover:ring-2 group-hover:ring-[#BFA267]/50`}
+                >
+                  {/* Inner Rounded Squircle Image Container */}
+                  <div className="w-full h-full rounded-[19px] sm:rounded-[23px] md:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
+                    <img
+                      src={cat.image}
+                      alt={cat.label}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-112"
+                    />
+                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-opacity duration-300" />
+                  </div>
                 </div>
-                <span className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-[0.16em] text-[#1A1A18] group-hover:text-[#8C6228] transition-colors">
-                  {item.name}
+
+                {/* Category Title Below Image — EXACT Jakarta Sans uppercase tracking-[0.22em] */}
+                <span className="text-[10.5px] sm:text-[11.5px] font-sans font-semibold uppercase tracking-[0.22em] text-[#1A1A18] mt-2.5 text-center leading-tight transition-colors group-hover:text-[#8C6228] max-w-[120px]">
+                  {cat.label}
                 </span>
-              </div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>
@@ -519,13 +560,20 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                 >
                   Thank you, {formData.name}.
                 </h3>
-                <p className="text-xs sm:text-sm text-[#78746D] max-w-md mx-auto leading-relaxed">
-                  Your enquiry for <strong>{data.title}</strong> has been received. Our team will contact you at <strong>{formData.email}</strong> shortly.
-                </p>
-                <div className="pt-3">
+                <div className="pt-3 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/917021463609?text=${encodeURIComponent(
+                      `✨ *NEW CURATION ENQUIRY* ✨\n📍 *Source / Page:* ${data.title}\n\n👤 *PERSONAL DETAILS*\n• *Name:* ${formData.name}\n• *Email:* ${formData.email}\n• *Phone / WhatsApp:* ${formData.phone}\n\n📦 *REQUIREMENTS*\n• *Estimated Quantity:* ${formData.quantity}\n• *Target Budget:* ${formData.budget}\n\n─────────────\n_Sent via The Gourmet Gifts Concierge_`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-2.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.16em] cursor-pointer shadow-md inline-flex items-center gap-2"
+                  >
+                    <span>OPEN CHAT ON WHATSAPP</span>
+                  </a>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-6 py-2.5 bg-[#1A1A18] text-white text-xs font-mono uppercase tracking-[0.16em] cursor-pointer"
+                    className="px-6 py-2.5 border border-[#1A1A18]/30 hover:border-[#1A1A18] text-[#1A1A18] text-xs font-mono uppercase tracking-[0.16em] cursor-pointer"
                   >
                     SEND ANOTHER ENQUIRY
                   </button>
@@ -534,7 +582,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
                       Your Name *
@@ -549,21 +597,6 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                     />
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
-                      Company / Organization
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Company name"
-                      className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
                       Email Address *
@@ -628,20 +661,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
-                    Custom Requests / Delivery Timelines
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell us about branding, packaging preferences or required delivery dates..."
-                    className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none transition-colors resize-none"
-                  />
-                </div>
-
-                <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-[#EFECE6]">
+                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between border-[#EFECE6]">
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -653,21 +673,9 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                     <span>{isSubmitting ? 'DISPATCHING TO CONCIERGE...' : 'SEND CURATION ENQUIRY'}</span>
                   </button>
 
-                  <div className="flex flex-wrap items-center gap-2.5 text-xs text-[#78746D] font-light">
-                    <span>Direct concierge:</span>
-                    <a 
-                      href={`https://wa.me/917021463609?text=Hi%20The%20Gourmet%20Gifts%2C%20I%20would%20like%20to%20enquire%20about%20${encodeURIComponent(data.title)}.`}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-[#1A1A18] font-semibold hover:underline flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-1 rounded-sm border border-[#D9D5CC]"
-                    >
-                      WhatsApp: +91 70214 63609
-                    </a>
-                    <span className="hidden sm:inline">•</span>
-                    <a href="mailto:hello@thegourmetgifts.co" className="text-[#1A1A18] font-medium underline underline-offset-4 hover:text-[#BFA267] transition-colors">
-                      hello@thegourmetgifts.co
-                    </a>
-                  </div>
+                  <p className="text-xs text-[#78746D] font-light">
+                    Direct concierge: <a href="mailto:hello@thegourmetgifts.co" className="text-[#1A1A18] font-medium underline underline-offset-4 hover:text-[#BFA267] transition-colors">hello@thegourmetgifts.co</a>
+                  </p>
                 </div>
 
               </form>

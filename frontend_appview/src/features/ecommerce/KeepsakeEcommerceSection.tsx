@@ -51,8 +51,8 @@ export default function KeepsakeEcommerceSection() {
                     </div>
                   </div>
 
-                  {/* Category Title Below Image — EXACT Jakarta Sans uppercase tracking-[0.22em] */}
-                  <span className="text-[11px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.22em] text-[#1A1A18] mt-3 max-w-[140px] text-center leading-tight transition-colors group-hover:text-[#8C6228]">
+                  {/* Category Title Below Image — Responsive tracking and clean wrap */}
+                  <span className="text-[10px] sm:text-[11.5px] md:text-[12px] font-sans font-semibold uppercase tracking-[0.12em] sm:tracking-[0.22em] text-[#1A1A18] mt-2 sm:mt-3 max-w-[105px] sm:max-w-[140px] text-center leading-tight transition-colors group-hover:text-[#8C6228] break-words">
                     {cat.label}
                   </span>
                 </Link>
@@ -67,7 +67,8 @@ export default function KeepsakeEcommerceSection() {
             href="/collections"
             className="inline-flex items-center gap-2 group text-[#1A1A18] font-sans text-xs sm:text-sm font-semibold tracking-[0.16em] uppercase relative py-1 cursor-pointer transition-colors"
           >
-            <span>Explore Complete Catalogue</span>
+            <span className="inline sm:hidden">Explore Catalogue</span>
+            <span className="hidden sm:inline">Explore Complete Catalogue</span>
             <ArrowRight className="w-4 h-4 text-[#9E7B35] group-hover:translate-x-1.5 transition-transform duration-300" />
             
             {/* Animated Underline */}

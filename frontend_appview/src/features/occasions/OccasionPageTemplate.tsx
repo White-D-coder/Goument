@@ -29,7 +29,8 @@ import {
   ShieldCheck,
   Clock,
   Headphones,
-  ArrowRight
+  ArrowRight,
+  ChevronRight,
 } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { OccasionPageData } from '@/data/occasionsData';
@@ -157,6 +158,27 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           {/* Left Column: Headline, Tagline, CTAs & Trust Badges */}
           <div className="lg:col-span-6 space-y-6 sm:space-y-7">
             <ScrollReveal animation="fadeUp">
+              {/* ─── Working Breadcrumbs ─── */}
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#8C847B] mb-3 sm:mb-4">
+                <Link
+                  href="/gourmet-gifts"
+                  className="hover:text-[#1A1A18] transition-colors"
+                >
+                  Home
+                </Link>
+                <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
+                <Link
+                  href="/gourmet-gifts#occasions"
+                  className="hover:text-[#1A1A18] transition-colors"
+                >
+                  Occasions
+                </Link>
+                <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
+                <span className="text-[#1A1A18] font-medium truncate">
+                  {data.title}
+                </span>
+              </nav>
+
               <div className="space-y-3 sm:space-y-4">
                 <h1
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1A1A18] tracking-tight leading-[1.05]"
@@ -346,24 +368,24 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             {data.budgetTiers.map((tier, idx) => {
               const pillTiers = [
                 {
-                  bg: 'bg-gradient-to-br from-[#3D5244] to-[#28382D]',
-                  border: 'border-[#5A7362]/60',
-                  shadow: 'shadow-[0_10px_26px_rgba(40,56,45,0.32)] hover:shadow-[0_16px_34px_rgba(40,56,45,0.48)]',
+                  bg: 'bg-[#FDEBDD]',
+                  border: 'border-[#F0DACB]',
+                  shadow: 'shadow-[0_8px_22px_rgba(253,235,221,0.5)] hover:shadow-[0_12px_28px_rgba(240,218,203,0.7)]',
                 },
                 {
-                  bg: 'bg-gradient-to-br from-[#7D434B] to-[#592B32]',
-                  border: 'border-[#9E5F68]/60',
-                  shadow: 'shadow-[0_10px_26px_rgba(89,43,50,0.32)] hover:shadow-[0_16px_34px_rgba(89,43,50,0.48)]',
+                  bg: 'bg-[#D9CDE4]',
+                  border: 'border-[#C9BCD6]',
+                  shadow: 'shadow-[0_8px_22px_rgba(217,205,228,0.5)] hover:shadow-[0_12px_28px_rgba(201,188,214,0.7)]',
                 },
                 {
-                  bg: 'bg-gradient-to-br from-[#805B27] to-[#573912]',
-                  border: 'border-[#A3793F]/60',
-                  shadow: 'shadow-[0_10px_26px_rgba(87,57,18,0.32)] hover:shadow-[0_16px_34px_rgba(87,57,18,0.48)]',
+                  bg: 'bg-[#B9E3DD]',
+                  border: 'border-[#A6D4CD]',
+                  shadow: 'shadow-[0_8px_22px_rgba(185,227,221,0.5)] hover:shadow-[0_12px_28px_rgba(166,212,205,0.7)]',
                 },
                 {
-                  bg: 'bg-gradient-to-br from-[#452D3E] to-[#291824]',
-                  border: 'border-[#694860]/60',
-                  shadow: 'shadow-[0_10px_26px_rgba(41,24,36,0.35)] hover:shadow-[0_16px_34px_rgba(41,24,36,0.52)]',
+                  bg: 'bg-[#A6CCE3]',
+                  border: 'border-[#93BDD6]',
+                  shadow: 'shadow-[0_8px_22px_rgba(166,204,227,0.5)] hover:shadow-[0_12px_28px_rgba(147,189,214,0.7)]',
                 },
               ];
               const pill = pillTiers[idx % pillTiers.length];

@@ -143,11 +143,10 @@ export const GiftingProcessSection: React.FC = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right: 5-Step Connected Timeline */}
+          {/* Right: 5-Step Connected Timeline (Horizontal Scroll on Mobile, 5-col Grid on Desktop) */}
           <div className="lg:col-span-8 xl:col-span-9">
             
-            {/* Desktop & Tablet: Horizontal Flow with Connected Dotted White Line */}
-            <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-7 sm:gap-6 lg:gap-3.5 items-start">
+            <div className="relative flex md:grid md:grid-cols-5 gap-5 sm:gap-6 md:gap-3.5 items-start overflow-x-auto md:overflow-visible pb-4 md:pb-0 px-1 sm:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               
               {/* Connected Dotted Line (Desktop only) */}
               <div 
@@ -165,7 +164,7 @@ export const GiftingProcessSection: React.FC = () => {
                     key={step.number}
                     animation="fadeUp"
                     delay={0.06 * (idx + 1)}
-                    className="relative z-10 flex flex-col items-center text-center group px-1"
+                    className="relative z-10 flex flex-col items-center text-center group px-1 w-[200px] sm:w-[220px] md:w-auto shrink-0 snap-start"
                   >
                     {/* Deep Heritage Node with White Icon & Florette Accent */}
                     <div className="relative mb-3.5">

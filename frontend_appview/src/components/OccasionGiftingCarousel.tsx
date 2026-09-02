@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export interface OccasionCard {
@@ -159,17 +159,18 @@ export default function OccasionGiftingCarousel() {
   };
 
   return (
-    <section id="occasions" className="pt-4 sm:pt-8 md:pt-12 pb-4 sm:pb-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
-      <div className="max-w-[1580px] mx-auto px-2 sm:px-4 lg:px-6">
+    <section id="occasions" className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
+      <div className="max-w-[1580px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         
         {/* ─── SECTION HEADER ─── */}
         <ScrollReveal animation="fadeUp">
-          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2 mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <div className="text-center max-w-4xl mx-auto px-2 space-y-2.5 sm:space-y-3.5 mb-8 sm:mb-10 md:mb-12">
             <h2
-              className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
+              className="text-[28px] xs:text-3xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-[1.15]"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              For Every Occasion That Matters
+              <span className="block xs:inline">For Every Occasion</span>{' '}
+              <span className="block xs:inline">That Matters</span>
             </h2>
             <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
               <span className="inline sm:hidden">
@@ -213,7 +214,7 @@ export default function OccasionGiftingCarousel() {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
-            className={`flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-3 pt-1 -mx-3 px-3 sm:mx-0 sm:px-0 scroll-smooth select-none ${
+            className={`flex gap-3.5 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 px-4 sm:px-0 scroll-smooth select-none ${
               isDragging ? 'cursor-grabbing scroll-auto' : 'cursor-grab'
             } [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
           >
@@ -226,7 +227,7 @@ export default function OccasionGiftingCarousel() {
                     e.preventDefault();
                   }
                 }}
-                className="relative w-[240px] sm:w-[270px] md:w-[280px] lg:w-[calc((100%-4*1rem)/5.35)] aspect-[3/4.2] shrink-0 snap-start rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.22)] transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 group border border-black/10"
+                className="relative w-[240px] sm:w-[270px] md:w-[280px] lg:w-[calc((100%-4*1rem)/5.35)] aspect-[3/4.2] shrink-0 snap-start rounded-2xl overflow-hidden shadow-[0_10px_28px_rgba(0,0,0,0.14)] hover:shadow-[0_20px_44px_rgba(0,0,0,0.24)] transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 group"
               >
                 {/* Full-Bleed Image Background */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A18] pointer-events-none">
@@ -259,9 +260,10 @@ export default function OccasionGiftingCarousel() {
                     <p className="font-sans text-xs sm:text-[12.5px] text-[#EDE6DC] font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] max-w-[215px] mx-auto">
                       {card.subtitle}
                     </p>
-                    <div className="pt-1 flex items-center justify-center">
-                      <span className="text-[11px] font-sans uppercase tracking-[0.22em] text-[#DFC299] font-semibold drop-shadow-md">
-                        EXPLORE
+                    <div className="pt-2">
+                      <span className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-white/90 group-hover:text-[#DFC299] transition-colors">
+                        <span>EXPLORE</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
                   </div>

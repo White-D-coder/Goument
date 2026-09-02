@@ -8,7 +8,8 @@ import {
   Minus, 
   Plus, 
   Check,
-  SlidersHorizontal
+  SlidersHorizontal,
+  ChevronRight,
 } from 'lucide-react';
 import { HAMPERS_CATALOG, CATALOGUE_CATEGORIES, HamperData } from '@/data/hampersData';
 import { useCartStore } from '@/hooks/useCart';
@@ -103,11 +104,26 @@ function CollectionsCatalogueContent() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1A1A18] pt-20 sm:pt-24 pb-16">
       
-      {/* ─── TOP HEADER SECTION: CENTERED TITLE ─── */}
-      <section className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 sm:mb-8">
+      {/* ─── TOP HEADER SECTION: BREADCRUMBS & CENTERED TITLE ─── */}
+      <section className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
         
+        {/* Working Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 text-xs text-[#8C847B] mb-2 sm:mb-3">
+          <Link href="/gourmet-gifts" className="hover:text-[#1A1A18] transition-colors">
+            Home
+          </Link>
+          <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
+          <Link href="/gourmet-gifts#catalogue" className="hover:text-[#1A1A18] transition-colors">
+            Catalogue
+          </Link>
+          <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
+          <span className="text-[#1A1A18] font-medium truncate">
+            {activeCategoryMeta?.label || 'All Items'}
+          </span>
+        </nav>
+
         {/* Centered Title */}
-        <div className="text-center max-w-2xl mx-auto py-2">
+        <div className="text-center max-w-2xl mx-auto py-1">
           <h1
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A18] tracking-tight leading-tight"
             style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}

@@ -1,8 +1,28 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { UAParser } from 'ua-parser-js';
+import { isPageRouteActive, isApiRouteActive } from '@/config/appRoutes.config';
 
 export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // 1. Enforce API Route Active Status
+  if (pathname.startsWith('/api/')) {
+    if (!isApiRouteActive(pathname)) {
+      return NextResponse.json(
+        { success: false, error: 'This API route is currently disabled in appRoutes.config.ts' },
+        { status: 503 }
+      );
+    }
+  } else {
+    // 2. Enforce Page Route Active Status (Disabled pages return 404)
+    if (!isPageRouteActive(pathname)) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/_not-found';
+      return NextResponse.rewrite(url);
+    }
+  }
+
   const userAgent = request.headers.get('user-agent') || '';
   const parser = new UAParser(userAgent);
   const device = parser.getDevice();

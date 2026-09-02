@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
-import { Cormorant_Garamond, Plus_Jakarta_Sans, Geist, Playfair_Display } from 'next/font/google';
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Geist } from 'next/font/google';
 import './globals.css';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import { QueryProvider } from '@/shared/QueryProvider';
@@ -15,13 +15,6 @@ const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-playfair',
   display: 'swap',
 });
 
@@ -56,7 +49,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${cormorant.variable} ${playfair.variable} ${jakarta.variable}`}
+      className={`${geist.variable} ${cormorant.variable} ${jakarta.variable}`}
     >
       <body>
         <QueryProvider>

@@ -531,6 +531,10 @@ export const IndustriesSection: React.FC = () => {
               px-2
               space-y-1.5
               sm:space-y-2
+              mb-6
+              sm:mb-8
+              md:mb-10
+              lg:mb-12
             "
           >
             <h2

@@ -33,7 +33,6 @@ import {
 } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { OccasionPageData } from '@/data/occasionsData';
-import { CATALOGUE_CATEGORIES, HAMPERS_CATALOG } from '@/data/hampersData';
 import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
 
@@ -69,48 +68,20 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
     name: '',
     email: '',
     phone: '',
-    budget: '₹1,000 - ₹1,500 per set',
+    budget: data.budgetTiers[1] ? `${data.budgetTiers[1].range} per set` : `${data.budgetTiers[0]?.range || '₹1,000 – ₹1,499'} per set`,
     quantity: '50 - 100 sets',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [selectedBudgetIdx, setSelectedBudgetIdx] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  // Categories for this specific occasion
-  const displayCategories = useMemo(() => {
-    if (data.categoryIds && data.categoryIds.length > 0) {
-      return data.categoryIds
-        .map((id) => CATALOGUE_CATEGORIES.find((c) => c.id === id))
-        .filter(Boolean) as typeof CATALOGUE_CATEGORIES;
+  const handleBudgetClick = (range: string) => {
+    const formatted = `${range} per set`;
+    setFormData((prev) => ({ ...prev, budget: formatted }));
+    const el = document.getElementById('curation-inquiry');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-    return CATALOGUE_CATEGORIES.slice(0, 8);
-  }, [data.categoryIds]);
-
-  // Dynamic products list displayed directly underneath Recommended Product Mix
-  const visibleProducts = useMemo(() => {
-    if (selectedCategory !== 'all') {
-      const filtered = HAMPERS_CATALOG.filter((item) => item.category === selectedCategory);
-      return filtered.length > 0 ? filtered : HAMPERS_CATALOG.slice(0, 8);
-    }
-    if (selectedBudgetIdx !== null) {
-      const count = 8;
-      const offset = (selectedBudgetIdx * 3) % Math.max(1, HAMPERS_CATALOG.length - count);
-      return HAMPERS_CATALOG.slice(offset, offset + count);
-    }
-    return HAMPERS_CATALOG.slice(0, 8);
-  }, [selectedCategory, selectedBudgetIdx]);
-
-  const handleBudgetPillClick = (idx: number) => {
-    setSelectedBudgetIdx(idx);
-    setSelectedCategory('all');
-    setTimeout(() => {
-      const el = document.getElementById('recommended-product-cards');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }, 60);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -209,31 +180,42 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                   onClick={scrollToInquiry}
                   className="px-7 py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
                 >
-                  GET 3 CONCEPTS
+                  {data.primaryCta || 'GET 3 CURATED CONCEPTS'}
                 </button>
                 
                 <button
                   onClick={scrollToConcepts}
                   className="px-6 py-3.5 border border-[#8C6228]/50 hover:border-[#1A1A18] text-[#8C6228] hover:text-[#1A1A18] font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 hover:bg-white/60 cursor-pointer"
                 >
-                  EXPLORE GIFT BOXES
+                  {data.secondaryCta || 'EXPLORE GIFT BOXES'}
                 </button>
               </div>
 
               {/* 3 Trust Badges */}
               <div className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4 text-xs text-[#6B655E] font-medium">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#8C6228]" />
-                  <span>Premium Quality</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#8C6228]" />
-                  <span>On-time Delivery</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Headphones className="w-4 h-4 text-[#8C6228]" />
-                  <span>End-to-end Support</span>
-                </div>
+                {data.trustPoints && data.trustPoints.length > 0 ? (
+                  data.trustPoints.map((pt, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#8C6228]" />
+                      <span>{pt}</span>
+                    </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-[#8C6228]" />
+                      <span>Premium Quality</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-[#8C6228]" />
+                      <span>On-time Delivery</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Headphones className="w-4 h-4 text-[#8C6228]" />
+                      <span>End-to-end Support</span>
+                    </div>
+                  </>
+                )}
               </div>
             </ScrollReveal>
           </div>
@@ -258,7 +240,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          2. WHAT IT SOLVES (4 VALUE PILLAR CARDS)
+          2. WHY THOUGHTFUL GIFTING MATTERS (4 VALUE PILLAR CARDS)
           ══════════════════════════════════════════════════════════════════ */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 border-t border-[#EAE5DC]">
         <ScrollReveal animation="fadeUp">
@@ -269,9 +251,11 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             >
               {data.solvesTitle}
             </h2>
-            <p className="text-xs sm:text-sm text-[#78746D] font-light max-w-2xl mx-auto leading-relaxed">
-              {data.solvesSubtitle}
-            </p>
+            {data.solvesSubtitle && (
+              <p className="text-xs sm:text-sm text-[#78746D] font-light max-w-2xl mx-auto leading-relaxed">
+                {data.solvesSubtitle}
+              </p>
+            )}
           </div>
         </ScrollReveal>
 
@@ -298,17 +282,22 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          3. PERFECT FOR EVERY WORKPLACE MOMENT (8 MOMENT PILLS/CARDS)
+          3. CURATED FOR EVERY MOMENT (8 MOMENT CARDS)
           ══════════════════════════════════════════════════════════════════ */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 bg-[#F6F4EF]/60 rounded-3xl sm:rounded-[36px] my-6">
         <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-8 sm:mb-10">
+          <div className="text-center space-y-2 mb-8 sm:mb-10 max-w-3xl mx-auto">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               {data.momentsTitle}
             </h2>
+            {data.momentsSubtitle && (
+              <p className="text-xs sm:text-sm text-[#78746D] font-light leading-relaxed">
+                {data.momentsSubtitle}
+              </p>
+            )}
           </div>
         </ScrollReveal>
 
@@ -332,21 +321,26 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          4. GIFTS FOR EVERY BUDGET (CIRCULAR PILLS)
+          4. THOUGHTFULLY CURATED AROUND YOUR BUDGET
           ══════════════════════════════════════════════════════════════════ */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-6 sm:mb-8">
+          <div className="text-center space-y-2 mb-6 sm:mb-8 max-w-3xl mx-auto">
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              Gifts For Every Budget
+              {data.budgetTitle || 'Thoughtfully Curated Around Your Budget'}
             </h2>
+            {data.budgetSubtitle && (
+              <p className="text-xs sm:text-sm text-[#78746D] font-light leading-relaxed">
+                {data.budgetSubtitle}
+              </p>
+            )}
           </div>
         </ScrollReveal>
 
-        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (2-LINE BOLD WHITE TEXT, LARGER FONT) ── */}
+        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (2-LINE BOLD WHITE TEXT) ── */}
         <div className="w-full flex items-center justify-center pt-1 pb-2 px-4 sm:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
             {data.budgetTiers.map((tier, idx) => {
@@ -373,225 +367,101 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                 },
               ];
               const pill = pillTiers[idx % pillTiers.length];
-              const isSelected = selectedBudgetIdx === idx;
+
+              // Parse 2-line text cleanly
+              const lines = tier.range.includes(' – ') 
+                ? [`${tier.range.split(' – ')[0]} –`, tier.range.split(' – ')[1]]
+                : tier.range.startsWith('Up to ')
+                ? ['Up to', tier.range.replace('Up to ', '')]
+                : tier.range.startsWith('Under ')
+                ? ['Under', tier.range.replace('Under ', '')]
+                : [tier.range];
 
               return (
                 <ScrollReveal key={idx} animation="fadeUp" delay={0.04 * (idx + 1)}>
-                  <button
-                    onClick={() => handleBudgetPillClick(idx)}
-                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:scale-108 cursor-pointer border ${pill.bg} ${pill.border} ${pill.shadow} ${
-                      isSelected ? 'ring-3 ring-offset-2 ring-[#1A1A18] scale-105' : ''
-                    }`}
+                  <div
+                    onClick={() => handleBudgetClick(tier.range)}
+                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:scale-108 cursor-pointer border ${pill.bg} ${pill.border} ${pill.shadow}`}
                   >
                     <div className="text-white space-y-0.5 select-none text-center">
-                      {idx === 0 ? (
+                      {lines.length > 1 ? (
                         <>
-                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">Under</span>
-                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹999</span>
-                        </>
-                      ) : idx === 1 ? (
-                        <>
-                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">₹999 –</span>
-                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹1,499</span>
-                        </>
-                      ) : idx === 2 ? (
-                        <>
-                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">₹1,499 –</span>
-                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹2,499</span>
+                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">
+                            {lines[0]}
+                          </span>
+                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">
+                            {lines[1]}
+                          </span>
                         </>
                       ) : (
-                        <>
-                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹2,499+</span>
-                        </>
+                        <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">
+                          {lines[0]}
+                        </span>
                       )}
                     </div>
-                  </button>
+                  </div>
                 </ScrollReveal>
               );
             })}
           </div>
         </div>
+
+        {/* ── Immediately below the circles: Need something different? ── */}
+        <div className="text-center pt-8 sm:pt-10 space-y-3 max-w-xl mx-auto">
+          <h3 className="text-lg sm:text-xl font-medium text-[#1A1A18] tracking-tight">
+            Need something different?
+          </h3>
+          <p className="text-xs sm:text-sm text-[#6B655E] font-light">
+            Tell us your budget and brief — we&apos;ll curate around it.
+          </p>
+          <div className="pt-1">
+            <button
+              onClick={scrollToInquiry}
+              className="px-7 py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+            >
+              GET 3 CURATED CONCEPTS
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          5. RECOMMENDED PRODUCT MIX (SQUIRCLE CATEGORIES + PRODUCT CARDS UNDERNEATH)
+          5. NOT SURE WHAT TO GIFT? THAT'S WHERE WE COME IN.
           ══════════════════════════════════════════════════════════════════ */}
-      <section id="recommended-product-mix" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12 scroll-mt-20">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 my-4">
         <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-8 sm:mb-10">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Recommended Product Mix
-            </h2>
-            <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
-              Explore our diverse product categories tailored for {data.title}.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        {/* ── Category Squircles (Interactive Filter) ── */}
-        <div className="flex flex-wrap items-start justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 max-w-[1400px] mx-auto">
-          {displayCategories.map((cat, idx) => {
-            const isCatActive = selectedCategory === cat.id;
-
-            return (
-              <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory(selectedCategory === cat.id ? 'all' : cat.id);
-                    setTimeout(() => {
-                      const el = document.getElementById('recommended-product-cards');
-                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 50);
-                  }}
-                  className="flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-28 lg:w-30 focus:outline-none transition-all duration-300"
-                >
-                  {/* Outer Prominent Rounded Squircle Frame */}
-                  <div
-                    className={`w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[30px] p-[2.5px] sm:p-[3px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] ${
-                      isCatActive ? 'ring-3 ring-[#8C6228] scale-105 shadow-md' : ''
-                    }`}
-                  >
-                    {/* Inner Rounded Squircle Image Container */}
-                    <div className="w-full h-full rounded-[17px] sm:rounded-[21px] md:rounded-[25px] lg:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
-                      <img
-                        src={cat.image}
-                        alt={cat.label}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-112"
-                      />
-                      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-opacity duration-300" />
-                    </div>
-                  </div>
-
-                  {/* Category Title Below Image */}
-                  <span className={`text-[10px] sm:text-[10.5px] md:text-[11px] font-sans font-semibold uppercase tracking-[0.2em] mt-2.5 text-center leading-tight transition-colors w-full px-0.5 ${
-                    isCatActive ? 'text-[#8C6228] font-bold' : 'text-[#1A1A18] group-hover:text-[#8C6228]'
-                  }`}>
-                    {cat.label}
-                  </span>
-                </button>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-
-        {/* ── PRODUCT CARDS GRID PLACED DIRECTLY UNDER RECOMMENDED PRODUCT MIX (NO PRICING, NON-CLICKABLE) ── */}
-        <div id="recommended-product-cards" className="pt-10 sm:pt-14 scroll-mt-24">
-          <ScrollReveal animation="fadeUp">
-            <div className="text-center mb-6 space-y-1">
-              <span className="text-[10.5px] sm:text-[11.5px] uppercase tracking-[0.22em] font-semibold text-[#8C6228] block">
-                {selectedCategory !== 'all' 
-                  ? `Category Showcase • ${displayCategories.find(c => c.id === selectedCategory)?.label || 'Selected Category'}`
-                  : selectedBudgetIdx !== null
-                  ? `Budget Curation • ${data.budgetTiers[selectedBudgetIdx]?.range}`
-                  : 'All Curated Products'}
-              </span>
-              <p className="text-xs text-[#78746D] font-light max-w-xl mx-auto">
-                Bespoke artisanal items crafted for corporate and festive gift boxes.
+          <div className="bg-[#F4EFEA] border border-[#E8E1D5] rounded-3xl sm:rounded-[36px] p-8 sm:p-12 md:p-16 text-center space-y-6 max-w-4xl mx-auto shadow-2xs">
+            <div className="space-y-3 max-w-2xl mx-auto">
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-light text-[#1A1A18] tracking-tight leading-tight"
+                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+              >
+                Not Sure What to Gift? That’s Where We Come In.
+              </h2>
+              <p className="text-xs sm:text-sm md:text-base text-[#6B655E] font-light leading-relaxed">
+                Tell us who you’re gifting, the occasion, quantity and budget.
+                <br className="hidden sm:inline" /> We’ll come back with 3 thoughtfully curated concepts built around your client and your brand.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              {visibleProducts.map((item, idx) => (
-                <div
-                  key={item._id || idx}
-                  className="bg-white rounded-2xl overflow-hidden shadow-2xs border border-[#F0ECE1] flex flex-col justify-between select-none pointer-events-none"
-                >
-                  {/* Visual Frame (Clean, Non-clickable) */}
-                  <div className="w-full aspect-[4/3] overflow-hidden bg-[#FAF6F0] relative">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Content (No Price Tag, Static Non-clickable) */}
-                  <div className="p-3.5 sm:p-4.5 flex-1 flex flex-col justify-between space-y-2">
-                    <div className="space-y-1">
-                      <span className="text-[9.5px] uppercase tracking-wider text-[#7A8B6F] font-semibold font-mono block">
-                        {item.categoryLabel}
-                      </span>
-                      <h4 className="text-xs sm:text-sm font-semibold text-[#1A1A18] leading-snug line-clamp-1">
-                        {item.name}
-                      </h4>
-                      <p className="text-[11px] sm:text-xs text-[#7A7268] font-light line-clamp-2 leading-relaxed">
-                        {item.subCopy || item.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="pt-2">
+              <button
+                onClick={scrollToInquiry}
+                className="px-8 py-4 bg-[#1A1A18] hover:bg-[#2C241D] text-white font-sans text-xs sm:text-sm uppercase tracking-[0.18em] font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+              >
+                GET 3 CURATED CONCEPTS
+              </button>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          6. CURATED CONCEPTS LOVED BY TEAMS (4 HAMPERS)
-          ══════════════════════════════════════════════════════════════════ */}
-      <section id="curated-concepts" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-18 bg-[#F6F4EF]/60 rounded-3xl sm:rounded-[36px] my-6 scroll-mt-20">
-        <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-10 sm:mb-12">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Curated Concepts Loved By Teams
-            </h2>
+            <p className="text-[11px] sm:text-xs text-[#8C847B] font-light tracking-wide pt-1">
+              No catalogue scrolling. No guesswork. Just thoughtful options curated for you.
+            </p>
           </div>
         </ScrollReveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {data.curatedConcepts.map((concept, idx) => (
-            <ScrollReveal key={idx} animation="fadeUp" delay={0.06 * (idx + 1)}>
-              <div className="bg-white border border-[#E5E0D6] rounded-2xl overflow-hidden shadow-2xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group h-full">
-                
-                {/* Concept Visual Frame */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF6F0]">
-                  <Image
-                    src={concept.image}
-                    alt={concept.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-1.5">
-                    <h3 className="text-lg font-bold text-[#1A1A18] tracking-tight">
-                      {concept.name}
-                    </h3>
-                    <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                      {concept.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 border-t border-[#F0EBE2]">
-                    <button
-                      onClick={scrollToInquiry}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.16em] font-semibold text-[#8C6228] hover:text-[#1A1A18] transition-colors cursor-pointer"
-                    >
-                      <span>EXPLORE CONCEPT</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          7. MAKE IT UNIQUELY YOURS (5 CUSTOMIZATION BADGES)
+          6. MAKE IT UNIQUELY YOURS (5 CUSTOMIZATION BADGES)
           ══════════════════════════════════════════════════════════════════ */}
       <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
         <ScrollReveal animation="fadeUp">
@@ -782,10 +652,12 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                       className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none cursor-pointer"
                     >
-                      <option>Under ₹1,000 per set</option>
-                      <option>₹1,000 - ₹1,500 per set</option>
-                      <option>₹1,500 - ₹2,500 per set</option>
-                      <option>₹2,500+ per set</option>
+                      {data.budgetTiers.map((tier) => (
+                        <option key={tier.range} value={`${tier.range} per set`}>
+                          {tier.range} per set
+                        </option>
+                      ))}
+                      <option value="Custom / Undecided">Custom / Undecided</option>
                     </select>
                   </div>
 

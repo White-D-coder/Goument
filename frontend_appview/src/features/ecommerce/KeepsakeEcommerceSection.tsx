@@ -13,7 +13,7 @@ export default function KeepsakeEcommerceSection() {
         
         {/* ─── SECTION HEADER ─── */}
         <ScrollReveal animation="fadeUp">
-          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2">
+          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2 mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2
               className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}

@@ -201,7 +201,7 @@ export default function ContactPage() {
                       Studio
                     </span>
                     <p className="text-xs sm:text-[13.5px] font-light text-[#3A3833] leading-relaxed">
-                      Mumbai &amp; Delhi NCR, India
+                      Mumbai, India
                     </p>
                   </div>
 

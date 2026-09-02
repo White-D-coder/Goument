@@ -80,7 +80,7 @@ const GOURMET_FOOTER_COLUMNS = [
     links: [
       { label: 'hello@thegourmetgifts.co', href: 'mailto:hello@thegourmetgifts.co' },
       { label: '+91 70214 63609 (WhatsApp)', href: 'https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting.' },
-      { label: 'Mumbai & Delhi NCR, India', href: '/contact' },
+      { label: 'Mumbai, India', href: '/contact' },
     ],
   },
 ];

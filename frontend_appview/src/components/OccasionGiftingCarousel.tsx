@@ -66,7 +66,7 @@ export const OCCASION_CARDS: OccasionCard[] = [
   },
   {
     id: 'weddings-celebrations',
-    title: 'WEDDINGS & CELEBRATIONS',
+    title: 'CELEBRATIONS',
     subtitle: 'Heirloom favours & celebratory hampers.',
     image: '/cards/wedding.png',
     href: '/occasions/weddings-celebrations',
@@ -218,7 +218,7 @@ export default function OccasionGiftingCarousel() {
               isDragging ? 'cursor-grabbing scroll-auto' : 'cursor-grab'
             } [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
           >
-            {OCCASION_CARDS.map((card) => (
+            {OCCASION_CARDS.map((card, idx) => (
               <Link
                 key={card.id}
                 href={card.href}
@@ -235,6 +235,9 @@ export default function OccasionGiftingCarousel() {
                     src={card.image}
                     alt={card.title}
                     fill
+                    priority={idx < 5}
+                    loading={idx < 5 ? 'eager' : 'lazy'}
+                    quality={80}
                     sizes="(max-width: 768px) 240px, (max-width: 1200px) 280px, 320px"
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-108 filter brightness-[0.98]"
                   />

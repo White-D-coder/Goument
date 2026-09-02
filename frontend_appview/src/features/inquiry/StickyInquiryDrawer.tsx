@@ -230,7 +230,7 @@ export const StickyInquiryDrawer: React.FC = () => {
                           <option>Corporate / Client Gifting</option>
                           <option>Employee Onboarding</option>
                           <option>Festive & Diwali</option>
-                          <option>Weddings & Celebrations</option>
+                          <option>Celebrations</option>
                           <option>Events & Conferences</option>
                           <option>Milestone Recognition</option>
                         </select>

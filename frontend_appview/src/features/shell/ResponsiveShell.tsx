@@ -104,7 +104,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           transition: 'background-color 400ms cubic-bezier(0.4,0,0.2,1), border-color 400ms cubic-bezier(0.4,0,0.2,1), backdrop-filter 400ms cubic-bezier(0.4,0,0.2,1)',
         }}
       >
-        <nav className="max-w-[1440px] mx-auto flex items-center justify-between h-16 lg:h-[68px] px-4 sm:px-6 lg:px-10">
+        <nav className="max-w-[1440px] mx-auto flex items-center justify-between h-16 lg:h-[68px] px-3.5 sm:px-6 lg:px-10 gap-2 sm:gap-4">
           
           {/* ─── Left: Navigation Links (Desktop) ─── */}
           <div className="hidden lg:flex items-center gap-7 xl:gap-8 flex-1">
@@ -139,12 +139,12 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             ))}
           </div>
 
-          {/* ─── Center: Brand Identity / Monogram ─── */}
-          <div className="flex-shrink-0 flex items-center justify-center">
+          {/* ─── Center / Left (Mobile): Brand Identity / Monogram ─── */}
+          <div className="flex-shrink-0 flex items-center justify-start lg:justify-center min-w-0">
             <Link
               href="/"
               onClick={scrollToHeroOrTop}
-              className="flex items-center gap-2 sm:gap-3 group py-1 cursor-pointer"
+              className="flex items-center gap-2 sm:gap-3 group py-1 cursor-pointer min-w-0"
               aria-label="The Gourmet Gifts Home"
             >
               <div className="relative flex items-center h-9 sm:h-10">
@@ -156,7 +156,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.94 }}
                       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className="relative w-9 h-9 sm:w-10 sm:h-10"
+                      className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0"
                     >
                       <Image
                         src="/images/brand/logo-vector.pdf.png"
@@ -175,7 +175,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className={`text-[16px] sm:text-[18px] lg:text-[20px] uppercase tracking-[0.04em] font-medium leading-none whitespace-nowrap transition-colors duration-300 ${
+                      className={`text-[13px] xs:text-[14px] sm:text-[18px] lg:text-[20px] uppercase tracking-[0.03em] sm:tracking-[0.04em] font-medium leading-none whitespace-nowrap transition-colors duration-300 ${
                         isTransparentHero ? 'text-white' : 'text-[var(--satra-charcoal)]'
                       }`}
                       style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
@@ -189,12 +189,12 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           </div>
 
           {/* ─── Right: Utilities + Mobile Menu (Quick Enquire, Menu) ─── */}
-          <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
+          <div className="flex-1 flex items-center justify-end gap-2.5 sm:gap-4 lg:gap-5 shrink-0">
             {/* Quick Enquire Modal CTA */}
             <button
               type="button"
               onClick={() => openInquiryModal({ source: 'Navbar Enquire Button' })}
-              className={`inline-flex items-center px-3.5 py-1.5 text-[10.5px] font-mono font-semibold uppercase tracking-[0.16em] transition-all rounded-sm cursor-pointer ${
+              className={`inline-flex items-center px-2.5 sm:px-3.5 py-1.5 text-[9.5px] sm:text-[10.5px] font-mono font-semibold uppercase tracking-[0.12em] sm:tracking-[0.16em] transition-all rounded-sm cursor-pointer shrink-0 ${
                 isTransparentHero 
                   ? 'bg-white text-[#1A1A18] hover:bg-white/90 shadow-xs' 
                   : 'bg-[#1A1A18] text-[#FAF8F5] hover:bg-[#38332B]'

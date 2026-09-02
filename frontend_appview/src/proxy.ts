@@ -50,6 +50,6 @@ export const config = {
     /*
      * Match all request paths except static files, _next, favicon, webmanifest
      */
-    '/((?!_next/static|_next/image|LOGOs.png|icon.svg|manifest.webmanifest|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|webmanifest)$).*)',
+    '/((?!_next/static|_next/image|meta.svg|icon.svg|manifest.webmanifest|robots.txt|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|webmanifest)$).*)',
   ],
 };

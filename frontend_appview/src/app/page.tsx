@@ -67,11 +67,14 @@ export default function HomePage() {
       <div id="hero" className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0 flex flex-col justify-center items-center">
         {/* Full-bleed cover background image (No blank margins) */}
         <div className="absolute inset-0 overflow-hidden">
-          <img
-            ref={heroImageRef}
+          <Image
             src="/images/hero/hero_main.jpg"
             alt="The Gourmet Gifts — Luxury Gifting"
-            className="w-full h-full object-cover object-center filter brightness-[0.88]"
+            fill
+            priority
+            quality={80}
+            sizes="100vw"
+            className="object-cover object-center filter brightness-[0.88]"
           />
         </div>
 

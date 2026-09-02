@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { CATALOGUE_CATEGORIES } from '@/data/hampersData';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -46,15 +47,11 @@ export default function KeepsakeEcommerceSection() {
           </div>
         </ScrollReveal>
 
-        {/* ─── 12 CATEGORIES FULL GRID (NO HORIZONTAL SCROLL - VISIBLE AT ONCE) ─── */}
-        <div className="pt-1 pb-2">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6 md:gap-7 lg:gap-8 justify-items-center">
+        {/* ─── 12 ATELIER CATEGORIES (6x2 Desktop, 4x3 Tablet, 3x4 Mobile) ─── */}
+        <div className="w-full">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-10 justify-items-center">
             {CATALOGUE_CATEGORIES.map((cat, idx) => {
-              // Swap Personalisation & Apparel position on mobile only
-              const mobileOrder = 
-                cat.id === 'personalisation' ? 'order-11 sm:order-none' :
-                cat.id === 'corporate-apparel' ? 'order-4 sm:order-none' :
-                MOBILE_ORDER_CLASSES[idx];
+              const mobileOrder = MOBILE_ORDER_CLASSES[idx] || 'order-none';
 
               return (
                 <Link
@@ -68,10 +65,13 @@ export default function KeepsakeEcommerceSection() {
                   >
                     {/* Inner Rounded Squircle Image Container */}
                     <div className="w-full h-full rounded-[23px] sm:rounded-[26px] md:rounded-[30px] lg:rounded-[34px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
-                      <img
+                      <Image
                         src={cat.image}
                         alt={cat.label}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-112"
+                        fill
+                        sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 144px"
+                        quality={75}
+                        className="object-cover transition-transform duration-700 group-hover:scale-112"
                       />
                       <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-opacity duration-300" />
                     </div>

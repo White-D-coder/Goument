@@ -776,9 +776,9 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
   'weddings-celebrations': {
     slug: 'weddings-celebrations',
-    metaTitle: 'Weddings & Celebrations — The Gourmet Gifts',
-    metaDescription: 'Make every celebration feel more thoughtful. Bespoke wedding welcome gifts, guest favours, and bridal party hampers.',
-    title: 'Weddings & Celebrations',
+    metaTitle: 'Celebrations — The Gourmet Gifts',
+    metaDescription: 'Make every celebration feel more thoughtful. Bespoke wedding welcome gifts, guest favours, and celebratory hampers.',
+    title: 'Celebrations',
     tagline: 'Make every celebration feel more thoughtful.',
     description: 'From wedding gifting and guest favours to family celebrations and special occasions, we curate gifts around the people, the moment and the experience you want to create — so every gesture feels personal, beautiful and worth remembering.',
     heroImage: '/cards/wedding.png',
@@ -884,7 +884,7 @@ export const getOccasionData = (slug: string): OccasionPageData => {
 
   const titles: Record<string, string> = {
     'onboarding-kits': 'Onboarding Kits',
-    'weddings-celebrations': 'Weddings & Celebrations',
+    'weddings-celebrations': 'Celebrations',
     'milestones-recognition': 'Milestones & Recognition',
     'cx-gifting': 'Customer Experience Gifting',
     'dealer-partner-gifting': 'Dealer & Partner Gifting',

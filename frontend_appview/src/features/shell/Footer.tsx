@@ -14,7 +14,7 @@ const GOURMET_FOOTER_COLUMNS = [
       { label: 'Events & Conferences', href: '/occasions/events-conferences' },
       { label: 'Milestones & Recognition', href: '/milestones-recognition' },
       { label: 'Dealer & Partner Gifting', href: '/occasions/dealer-partner-gifting' },
-      { label: 'Weddings & Celebrations', href: '/occasions/weddings-celebrations' },
+      { label: 'Celebrations', href: '/occasions/weddings-celebrations' },
       { label: 'CX Gifting', href: '/occasions/cx-gifting' },
     ],
   },

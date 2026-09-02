@@ -44,13 +44,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/LOGOs.png', sizes: '192x192', type: 'image/png' },
-      { url: '/LOGOs.png', sizes: 'any' },
+      { url: '/meta.svg', type: 'image/svg+xml' },
+      { url: '/meta.svg', sizes: 'any' },
     ],
-    shortcut: '/LOGOs.png',
+    shortcut: '/meta.svg',
     apple: [
-      { url: '/LOGOs.png', sizes: '180x180', type: 'image/png' },
+      { url: '/meta.svg', sizes: '180x180', type: 'image/svg+xml' },
     ],
   },
   manifest: '/manifest.webmanifest',

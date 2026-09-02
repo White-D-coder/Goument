@@ -94,8 +94,8 @@ export const INDUSTRIES_ROW_2: IndustryItem[] = [
     ],
   },
   {
-    id: 'weddings-celebrations',
-    title: 'Weddings & Celebrations',
+    id: 'celebrations',
+    title: 'Celebrations',
     imageIcon: '/icons/arch.png',
     iconColor: 'text-[#9B5368]',
     bulletColor: 'text-[#9B5368]',

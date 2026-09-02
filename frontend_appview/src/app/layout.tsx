@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import { QueryProvider } from '@/shared/QueryProvider';

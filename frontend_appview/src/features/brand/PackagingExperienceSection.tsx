@@ -201,10 +201,6 @@ export const ProductCard = ({
           className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-700 group-hover/product:scale-106"
         />
       </div>
-      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-60 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 pointer-events-none" />
-      <h3 className="absolute bottom-3 sm:bottom-5 left-3 sm:left-5 right-3 opacity-0 group-hover/product:opacity-100 text-white font-sans text-[11px] sm:text-sm font-semibold uppercase tracking-wider transition-opacity duration-300 drop-shadow-md">
-        {product.title}
-      </h3>
     </motion.div>
   );
 };

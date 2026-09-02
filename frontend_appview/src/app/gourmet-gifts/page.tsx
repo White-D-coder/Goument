@@ -18,11 +18,13 @@ import { GiftingProcessSection } from '@/features/brand/GiftingProcessSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
 import CuratedInquirySection from '@/features/inquiry/CuratedInquirySection';
+import { useInquiryModal } from '@/hooks/useInquiryModal';
 // import { TrustedBusinessesMarquee } from '@/components/brand/TrustedBusinessesMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomePage() {
+  const { openInquiryModal } = useInquiryModal();
   const heroImageRef = useRef<HTMLImageElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
 
@@ -102,14 +104,13 @@ export default function HomePage() {
 
             {/* Buttons */}
             <div className="opacity-0 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-3 w-full sm:w-auto">
-              <a
-                href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20get%203%20gifting%20concepts%20curated%20for%20our%20brand."
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => openInquiryModal({ source: 'Hero Section (Get 3 Concepts)' })}
                 className="px-6 sm:px-7 py-3 sm:py-3.5 bg-[#8C6228] hover:bg-[#A37330] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-[0_8px_20px_rgba(140,98,40,0.35)] hover:scale-105 active:scale-95 cursor-pointer text-center"
               >
                 GET 3 GIFTING CONCEPTS
-              </a>
+              </button>
               
               <a
                 href="#catalogue"

@@ -12,6 +12,8 @@ import { Footer } from './Footer';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
 import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
+import { InquiryModal } from '@/components/modals/InquiryModal';
+import { useInquiryModal } from '@/hooks/useInquiryModal';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
@@ -22,6 +24,7 @@ const GOURMET_NAV_LINKS = [
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
+  const { openInquiryModal } = useInquiryModal();
   const [showReconnectedToast, setShowReconnectedToast] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -187,19 +190,18 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
           {/* ─── Right: Utilities + Mobile Menu (Quick Enquire, Menu) ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
-            {/* Quick Enquire WhatsApp CTA */}
-            <a
-              href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting."
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`hidden sm:inline-flex items-center px-3.5 py-1.5 text-[10.5px] font-mono font-semibold uppercase tracking-[0.16em] transition-all rounded-sm ${
+            {/* Quick Enquire Modal CTA */}
+            <button
+              type="button"
+              onClick={() => openInquiryModal({ source: 'Navbar Enquire Button' })}
+              className={`inline-flex items-center px-3.5 py-1.5 text-[10.5px] font-mono font-semibold uppercase tracking-[0.16em] transition-all rounded-sm cursor-pointer ${
                 isTransparentHero 
                   ? 'bg-white text-[#1A1A18] hover:bg-white/90 shadow-xs' 
                   : 'bg-[#1A1A18] text-[#FAF8F5] hover:bg-[#38332B]'
               }`}
             >
               ENQUIRE
-            </a>
+            </button>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -290,6 +292,20 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               ))}
             </nav>
 
+            {/* Mobile Enquire Button */}
+            <div className="px-8 pb-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  openInquiryModal({ source: 'Mobile Menu Enquire' });
+                }}
+                className="w-full py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.18em] font-bold rounded-lg transition-all cursor-pointer shadow-md"
+              >
+                ENQUIRE NOW
+              </button>
+            </div>
+
             {/* Bottom Actions */}
             <div className="px-8 py-6 border-t flex items-center justify-between" style={{ borderColor: 'var(--satra-linen)' }}>
               <div className="flex items-center gap-5">
@@ -312,6 +328,9 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
       {/* ═══ FOOTER ═══ */}
       <Footer />
+
+      {/* ═══ GLOBAL INQUIRY POPUP MODAL ═══ */}
+      <InquiryModal />
     </div>
   );
 };

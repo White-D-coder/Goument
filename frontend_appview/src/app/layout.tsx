@@ -45,12 +45,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon.png', sizes: 'any' },
+      { url: '/LOGOs.png', sizes: '192x192', type: 'image/png' },
+      { url: '/LOGOs.png', sizes: 'any' },
     ],
-    shortcut: '/icon.svg',
+    shortcut: '/LOGOs.png',
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/LOGOs.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   manifest: '/manifest.webmanifest',

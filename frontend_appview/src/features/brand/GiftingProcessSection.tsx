@@ -45,96 +45,88 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 export const GiftingProcessSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#38493B] text-white overflow-hidden pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14">
-      
-      {/* ─── CONTENT CONTAINER ─── */}
+    <section className="relative w-full bg-[#38493B] md:bg-transparent text-white overflow-hidden pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14">
+
       <div className="relative z-10 max-w-[1580px] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          
-          {/* Left: Main Heading in Pure White (Strictly 2 Lines) */}
-          <div className="lg:col-span-4 xl:col-span-3">
-            <ScrollReveal animation="fadeUp">
-              <h2
-                className="text-2xl sm:text-3xl md:text-[32px] lg:text-[30px] xl:text-[36px] font-light uppercase tracking-[0.05em] text-white leading-[1.18]"
-                style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-              >
-                <span className="block whitespace-nowrap">HOW OUR GIFTING</span>
-                <span className="block whitespace-nowrap">PROCESS WORKS</span>
-              </h2>
-            </ScrollReveal>
-          </div>
 
-          {/* Right: 5-Step Process */}
-          <div className="lg:col-span-8 xl:col-span-9">
-            
-            {/* ─── MOBILE VIEW: Vertical Stack (No Icons, Number on Left, Title + Context on Right) ─── */}
-            <div className="flex flex-col md:hidden divide-y divide-white/10">
-              {PROCESS_STEPS.map((step, idx) => (
-                <ScrollReveal
+        {/* ─────────────────────────────────────────
+            DESKTOP VIEW — SLEEK ROUNDED CAPSULE BOX
+        ───────────────────────────────────────── */}
+        <div className="hidden md:block">
+          <ScrollReveal animation="fadeUp" delay={0.08}>
+            <div className="w-full max-w-[1440px] mx-auto grid grid-cols-5 divide-x divide-white/10 bg-[#273629] rounded-full border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.3)] px-6 lg:px-10 py-5 lg:py-6 items-center">
+              {PROCESS_STEPS.map((step) => (
+                <div
                   key={step.number}
-                  animation="fadeUp"
-                  delay={0.04 * (idx + 1)}
-                  className="py-3.5 first:pt-0 last:pb-0 flex items-start gap-3.5"
+                  className="flex items-center justify-start px-3 lg:px-5 min-w-0"
                 >
-                  {/* Left: Step Number */}
-                  <span className="text-sm xs:text-base font-mono font-bold text-[#DFC299] tracking-wider shrink-0 pt-0.5 w-6 text-left">
-                    {step.number}
-                  </span>
+                  {/* Circled Gold Number */}
+                  <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-full border border-[#DFC299]/75 flex items-center justify-center shrink-0 font-sans text-sm lg:text-base text-[#DFC299]">
+                    {step.number.replace(/^0/, '')}
+                  </div>
 
-                  {/* Right: Title & Context */}
-                  <div className="flex-1 space-y-0.5 text-left">
-                    <h3 className="text-xs xs:text-[12.5px] font-bold text-white uppercase tracking-wider leading-snug">
+                  {/* Title + Full Paragraph Description */}
+                  <div className="flex-1 min-w-0 pl-3 lg:pl-4 text-left">
+                    <h3 className="text-xs lg:text-[13px] font-sans font-bold uppercase tracking-wider text-white leading-snug">
                       {step.title}
                     </h3>
-                    <p className="text-[11px] xs:text-xs text-white/80 font-light leading-relaxed">
+                    <p className="text-[10px] lg:text-[11px] text-[#A6B2A3] font-light leading-snug mt-1 whitespace-normal">
                       {step.description}
                     </p>
                   </div>
-                </ScrollReveal>
+                </div>
               ))}
             </div>
+          </ScrollReveal>
+        </div>
 
-            {/* ─── DESKTOP VIEW: 5-Column Grid with Icons ─── */}
-            <div className="hidden md:grid md:grid-cols-5 gap-3.5 lg:gap-5 items-start">
-              {PROCESS_STEPS.map((step, idx) => (
-                <ScrollReveal
-                  key={step.number}
-                  animation="fadeUp"
-                  delay={0.06 * (idx + 1)}
-                  className="relative z-10 flex flex-col items-center text-center group px-1"
-                >
-                  {/* Pure Icon Container */}
-                  <div className="relative mb-3.5 h-[52px] sm:h-[58px] flex items-center justify-center">
-                    <img
-                      src={step.iconImage}
-                      alt={step.title}
-                      className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain brightness-0 invert opacity-95 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
-                    />
-                  </div>
 
-                  {/* Step Number */}
-                  <span className="text-[11px] font-mono font-bold tracking-widest text-[#DFC299] mb-1.5 uppercase">
-                    {step.number}
-                  </span>
+        {/* ─────────────────────────────────────────
+            MOBILE VIEW — SOLID GREEN BACKGROUND & CLEAR TEXT
+        ───────────────────────────────────────── */}
+        <div className="flex flex-col md:hidden">
+          {/* Mobile Header */}
+          <div className="mb-5 text-center">
+            <span className="text-[10px] font-sans uppercase tracking-[0.22em] font-bold text-[#DFC299] block mb-1">
+              Step-by-Step Flow
+            </span>
+            <h2
+              className="text-2xl xs:text-3xl font-light text-white tracking-tight uppercase leading-tight"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              How Our Gifting Process Works
+            </h2>
+          </div>
 
-                  {/* Step Title */}
-                  <h3 className="text-xs sm:text-[12.5px] font-bold text-white tracking-wider uppercase mb-1.5 leading-snug max-w-[170px] min-h-[34px] flex items-center justify-center">
+          <div className="flex flex-col divide-y divide-white/10 bg-[#2D3D30] rounded-2xl p-4 border border-white/10">
+            {PROCESS_STEPS.map((step, idx) => (
+              <ScrollReveal
+                key={step.number}
+                animation="fadeUp"
+                delay={0.04 * (idx + 1)}
+                className="py-3.5 first:pt-1 last:pb-1 flex items-start gap-3.5"
+              >
+                {/* Left: Step Number Circle */}
+                <div className="w-7 h-7 rounded-full border border-[#DFC299]/60 bg-[#DFC299]/15 flex items-center justify-center shrink-0 font-mono font-bold text-xs text-[#DFC299]">
+                  {step.number.replace(/^0/, '')}
+                </div>
+
+                {/* Right: Title & Context */}
+                <div className="flex-1 space-y-0.5 text-left">
+                  <h3 className="text-xs xs:text-[12.5px] font-bold text-white uppercase tracking-wider leading-snug">
                     {step.title}
                   </h3>
 
-                  {/* Step Description */}
-                  <p className="text-[11px] sm:text-[11.5px] text-white/85 font-light leading-relaxed max-w-[165px]">
+                  <p className="text-[11px] xs:text-xs text-white/80 font-light leading-relaxed">
                     {step.description}
                   </p>
-                </ScrollReveal>
-              ))}
-            </div>
-
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
-
         </div>
-      </div>
 
+      </div>
     </section>
   );
 };

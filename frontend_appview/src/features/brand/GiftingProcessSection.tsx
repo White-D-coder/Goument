@@ -49,6 +49,18 @@ export const GiftingProcessSection: React.FC = () => {
 
       <div className="relative z-10 max-w-[1580px] mx-auto px-5 sm:px-8 lg:px-12">
 
+        {/* ─── SECTION HEADER (DESKTOP) ─── */}
+        <div className="hidden md:block text-center max-w-4xl mx-auto px-2 mb-3 sm:mb-5 md:mb-6">
+          <ScrollReveal animation="fadeUp">
+            <h2
+              className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
+              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+            >
+              How It Comes Together
+            </h2>
+          </ScrollReveal>
+        </div>
+
         {/* ─────────────────────────────────────────
             DESKTOP VIEW — SLEEK ROUNDED CAPSULE BOX
         ───────────────────────────────────────── */}
@@ -82,48 +94,33 @@ export const GiftingProcessSection: React.FC = () => {
 
 
         {/* ─────────────────────────────────────────
-            MOBILE VIEW — SOLID GREEN BACKGROUND & CLEAR TEXT
+            MOBILE VIEW — ORIGINAL UNCHANGED
         ───────────────────────────────────────── */}
-        <div className="flex flex-col md:hidden">
-          {/* Mobile Header */}
-          <div className="mb-5 text-center">
-            <span className="text-[10px] font-sans uppercase tracking-[0.22em] font-bold text-[#DFC299] block mb-1">
-              Step-by-Step Flow
-            </span>
-            <h2
-              className="text-2xl xs:text-3xl font-light text-white tracking-tight uppercase leading-tight"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+        <div className="flex flex-col md:hidden divide-y divide-white/10">
+          {PROCESS_STEPS.map((step, idx) => (
+            <ScrollReveal
+              key={step.number}
+              animation="fadeUp"
+              delay={0.04 * (idx + 1)}
+              className="py-3.5 first:pt-0 last:pb-0 flex items-start gap-3.5"
             >
-              How Our Gifting Process Works
-            </h2>
-          </div>
+              {/* Left: Step Number */}
+              <span className="text-sm xs:text-base font-mono font-bold text-[#DFC299] tracking-wider shrink-0 pt-0.5 w-6 text-left">
+                {step.number}
+              </span>
 
-          <div className="flex flex-col divide-y divide-white/10 bg-[#2D3D30] rounded-2xl p-4 border border-white/10">
-            {PROCESS_STEPS.map((step, idx) => (
-              <ScrollReveal
-                key={step.number}
-                animation="fadeUp"
-                delay={0.04 * (idx + 1)}
-                className="py-3.5 first:pt-1 last:pb-1 flex items-start gap-3.5"
-              >
-                {/* Left: Step Number Circle */}
-                <div className="w-7 h-7 rounded-full border border-[#DFC299]/60 bg-[#DFC299]/15 flex items-center justify-center shrink-0 font-mono font-bold text-xs text-[#DFC299]">
-                  {step.number.replace(/^0/, '')}
-                </div>
+              {/* Right: Title & Context */}
+              <div className="flex-1 space-y-0.5 text-left">
+                <h3 className="text-xs xs:text-[12.5px] font-bold text-white uppercase tracking-wider leading-snug">
+                  {step.title}
+                </h3>
 
-                {/* Right: Title & Context */}
-                <div className="flex-1 space-y-0.5 text-left">
-                  <h3 className="text-xs xs:text-[12.5px] font-bold text-white uppercase tracking-wider leading-snug">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-[11px] xs:text-xs text-white/80 font-light leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                <p className="text-[11px] xs:text-xs text-white/80 font-light leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
 
       </div>

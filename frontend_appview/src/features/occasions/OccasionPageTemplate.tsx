@@ -152,23 +152,23 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       {/* ══════════════════════════════════════════════════════════════════
           1. HERO SECTION (2-COLUMN EDITORIAL SHOWCASE)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-12 sm:pb-16 md:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-20 sm:pt-28 md:pt-32 lg:pt-36 pb-8 sm:pb-14 md:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           {/* Left Column: Headline, Tagline, CTAs & Trust Badges */}
-          <div className="lg:col-span-6 space-y-6 sm:space-y-7">
+          <div className="lg:col-span-6 space-y-5 sm:space-y-7">
             <ScrollReveal animation="fadeUp">
               {/* ─── Working Breadcrumbs ─── */}
-              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#8C847B] mb-3 sm:mb-4">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#8C847B] mb-2.5 sm:mb-4">
                 <Link
-                  href="/gourmet-gifts"
+                  href="/"
                   className="hover:text-[#1A1A18] transition-colors"
                 >
                   Home
                 </Link>
                 <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
                 <Link
-                  href="/gourmet-gifts#occasions"
+                  href="/occasions"
                   className="hover:text-[#1A1A18] transition-colors"
                 >
                   Occasions
@@ -179,35 +179,35 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                 </span>
               </nav>
 
-              <div className="space-y-3 sm:space-y-4">
+              <div className="space-y-2.5 sm:space-y-4">
                 <h1
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1A1A18] tracking-tight leading-[1.05]"
+                  className="text-[38px] xs:text-[44px] sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1A1A18] tracking-tight leading-[1.04]"
                   style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
                 >
                   {data.title}
                 </h1>
                 
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-[#1A1A18] tracking-tight leading-snug">
+                <h2 className="text-[19px] xs:text-2xl sm:text-2xl md:text-3xl font-medium text-[#1A1A18] tracking-tight leading-snug">
                   {data.tagline}
                 </h2>
                 
-                <p className="text-xs sm:text-sm md:text-base text-[#6B655E] leading-relaxed max-w-xl font-light">
+                <p className="text-xs xs:text-[13px] sm:text-sm md:text-base text-[#6B655E] leading-relaxed max-w-xl font-light">
                   {data.description}
                 </p>
               </div>
 
               {/* Primary Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-3">
+              <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-3 sm:gap-4 pt-2 sm:pt-3">
                 <button
                   onClick={scrollToInquiry}
-                  className="px-7 py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+                  className="w-full xs:w-auto text-center px-6 sm:px-7 py-3 sm:py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
                 >
                   {data.primaryCta || 'GET 3 CURATED CONCEPTS'}
                 </button>
                 
                 <button
                   onClick={scrollToConcepts}
-                  className="px-6 py-3.5 border border-[#8C6228]/50 hover:border-[#1A1A18] text-[#8C6228] hover:text-[#1A1A18] font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 hover:bg-white/60 cursor-pointer"
+                  className="w-full xs:w-auto text-center px-5 sm:px-6 py-3 sm:py-3.5 border border-[#8C6228]/50 hover:border-[#1A1A18] text-[#8C6228] hover:text-[#1A1A18] font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 hover:bg-white/60 cursor-pointer"
                 >
                   {data.secondaryCta || 'EXPLORE GIFT BOXES'}
                 </button>
@@ -323,16 +323,16 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5">
           {data.moments.map((moment, idx) => {
             const Icon = IconMap[moment.iconName] || Heart;
             return (
-              <ScrollReveal key={idx} animation="fadeUp" delay={0.03 * (idx + 1)}>
-                <div className="bg-white border border-[#EAE5DC] rounded-xl sm:rounded-2xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 shadow-sm hover:shadow-md transition-all hover:border-[#8C6228]/40">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#FAF8F5] flex items-center justify-center shrink-0 text-[#8C6228]">
-                    <Icon className="w-4.5 h-4.5 stroke-[1.5]" />
+              <ScrollReveal key={idx} animation="fadeUp" delay={0.02 * (idx + 1)}>
+                <div className="bg-white border border-[#EAE5DC] rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-3.5 shadow-2xs hover:shadow-md transition-all hover:border-[#8C6228]/40 h-full justify-center sm:justify-start">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#FAF8F5] border border-[#EAE5DC]/60 flex items-center justify-center shrink-0 text-[#8C6228]">
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
                   </div>
-                  <span className="text-xs sm:text-[13px] font-semibold text-[#1A1A18] leading-tight">
+                  <span className="text-[11px] xs:text-xs sm:text-[13px] font-semibold text-[#1A1A18] leading-tight break-normal">
                     {moment.title}
                   </span>
                 </div>
@@ -482,85 +482,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
         </ScrollReveal>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════════════
-          6. MAKE IT UNIQUELY YOURS (5 CUSTOMIZATION BADGES)
-          ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
-        <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-10">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Make It Uniquely Yours
-            </h2>
-          </div>
-        </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-          {data.customizationFeatures.map((feat, idx) => {
-            const Icon = IconMap[feat.iconName] || BadgeCheck;
-            return (
-              <ScrollReveal key={idx} animation="fadeUp" delay={0.04 * (idx + 1)}>
-                <div className="bg-white border border-[#EAE5DC] rounded-2xl p-5 space-y-3 shadow-2xs text-center flex flex-col items-center h-full">
-                  <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#DDD8CE] flex items-center justify-center text-[#8C6228]">
-                    <Icon className="w-5 h-5 stroke-[1.5]" />
-                  </div>
-                  <h3 className="text-sm sm:text-[15px] font-bold text-[#1A1A18] tracking-tight">
-                    {feat.title}
-                  </h3>
-                  <p className="text-xs text-[#6B655E] font-light leading-relaxed">
-                    {feat.description}
-                  </p>
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════════════
-          8. HASSLE-FREE GIFTING IN 5 SIMPLE STEPS (TIMELINE)
-          ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-18 border-t border-[#EAE5DC]">
-        <ScrollReveal animation="fadeUp">
-          <div className="text-center space-y-2 mb-12">
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl font-light text-[#1A1A18] tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-            >
-              Hassle-free Gifting In 5 Simple Steps
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        <div className="relative grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-7 sm:gap-6 lg:gap-4 items-start">
-          
-          {/* Connecting Dotted Line (Desktop only) */}
-          <div 
-            className="hidden lg:block absolute top-[22px] left-[8%] right-[8%] h-px z-0 pointer-events-none"
-            style={{
-              backgroundImage: 'radial-gradient(circle, rgba(140, 98, 40, 0.45) 1.5px, transparent 1.5px)',
-              backgroundSize: '10px 2px',
-            }}
-          />
-
-          {data.processSteps.map((step, idx) => (
-            <ScrollReveal key={idx} animation="fadeUp" delay={0.06 * (idx + 1)} className="relative z-10 flex flex-col items-center text-center px-1">
-              {/* Number Badge Node */}
-              <div className="w-11 h-11 rounded-full bg-[#8C6228] text-white font-bold font-mono text-sm flex items-center justify-center shadow-md mb-3.5">
-                {step.step}
-              </div>
-              <h3 className="text-sm font-bold text-[#1A1A18] mb-1.5 leading-snug">
-                {step.title}
-              </h3>
-              <p className="text-xs text-[#6B655E] font-light leading-relaxed max-w-[190px]">
-                {step.description}
-              </p>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════════════════════════
           9. BESPOKE CURATION INQUIRY SECTION (QUOTATION FORM)

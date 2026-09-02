@@ -23,8 +23,8 @@ const MOBILE_ORDER_CLASSES = [
 
 export default function KeepsakeEcommerceSection() {
   return (
-    <section id="catalogue" className="pt-4 sm:pt-8 md:pt-12 pb-10 sm:pb-16 px-4 sm:px-6 lg:px-10 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
-      <div className="max-w-[1580px] mx-auto space-y-6 sm:space-y-10">
+    <section id="catalogue" className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14 px-4 sm:px-6 lg:px-10 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
+      <div className="max-w-[1580px] mx-auto space-y-6 sm:space-y-8">
         
         {/* ─── SECTION HEADER ─── */}
         <ScrollReveal animation="fadeUp">
@@ -36,7 +36,12 @@ export default function KeepsakeEcommerceSection() {
               What We Can Curate
             </h2>
             <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
-              Select any division below to explore our full artisanal catalogue and bespoke gift boxes.
+              <span className="inline sm:hidden">
+                Explore our artisanal gift catalogue.
+              </span>
+              <span className="hidden sm:inline">
+                Select any division below to explore our full artisanal catalogue and bespoke gift boxes.
+              </span>
             </p>
           </div>
         </ScrollReveal>
@@ -72,8 +77,8 @@ export default function KeepsakeEcommerceSection() {
                     </div>
                   </div>
 
-                  {/* Category Title Below Image — Left-aligned on mobile, Center on desktop */}
-                  <span className="text-[8px] xs:text-[10.5px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.2em] text-[#1A1A18] mt-2 sm:mt-3 w-full max-w-[115px] sm:max-w-[140px] text-left sm:text-center leading-[1.25] transition-colors group-hover:text-[#8C6228] break-normal">
+                  {/* Category Title Below Image — Perfectly Centered Under Squircle */}
+                  <span className="text-[9.5px] xs:text-[10.5px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.06em] xs:tracking-[0.08em] sm:tracking-[0.16em] text-[#1A1A18] mt-2 sm:mt-3 w-full max-w-[96px] xs:max-w-[104px] sm:max-w-[130px] text-center leading-[1.25] transition-colors group-hover:text-[#8C6228] break-normal">
                     {cat.label}
                   </span>
                 </Link>

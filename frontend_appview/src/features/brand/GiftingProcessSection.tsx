@@ -45,7 +45,7 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 export const GiftingProcessSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#38493B] text-white overflow-hidden py-14 sm:py-18 lg:py-20">
+    <section className="relative w-full bg-[#38493B] text-white overflow-hidden pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14">
       
       {/* ─── CONTENT CONTAINER ─── */}
       <div className="relative z-10 max-w-[1580px] mx-auto px-5 sm:px-8 lg:px-12">
@@ -64,46 +64,70 @@ export const GiftingProcessSection: React.FC = () => {
             </ScrollReveal>
           </div>
 
-          {/* Right: 5-Step Connected Timeline (Horizontal Scroll on Mobile, 5-col Grid on Desktop) */}
+          {/* Right: 5-Step Process */}
           <div className="lg:col-span-8 xl:col-span-9">
             
-            <div className="relative flex md:grid md:grid-cols-5 gap-5 sm:gap-6 md:gap-3.5 items-start overflow-x-auto md:overflow-visible pb-4 md:pb-0 px-1 sm:px-0 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              
-              {PROCESS_STEPS.map((step, idx) => {
-                return (
-                  <ScrollReveal
-                    key={step.number}
-                    animation="fadeUp"
-                    delay={0.06 * (idx + 1)}
-                    className="relative z-10 flex flex-col items-center text-center group px-1 w-[200px] sm:w-[220px] md:w-auto shrink-0 snap-start"
-                  >
-                    {/* Pure Icon Container (No Outer Circle / No Extra Background) */}
-                    <div className="relative mb-3.5 h-[52px] sm:h-[58px] flex items-center justify-center">
-                      <img
-                        src={step.iconImage}
-                        alt={step.title}
-                        className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain brightness-0 invert opacity-95 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
-                      />
-                    </div>
+            {/* ─── MOBILE VIEW: Vertical Stack (No Icons, Number on Left, Title + Context on Right) ─── */}
+            <div className="flex flex-col md:hidden divide-y divide-white/10">
+              {PROCESS_STEPS.map((step, idx) => (
+                <ScrollReveal
+                  key={step.number}
+                  animation="fadeUp"
+                  delay={0.04 * (idx + 1)}
+                  className="py-3.5 first:pt-0 last:pb-0 flex items-start gap-3.5"
+                >
+                  {/* Left: Step Number */}
+                  <span className="text-sm xs:text-base font-mono font-bold text-[#DFC299] tracking-wider shrink-0 pt-0.5 w-6 text-left">
+                    {step.number}
+                  </span>
 
-                    {/* Step Number */}
-                    <span className="text-[11px] font-mono font-bold tracking-widest text-white/75 mb-1.5 uppercase">
-                      {step.number}
-                    </span>
-
-                    {/* Step Title (Pure White, Crisp & Bold) */}
-                    <h3 className="text-xs sm:text-[12.5px] font-bold text-white tracking-wider uppercase mb-1.5 leading-snug max-w-[170px] min-h-[34px] flex items-center justify-center">
+                  {/* Right: Title & Context */}
+                  <div className="flex-1 space-y-0.5 text-left">
+                    <h3 className="text-xs xs:text-[12.5px] font-bold text-white uppercase tracking-wider leading-snug">
                       {step.title}
                     </h3>
-
-                    {/* Step Description (Pure White / Soft Linen, 100% Readable) */}
-                    <p className="text-[11px] sm:text-[11.5px] text-white/85 font-light leading-relaxed max-w-[165px]">
+                    <p className="text-[11px] xs:text-xs text-white/80 font-light leading-relaxed">
                       {step.description}
                     </p>
-                  </ScrollReveal>
-                );
-              })}
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
 
+            {/* ─── DESKTOP VIEW: 5-Column Grid with Icons ─── */}
+            <div className="hidden md:grid md:grid-cols-5 gap-3.5 lg:gap-5 items-start">
+              {PROCESS_STEPS.map((step, idx) => (
+                <ScrollReveal
+                  key={step.number}
+                  animation="fadeUp"
+                  delay={0.06 * (idx + 1)}
+                  className="relative z-10 flex flex-col items-center text-center group px-1"
+                >
+                  {/* Pure Icon Container */}
+                  <div className="relative mb-3.5 h-[52px] sm:h-[58px] flex items-center justify-center">
+                    <img
+                      src={step.iconImage}
+                      alt={step.title}
+                      className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain brightness-0 invert opacity-95 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100 drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+                    />
+                  </div>
+
+                  {/* Step Number */}
+                  <span className="text-[11px] font-mono font-bold tracking-widest text-[#DFC299] mb-1.5 uppercase">
+                    {step.number}
+                  </span>
+
+                  {/* Step Title */}
+                  <h3 className="text-xs sm:text-[12.5px] font-bold text-white tracking-wider uppercase mb-1.5 leading-snug max-w-[170px] min-h-[34px] flex items-center justify-center">
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="text-[11px] sm:text-[11.5px] text-white/85 font-light leading-relaxed max-w-[165px]">
+                    {step.description}
+                  </p>
+                </ScrollReveal>
+              ))}
             </div>
 
           </div>

@@ -53,6 +53,36 @@ const GOURMET_FOOTER_COLUMNS = [
   },
 ];
 
+import { motion, type Variants } from 'framer-motion';
+
+const GOURMET_TITLE_WORDS = ['THE', 'GOURMET', 'GIFTS'];
+
+const footerTitleContainer: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const footerTitleWord: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+    scale: 0.98,
+    filter: 'blur(10px)',
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export const Footer: React.FC = () => {
   const pathname = usePathname();
   const footerColumns = GOURMET_FOOTER_COLUMNS;
@@ -90,12 +120,24 @@ export const Footer: React.FC = () => {
         {/* Top Header: Compact Brand Row */}
         <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2.5 sm:gap-4 pb-6 border-b border-black/10">
           <Link href="/" className="inline-flex items-center gap-2.5 group cursor-pointer">
-            <span
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.01em] uppercase font-light leading-tight text-[#000000] transition-colors group-hover:text-[#8C6228]"
+            <motion.h2
+              variants={footerTitleContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: '-60px' }}
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.01em] uppercase font-light leading-tight text-[#000000] transition-colors group-hover:text-[#8C6228] flex flex-wrap gap-x-2 sm:gap-x-3.5"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500 }}
             >
-              The Gourmet Gifts
-            </span>
+              {GOURMET_TITLE_WORDS.map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={footerTitleWord}
+                  className="inline-block"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h2>
           </Link>
 
           <p className="font-serif italic text-xs sm:text-sm text-[#000000]/75 tracking-wide text-left sm:text-right">

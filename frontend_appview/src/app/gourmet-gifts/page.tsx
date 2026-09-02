@@ -13,6 +13,7 @@ import ImageTypography from '@/components/ImageTypography';
 import OccasionGiftingCarousel from '@/components/OccasionGiftingCarousel';
 import { WhyChooseSection } from '@/features/brand/WhyChooseSection';
 import { IndustriesSection } from '@/features/brand/IndustriesSection';
+import { PackagingExperienceSection } from '@/features/brand/PackagingExperienceSection';
 import { GiftingProcessSection } from '@/features/brand/GiftingProcessSection';
 import KeepsakeEcommerceSection from '@/features/ecommerce/KeepsakeEcommerceSection';
 import CustomGiftBoxesSection from '@/features/ecommerce/CustomGiftBoxesSection';
@@ -151,11 +152,14 @@ export default function HomePage() {
         {/* ─── ATELIER LUXURY E-COMMERCE SECTION (WHAT WE CAN CURATE) ─── */}
         <KeepsakeEcommerceSection />
 
-        {/* ─── HOW OUR GIFTING PROCESS WORKS ─── */}
+        {/* ─── PACKAGING THAT COMPLETES THE EXPERIENCE ─── */}
         <GiftingProcessSection />
+        <PackagingExperienceSection />
+
+        {/* ─── HOW OUR GIFTING PROCESS WORKS ─── */}
 
         {/* ─── WHY CHOOSE THE GOURMET GIFTS (ABOVE ENQUIRY) ─── */}
-        <WhyChooseSection />
+        {/* <WhyChooseSection /> */}
 
         {/* ─── BESPOKE HANDCRAFTED GIFT BOXES SECTION ─── */}
         {/* <CustomGiftBoxesSection /> */}
@@ -167,7 +171,7 @@ export default function HomePage() {
         {/* <TrustedBusinessesMarquee /> */}
 
         {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (HERITAGE FOREST GREEN THEME) ─── */}
-        <section className="py-5 sm:py-12 md:py-24 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#38493B] text-[#FAF8F5]">
+        <section className="pt-6 sm:pt-10 md:pt-14 pb-7 sm:pb-10 md:pb-12 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#38493B] text-[#FAF8F5]">
 
           <div className="max-w-[760px] mx-auto space-y-5 relative z-10">
             <ScrollReveal animation="fadeUp">
@@ -181,7 +185,12 @@ export default function HomePage() {
                 For those who give at scale.
               </h2>
               <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#EDE6DC]/90 max-w-lg mx-auto leading-relaxed">
-                Bespoke corporate curations, custom crest monograms, and institutional gifting.
+                <span className="inline sm:hidden">
+                  Bespoke corporate gifting at scale.
+                </span>
+                <span className="hidden sm:inline">
+                  Bespoke corporate curations, custom crest monograms, and institutional gifting.
+                </span>
               </p>
               <div className="flex items-center justify-center pt-6">
                 <EditorialCTA label="Contact" href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting%20at%20scale." dark={true} className="text-white hover:text-[#DFC299] transition-colors text-xs font-mono uppercase tracking-[0.18em]" />

@@ -291,6 +291,18 @@ export function isPageRouteActive(pathname: string): boolean {
   if (!pathname) return true;
   const cleanPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
 
+  // Next.js standard metadata files bypass
+  if (
+    cleanPath === '/manifest.webmanifest' ||
+    cleanPath.endsWith('.webmanifest') ||
+    cleanPath === '/robots.txt' ||
+    cleanPath === '/sitemap.xml' ||
+    cleanPath === '/favicon.ico' ||
+    cleanPath === '/icon.svg'
+  ) {
+    return true;
+  }
+
   // Exact match
   for (const key in PAGE_ROUTES_CONFIG) {
     const route = PAGE_ROUTES_CONFIG[key];

@@ -159,7 +159,7 @@ export default function OccasionGiftingCarousel() {
   };
 
   return (
-    <section id="occasions" className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
+    <section id="occasions" className="pt-6 sm:pt-10 md:pt-14 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
       <div className="max-w-[1580px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         
         {/* ─── SECTION HEADER ─── */}
@@ -172,9 +172,9 @@ export default function OccasionGiftingCarousel() {
               <span className="block xs:inline">For Every Occasion</span>{' '}
               <span className="block xs:inline">That Matters</span>
             </h2>
-            <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
+            <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal pb-[3px]">
               <span className="inline sm:hidden">
-                Thoughtful keepsakes for milestones, celebrations, and lasting relationships.
+                Thoughtful keepsakes for every milestone.
               </span>
               <span className="hidden sm:inline">
                 Thoughtfully curated keepsakes designed for corporate milestones, celebrations, and meaningful relationships.

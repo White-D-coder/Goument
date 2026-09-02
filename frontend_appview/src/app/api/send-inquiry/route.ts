@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { API_KEYS_CONFIG } from '@/config/appRoutes.config';
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,21 +20,20 @@ export async function POST(req: NextRequest) {
       source = 'Gourmet Gifts Website',
     } = body;
 
-    if (!name || !email || !phone) {
+    if (!name || !email) {
       return NextResponse.json(
-        { success: false, error: 'Name, email, and phone number are required.' },
+        { success: false, error: 'Name and email are required.' },
         { status: 400 }
       );
     }
 
-    const recipientEmail = process.env.INQUIRY_RECIPIENT_EMAIL || 'hello@thegourmetgifts.co';
-
-    // Configure Nodemailer Transporter with environment variables or fallback
-    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
-    const smtpPort = parseInt(process.env.SMTP_PORT || '465');
-    const smtpSecure = process.env.SMTP_SECURE !== 'false';
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
+    const smtpConfig = API_KEYS_CONFIG.SMTP;
+    const recipientEmail = smtpConfig.RECIPIENT_EMAIL || process.env.INQUIRY_RECIPIENT_EMAIL || 'hello@thegourmetgifts.co';
+    const smtpHost = smtpConfig.HOST || process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = smtpConfig.PORT || parseInt(process.env.SMTP_PORT || '465', 10);
+    const smtpSecure = smtpConfig.SECURE;
+    const smtpUser = smtpConfig.USER || process.env.SMTP_USER;
+    const smtpPass = smtpConfig.PASS || process.env.SMTP_PASS;
 
     // Build Luxury Formatted HTML Email
     const productsHtml = Array.isArray(productItems) && productItems.length > 0

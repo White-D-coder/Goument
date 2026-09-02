@@ -9,18 +9,48 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: 'General Enquiry',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all required fields.');
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast.error('Please fill in name, email, and message.');
       return;
     }
-    setSubmitted(true);
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/send-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || 'Not Provided',
+          occasion: formData.subject,
+          message: formData.message.trim(),
+          source: 'Website Contact Page',
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        toast.success('Your enquiry has been dispatched to our team!');
+      } else {
+        toast.error(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      console.error('Inquiry Submission Error:', err);
+      toast.error('Network error. Please try again or WhatsApp us.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,10 +84,13 @@ export default function ContactPage() {
                     <CheckCircle2 className="w-10 h-10 text-[#7A8B6F]" />
                     <h3 className="type-title text-[#1A1A18]">Message Sent</h3>
                     <p className="type-body text-[#8A8680] text-sm max-w-md">
-                      Thank you, {formData.name}. We'll respond within 24 hours.
+                      Thank you, {formData.name}. Our concierge team has received your enquiry and will respond within 24 hours.
                     </p>
                     <button
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({ name: '', email: '', phone: '', subject: 'General Enquiry', message: '' });
+                      }}
                       className="editorial-link type-meta text-[#1A1A18] inline-flex items-center gap-1.5 cursor-pointer"
                     >
                       <span>Send Another</span>
@@ -68,7 +101,7 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="type-meta text-[#1A1A18] block">Name</label>
+                        <label className="type-meta text-[#1A1A18] block">Name *</label>
                         <input
                           type="text"
                           required
@@ -79,7 +112,7 @@ export default function ContactPage() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="type-meta text-[#1A1A18] block">Email</label>
+                        <label className="type-meta text-[#1A1A18] block">Email *</label>
                         <input
                           type="email"
                           required
@@ -91,23 +124,36 @@ export default function ContactPage() {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="type-meta text-[#1A1A18] block">Subject</label>
-                      <select
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full px-0 py-3 bg-transparent border-b border-[#E0DDD6] type-body text-[#1A1A18] text-sm focus:outline-none focus:border-[#1A1A18] transition-colors cursor-pointer"
-                      >
-                        <option>General Enquiry</option>
-                        <option>Corporate Gifting</option>
-                        <option>Custom Order</option>
-                        <option>Collaboration</option>
-                        <option>Press & Media</option>
-                      </select>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="type-meta text-[#1A1A18] block">Phone / WhatsApp</label>
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+91 98765 43210"
+                          className="w-full px-0 py-3 bg-transparent border-b border-[#E0DDD6] type-body text-[#1A1A18] text-sm placeholder:text-[#B5AFA6] focus:outline-none focus:border-[#1A1A18] transition-colors"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="type-meta text-[#1A1A18] block">Subject</label>
+                        <select
+                          value={formData.subject}
+                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                          className="w-full px-0 py-3 bg-transparent border-b border-[#E0DDD6] type-body text-[#1A1A18] text-sm focus:outline-none focus:border-[#1A1A18] transition-colors cursor-pointer"
+                        >
+                          <option>General Enquiry</option>
+                          <option>Corporate Gifting</option>
+                          <option>Custom Order</option>
+                          <option>Collaboration</option>
+                          <option>Press &amp; Media</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="type-meta text-[#1A1A18] block">Message</label>
+                      <label className="type-meta text-[#1A1A18] block">Message *</label>
                       <textarea
                         rows={5}
                         required
@@ -120,9 +166,10 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="editorial-link type-meta text-[#1A1A18] inline-flex items-center gap-2 pt-2 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="editorial-link type-meta text-[#1A1A18] inline-flex items-center gap-2 pt-2 cursor-pointer disabled:opacity-50"
                     >
-                      <span>Send Message</span>
+                      <span>{isSubmitting ? 'Sending Message...' : 'Send Message'}</span>
                       <ArrowRight className="w-3 h-3" />
                     </button>
                   </form>
@@ -130,39 +177,51 @@ export default function ContactPage() {
               </ScrollReveal>
             </div>
 
-            {/* Right — Contact Details */}
+            {/* Right — Contact Details & Locations */}
             <div className="lg:col-span-5">
               <ScrollReveal animation="fadeUp" delay={0.2}>
-                <div className="space-y-12 lg:pt-2">
-                  <div className="space-y-2">
-                    <span className="type-meta text-[#B5AFA6] block">Email</span>
+                <div className="space-y-7 lg:pt-2">
+                  
+                  {/* Email */}
+                  <div className="space-y-1">
+                    <span className="text-[10.5px] uppercase tracking-[0.2em] font-medium text-[#8C6228] block">
+                      Email
+                    </span>
                     <a
                       href="mailto:hello@thegourmetgifts.co"
-                      className="type-body text-[#1A1A18] text-sm hover:text-[#8A8680] transition-colors"
+                      className="text-xs sm:text-[13.5px] font-light text-[#3A3833] hover:text-[#8C6228] transition-colors leading-relaxed block"
                     >
                       hello@thegourmetgifts.co
                     </a>
                   </div>
 
-                  <div className="space-y-2">
-                    <span className="type-meta text-[#B5AFA6] block">Studio</span>
-                    <p className="type-body text-[#1A1A18] text-sm">
-                      Mumbai & Delhi NCR, India
+                  {/* Studio */}
+                  <div className="space-y-1">
+                    <span className="text-[10.5px] uppercase tracking-[0.2em] font-medium text-[#8C6228] block">
+                      Studio
+                    </span>
+                    <p className="text-xs sm:text-[13.5px] font-light text-[#3A3833] leading-relaxed">
+                      Mumbai &amp; Delhi NCR, India
                     </p>
                   </div>
 
-                  <div className="space-y-2">
-                    <span className="type-meta text-[#B5AFA6] block">Hours</span>
-                    <p className="type-body text-[#1A1A18] text-sm">
-                      Monday – Saturday<br />
-                      10:00 AM – 7:00 PM IST
+                  {/* Corporate Office */}
+                  <div className="space-y-1">
+                    <span className="text-[10.5px] uppercase tracking-[0.2em] font-medium text-[#8C6228] block">
+                      Corporate Office
+                    </span>
+                    <p className="text-xs sm:text-[13.5px] font-light text-[#3A3833] leading-relaxed">
+                      1702, 17th floor, INNOV8 PARINEE CRESCENZO, CRESCENZO BUILDING, OPPO. MCA GROUND, BANDRA KURLA COMPLEX, PLOT NO C-38/39, G BLOCK, BANDRA EAST, MUMBAI - 400051
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#E0DDD6]">
-                    <p className="type-micro text-[#B5AFA6]">
-                      For corporate enquiries of 50+ units, please visit our{' '}
-                      <a href="/corporate" className="text-[#1A1A18] hover:underline">corporate page</a>.
+                  {/* Warehouse */}
+                  <div className="space-y-1">
+                    <span className="text-[10.5px] uppercase tracking-[0.2em] font-medium text-[#8C6228] block">
+                      Warehouse
+                    </span>
+                    <p className="text-xs sm:text-[13.5px] font-light text-[#3A3833] leading-relaxed">
+                      Sharda Bhavan, Opposite Gala Provision Store, Fatak Road/Narayan Joshi Road, Kandivali West, Mumbai – 400067
                     </p>
                   </div>
                 </div>

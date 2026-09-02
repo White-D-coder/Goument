@@ -18,6 +18,7 @@ import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
 const GOURMET_NAV_LINKS = [
   { label: 'Catalogue', href: '/gourmet-gifts#catalogue' },
   { label: 'Occasions', href: '/gourmet-gifts#occasions' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {

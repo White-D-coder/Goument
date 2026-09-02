@@ -75,6 +75,11 @@
 /* ─── Design Tokens ─── */
 @layer base {
   :root {
+    /* ── Core Typography Variables ── */
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-geist: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
     /* ── House of Satra — Sovereign Palette ── */
     --satra-obsidian: #141413;
     --satra-charcoal: #1A1A18;

@@ -1,28 +1,7 @@
 import type { Metadata, Viewport } from 'next';
-import { headers } from 'next/headers';
-import { Cormorant_Garamond, Plus_Jakarta_Sans, Geist } from 'next/font/google';
 import './globals.css';
 import { ResponsiveShell } from '@/features/shell/ResponsiveShell';
 import { QueryProvider } from '@/shared/QueryProvider';
-
-const geist = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist',
-  display: 'swap',
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
-  display: 'swap',
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
@@ -47,10 +26,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geist.variable} ${cormorant.variable} ${jakarta.variable}`}
-    >
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <QueryProvider>
           <ResponsiveShell>{children}</ResponsiveShell>

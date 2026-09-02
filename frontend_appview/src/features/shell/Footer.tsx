@@ -45,36 +45,42 @@ const SATRA_FOOTER_COLUMNS = [
 
 const GOURMET_FOOTER_COLUMNS = [
   {
-    title: 'Gourmet Curations',
+    title: 'Occasions',
     links: [
-      { label: 'Master Catalogue', href: '/gourmet-gifts' },
-      { label: 'Corporate Gifting', href: '/corporate' },
-      { label: 'Artisanal Gift Boxing', href: '/gift-boxing' },
-      { label: 'Our Heritage Story', href: '/story' },
+      { label: 'Employee Gifting', href: '/employee-gifting' },
+      { label: 'Client Gifting', href: '/occasions/client-gifting' },
+      { label: 'Festive Gifting', href: '/occasions/festive-gifting' },
+      { label: 'Events & Conferences', href: '/occasions/events-conferences' },
+      { label: 'Milestones & Recognition', href: '/milestones-recognition' },
+      { label: 'CX & Partner Gifting', href: '/occasions/cx-gifting' },
     ],
   },
   {
-    title: 'Corporate & Bulk',
+    title: 'Catalogue Categories',
     links: [
-      { label: 'Custom Brand QR Solutions', href: '/gourmet-gifts' },
-      { label: '3D Miniature Milestone Sets', href: '/gourmet-gifts' },
-      { label: 'Bespoke Packaging Design', href: '/corporate' },
-      { label: 'Direct Corporate Enquiries', href: '/inquire' },
+      { label: 'Indian Gourmet Sweets', href: '/gourmet-gifts#catalogue' },
+      { label: 'Electronics & Gadgets', href: '/gourmet-gifts#catalogue' },
+      { label: 'Office & Travel Bags', href: '/gourmet-gifts#catalogue' },
+      { label: 'Stationery & Desk', href: '/gourmet-gifts#catalogue' },
+      { label: 'Recognition & Trophies', href: '/gourmet-gifts#catalogue' },
+      { label: 'Corporate Apparel', href: '/gourmet-gifts#catalogue' },
     ],
   },
   {
-    title: 'Customer Care',
+    title: 'Quick Navigation',
     links: [
-      { label: 'Pan-India Temperature Logistics', href: '/contact' },
-      { label: 'Freshness & Shelf Life Guarantee', href: '/contact' },
-      { label: 'Corporate Concierge', href: '/inquire' },
+      { label: 'Full Catalogue', href: '/gourmet-gifts#catalogue' },
+      { label: 'Occasions Showcase', href: '/gourmet-gifts#occasions' },
+      { label: 'Bespoke Curation Enquiry', href: '/gourmet-gifts#curation-inquiry' },
+      { label: 'Contact Us', href: '/contact' },
     ],
   },
   {
     title: 'Concierge Direct',
     links: [
       { label: 'hello@thegourmetgifts.co', href: 'mailto:hello@thegourmetgifts.co' },
-      { label: 'Pan-India Delivery & Corporate Bulk', href: '/gourmet-gifts#curation-inquiry' },
+      { label: '+91 70214 63609 (WhatsApp)', href: 'https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting.' },
+      { label: 'Mumbai & Delhi NCR, India', href: '/contact' },
     ],
   },
 ];

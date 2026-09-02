@@ -188,19 +188,8 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
             </Link>
           </div>
 
-          {/* ─── Right: Utilities + Mobile Menu (Curation Tray, Search, Account, Menu) ─── */}
+          {/* ─── Right: Utilities + Mobile Menu (Quick Enquire, Menu) ─── */}
           <div className="flex-1 flex items-center justify-end gap-3 sm:gap-4 lg:gap-5">
-            {/* Search */}
-            <button
-              onClick={() => setSearchOpen(true)}
-              className={`flex items-center justify-center transition-colors duration-200 cursor-pointer ${
-                isTransparentHero ? 'text-white/75 hover:text-white' : 'text-[var(--satra-stone)] hover:text-[var(--satra-charcoal)]'
-              }`}
-              aria-label="Search catalogue"
-            >
-              <Search className="w-[18px] h-[18px]" strokeWidth={1.5} />
-            </button>
-
             {/* Quick Enquire WhatsApp CTA */}
             <a
               href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting."

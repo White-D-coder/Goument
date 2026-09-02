@@ -210,81 +210,25 @@ function CollectionsCatalogueContent() {
                       key={item._id}
                       className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.09)] transition-all duration-300 flex flex-col justify-between border border-[#F0ECE1] group"
                     >
-                      {/* Product Image (Clean, No Floating Category Tag) */}
-                      <Link href={`/gourmet-gifts/${item.slug}`} className="w-full aspect-[4/3] overflow-hidden bg-[#FAF6F0] relative block cursor-pointer">
+                      {/* Product Image (Static Clean Preview) */}
+                      <div className="w-full aspect-[4/3] overflow-hidden bg-[#FAF6F0] relative block">
                         <img
                           src={item.image}
                           alt={item.name}
                           loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
-                      </Link>
+                      </div>
 
                       {/* Content Body */}
-                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                         <div className="space-y-1">
-                          <Link href={`/gourmet-gifts/${item.slug}`}>
-                            <h3 className="text-base sm:text-[17px] font-semibold text-[#1A1A18] leading-snug line-clamp-1 group-hover:text-[#9E7B35] transition-colors tracking-tight font-sans">
-                              {item.name}
-                            </h3>
-                          </Link>
+                          <h3 className="text-base sm:text-[17px] font-semibold text-[#1A1A18] leading-snug line-clamp-1 tracking-tight font-sans">
+                            {item.name}
+                          </h3>
                           <p className="text-xs text-[#7A7268] font-light line-clamp-2 leading-relaxed">
                             {item.subCopy}
                           </p>
-                        </div>
-
-                        {/* Price & Action Button */}
-                        <div className="pt-2 border-t border-[#F0ECE1] flex items-center justify-between gap-2">
-                          <div>
-                            {item.price && item.price > 0 ? (
-                              <span className="text-sm font-bold text-[#1A1A18] font-sans">
-                                ₹{item.price.toLocaleString('en-IN')}
-                              </span>
-                            ) : (
-                              <span className="text-xs font-sans uppercase tracking-wider text-[#7A8B6F] font-semibold">
-                                Bespoke Quote
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="flex items-center gap-2">
-                            <Link
-                              href={`/gourmet-gifts/${item.slug}`}
-                              className="inline-flex items-center gap-1 border border-[#C5A880] text-[#9E7B35] hover:bg-[#C5A880] hover:text-white rounded-lg px-2.5 py-1 text-xs font-semibold tracking-wide transition-all duration-200 active:scale-95 font-sans"
-                            >
-                              <span>View</span>
-                              <ArrowRight className="w-3 h-3" />
-                            </Link>
-
-                            {/* Stepper / Add to Bag */}
-                            {currentQty > 0 ? (
-                              <div className="flex items-center bg-[#FAF5EC] border border-[#C5A880] rounded-lg p-0.5 shadow-2xs">
-                                <button
-                                  onClick={(e) => handleDecrement(item, e)}
-                                  className="w-5 h-5 rounded flex items-center justify-center text-[#7A1C29] hover:bg-[#C5A880] hover:text-white transition-colors active:scale-90 cursor-pointer"
-                                >
-                                  <Minus className="w-3 h-3" />
-                                </button>
-                                <span className="w-5 text-center text-xs font-bold text-[#451B27] select-none font-sans">
-                                  {currentQty}
-                                </span>
-                                <button
-                                  onClick={(e) => handleIncrement(item, e)}
-                                  className="w-5 h-5 rounded flex items-center justify-center text-[#7A1C29] hover:bg-[#C5A880] hover:text-white transition-colors active:scale-90 cursor-pointer"
-                                >
-                                  <Plus className="w-3 h-3" />
-                                </button>
-                              </div>
-                            ) : (
-                              <button
-                                onClick={(e) => handleIncrement(item, e)}
-                                className="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer bg-[#FAF5EC] hover:bg-[#F2E8D7] text-[#9E7B35] border border-[#EADBCA] flex items-center gap-1 active:scale-95 font-sans"
-                              >
-                                <Plus className="w-3 h-3" />
-                                <span>Bag</span>
-                              </button>
-                            )}
-                          </div>
                         </div>
                       </div>
                     </div>

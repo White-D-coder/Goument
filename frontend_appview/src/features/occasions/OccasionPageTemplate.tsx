@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { OccasionPageData } from '@/data/occasionsData';
-import { CATALOGUE_CATEGORIES } from '@/data/hampersData';
+import { CATALOGUE_CATEGORIES, HAMPERS_CATALOG } from '@/data/hampersData';
 import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
 
@@ -75,6 +75,8 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedBudgetIdx, setSelectedBudgetIdx] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   // Categories for this specific occasion
   const displayCategories = useMemo(() => {
@@ -85,6 +87,31 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
     }
     return CATALOGUE_CATEGORIES.slice(0, 8);
   }, [data.categoryIds]);
+
+  // Dynamic products list displayed directly underneath Recommended Product Mix
+  const visibleProducts = useMemo(() => {
+    if (selectedCategory !== 'all') {
+      const filtered = HAMPERS_CATALOG.filter((item) => item.category === selectedCategory);
+      return filtered.length > 0 ? filtered : HAMPERS_CATALOG.slice(0, 8);
+    }
+    if (selectedBudgetIdx !== null) {
+      const count = 8;
+      const offset = (selectedBudgetIdx * 3) % Math.max(1, HAMPERS_CATALOG.length - count);
+      return HAMPERS_CATALOG.slice(offset, offset + count);
+    }
+    return HAMPERS_CATALOG.slice(0, 8);
+  }, [selectedCategory, selectedBudgetIdx]);
+
+  const handleBudgetPillClick = (idx: number) => {
+    setSelectedBudgetIdx(idx);
+    setSelectedCategory('all');
+    setTimeout(() => {
+      const el = document.getElementById('recommended-product-cards');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 60);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -319,27 +346,66 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
           </div>
         </ScrollReveal>
 
-        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (DEEP LUXURY GRADIENTS & WHITE TEXT) ── */}
+        {/* ── 100% DEAD-CENTERED CIRCULAR PRICE PILLS (2-LINE BOLD WHITE TEXT, LARGER FONT) ── */}
         <div className="w-full flex items-center justify-center pt-1 pb-2 px-4 sm:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8">
             {data.budgetTiers.map((tier, idx) => {
-              const deepTiers = [
-                'bg-gradient-to-br from-[#4A624E] to-[#2E4233] text-white shadow-[0_8px_20px_rgba(46,66,51,0.28)] hover:shadow-[0_12px_28px_rgba(46,66,51,0.38)] border border-[#6B856F]/40',
-                'bg-gradient-to-br from-[#8C524F] to-[#603330] text-white shadow-[0_8px_20px_rgba(96,51,48,0.28)] hover:shadow-[0_12px_28px_rgba(96,51,48,0.38)] border border-[#AC716E]/40',
-                'bg-gradient-to-br from-[#8E652E] to-[#5C3E14] text-white shadow-[0_8px_20px_rgba(92,62,20,0.28)] hover:shadow-[0_12px_28px_rgba(92,62,20,0.38)] border border-[#B3874C]/40',
-                'bg-gradient-to-br from-[#4E3544] to-[#2B1B25] text-white shadow-[0_8px_20px_rgba(43,27,37,0.32)] hover:shadow-[0_12px_28px_rgba(43,27,37,0.42)] border border-[#714E63]/40',
+              const pillTiers = [
+                {
+                  bg: 'bg-gradient-to-br from-[#3D5244] to-[#28382D]',
+                  border: 'border-[#5A7362]/60',
+                  shadow: 'shadow-[0_10px_26px_rgba(40,56,45,0.32)] hover:shadow-[0_16px_34px_rgba(40,56,45,0.48)]',
+                },
+                {
+                  bg: 'bg-gradient-to-br from-[#7D434B] to-[#592B32]',
+                  border: 'border-[#9E5F68]/60',
+                  shadow: 'shadow-[0_10px_26px_rgba(89,43,50,0.32)] hover:shadow-[0_16px_34px_rgba(89,43,50,0.48)]',
+                },
+                {
+                  bg: 'bg-gradient-to-br from-[#805B27] to-[#573912]',
+                  border: 'border-[#A3793F]/60',
+                  shadow: 'shadow-[0_10px_26px_rgba(87,57,18,0.32)] hover:shadow-[0_16px_34px_rgba(87,57,18,0.48)]',
+                },
+                {
+                  bg: 'bg-gradient-to-br from-[#452D3E] to-[#291824]',
+                  border: 'border-[#694860]/60',
+                  shadow: 'shadow-[0_10px_26px_rgba(41,24,36,0.35)] hover:shadow-[0_16px_34px_rgba(41,24,36,0.52)]',
+                },
               ];
-              const pillStyle = deepTiers[idx % deepTiers.length];
+              const pill = pillTiers[idx % pillTiers.length];
+              const isSelected = selectedBudgetIdx === idx;
 
               return (
                 <ScrollReveal key={idx} animation="fadeUp" delay={0.04 * (idx + 1)}>
-                  <div
-                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-30 md:h-30 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:scale-108 cursor-pointer ${pillStyle}`}
+                  <button
+                    onClick={() => handleBudgetPillClick(idx)}
+                    className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full shrink-0 flex flex-col items-center justify-center p-3 text-center transition-all duration-300 hover:scale-108 cursor-pointer border ${pill.bg} ${pill.border} ${pill.shadow} ${
+                      isSelected ? 'ring-3 ring-offset-2 ring-[#1A1A18] scale-105' : ''
+                    }`}
                   >
-                    <span className="text-[11px] sm:text-xs md:text-[13px] font-sans font-bold text-white tracking-tight leading-snug px-1 drop-shadow-xs">
-                      {tier.range}
-                    </span>
-                  </div>
+                    <div className="text-white space-y-0.5 select-none text-center">
+                      {idx === 0 ? (
+                        <>
+                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">Under</span>
+                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹999</span>
+                        </>
+                      ) : idx === 1 ? (
+                        <>
+                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">₹999 –</span>
+                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹1,499</span>
+                        </>
+                      ) : idx === 2 ? (
+                        <>
+                          <span className="block text-xs sm:text-[13px] md:text-sm font-medium opacity-90 leading-tight">₹1,499 –</span>
+                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹2,499</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="block text-sm sm:text-base md:text-[17px] font-bold tracking-tight leading-tight">₹2,499+</span>
+                        </>
+                      )}
+                    </div>
+                  </button>
                 </ScrollReveal>
               );
             })}
@@ -348,9 +414,9 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          5. RECOMMENDED PRODUCT MIX (8 SQUIRCLE CATEGORIES)
+          5. RECOMMENDED PRODUCT MIX (SQUIRCLE CATEGORIES + PRODUCT CARDS UNDERNEATH)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
+      <section id="recommended-product-mix" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12 scroll-mt-20">
         <ScrollReveal animation="fadeUp">
           <div className="text-center space-y-2 mb-8 sm:mb-10">
             <h2
@@ -359,38 +425,109 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             >
               Recommended Product Mix
             </h2>
+            <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
+              Explore our diverse product categories tailored for {data.title}.
+            </p>
           </div>
         </ScrollReveal>
 
+        {/* ── Category Squircles (Interactive Filter) ── */}
         <div className="flex flex-wrap items-start justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8 max-w-[1400px] mx-auto">
-          {displayCategories.map((cat, idx) => (
-            <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
-              <Link
-                href={`/collections?category=${cat.id}`}
-                className="flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-28 lg:w-30 focus:outline-none transition-all duration-300"
-              >
-                {/* Outer Prominent Rounded Squircle Frame (Homepage Design) */}
-                <div
-                  className={`w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[30px] p-[2.5px] sm:p-[3px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] group-hover:ring-2 group-hover:ring-[#BFA267]/50`}
+          {displayCategories.map((cat, idx) => {
+            const isCatActive = selectedCategory === cat.id;
+
+            return (
+              <ScrollReveal key={cat.id} animation="fadeUp" delay={0.025 * (idx + 1)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory(selectedCategory === cat.id ? 'all' : cat.id);
+                    setTimeout(() => {
+                      const el = document.getElementById('recommended-product-cards');
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 50);
+                  }}
+                  className="flex flex-col items-center group cursor-pointer w-20 sm:w-24 md:w-28 lg:w-30 focus:outline-none transition-all duration-300"
                 >
-                  {/* Inner Rounded Squircle Image Container */}
-                  <div className="w-full h-full rounded-[17px] sm:rounded-[21px] md:rounded-[25px] lg:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
+                  {/* Outer Prominent Rounded Squircle Frame */}
+                  <div
+                    className={`w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[30px] p-[2.5px] sm:p-[3px] transition-all duration-500 bg-[#EAE5DC] ${cat.pastelHover} group-hover:scale-108 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.12)] ${
+                      isCatActive ? 'ring-3 ring-[#8C6228] scale-105 shadow-md' : ''
+                    }`}
+                  >
+                    {/* Inner Rounded Squircle Image Container */}
+                    <div className="w-full h-full rounded-[17px] sm:rounded-[21px] md:rounded-[25px] lg:rounded-[27px] bg-[#FAF8F5] overflow-hidden relative shadow-inner">
+                      <img
+                        src={cat.image}
+                        alt={cat.label}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-112"
+                      />
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-opacity duration-300" />
+                    </div>
+                  </div>
+
+                  {/* Category Title Below Image */}
+                  <span className={`text-[10px] sm:text-[10.5px] md:text-[11px] font-sans font-semibold uppercase tracking-[0.2em] mt-2.5 text-center leading-tight transition-colors w-full px-0.5 ${
+                    isCatActive ? 'text-[#8C6228] font-bold' : 'text-[#1A1A18] group-hover:text-[#8C6228]'
+                  }`}>
+                    {cat.label}
+                  </span>
+                </button>
+              </ScrollReveal>
+            );
+          })}
+        </div>
+
+        {/* ── PRODUCT CARDS GRID PLACED DIRECTLY UNDER RECOMMENDED PRODUCT MIX (NO PRICING, NON-CLICKABLE) ── */}
+        <div id="recommended-product-cards" className="pt-10 sm:pt-14 scroll-mt-24">
+          <ScrollReveal animation="fadeUp">
+            <div className="text-center mb-6 space-y-1">
+              <span className="text-[10.5px] sm:text-[11.5px] uppercase tracking-[0.22em] font-semibold text-[#8C6228] block">
+                {selectedCategory !== 'all' 
+                  ? `Category Showcase • ${displayCategories.find(c => c.id === selectedCategory)?.label || 'Selected Category'}`
+                  : selectedBudgetIdx !== null
+                  ? `Budget Curation • ${data.budgetTiers[selectedBudgetIdx]?.range}`
+                  : 'All Curated Products'}
+              </span>
+              <p className="text-xs text-[#78746D] font-light max-w-xl mx-auto">
+                Bespoke artisanal items crafted for corporate and festive gift boxes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+              {visibleProducts.map((item, idx) => (
+                <div
+                  key={item._id || idx}
+                  className="bg-white rounded-2xl overflow-hidden shadow-2xs border border-[#F0ECE1] flex flex-col justify-between select-none pointer-events-none"
+                >
+                  {/* Visual Frame (Clean, Non-clickable) */}
+                  <div className="w-full aspect-[4/3] overflow-hidden bg-[#FAF6F0] relative">
                     <img
-                      src={cat.image}
-                      alt={cat.label}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-112"
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-opacity duration-300" />
+                  </div>
+
+                  {/* Content (No Price Tag, Static Non-clickable) */}
+                  <div className="p-3.5 sm:p-4.5 flex-1 flex flex-col justify-between space-y-2">
+                    <div className="space-y-1">
+                      <span className="text-[9.5px] uppercase tracking-wider text-[#7A8B6F] font-semibold font-mono block">
+                        {item.categoryLabel}
+                      </span>
+                      <h4 className="text-xs sm:text-sm font-semibold text-[#1A1A18] leading-snug line-clamp-1">
+                        {item.name}
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-[#7A7268] font-light line-clamp-2 leading-relaxed">
+                        {item.subCopy || item.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Category Title Below Image — EXACT Jakarta Sans uppercase tracking-[0.22em] */}
-                <span className="text-[10px] sm:text-[10.5px] md:text-[11px] font-sans font-semibold uppercase tracking-[0.2em] text-[#1A1A18] mt-2.5 text-center leading-tight transition-colors group-hover:text-[#8C6228] w-full px-0.5">
-                  {cat.label}
-                </span>
-              </Link>
-            </ScrollReveal>
-          ))}
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

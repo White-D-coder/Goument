@@ -1157,7 +1157,7 @@ export const HAMPERS_CATALOG: HamperData[] = [
     packaging_style: 'Bio-Washed Organic Cotton Corporate Apparel',
     description: 'Bio-Washed Organic Cotton Corporate Apparel tailored for team offsites, corporate events and brand representation.',
     price: 0,
-    image: '/images/corporate/customtees/custom.jpg',
+    image: '/images/catalogue_items/category/appreal.png',
     highlights: ['220 GSM Combed Cotton', 'Custom Crest Embroidery', 'Pre-Shrunk Bio-Wash'],
   },
 

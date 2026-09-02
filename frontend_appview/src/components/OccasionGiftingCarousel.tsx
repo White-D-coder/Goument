@@ -160,11 +160,11 @@ export default function OccasionGiftingCarousel() {
 
   return (
     <section id="occasions" className="pt-4 sm:pt-8 md:pt-12 pb-4 sm:pb-8 bg-[#FAF8F5] text-[#1A1A18] relative overflow-hidden scroll-mt-20">
-      <div className="max-w-[1580px] mx-auto px-2 sm:px-4 lg:px-6 space-y-4 sm:space-y-6">
+      <div className="max-w-[1580px] mx-auto px-2 sm:px-4 lg:px-6">
         
         {/* ─── SECTION HEADER ─── */}
         <ScrollReveal animation="fadeUp">
-          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2">
+          <div className="text-center max-w-4xl mx-auto px-2 space-y-1.5 sm:space-y-2 mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2
               className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}

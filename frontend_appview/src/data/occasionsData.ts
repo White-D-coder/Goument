@@ -47,22 +47,28 @@ export interface OccasionPageData {
   tagline: string;
   description: string;
   heroImage: string;
+  primaryCta?: string;
+  secondaryCta?: string;
+  trustPoints?: string[];
 
-  // Section 2: What It Solves
+  // Section 2: Why Thoughtful Gifting Matters
   solvesTitle: string;
-  solvesSubtitle: string;
+  solvesSubtitle?: string;
   pillars: ValuePillar[];
 
   // Section 3: Moments Grid
   momentsTitle: string;
+  momentsSubtitle?: string;
   moments: OccasionMoment[];
 
   // Section 4: Budget Tiers
+  budgetTitle?: string;
+  budgetSubtitle?: string;
   budgetTiers: BudgetTier[];
 
-  // Section 5: Recommended Product Mix
-  categoryIds?: string[];
-  productMix?: ProductMixItem[];
+  // Section 5: Not Sure What to Gift
+  notSureTitle?: string;
+  notSureDescription?: string;
 
   // Section 6: Curated Concepts
   curatedConcepts: CuratedConcept[];
@@ -80,79 +86,74 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     metaTitle: 'Employee Gifting — The Gourmet Gifts',
     metaDescription: 'Celebrate your people with premium, thoughtful corporate gifts that inspire, engage and make every milestone memorable.',
     title: 'Employee Gifting',
-    tagline: 'Thoughtful gifts. Stronger teams. Lasting impact.',
-    description: 'Celebrate your people with premium, thoughtful gifts that inspire, engage and make every milestone memorable.',
+    tagline: 'For the people who make the company what it is.',
+    description: 'Onboarding. Milestones. Recognition. Festivals. Everyday appreciation. We thoughtfully curate each gifting experience around the recipient, the occasion and your brand — so it feels personal, useful and worth remembering.',
     heroImage: '/cards/employeecard.png',
+    primaryCta: 'GET 3 CURATED CONCEPTS',
+    secondaryCta: 'EXPLORE EMPLOYEE GIFTING',
+    trustPoints: ['Thoughtful Curation', 'Brand Personalisation', 'End-to-End Execution'],
 
-    solvesTitle: 'What Employee Gifting Solves',
-    solvesSubtitle: 'Great teams are built on appreciation, recognition and connection. Our employee gifting solutions help you strengthen relationships, boost morale and celebrate every moment that matters.',
+    solvesTitle: 'Why Thoughtful Employee Gifting Matters',
+    solvesSubtitle: '',
     pillars: [
       {
-        title: 'Boosts Engagement',
-        description: 'Recognize achievements and inspire your teams to perform at their highest potential.',
-        iconName: 'Sparkles',
+        title: 'Makes People Feel Valued',
+        description: 'Celebrate contributions, milestones and everyday wins with gifts that feel considered — not obligatory.',
+        iconName: 'Heart',
       },
       {
-        title: 'Builds Loyalty',
-        description: 'Make your people feel valued, seen, and genuinely connected to the company mission.',
+        title: 'Builds Genuine Connection',
+        description: 'Thoughtful gifting creates warmer relationships between employees, teams and the organisation they are part of.',
         iconName: 'HeartHandshake',
       },
       {
-        title: 'Reinforces Culture',
-        description: 'Celebrate your core values through authentic, thoughtfully crafted shared experiences.',
+        title: 'Brings Culture to Life',
+        description: 'Turn your values into something tangible through gifting experiences curated around your people and your brand.',
         iconName: 'Building',
       },
       {
-        title: 'Drives Impact',
-        description: 'Motivated, appreciated teams deliver measurable results and stronger business outcomes.',
-        iconName: 'TrendingUp',
+        title: 'Makes Moments Memorable',
+        description: 'From a first day to a five-year milestone, the right gift can turn an ordinary company moment into one people remember.',
+        iconName: 'Sparkles',
       },
     ],
 
-    momentsTitle: 'Perfect For Every Workplace Moment',
+    momentsTitle: 'Curated For Every Employee Moment',
+    momentsSubtitle: '',
     moments: [
+      { title: 'Welcome & Onboarding', iconName: 'Users' },
       { title: 'Employee Appreciation', iconName: 'Heart' },
       { title: 'Work Anniversaries', iconName: 'Calendar' },
-      { title: 'Milestones', iconName: 'Trophy' },
-      { title: 'Remote Employee Gifts', iconName: 'Home' },
-      { title: 'Employee Birthdays', iconName: 'Cake' },
-      { title: 'Festive Employee Gifting', iconName: 'Sparkles' },
-      { title: 'Leadership Gifting', iconName: 'Crown' },
+      { title: 'Milestones & Achievements', iconName: 'Trophy' },
+      { title: 'Birthdays & Personal Moments', iconName: 'Cake' },
+      { title: 'Festive Gifting', iconName: 'Sparkles' },
+      { title: 'Leadership/Executive Gifting', iconName: 'Crown' },
       { title: 'Team Celebrations', iconName: 'Users' },
     ],
 
+    budgetTitle: 'Thoughtfully Curated Around Your Budget',
+    budgetSubtitle: '',
     budgetTiers: [
       {
-        range: 'Under ₹999',
-        description: 'Thoughtful & delightful gifts that make an immediate impact.',
+        range: 'Up to ₹999',
+        description: 'Thoughtful essentials & everyday appreciation',
         iconName: 'Wallet',
       },
       {
-        range: '₹999 – ₹1,499',
-        description: 'Premium picks for everyday appreciation and high-frequency gifting.',
+        range: '₹1,000 – ₹1,499',
+        description: 'Elevated employee gifting',
         iconName: 'Gift',
       },
       {
-        range: '₹1,499 – ₹2,499',
-        description: 'Curated favourites for special promotions and quarterly awards.',
+        range: '₹1,500 – ₹2,499',
+        description: 'Premium curated experiences',
         iconName: 'Award',
       },
       {
-        range: '₹2,499+',
-        description: 'Luxury bespoke keepsakes for unforgettable executive impressions.',
+        range: '₹2,500+',
+        description: 'Signature & bespoke gifting',
         iconName: 'Gem',
       },
-    ],
-
-    categoryIds: [
-      'office-travel-bags',
-      'stationery-desk',
-      'electronics-audio',
-      'gourmet-food',
-      'beverages',
-      'corporate-apparel',
-      'personalisation',
-      'wellness-lifestyle',
     ],
 
     curatedConcepts: [
@@ -239,124 +240,79 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     ],
   },
 
-  'onboarding-kits': {
-    slug: 'onboarding-kits',
-    metaTitle: 'Onboarding Kits — The Gourmet Gifts',
-    metaDescription: 'Make Day One feel like Day One with welcoming employee welcome kits.',
-    title: 'Onboarding Kits',
-    tagline: 'Make Day One feel like Day One.',
-    description: 'Transform new hire excitement into long-term belonging with welcome kits that impress from the moment they unbox.',
-    heroImage: '/cards/employeecard.png',
-
-    solvesTitle: 'What Welcoming Onboarding Solves',
-    solvesSubtitle: 'A memorable first impression accelerates team integration, instills brand pride, and reduces early-stage turnover.',
-    pillars: [
-      { title: 'Accelerates Belonging', description: 'Make new hires feel warmly welcomed before their first morning meeting.', iconName: 'Sparkles' },
-      { title: 'Instills Brand Pride', description: 'High-utility branded gear that employees proudly showcase every day.', iconName: 'Building' },
-      { title: 'Simplifies HR Logistics', description: 'Zero-touch packaging and automated remote address dispatch.', iconName: 'Truck' },
-      { title: 'Day One Excitement', description: 'Turn unboxing into an Instagram and LinkedIn shareable celebration.', iconName: 'TrendingUp' },
-    ],
-
-    momentsTitle: 'Tailored for Every New Team Member',
-    moments: [
-      { title: 'New Hire Day 1', iconName: 'Calendar' },
-      { title: 'Remote Welcome Packs', iconName: 'Home' },
-      { title: 'Intern Welcome Kits', iconName: 'Users' },
-      { title: 'Executive Induction', iconName: 'Crown' },
-      { title: 'Campus Hires', iconName: 'Award' },
-      { title: 'Tech Equipment Packs', iconName: 'Laptop' },
-      { title: 'Sales Rep Starter Sets', iconName: 'Trophy' },
-      { title: 'Global Relocation Packs', iconName: 'Globe' },
-    ],
-
-    budgetTiers: [
-      { range: 'Under ₹1,199', description: 'Essential stationery & drinkware starter packs.', iconName: 'Wallet' },
-      { range: '₹1,199 – ₹1,999', description: 'Complete kits with notebook, bottle & treats.', iconName: 'Gift' },
-      { range: '₹1,999 – ₹3,499', description: 'Premium backpacks, tech sleeves & gourmet snacks.', iconName: 'Award' },
-      { range: '₹3,499+', description: 'Executive suites with luxury accessories & ANC headphones.', iconName: 'Gem' },
-    ],
-
-    categoryIds: [
-      'office-travel-bags',
-      'stationery-desk',
-      'electronics-audio',
-      'corporate-apparel',
-      'beverages',
-      'gourmet-food',
-      'personalisation',
-      'wellness-lifestyle',
-    ],
-
-    curatedConcepts: [
-      { name: 'The Day One Classic', tagline: 'Everyday Essentials', description: 'Notebook, matte tumbler, pen, and energizing dark chocolate.', image: '/images/boxes/box_1.png' },
-      { name: 'Remote Starter', tagline: 'Home Office Ready', description: 'Noise isolating headset, desk organizer, and specialty drip coffee.', image: '/images/boxes/box_2.png' },
-      { name: 'Tech Pioneer', tagline: 'Engineered For Focus', description: 'Wireless charging dock, braided cables, and ergonomic accessories.', image: '/images/boxes/box_3.png' },
-      { name: 'Director Suite', tagline: 'C-Level Induction', description: 'Handmade leather folios, brass accents, and rare single estate teas.', image: '/images/boxes/box_4.png' },
-    ],
-
-    customizationFeatures: [
-      { title: 'Branded Swag', description: 'Logo matching across apparel, bottles, and stationery.', iconName: 'BadgeCheck' },
-      { title: 'Welcome Letters', description: 'Personalized letters signed by department leaders.', iconName: 'FileText' },
-      { title: 'Custom Boxes', description: 'Rigid magnetic boxes with company motto inside lid.', iconName: 'Package' },
-      { title: 'Pre-Packaged Sets', description: 'Ready to ship from our fulfillment centers on demand.', iconName: 'Sliders' },
-      { title: 'Remote Logistics', description: 'Single-item dispatch directly to employee residences.', iconName: 'Truck' },
-    ],
-
-    processSteps: [
-      { step: '1', title: 'Share Your Requirements', description: 'Provide new hire cohorts, headcount, and onboarding schedule.' },
-      { step: '2', title: 'We Curate Concepts', description: 'We design tailored kit options with 3D product previews.' },
-      { step: '3', title: 'Approve & Personalise', description: 'Confirm branding, custom sleeves, and personal inserts.' },
-      { step: '4', title: 'We Prepare & Pack', description: 'Kits are inventoried and assembled with precision quality control.' },
-      { step: '5', title: 'Delivered With Delight', description: 'Scheduled dispatch to arrive 2 days before official joining date.' },
-    ],
-  },
-
   'client-gifting': {
     slug: 'client-gifting',
     metaTitle: 'Client Gifting — The Gourmet Gifts',
-    metaDescription: 'Stay remembered after the meeting with executive client gifts and bespoke packaging.',
+    metaDescription: 'Be remembered for more than the business you do. Thoughtfully curated gifting for clients, partners and key relationships.',
     title: 'Client Gifting',
-    tagline: 'Stay remembered after the meeting.',
-    description: 'Nurture high-value partnerships with luxury keepsake hampers that leave an indelible mark of distinction.',
+    tagline: 'Be remembered for more than the business you do.',
+    description: 'Thoughtfully curated gifting for clients, partners and key relationships — designed around who you\'re gifting to, why you\'re gifting and what you want your brand to leave behind.',
     heroImage: '/cards/clientcard.png',
+    primaryCta: 'GET 3 CURATED CONCEPTS',
+    secondaryCta: 'EXPLORE CLIENT GIFTING',
+    trustPoints: ['Curated Around the Recipient', 'Customised to Your Brand', 'Handled End-to-End'],
 
-    solvesTitle: 'What Client Gifting Solves',
-    solvesSubtitle: 'Stand out from generic corporate swag with high-calibre artisanal hampers that reinforce executive relationships.',
+    solvesTitle: 'Why Thoughtful Client Gifting Matters',
+    solvesSubtitle: 'The right gift can strengthen a relationship, mark an important moment and say what a routine email cannot. We curate around who the client is, the occasion, your relationship and your brand — so every gesture feels considered.',
     pillars: [
-      { title: 'Strengthens Retention', description: 'Keep your firm top-of-mind across decision-making cycles.', iconName: 'HeartHandshake' },
-      { title: 'Celebrates Wins', description: 'Commemorate deal closures, annual reviews, and key milestones.', iconName: 'Trophy' },
-      { title: 'Demonstrates Taste', description: 'Convey institutional sophistication with rare artisanal selections.', iconName: 'Crown' },
-      { title: 'Builds Reciprocity', description: 'Thoughtful appreciation deepens interpersonal trust and collaboration.', iconName: 'TrendingUp' },
+      {
+        title: 'Strengthens Relationships',
+        description: 'Show appreciation in a way that feels personal, relevant and genuinely considered.',
+        iconName: 'HeartHandshake',
+      },
+      {
+        title: 'Marks Important Moments',
+        description: 'Celebrate new partnerships, milestones, achievements and shared successes with intention.',
+        iconName: 'Trophy',
+      },
+      {
+        title: 'Reflects Your Brand',
+        description: 'Every detail — from the products to the packaging — can express the quality and thought behind your business.',
+        iconName: 'Building',
+      },
+      {
+        title: 'Keeps You Remembered',
+        description: 'A well-curated gift creates a lasting impression without feeling promotional or transactional.',
+        iconName: 'Sparkles',
+      },
     ],
 
-    momentsTitle: 'Curated for Key Relationship Milestones',
+    momentsTitle: 'Curated For Every Client Moment',
+    momentsSubtitle: 'From the first conversation to years of partnership, every relationship gives you a different reason to gift.',
     moments: [
-      { title: 'Deal Closures', iconName: 'Trophy' },
-      { title: 'Annual Retainer Thanks', iconName: 'Calendar' },
-      { title: 'Festive Client Greetings', iconName: 'Sparkles' },
-      { title: 'Board Appreciations', iconName: 'Crown' },
-      { title: 'Quarterly Reviews', iconName: 'TrendingUp' },
-      { title: 'VIP Relationship Gifts', iconName: 'Award' },
-      { title: 'Apology & Concierge', iconName: 'Heart' },
-      { title: 'Executive Welcome', iconName: 'Building' },
+      { title: 'New Client Welcomes', iconName: 'Users' },
+      { title: 'Deal Closures & Wins', iconName: 'Trophy' },
+      { title: 'Client Milestones', iconName: 'Calendar' },
+      { title: 'Festive Gifting', iconName: 'Sparkles' },
+      { title: 'Thank You & Appreciation', iconName: 'Heart' },
+      { title: 'VIP & Key Relationships', iconName: 'Award' },
+      { title: 'Events & Special Occasions', iconName: 'Crown' },
+      { title: 'Leadership & Executive Gifting', iconName: 'Building' },
     ],
 
+    budgetTitle: 'Curated Around Your Budget',
+    budgetSubtitle: 'Whether it’s a thoughtful gesture for 50 clients or a signature experience for your most important relationships, we curate to make every budget feel intentional.',
     budgetTiers: [
-      { range: 'Under ₹1,499', description: 'Signature confections and premium roast coffee sets.', iconName: 'Wallet' },
-      { range: '₹1,499 – ₹2,499', description: 'Handmade leather vessels with imported delicacies.', iconName: 'Gift' },
-      { range: '₹2,499 – ₹4,999', description: 'Exclusive wooden chests with heirloom brass keepsakes.', iconName: 'Award' },
-      { range: '₹4,999+', description: 'Ultra-luxury bespoke curations for top tier clients.', iconName: 'Gem' },
-    ],
-
-    categoryIds: [
-      'gourmet-food',
-      'beverages',
-      'decor-spiritual',
-      'office-travel-bags',
-      'personalisation',
-      'infinity-beyond',
-      'wellness-lifestyle',
-      'awards-recognition',
+      {
+        range: 'Up to ₹1,499',
+        description: 'Thoughtful gestures for key client accounts & partners',
+        iconName: 'Wallet',
+      },
+      {
+        range: '₹1,500 – ₹2,499',
+        description: 'Elevated artisanal sets & executive delights',
+        iconName: 'Gift',
+      },
+      {
+        range: '₹2,500 – ₹4,999',
+        description: 'Premium curated experiences & signature boxes',
+        iconName: 'Award',
+      },
+      {
+        range: '₹5,000+',
+        description: 'Ultra-bespoke executive hampers for VIP partnerships',
+        iconName: 'Gem',
+      },
     ],
 
     curatedConcepts: [
@@ -382,26 +338,204 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { step: '5', title: 'Delivered With Delight', description: 'Direct doorstep delivery across Mumbai, Delhi, Bengaluru, and pan-India.' },
     ],
   },
-};
 
-// Category mapping helper for dynamic occasion pages
-const OCCASION_CATEGORY_MAP: Record<string, string[]> = {
-  'festive-gifting': ['gourmet-food', 'decor-spiritual', 'beverages', 'personalisation', 'wellness-lifestyle', '3d-miniatures', 'infinity-beyond'],
-  'weddings-celebrations': ['decor-spiritual', 'gourmet-food', 'personalisation', '3d-miniatures', 'beverages', 'wellness-lifestyle', 'infinity-beyond'],
-  'events-conferences': ['office-travel-bags', 'stationery-desk', 'electronics-audio', 'corporate-apparel', 'gourmet-food', 'beverages', 'personalisation', 'awards-recognition'],
-  'milestones-recognition': ['awards-recognition', 'office-travel-bags', 'electronics-audio', 'infinity-beyond', 'personalisation', 'gourmet-food', 'wellness-lifestyle', 'stationery-desk'],
-  'cx-gifting': ['gourmet-food', 'beverages', 'personalisation', 'wellness-lifestyle', 'decor-spiritual', 'office-travel-bags'],
-  'dealer-partner-gifting': ['awards-recognition', 'electronics-audio', 'office-travel-bags', 'gourmet-food', 'beverages', 'decor-spiritual', 'personalisation'],
-};
+  'festive-gifting': {
+    slug: 'festive-gifting',
+    metaTitle: 'Festive Gifting — The Gourmet Gifts',
+    metaDescription: 'Celebrate the season. Make every gesture feel personal. Thoughtfully curated festive gifting for teams, clients, friends and families.',
+    title: 'Festive Gifting',
+    tagline: 'Celebrate the season. Make every gesture feel personal.',
+    description: 'From teams and clients to families, friends and loved ones, we curate festive gifts around who you’re gifting, the occasion and the feeling you want to create — thoughtfully chosen, beautifully presented and made to be remembered.',
+    heroImage: '/cards/festivecard.png',
+    primaryCta: 'GET 3 CURATED CONCEPTS',
+    secondaryCta: 'EXPLORE FESTIVE GIFTING',
+    trustPoints: ['Thoughtfully Curated', 'Personalised Your Way', 'Delivered End-to-End'],
 
-// Hero image mapping helper for dynamic occasion pages
-const OCCASION_HERO_IMAGE_MAP: Record<string, string> = {
-  'festive-gifting': '/cards/festivecard.png',
-  'weddings-celebrations': '/cards/wedding.png',
-  'events-conferences': '/cards/events.png',
-  'milestones-recognition': '/cards/milestones.png',
-  'cx-gifting': '/cards/cx.png',
-  'dealer-partner-gifting': '/cards/dealer.png',
+    solvesTitle: 'Why Thoughtful Festive Gifting Matters',
+    solvesSubtitle: 'Festivals are about connection, gratitude and shared moments. The right gift makes those moments feel more personal — whether you\'re celebrating your team, your clients, your family or someone close to you.',
+    pillars: [
+      {
+        title: 'Makes It Personal',
+        description: 'A thoughtfully chosen gift feels made for the recipient, rather than picked simply because the occasion demands one.',
+        iconName: 'Heart',
+      },
+      {
+        title: 'Strengthens Connections',
+        description: 'Festive gifting is a simple way to express appreciation, gratitude and warmth across both personal and professional relationships.',
+        iconName: 'HeartHandshake',
+      },
+      {
+        title: 'Makes the Occasion Memorable',
+        description: 'Thoughtful details, meaningful products and beautiful presentation turn a festive gesture into something worth remembering.',
+        iconName: 'Sparkles',
+      },
+      {
+        title: 'Reflects Who You Are',
+        description: 'Whether it\'s from a company or a family, the gift can reflect your personality, values, traditions and the sentiment behind it.',
+        iconName: 'Building',
+      },
+    ],
+
+    momentsTitle: 'Curated For Everyone You Celebrate',
+    momentsSubtitle: 'One festive season. Many relationships. We curate differently depending on who it\'s for and what you want the gesture to say.',
+    moments: [
+      { title: 'Employee & Team Gifting', iconName: 'Users' },
+      { title: 'Client & Partner Gifting', iconName: 'HeartHandshake' },
+      { title: 'Family & Loved Ones', iconName: 'Heart' },
+      { title: 'Friends & Personal Gifting', iconName: 'Sparkles' },
+      { title: 'Festive Home Visits', iconName: 'Home' },
+      { title: 'Hosts & Housewarming Gifts', iconName: 'Gift' },
+      { title: 'Premium & VIP Gifting', iconName: 'Crown' },
+      { title: 'Large Celebrations & Bulk Gifting', iconName: 'Building' },
+    ],
+
+    budgetTitle: 'Thoughtfully Curated Around Your Budget',
+    budgetSubtitle: '',
+    budgetTiers: [
+      {
+        range: 'Up to ₹999',
+        description: 'Artisanal mithai & celebratory treats',
+        iconName: 'Wallet',
+      },
+      {
+        range: '₹1,000 – ₹1,499',
+        description: 'Elevated festive boxes with brass diyas & sweets',
+        iconName: 'Gift',
+      },
+      {
+        range: '₹1,500 – ₹2,499',
+        description: 'Premium curated dry fruit & gourmet hampers',
+        iconName: 'Award',
+      },
+      {
+        range: '₹2,500+',
+        description: 'Luxury festive trunk & bespoke celebratory crates',
+        iconName: 'Gem',
+      },
+    ],
+
+    curatedConcepts: [
+      { name: 'Diwali Splendour', tagline: 'Warmth & Tradition', description: 'Handmade brass diyas, saffron infused sweets, and premium dry fruit selection.', image: '/images/boxes/box_1.png' },
+      { name: 'Royal Mithai Box', tagline: 'Gourmet Delicacies', description: 'Artisanal fusion sweets crafted with organic nuts, silver vark and rose petals.', image: '/images/boxes/box_2.png' },
+      { name: 'The Celebratory Trunk', tagline: 'Grandeur & Joy', description: 'Luxury vegan leather keepsake chest with gourmet confectionery and festive decor.', image: '/images/boxes/box_3.png' },
+      { name: 'The Heritage Hamper', tagline: 'Heirloom Elegance', description: 'Rare origin teas, hand-cast incense holders, and pure wild honey jars.', image: '/images/boxes/box_4.png' },
+    ],
+
+    customizationFeatures: [
+      { title: 'Festive Sleeves', description: 'Custom foil-stamped holiday bands with your personal greeting.', iconName: 'BadgeCheck' },
+      { title: 'Greeting Inserts', description: 'Personalized festival cards customized with recipient names.', iconName: 'FileText' },
+      { title: 'Traditional Packaging', description: 'Silk brocade trims, floral garnishes, and brass seal accents.', iconName: 'Package' },
+      { title: 'Dietary Selections', description: 'Sugar-free, keto, and vegan festive confections available.', iconName: 'Sliders' },
+      { title: 'Pan-India Delivery', description: 'Timely home delivery to families and offices across 500+ cities.', iconName: 'Truck' },
+    ],
+
+    processSteps: [
+      { step: '1', title: 'Share Your Requirements', description: 'Provide recipient lists, festive occasion, and target delivery dates.' },
+      { step: '2', title: 'We Curate Concepts', description: 'Choose from 3 customized concepts tailored to your festive theme.' },
+      { step: '3', title: 'Approve & Personalise', description: 'Finalize personal greetings, packaging colors, and custom additions.' },
+      { step: '4', title: 'We Prepare & Pack', description: 'Careful batch preparation with freshness sealing and protective transit boxing.' },
+      { step: '5', title: 'Delivered With Delight', description: 'Direct doorstep dispatch right on time before the festival begins.' },
+    ],
+  },
+
+  'events-conferences': {
+    slug: 'events-conferences',
+    metaTitle: 'Events & Conferences — The Gourmet Gifts',
+    metaDescription: 'Make the event memorable beyond the venue. Welcome kits, speaker gifts, attendee keepsakes and event merchandise.',
+    title: 'Events & Conferences',
+    tagline: 'Make the event memorable beyond the venue.',
+    description: 'From welcome kits and speaker gifts to attendee keepsakes and event merchandise, we curate every detail around your audience, event and brand — so the gifting feels like part of the experience, not an afterthought.',
+    heroImage: '/cards/events.png',
+    primaryCta: 'GET 3 CURATED CONCEPTS',
+    secondaryCta: 'EXPLORE EVENT GIFTING',
+    trustPoints: ['Thoughtfully Curated', 'Event-Ready Customisation', 'End-to-End Execution'],
+
+    solvesTitle: 'Why Thoughtful Event Gifting Matters',
+    solvesSubtitle: 'The right event gift does more than fill a welcome bag. It becomes part of the experience — something useful, relevant and memorable that continues to represent your event after it ends.',
+    pillars: [
+      {
+        title: 'Creates a Strong First Impression',
+        description: 'Thoughtfully curated welcome kits and event essentials set the tone from the moment guests arrive.',
+        iconName: 'Sparkles',
+      },
+      {
+        title: 'Keeps Your Brand Remembered',
+        description: 'Useful, well-designed gifts continue to create recall long after the event or conference is over.',
+        iconName: 'Building',
+      },
+      {
+        title: 'Enhances the Experience',
+        description: 'From check-in to take-home, considered gifting makes attendees, speakers and partners feel looked after.',
+        iconName: 'HeartHandshake',
+      },
+      {
+        title: 'Brings the Event to Life',
+        description: 'Products, packaging and personalisation can be curated around your theme, audience and brand story.',
+        iconName: 'Trophy',
+      },
+    ],
+
+    momentsTitle: 'Curated For Every Event Moment',
+    momentsSubtitle: 'From the first welcome to the final takeaway, we curate gifts for every audience and touchpoint across your event.',
+    moments: [
+      { title: 'Attendee Welcome Kits', iconName: 'Users' },
+      { title: 'Conference & Delegate Kits', iconName: 'FileText' },
+      { title: 'Speaker & Guest Gifting', iconName: 'Award' },
+      { title: 'VIP & Leadership Gifts', iconName: 'Crown' },
+      { title: 'Exhibitions & Trade Shows', iconName: 'Building' },
+      { title: 'Product & Brand Launches', iconName: 'Sparkles' },
+      { title: 'Offsites & Corporate Retreats', iconName: 'Home' },
+      { title: 'Awards, Galas & Celebrations', iconName: 'Trophy' },
+    ],
+
+    budgetTitle: 'Thoughtfully Curated Around Your Budget',
+    budgetSubtitle: '',
+    budgetTiers: [
+      {
+        range: 'Up to ₹999',
+        description: 'Attendee delegate essentials & welcome bags',
+        iconName: 'Wallet',
+      },
+      {
+        range: '₹1,000 – ₹1,499',
+        description: 'Elevated kits with notebook, bottle & tech accessories',
+        iconName: 'Gift',
+      },
+      {
+        range: '₹1,500 – ₹2,499',
+        description: 'Premium speaker & sponsor appreciation sets',
+        iconName: 'Award',
+      },
+      {
+        range: '₹2,500+',
+        description: 'Signature VIP keepsake boxes & executive hampers',
+        iconName: 'Gem',
+      },
+    ],
+
+    curatedConcepts: [
+      { name: 'Delegate Essentials', tagline: 'Conference Ready', description: 'Hardcover journal, premium stylus pen, metal tumbler, and power bank.', image: '/images/boxes/box_1.png' },
+      { name: 'Keynote Speaker Box', tagline: 'Distinguished Honour', description: 'Hand-crafted brass keepsake, artisan dry fruits, and custom gratitude plaque.', image: '/images/boxes/box_2.png' },
+      { name: 'Summit VIP Hamper', tagline: 'Executive Impact', description: 'Noise-cancelling earbuds, leather folio, and single-origin coffee drip bags.', image: '/images/boxes/box_3.png' },
+      { name: 'Retreat Welcome Set', tagline: 'Relax & Connect', description: 'Aroma candle, organic herbal tea, wellness pouch, and personalized tote bag.', image: '/images/boxes/box_4.png' },
+    ],
+
+    customizationFeatures: [
+      { title: 'Event Theme Branding', description: 'Coordinated colors, event hashtags, and logo placement across all items.', iconName: 'BadgeCheck' },
+      { title: 'Lanyard & Badge Pairing', description: 'Integrated packaging suited for quick registration desk distribution.', iconName: 'FileText' },
+      { title: 'Speaker Monograms', description: 'Custom name personalization for keynote speakers and panelists.', iconName: 'Package' },
+      { title: 'Venue Direct Delivery', description: 'Direct scheduled freight dispatch to hotel convention centers and auditoriums.', iconName: 'Truck' },
+      { title: 'Sustainable Materials', description: 'Eco-friendly kraft boxes, seed paper notepads, and recyclable packaging.', iconName: 'Sliders' },
+    ],
+
+    processSteps: [
+      { step: '1', title: 'Share Your Requirements', description: 'Tell us event date, venue location, attendee count, and theme brief.' },
+      { step: '2', title: 'We Curate Concepts', description: 'We design 3 event-ready concept options with digital 3D mockups.' },
+      { step: '3', title: 'Approve & Personalise', description: 'Confirm kit items, branding guidelines, and insert cards.' },
+      { step: '4', title: 'We Prepare & Pack', description: 'Assembly, count verification, and secure palletization for transit.' },
+      { step: '5', title: 'Delivered With Delight', description: 'Guaranteed venue delivery 24-48 hours before the event doors open.' },
+    ],
+  },
 };
 
 // Fallback generator for other categories ensuring seamless support
@@ -413,9 +547,8 @@ export const getOccasionData = (slug: string): OccasionPageData => {
   }
 
   const titles: Record<string, string> = {
-    'festive-gifting': 'Festive Gifting',
+    'onboarding-kits': 'Onboarding Kits',
     'weddings-celebrations': 'Weddings & Celebrations',
-    'events-conferences': 'Events & Conferences',
     'milestones-recognition': 'Milestones & Recognition',
     'cx-gifting': 'CX Gifting',
     'dealer-partner-gifting': 'Dealer & Partner Gifting',
@@ -431,9 +564,11 @@ export const getOccasionData = (slug: string): OccasionPageData => {
     title: name,
     tagline: `Thoughtfully curated ${name.toLowerCase()} for meaningful impact.`,
     description: `Elevate your ${name.toLowerCase()} with bespoke keepsake boxes, gourmet delicacies, and white-glove corporate fulfillment.`,
-    solvesTitle: `What ${name} Solves`,
+    solvesTitle: `Why Thoughtful ${name} Matters`,
     solvesSubtitle: `Elevate your ${name.toLowerCase()} relationships with bespoke keepsakes and curated luxury gifting.`,
-    heroImage: OCCASION_HERO_IMAGE_MAP[slug] || DEFAULT_OCCASION.heroImage,
-    categoryIds: OCCASION_CATEGORY_MAP[slug] || DEFAULT_OCCASION.categoryIds,
+    heroImage: DEFAULT_OCCASION.heroImage,
+    primaryCta: 'GET 3 CURATED CONCEPTS',
+    secondaryCta: `EXPLORE ${name.toUpperCase()}`,
+    trustPoints: ['Thoughtfully Curated', 'Customised to Your Brand', 'Handled End-to-End'],
   };
 };

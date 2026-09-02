@@ -418,54 +418,17 @@ export default function CorporateArchitecturalCatalogue() {
                     </p>
                   </div>
 
-                  {/* Action Buttons: View Link + Bag Stepper */}
-                  <div className="pt-1 sm:pt-2 flex items-center justify-between gap-2">
-                    <button
-                      onClick={async (e) => {
-                        if (currentQty === 0) {
-                          await handleIncrement(item, e);
-                        }
-                        window.location.href = '/gourmet-gifts#curation-inquiry';
-                      }}
-                      className="inline-flex items-center gap-1.5 border border-[#C5A880] text-[#9E7B35] group-hover:bg-[#C5A880] group-hover:text-white rounded-lg px-3 sm:px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
+                  {/* Clean Action Button */}
+                  <div className="pt-1 sm:pt-2 flex items-center justify-between">
+                    <a
+                      href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20corporate%20curations."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 border border-[#C5A880] text-[#9E7B35] hover:bg-[#C5A880] hover:text-white rounded-lg px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
                     >
-                      <span>Inquire</span>
+                      <span>Enquire</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-
-                    {/* Dynamic Quantity Stepper Counter */}
-                    {currentQty > 0 ? (
-                      <div 
-                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                        className="flex items-center bg-[#FAF5EC] border border-[#C5A880] rounded-lg p-0.5 shadow-xs"
-                      >
-                        <button
-                          onClick={(e) => handleDecrement(item, e)}
-                          aria-label="Decrease quantity"
-                          className="w-6 h-6 rounded flex items-center justify-center text-[#9E7B35] hover:bg-[#C5A880] hover:text-white transition-colors cursor-pointer"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="w-6 text-center text-xs font-bold text-[#1A1A18]">
-                          {currentQty}
-                        </span>
-                        <button
-                          onClick={(e) => handleIncrement(item, e)}
-                          aria-label="Increase quantity"
-                          className="w-6 h-6 rounded flex items-center justify-center text-[#9E7B35] hover:bg-[#C5A880] hover:text-white transition-colors cursor-pointer"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={(e) => handleIncrement(item, e)}
-                        className="inline-flex items-center gap-1 bg-[#FAF5EC] hover:bg-[#C5A880] text-[#9E7B35] hover:text-white border border-[#EADBCA] hover:border-[#C5A880] rounded-lg px-3 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 shadow-2xs cursor-pointer active:scale-95"
-                      >
-                        <Plus className="w-3 h-3" />
-                        <span>Add</span>
-                      </button>
-                    )}
+                    </a>
                   </div>
 
                 </div>
@@ -481,15 +444,17 @@ export default function CorporateArchitecturalCatalogue() {
               Ready to create your custom corporate gifting package?
             </h4>
             <p className="text-xs text-[#78746D]">
-              Selected corporate items above will automatically attach to your tailored curation proposal.
+              Our concierge team curates bespoke packages tailored to your brand identity and audience.
             </p>
           </div>
 
           <a
-            href="/gourmet-gifts#curation-inquiry"
+            href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20get%20bespoke%20corporate%20curation%20proposals."
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-3.5 bg-[#1A1A18] hover:bg-[#38332B] text-white text-xs font-mono uppercase tracking-[0.2em] transition-all shadow-md inline-flex items-center gap-2 cursor-pointer shrink-0 rounded-none"
           >
-            <span>Proceed to Curation Inquiry ({cartItems.reduce((acc, i) => acc + i.quantity, 0)} Items)</span>
+            <span>Contact Concierge</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#DFC299]" />
           </a>
         </div>

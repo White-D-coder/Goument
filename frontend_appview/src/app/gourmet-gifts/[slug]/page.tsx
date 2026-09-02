@@ -186,59 +186,22 @@ export default function HamperDetailPage({ params }: { params: Promise<{ slug: s
               )}
             </div>
 
-            {/* ── QUANTITY SELECTOR & CTAS ── */}
-            <div className="space-y-4 pt-3 border-t border-[#EADBCA]">
-              <div className="flex items-center gap-4">
-                {/* Quantity Pill */}
-                <div className="inline-flex items-center border border-[#D6D1C7] bg-white rounded-xl p-1 shadow-2xs">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    disabled={quantity <= 1}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[#1A1A18] hover:bg-[#F2EDE4] disabled:opacity-30 cursor-pointer transition-colors"
-                    aria-label="Decrease quantity"
-                  >
-                    <Minus className="w-3.5 h-3.5" />
-                  </button>
-                  <span className="w-10 text-center text-sm font-bold text-[#1A1A18]">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[#1A1A18] hover:bg-[#F2EDE4] cursor-pointer transition-colors"
-                    aria-label="Increase quantity"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+            {/* ── BESPOKE ENQUIRY & CONCIERGE CTAS ── */}
+            <div className="space-y-3 pt-3 border-t border-[#EADBCA]">
+              <a
+                href={`https://wa.me/917021463609?text=${encodeURIComponent(`Hi! I'd like to enquire about curating ${hamper.name} for our brand.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-widest bg-[#1A1A18] hover:bg-[#38332B] text-white flex items-center justify-center gap-2 transition-all shadow-md active:scale-98 cursor-pointer"
+              >
+                <span>Enquire via WhatsApp</span>
+              </a>
 
-                {/* Add to Curation Tray Button */}
-                <button
-                  onClick={handleAddToCart}
-                  className={`flex-1 py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md active:scale-98 ${
-                    isAdded
-                      ? 'bg-[#7A8B6F] text-white'
-                      : 'bg-[#451B27] hover:bg-[#33141D] text-white'
-                  }`}
-                >
-                  {isAdded ? (
-                    <>
-                      <Check className="w-4 h-4" />
-                      <span>Added to Curation Tray</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Add to Curation Tray</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Bulk / Corporate Gifting Enquire Button */}
               <Link
-                href={`/inquire?hamper=${encodeURIComponent(hamper.name)}`}
+                href="/contact"
                 className="w-full text-center py-3.5 border border-[#C5A880] text-[#9E7B35] hover:bg-[#C5A880] hover:text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-all block shadow-2xs hover:shadow-xs"
               >
-                Enquire for Bespoke / Corporate Orders →
+                Request Custom Quotation
               </Link>
             </div>
 

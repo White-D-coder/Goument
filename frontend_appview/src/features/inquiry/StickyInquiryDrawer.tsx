@@ -245,11 +245,11 @@ export const StickyInquiryDrawer: React.FC = () => {
                           onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                           className="w-full bg-white border border-[#D0CBC0] focus:border-[#1A1A18] rounded-lg px-2.5 py-2 text-xs text-[#1A1A18] focus:outline-none"
                         >
-                          <option>25 - 50 sets</option>
-                          <option>50 - 100 sets</option>
-                          <option>100 - 250 sets</option>
-                          <option>250 - 500 sets</option>
-                          <option>500+ sets</option>
+                          <option>25 - 50</option>
+                          <option>50 - 100</option>
+                          <option>100 - 250</option>
+                          <option>250 - 500</option>
+                          <option>500+</option>
                         </select>
                       </div>
                     </div>

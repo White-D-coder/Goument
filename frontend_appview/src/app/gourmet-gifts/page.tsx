@@ -77,13 +77,13 @@ export default function HomePage() {
         {/* Ambient luxury gradient overlay for legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A18]/85 via-black/30 to-black/50 pointer-events-none" />
 
-        {/* Hero Content positioned inside the sticky hero — Left Aligned */}
-        <div className="relative z-10 px-6 sm:px-10 lg:px-16 max-w-[1440px] mx-auto w-full flex flex-col items-start justify-center text-left">
-          <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-start text-left">
+        {/* Hero Content positioned inside the sticky hero — Centered on Mobile, Left-Aligned on Desktop */}
+        <div className="relative z-10 px-5 sm:px-10 lg:px-16 max-w-[1440px] mx-auto w-full flex flex-col items-center sm:items-start justify-center text-center sm:text-left">
+          <div ref={heroTextRef} className="max-w-3xl space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start text-center sm:text-left">
             
             {/* Title */}
             <h1
-              className="text-white leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-left"
+              className="text-white leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] opacity-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-center sm:text-left"
               style={{
                 fontFamily: 'var(--font-cormorant), Georgia, serif',
                 fontWeight: 300,
@@ -94,26 +94,26 @@ export default function HomePage() {
 
             {/* Subtitle */}
             <p
-              className="text-[#ffffff] opacity-0 text-base sm:text-2xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-left"
+              className="text-[#ffffff] opacity-0 text-base sm:text-2xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-center sm:text-left"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               We don’t start with a catalogue, We start with who you&apos;re gifting to.
             </p>
 
             {/* Buttons */}
-            <div className="opacity-0 flex flex-wrap items-center justify-start gap-3 sm:gap-4 pt-3">
+            <div className="opacity-0 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-3 w-full sm:w-auto">
               <a
                 href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20get%203%20gifting%20concepts%20curated%20for%20our%20brand."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 sm:px-7 py-3 sm:py-3.5 bg-[#8C6228] hover:bg-[#A37330] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-[0_8px_20px_rgba(140,98,40,0.35)] hover:scale-105 active:scale-95 cursor-pointer"
+                className="px-6 sm:px-7 py-3 sm:py-3.5 bg-[#8C6228] hover:bg-[#A37330] text-white font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 shadow-[0_8px_20px_rgba(140,98,40,0.35)] hover:scale-105 active:scale-95 cursor-pointer text-center"
               >
                 GET 3 GIFTING CONCEPTS
               </a>
               
               <a
                 href="#catalogue"
-                className="px-6 sm:px-7 py-3 sm:py-3.5 border border-white/60 hover:border-white text-white hover:text-[#DFC299] hover:bg-white/10 font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 backdrop-blur-xs cursor-pointer"
+                className="px-6 sm:px-7 py-3 sm:py-3.5 border border-white/60 hover:border-white text-white hover:text-[#DFC299] hover:bg-white/10 font-sans text-xs uppercase tracking-[0.16em] font-bold rounded-lg transition-all duration-300 backdrop-blur-xs cursor-pointer text-center"
               >
                 SEE WHAT WE CAN CURATE
               </a>

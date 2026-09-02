@@ -69,16 +69,15 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
     name: '',
     email: '',
     phone: '',
-    budget: data.budgetTiers[1] ? `${data.budgetTiers[1].range} per set` : `${data.budgetTiers[0]?.range || '₹1,000 – ₹1,499'} per set`,
-    quantity: '50 - 100 sets',
+    budget: data.budgetTiers[1] ? data.budgetTiers[1].range : data.budgetTiers[0]?.range || '₹1,000 – ₹1,499',
+    quantity: '50 - 100',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleBudgetClick = (range: string) => {
-    const formatted = `${range} per set`;
-    setFormData((prev) => ({ ...prev, budget: formatted }));
+    setFormData((prev) => ({ ...prev, budget: range }));
     const el = document.getElementById('curation-inquiry');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -597,8 +596,8 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                       className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none cursor-pointer"
                     >
                       {data.budgetTiers.map((tier) => (
-                        <option key={tier.range} value={`${tier.range} per set`}>
-                          {tier.range} per set
+                        <option key={tier.range} value={tier.range}>
+                          {tier.range}
                         </option>
                       ))}
                       <option value="Custom / Undecided">Custom / Undecided</option>
@@ -614,11 +613,11 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                       onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                       className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none cursor-pointer"
                     >
-                      <option>25 - 50 sets</option>
-                      <option>50 - 100 sets</option>
-                      <option>100 - 250 sets</option>
-                      <option>250 - 500 sets</option>
-                      <option>500+ sets</option>
+                      <option>25 - 50</option>
+                      <option>50 - 100</option>
+                      <option>100 - 250</option>
+                      <option>250 - 500</option>
+                      <option>500+</option>
                     </select>
                   </div>
                 </div>

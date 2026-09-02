@@ -64,7 +64,7 @@ export const INDUSTRIES_ROW_1: IndustryItem[] = [
   },
   {
     id: 'finance-professional-services',
-    title: 'Finance & Professional Services',
+    title: 'Finance & Services',
     icon: Landmark,
     iconColor: 'text-[#7A1C29]',
     bulletColor: 'text-[#7A1C29]',

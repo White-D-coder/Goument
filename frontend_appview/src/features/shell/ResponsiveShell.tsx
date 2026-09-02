@@ -204,32 +204,39 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
               ENQUIRE
             </a>
 
-            {/* Mobile Menu Toggle */}
+            {/* Universal Working Hamburger Menu Toggle (Desktop + Tablet + Mobile) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden relative w-6 h-4 flex flex-col justify-between items-end cursor-pointer ml-1 ${
-                isTransparentHero ? 'text-white' : 'text-[var(--satra-charcoal)]'
+              className={`flex items-center gap-2 px-2.5 py-1.5 rounded-md transition-all cursor-pointer select-none group ${
+                isTransparentHero 
+                  ? 'text-white hover:bg-white/10' 
+                  : 'text-[#1A1A18] hover:bg-black/5'
               }`}
               aria-label="Toggle navigation menu"
             >
-              <motion.span
-                animate={mobileMenuOpen ? { rotate: 45, y: 7.5, width: 24 } : { rotate: 0, y: 0, width: 24 }}
-                transition={{ duration: 0.3 }}
-                className="block h-[1.2px] bg-current origin-center"
-                style={{ width: 24 }}
-              />
-              <motion.span
-                animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.15 }}
-                className="block h-[1.2px] bg-current"
-                style={{ width: 16 }}
-              />
-              <motion.span
-                animate={mobileMenuOpen ? { rotate: -45, y: -7.5, width: 24 } : { rotate: 0, y: 0, width: 24 }}
-                transition={{ duration: 0.3 }}
-                className="block h-[1.2px] bg-current origin-center"
-                style={{ width: 20 }}
-              />
+              <span className="text-[11px] font-mono font-bold tracking-[0.16em] uppercase hidden sm:inline-block">
+                MENU
+              </span>
+              <div className="relative w-5 h-3.5 flex flex-col justify-between items-end">
+                <motion.span
+                  animate={mobileMenuOpen ? { rotate: 45, y: 6, width: 20 } : { rotate: 0, y: 0, width: 20 }}
+                  transition={{ duration: 0.25 }}
+                  className="block h-[1.5px] bg-current origin-center rounded-full"
+                  style={{ width: 20 }}
+                />
+                <motion.span
+                  animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="block h-[1.5px] bg-current rounded-full"
+                  style={{ width: 14 }}
+                />
+                <motion.span
+                  animate={mobileMenuOpen ? { rotate: -45, y: -6, width: 20 } : { rotate: 0, y: 0, width: 20 }}
+                  transition={{ duration: 0.25 }}
+                  className="block h-[1.5px] bg-current origin-center rounded-full"
+                  style={{ width: 17 }}
+                />
+              </div>
             </button>
           </div>
 
@@ -237,77 +244,141 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       </header>
 
       {/* ═══════════════════════════════════════════════════
-          MOBILE MENU OVERLAY
+          LUXURY WORKING DRAWER MENU (DESKTOP & MOBILE)
           ═══════════════════════════════════════════════════ */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-40 flex flex-col"
-            style={{ backgroundColor: 'var(--satra-silk)' }}
-          >
-            {/* Spacer */}
-            <div className="h-20 shrink-0" />
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs cursor-pointer"
+            />
 
-            {/* Nav Links */}
-            <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
-              {currentNavLinks.map((link, i) => (
-                <motion.div
-                  key={link.href + link.label}
-                  initial={{ opacity: 0, x: 25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.08 + i * 0.04, ease: [0.4, 0, 0.2, 1] }}
+            {/* Slide-out Drawer Panel */}
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-[420px] bg-[#FAF8F5] text-[#1A1A18] shadow-2xl flex flex-col justify-between overflow-y-auto border-l border-[#E5E0D6]"
+            >
+              {/* Top Header of Drawer */}
+              <div className="flex items-center justify-between p-6 border-b border-[#E8E2D6] shrink-0">
+                <Link
+                  href="/gourmet-gifts"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5"
                 >
-                  <Link
-                    href={link.href}
-                    onClick={(e) => {
-                      setMobileMenuOpen(false);
-                      if (link.href.includes('#')) {
-                        const [targetPath, hash] = link.href.split('#');
-                        if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts')) {
-                          e.preventDefault();
-                          const element = document.getElementById(hash);
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }
-                      }
-                    }}
-                    className={`block py-2.5 transition-colors duration-200 ${
-                      pathname === link.href
-                        ? 'text-[var(--satra-charcoal)] font-semibold'
-                        : 'text-[var(--satra-text-secondary)]'
-                    }`}
+                  <div className="relative w-7 h-7">
+                    <Image
+                      src="/images/brand/logo-vector.pdf.png"
+                      alt="The Gourmet Gifts"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <span
+                    className="text-lg font-light tracking-tight text-[#1A1A18] uppercase"
+                    style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 600 }}
                   >
-                    <span
-                      className="text-[26px] sm:text-[30px] font-light tracking-tight"
-                      style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
-                    >
-                      {link.label}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-
-            {/* Bottom Actions */}
-            <div className="px-8 py-6 border-t flex items-center justify-between" style={{ borderColor: 'var(--satra-linen)' }}>
-              <div className="flex items-center gap-5">
-                <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="text-[var(--satra-stone)]" aria-label="Account">
-                  <User className="w-5 h-5" strokeWidth={1.5} />
+                    The Gourmet Gifts
+                  </span>
                 </Link>
-                <button onClick={() => { setMobileMenuOpen(false); setSearchOpen(true); }} className="text-[var(--satra-stone)]" aria-label="Search">
-                  <Search className="w-5 h-5" strokeWidth={1.5} />
+
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-[#1A1A18] transition-colors cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  ✕
                 </button>
               </div>
-              <span className="type-micro text-[var(--satra-taupe)]">
-                The Gourmet Gifts
-              </span>
-            </div>
-          </motion.div>
+
+              {/* Main Navigation Links Content */}
+              <div className="flex-1 px-6 py-6 space-y-7 overflow-y-auto">
+                {/* Occasions Direct Links */}
+                <div className="space-y-3">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#8C6228] block">
+                    Occasions Gifting
+                  </span>
+                  <div className="flex flex-col space-y-2">
+                    {[
+                      { label: 'Employee Gifting', href: '/employee-gifting' },
+                      { label: 'Client Gifting', href: '/occasions/client-gifting' },
+                      { label: 'Festive Gifting', href: '/occasions/festive-gifting' },
+                      { label: 'Events & Conferences', href: '/occasions/events-conferences' },
+                      { label: 'Milestones & Recognition', href: '/milestones-recognition' },
+                      { label: 'CX Gifting', href: '/occasions/cx-gifting' },
+                      { label: 'Dealer & Partner Gifting', href: '/occasions/dealer-partner-gifting' },
+                      { label: 'Weddings & Celebrations', href: '/occasions/weddings-celebrations' },
+                    ].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-sm font-medium text-[#2C2925] hover:text-[#8C6228] hover:translate-x-1 transition-all py-1"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Navigation */}
+                <div className="space-y-3 pt-3 border-t border-[#E8E2D6]">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#8C6228] block">
+                    Explore &amp; Connect
+                  </span>
+                  <div className="flex flex-col space-y-2">
+                    <Link
+                      href="/collections"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm font-medium text-[#2C2925] hover:text-[#8C6228] transition-colors py-1"
+                    >
+                      Complete Catalogue
+                    </Link>
+                    <Link
+                      href="/gourmet-gifts#curation-inquiry"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm font-medium text-[#2C2925] hover:text-[#8C6228] transition-colors py-1"
+                    >
+                      Bespoke Curation Enquiry
+                    </Link>
+                    <Link
+                      href="/contact"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm font-medium text-[#2C2925] hover:text-[#8C6228] transition-colors py-1"
+                    >
+                      Contact Concierge
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Concierge Action Box */}
+              <div className="p-6 bg-[#F4EFEA] border-t border-[#E8E2D6] space-y-3 shrink-0">
+                <a
+                  href="https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.16em] font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md active:scale-98"
+                >
+                  <span>CHAT ON WHATSAPP</span>
+                </a>
+
+                <div className="text-center pt-1">
+                  <p className="text-[11px] text-[#78746D] font-light">
+                    hello@thegourmetgifts.co • Mumbai, India
+                  </p>
+                </div>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
 

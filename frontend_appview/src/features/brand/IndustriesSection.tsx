@@ -567,8 +567,12 @@ export const IndustriesSection: React.FC = () => {
                 leading-normal
               "
             >
-              Specialised gifting programmes tailored to the
-              unique identity, audience, and scale of each industry.
+              <span className="inline sm:hidden">
+                Industry-specific gifting tailored to audience, identity, and scale.
+              </span>
+              <span className="hidden sm:inline">
+                Specialised gifting programmes tailored to the unique identity, audience, and scale of each industry.
+              </span>
             </p>
           </div>
         </ScrollReveal>

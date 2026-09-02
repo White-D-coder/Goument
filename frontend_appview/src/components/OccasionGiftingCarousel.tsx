@@ -172,7 +172,12 @@ export default function OccasionGiftingCarousel() {
               For Every Occasion That Matters
             </h2>
             <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
-              Thoughtfully curated keepsakes designed for corporate milestones, celebrations, and meaningful relationships.
+              <span className="inline sm:hidden">
+                Thoughtful keepsakes for milestones, celebrations, and lasting relationships.
+              </span>
+              <span className="hidden sm:inline">
+                Thoughtfully curated keepsakes designed for corporate milestones, celebrations, and meaningful relationships.
+              </span>
             </p>
           </div>
         </ScrollReveal>

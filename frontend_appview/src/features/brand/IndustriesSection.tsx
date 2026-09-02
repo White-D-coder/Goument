@@ -138,7 +138,7 @@ export const IndustriesSection: React.FC = () => {
               className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              Industries We Understand
+              Gifting, Built Around Your Industry
             </h2>
 
             <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">

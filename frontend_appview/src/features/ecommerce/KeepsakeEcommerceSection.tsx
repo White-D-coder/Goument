@@ -88,7 +88,7 @@ export default function KeepsakeEcommerceSection() {
         </div>
 
         {/* ─── ELEGANT UNDERLINE ANIMATED LINK (NO BLACK BUTTON, NO SPARKLE) ─── */}
-        <div className="text-center pt-2 sm:pt-4">
+        <div className="text-center pt-0 mt-1 sm:mt-2">
           <Link
             href="/collections"
             className="inline-flex items-center gap-2 group text-[#1A1A18] font-sans text-xs sm:text-sm font-semibold tracking-[0.16em] uppercase relative py-1 cursor-pointer transition-colors"

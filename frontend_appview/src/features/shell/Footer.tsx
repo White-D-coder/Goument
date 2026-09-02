@@ -104,10 +104,10 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Middle: 4 Compact Nav Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-b border-black/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 md:gap-8 py-6 sm:py-8 border-b border-black/10">
           {footerColumns.map((col) => (
-            <div key={col.title} className="space-y-2.5">
-              <h4 className="text-[10px] sm:text-[11px] md:text-[12px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#000000] font-mono font-bold">
+            <div key={col.title} className="space-y-2 sm:space-y-2.5">
+              <h4 className="text-[9.5px] sm:text-[11px] md:text-[12px] uppercase tracking-[0.18em] sm:tracking-[0.22em] text-[#000000] font-mono font-bold">
                 {col.title}
               </h4>
               <ul className="space-y-1.5">
@@ -121,7 +121,7 @@ export const Footer: React.FC = () => {
                           href={link.href}
                           target={link.href.startsWith('http') ? '_blank' : undefined}
                           rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="inline-block text-xs sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer"
+                          className="inline-block text-[10.5px] xs:text-[11.5px] sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer max-w-full truncate xs:overflow-visible"
                         >
                           {link.label}
                         </a>
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
                       <Link
                         href={link.href}
                         onClick={(e) => handleLinkClick(e, link.href)}
-                        className="inline-block text-xs sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer"
+                        className="inline-block text-[10.5px] xs:text-[11.5px] sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer"
                       >
                         {link.label}
                       </Link>

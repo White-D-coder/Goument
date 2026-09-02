@@ -166,7 +166,7 @@ export async function POST(req: NextRequest) {
           </div>
 
           <!-- Footer -->
-          <div style="background: #FAF8F5; padding: 18px 24px; text-align: center; border-top: 1px solid #ECE7DE; font-size: 12px; color: #8A8680;">
+          <div style="background: #ffffffff; padding: 18px 24px; text-align: center; border-top: 1px solid #ECE7DE; font-size: 12px; color: #8A8680;">
             <p style="margin: 0;">The Gourmet Gifts &copy; ${new Date().getFullYear()} — Handcrafted Keepsakes &amp; Bespoke Corporate Curations</p>
           </div>
 

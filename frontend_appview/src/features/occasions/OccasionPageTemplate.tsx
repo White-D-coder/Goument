@@ -368,24 +368,24 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             {data.budgetTiers.map((tier, idx) => {
               const pillTiers = [
                 {
-                  bg: 'bg-[#FDEBDD]',
-                  border: 'border-[#F0DACB]',
-                  shadow: 'shadow-[0_8px_22px_rgba(253,235,221,0.5)] hover:shadow-[0_12px_28px_rgba(240,218,203,0.7)]',
+                  bg: 'bg-[#154230]', // Emerald Green
+                  border: 'border-[#0F3023]',
+                  shadow: 'shadow-[0_8px_24px_rgba(21,66,48,0.35)] hover:shadow-[0_12px_32px_rgba(21,66,48,0.5)]',
                 },
                 {
-                  bg: 'bg-[#D9CDE4]',
-                  border: 'border-[#C9BCD6]',
-                  shadow: 'shadow-[0_8px_22px_rgba(217,205,228,0.5)] hover:shadow-[0_12px_28px_rgba(201,188,214,0.7)]',
+                  bg: 'bg-[#5D1E21]', // Deep Burgundy
+                  border: 'border-[#481719]',
+                  shadow: 'shadow-[0_8px_24px_rgba(93,30,33,0.35)] hover:shadow-[0_12px_32px_rgba(93,30,33,0.5)]',
                 },
                 {
-                  bg: 'bg-[#B9E3DD]',
-                  border: 'border-[#A6D4CD]',
-                  shadow: 'shadow-[0_8px_22px_rgba(185,227,221,0.5)] hover:shadow-[0_12px_28px_rgba(166,212,205,0.7)]',
+                  bg: 'bg-[#101111]', // Charcoal Black
+                  border: 'border-[#000000]',
+                  shadow: 'shadow-[0_8px_24px_rgba(16,17,17,0.35)] hover:shadow-[0_12px_32px_rgba(16,17,17,0.5)]',
                 },
                 {
-                  bg: 'bg-[#A6CCE3]',
-                  border: 'border-[#93BDD6]',
-                  shadow: 'shadow-[0_8px_22px_rgba(166,204,227,0.5)] hover:shadow-[0_12px_28px_rgba(147,189,214,0.7)]',
+                  bg: 'bg-[#A6824A]', // Antique Gold
+                  border: 'border-[#8F6F3D]',
+                  shadow: 'shadow-[0_8px_24px_rgba(166,130,74,0.35)] hover:shadow-[0_12px_32px_rgba(166,130,74,0.5)]',
                 },
               ];
               const pill = pillTiers[idx % pillTiers.length];

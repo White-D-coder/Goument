@@ -93,7 +93,7 @@ export default function HomePage() {
 
             {/* Subtitle */}
             <p
-              className="text-[#DFC299] opacity-0 text-base sm:text-xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-left"
+              className="text-[#ffffff] opacity-0 text-base sm:text-2xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-left"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
               We don’t start with a catalogue, We start with who you&apos;re gifting to.
@@ -166,21 +166,8 @@ export default function HomePage() {
         {/* ─── 7. TRUSTED BY BUSINESSES ACROSS INDIA (MARQUEE) ─── */}
         {/* <TrustedBusinessesMarquee /> */}
 
-        {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (TEXTURED VELVET PLUM THEME) ─── */}
-        <section className="py-20 sm:py-24 md:py-32 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#4E3544] text-[#FAF8F5]">
-          
-          {/* Textured Swatch Background Overlay */}
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-overlay">
-            <Image
-              src="/images/brand/cta_texture.png"
-              alt="Velvet Texture"
-              fill
-              className="object-cover object-center"
-            />
-          </div>
-
-          {/* Rich Plum & Aubergine Radial Depth Aura */}
-          <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#6B465B]/90 via-[#4E3544] to-[#2B1B26]" />
+        {/* ─── 8. PRIVATE CONCIERGE & BESPOKE GIFTING (HERITAGE FOREST GREEN THEME) ─── */}
+        <section className="py-5 sm:py-12 md:py-24 px-5 sm:px-8 lg:px-12 text-center relative overflow-hidden bg-[#38493B] text-[#FAF8F5]">
 
           <div className="max-w-[760px] mx-auto space-y-5 relative z-10">
             <ScrollReveal animation="fadeUp">

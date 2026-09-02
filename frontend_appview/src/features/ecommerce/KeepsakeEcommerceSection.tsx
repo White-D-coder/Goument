@@ -72,8 +72,8 @@ export default function KeepsakeEcommerceSection() {
                     </div>
                   </div>
 
-                  {/* Category Title Below Image — Never breaks single words across lines */}
-                  <span className="text-[10px] xs:text-[10.5px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.2em] text-[#1A1A18] mt-2 sm:mt-3 w-full max-w-[115px] sm:max-w-[140px] text-center leading-[1.25] transition-colors group-hover:text-[#8C6228] break-normal">
+                  {/* Category Title Below Image — Left-aligned on mobile, Center on desktop */}
+                  <span className="text-[8px] xs:text-[10.5px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.2em] text-[#1A1A18] mt-2 sm:mt-3 w-full max-w-[115px] sm:max-w-[140px] text-left sm:text-center leading-[1.25] transition-colors group-hover:text-[#8C6228] break-normal">
                     {cat.label}
                   </span>
                 </Link>

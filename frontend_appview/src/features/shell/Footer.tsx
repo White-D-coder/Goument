@@ -2,46 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-
-/* 
-const SATRA_FOOTER_COLUMNS = [
-  {
-    title: 'Maison & Divisions',
-    links: [
-      { label: 'Satra Atelier', href: '/collections' },
-      { label: 'Satra Living', href: '/story' },
-      { label: 'Our Story & Guilds', href: '/story' },
-    ],
-  },
-  {
-    title: 'Corporate Curation',
-    links: [
-      { label: 'Private Concierge', href: '/corporate' },
-      { label: 'Custom Crest Embossing', href: '/corporate' },
-      { label: 'Institutional Orders', href: '/corporate' },
-      { label: 'Corporate Dossier', href: '/corporate' },
-    ],
-  },
-  {
-    title: 'Client Services',
-    links: [
-      { label: 'Bespoke Inquiries', href: '/contact' },
-      { label: 'Artisanal Gift Boxing', href: '/gift-boxing' },
-      { label: 'Pan-India Dispatch', href: '/contact' },
-    ],
-  },
-  {
-    title: 'Concierge Direct',
-    links: [
-      { label: 'concierge@houseofsatra.com', href: 'mailto:concierge@houseofsatra.com' },
-      { label: '+91 98765 43210', href: 'tel:+919876543210' },
-      { label: 'Delhi NCR • Mumbai • Jaipur', href: '/contact' },
-    ],
-  },
-];
-*/
 
 const GOURMET_FOOTER_COLUMNS = [
   {
@@ -52,26 +13,33 @@ const GOURMET_FOOTER_COLUMNS = [
       { label: 'Festive Gifting', href: '/occasions/festive-gifting' },
       { label: 'Events & Conferences', href: '/occasions/events-conferences' },
       { label: 'Milestones & Recognition', href: '/milestones-recognition' },
-      { label: 'CX & Partner Gifting', href: '/occasions/cx-gifting' },
+      { label: 'Dealer & Partner Gifting', href: '/occasions/dealer-partner-gifting' },
+      { label: 'Weddings & Celebrations', href: '/occasions/weddings-celebrations' },
+      { label: 'CX Gifting', href: '/occasions/cx-gifting' },
     ],
   },
   {
     title: 'Catalogue Categories',
     links: [
-      { label: 'Indian Gourmet Sweets', href: '/gourmet-gifts#catalogue' },
-      { label: 'Electronics & Gadgets', href: '/gourmet-gifts#catalogue' },
-      { label: 'Office & Travel Bags', href: '/gourmet-gifts#catalogue' },
-      { label: 'Stationery & Desk', href: '/gourmet-gifts#catalogue' },
-      { label: 'Recognition & Trophies', href: '/gourmet-gifts#catalogue' },
-      { label: 'Corporate Apparel', href: '/gourmet-gifts#catalogue' },
+      { label: 'Gourmet Food', href: '/collections?category=gourmet-food' },
+      { label: 'Beverages', href: '/collections?category=beverages' },
+      { label: 'Decor & Spiritual', href: '/collections?category=decor-spiritual' },
+      { label: 'Personalisation', href: '/collections?category=personalisation' },
+      { label: 'Wellness & Lifestyle', href: '/collections?category=wellness-lifestyle' },
+      { label: 'Office & Travel Bags', href: '/collections?category=office-travel-bags' },
+      { label: 'Electronics', href: '/collections?category=electronics-audio' },
+      { label: 'Stationery & Desk', href: '/collections?category=stationery-desk' },
+      { label: 'Corporate Apparel', href: '/collections?category=corporate-apparel' },
+      { label: 'Recognition & Trophies', href: '/collections?category=awards-recognition' },
     ],
   },
   {
     title: 'Quick Navigation',
     links: [
-      { label: 'Full Catalogue', href: '/gourmet-gifts#catalogue' },
+      { label: 'Home', href: '/' },
+      { label: 'Explore Catalogue', href: '/collections' },
       { label: 'Occasions Showcase', href: '/gourmet-gifts#occasions' },
-      { label: 'Bespoke Curation Enquiry', href: '/gourmet-gifts#curation-inquiry' },
+      { label: 'Bespoke Enquiry', href: '/contact' },
       { label: 'Contact Us', href: '/contact' },
     ],
   },
@@ -79,99 +47,114 @@ const GOURMET_FOOTER_COLUMNS = [
     title: 'Concierge Direct',
     links: [
       { label: 'hello@thegourmetgifts.co', href: 'mailto:hello@thegourmetgifts.co' },
-      { label: '+91 70214 63609 (WhatsApp)', href: 'https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting.' },
+      { label: '+91 70214 63609', href: 'https://wa.me/917021463609?text=Hi%21%20I%E2%80%99d%20like%20to%20enquire%20about%20bespoke%20corporate%20gifting.' },
       { label: 'Mumbai, India', href: '/contact' },
     ],
   },
 ];
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
   const footerColumns = GOURMET_FOOTER_COLUMNS;
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.includes('#')) {
+      const [targetPath, hash] = href.split('#');
+      if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts') || (pathname === '/gourmet-gifts' && targetPath === '/')) {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.hash = hash;
+        }
+      }
+    }
+  };
+
   return (
-    <footer className="relative overflow-hidden bg-[#121211] text-[#F6F4EF] border-t border-white/10">
+    <footer className="relative overflow-hidden bg-[#ffffff] text-[#000000] border-t border-black/10">
 
-      {/* ─── Background Texture Image ─── */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12] mix-blend-luminosity">
-        <Image
-          src="/images/footer_bg_pattern.jpg"
-          alt="Background Texture"
-          fill
-          className="object-cover object-center filter grayscale"
-        />
-      </div>
-
-      {/* ─── Top-Left Atmospheric Glow Gradient ─── */}
+      {/* ─── Top-Left Subtle Warm Glow Gradient ─── */}
       <div 
-        className="absolute top-0 left-0 w-[350px] sm:w-[500px] h-[250px] sm:h-[350px] pointer-events-none z-0 opacity-60"
+        className="absolute top-0 left-0 w-[350px] sm:w-[500px] h-[250px] sm:h-[350px] pointer-events-none z-0 opacity-40"
         style={{
-          background: 'radial-gradient(circle at 15% 90%, rgba(212, 175, 55, 0.16) 0%, rgba(181, 175, 166, 0.06) 35%, transparent 70%)',
+          background: 'radial-gradient(circle at 15% 90%, rgba(212, 175, 55, 0.12) 0%, rgba(181, 175, 166, 0.04) 35%, transparent 70%)',
           filter: 'blur(30px)',
         }}
       />
-
-      {/* ─── Ambient Vignette ─── */}
-      <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
       {/* ─── Compact Sleek Container ─── */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pt-8 sm:pt-10 pb-6 sm:pb-8">
         
         {/* Top Header: Compact Brand Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-6 border-b border-white/10">
-          <Link href="/gourmet-gifts" className="inline-flex items-center gap-2.5 group">
-            <div className="relative w-7 h-5 sm:w-8 sm:h-6 transition-transform group-hover:scale-105 duration-300">
-              <Image
-                src="/images/brand/logo-vector.pdf.png"
-                alt="The Gourmet Gifts"
-                fill
-                className="object-contain brightness-0 invert"
-              />
-            </div>
+        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2.5 sm:gap-4 pb-6 border-b border-black/10">
+          <Link href="/" className="inline-flex items-center gap-2.5 group cursor-pointer">
             <span
-              className="text-xl sm:text-2xl tracking-[-0.01em] uppercase font-light leading-none text-[#F6F4EF]"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[-0.01em] uppercase font-light leading-tight text-[#000000] transition-colors group-hover:text-[#8C6228]"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', fontWeight: 500 }}
             >
               The Gourmet Gifts
             </span>
           </Link>
 
-          <p className="font-serif italic text-xs sm:text-sm text-[#C7C3BB]/80 tracking-wide">
+          <p className="font-serif italic text-xs sm:text-sm text-[#000000]/75 tracking-wide text-left sm:text-right">
             “Thoughtfully Curated, Beautifully Presented.”
           </p>
         </div>
 
         {/* Middle: 4 Compact Nav Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-b border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-6 sm:py-8 border-b border-black/10">
           {footerColumns.map((col) => (
             <div key={col.title} className="space-y-2.5">
-              <h4 className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.22em] text-[#7A8B6F] font-mono font-bold">
+              <h4 className="text-[10px] sm:text-[11px] md:text-[12px] uppercase tracking-[0.2em] sm:tracking-[0.22em] text-[#000000] font-mono font-bold">
                 {col.title}
               </h4>
               <ul className="space-y-1.5">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="inline-block text-xs sm:text-[12.5px] text-[#A6A29A] hover:text-[#FFFFFF] transition-colors duration-200"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const isExternal = link.href.startsWith('http') || link.href.startsWith('mailto:') || link.href.startsWith('tel:');
+                  
+                  if (isExternal) {
+                    return (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          target={link.href.startsWith('http') ? '_blank' : undefined}
+                          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="inline-block text-xs sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    );
+                  }
+
+                  return (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        onClick={(e) => handleLinkClick(e, link.href)}
+                        className="inline-block text-xs sm:text-[12.5px] text-[#4A4742] hover:text-[#8C6228] transition-colors duration-200 cursor-pointer"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
 
         {/* Bottom Bar: Compact Meta & Copyright */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] text-[#8A8680]">
-          <div className="flex items-center gap-2.5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] sm:text-[10.5px] text-[#78746D]">
+          <div className="flex items-center gap-2">
             <span>© {new Date().getFullYear()} The Gourmet Gifts.</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
+            <span className="w-1 h-1 rounded-full bg-black/20" />
             <span>All rights reserved.</span>
           </div>
 
-          <span className="text-[#B5AFA6]/60 uppercase tracking-widest text-[8.5px]">
+          <span className="text-[#8C847B] uppercase tracking-widest text-[8.5px] sm:text-[9px]">
             Luxury Artisanal Gifting &amp; Curations
           </span>
         </div>

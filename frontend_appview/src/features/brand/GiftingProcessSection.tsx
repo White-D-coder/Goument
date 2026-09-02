@@ -45,12 +45,12 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 export const GiftingProcessSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#38493B] md:bg-transparent text-white overflow-hidden pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14">
+    <section className="relative w-full bg-[#38493B] md:bg-transparent text-white overflow-hidden pt-6 sm:pt-8 md:pt-6 pb-6 sm:pb-8 md:pb-6">
 
       <div className="relative z-10 max-w-[1580px] mx-auto px-5 sm:px-8 lg:px-12">
 
         {/* ─── SECTION HEADER (DESKTOP) ─── */}
-        <div className="hidden md:block text-center max-w-4xl mx-auto px-2 mb-3 sm:mb-5 md:mb-6">
+        <div className="hidden md:block text-center max-w-4xl mx-auto px-2 mb-3 sm:mb-4 md:mb-4">
           <ScrollReveal animation="fadeUp">
             <h2
               className="text-2xl sm:text-4xl md:text-5xl font-light text-[#1A1A18] tracking-tight leading-tight"
@@ -66,7 +66,7 @@ export const GiftingProcessSection: React.FC = () => {
         ───────────────────────────────────────── */}
         <div className="hidden md:block">
           <ScrollReveal animation="fadeUp" delay={0.08}>
-            <div className="w-full max-w-[1440px] mx-auto grid grid-cols-5 divide-x divide-white/10 bg-[#273629] rounded-full border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.3)] px-6 lg:px-10 py-5 lg:py-6 items-center">
+            <div className="w-full max-w-[1440px] mx-auto grid grid-cols-5 divide-x divide-white/10 bg-[#273629] rounded-full border border-white/10 px-6 lg:px-10 py-5 lg:py-6 items-center">
               {PROCESS_STEPS.map((step) => (
                 <div
                   key={step.number}

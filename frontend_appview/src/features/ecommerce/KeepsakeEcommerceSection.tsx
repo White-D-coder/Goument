@@ -24,7 +24,7 @@ const MOBILE_ORDER_CLASSES = [
 
 export default function KeepsakeEcommerceSection() {
   return (
-    <section id="catalogue" className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14 px-4 sm:px-6 lg:px-10 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
+    <section id="catalogue" className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-8 md:pb-7 px-4 sm:px-6 lg:px-10 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
       <div className="max-w-[1580px] mx-auto space-y-6 sm:space-y-8">
         
         {/* ─── SECTION HEADER ─── */}

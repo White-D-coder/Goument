@@ -28,7 +28,6 @@ export interface HamperData {
     | 'decor-spiritual' 
     | 'wellness-lifestyle' 
     | 'infinity-beyond' 
-    | 'personalisation' 
     | '3d-miniatures'
     | 'office-travel-bags'
     | 'electronics-audio'
@@ -76,14 +75,6 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
     borderRadius: '48% 52% 43% 57% / 58% 41% 59% 42%',
     pastelActive: 'bg-[#DFC299]',
     pastelHover: 'group-hover:bg-[#F3E7D5]',
-  },
-  {
-    id: 'personalisation',
-    label: 'Personalisation',
-    image: '/images/catalogue_items/category/personalisation.png',
-    borderRadius: '42% 58% 52% 48% / 32% 35% 65% 68%',
-    pastelActive: 'bg-[#E8A59E]',
-    pastelHover: 'group-hover:bg-[#F8DDD9]',
   },
   {
     id: 'wellness-lifestyle',

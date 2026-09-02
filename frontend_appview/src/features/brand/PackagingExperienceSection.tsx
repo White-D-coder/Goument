@@ -108,7 +108,7 @@ export const PackagingExperienceSection: React.FC = () => {
     <div
       ref={ref}
       id="packaging"
-      className="pt-6 sm:pt-10 md:pt-14 pb-6 sm:pb-10 md:pb-14 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20"
+      className="pt-6 sm:pt-8 md:pt-6 pb-6 sm:pb-10 md:pb-14 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20"
     >
       <PackagingHeader />
       

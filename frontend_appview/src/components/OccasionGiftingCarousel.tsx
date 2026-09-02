@@ -227,7 +227,7 @@ export default function OccasionGiftingCarousel() {
                     e.preventDefault();
                   }
                 }}
-                className="relative w-[240px] sm:w-[270px] md:w-[280px] lg:w-[calc((100%-4*1rem)/5.35)] aspect-[3/4.2] shrink-0 snap-start rounded-2xl overflow-hidden shadow-[0_10px_28px_rgba(0,0,0,0.14)] hover:shadow-[0_20px_44px_rgba(0,0,0,0.24)] transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 group"
+                className="relative w-[240px] sm:w-[270px] md:w-[280px] lg:w-[calc((100%-4*1rem)/5.35)] aspect-[3/4.2] shrink-0 snap-start rounded-2xl overflow-hidden transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 group"
               >
                 {/* Full-Bleed Image Background */}
                 <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A18] pointer-events-none">

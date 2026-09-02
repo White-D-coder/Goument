@@ -31,21 +31,21 @@ export const BoxCapacityModal: React.FC = () => {
 
   const handleAddAnotherBox = () => {
     closeCapacityModal();
-    if (pathname === '/' || pathname === '/gourmet-gifts') {
+    if (pathname === '/') {
       const el = document.getElementById('boxes');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     } else {
-      router.push('/gourmet-gifts#boxes');
+      router.push('/#boxes');
     }
   };
 
   const handleProceedToEnquiry = () => {
     closeCapacityModal();
-    if (pathname === '/' || pathname === '/gourmet-gifts') {
+    if (pathname === '/') {
       const el = document.getElementById('curation-inquiry');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     } else {
-      router.push('/gourmet-gifts#curation-inquiry');
+      router.push('/#curation-inquiry');
     }
   };
 

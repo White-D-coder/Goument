@@ -48,13 +48,13 @@ export const CurationDrawer: React.FC = () => {
 
   const handleProceedToEnquiry = () => {
     closeDrawer();
-    if (pathname === '/' || pathname === '/gourmet-gifts') {
+    if (pathname === '/') {
       const el = document.getElementById('curation-inquiry');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      router.push('/gourmet-gifts#curation-inquiry');
+      router.push('/#curation-inquiry');
     }
   };
 

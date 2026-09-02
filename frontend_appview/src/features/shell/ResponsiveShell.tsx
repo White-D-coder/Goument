@@ -17,8 +17,8 @@ import { useInquiryModal } from '@/hooks/useInquiryModal';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
-  { label: 'Catalogue', href: '/gourmet-gifts#catalogue' },
-  { label: 'Occasions', href: '/gourmet-gifts#occasions' },
+  { label: 'Catalogue', href: '/#catalogue' },
+  { label: 'Occasions', href: '/#occasions' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -70,11 +70,11 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
     pathname.startsWith('/account') ||
     pathname.startsWith('/corporate');
 
-  const isTransparentHero = (pathname === '/' || pathname === '/gourmet-gifts') && !isScrolled && !mobileMenuOpen;
+  const isTransparentHero = pathname === '/' && !isScrolled && !mobileMenuOpen;
   const currentNavLinks = GOURMET_NAV_LINKS;
 
   const scrollToHeroOrTop = (e: React.MouseEvent) => {
-    if (pathname === '/' || pathname === '/gourmet-gifts') {
+    if (pathname === '/') {
       e.preventDefault();
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
@@ -115,7 +115,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 onClick={(e) => {
                   if (link.href.includes('#')) {
                     const [targetPath, hash] = link.href.split('#');
-                    if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts')) {
+                    if (pathname === targetPath || (pathname === '/' && (targetPath === '' || targetPath === '/'))) {
                       e.preventDefault();
                       const element = document.getElementById(hash);
                       if (element) {
@@ -142,7 +142,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
           {/* ─── Center: Brand Identity / Monogram ─── */}
           <div className="flex-shrink-0 flex items-center justify-center">
             <Link
-              href="/gourmet-gifts"
+              href="/"
               onClick={scrollToHeroOrTop}
               className="flex items-center gap-2 sm:gap-3 group py-1 cursor-pointer"
               aria-label="The Gourmet Gifts Home"
@@ -266,7 +266,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                       setMobileMenuOpen(false);
                       if (link.href.includes('#')) {
                         const [targetPath, hash] = link.href.split('#');
-                        if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts')) {
+                        if (pathname === targetPath || (pathname === '/' && (targetPath === '' || targetPath === '/'))) {
                           e.preventDefault();
                           const element = document.getElementById(hash);
                           if (element) {

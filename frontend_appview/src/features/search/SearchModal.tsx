@@ -112,7 +112,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {results.map((item: any) => {
                     const isBox = 'capacitySlots' in item;
-                    const href = isBox ? `/gourmet-gifts#boxes` : `/gourmet-gifts/${item.slug}`;
+                    const href = isBox ? `/#boxes` : `/gourmet-gifts/${item.slug}`;
 
                     return (
                       <Link
@@ -157,7 +157,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             {/* Bottom Bar */}
             <div className="p-3 bg-[#FAF8F5] border-t border-[#E0DDD6] text-center">
               <Link
-                href="/gourmet-gifts"
+                href="/#catalogue"
                 onClick={onClose}
                 className="text-xs font-semibold text-[#9E7B35] hover:underline inline-flex items-center gap-1"
               >

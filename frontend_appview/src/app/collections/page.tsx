@@ -50,7 +50,7 @@ function CollectionsCatalogueContent() {
             Home
           </Link>
           <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />
-          <Link href="/gourmet-gifts#catalogue" className="hover:text-[#1A1A18] transition-colors">
+          <Link href="/#catalogue" className="hover:text-[#1A1A18] transition-colors">
             Catalogue
           </Link>
           <ChevronRight className="w-3 h-3 text-[#B5AFA6]" />

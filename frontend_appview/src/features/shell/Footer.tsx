@@ -38,7 +38,7 @@ const GOURMET_FOOTER_COLUMNS = [
     links: [
       { label: 'Home', href: '/' },
       { label: 'Explore Catalogue', href: '/collections' },
-      { label: 'Occasions Showcase', href: '/gourmet-gifts#occasions' },
+      { label: 'Occasions Showcase', href: '/#occasions' },
       { label: 'Bespoke Enquiry', href: '/contact' },
       { label: 'Contact Us', href: '/contact' },
     ],
@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.includes('#')) {
       const [targetPath, hash] = href.split('#');
-      if (pathname === targetPath || (pathname === '/' && targetPath === '/gourmet-gifts') || (pathname === '/gourmet-gifts' && targetPath === '/')) {
+      if (pathname === targetPath || (pathname === '/' && (targetPath === '' || targetPath === '/'))) {
         e.preventDefault();
         const element = document.getElementById(hash);
         if (element) {

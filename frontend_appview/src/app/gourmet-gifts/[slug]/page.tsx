@@ -69,7 +69,7 @@ export default function HamperDetailPage({ params }: { params: Promise<{ slug: s
       {/* ─── BREADCRUMB & BACK NAVIGATION ─── */}
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-10 mb-6 sm:mb-8">
         <Link
-          href="/gourmet-gifts"
+          href="/#catalogue"
           className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#78746D] hover:text-[#1A1A18] transition-colors group font-semibold"
         >
           <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
@@ -241,7 +241,7 @@ export default function HamperDetailPage({ params }: { params: Promise<{ slug: s
             </h2>
           </div>
           <Link
-            href="/gourmet-gifts"
+            href="/#catalogue"
             className="text-xs uppercase font-semibold text-[#9E7B35] hover:text-[#7A1C29] flex items-center gap-1 transition-colors"
           >
             <span>View All</span>

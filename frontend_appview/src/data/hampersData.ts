@@ -553,15 +553,15 @@ export const HAMPERS_CATALOG: HamperData[] = [
   },
 
   /* ═══════════════════════════════════════════════
-     4. PERSONALISATION
+     4. ETERNAL PAPER CO / PERSONALISATION
      ═══════════════════════════════════════════════ */
   {
     _id: 'personalisation_visiting_card_qr',
     slug: 'company-visiting-card-qr',
     name: 'Company Visiting Card QR',
     subCopy: 'Share your details instantly with a smart QR solution.',
-    category: 'personalisation',
-    categoryLabel: 'Personalisation',
+    category: 'infinity-beyond',
+    categoryLabel: 'Eternal Paper Co',
     inside_items: [
       { item: 'Smart Visiting Card with Dynamic QR', weight: 'Custom' },
     ],
@@ -577,8 +577,8 @@ export const HAMPERS_CATALOG: HamperData[] = [
     slug: 'festive-greeting-qr-from-leadership',
     name: 'Festive Greeting QR from Leadership',
     subCopy: 'Send warm festive wishes directly from leadership.',
-    category: 'personalisation',
-    categoryLabel: 'Personalisation',
+    category: 'infinity-beyond',
+    categoryLabel: 'Eternal Paper Co',
     inside_items: [
       { item: 'Festive Greeting Card with Leadership Video QR', weight: 'Custom' },
     ],

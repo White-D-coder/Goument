@@ -245,8 +245,8 @@ export default function OccasionGiftingCarousel() {
                 {/* Bottom Center Content */}
                 <div className="relative z-10 w-full mt-auto pointer-events-none flex flex-col items-center justify-end text-center">
                   
-                  {/* Default State (img 1): Title with Explore's exact font, uppercase & letter-spacing */}
-                  <div className="transform transition-all duration-400 ease-out sm:group-hover:opacity-0 sm:group-hover:-translate-y-2 pb-1">
+                  {/* Default State (Desktop Only): White Title that fades on hover */}
+                  <div className="hidden sm:block transform transition-all duration-400 ease-out group-hover:opacity-0 group-hover:-translate-y-2 pb-1">
                     <span className="text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.22em] text-white/95 font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
                       {card.title}
                     </span>

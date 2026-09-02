@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search } from 'lucide-react';
 import { BottomNav } from './BottomNav';
 import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
@@ -10,11 +9,9 @@ import { CartIcon } from './CartIcon';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { useCartSync } from '@/shared/useCartSync';
 import { Toaster } from 'react-hot-toast';
-import { SearchModal } from '@/features/search/SearchModal';
 
 export const MobileShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [showReconnectedToast, setShowReconnectedToast] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isOnline = useOnlineStatus(() => {
@@ -48,9 +45,6 @@ export const MobileShell: React.FC<{ children: React.ReactNode }> = ({ children 
           onHandled={() => setShowReconnectedToast(false)}
         />
 
-        {/* Modals */}
-        <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-
         {/* Dynamic Scroll Top Header */}
         <header
           className={`sticky top-0 z-40 px-4 py-2 flex items-center justify-between transition-all duration-300 ${
@@ -81,16 +75,8 @@ export const MobileShell: React.FC<{ children: React.ReactNode }> = ({ children 
             </span>
           </Link>
 
-          {/* Search Icon & Cart Icon on Right */}
+          {/* Cart Icon on Right */}
           <div className="flex items-center gap-3.5">
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              aria-label="Open search"
-              className="p-1 text-[#3A2342] hover:text-[#6B427B] transition-colors flex items-center justify-center"
-            >
-              <Search className="w-5 h-5 stroke-[2]" />
-            </button>
-
             <Link href="/cart" aria-label="View shopping bag" className="p-1 flex items-center justify-center">
               <CartIcon className="w-5.5 h-5.5 text-[#3A2342]" />
             </Link>

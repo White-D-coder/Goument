@@ -4,12 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Search, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { OfflineBanner } from './OfflineBanner';
 import { OnlineToast } from './OnlineToast';
 import { Footer } from './Footer';
-import { SearchModal } from '@/features/search/SearchModal';
 import { useOnlineStatus } from '@/shared/useOnlineStatus';
 import { Toaster } from 'react-hot-toast';
 import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
@@ -26,7 +25,6 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
   const [showReconnectedToast, setShowReconnectedToast] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
 
   const isOnline = useOnlineStatus(() => {
     setShowReconnectedToast(true);
@@ -90,7 +88,6 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       />
       <OfflineBanner isOnline={isOnline} />
       <OnlineToast shouldTrigger={showReconnectedToast} onHandled={() => setShowReconnectedToast(false)} />
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {/* ═══════════════════════════════════════════════════
           NAVIGATION BAR — The Gourmet Gifts
@@ -299,9 +296,6 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="text-[var(--satra-stone)]" aria-label="Account">
                   <User className="w-5 h-5" strokeWidth={1.5} />
                 </Link>
-                <button onClick={() => { setMobileMenuOpen(false); setSearchOpen(true); }} className="text-[var(--satra-stone)]" aria-label="Search">
-                  <Search className="w-5 h-5" strokeWidth={1.5} />
-                </button>
               </div>
               <span className="type-micro text-[var(--satra-taupe)]">
                 The Gourmet Gifts

@@ -6,6 +6,21 @@ import { ArrowRight } from 'lucide-react';
 import { CATALOGUE_CATEGORIES } from '@/data/hampersData';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
+const MOBILE_ORDER_CLASSES = [
+  'order-1 sm:order-none',
+  'order-2 sm:order-none',
+  'order-3 sm:order-none',
+  'order-4 sm:order-none',
+  'order-5 sm:order-none',
+  'order-6 sm:order-none',
+  'order-7 sm:order-none',
+  'order-8 sm:order-none',
+  'order-9 sm:order-none',
+  'order-10 sm:order-none',
+  'order-11 sm:order-none',
+  'order-12 sm:order-none',
+];
+
 export default function KeepsakeEcommerceSection() {
   return (
     <section id="catalogue" className="pt-4 sm:pt-8 md:pt-12 pb-10 sm:pb-16 px-4 sm:px-6 lg:px-10 bg-[#FAF8F5] text-[#1A1A18] scroll-mt-20">
@@ -29,12 +44,18 @@ export default function KeepsakeEcommerceSection() {
         {/* ─── 12 CATEGORIES FULL GRID (NO HORIZONTAL SCROLL - VISIBLE AT ONCE) ─── */}
         <div className="pt-1 pb-2">
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 sm:gap-6 md:gap-7 lg:gap-8 justify-items-center">
-            {CATALOGUE_CATEGORIES.map((cat) => {
+            {CATALOGUE_CATEGORIES.map((cat, idx) => {
+              // Swap Personalisation & Apparel position on mobile only
+              const mobileOrder = 
+                cat.id === 'personalisation' ? 'order-11 sm:order-none' :
+                cat.id === 'corporate-apparel' ? 'order-4 sm:order-none' :
+                MOBILE_ORDER_CLASSES[idx];
+
               return (
                 <Link
                   key={cat.id}
                   href={`/collections?category=${cat.id}`}
-                  className="flex flex-col items-center group cursor-pointer w-full max-w-[170px] focus:outline-none transition-all duration-300"
+                  className={`flex flex-col items-center group cursor-pointer w-full max-w-[170px] focus:outline-none transition-all duration-300 ${mobileOrder}`}
                 >
                   {/* Outer Prominent Rounded Squircle Frame (Bigger Size) */}
                   <div
@@ -51,8 +72,8 @@ export default function KeepsakeEcommerceSection() {
                     </div>
                   </div>
 
-                  {/* Category Title Below Image — Responsive tracking and clean wrap */}
-                  <span className="text-[10px] sm:text-[11.5px] md:text-[12px] font-sans font-semibold uppercase tracking-[0.12em] sm:tracking-[0.22em] text-[#1A1A18] mt-2 sm:mt-3 max-w-[105px] sm:max-w-[140px] text-center leading-tight transition-colors group-hover:text-[#8C6228] break-words">
+                  {/* Category Title Below Image — Never breaks single words across lines */}
+                  <span className="text-[10px] xs:text-[10.5px] sm:text-[12px] font-sans font-semibold uppercase tracking-[0.06em] xs:tracking-[0.1em] sm:tracking-[0.2em] text-[#1A1A18] mt-2 sm:mt-3 w-full max-w-[115px] sm:max-w-[140px] text-center leading-[1.25] transition-colors group-hover:text-[#8C6228] break-normal">
                     {cat.label}
                   </span>
                 </Link>

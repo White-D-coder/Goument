@@ -306,7 +306,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
       {/* ══════════════════════════════════════════════════════════════════
           3. CURATED FOR EVERY MOMENT (8 MOMENT CARDS)
           ══════════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 bg-[#F6F4EF]/60 rounded-3xl sm:rounded-[36px] my-6">
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-12">
         <ScrollReveal animation="fadeUp">
           <div className="text-center space-y-2 mb-8 sm:mb-10 max-w-3xl mx-auto">
             <h2
@@ -328,7 +328,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
             const Icon = IconMap[moment.iconName] || Heart;
             return (
               <ScrollReveal key={idx} animation="fadeUp" delay={0.03 * (idx + 1)}>
-                <div className="bg-white border border-[#E5E0D6] rounded-xl sm:rounded-2xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 shadow-2xs hover:shadow-xs transition-all hover:border-[#8C6228]/40">
+                <div className="bg-white border border-[#EAE5DC] rounded-xl sm:rounded-2xl p-4 sm:p-5 flex items-center gap-3 sm:gap-4 shadow-sm hover:shadow-md transition-all hover:border-[#8C6228]/40">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#FAF8F5] flex items-center justify-center shrink-0 text-[#8C6228]">
                     <Icon className="w-4.5 h-4.5 stroke-[1.5]" />
                   </div>

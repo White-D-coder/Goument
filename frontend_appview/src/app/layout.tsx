@@ -53,7 +53,44 @@ export const metadata: Metadata = {
       { url: '/meta.svg', sizes: '180x180', type: 'image/svg+xml' },
     ],
   },
+  alternates: {
+    canonical: 'https://thegourmetgifts.co',
+  },
   manifest: '/manifest.webmanifest',
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://thegourmetgifts.co/#organization',
+      name: 'The Gourmet Gifts',
+      url: 'https://thegourmetgifts.co',
+      logo: 'https://thegourmetgifts.co/meta.svg',
+      description: 'Bespoke corporate gifting, artisanal hampers, and keepsake gift boxes curated for businesses.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Mumbai',
+        addressCountry: 'IN',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+91-70214-63609',
+        contactType: 'customer service',
+        availableLanguage: ['English', 'Hindi'],
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://thegourmetgifts.co/#website',
+      url: 'https://thegourmetgifts.co',
+      name: 'The Gourmet Gifts',
+      publisher: {
+        '@id': 'https://thegourmetgifts.co/#organization',
+      },
+    },
+  ],
 };
 
 export const viewport: Viewport = {
@@ -79,6 +116,10 @@ export default async function RootLayout({
         />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <Script id="microsoft-clarity" strategy="afterInteractive">

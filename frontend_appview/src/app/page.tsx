@@ -101,7 +101,7 @@ export default function HomePage() {
               className="text-[#ffffff] opacity-0 text-base sm:text-2xl md:text-2xl lg:text-[24px] font-normal tracking-tight leading-snug max-w-2xl text-center sm:text-left"
               style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
             >
-              We don’t start with a catalogue, We start with who you&apos;re gifting to.
+              We don’t start with a catalogue. We start with who you&apos;re gifting to.
             </p>
 
             {/* Buttons */}

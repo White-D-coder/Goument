@@ -38,9 +38,10 @@ const GOURMET_FOOTER_COLUMNS = [
     links: [
       { label: 'Home', href: '/' },
       { label: 'Explore Catalogue', href: '/collections' },
-      { label: 'Occasions Showcase', href: '/#occasions' },
+      { label: 'Occasions Showcase', href: '/occasions' },
       { label: 'Bespoke Enquiry', href: '/contact' },
       { label: 'Contact Us', href: '/contact' },
+      { label: 'Privacy & Terms', href: '/contact' },
     ],
   },
   {
@@ -194,6 +195,10 @@ export const Footer: React.FC = () => {
             <span>© {new Date().getFullYear()} The Gourmet Gifts.</span>
             <span className="w-1 h-1 rounded-full bg-black/20" />
             <span>All rights reserved.</span>
+            <span className="w-1 h-1 rounded-full bg-black/20" />
+            <Link href="/contact" className="hover:text-[#1A1A18] transition-colors">
+              Privacy &amp; Terms
+            </Link>
           </div>
 
           <span className="text-[#8C847B] uppercase tracking-widest text-[8.5px] sm:text-[9px]">

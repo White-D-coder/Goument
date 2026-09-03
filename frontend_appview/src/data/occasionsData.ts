@@ -173,7 +173,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
     processSteps: [
       { step: '1', title: 'Share Your Requirements', description: 'Tell us your occasion, headcount, budget and required delivery date.' },
-      { step: '2', title: 'We Curate Concepts', description: 'Receive 3 customized gifting concepts with digital mockups within 24 hours.' },
+      { step: '2', title: 'We Curate Concepts', description: 'Receive 3 customised gifting concepts with digital mockups within 24 hours.' },
       { step: '3', title: 'Approve & Personalise', description: 'Review physical samples or digital renders and finalize custom branding.' },
       { step: '4', title: 'We Prepare & Pack', description: 'Expert hand-assembly, multi-point QC inspections, and secure transit packaging.' },
       { step: '5', title: 'Delivered With Delight', description: 'Coordinated door-to-door pan-India delivery with live dispatch tracking.' },
@@ -363,7 +363,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
     customizationFeatures: [
       { title: 'Festive Sleeves', description: 'Custom foil-stamped holiday bands with your personal greeting.', iconName: 'BadgeCheck' },
-      { title: 'Greeting Inserts', description: 'Personalized festival cards customized with recipient names.', iconName: 'FileText' },
+      { title: 'Greeting Inserts', description: 'Personalised festival cards customised with recipient names.', iconName: 'FileText' },
       { title: 'Traditional Packaging', description: 'Silk brocade trims, floral garnishes, and brass seal accents.', iconName: 'Package' },
       { title: 'Dietary Selections', description: 'Sugar-free, keto, and vegan festive confections available.', iconName: 'Sliders' },
       { title: 'Pan-India Delivery', description: 'Timely home delivery to families and offices across 500+ cities.', iconName: 'Truck' },
@@ -371,7 +371,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
     processSteps: [
       { step: '1', title: 'Share Your Requirements', description: 'Provide recipient lists, festive occasion, and target delivery dates.' },
-      { step: '2', title: 'We Curate Concepts', description: 'Choose from 3 customized concepts tailored to your festive theme.' },
+      { step: '2', title: 'We Curate Concepts', description: 'Choose from 3 customised concepts tailored to your festive theme.' },
       { step: '3', title: 'Approve & Personalise', description: 'Finalize personal greetings, packaging colors, and custom additions.' },
       { step: '4', title: 'We Prepare & Pack', description: 'Careful batch preparation with freshness sealing and protective transit boxing.' },
       { step: '5', title: 'Delivered With Delight', description: 'Direct doorstep dispatch right on time before the festival begins.' },
@@ -866,7 +866,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
 
     processSteps: [
       { step: '1', title: 'Share Your Requirements', description: 'Tell us event dates, destination venue, guest count, and theme aesthetic.' },
-      { step: '2', title: 'We Curate Concepts', description: 'Receive 3 customized wedding curation options with packaging mockups.' },
+      { step: '2', title: 'We Curate Concepts', description: 'Receive 3 customised wedding curation options with packaging mockups.' },
       { step: '3', title: 'Approve & Personalise', description: 'Finalize personalized monograms, ribbon shades, and gift contents.' },
       { step: '4', title: 'We Prepare & Pack', description: 'Careful batch assembly, freshness sealing, and luxury gift wrapping.' },
       { step: '5', title: 'Delivered With Delight', description: 'Direct scheduled delivery to your destination resort or residence.' },

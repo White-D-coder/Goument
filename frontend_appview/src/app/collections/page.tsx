@@ -11,23 +11,13 @@ import {
 import { HAMPERS_CATALOG, CATALOGUE_CATEGORIES, HamperData } from '@/data/hampersData';
 import { useCartStore } from '@/hooks/useCart';
 
-function CollectionsCatalogueContent() {
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get('category');
-
-  // Default to first category if requested or specific category
-  const [selectedCategory, setSelectedCategory] = useState<string>('gourmet-food');
-
-  useEffect(() => {
-    if (categoryParam) {
-      const exists = CATALOGUE_CATEGORIES.some((c) => c.id === categoryParam);
-      if (exists) {
-        setSelectedCategory(categoryParam);
-      }
-    }
-  }, [categoryParam]);
-
-  // Filter Products
+function CataloguePresentation({
+  selectedCategory,
+  onSelectCategory,
+}: {
+  selectedCategory: string;
+  onSelectCategory?: (id: string) => void;
+}) {
   const filteredProducts = useMemo(() => {
     let list = HAMPERS_CATALOG;
     if (selectedCategory && selectedCategory !== 'all') {
@@ -84,7 +74,7 @@ function CollectionsCatalogueContent() {
             return (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => onSelectCategory?.(cat.id)}
                 className="flex flex-col items-center shrink-0 snap-start transition-all duration-200 cursor-pointer focus:outline-none w-[74px]"
               >
                 {/* Compact Squircle Image Frame (Image 2 style) */}
@@ -148,7 +138,7 @@ function CollectionsCatalogueContent() {
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
+                    onClick={() => onSelectCategory?.(cat.id)}
                     className="flex flex-col items-center py-2 px-1 rounded-xl transition-all duration-300 group cursor-pointer text-center relative focus:outline-none"
                   >
                     {/* Squircle Image Frame */}
@@ -197,7 +187,7 @@ function CollectionsCatalogueContent() {
                   No curations found in this category.
                 </p>
                 <button
-                  onClick={() => setSelectedCategory('gourmet-food')}
+                  onClick={() => onSelectCategory?.('gourmet-food')}
                   className="text-xs font-bold uppercase tracking-wider text-[#9E7B35] underline cursor-pointer"
                 >
                   View Gourmet Food
@@ -260,9 +250,31 @@ function CollectionsCatalogueContent() {
   );
 }
 
+function CollectionsCatalogueContent() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const [selectedCategory, setSelectedCategory] = useState<string>('gourmet-food');
+
+  useEffect(() => {
+    if (categoryParam) {
+      const exists = CATALOGUE_CATEGORIES.some((c) => c.id === categoryParam);
+      if (exists) {
+        setSelectedCategory(categoryParam);
+      }
+    }
+  }, [categoryParam]);
+
+  return (
+    <CataloguePresentation
+      selectedCategory={selectedCategory}
+      onSelectCategory={setSelectedCategory}
+    />
+  );
+}
+
 export default function CollectionsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center text-xs font-mono tracking-widest text-[#8C847B]">LOADING CATALOGUE...</div>}>
+    <Suspense fallback={<CataloguePresentation selectedCategory="gourmet-food" />}>
       <CollectionsCatalogueContent />
     </Suspense>
   );

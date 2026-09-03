@@ -28,7 +28,7 @@ export const INDUSTRIES_ROW_1: IndustryItem[] = [
     bulletColor: 'text-[#3D5244]',
     points: [
       'Possession Gifts',
-      'Channel Partner',
+      'Channel Partner Gifting',
       'Project Launches',
       'VIP Homeowners',
       'Festive Gifting',
@@ -56,7 +56,7 @@ export const INDUSTRIES_ROW_1: IndustryItem[] = [
     bulletColor: 'text-[#3B4C5A]',
     points: [
       'Welcome Kits',
-      'Remote Employee',
+      'Remote Teams',
       'Offsites',
       'Milestones',
       'Merchandise',
@@ -102,7 +102,7 @@ export const INDUSTRIES_ROW_2: IndustryItem[] = [
     points: [
       'Save the Date Favours',
       'Invitation Boxes',
-      'Bridesmaid & Grooms',
+      'Bridesmaids & Groomsmen',
       'Welcome Hampers',
       'Return Gifting',
     ],

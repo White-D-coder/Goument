@@ -76,6 +76,28 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const conceptsAudienceTarget = useMemo(() => {
+    switch (data.slug) {
+      case 'employee-gifting':
+      case 'onboarding-kits':
+        return 'built around your people, the occasion and your brand.';
+      case 'cx-gifting':
+        return 'built around your customer, the journey moment and your brand.';
+      case 'dealer-partner-gifting':
+        return 'built around the partner tier, the milestone and your brand.';
+      case 'events-conferences':
+        return 'built around the audience, the event format and your brand.';
+      case 'milestones-recognition':
+        return 'built around the achievement, the recipient and what the moment represents.';
+      case 'festive-gifting':
+        return 'built around who you’re gifting to, the festival and your brand.';
+      case 'weddings-celebrations':
+        return 'built around the people, the celebration, the theme and your budget.';
+      default:
+        return 'built around your client and your brand.';
+    }
+  }, [data.slug]);
+
   const handleBudgetClick = (range: string) => {
     setFormData((prev) => ({ ...prev, budget: range }));
     const el = document.getElementById('curation-inquiry');
@@ -461,7 +483,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
               </h2>
               <p className="text-xs sm:text-sm md:text-base text-[#6B655E] font-light leading-relaxed">
                 Tell us who you’re gifting, the occasion, quantity and budget.
-                <br className="hidden sm:inline" /> We’ll come back with 3 thoughtfully curated concepts built around your client and your brand.
+                <br className="hidden sm:inline" /> We’ll come back with 3 thoughtfully curated concepts {conceptsAudienceTarget}
               </p>
             </div>
 

@@ -14,6 +14,7 @@ import { Toaster } from 'react-hot-toast';
 import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
 import { InquiryModal } from '@/components/modals/InquiryModal';
 import { useInquiryModal } from '@/hooks/useInquiryModal';
+import { FloatingStickyInquireButton } from '@/components/brand/FloatingStickyInquireButton';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
@@ -331,6 +332,9 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
       {/* ═══ GLOBAL INQUIRY POPUP MODAL ═══ */}
       <InquiryModal />
+
+      {/* ═══ BOTTOM RIGHT STICKY FLOATING ENQUIRE BUTTON ═══ */}
+      <FloatingStickyInquireButton />
     </div>
   );
 };

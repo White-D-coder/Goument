@@ -250,7 +250,7 @@ export default function OccasionGiftingCarousel() {
                     </span>
                   </div>
 
-                  {/* Hover State (img 2): Full Detailed Block (Title + Subtitle + Explore) Animating from Bottom to Top */}
+                  {/* Hover State: Full Detailed Block (Title + Subtitle + Explore) Animating from Bottom to Top */}
                   <div className="space-y-1.5 transform transition-all duration-500 ease-out opacity-100 translate-y-0 sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 pb-1">
                     <h3 className="font-sans text-base sm:text-lg md:text-[19px] font-bold text-[#DFC299] uppercase tracking-wider leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
                       {card.title}

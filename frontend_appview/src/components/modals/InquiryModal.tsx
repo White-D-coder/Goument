@@ -57,18 +57,18 @@ export const InquiryModal: React.FC = () => {
 
     setIsSubmitting(true);
     try {
-      // 1. Send inquiry to email endpoint
+      // 1. Send inquiry to email endpoint (dispatches email to hello@thegourmetgifts.co)
       fetch('/api/send-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           occasion: options.occasion || 'General Curation',
-          source: options.source || 'Inquiry Pop-up Modal',
+          source: options.source || 'Floating Enquire Widget',
         }),
-      }).catch((err) => console.error('Email inquiry trigger error:', err));
+      }).catch((err) => console.error('Email dispatch error:', err));
 
-      // 2. Open WhatsApp with structured inquiry message
+      // 2. Open WhatsApp with pre-filled structured inquiry
       openWhatsAppInquiry({
         pageName: options.source || 'The Gourmet Gifts Website',
         occasion: options.occasion || 'General Curation',
@@ -79,11 +79,28 @@ export const InquiryModal: React.FC = () => {
         quantity: formData.quantity,
       });
 
-      toast.success('Enquiry initiated via WhatsApp concierge!');
+      toast.success('Enquiry initiated via WhatsApp & Email dispatched!');
+      // Reset & close
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        budget: options.defaultBudget || '₹1,000 – ₹1,499',
+        quantity: options.defaultQuantity || '50 - 100',
+      });
       closeInquiryModal();
     } catch (error) {
       console.error('Inquiry submission error:', error);
-      toast.error('Failed to submit. Opening WhatsApp concierge directly...');
+      openWhatsAppInquiry({
+        pageName: options.source || 'The Gourmet Gifts Website',
+        occasion: options.occasion || 'General Curation',
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        budget: formData.budget,
+        quantity: formData.quantity,
+      });
+      closeInquiryModal();
     } finally {
       setIsSubmitting(false);
     }
@@ -92,32 +109,36 @@ export const InquiryModal: React.FC = () => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          {/* Backdrop */}
+        <div className="fixed bottom-24 right-4 sm:right-6 z-50 pointer-events-auto">
+          {/* Floating Card right above the bottom-right button - NO dark backdrop, NO blur, background page remains clickable and scrollable */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeInquiryModal}
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
-          />
-
-          {/* Modal Container Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            initial={{ opacity: 0, scale: 0.92, y: 20, transformOrigin: 'bottom right' }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 16 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-2xl bg-white rounded-3xl sm:rounded-[32px] p-6 sm:p-8 shadow-2xl border border-[#EAE5DC] text-[#1A1A18] z-10"
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ type: 'spring', damping: 24, stiffness: 280 }}
+            className="w-[calc(100vw-2rem)] sm:w-[480px] max-h-[82vh] overflow-y-auto bg-white rounded-3xl p-5 sm:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.22)] border border-[#EAE5DC] text-[#1A1A18] relative"
           >
-            {/* Close Button */}
-            <button
-              onClick={closeInquiryModal}
-              className="absolute top-5 right-5 p-2 rounded-full text-[#78746D] hover:text-[#1A1A18] hover:bg-[#FAF8F5] transition-colors"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            {/* Header: Title + Close Button */}
+            <div className="flex items-center justify-between pb-3 border-b border-[#F0ECE1] mb-4">
+              <div className="space-y-0.5">
+                <span className="text-[10px] font-mono tracking-[0.2em] text-[#8C6228] uppercase font-semibold block">
+                  Bespoke Curation
+                </span>
+                <h3
+                  className="text-xl sm:text-2xl font-light text-[#1A1A18] leading-tight"
+                  style={{ fontFamily: 'var(--font-cormorant), Georgia, serif' }}
+                >
+                  Quick Curation Enquiry
+                </h3>
+              </div>
+              <button
+                onClick={closeInquiryModal}
+                className="p-1.5 rounded-full text-[#78746D] hover:text-[#1A1A18] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+                aria-label="Close form"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7 pt-2">
               {/* Row 1: Name, Email, Phone */}
@@ -207,26 +228,16 @@ export const InquiryModal: React.FC = () => {
                 </div>
               </div>
 
-              {/* Row 3: Submit Button & Direct Concierge Note */}
-              <div className="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              {/* Row 3: Submit Button */}
+              <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-7 py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 rounded-lg shrink-0 cursor-pointer shadow-md hover:shadow-lg disabled:opacity-50"
+                  className="w-full py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2.5 rounded-xl cursor-pointer shadow-md hover:shadow-lg disabled:opacity-50 active:scale-[0.99]"
                 >
                   <Send className="w-3.5 h-3.5 text-[#DFC299]" />
                   <span>{isSubmitting ? 'SENDING...' : 'SEND CURATION ENQUIRY'}</span>
                 </button>
-
-                <div className="text-xs text-[#78746D] font-light text-left sm:text-right">
-                  Direct concierge:{' '}
-                  <a
-                    href="mailto:hello@thegourmetgifts.co"
-                    className="text-[#1A1A18] font-normal underline hover:text-[#8C6228] transition-colors"
-                  >
-                    hello@thegourmetgifts.co
-                  </a>
-                </div>
               </div>
             </form>
           </motion.div>

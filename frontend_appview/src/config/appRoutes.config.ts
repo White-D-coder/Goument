@@ -184,6 +184,13 @@ export const PAGE_ROUTES_CONFIG: Record<string, PageRouteItem> = {
     description: 'Direct contact info, WhatsApp concierge, corporate office details.',
     enabled: true,
   },
+  PRIVACY: {
+    id: 'privacy',
+    name: 'Privacy & Terms',
+    path: '/privacy',
+    description: 'Client confidentiality and corporate data protection policy.',
+    enabled: true,
+  },
   CORPORATE: {
     id: 'corporate',
     name: 'Corporate Gifting Solutions',

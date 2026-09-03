@@ -267,12 +267,12 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { title: 'Executive Lettering', description: 'Letterpress printed appreciation notes on handmade deckle paper.', iconName: 'FileText' },
       { title: 'Custom Ribboning', description: 'Satin & grosgrain ribbons woven to your firm’s brand guidelines.', iconName: 'Package' },
       { title: 'Dietary Customization', description: 'Vegetarian, gluten-free, and sugar-conscious curated options.', iconName: 'Sliders' },
-      { title: 'Direct Delivery', description: 'White-glove courier delivery straight to CXO office desks.', iconName: 'Truck' },
+      { title: 'Direct Delivery', description: 'Priority courier delivery straight to executive desks.', iconName: 'Truck' },
     ],
 
     processSteps: [
       { step: '1', title: 'Share Your Requirements', description: 'Tell us client tier sizes, preferred themes, and dispatch dates.' },
-      { step: '2', title: 'We Curate Concepts', description: 'Review 3 luxury proposals tailored to your brand standards.' },
+      { step: '2', title: 'We Curate Concepts', description: 'Review 3 tailored curation concepts aligned with your brand standards.' },
       { step: '3', title: 'Approve & Personalise', description: 'Inspect box finish, monogram placement, and personalized cards.' },
       { step: '4', title: 'We Prepare & Pack', description: 'Hand-ribboned, sealed with wax crests, and packaged in protective transit outers.' },
       { step: '5', title: 'Delivered With Delight', description: 'Direct doorstep delivery across Mumbai, Delhi, Bengaluru, and pan-India.' },
@@ -366,7 +366,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { title: 'Greeting Inserts', description: 'Personalised festival cards customised with recipient names.', iconName: 'FileText' },
       { title: 'Traditional Packaging', description: 'Silk brocade trims, floral garnishes, and brass seal accents.', iconName: 'Package' },
       { title: 'Dietary Selections', description: 'Sugar-free, keto, and vegan festive confections available.', iconName: 'Sliders' },
-      { title: 'Pan-India Delivery', description: 'Timely home delivery to families and offices across 500+ cities.', iconName: 'Truck' },
+      { title: 'Pan-India Delivery', description: 'Timely doorstep delivery to homes and offices pan-India.', iconName: 'Truck' },
     ],
 
     processSteps: [
@@ -661,7 +661,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
     customizationFeatures: [
       { title: 'Brand Story Packaging', description: 'Pantone matched box outers, custom tissue paper, and branded seal stickers.', iconName: 'BadgeCheck' },
       { title: 'Dynamic QR Inserts', description: 'Personalized thank-you cards linking to exclusive member rewards or videos.', iconName: 'FileText' },
-      { title: 'Automated CRM Triggers', description: 'API integration ready for automatic dispatch on milestone completions.', iconName: 'Package' },
+      { title: 'Workflow Integration', description: 'Custom webhook and trigger support for automatic milestone gifting dispatch.', iconName: 'Package' },
       { title: 'Dietary Variations', description: 'Nut-free, vegan, and sugar-conscious options for diverse customers.', iconName: 'Sliders' },
       { title: 'Pan-India Fulfillment', description: 'Reliable express home delivery with customer live delivery SMS updates.', iconName: 'Truck' },
     ],
@@ -670,7 +670,7 @@ export const OCCASIONS_DATA: Record<string, OccasionPageData> = {
       { step: '1', title: 'Share Your Requirements', description: 'Tell us customer journey triggers, monthly volume, and budget tier.' },
       { step: '2', title: 'We Curate Concepts', description: 'Receive 3 customer journey concepts designed for maximum delight.' },
       { step: '3', title: 'Approve & Personalise', description: 'Confirm unboxing elements, message cards, and custom packaging sleeves.' },
-      { step: '4', title: 'We Prepare & Pack', description: 'Batch assembly or on-demand inventory stocking in our fulfillment centers.' },
+      { step: '4', title: 'We Prepare & Pack', description: 'Batch assembly and secure warehousing with strict multi-point QC.' },
       { step: '5', title: 'Delivered With Delight', description: 'Direct doorstep dispatch upon customer milestone or anniversary.' },
     ],
   },

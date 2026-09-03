@@ -173,12 +173,7 @@ export default function OccasionGiftingCarousel() {
               <span className="block xs:inline">That Matters</span>
             </h2>
             <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal pb-[3px]">
-              <span className="inline sm:hidden">
-                Thoughtful keepsakes for every milestone.
-              </span>
-              <span className="hidden sm:inline">
-                Thoughtfully curated keepsakes designed for corporate milestones, celebrations, and meaningful relationships.
-              </span>
+              Thoughtful gifting for milestones, celebrations, and relationships that matter.
             </p>
           </div>
         </ScrollReveal>

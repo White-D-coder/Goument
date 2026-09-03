@@ -161,12 +161,7 @@ export const PackagingHeader = () => {
         Packaging That Completes the Experience
       </h2>
       <p className="text-xs md:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
-        <span className="inline sm:hidden">
-          Handcrafted boxes for luxury unboxings.
-        </span>
-        <span className="hidden sm:inline">
-          Bespoke handcrafted boxes for unforgettable unboxing moments.
-        </span>
+        Bespoke handcrafted boxes for unforgettable unboxing moments.
       </p>
     </div>
   );

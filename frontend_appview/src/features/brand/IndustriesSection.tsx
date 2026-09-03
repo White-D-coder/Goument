@@ -200,12 +200,7 @@ export const IndustriesSection: React.FC = () => {
             </h2>
 
             <p className="text-xs sm:text-sm text-[#78746D] font-light max-w-3xl mx-auto leading-normal">
-              <span className="inline sm:hidden">
-                Tailored gifting for every industry.
-              </span>
-              <span className="hidden sm:inline">
-                Specialised gifting programmes tailored to the unique identity, audience, and scale of each industry.
-              </span>
+              Gifting built around the audience, context, and scale of your industry.
             </p>
           </div>
         </ScrollReveal>

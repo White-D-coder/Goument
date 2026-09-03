@@ -41,7 +41,7 @@ const GOURMET_FOOTER_COLUMNS = [
       { label: 'Occasions Showcase', href: '/occasions' },
       { label: 'Bespoke Enquiry', href: '/contact' },
       { label: 'Contact Us', href: '/contact' },
-      { label: 'Privacy & Terms', href: '/contact' },
+      { label: 'Privacy & Terms', href: '/privacy' },
     ],
   },
   {
@@ -196,7 +196,7 @@ export const Footer: React.FC = () => {
             <span className="w-1 h-1 rounded-full bg-black/20" />
             <span>All rights reserved.</span>
             <span className="w-1 h-1 rounded-full bg-black/20" />
-            <Link href="/contact" className="hover:text-[#1A1A18] transition-colors">
+            <Link href="/privacy" className="hover:text-[#1A1A18] transition-colors">
               Privacy &amp; Terms
             </Link>
           </div>

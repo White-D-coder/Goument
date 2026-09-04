@@ -30,17 +30,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://thegourmetgifts.co/meta.png?v=3',
+        url: 'https://thegourmetgifts.co/meta.png',
         width: 1200,
         height: 1200,
         type: 'image/png',
-        alt: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
-      },
-      {
-        url: 'https://thegourmetgifts.co/meta.svg',
-        width: 1200,
-        height: 630,
-        type: 'image/svg+xml',
         alt: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
       },
     ],
@@ -49,18 +42,15 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
     description: 'Artisanal delicacies, bespoke keepsake vessels, and executive corporate gifting systems.',
-    images: ['https://thegourmetgifts.co/meta.png?v=3', 'https://thegourmetgifts.co/meta.svg'],
+    images: ['https://thegourmetgifts.co/meta.png'],
   },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.png', type: 'image/png' },
     ],
     shortcut: '/icon.svg',
     apple: [
-      { url: '/icon.svg', sizes: '180x180', type: 'image/svg+xml' },
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
   },
   alternates: {
@@ -77,7 +67,7 @@ const jsonLd = {
       '@id': 'https://thegourmetgifts.co/#organization',
       name: 'The Gourmet Gifts',
       url: 'https://thegourmetgifts.co',
-      logo: 'https://thegourmetgifts.co/meta.svg',
+      logo: 'https://thegourmetgifts.co/icon.svg',
       description: 'Bespoke corporate gifting, artisanal hampers, and keepsake gift boxes curated for businesses.',
       address: {
         '@type': 'PostalAddress',
@@ -124,8 +114,6 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -41,3 +41,7 @@ coverage/
 
 # Vercel & Deployment
 .vercel/
+
+# Analytics Vault Database
+*.enc
+**/data/

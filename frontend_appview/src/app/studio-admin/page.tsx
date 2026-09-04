@@ -125,8 +125,8 @@ export default function StudioAdminPage() {
     checkAuth();
   }, []);
 
-  const loadDashboardData = async () => {
-    setIsFetchingData(true);
+  const loadDashboardData = async (isSilent = false) => {
+    if (!isSilent) setIsFetchingData(true);
     try {
       const res = await fetch('/api/admin/data', { cache: 'no-store' });
       if (res.status === 401) {
@@ -136,15 +136,26 @@ export default function StudioAdminPage() {
       const json = await res.json();
       if (json.success && json.data) {
         setData(json.data);
-      } else {
+      } else if (!isSilent) {
         toast.error(json.error || 'Failed to refresh data.');
       }
     } catch {
-      toast.error('Network error loading data.');
+      if (!isSilent) {
+        toast.error('Network error loading data.');
+      }
     } finally {
-      setIsFetchingData(false);
+      if (!isSilent) setIsFetchingData(false);
     }
   };
+
+  // Real-time dynamic polling every 4 seconds when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    const interval = setInterval(() => {
+      loadDashboardData(true);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isAuthenticated]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -359,6 +370,11 @@ export default function StudioAdminPage() {
 
           {/* Actions */}
           <div className="flex items-center gap-2.5">
+            <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#DDD7CD] text-[11px] uppercase tracking-[0.1em] font-medium text-[#59554E]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Live Updates</span>
+            </div>
+
             <button
               onClick={handleDownloadExcel}
               disabled={isDownloading}
@@ -369,7 +385,7 @@ export default function StudioAdminPage() {
             </button>
 
             <button
-              onClick={loadDashboardData}
+              onClick={() => loadDashboardData(false)}
               disabled={isFetchingData}
               title="Refresh Data"
               className="p-2 rounded-lg bg-[#FAF8F5] hover:bg-[#EFECE5] border border-[#DDD7CD] text-[#59554E] hover:text-[#1A1A18] transition-colors cursor-pointer"

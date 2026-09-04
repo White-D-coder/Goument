@@ -158,12 +158,12 @@ export function useSilentTelemetry() {
       }
     };
 
-    // 4. Periodic heartbeat every 20 seconds while user is active
+    // 4. Periodic heartbeat every 4 seconds while user is active
     const heartbeatInterval = setInterval(() => {
       if (isTabActiveRef.current) {
         flushTelemetry(true);
       }
-    }, 20000);
+    }, 4000);
 
     // 5. Page unload
     const handleUnload = () => {

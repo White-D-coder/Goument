@@ -30,7 +30,14 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/meta.svg',
+        url: 'https://thegourmetgifts.co/meta.png?v=3',
+        width: 1200,
+        height: 1200,
+        type: 'image/png',
+        alt: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
+      },
+      {
+        url: 'https://thegourmetgifts.co/meta.svg',
         width: 1200,
         height: 630,
         type: 'image/svg+xml',
@@ -42,16 +49,18 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
     description: 'Artisanal delicacies, bespoke keepsake vessels, and executive corporate gifting systems.',
-    images: ['/meta.svg'],
+    images: ['https://thegourmetgifts.co/meta.png?v=3', 'https://thegourmetgifts.co/meta.svg'],
   },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon.svg', sizes: 'any' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png' },
     ],
     shortcut: '/icon.svg',
     apple: [
       { url: '/icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   alternates: {

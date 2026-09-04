@@ -189,19 +189,21 @@ export const Footer: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom Bar: Compact Meta & Copyright */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pt-5 text-[10px] sm:text-[10.5px] text-[#78746D]">
-          <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} The Gourmet Gifts.</span>
+        {/* Bottom Bar: Compact Meta, Entity, GST & Copyright */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-5 text-[10.5px] sm:text-[11px] text-[#78746D]">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+            <span className="font-medium text-[#3A3731]">House of Satra Pvt Ltd.</span>
             <span className="w-1 h-1 rounded-full bg-black/20" />
-            <span>All rights reserved.</span>
+            <span className="font-mono text-[#5C5851] tracking-wider">GST: 27AAICH9186M1ZP</span>
+            <span className="w-1 h-1 rounded-full bg-black/20" />
+            <span>© {new Date().getFullYear()} The Gourmet Gifts.</span>
             <span className="w-1 h-1 rounded-full bg-black/20" />
             <Link href="/privacy" className="hover:text-[#1A1A18] transition-colors">
               Privacy &amp; Terms
             </Link>
           </div>
 
-          <span className="text-[#8C847B] uppercase tracking-widest text-[8.5px] sm:text-[9px]">
+          <span className="text-[#8C847B] uppercase tracking-widest text-[9px] sm:text-[9.5px]">
             Luxury Artisanal Gifting &amp; Curations
           </span>
         </div>

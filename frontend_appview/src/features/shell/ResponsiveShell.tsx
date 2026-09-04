@@ -15,6 +15,8 @@ import GoldPopperSprinkle from '@/components/effects/GoldPopperSprinkle';
 import { InquiryModal } from '@/components/modals/InquiryModal';
 import { useInquiryModal } from '@/hooks/useInquiryModal';
 import { FloatingStickyInquireButton } from '@/components/brand/FloatingStickyInquireButton';
+import { useSilentTelemetry } from '@/hooks/useSilentTelemetry';
+import { useUserLocation } from '@/hooks/useUserLocation';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
@@ -25,6 +27,8 @@ const GOURMET_NAV_LINKS = [
 
 export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
+  useSilentTelemetry();
+  useUserLocation();
   const { openInquiryModal } = useInquiryModal();
   const [showReconnectedToast, setShowReconnectedToast] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -80,6 +84,19 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
   };
+
+  // Completely isolate private admin dashboard from consumer storefront navigation and popups
+  if (pathname?.startsWith('/studio-admin')) {
+    return (
+      <div className="min-h-screen bg-[#FAF8F5] text-[#1A1A18]">
+        <Toaster
+          position="top-center"
+          toastOptions={{ style: { fontFamily: 'var(--font-jakarta)', fontSize: '13px' } }}
+        />
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col relative" style={{ backgroundColor: 'var(--satra-ivory)' }}>

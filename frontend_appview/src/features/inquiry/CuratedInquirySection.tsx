@@ -5,11 +5,12 @@ import {
   Send, 
   CheckCircle2, 
 } from 'lucide-react';
-import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
+import { useUserLocation } from '@/hooks/useUserLocation';
 
 export default function CuratedInquirySection() {
+  const userLoc = useUserLocation();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -21,6 +22,13 @@ export default function CuratedInquirySection() {
     targetDate: '',
     message: '',
   });
+
+  // Auto-fill delivery location from detected user location
+  React.useEffect(() => {
+    if (userLoc.fullLocation && !formData.city) {
+      setFormData((prev) => ({ ...prev, city: userLoc.fullLocation }));
+    }
+  }, [userLoc.fullLocation]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -297,16 +305,37 @@ export default function CuratedInquirySection() {
 
                 {/* Delivery Location */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
-                    Delivery Location
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    placeholder="City / State"
-                    className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] placeholder-[#9E9A92] focus:outline-none transition-colors"
-                  />
+                  <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
+                      Delivery Location
+                    </label>
+                    {userLoc.isAutoDetected && formData.city && (
+                      <span className="text-[9.5px] text-[#8C7449] font-medium flex items-center gap-0.5">
+                        <span>📍 Auto-detected</span>
+                      </span>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      placeholder="e.g. Mumbai, Delhi, Bengaluru"
+                      className="w-full bg-transparent border-0 border-b border-[#D0CBC0] focus:border-[#1A1A18] rounded-none px-0 py-2 text-xs sm:text-sm text-[#1A1A18] placeholder-[#9E9A92] focus:outline-none transition-colors pr-14"
+                    />
+                    {formData.city && (
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, city: '' })}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] text-[#8C867D] hover:text-[#1A1A18] px-1 py-0.5 underline cursor-pointer"
+                      >
+                        Change
+                      </button>
+                    )}
+                  </div>
+                  <span className="text-[10px] text-[#8C867D] block pt-0.5">
+                    Pre-filled from your location. Edit if delivering to another city.
+                  </span>
                 </div>
 
               </div>

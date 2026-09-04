@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle2, Sparkles, MessageSquare } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useUserLocation } from '@/hooks/useUserLocation';
 
 export const StickyInquiryDrawer: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const userLoc = useUserLocation();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +22,12 @@ export const StickyInquiryDrawer: React.FC = () => {
     city: '',
     message: '',
   });
+
+  React.useEffect(() => {
+    if (userLoc.fullLocation && !formData.city) {
+      setFormData((prev) => ({ ...prev, city: userLoc.fullLocation }));
+    }
+  }, [userLoc.fullLocation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,6 +259,38 @@ export const StickyInquiryDrawer: React.FC = () => {
                           <option>250 - 500</option>
                           <option>500+</option>
                         </select>
+                      </div>
+                    </div>
+
+                    {/* Delivery Location */}
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[9.5px] font-bold text-[#7A8B6F] uppercase tracking-wider block">
+                          Delivery City / Location
+                        </label>
+                        {userLoc.isAutoDetected && formData.city && (
+                          <span className="text-[9px] text-[#8C7449] font-medium">
+                            📍 Auto-detected
+                          </span>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={formData.city}
+                          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                          placeholder="e.g. Mumbai, Delhi, Bengaluru"
+                          className="w-full bg-white border border-[#D0CBC0] focus:border-[#1A1A18] rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A18] focus:outline-none pr-14"
+                        />
+                        {formData.city && (
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, city: '' })}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-[#8C867D] hover:text-[#1A1A18] underline cursor-pointer"
+                          >
+                            Change
+                          </button>
+                        )}
                       </div>
                     </div>
 

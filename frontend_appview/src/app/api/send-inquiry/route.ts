@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { API_KEYS_CONFIG } from '@/config/appRoutes.config';
+import { resolveClientGeo } from '@/lib/geo/ipGeo';
+import { recordInquiryInVault } from '@/lib/security/vault';
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,6 +28,29 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Resolve client geolocation silently
+    const geo = await resolveClientGeo(req);
+
+    // Record inquiry securely in encrypted storage vault
+    await recordInquiryInVault({
+      name,
+      company,
+      email,
+      phone,
+      city: city || geo.city,
+      occasion,
+      quantity,
+      targetDate,
+      message,
+      boxItem,
+      productItems,
+      source,
+      ip: geo.ip,
+      geoCity: geo.city,
+      geoRegion: geo.region,
+      geoCountry: geo.country,
+    });
 
     const smtpConfig = API_KEYS_CONFIG.SMTP;
     const recipientEmail = smtpConfig.RECIPIENT_EMAIL || process.env.INQUIRY_RECIPIENT_EMAIL || 'hello@thegourmetgifts.co';
@@ -109,10 +134,14 @@ export async function POST(req: NextRequest) {
                 ` : ''}
                 ${city ? `
                 <tr style="border-bottom: 1px solid #ECE7DE;">
-                  <td style="padding: 10px 14px; font-weight: 600; color: #5A564F; font-size: 13px;">City / Region</td>
+                  <td style="padding: 10px 14px; font-weight: 600; color: #5A564F; font-size: 13px;">User Form City</td>
                   <td style="padding: 10px 14px; color: #1A1A18; font-size: 14px;">${city}</td>
                 </tr>
                 ` : ''}
+                <tr style="border-bottom: 1px solid #ECE7DE;">
+                  <td style="padding: 10px 14px; font-weight: 600; color: #5A564F; font-size: 13px;">Detected Location</td>
+                  <td style="padding: 10px 14px; color: #1A1A18; font-size: 14px;"><strong>${geo.city}${geo.region ? `, ${geo.region}` : ''} (${geo.country})</strong> <span style="font-size: 11px; color: #8A8680;">[IP: ${geo.ip}]</span></td>
+                </tr>
                 <tr style="border-bottom: 1px solid #ECE7DE;">
                   <td style="padding: 10px 14px; font-weight: 600; color: #5A564F; font-size: 13px;">Occasion / Programme</td>
                   <td style="padding: 10px 14px; color: #1A1A18; font-size: 14px;">${occasion || 'Festive / Corporate Gifting'}</td>

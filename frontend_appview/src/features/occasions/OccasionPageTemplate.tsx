@@ -444,16 +444,11 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                 animation="fadeUp"
                 delay={0.035 * (idx + 1)}
               >
-                <div className="group border-b border-[#DCD5CA] py-5 sm:py-6 lg:py-7">
+                <div className="group border-b border-[#DCD5CA] py-5 sm:py-6 lg:py-7 transition-transform duration-300 ease-out hover:-translate-y-1">
                   <div className="flex items-center gap-4 sm:gap-5">
 
-                    {/* Number */}
-                    <span className="w-7 shrink-0 text-[11px] font-mono tracking-[0.12em] text-[#B5AFA6]">
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-
                     {/* Icon */}
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center text-[#8C6228]">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center text-[#8C6228] transition-transform duration-300 group-hover:scale-110">
                       <Icon className="w-5 h-5 sm:w-[21px] sm:h-[21px] stroke-[1.45]" />
                     </div>
 
@@ -463,7 +458,7 @@ export const OccasionPageTemplate: React.FC<{ data: OccasionPageData }> = ({ dat
                     </span>
 
                     {/* Arrow */}
-                    <ChevronRight className="w-4 h-4 shrink-0 text-[#B5AFA6] group-hover:text-[#8C6228] group-hover:translate-x-1 transition-all duration-300" />
+                    <ChevronRight className="w-4 h-4 shrink-0 text-[#B5AFA6] group-hover:text-[#8C6228] group-hover:translate-x-1.5 transition-all duration-300" />
 
                   </div>
                 </div>

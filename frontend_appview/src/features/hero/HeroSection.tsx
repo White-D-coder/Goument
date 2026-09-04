@@ -60,19 +60,39 @@ export const HeroSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Sleek Animated Underline Luxury CTA */}
-          <div className="pt-4 flex justify-center">
+          {/* Dual High-Converting Luxury CTAs */}
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
+            {/* Primary Action: Instant Proposal & Pricing */}
+            <Link
+              href="/#curation-inquiry"
+              onClick={(e) => {
+                if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                  e.preventDefault();
+                  document.getElementById('curation-inquiry')?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-[#DFC299] via-[#C9AC83] to-[#DFC299] hover:brightness-110 active:scale-[0.98] text-[#141311] text-xs font-mono font-bold uppercase tracking-[0.16em] rounded-sm transition-all duration-200 shadow-xl flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              <span>Get Corporate Proposal &amp; Pricing</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            {/* Secondary Action: Explore Catalogue */}
             <Link
               href="/gift-boxing"
-              className="relative group inline-flex items-center justify-center gap-3 py-2 text-white text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 whitespace-nowrap cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/50 hover:border-white text-xs font-mono uppercase tracking-[0.16em] font-semibold rounded-sm transition-all duration-200 flex items-center justify-center cursor-pointer"
             >
-              <span className="font-sans group-hover:text-[#a6bd93] transition-colors duration-300">
-                Discover Collection
-              </span>
-              <ArrowRight className="w-4 h-4 text-[#a6bd93] group-hover:translate-x-2 transition-transform duration-300" />
-              {/* Expanding Underline Animation */}
-              <span className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#a6bd93] transition-all duration-500 ease-out" />
+              Explore Keepsake Vessels
             </Link>
+          </div>
+
+          {/* Micro-Trust Signals */}
+          <div className="flex items-center justify-center gap-3 sm:gap-5 pt-1 text-[11px] sm:text-xs text-white/85 font-mono tracking-wide flex-wrap">
+            <span className="flex items-center gap-1.5">⚡ 2-Hour Turnaround</span>
+            <span className="text-white/40">•</span>
+            <span className="flex items-center gap-1.5">📦 Pan-India White Glove</span>
+            <span className="text-white/40">•</span>
+            <span className="flex items-center gap-1.5">🏷️ Custom Brand Embossing</span>
           </div>
         </div>
       </div>

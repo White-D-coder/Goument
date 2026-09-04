@@ -218,7 +218,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                   : 'bg-[#1A1A18] text-[#FAF8F5] hover:bg-[#38332B]'
               }`}
             >
-              REQUEST QUOTE
+              ENQUIRE
             </button>
 
             {/* Mobile Menu Toggle */}
@@ -320,7 +320,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                 }}
                 className="w-full py-3.5 bg-[#1A1A18] hover:bg-[#2C241D] text-white text-xs font-mono uppercase tracking-[0.18em] font-bold rounded-lg transition-all cursor-pointer shadow-md"
               >
-                REQUEST QUOTE NOW
+                ENQUIRE NOW
               </button>
             </div>
 

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { 
   Send, 
   CheckCircle2, 
-  ExternalLink,
 } from 'lucide-react';
 import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
@@ -356,39 +355,22 @@ export default function CuratedInquirySection() {
                 />
               </div>
 
-              {/* Submit Button & Direct Concierge Action */}
-              <div className="pt-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-t border-[#EFECE6]">
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`px-8 py-3.5 bg-gradient-to-r from-[#1A1A18] via-[#2D2821] to-[#1A1A18] hover:brightness-125 text-white text-xs font-mono uppercase tracking-[0.16em] font-semibold transition-all flex items-center justify-center gap-2 rounded-sm shrink-0 shadow-md ${
-                      isSubmitting ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer active:scale-98'
-                    }`}
-                  >
-                    <Send className="w-3.5 h-3.5 text-[#DFC299]" />
-                    <span>{isSubmitting ? 'PREPARING YOUR PROPOSAL...' : 'REQUEST BESPOKE PROPOSAL & PRICING →'}</span>
-                  </button>
+              {/* Submit Button & Direct Concierge Email */}
+              <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-[#EFECE6]">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`px-8 py-3.5 bg-[#1A1A18] hover:bg-[#38332B] text-white text-xs font-mono uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 rounded-none shrink-0 ${
+                    isSubmitting ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer active:scale-95'
+                  }`}
+                >
+                  <Send className="w-3.5 h-3.5 text-[#DFC299]" />
+                  <span>{isSubmitting ? 'DISPATCHING TO CONCIERGE...' : 'SEND CURATION ENQUIRY'}</span>
+                </button>
 
-                  <a
-                    href="https://wa.me/917021463609?text=Hello%2C%20I%20would%20like%20to%20get%20an%20instant%20corporate%20gifting%20estimate%20and%20catalogue."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-3.5 bg-[#E7F6EC] hover:bg-[#D4EEDC] text-[#1E6B39] border border-[#BDE3CA] text-xs font-mono uppercase tracking-[0.14em] font-semibold flex items-center justify-center gap-2 rounded-sm transition-all cursor-pointer whitespace-nowrap"
-                  >
-                    <span>WhatsApp Quote (1 Min)</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-                <div className="text-left lg:text-right">
-                  <p className="text-[11px] text-[#78746D] font-mono">
-                    ⚡ Concierge response within 2 hours
-                  </p>
-                  <p className="text-[10px] text-[#A39E95] mt-0.5">
-                    3D Digital Mockup &amp; Sample Kit available
-                  </p>
-                </div>
+                <p className="text-xs text-[#78746D] font-light">
+                  Direct concierge: <a href="mailto:hello@thegourmetgifts.co" className="text-[#1A1A18] font-medium underline underline-offset-4 hover:text-[#BFA267] transition-colors">hello@thegourmetgifts.co</a>
+                </p>
               </div>
 
             </form>

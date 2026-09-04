@@ -8,6 +8,7 @@ import {
 import { openWhatsAppInquiry } from '@/lib/whatsapp';
 import toast from 'react-hot-toast';
 import { useUserLocation } from '@/hooks/useUserLocation';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export default function CuratedInquirySection() {
   const userLoc = useUserLocation();

@@ -62,10 +62,32 @@ const SECRET_SEED = process.env.ENCRYPTION_SECRET || 'gourmet_luxury_analytics_v
 const SALT = 'the_gourmet_gifts_secure_salt_b2b_luxury_2026';
 const DERIVED_KEY = crypto.scryptSync(SECRET_SEED, SALT, 32);
 
-function ensureVaultDir() {
-  if (!fs.existsSync(VAULT_DIR)) {
-    fs.mkdirSync(VAULT_DIR, { recursive: true });
+function getVaultFilePath(): string {
+  const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+  if (isServerless) {
+    const tmpDir = path.join('/tmp', 'gourmet_vault');
+    if (!fs.existsSync(tmpDir)) {
+      try {
+        fs.mkdirSync(tmpDir, { recursive: true });
+      } catch {}
+    }
+    const tmpFile = path.join(tmpDir, 'analytics_vault.enc');
+    const bundledFile = path.join(process.cwd(), 'data', 'analytics_vault.enc');
+    if (!fs.existsSync(tmpFile) && fs.existsSync(bundledFile)) {
+      try {
+        fs.copyFileSync(bundledFile, tmpFile);
+      } catch {}
+    }
+    return tmpFile;
   }
+
+  const localDir = path.join(process.cwd(), 'data');
+  if (!fs.existsSync(localDir)) {
+    try {
+      fs.mkdirSync(localDir, { recursive: true });
+    } catch {}
+  }
+  return path.join(localDir, 'analytics_vault.enc');
 }
 
 function encryptPayload(plainText: string): string {
@@ -110,15 +132,22 @@ function getInitialVault(): VaultData {
 }
 
 export async function readVaultData(): Promise<VaultData> {
-  ensureVaultDir();
-  if (!fs.existsSync(VAULT_FILE)) {
+  const vaultFile = getVaultFilePath();
+  const bundledFile = path.join(process.cwd(), 'data', 'analytics_vault.enc');
+
+  let fileToRead = vaultFile;
+  if (!fs.existsSync(vaultFile) && fs.existsSync(bundledFile)) {
+    fileToRead = bundledFile;
+  }
+
+  if (!fs.existsSync(fileToRead)) {
     const initial = getInitialVault();
     await writeVaultData(initial);
     return initial;
   }
 
   try {
-    const rawCipher = fs.readFileSync(VAULT_FILE, 'utf8');
+    const rawCipher = fs.readFileSync(fileToRead, 'utf8');
     if (!rawCipher || rawCipher.trim() === '') {
       return getInitialVault();
     }
@@ -131,21 +160,25 @@ export async function readVaultData(): Promise<VaultData> {
       lastUpdated: parsed.lastUpdated || new Date().toISOString(),
     };
   } catch (error) {
-    console.error('[VAULT] Failed to decrypt or parse vault, recovering safe state:', error);
+    console.error('[VAULT] Failed to decrypt vault, recovering state:', error);
     return getInitialVault();
   }
 }
 
 export async function writeVaultData(data: VaultData): Promise<void> {
-  ensureVaultDir();
+  const vaultFile = getVaultFilePath();
+  const dir = path.dirname(vaultFile);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
   data.lastUpdated = new Date().toISOString();
   const serialized = JSON.stringify(data);
   const encrypted = encryptPayload(serialized);
   
-  // Atomic write to avoid partial writes during concurrent requests
-  const tempFile = `${VAULT_FILE}.tmp.${Date.now()}`;
+  const tempFile = `${vaultFile}.tmp.${Date.now()}`;
   fs.writeFileSync(tempFile, encrypted, 'utf8');
-  fs.renameSync(tempFile, VAULT_FILE);
+  fs.renameSync(tempFile, vaultFile);
 }
 
 export async function recordInquiryInVault(

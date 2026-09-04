@@ -89,6 +89,7 @@ export const InquiryModal: React.FC = () => {
         name: '',
         email: '',
         phone: '',
+        city: '',
         budget: options.defaultBudget || '₹1,000 – ₹1,499',
         quantity: options.defaultQuantity || '50 - 100',
       });

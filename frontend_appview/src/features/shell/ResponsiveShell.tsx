@@ -179,12 +179,10 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
                       className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0"
                     >
                       <Image
-                        src="/images/brand/logo-vector.pdf.png"
+                        src="/icon.svg"
                         alt="The Gourmet Gifts"
                         fill
-                        className={`object-contain transition-all duration-300 ${
-                          isTransparentHero ? 'brightness-0 invert' : ''
-                        }`}
+                        className="object-contain transition-all duration-300"
                         priority
                       />
                     </motion.div>

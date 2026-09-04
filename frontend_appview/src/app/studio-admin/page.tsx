@@ -272,7 +272,7 @@ export default function StudioAdminPage() {
           
           <div className="relative w-14 h-14 mx-auto mb-4">
             <Image
-              src="/images/brand/logo-vector.pdf.png"
+              src="/icon.svg"
               alt="The Gourmet Gifts"
               fill
               className="object-contain"
@@ -351,7 +351,7 @@ export default function StudioAdminPage() {
           <div className="flex items-center gap-3">
             <div className="relative w-9 h-9 shrink-0">
               <Image
-                src="/images/brand/logo-vector.pdf.png"
+                src="/icon.svg"
                 alt="The Gourmet Gifts"
                 fill
                 className="object-contain"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 export interface UserLocationState {
   city: string;
@@ -43,11 +43,16 @@ export function useUserLocation() {
     };
   });
 
+  const isRequestingRef = useRef(false);
+
   const requestGpsLocation = useCallback(() => {
     if (typeof window === 'undefined' || !navigator.geolocation) return;
+    if (isRequestingRef.current) return;
+    isRequestingRef.current = true;
 
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
+        isRequestingRef.current = false;
         try {
           const lat = pos.coords.latitude;
           const lon = pos.coords.longitude;
@@ -78,12 +83,13 @@ export function useUserLocation() {
         }
       },
       (err) => {
-        // GPS permission denied or timed out — silently keep IP location
+        isRequestingRef.current = false;
+        // GPS permission denied or dismissed — IP location remains active
       },
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 120000,
+        maximumAge: 0,
       }
     );
   }, []);
@@ -113,10 +119,20 @@ export function useUserLocation() {
         .catch(() => {});
     }
 
-    // 2. Prompt browser geolocation for high precision GPS
+    // 2. Immediate prompt attempt
     requestGpsLocation();
 
-    // 3. Listen for location updates across forms/components
+    // 3. One-time user gesture trigger: modern browsers require a click/tap to allow location prompts
+    const handleFirstUserGesture = () => {
+      requestGpsLocation();
+      window.removeEventListener('click', handleFirstUserGesture);
+      window.removeEventListener('touchstart', handleFirstUserGesture);
+    };
+
+    window.addEventListener('click', handleFirstUserGesture, { once: true });
+    window.addEventListener('touchstart', handleFirstUserGesture, { once: true });
+
+    // 4. Listen for location updates across forms/components
     const handleLocationUpdate = (e: Event) => {
       const customEvent = e as CustomEvent<UserLocationState>;
       if (customEvent.detail) {
@@ -126,6 +142,8 @@ export function useUserLocation() {
 
     window.addEventListener('gourmet_location_updated', handleLocationUpdate);
     return () => {
+      window.removeEventListener('click', handleFirstUserGesture);
+      window.removeEventListener('touchstart', handleFirstUserGesture);
       window.removeEventListener('gourmet_location_updated', handleLocationUpdate);
     };
   }, [requestGpsLocation]);

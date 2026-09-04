@@ -30,10 +30,11 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/meta.svg',
         width: 1200,
         height: 630,
-        alt: 'The Gourmet Gifts Logo and Bespoke Gifting',
+        type: 'image/svg+xml',
+        alt: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
       },
     ],
   },
@@ -41,16 +42,16 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'The Gourmet Gifts — B2B Gifting, curated around your brand.',
     description: 'Artisanal delicacies, bespoke keepsake vessels, and executive corporate gifting systems.',
-    images: ['/og-image.png'],
+    images: ['/meta.svg'],
   },
   icons: {
     icon: [
-      { url: '/meta.svg', type: 'image/svg+xml' },
-      { url: '/meta.svg', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', sizes: 'any' },
     ],
-    shortcut: '/meta.svg',
+    shortcut: '/icon.svg',
     apple: [
-      { url: '/meta.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/icon.svg', sizes: '180x180', type: 'image/svg+xml' },
     ],
   },
   alternates: {
@@ -115,7 +116,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -21,6 +21,7 @@ import { LocationPromptBar } from '@/components/brand/LocationPromptBar';
 
 /* ── The Gourmet Gifts Nav Links (Single-Word Concise) ── */
 const GOURMET_NAV_LINKS = [
+  { label: 'Hampers', href: '/hampers' },
   { label: 'Catalogue', href: '/#catalogue' },
   { label: 'Occasions', href: '/#occasions' },
   { label: 'Contact', href: '/contact' },
@@ -68,6 +69,7 @@ export const ResponsiveShell: React.FC<{ children: React.ReactNode }> = ({ child
 
   const isGourmetRoute = 
     pathname === '/' || 
+    pathname.startsWith('/hampers') ||
     pathname.startsWith('/gourmet-gifts') || 
     pathname.startsWith('/gift-boxing') || 
     pathname.startsWith('/collections') ||

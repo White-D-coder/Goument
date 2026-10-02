@@ -1,0 +1,47 @@
+/* Warm storefront surfaces; keep the light paper token for cards and imagery. */
+:root {
+  --canvas: #F2EAE7;
+  --surface-rose: #E9D9D5;
+  --surface-soft: #EDE2DC;
+  --muted: #665E5A;
+  --on-wine-muted: #DEC9BD;
+  --champagne: #DFC299;
+}
+
+body { background: var(--canvas); }
+
+.commerce-home .signature-section {
+  background: var(--surface-rose);
+  border-radius: 28px;
+  padding-top: 32px;
+  margin-bottom: 28px;
+}
+.commerce-home .signature-intro h2,
+.commerce-home .brand-story h2 { color: var(--wine); }
+.commerce-home .assurance-strip { background: var(--surface-soft); }
+.commerce-home .brand-story { background: var(--surface-rose); }
+.commerce-home .assurance-strip p,
+.commerce-home .brand-story > span { color: var(--muted); }
+
+.shop-edit .shop-intro { background: var(--surface-rose); }
+
+.b2b-store-footer { background: var(--wine); color: var(--paper); }
+.b2b-store-footer::before { display: none; }
+.b2b-footer-wordmark { color: var(--paper); }
+.b2b-footer-column h2 { color: var(--champagne); }
+.b2b-footer-heading p,
+.b2b-footer-column a,
+.b2b-footer-entity span,
+.b2b-footer-bottom,
+.b2b-footer-bottom span:last-child { color: var(--on-wine-muted); }
+.b2b-footer-wordmark:hover,
+.b2b-footer-column a:hover { color: var(--paper); }
+.b2b-store-footer a:focus-visible { outline-color: var(--paper); }
+
+@media (max-width: 760px) {
+  .commerce-home .signature-section {
+    border-radius: 20px;
+    padding-top: 24px;
+    margin-bottom: 24px;
+  }
+}

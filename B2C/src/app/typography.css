@@ -1,0 +1,214 @@
+/* Typography copied from frontend_appview/src/app/globals.css.
+   Component mappings below follow its active home, shell and catalogue styles. */
+
+@font-face {
+  font-family: 'Pagio';
+  src: url('/fonts/Pagio.woff') format('woff'),
+       url('/fonts/Pagio.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TropicalScript';
+  src: url('/fonts/TropicalScript.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DreamAlways';
+  src: url('/fonts/DreamAlways.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-handwriting {
+  font-family: 'TropicalScript', 'DreamAlways', cursive;
+}
+
+.font-script {
+  font-family: 'DreamAlways', 'TropicalScript', cursive;
+}
+
+.type-display {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 120px);
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+.type-heading {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 64px);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+.type-title {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(22px, 2.5vw, 36px);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+.type-body {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+  }
+
+.type-meta {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+.type-nav {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+.type-micro {
+    font-family: var(--font-geist), system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+
+.type-serif-body {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 24px);
+    letter-spacing: 0;
+    line-height: 1.6;
+  }
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Pagio', var(--font-cormorant);
+  --font-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-geist: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: var(--font-jakarta); font-size: 15px; font-weight: 400; line-height: 1.7; letter-spacing: .01em; }
+h1, h2, h3, h4 { font-family: var(--font-cormorant); }
+h1, .detail h1 { font-size: clamp(32px, 4.5vw, 64px); font-weight: 300; line-height: 1.08; letter-spacing: -.02em; }
+h2, .summary h2, .auth-form h2 { font-size: clamp(22px, 2.5vw, 36px); font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
+/* Active app/page.tsx hero, including source sm/md/lg breakpoints. */
+.gift-hero h1 { font-family: var(--font-cormorant); font-size: 31px; font-weight: 300; line-height: 1.12; letter-spacing: -.02em; }
+.gift-hero-content > p:not(.eyebrow) { font-family: var(--font-cormorant); font-size: 16px; font-weight: 400; line-height: 1.375; letter-spacing: -.025em; }
+/* OccasionGiftingCarousel and IndustriesSection heading scale. */
+.home-section h2, .feature-tile h2, .paper-feature h2, .brand-story h2 {
+  font-family: var(--font-cormorant); font-size: 24px; font-weight: 300; line-height: 1.08; letter-spacing: -.02em;
+}
+.commerce-home .signature-intro h2 {
+  letter-spacing: .005em;
+  text-align: center;
+  text-wrap: balance;
+}
+.feature-tile p:not(.eyebrow), .paper-feature p:not(.eyebrow), .detail p, .summary p, .empty p { font-family: var(--font-jakarta); font-size: 15px; font-weight: 400; line-height: 1.7; letter-spacing: .01em; }
+.brand-story > p:not(.eyebrow) { font-family: var(--font-cormorant); font-size: clamp(18px, 2vw, 24px); font-weight: 400; line-height: 1.6; letter-spacing: 0; }
+/* Source metadata and micro typography; no 7–9px promotional copy. */
+.eyebrow, .gift-hero .eyebrow, .feature-tile .eyebrow, .paper-feature .eyebrow { font-family: var(--font-jakarta); font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: .15em; text-transform: uppercase; }
+.announcement, .hero-promises span, .preview-caption, .muted, .auth-help, .auth-divider, .brand-story > span { font-family: var(--font-jakarta); font-size: 10px; font-weight: 400; line-height: 1.3; letter-spacing: .08em; }
+/* Active CustomGiftBoxesSection product title: font-sans semibold. */
+.product-label h3, .signature-grid .product-label h3 { font-family: var(--font-jakarta); font-size: 17px; font-weight: 600; line-height: 1.375; letter-spacing: -.025em; }
+.product-card p, .signature-grid .product-card > p, .collection-circles h3, .occasion-grid h3, .assurance-strip h3 { font-family: var(--font-jakarta); font-size: 12px; font-weight: 400; line-height: 1.625; letter-spacing: .01em; }
+.product-label span, .assurance-strip p, .text-link, label, .pagination, .orders article { font-family: var(--font-jakarta); font-size: 12px; font-weight: 400; line-height: 1.4; letter-spacing: .01em; }
+input, select { font-family: var(--font-jakarta); font-size: 15px; font-weight: 400; line-height: 1.7; letter-spacing: .01em; }
+.button, .hero-buttons .button, .paper-feature .button { font-family: var(--font-jakarta); font-size: 12px; font-weight: 700; line-height: 1.3333; letter-spacing: .16em; text-transform: uppercase; }
+.hero-buttons { flex-wrap: wrap; }
+/* ResponsiveShell desktop links and mobile editorial navigation. */
+.header .nav > a { font-family: var(--font-jakarta); font-size: 11.5px; font-weight: 500; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+.header .brand > span.brand-name { font-family: var(--font-cormorant); font-size: 13px; font-weight: 500; letter-spacing: .03em; line-height: 1; text-transform: uppercase; }
+/* Exact active Footer.tsx typography, independent of B2C footer layout. */
+.b2b-footer-wordmark { font-family: var(--font-cormorant); font-size: 24px; font-weight: 500; line-height: 1.25; letter-spacing: -.01em; }
+.b2b-footer-heading p { font-family: Georgia, 'Times New Roman', serif; font-size: 12px; font-weight: 400; line-height: 1.3333; letter-spacing: .025em; }
+.b2b-footer-column h2 { font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; line-height: 1.5; letter-spacing: .18em; }
+.b2b-footer-column a, .b2b-footer-entity span { font-family: var(--font-jakarta); font-size: 10.5px; font-weight: 400; line-height: 1.5; letter-spacing: .01em; }
+.b2b-footer-bottom { font-family: var(--font-jakarta); font-size: 12px; line-height: 1.3333; }
+.b2b-footer-bottom span:last-child { font-size: 9px; letter-spacing: .1em; }
+@media (min-width:640px) {
+  .gift-hero h1 { font-size: 48px; line-height: 1.04; }
+  .gift-hero-content > p:not(.eyebrow) { font-size: 24px; }
+  .home-section h2, .feature-tile h2, .paper-feature h2, .brand-story h2 { font-size: 36px; line-height: 1.04; }
+  .product-label h3, .signature-grid .product-label h3 { font-size: 19px; }
+  .header .brand > span.brand-name { font-size: 18px; letter-spacing: .04em; }
+  .b2b-footer-wordmark { font-size: 36px; }
+  .b2b-footer-heading p { font-size: 14px; line-height: 1.4286; }
+  .b2b-footer-column h2 { font-size: 11px; letter-spacing: .22em; }
+  .b2b-footer-column a, .b2b-footer-entity span, .b2b-footer-bottom { font-size: 12.5px; }
+  .b2b-footer-bottom span:last-child { font-size: 9.5px; }
+}
+@media (min-width:768px) {
+  .gift-hero h1 { font-size: 60px; }
+  .home-section h2, .feature-tile h2, .paper-feature h2, .brand-story h2 { font-size: 48px; }
+  .b2b-footer-wordmark { font-size: 48px; }
+  .b2b-footer-column h2 { font-size: 12px; }
+}
+@media (min-width:1024px) {
+  .gift-hero h1 { font-size: 68px; }
+  .header .brand > span.brand-name { font-size: 20px; }
+  .b2b-footer-wordmark { font-size: 60px; }
+}
+@media (max-width:760px) {
+  .header .nav > a { font-family: var(--font-cormorant); font-size: 26px; font-weight: 300; letter-spacing: -.025em; text-transform: none; }
+}
+@media (min-width:640px) and (max-width:760px) { .header .nav > a { font-size: 30px; } }
+/* Keep the copied text scale usable within the smaller B2C editorial tiles. */
+.reference-home .section-heading { flex-wrap: wrap; }
+.feature-tile > div, .paper-feature > div { min-width: 0; }
+.feature-tile .button, .paper-feature .button { flex-wrap: wrap; }
+@media (min-width:761px) and (max-width:1023px) {
+  .header .mobile { display: flex; }
+  .header .brand { margin-right: auto; }
+  .header .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; padding: 25px; background: var(--paper); }
+  .header .nav.open { display: flex; flex-direction: column; gap: 18px; }
+  .header .nav > a { font-family: var(--font-cormorant); font-size: 30px; font-weight: 300; letter-spacing: -.025em; text-transform: none; }
+  .feature-pair { grid-template-columns: 1fr; }
+}
+
+/* Account-only display size: approximately the height of the two sign-in fields. */
+.auth-intro-text { min-width: 0; container-type: inline-size; }
+.auth-intro-text h1 {
+  font-size: clamp(48px, 6.2vw, 88px);
+  font-size: min(88px, 16cqi);
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  margin: 20px 0 30px;
+}
+@media (max-width:640px) {
+  .auth-intro-text h1 { font-size: clamp(38px, 9vw, 58px); line-height: 1.08; margin: 16px 0 24px; }
+}
+
+/* Shared Signature Edit typeface for storefront page and section headings.
+   Keep product names, card labels, navigation and footer typography separate.
+   Main scope wins over component/route font rules without changing their sizes. */
+#main :is(h1, h2):not(:where(.builder-item *, .product-detail-edit *)) {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+}
+#main :is(h1, h2):not(:where(.builder-item *, .product-detail-edit *)) :is(em, i) {
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}

@@ -1,0 +1,415 @@
+[
+  {
+    "id": "gourmet_makhana",
+    "name": "Makhana",
+    "image": "/images/pics/makhana.png",
+    "description": "Light, crunchy & wholesome fox nuts, perfectly roasted.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "gourmet_artisanal_chikki",
+    "name": "Artisanal Chikki",
+    "image": "/images/pics/chikki.png",
+    "description": "Handcrafted nut brittles with traditional jaggery sweetness.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "gourmet_chilli_cheese_bhujia",
+    "name": "Chilli Cheese Bhujia",
+    "image": "/images/pics/bhujia.png",
+    "description": "Artisanal crispy bhujia tossed with cheddar cheese & fiery green chilli.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "gourmet_indian_sweets",
+    "name": "Indian Gourmet Sweets",
+    "image": "/images/pics/sweets.png",
+    "description": "Traditional favourites made with pure ingredients.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "gourmet_roasted_nuts_seeds",
+    "name": "Roasted Nuts & Seeds",
+    "image": "/images/pics/dryfruits.png",
+    "description": "Perfectly roasted for a wholesome and satisfying crunch.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "gourmet_bihar_thekua",
+    "name": "Bihar’s Thekua",
+    "image": "/images/pics/thekuap.png",
+    "description": "Classic Bihari thekua, crisp outside, soft inside, timeless taste.",
+    "category": "Gourmet Food"
+  },
+  {
+    "id": "beverage_niloufer_founders_tea",
+    "name": "Café Niloufer Founders Blended Tea",
+    "image": "/images/pics/blendedtea.png",
+    "description": "A signature aromatic blend from the iconic 1920 tea house.",
+    "category": "Beverages"
+  },
+  {
+    "id": "beverage_royal_assam_tea",
+    "name": "Royal Assam Tea",
+    "image": "/images/pics/assamtea.png",
+    "description": "Rich, malty & full-bodied Assam goodness.",
+    "category": "Beverages"
+  },
+  {
+    "id": "beverage_filter_kaapi",
+    "name": "Filter Kaapi",
+    "image": "/images/pics/filterkaapi.png",
+    "description": "Bold, earthy & exceptionally satisfying authentic South Indian blend.",
+    "category": "Beverages"
+  },
+  {
+    "id": "decor_brass_diyas",
+    "name": "Brass Diyas",
+    "image": "/images/decor/brass_diya.jpg",
+    "description": "Timeless radiance for sacred spaces.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_phool_incense",
+    "name": "Phool Incense",
+    "image": "/images/decor/phool_incense.jpg",
+    "description": "Handcrafted aromas rooted in tradition.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_scented_soy_candles",
+    "name": "Scented Soy Candles",
+    "image": "/images/pics/candles.png",
+    "description": "Pure, calming & crafted for every mood.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_coasters",
+    "name": "Coasters",
+    "image": "/images/decor/coasters.png",
+    "description": "Elegant accents for every surface.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_mini_planters",
+    "name": "Mini Planters",
+    "image": "/images/decor/miniplanters.png",
+    "description": "Green touches for beautiful corners.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_brass_tree",
+    "name": "Brass Tree",
+    "image": "/images/decor/brass_tree.jpg",
+    "description": "Symbol of prosperity and abundance.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_crystal_tree",
+    "name": "Crystal Tree",
+    "image": "/images/decor/crystal_tree.jpg",
+    "description": "Energy, balance & positive vibes.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_copper_bottle",
+    "name": "Copper Bottle",
+    "image": "/images/decor/copper_bottle.png",
+    "description": "Pure hammered copper bottle with artisanal floral embossing.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_emerald_zibu_symbol_wallet",
+    "name": "Emerald Zibu Symbol Wallet",
+    "image": "/images/decor/emerald_zibu_symbol_wallet.png",
+    "description": "Sacred manifestation wallet infused with gold Zibu prosperity symbols.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_golden_fish_decor",
+    "name": "Golden Fish Décor",
+    "image": "/images/decor/golden_fish_decor.png",
+    "description": "Sculpted brass symbol of auspicious fortune, serenity, and fluid abundance.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_ivory_nandi_gift_box",
+    "name": "Ivory Nandi Gift Box",
+    "image": "/images/decor/ivory_nandi_gift_box.png",
+    "description": "Hand-carved marble Nandi nestled in a botanical keepsake gift chest.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_seven_horses_framed_wall_art",
+    "name": "Seven Horses Framed Wall Art",
+    "image": "/images/decor/seven_horses_framed_wall_art.png",
+    "description": "Dynamic 3D golden galloping horses in an ornate Baroque frame for triumph and success.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_zibu_intention_coin_set",
+    "name": "Zibu Intention Coin Set",
+    "image": "/images/decor/zibu_intention_coin_set.png",
+    "description": "Four engraved gold intention coins representing Abundance, Love, Protection, and Prosperity.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "decor_zibu_symbol_cards_charms",
+    "name": "Zibu Symbol Cards & Charms",
+    "image": "/images/decor/zibu_symbol_cards_charms.png",
+    "description": "Sacred angelic number cards, golden decals, and good luck laughing Buddha charm.",
+    "category": "Decor & Spiritual"
+  },
+  {
+    "id": "personalisation_visiting_card_qr",
+    "name": "Company Visiting Card QR",
+    "image": "/images/personalisation/personal_QR_card.jpg",
+    "description": "Share your details instantly with a smart QR solution.",
+    "category": "Eternal Paper Co"
+  },
+  {
+    "id": "personalisation_leadership_greeting_qr",
+    "name": "Festive Greeting QR from Leadership",
+    "image": "/images/personalisation/festive.jpg",
+    "description": "Send warm festive wishes directly from leadership.",
+    "category": "Eternal Paper Co"
+  },
+  {
+    "id": "wellness_vision_boards",
+    "name": "Vision Boards & Goal Canvas",
+    "image": "/images/wellness/vision_boards.jpg",
+    "description": "Empower goals and visualize aspirations with custom goal-setting prompts.",
+    "category": "Wellness & Lifestyle"
+  },
+  {
+    "id": "wellness_affirmation_cards",
+    "name": "Daily Affirmation Cards",
+    "image": "/images/wellness/cards.jpg",
+    "description": "Daily mindset rituals designed to inspire clarity, resilience and positivity.",
+    "category": "Wellness & Lifestyle"
+  },
+  {
+    "id": "wellness_manifestation_kits",
+    "name": "Manifestation Ritual Kit",
+    "image": "/images/wellness/manifestation_kit.jpg",
+    "description": "Complete manifestation suite designed to cultivate focus and mindful intentions.",
+    "category": "Wellness & Lifestyle"
+  },
+  {
+    "id": "wellness_premium_massager",
+    "name": "Premium Pocket Massager",
+    "image": "/images/wellness/massager.jpg",
+    "description": "Compact, powerful deep-tissue pocket massager for instant relaxation.",
+    "category": "Wellness & Lifestyle"
+  },
+  {
+    "id": "stationery_travel_journals",
+    "name": "Travel Journals",
+    "image": "/images/infinity/travel_journel.jpg",
+    "description": "Document adventures and meaningful thoughts on premium fountain-pen friendly archival paper.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_vision_journals",
+    "name": "Vision Journals 2026",
+    "image": "/images/infinity/vision.jpg",
+    "description": "Structured layouts for visionary goal tracking, daily reflections and action planning.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_bookmarks",
+    "name": "Enamelled Metal Bookmarks",
+    "image": "/images/infinity/bookmarks.jpg",
+    "description": "Precision laser-cut brass bookmarks adorned with vibrant botanical enamel.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_custom_keychains",
+    "name": "Custom Keychains",
+    "image": "/images/infinity/custom_keychain.jpg",
+    "description": "Sophisticated handcrafted keychains custom engraved or debossed with initials.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_premium_notebooks",
+    "name": "Premium Industry Notebooks",
+    "image": "/images/infinity/Premium_Industry_Notebooks.jpg",
+    "description": "Engineered for corporate professionals with durable covers and bleed-proof ivory paper.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_industry_calendars",
+    "name": "Industry Desk Calendars 2026",
+    "image": "/images/infinity/calender.jpg",
+    "description": "Minimalist, functional monthly desk calendars with inspirational typography.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "stationery_affirmation_decks",
+    "name": "Affirmation Decks",
+    "image": "/images/infinity/Affirmation_Decks.jpg",
+    "description": "Empowering cards designed for team morale, executive focus and personal well-being.",
+    "category": "Infinity & Beyond"
+  },
+  {
+    "id": "miniature_truck",
+    "name": "Truck Miniature",
+    "image": "/images/miniature/truck.jpg",
+    "description": "Precision scale model commercial delivery truck with custom corporate livery branding.",
+    "category": "3D Miniatures"
+  },
+  {
+    "id": "miniature_car",
+    "name": "Car Miniature",
+    "image": "/images/miniature/car_mini.jpg",
+    "description": "Detailed executive vehicle replica with high-gloss automotive finish.",
+    "category": "3D Miniatures"
+  },
+  {
+    "id": "miniature_construction_equipment",
+    "name": "Construction Equipment Model",
+    "image": "/images/miniature/construction.png",
+    "description": "Articulated metal scale excavator model for infrastructure & industrial milestones.",
+    "category": "3D Miniatures"
+  },
+  {
+    "id": "miniature_mascot_figurine",
+    "name": "Mascot Figurine",
+    "image": "/images/miniature/mascot_figurine.jpg",
+    "description": "Handcrafted bespoke brand mascot figurine wearing custom corporate attire.",
+    "category": "3D Miniatures"
+  },
+  {
+    "id": "corp_office_bag",
+    "name": "Office Bag",
+    "image": "/images/corporate/OfficeTravelBags/office_bag.jpg",
+    "description": "Structured Full-Grain Leather Briefcase for executives.",
+    "category": "Office & Travel Bags"
+  },
+  {
+    "id": "corp_laptop_bag",
+    "name": "Laptop Bag",
+    "image": "/images/corporate/OfficeTravelBags/LaptopBag.jpg",
+    "description": "Espresso Leather Messenger Sleeve with shock absorption.",
+    "category": "Office & Travel Bags"
+  },
+  {
+    "id": "corp_trolley_bag",
+    "name": "Trolley Bag",
+    "image": "/images/corporate/OfficeTravelBags/TrolleyBag.jpg",
+    "description": "Executive Wheeled Carry-On Suitcase with telescopic handle.",
+    "category": "Office & Travel Bags"
+  },
+  {
+    "id": "corp_duffel_bag",
+    "name": "Duffel Bag",
+    "image": "/images/corporate/OfficeTravelBags/Duffel Bag.jpg",
+    "description": "Textured Leather Weekender Duffel with shoe compartment.",
+    "category": "Office & Travel Bags"
+  },
+  {
+    "id": "corp_backpack",
+    "name": "Backpack",
+    "image": "/images/corporate/OfficeTravelBags/Backpack.jpg",
+    "description": "Ergonomic Commute Tech Backpack with USB charging pass-through.",
+    "category": "Office & Travel Bags"
+  },
+  {
+    "id": "corp_headphones",
+    "name": "Headphones",
+    "image": "/images/corporate/electronics/Headphones.jpg",
+    "description": "Active Noise Cancelling Studio Audio with 40-hour battery life.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_bluetooth_speaker",
+    "name": "Bluetooth Speaker",
+    "image": "/images/corporate/electronics/Bluetooth Speaker.jpg",
+    "description": "Acoustic Fabric Executive Soundbar with deep bass response.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_power_bank",
+    "name": "Power Bank",
+    "image": "/images/corporate/electronics/powerbank.jpg",
+    "description": "Slim 10,000mAh Fast Charging Alloy with dual output ports.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_tws_earbuds",
+    "name": "TWS Earbuds",
+    "image": "/images/corporate/electronics/TWS Earbuds.jpg",
+    "description": "Low-Latency Wireless In-Ear Acoustics with environmental noise cancellation.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_wireless_charger",
+    "name": "Wireless Charger",
+    "image": "/images/corporate/electronics/Wireless Charger.jpg",
+    "description": "Circular Leatherette Fast Induction Pad for desk charging.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_desk_gadgets",
+    "name": "Desk Gadgets",
+    "image": "/images/corporate/electronics/Desk Gadgets.jpg",
+    "description": "Executive 3-in-1 Magnetic Charging Station & Workspace Dock.",
+    "category": "Electronics"
+  },
+  {
+    "id": "corp_pen_set",
+    "name": "Premium Pen Set",
+    "image": "/images/corporate/stationary/Premium Pen Set.jpg",
+    "description": "Dual Rollerball & Fountain Brass Casing in presentation box.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_paper_weight",
+    "name": "Paper Weight",
+    "image": "/images/corporate/stationary/Paper Weight.jpg",
+    "description": "Faceted Optic Crystal Sphere on Brass pedestal.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_table_clock",
+    "name": "Table Clock",
+    "image": "/images/catalogue_items/category/tableclock.webp",
+    "description": "Heritage Architectural Desk Timepiece with silent sweep movement.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_diary_2026",
+    "name": "Diary 2026",
+    "image": "/images/corporate/stationary/Diary 2026.jpg",
+    "description": "Midnight Bound Executive Journal with daily milestone tracking.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_desk_organizer",
+    "name": "Desk Organizer",
+    "image": "/images/corporate/stationary/Desk Organizer.jpg",
+    "description": "Tiered Full-Grain Leather Utility Caddy for stationery and accessories.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_passport_holder",
+    "name": "Passport Holder",
+    "image": "/images/corporate/stationary/Passport Holder.jpg",
+    "description": "Travel Passport & Boarding Wallet with RFID protection.",
+    "category": "Stationery & Desk"
+  },
+  {
+    "id": "corp_custom_tshirts",
+    "name": "Customised T-Shirts",
+    "image": "/images/catalogue_items/category/appreal.png",
+    "description": "Bio-Washed Organic Cotton Corporate Apparel with bespoke branding.",
+    "category": "Apparel"
+  },
+  {
+    "id": "corp_acrylic_trophy",
+    "name": "Acrylic Trophy",
+    "image": "/images/corporate/customtees/awards.jpg",
+    "description": "Custom Commemorative Recognition Award with precision laser engraving.",
+    "category": "Recognition"
+  }
+]

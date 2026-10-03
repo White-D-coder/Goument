@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-03 — Resolve Vercel 500 FUNCTION_INVOCATION_FAILED with static ISR prerendering
+
+- **Root Cause**: Next.js `/b2c` route was set to `force-dynamic` with `cache: 'no-store'` fetch pointing to external backend. When backend was unavailable or sleeping on Vercel, the serverless Lambda function timed out and crashed with `500 FUNCTION_INVOCATION_FAILED`. Additionally, `outputFileTracingRoot` was disrupting Vercel file tracing.
+- **Resolution**:
+  - Removed `outputFileTracingRoot` from [`B2C/next.config.ts`](file:///Users/deeptanubhunia/Desktop/gour/B2C/next.config.ts).
+  - Switched catalogue fetch in [`B2C/src/lib/catalogue.ts`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/lib/catalogue.ts) to ISR `next: { revalidate: 60 }` with fallback resilience.
+  - Made `/b2c` statically prerendered (`○ (Static) 1m 1y`), served directly from Vercel Edge CDN with zero serverless function dependency and zero invocation failures.
+- **Verification**: Verified Next.js build produces static route `○ /b2c` with 0 errors.
+
 ## 2026-10-03 — Dedicated Vercel deployment configuration for B2C
 
 Per user request ("Mujhe tunnel link nahi chahiye, Vercel pe ek dedicated URL chahiye B2C ke liye"):

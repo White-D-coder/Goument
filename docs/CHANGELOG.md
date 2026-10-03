@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-03 — Instant live HTTPS tunnel for B2C trial preview
+
+Per user request ("sugest me alternative", "krte hai simple me"):
+- **Secure Public Tunnel**:
+  - Started high-speed Cloudflare quick tunnel forwarding to local port 3000.
+  - Generates an instant, zero-setup HTTPS link (`trycloudflare.com`) accessible from any phone or remote device.
+  - Updated [`B2C/backend/auth/app.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/auth/app.js) to accept tunnel request origins so APIs, auth, cart, and checkout work without CORS errors.
+  - Preserves 100% strict isolation: `frontend_appview` (B2B) remains completely untouched and unaffected.
+- **Verification**: Verified HTTP 200 on all public tunnel endpoints (`/b2c`, `/shop`, `/account`, `/cart`, `/api/v1/auth/config`).
+
 ## 2026-10-03 — Set B2C storefront port to 3000
 
 Per user request ("broo 3000 pe rkh"):

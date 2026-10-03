@@ -8,7 +8,7 @@ Documentation initialization is complete; canonical files and references were st
 
 ## In Progress
 
-B2C incremental implementation authorized 2026-09-27. First P0 increment: server-controlled signup role. See IMPLEMENTATION_PLAN.md; dated audit remains preserved.
+B2C incremental implementation. Merged `feature/hampers` into `main` cleanly with `frontend_appview` completely untouched and isolated. B2C home route set to `/b2c` on port 3000. Full-stack running locally with public tunnel active for external device preview (Cloudflare quick tunnel).
 
 ## Blocked
 

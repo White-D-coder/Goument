@@ -8,7 +8,6 @@ import HeroTitle from '@/components/HeroTitle';
 import GoldPopperSprinkle from '@/components/GoldPopperSprinkle';
 import ShoppingRail from '@/components/ShoppingRail';
 import { catalogue } from '@/lib/catalogue';
-export const dynamic = 'force-dynamic';
 const collections = [
  ['Gift Hampers','/images/storefront/hamper.jpg',''],
  ['Tea Kits','/images/pics/assamtea.png','tea'],

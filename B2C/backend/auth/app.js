@@ -19,10 +19,9 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   const publicJson = express.json({ limit: '8kb' });
   const adminJson = express.json({ limit: '128kb' });
   app.use((req,res,next)=>(req.path === '/api/v1/auth/admin' || req.path.startsWith('/api/v1/auth/admin/') ? adminJson : publicJson)(req,res,next));
-  app.use('/api/v1/auth', (req,res,next)=>{res.set('Cache-Control','no-store');res.set('Referrer-Policy','no-referrer');next();});
   app.use('/api/v1/auth', (req,res,next)=>{
     const reqOrigin = req.get('origin');
-    if (req.method !== 'GET' && reqOrigin && ![origin, 'http://localhost:3000', 'http://localhost:3001'].includes(reqOrigin)) return res.status(403).json({ message: 'Request origin not allowed' });
+    if (req.method !== 'GET' && reqOrigin && ![origin, 'http://localhost:3000', 'http://localhost:3001'].includes(reqOrigin) && !reqOrigin.endsWith('.trycloudflare.com') && !reqOrigin.endsWith('.localtunnel.me')) return res.status(403).json({ message: 'Request origin not allowed' });
     // Operations uses persisted per-actor/IP read, write and sensitive buckets.
     if (req.path === '/admin' || req.path.startsWith('/admin/')) return next();
     const now=Date.now();for(const [key,value]of rates)if(value.until<now)rates.delete(key);

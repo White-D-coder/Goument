@@ -6,10 +6,12 @@ import { useUserLocation } from '@/hooks/useUserLocation';
 
 export const LocationPromptBar: React.FC = () => {
   const { isGps, isAutoDetected, fullLocation, requestGpsLocation } = useUserLocation();
+  const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [permissionState, setPermissionState] = useState<string>('prompt');
 
   useEffect(() => {
+    setMounted(true);
     if (typeof window === 'undefined') return;
 
     // Check navigator permissions state
@@ -38,7 +40,7 @@ export const LocationPromptBar: React.FC = () => {
     }
   }, [isGps, fullLocation]);
 
-  if (dismissed || permissionState === 'granted') {
+  if (!mounted || dismissed || permissionState === 'granted') {
     return null;
   }
 

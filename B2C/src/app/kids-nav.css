@@ -1,0 +1,27 @@
+/* Google Fonts Baloo 2, 700; local Kids-only subset, licence beside the asset. */
+@font-face {
+  font-family: 'Baloo Kids';
+  src: url('/fonts/Baloo2-Kids.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.header .kids-nav-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .015em;
+  padding: .03em .4em;
+  border-radius: .55em;
+  font-family: 'Baloo Kids', 'Trebuchet MS', sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: .015em;
+  text-transform: none;
+}
+.kids-nav-label > span:nth-child(1) { color: #FFA9BB; }
+.kids-nav-label > span:nth-child(2) { color: #A8DFFF; }
+.kids-nav-label > span:nth-child(3) { color: #FFE28A; }
+.kids-nav-label > span:nth-child(4) { color: #A9E6C5; }

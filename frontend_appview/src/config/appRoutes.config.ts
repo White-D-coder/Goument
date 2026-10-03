@@ -149,6 +149,13 @@ export const PAGE_ROUTES_CONFIG: Record<string, PageRouteItem> = {
     description: 'Complete catalogue, live category filtering, Curation additions.',
     enabled: true,
   },
+  HAMPERS: {
+    id: 'hampers',
+    name: 'Curated Hampers E-Commerce',
+    path: '/hampers',
+    description: 'Curated and customizable luxury gift hampers, festive suites, and scale-based gifts.',
+    enabled: true,
+  },
   CONTACT: {
     id: 'contact',
     name: 'Contact & Concierge',
@@ -386,6 +393,7 @@ export function isPageRouteActive(pathname: string): boolean {
   // Active whitelist requested by the user
   const activeWhitelist = new Set([
     '/',
+    '/hampers',
     '/collections',
     '/contact',
     '/offline',

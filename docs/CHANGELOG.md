@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-03 — Dedicated Vercel deployment configuration for B2C
+
+Per user request ("Mujhe tunnel link nahi chahiye, Vercel pe ek dedicated URL chahiye B2C ke liye"):
+- **Dedicated Vercel Project Isolation**:
+  - Added [`B2C/vercel.json`](file:///Users/deeptanubhunia/Desktop/gour/B2C/vercel.json) specifying `"buildCommand": "npm run build"`.
+  - Configured for zero-conflict multi-project deployment from the existing repository with Root Directory set to `B2C`.
+  - Guarantees `frontend_appview` (B2B at `thegourmetgifts.co`) remains 100% untouched.
+
 ## 2026-10-03 — Instant live HTTPS tunnel for B2C trial preview
 
 Per user request ("sugest me alternative", "krte hai simple me"):

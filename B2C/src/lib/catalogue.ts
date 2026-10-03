@@ -1,7 +1,7 @@
 import 'server-only';
 import { HAMPERS_CATALOG } from './catalogue-preview';
 import type { Product } from './types';
-const backend = process.env.BACKEND_URL || 'http://127.0.0.1:5002';
+const backend = process.env.BACKEND_URL || 'https://backendbtwoc.vercel.app';
 export async function catalogue(search = '', sort = 'newest', page = 1) {
  try {
   const query = new URLSearchParams({ search, sort, page: String(page), limit: '12' });

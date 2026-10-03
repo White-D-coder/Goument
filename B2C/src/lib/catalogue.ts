@@ -5,7 +5,7 @@ const backend = process.env.BACKEND_URL || 'https://backendbtwoc.vercel.app';
 export async function catalogue(search = '', sort = 'newest', page = 1) {
  try {
   const query = new URLSearchParams({ search, sort, page: String(page), limit: '12' });
-  const response = await fetch(`${backend}/api/v1/products?${query}`, { next: { revalidate: 60 }, signal: AbortSignal.timeout(1000) });
+  const response = await fetch(`${backend}/api/v1/products?${query}`, { next: { revalidate: 60 }, signal: AbortSignal.timeout(8000) });
   if (!response.ok) throw new Error('Catalogue unavailable');
   const data = await response.json();
   if (!Array.isArray(data.products)) throw new Error('Invalid catalogue');
@@ -17,7 +17,7 @@ export async function catalogue(search = '', sort = 'newest', page = 1) {
 }
 export async function productBySlug(slug: string): Promise<Product | null> {
  try {
-  const response = await fetch(`${backend}/api/v1/products/${encodeURIComponent(slug)}`, { next: { revalidate: 60 }, signal: AbortSignal.timeout(1000) });
+  const response = await fetch(`${backend}/api/v1/products/${encodeURIComponent(slug)}`, { next: { revalidate: 60 }, signal: AbortSignal.timeout(8000) });
   if (response.status === 404) return null;
   if (!response.ok) throw new Error('Unavailable');
   return (await response.json()).data;

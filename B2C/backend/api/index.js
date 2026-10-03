@@ -38,6 +38,44 @@ async function getApp() {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
       });
       app.use(authApp);
+
+      // Public Products catalogue endpoints
+      app.get('/api/v1/products', async (req, res) => {
+        try {
+          const { search = '', page = 1, limit = 12 } = req.query;
+          const filter = { status: 'ACTIVE' };
+          if (search) {
+            filter.$or = [
+              { name: { $regex: search, $options: 'i' } },
+              { shortDescription: { $regex: search, $options: 'i' } }
+            ];
+          }
+          const pageNum = Math.max(1, parseInt(page, 10) || 1);
+          const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 12));
+          const skip = (pageNum - 1) * limitNum;
+          const [products, total] = await Promise.all([
+            cachedDb.models.Product.find(filter).skip(skip).limit(limitNum).lean(),
+            cachedDb.models.Product.countDocuments(filter)
+          ]);
+          res.json({
+            products,
+            total,
+            pages: Math.ceil(total / limitNum)
+          });
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+      });
+
+      app.get('/api/v1/products/:slug', async (req, res) => {
+        try {
+          const product = await cachedDb.models.Product.findOne({ slug: req.params.slug, status: 'ACTIVE' }).lean();
+          if (!product) return res.status(404).json({ error: 'Not found' });
+          res.json({ data: product });
+        } catch (err) {
+          res.status(500).json({ error: err.message });
+        }
+      });
     } catch (err) {
       console.error('B2C Database connection error:', err);
       app.use('/api/v1/auth', (req, res) => {

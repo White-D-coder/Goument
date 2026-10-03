@@ -6,7 +6,7 @@ const { googleProvider } = require('./google');
 const { page } = require('../database/queries');
 function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGateway = null }) {
   const url = new URL(origin);
-  if (url.origin !== origin || (url.protocol !== 'https:' && !['http://localhost:3001','http://127.0.0.1:3001'].includes(origin))) throw new Error('AUTH_ORIGIN must be an exact HTTPS origin or local B2C origin');
+  if (url.origin !== origin || (url.protocol !== 'https:' && !['http://localhost:3000','http://127.0.0.1:3000','http://localhost:3001','http://127.0.0.1:3001'].includes(origin))) throw new Error('AUTH_ORIGIN must be an exact HTTPS origin or local B2C origin');
   const secure = url.protocol === 'https:';
   const cookie = { httpOnly: true, secure, sameSite: 'lax', path: '/api/v1/auth' };
   const sessionName = 'b2c_session'; const flowName = 'b2c_google_flow';

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-03 — Set B2C storefront port to 3000
+
+Per user request ("broo 3000 pe rkh"):
+- **Port 3000 Configuration**:
+  - Updated [`B2C/package.json`](file:///Users/deeptanubhunia/Desktop/gour/B2C/package.json) scripts (`dev` and `start`) to run on `-p 3000`.
+  - Updated [`B2C/backend/.env`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/.env) `AUTH_ORIGIN=http://localhost:3000`.
+  - Updated [`B2C/backend/auth/app.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/auth/app.js) to accept `http://localhost:3000` for both `AUTH_ORIGIN` checks and request origin verification.
+  - Restarted auth service and dev server on `http://localhost:3000`.
+- **Verification**: Verified HTTP 200 on `http://localhost:3000/b2c`, `/shop`, `/account`, and `/cart`.
+
 ## 2026-10-03 — Set B2C home route to /b2c with automatic redirect and rewrites
 
 Per user request ("uska route /b2c kr abhi ke liye home ko"):

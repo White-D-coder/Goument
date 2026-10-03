@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-03 — Set B2C home route to /b2c with automatic redirect and rewrites
+
+Per user request ("uska route /b2c kr abhi ke liye home ko"):
+- **B2C Home at `/b2c`**:
+  - Created [`B2C/src/app/b2c/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/b2c/page.tsx) serving the complete B2C storefront homepage at `/b2c`.
+  - Configured root [`B2C/src/app/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/page.tsx) to redirect `/` $\rightarrow$ `/b2c`.
+  - Updated [`Brand.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Brand.tsx) and [`Footer.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Footer.tsx) brand logos to link to `/b2c`.
+  - Updated [`Header.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Header.tsx) `isHome` check to recognize both `/` and `/b2c` for the hero-transparent header, and updated Occasions/Our Story anchors (`/b2c#occasions`, `/b2c#our-story`).
+  - Updated breadcrumbs in [`B2C/src/app/shop/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/shop/page.tsx) to target `/b2c`.
+  - Added proxy rewrites in [`frontend_appview/next.config.ts`](file:///Users/deeptanubhunia/Desktop/gour/frontend_appview/next.config.ts) for `/b2c` and `/b2c/:path*` to `http://localhost:3001/b2c`.
+- **Verification**: Verified HTTP 200 on `/b2c` and 0 TypeScript errors.
+
 ## 2026-10-03 — Luxury CTA overhaul for account orders, explore action, and checkout
 
 Per user request ("cta badiya bna is page ka"):

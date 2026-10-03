@@ -14,7 +14,7 @@ export default async function Shop({searchParams}:{searchParams:Promise<{search?
  const data=await catalogue(search,sort,page);
  const href=(p:number)=>`/shop?${new URLSearchParams({search,sort:data.preview?'newest':sort,page:String(p)})}`;
  return <section className="section shop shop-edit">
-  <nav className="shop-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span aria-current="page">The collection</span></nav>
+  <nav className="shop-breadcrumb" aria-label="Breadcrumb"><Link href="/b2c">Home</Link><span>/</span><span aria-current="page">The collection</span></nav>
   <header className="shop-intro" data-reveal>
    <div className="shop-intro-copy">
     <p className="eyebrow">THOUGHTFULLY CHOSEN</p>

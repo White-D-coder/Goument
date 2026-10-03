@@ -57,6 +57,14 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: '/b2c',
+        destination: 'http://localhost:3001/b2c',
+      },
+      {
+        source: '/b2c/:path*',
+        destination: 'http://localhost:3001/b2c/:path*',
+      },
+      {
         source: '/dealer-partner-gifting',
         destination: '/occasions/dealer-partner-gifting',
       },

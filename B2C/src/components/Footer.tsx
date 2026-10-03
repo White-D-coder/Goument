@@ -55,7 +55,7 @@ export default function Footer() {
 		<footer className="b2b-store-footer">
 			<div className="b2b-footer-inner">
 				<div className="b2b-footer-heading">
-					<Link href="/" className="b2b-footer-wordmark" aria-label="The Gourmet Gifts home">
+					<Link href="/b2c" className="b2b-footer-wordmark" aria-label="The Gourmet Gifts home">
 						<span>THE</span>
 						<span>GOURMET</span>
 						<span>GIFTS</span>

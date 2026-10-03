@@ -48,9 +48,10 @@ Repeat authenticated orders must retain same User._id history through API pagina
 
 Sources: `frontend_appview/src/components/modals/InquiryModal.tsx`, `frontend_appview/src/hooks/useCart.ts`, `frontend_appview/src/shared/useCartSync.ts`, `frontend_appview/src/shared/api/client.ts`, `frontend_appview/src/features/shell/MobileShell.tsx`, `frontend_appview/src/features/shell/ResponsiveShell.tsx`.
 
-## Box-first gifting — 2026-09-30
+## Automated packaging gifting — 2026-10-03 (Updated)
 
-CURRENT / IMPLEMENTED: Home Signature Edit → select a real box → /build items → add freely → /cart. Cart shows current item quantities and packaging choices; overflow prompts more room, plus/minus below each box image adds/removes boxes, Use this box instead replaces packaging. Items survive box changes and page reloads in the same browser session. Review checkout checks authoritative packing; payment remains unavailable. Legacy product bag preserved at /cart/store. No implicit draft/customer merge on Google login.
+CURRENT / IMPLEMENTED: Home / Shop / Build → add items freely → /cart. Manual customer box selection, "more room" prompt, and box capacity limits have been removed from the customer interface. Cart displays the user's item list, and "Continue to checkout" is immediately available when items are present. Packaging calculation is executed automatically by the backend engine (`packaging.js`): pre-configured gift hampers count as individual presentation boxes (1 hamper = 1 box), and loose items are packed at 4-5 items per curated box (`Math.ceil(looseCount / 5)`).
+
 
 ## 2026-09-30 — Sign-in and delivery checkout
 

@@ -2,7 +2,6 @@
 
 /* eslint-disable @next/next/no-img-element -- Keep the full existing photographs visible. */
 import { useEffect, useRef, useState } from 'react';
-import { Pause, Play } from 'lucide-react';
 
 const slides = [
  { src: '/images/brand/hero.png', alt: 'The Gourmet Gifts signature boxes in ivory, lavender, burgundy and midnight blue', width: 1770, height: 889 },
@@ -15,7 +14,6 @@ export default function HeroSlideshow() {
  const [ready, setReady] = useState<number[]>([]);
  const [frame, setFrame] = useState({ current: 0, previous: -1 });
  const { current: activeIndex, previous: previousIndex } = frame;
- const [paused, setPaused] = useState(false);
 
  useEffect(() => {
   let disposed = false;
@@ -40,13 +38,13 @@ export default function HeroSlideshow() {
 
  useEffect(() => {
   const hero = stage.current?.closest('section');
-  if (!hero || ready.length < 2 || paused) return;
+  if (!hero || ready.length < 2) return;
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let visible = hero.getBoundingClientRect().bottom > 0 && hero.getBoundingClientRect().top < window.innerHeight;
   let timer: ReturnType<typeof setTimeout> | undefined;
   const schedule = () => {
    clearTimeout(timer);
-   const focused = hero.contains(document.activeElement) && !document.activeElement?.closest('.hero-slideshow-toggle');
+   const focused = hero.contains(document.activeElement);
    if (motion.matches || document.hidden || !visible || focused) return;
    timer = setTimeout(() => {
     const order = [...ready].sort((a, b) => a - b);
@@ -69,9 +67,9 @@ export default function HeroSlideshow() {
    hero.removeEventListener('focusin', schedule);
    hero.removeEventListener('focusout', schedule);
   };
- }, [activeIndex, paused, ready]);
+ }, [activeIndex, ready]);
 
- return <>
+ return (
   <div className="hero-slideshow" ref={stage} aria-live="off">
    {slides.map((slide, index) => <div
     className={`hero-slide${index === frame.current ? ' hero-slide--current' : index === frame.previous ? ' hero-slide--previous' : ''}`}
@@ -82,11 +80,5 @@ export default function HeroSlideshow() {
      fetchPriority={index === 0 ? 'high' : 'low'} decoding={index === 0 ? 'auto' : 'async'}/>
    </div>)}
   </div>
-  {ready.length > 1 && <button type="button" className="hero-slideshow-toggle"
-   onClick={() => setPaused(value => !value)}
-   aria-label={paused ? 'Resume hero slideshow' : 'Pause hero slideshow'}
-   title={paused ? 'Resume slideshow' : 'Pause slideshow'}>
-   {paused ? <Play size={16} aria-hidden="true"/> : <Pause size={16} aria-hidden="true"/>}
-  </button>}
- </>;
+ );
 }

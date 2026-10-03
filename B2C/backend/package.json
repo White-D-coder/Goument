@@ -11,7 +11,8 @@
     "db:seed": "node database/seeds/development.js",
     "test:database": "jest --runInBand --detectOpenHandles --testMatch \"**/database/tests/**/*.test.js\"",
     "db:describe": "node database/indexes/describe.js",
-    "auth:start": "node auth/server.js"
+    "auth:start": "node auth/server.js",
+    "admin:setup-owners": "node admin/setup-owners.js"
   },
   "dependencies": {
     "@socket.io/redis-adapter": "^8.3.0",

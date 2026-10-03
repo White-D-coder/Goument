@@ -22,7 +22,7 @@ const safeObject = value => {
 };
 const metadata = () => ({ type: Schema.Types.Mixed, validate: { validator: safeObject, message: 'Metadata must be bounded and exclude credentials/payment secrets' } });
 const url = () => ({ ...text(false, 2048), match: /^https:\/\// });
-const address = sub({ recipientName: text(true), phone: text(), addressLine1: text(true), addressLine2: text(), landmark: text(), city: text(true), state: text(true), postalCode: text(true, 20), country: { ...text(true, 2), uppercase: true, match: /^[A-Z]{2}$/ } });
+const address = sub({ recipientName: text(true), phone: text(), email: { type: String, required: false, trim: true, maxlength: 254, match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }, addressLine1: text(true), addressLine2: text(), landmark: text(), city: text(true), state: text(true), postalCode: text(true, 20), country: { ...text(true, 2), uppercase: true, match: /^[A-Z]{2}$/ } });
 const seo = sub({ title: text(false, 160), description: text(false, 320), keywords: list(String, 30), canonicalUrl: url() });
 const media = sub({ url: { ...text(true, 2048), match: /^(https:\/\/|\/)/ }, publicId: text(), alt: text(), type: { type: String, enum: ['IMAGE', 'VIDEO'], default: 'IMAGE' }, sortOrder: integer(true, 0, 0) });
 const orderItem = sub({ productId: ref('Product', false), variantId: ref('ProductVariant', false), sku: text(true), productName: text(true), variantName: text(), quantity: integer(true, 1), unitPriceMinor: integer(), discountMinor: integer(true, 0, 0), taxMinor: integer(true, 0, 0), lineTotalMinor: integer(), currency: currency() });

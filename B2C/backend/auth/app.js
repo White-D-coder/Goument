@@ -68,7 +68,7 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
     const after=typeof req.query.after==='string'?req.query.after:undefined;
     if(after&&after.length>500)throw service.failure('Invalid cursor',400);
     const result=await page(db.models.Order,{customerId:customer._id},{limit:10,after});
-    res.json({orders:result.items.map(o=>({_id:String(o._id),status:o.status,total:o.pricing.grandTotalMinor,currency:o.pricing.currency,createdAt:o.createdAt})),next:result.next});
+    res.json({orders:result.items.map(o=>({_id:String(o._id),orderNumber:o.orderNumber,status:o.status,total:o.pricing.grandTotalMinor,currency:o.pricing.currency,createdAt:o.createdAt})),next:result.next});
   }));
   require('../payments/routes').mountPayments(app,{db,gateway:paymentGateway,run});
   require('../gifting/routes').mountGifting(app, { db, cookie, run });

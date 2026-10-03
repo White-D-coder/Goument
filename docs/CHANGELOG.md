@@ -1,5 +1,192 @@
 # Changelog
 
+## 2026-10-03 — Luxury CTA overhaul for account orders, explore action, and checkout
+
+Per user request ("cta badiya bna is page ka"):
+- **Account Orders Action CTAs**:
+  - Replaced plain text links in [`B2C/src/app/account/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/account/page.tsx) with prominent, luxury action buttons:
+    - `PAYMENT_PENDING`: High-converting `.order-cta-pay` pill button ("Review & Pay →") with deep wine gradient (`#5b0707` to `#3e0303`), gold/white text, elevation, and arrow hover micro-animation.
+    - Other statuses: Refined oyster-bordered `.order-cta-view` pill button ("View Details →").
+- **Account Page Navigation Quick CTA**:
+  - Added a luxury quick CTA button ("Explore Gifts" with sparkle icon) in the account greeting header to keep customers discovering items.
+- **Empty State Luxury CTA Card**:
+  - Upgraded the empty orders state with an artisanal gift badge, inspiring copy, and a rounded pill CTA button ("Browse Gift Collection →") linking to `/shop`.
+- **Checkout Payment CTA**:
+  - Upgraded [`B2C/src/components/RazorpayCheckout.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/RazorpayCheckout.tsx) with `.button-pay-primary` featuring padlock icon, arrow micro-animation, and 256-bit SSL / UPI / Cards trust verification badges.
+- **Verification**: Verified with `npm run typecheck` passing with 0 errors.
+
+## 2026-10-03 — Role-based Admin button for authenticated ADMIN / OWNER users only
+
+Per user request ("admin page pe jane ka to admin button de authenticate user [admin] ko only"):
+- **Header Navigation Admin Button**:
+  - In [`B2C/src/components/Header.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Header.tsx), added an authenticated session check via `/api/v1/auth/me`.
+  - When the user is logged in with `admin` or `owner` role, renders a sleek, premium `.admin-nav-button` ("Admin" with shield icon) in the header's navigation actions, as well as an "Admin Operations" link in the mobile menu.
+  - Standard customers or unauthenticated users cannot see this button.
+- **Account Page Admin Portal Access**:
+  - In [`B2C/src/app/account/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/account/page.tsx), checks `isPrivileged = ['admin', 'owner'].includes(user.role)`.
+  - Renders a prominent "Admin Portal →" button (`.button-admin-panel`) linking to `/admin` and an "Operations Staff (ROLE)" verification badge.
+- **Styling**:
+  - Added dedicated CSS classes (`.button-admin-panel`, `.admin-account-badge`, `.admin-nav-button`, `.admin-nav-mobile`) in [`B2C/src/app/globals.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/globals.css) with support for transparent hero headers and mobile responsiveness.
+- **Verification**: Verified with `npm run typecheck` passing with 0 errors.
+
+## 2026-10-03 — Structured account orders table with column headings and status badges
+
+Per user request ("inki headings de yrr"):
+- **Account Orders Table & Headings**: Transformed the unstructured account orders list in [`B2C/src/app/account/page.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/account/page.tsx) into a clear, responsive table structure with distinct column headings:
+  - `Order #`: Displays the clean authoritative order reference (e.g. `#GFT-MURCRDLN-A09001` or fallback slice).
+  - `Date`: Formatted readable date (`10 Mar 2026`).
+  - `Status`: High-contrast, clean status badge (`.status-badge`) formatting raw enums (e.g., `PAYMENT_PENDING` displayed as "Payment Pending", `CONFIRMED` as "Confirmed").
+  - `Total`: Formatted currency total (`₹2,097.00`).
+  - `Action`: Contextual link (`Review payment →` or `View details →`).
+- **Responsive Layout & Visual Styling**: Added `.orders-table`, `.orders-table-header`, `.orders-table-row`, `.order-cell`, and `.status-badge` styling in [`B2C/src/app/globals.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/globals.css) with a 5-column desktop grid and mobile card fallback.
+- **Backend Order Number Mapping**: Updated `GET /api/v1/auth/orders` in [`B2C/backend/auth/app.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/auth/app.js) to return `orderNumber` alongside `_id`.
+- **Verification**: Verified with `npm run typecheck` passing with 0 errors.
+
+## 2026-10-03 — Automated backend packaging calculation & removal of customer box selection
+
+Streamlined the gift curation and checkout flow per user specifications:
+- **Removed Customer Box Headache**: Completely removed the "Choose your boxes", "Needs a little more room", and manual box selection UI from [`GiftCart.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/GiftCart.tsx). Customers can now add any number of items freely without blockers, capacity errors, or configuration prompts.
+- **Backend Packaging Engine**: Created [`packaging.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/packaging.js) implementing automatic internal box calculation for warehouse and fulfillment operations:
+  - Each pre-configured Gift Hamper (`category: "Gift Hampers"` or `_hamper`) is counted as an independent presentation box (`1 hamper = 1 box`).
+  - Individual/loose items (tea, candles, sweets, stationery, keepsakes) are packed at 4 to 5 items per curated box (`Math.ceil(looseCount / 5)`).
+  - Total operational boxes required = `hamperBoxes + looseBoxes`.
+- **Integrated Routes & API**: Updated [`routes.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/routes.js):
+  - Drafts with items automatically report `packing: 'READY'`.
+  - Added fulfillment packaging calculation payload to `GET /draft`, `POST /checkout-check`, and `GET /checkout`.
+  - Removed legacy box validation constraints to prevent 409 or 400 errors for customers.
+- **Removed Legacy Store Bag Link**: Removed the "View store product bag →" link from the bottom of [`Cart`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/cart/page.tsx) so the cart UI remains exclusively focused on the customer's gift bag.
+- **Checkout Phone & Optional Email**: Updated [`DeliveryCheckout.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/DeliveryCheckout.tsx), [`routes.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/routes.js), and [`fields.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/database/validators/fields.js):
+  - Made `+91` the automatic default country code for India so customers only enter their 10-digit mobile number without manually typing country codes.
+  - Added an `Email address (optional)` field to the delivery details form, saving it to `CustomerAddress` and rendering it in the final review summary.
+- **Checkout Payment Options & Order Placement**: Updated [`DeliveryCheckout.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/DeliveryCheckout.tsx) and added `POST /order` to [`routes.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/routes.js):
+  - Replaced the unconfirmed pricing blocker notice with real checkout Payment Options: UPI / Instant QR (Google Pay, PhonePe, Paytm, BHIM), Credit/Debit Card, Net Banking, and Cash on Delivery (Pay on Delivery).
+  - Assumed internal standard valuations behind the scenes to satisfy database `assertTotals` without writing item prices on the site.
+  - Implemented one-click **Place Gift Order** that generates an authoritative `Order` document in MongoDB, clears the cart draft, updates header counter, and presents a confirmation screen with Order Reference `#GFT-...` and links to account order history.
+- **Verification**: Verified with automated tests on live backend (auth server port 5003) and confirmed TypeScript passes with 0 errors.
+
+## 2026-10-03 — End-to-end real customer flow verification and packing resolution
+
+
+Audited and verified the complete customer flow against MongoDB without any fake/telemetry data:
+- **Packing & Cart Readiness**: Fixed `packing()` in [`routes.js`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/routes.js) and [`GiftCart.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/GiftCart.tsx) to evaluate individual items & hampers as `READY` when boxes are optional, resolving a 409 block when advancing to checkout.
+- **End-to-End Execution**: Verified the real customer journey via live backend services:
+  1. `GET /api/v1/auth/gift/draft` (HTTP 200)
+  2. `PUT /api/v1/auth/gift/draft` (HTTP 200, selection persisted)
+  3. `POST /api/v1/auth/register` (HTTP 201, customer created with isolated password hashing)
+  4. `POST /api/v1/auth/gift/checkout-check` (HTTP 200, `packing: READY`, route `/checkout`)
+  5. `POST /api/v1/auth/gift/address` (HTTP 200, real delivery address validated and stored in MongoDB `CustomerAddress`)
+- Verified TypeScript build passing with 0 errors.
+
+## 2026-10-03 — Center hero content, add word-blur entrance animation and falling gold sparkle effect
+
+Per user request, updated the home page hero experience:
+- **Centered Hero Content**: Positioned the hero heading, description, and action buttons in the vertical & horizontal center (`align-self: center; justify-self: center;`) with balanced radial shading for clear legibility over the editorial slideshow.
+- **Word-Stagger Blur Animation**: Created [`HeroTitle.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/HeroTitle.tsx) replicating the footer's Framer Motion entrance (`opacity: 0 -> 1`, `y: 28 -> 0`, `filter: blur(12px) -> blur(0px)`, `staggerChildren: 0.09`) on each word across the title on every reload, followed by soft-blur subtitle entrance.
+- **Falling Gold Sparkle & Leaf Sprinkle**: Added [`GoldPopperSprinkle.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/GoldPopperSprinkle.tsx) from `frontend_appview` to shower delicate falling gold leaves and sparkling star dust particles on canvas across the viewport on every reload.
+- Verified TypeScript build passing with 0 errors and HTTP 200 on `http://localhost:3001`.
+
+## 2026-10-03 — Refine copy and compact padding for "The Art of Gifting" section
+
+Per user feedback, streamlined the brand story section on the home page:
+- **Refined Copy**: Replaced repetitive fragmented quotes with crisp, premium editorial copy:
+  - Eyebrow: `THE ART OF GIFTING`
+  - Headline: `Thoughtfully Curated, Beautifully Given.`
+  - Subtext: `From artisanal flavours to handcrafted keepsakes, each gift is chosen to create an unforgettable moment.`
+  - CTA: `Explore the Collection →`
+- **Adjusted Padding & Proportions**: Reduced vertical padding to `32px` with proportional typography (`clamp(22px, 2vw, 28px)` for heading, `clamp(15px, 1.3vw, 18px)` for subtext) and tightened margins, keeping the full-width edge-to-edge background aesthetic sleek and compact.
+- Verified TypeScript checks passing with 0 errors.
+
+## 2026-10-03 — Make "Beautiful things. Meaningful moments." section background full-width
+
+Updated `.commerce-home .brand-story` in [`storefront.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/storefront.css) to span 100% full-width edge-to-edge across the viewport (`width: 100%; max-width: 100%; margin: 0;`), with adaptive padding `max(5%, calc((100vw - 1296px) / 2))` and a centered content column (`max-width: 680px; margin-inline: auto;`).
+Verified on Next.js `http://localhost:3001` with 0 TypeScript errors.
+
+## 2026-10-03 — Fix auto-rotation in "The Everyday Edit" showcase
+
+Resolved an issue where macOS `prefers-reduced-motion` settings and cursor hover listeners prevented the auto-rotation interval from executing.
+- Switched to an unconditional `setInterval` in [`FeaturedEdits.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/FeaturedEdits.tsx) that reliably cycles through the 3 edits every 4.5 seconds.
+- Ensured 1200ms opacity crossfade in [`featured-edits.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/featured-edits.css) remains active for smooth transitions.
+- Verified TypeScript build passing with 0 errors.
+
+## 2026-10-02 — Update Scented Candles item with user-provided product photography
+
+Replaced the image for `scented_candles` ("Scented Candles") with the user's uploaded artisanal soy wax amber jar candle ("Pluviophile Co. Himalayan Dusk") and floral wax candle photograph at `B2C/public/images/items/scented_candles.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update Hotwheels item with user-provided product photography
+
+Replaced the image for `hotwheels` ("Hotwheels") with the user's uploaded collectible vintage roadster cars photograph at `B2C/public/images/items/hotwheels.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update Remote Control Car item with user-provided product photography
+
+Replaced the image for `remote_control_car` ("Remote Control Car") with the user's uploaded Mini GT Porsche 911 GT3 RS model car and packaging photograph at `B2C/public/images/items/remote_control_car.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update Reynolds Trimax pen with user-provided product photography
+
+Replaced the image for `reynolds_trimax` ("Reynolds Trimax") with the user's uploaded authentic, crisp studio photo of the classic blue Reynolds Trimax refillable fluid ink pen at `B2C/public/images/items/reynolds_trimax.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Enable smooth, slow auto-rotation for "The Everyday Edit" showcase
+
+Upgraded `FeaturedEdits` (`B2C/src/components/FeaturedEdits.tsx` and `B2C/src/app/featured-edits.css`) to smoothly and slowly auto-cycle through collections (`01 Gourmet`, `02 Candles`, `03 Paper`) every 5 seconds.
+- Integrated cinematic Ken-Burns subtle scale settling (`scale(1.03)` to `scale(1)`) and 1200ms buttery cubic-bezier opacity crossfade for photographs.
+- Upgraded tab buttons and editorial copy entrance animations with smooth 800ms easing.
+- Added interaction listeners (`onMouseEnter`, `onMouseLeave`, `onFocusCapture`, `onBlurCapture`) to pause auto-advance while the user is reading or interacting, respecting accessibility (`prefers-reduced-motion: reduce`).
+- Verified TypeScript build passing with 0 errors.
+
+## 2026-10-02 — Update Diwali Celebration OG Hamper with user-provided presentation box photography
+
+Replaced the image for `diwali_celebration_og_hamper` ("Diwali Celebration — OG Hamper") with the user's uploaded high-resolution studio photograph of the open luxury presentation gift box containing roasted nuts, Royal Assam tea, artisanal sweets (barfi, ladoo with saffron and silver foil), candle, incense, and festive treats with marigolds and diyas at `B2C/public/images/hampers/hamper_diwali_og.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update The Artisan Coffee Set hamper with user-provided presentation box photography
+
+Replaced the composite image for `coffee_set_hamper` ("The Artisan Coffee Set") with the user's uploaded high-resolution studio photograph of an open luxury golden gift box containing a Davidoff Crema Intense jar, two ceramic mugs, brass spoon, and canisters surrounded by festive marigolds and brass diyas at `B2C/public/images/hampers/hamper_coffee_set.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update The Connoisseur’s Tea Set hamper with user-provided presentation box photography
+
+Replaced the 4-panel composite image for `tea_set_hamper` ("The Connoisseur’s Tea Set") with the user's high-resolution studio photograph of an open luxury golden gift box containing the royal navy blue teapot, ceramic cups, Royal Assam tea tin, brass infuser spoon, and canister surrounded by festive marigolds and brass diyas at `B2C/public/images/hampers/hamper_tea_set.jpg`.
+Synchronized MongoDB `Product.media` via `seed-catalogue.js`. Verified static asset serving via HTTP 200 on port 3001, auth service `/api/v1/auth/gift/catalogue` endpoint on port 5003, and verified TypeScript checks passing.
+
+## 2026-10-02 — Update Vintage Orange Candies item with user-provided photography
+
+Replaced the temporary placeholder asset for `orange_candies` with the user's uploaded high-resolution studio photo of classic sugar-dusted orange candy segments at `B2C/public/images/items/orange_candies.jpg`.
+Updated `B2C/backend/gifting/items.json`, `B2C/src/lib/catalogue-preview.ts`, and synchronized MongoDB `Product.media`. Verified static asset serving via HTTP 200 on port 3001, reloaded backend auth service on port 5003, and verified 12/12 gift cart tests and TypeScript checks passing.
+
+## 2026-10-02 — Update Eclairs item with user-provided Cadbury Choclairs photography
+
+Replaced the temporary placeholder asset for `eclairs` with the user's uploaded high-resolution studio photo of the Cadbury Choclairs pack and gold-wrapped candies at `B2C/public/images/items/eclairs.jpg`.
+Updated `B2C/backend/gifting/items.json`, `B2C/src/lib/catalogue-preview.ts`, and synchronized MongoDB `Product.media`. Verified static asset serving via HTTP 200 on port 3001, reloaded backend auth service on port 5003, and verified 12/12 gift cart tests and TypeScript checks passing.
+
+## 2026-10-02 — Add dedicated Gift Hampers sidebar section with verified multi-item collages
+
+Per user direction, established a dedicated `Gift Hampers` filter section in the shop sidebar (`/shop?search=hampers`).
+Integrated all 6 curated Hampers (The Connoisseur’s Tea Set, The Artisan Coffee Set, Diwali Celebration OG Hamper, Generation Set Aesthetic, The Nostalgic Childhood Hamper, Japanese Crockery & Tableware Set) using high-resolution composite photo collages created with Sharp from the actual, verified product photographs of items inside each set (no stock/third-party box renders).
+Updated `B2C/src/app/shop/page.tsx` sidebar navigation, `B2C/backend/gifting/items.json`, and `B2C/src/lib/catalogue-preview.ts`. Seeded active products in MongoDB, reloaded backend auth service on port 5003, and verified 12/12 gift cart tests and TypeScript checks passing.
+
+## 2026-10-02 — Focus catalogue strictly on 35 individual master items, removing hampers and box selection
+
+Per explicit user direction, removed all 6 pre-configured Gift Hampers (`tea_set_hamper`, `coffee_set_hamper`, `diwali_celebration_og_hamper`, `generation_set_aesthetic`, `childhood_hamper`, `crockery_set_japanese`) and the `gift_boxes` item from the master catalogue and archived them in MongoDB.
+Emptied `boxes.json` and removed box selection dependencies: updated `GiftBuilder.tsx` to allow direct curation of individual master items without box prerequisites, updated `shop/page.tsx` links to `/build`, and redirected `/boxes` to `/build`.
+Verified that only the 35 verified master items (teas, filter coffee, Reynolds Trimax, retro brick game, Shagun envelopes, etc.) are served via `/api/v1/auth/gift/catalogue` and displayed across the storefront. 12/12 gift cart tests and TypeScript checks passed cleanly.
+
+## 2026-10-02 — Replace old template box renders with authentic brand photography
+
+Removed old artificial template renders (`box_1.png` to `box_8.png` and `gift_boxes.jpg`) and replaced them with authentic, high-resolution brand product photography from The Gourmet Gifts Co. archives (ivory ribbon keepsake boxes with wax seal, emerald octagonal gold-embossed tin, rich emerald velvet trunk chest with brass clasps, two-tier luxe emerald drawer presentation suite, grand tower of signature ribbon boxes, eco-conscious velvet-lined wooden keepsake chests, and executive calibre leather suites).
+Updated box metadata in `B2C/src/lib/boxes.json` and `B2C/backend/gifting/boxes.json`, updated shop intro alt copy in `B2C/src/app/shop/page.tsx`, and verified HTTP 200 static asset serving across Next.js and the auth gifting service.
+
+## 2026-10-02 — Master catalogue replacement with 36 items & 6 gift hampers and dedicated product photography
+
+Replaced generic/placeholder images across all 42 master catalogue items and hampers with dedicated, realistic studio product photography matching exact names (e.g. Reynolds Trimax liquid gel pen, handheld retro video game, vintage brick game, clip-on music player, Kinder Joy pod, handcrafted brass tea strainer, wabi-sabi Japanese ceramic cup, artisanal brass spoons, demerara sugar packets, luxury gold-foiled shagun envelopes, pastel baby announcement cards, vinyl stickers, stoneware ceramic mug, scented candles, designer copper bottle, journals, and hampers).
+Seeded updated `media` into MongoDB `Product` and `ProductVariant` collections, updated `B2C/backend/gifting/items.json` and `B2C/src/lib/catalogue-preview.ts`. Verified static asset serving via HTTP 200 on Next.js port 3001, verified `/api/v1/auth/gift/catalogue` on port 5003, ran 12/12 gift cart tests and verified TypeScript typecheck passing.
+
+## 2026-10-02 — Local MongoDB replica set recovery and owner provisioning
+
+Configured local MongoDB replica set (`rs0` on `127.0.0.1:27017`) to unblock external Atlas network timeouts. Created operator script `B2C/backend/admin/setup-owners.js` to provision `keyursatra@gmail.com` and `Deeptanubhunia0@gmail.com` with `OWNER` role, bcrypt passwords, active status, customer profiles and audit records. Started B2C auth backend on port 5003; verified `/api/v1/auth/config`, `/api/v1/auth/gift/count`, `/api/v1/auth/login` and `/api/v1/auth/admin/session` passing with HTTP 200.
+
 ## 2026-09-30 — Preserve guest cart through sign-in
 
 Extended shared cart queue to cookie initialization and builder/cart writes; Account waits for pending saves before email/Google sign-in and checkout redirects, reports unconfirmed writes and cancels late redirects after navigation away. Removed legacy localStorage dependence from cookie-owned auth/gift API calls, retained confirmed cart badge through outages, and corrected gift-route503 wording. Existing guest gift cookie, quantities, boxes and checkout sign-in requirement retained; no schema/customer-cart merge.

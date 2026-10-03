@@ -1,1196 +1,1062 @@
-export interface InsideItem {
+export interface HamperInsideItem {
   item: string;
   weight?: string;
-  description?: string;
-}
-
-export interface CatalogueCategory {
-  id: string;
-  label: string;
-  subtitle?: string;
-  intro?: string;
-  tagline?: string;
-  image: string;
-  clipPath?: string;
-  borderRadius: string;
-  pastelActive: string;
-  pastelHover: string;
+  description: string;
 }
 
 export interface HamperData {
   _id: string;
   slug: string;
   name: string;
-  brand?: string;
+  brand: string;
   subCopy: string;
-  category: 
-    | 'gourmet-food' 
-    | 'beverages' 
-    | 'decor-spiritual' 
-    | 'wellness-lifestyle' 
-    | 'infinity-beyond' 
-    | '3d-miniatures'
-    | 'office-travel-bags'
-    | 'electronics-audio'
-    | 'stationery-desk'
-    | 'corporate-apparel'
-    | 'awards-recognition';
+  category: string;
   categoryLabel: string;
-  inside_items: InsideItem[];
+  inside_items: HamperInsideItem[];
   packaging_style: string;
   description: string;
   price: number;
   image: string;
   highlights: string[];
-  shelfLife?: string;
-  dietary?: string;
+}
+
+export interface CatalogueCategory {
+  id: string;
+  label: string;
+  subtitle: string;
+  image: string;
+  borderRadius: string;
+  pastelActive: string;
+  pastelHover: string;
 }
 
 export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
-    id: 'gourmet-food',
-    label: 'Gourmet Food',
-    subtitle: 'Regional flavours, thoughtfully curated.',
-    tagline: 'Regional flavours, thoughtfully curated.',
-    image: '/images/catalogue_items/category/gourmetfood.png',
-    borderRadius: '62% 38% 50% 50% / 65% 55% 45% 35%',
-    pastelActive: 'bg-[#F4A896]',
-    pastelHover: 'group-hover:bg-[#FADCD5]',
+    id: 'all',
+    label: 'All Gifts',
+    subtitle: 'Explore our complete artisanal gifting catalogue.',
+    image: '/images/beverages/assam_tea.jpg',
+    borderRadius: '42% 58% 70% 30% / 45% 45% 55% 55%',
+    pastelActive: 'bg-[#B0BCA4]',
+    pastelHover: 'group-hover:bg-[#EAEFE6]',
+  },
+  {
+    id: 'hampers',
+    label: 'Gift Hampers',
+    subtitle: 'Curated sets of tea, coffee, gourmet treats & childhood nostalgia.',
+    image: '/images/hampers/hamper_tea_set.jpg',
+    borderRadius: '55% 45% 60% 40% / 50% 55% 45% 50%',
+    pastelActive: 'bg-[#B08968]',
+    pastelHover: 'group-hover:bg-[#EDE0D4]',
   },
   {
     id: 'beverages',
-    label: 'Beverages',
-    subtitle: 'Curated for every moment.',
-    tagline: 'Curated for every moment.',
-    image: '/images/catalogue_items/category/beverages.png',
-    borderRadius: '45% 55% 63% 37% / 54% 46% 54% 46%',
-    pastelActive: 'bg-[#98C1A9]',
-    pastelHover: 'group-hover:bg-[#D5E8DD]',
+    label: 'Tea & Coffee',
+    subtitle: 'Single-estate tea, filter roast, brassware & cups.',
+    image: '/images/beverages/assam_tea.jpg',
+    borderRadius: '45% 55% 35% 65% / 60% 40% 60% 40%',
+    pastelActive: 'bg-[#C2A649]',
+    pastelHover: 'group-hover:bg-[#F2ECD8]',
   },
   {
-    id: 'decor-spiritual',
-    label: 'Decor & Spiritual',
-    subtitle: 'Thoughtful accents for inspired spaces.',
-    tagline: 'Thoughtful accents for inspired spaces.',
-    image: '/images/catalogue_items/category/decor_spiritual_v2.png',
-    borderRadius: '48% 52% 43% 57% / 58% 41% 59% 42%',
-    pastelActive: 'bg-[#DFC299]',
-    pastelHover: 'group-hover:bg-[#F3E7D5]',
-  },
-  {
-    id: 'wellness-lifestyle',
-    label: 'Wellness & Lifestyle',
-    image: '/images/catalogue_items/category/wellness.png',
-    borderRadius: '63% 37% 54% 46% / 44% 56% 44% 56%',
-    pastelActive: 'bg-[#E3A8BC]',
-    pastelHover: 'group-hover:bg-[#F5DCDE]',
+    id: 'gourmet-food',
+    label: 'Gourmet Treats',
+    subtitle: 'Artisanal cookies, chocolates, bhujia & sweets.',
+    image: '/images/pics/bhujia.png',
+    borderRadius: '60% 40% 55% 45% / 45% 60% 40% 55%',
+    pastelActive: 'bg-[#E5A87B]',
+    pastelHover: 'group-hover:bg-[#FBECE2]',
   },
   {
     id: 'infinity-beyond',
-    label: 'Eternal Paper Co',
-    image: '/images/catalogue_items/category/infinity.png',
+    label: 'Eternal Paper Co.',
+    subtitle: 'Handmade journals, bookmarks, shagun envelopes & cards.',
+    image: '/images/items/shagun_envelopes.jpg',
     borderRadius: '53% 47% 41% 59% / 68% 66% 34% 32%',
     pastelActive: 'bg-[#F6D07A]',
     pastelHover: 'group-hover:bg-[#FCF0CE]',
   },
   {
     id: '3d-miniatures',
-    label: '3D Miniatures',
-    image: '/images/catalogue_items/category/3d_v2.png',
+    label: 'Childhood & Nostalgia',
+    subtitle: 'Retro games, candies, Hotwheels & toys.',
+    image: '/images/items/brick_game.jpg',
     borderRadius: '48% 52% 47% 53% / 58% 46% 54% 42%',
     pastelActive: 'bg-[#CFAFA3]',
     pastelHover: 'group-hover:bg-[#EFE2DC]',
   },
-  /* ── 5 CORPORATE DIVISIONS ── */
   {
-    id: 'office-travel-bags',
-    label: 'Office & Travel Bags',
-    image: '/images/catalogue_items/category/office_v2.png',
-    borderRadius: '56% 44% 58% 42% / 46% 59% 41% 54%',
-    pastelActive: 'bg-[#D6C2A9]',
-    pastelHover: 'group-hover:bg-[#D6C2A9]/50',
-  },
-  {
-    id: 'electronics-audio',
-    label: 'Electronics',
-    image: '/images/catalogue_items/category/electronics_v2.png',
-    borderRadius: '46% 54% 38% 62% / 62% 44% 56% 38%',
-    pastelActive: 'bg-[#C7C3B7]',
-    pastelHover: 'group-hover:bg-[#C7C3B7]/50',
-  },
-  {
-    id: 'stationery-desk',
-    label: 'Stationery & Desk',
-    image: '/images/catalogue_items/category/stationaries.png',
-    borderRadius: '58% 42% 64% 36% / 40% 58% 42% 60%',
-    pastelActive: 'bg-[#D2C8B8]',
-    pastelHover: 'group-hover:bg-[#D2C8B8]/50',
-  },
-  {
-    id: 'corporate-apparel',
-    label: 'Apparel',
-    image: '/images/catalogue_items/category/appreal.png',
-    borderRadius: '38% 62% 48% 52% / 52% 38% 62% 48%',
-    pastelActive: 'bg-[#C5CCC5]',
-    pastelHover: 'group-hover:bg-[#C5CCC5]/50',
-  },
-  {
-    id: 'awards-recognition',
-    label: 'Recognition',
-    image: '/images/catalogue_items/category/recognition.png',
-    borderRadius: '52% 48% 60% 40% / 44% 60% 40% 56%',
-    pastelActive: 'bg-[#D7CEC2]',
-    pastelHover: 'group-hover:bg-[#D7CEC2]/50',
+    id: 'decor-spiritual',
+    label: 'Home & Wellness',
+    subtitle: 'Aromatherapy scented candles & lifestyle accents.',
+    image: '/images/items/scented_candles.jpg',
+    borderRadius: '50% 50% 45% 55% / 55% 45% 55% 45%',
+    pastelActive: 'bg-[#988184]',
+    pastelHover: 'group-hover:bg-[#E8E2E3]',
   },
 ];
 
 export const HAMPERS_CATALOG: HamperData[] = [
-  /* ═══════════════════════════════════════════════
-     1. GOURMET FOOD
-     ═══════════════════════════════════════════════ */
   {
-    _id: 'gourmet_makhana',
-    slug: 'makhana',
-    name: 'Makhana',
-    subCopy: 'Light, crunchy & wholesome fox nuts, perfectly roasted.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "tea_set_hamper",
+    slug: "tea-set",
+    name: "The Connoisseur’s Tea Set",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Artisanal tea, brass strainer, Japanese cup, brass spoon & sugar packets.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Roasted Fox Nuts (Makhana)', weight: '100g' },
-    ],
-    packaging_style: 'Light, crunchy & wholesome fox nuts, perfectly roasted.',
-    description: 'Light, crunchy & wholesome fox nuts, perfectly roasted.',
+      {
+            "item": "Single-Estate Artisanal Tea",
+            "weight": "100g",
+            "description": "Hand-picked whole leaf tea leaves."
+      },
+      {
+            "item": "Brass Tea Strainer",
+            "description": "Fine mesh hand-finished brass strainer."
+      },
+      {
+            "item": "Japanese Ceramic Teacup",
+            "description": "Hand-thrown artisanal cup with glazed texture."
+      },
+      {
+            "item": "Heritage Brass Spoon",
+            "description": "Handcrafted golden brass stirring spoon."
+      },
+      {
+            "item": "Raw Sugar Packets",
+            "weight": "5 Sachets",
+            "description": "Organic demerara & unrefined cane sugar."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "An elegant ceremonial gifting set dedicated to the meditative ritual of tea. Features single-estate artisanal tea, an authentic brass strainer, hand-glazed Japanese teacup, hand-forged brass spoon and organic cane sugar packets.",
     price: 0,
-    image: '/images/pics/makhana.png',
-    highlights: ['Zero Trans-Fat', 'Superfood Protein Snack', 'Gluten-Free'],
-    shelfLife: '90 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_tea_set.jpg",
+    highlights: ["Single-Estate Tea","Authentic Hand-Forged Brass","Artisanal Japanese Ceramic"],
   },
   {
-    _id: 'gourmet_artisanal_chikki',
-    slug: 'artisanal-chikki',
-    name: 'Artisanal Chikki',
-    subCopy: 'Handcrafted nut brittles with traditional jaggery sweetness.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "coffee_set_hamper",
+    slug: "coffee-set",
+    name: "The Artisan Coffee Set",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Filter coffee (Sleepy Owl / Davidoff), stoneware mug & small brass spoon.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Handcrafted Nut Brittle', weight: '150g' },
-    ],
-    packaging_style: 'Handcrafted nut brittles with traditional jaggery sweetness.',
-    description: 'Handcrafted nut brittles with traditional jaggery sweetness.',
+      {
+            "item": "Artisanal Filter Coffee (Sleepy Owl / Davidoff)",
+            "weight": "150g",
+            "description": "Rich, slow-roasted filter coffee blend."
+      },
+      {
+            "item": "Ceramic Stoneware Mug",
+            "description": "Matte-glazed comfort grip coffee mug."
+      },
+      {
+            "item": "Small Brass Spoon",
+            "description": "Delicate hand-forged brass coffee spoon."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "A comforting morning ritual in a presentation suite. Features rich, aromatic premium filter coffee blend, an artisan ceramic stoneware coffee mug, and a delicate handcrafted brass stirring spoon.",
     price: 0,
-    image: '/images/pics/chikki.png',
-    highlights: ['Traditional Jaggery Sweetness', 'No Refined Sugar', 'Crisp Texture'],
-    shelfLife: '60 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_coffee_set.jpg",
+    highlights: ["Slow-Roasted Filter Coffee","Stoneware Ceramic Mug","Hand-Crafted Brass Spoon"],
   },
   {
-    _id: 'gourmet_chilli_cheese_bhujia',
-    slug: 'chilli-cheese-bhujia',
-    name: 'Chilli Cheese Bhujia',
-    subCopy: 'Artisanal crispy bhujia tossed with cheddar cheese & fiery green chilli.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "diwali_celebration_og_hamper",
+    slug: "diwali-celebration-og-hamper",
+    name: "Diwali Celebration — OG Hamper",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Crispy bhujia, chocolates, cookies, pure ghee sweets & bookmark envelope.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Artisanal Chilli Cheese Bhujia', weight: '150g' },
-    ],
-    packaging_style: 'Airtight premium artisanal standee pouch keeping crunch fresh.',
-    description: 'A contemporary Indian savoury snack — crunchy bhujia infused with sharp cheddar cheese and a spicy kick of chilli.',
+      {
+            "item": "Artisanal Savoury Bhujia",
+            "weight": "150g",
+            "description": "Crispy spiced savoury crunch."
+      },
+      {
+            "item": "Couverture Handcrafted Chocolates",
+            "weight": "120g",
+            "description": "Assorted rich milk & dark chocolates."
+      },
+      {
+            "item": "Slow-Baked Butter Cookies",
+            "weight": "150g",
+            "description": "Melt-in-mouth vanilla butter cookies."
+      },
+      {
+            "item": "Pure Ghee Sweets",
+            "weight": "200g",
+            "description": "Festive mithai made with pure ingredients."
+      },
+      {
+            "item": "Shagun Envelope & Bookmark",
+            "description": "Gold foil deckled-edge cash envelope & bookmark."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "The definitive festive hamper that captures the warmth and grandeur of Diwali. Packed with artisanal crispy bhujia, velvety handcrafted chocolates, buttery cookies, traditional Indian sweets and an auspicious gold-foiled bookmark envelope.",
     price: 0,
-    image: '/images/pics/bhujia.png',
-    highlights: ['Crispy Savoury Snack', 'Sharp Cheddar & Chilli Kick', '100% Vegetarian'],
-    shelfLife: '90 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_diwali_og.jpg",
+    highlights: ["Traditional Festive Favourites","Pure Desi Ghee Sweets","Keepsake Gold Foil Envelopes"],
   },
   {
-    _id: 'gourmet_indian_sweets',
-    slug: 'indian-gourmet-sweets',
-    name: 'Indian Gourmet Sweets',
-    subCopy: 'Traditional favourites made with pure ingredients.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "generation_set_aesthetic",
+    slug: "generation-set-aesthetic",
+    name: "Generation Set — Aesthetic",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Designer copper bottle, eco-friendly journal & good pen.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Artisanal Indian Gourmet Sweets', weight: '150g' },
-    ],
-    packaging_style: 'Traditional favourites made with pure ingredients.',
-    description: 'Traditional favourites made with pure ingredients.',
+      {
+            "item": "Designer Copper Bottle",
+            "weight": "750ml",
+            "description": "Pure hammered ayurvedic copper bottle."
+      },
+      {
+            "item": "Eco-Friendly Hardbound Journal",
+            "weight": "192 Pages",
+            "description": "Unruled cotton rag paper notebook."
+      },
+      {
+            "item": "Executive Minimalist Pen",
+            "description": "Matte black metal rollerball pen."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "A contemporary aesthetic curation designed for daily mindful living. Combines a hammered pure copper hydration vessel, an artisanal recycled hardcover journal and an executive minimalist pen.",
     price: 0,
-    image: '/images/pics/sweets.png',
-    highlights: ['100% Desi Ghee', 'No Preservatives', 'Fresh Handcrafted Batch'],
-    shelfLife: '25 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_generation_set.jpg",
+    highlights: ["Pure Handcrafted Copper","100% Recycled Cotton Paper","Precision Writing Instrument"],
   },
   {
-    _id: 'gourmet_roasted_nuts_seeds',
-    slug: 'roasted-nuts-seeds',
-    name: 'Roasted Nuts & Seeds',
-    subCopy: 'Perfectly roasted for a wholesome and satisfying crunch.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "childhood_hamper",
+    slug: "childhood-hamper",
+    name: "The Nostalgic Childhood Hamper",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Retro video game, brick game, candies, eclairs, Kinder Joy, Hotwheels, RC car, Trimax, diary & iPod player.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Roasted Nuts & Seeds Blend', weight: '120g' },
-    ],
-    packaging_style: 'Perfectly roasted for a wholesome and satisfying crunch.',
-    description: 'Perfectly roasted for a wholesome and satisfying crunch.',
+      {
+            "item": "8-Bit Retro Video Game Console",
+            "description": "Handheld color screen retro gaming device."
+      },
+      {
+            "item": "Handheld Brick Game",
+            "description": "Vintage block puzzle LCD device."
+      },
+      {
+            "item": "Vintage Orange Candies",
+            "weight": "100g",
+            "description": "Sweet & tangy sugar-dusted hard candies."
+      },
+      {
+            "item": "Chocolate Eclairs Toffees",
+            "weight": "100g",
+            "description": "Caramel toffees with molten chocolate core."
+      },
+      {
+            "item": "Kinder Joy Egg",
+            "description": "Wafer balls in milky cream with surprise toy."
+      },
+      {
+            "item": "Hotwheels Die-Cast Car",
+            "description": "Authentic 1:64 scale metal race car."
+      },
+      {
+            "item": "Mini RC Car",
+            "description": "Radio-controlled micro racer with handheld remote."
+      },
+      {
+            "item": "Reynolds Trimax Pen",
+            "description": "Classic blue liquid gel precision pen."
+      },
+      {
+            "item": "Pocket Mini Diary",
+            "weight": "96 Pages",
+            "description": "Compact gilded notebook."
+      },
+      {
+            "item": "Clip-On MP3 Player",
+            "description": "Wearable digital audio player with earphones."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "An irresistible treasure chest of pure 90s nostalgia and playful memories. Features a retro handheld console, brick game, classic orange candies, eclairs, Kinder Joy, authentic Hotwheels car, mini remote control vehicle, iconic Reynolds Trimax pen, pocket diary and clip-on MP3 player.",
     price: 0,
-    image: '/images/pics/dryfruits.png',
-    highlights: ['High Protein & Fiber', 'Low Sodium Roasted', 'Wholesome Crunch'],
-    shelfLife: '120 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_childhood.jpg",
+    highlights: ["90s Nostalgia Treasure","Playable Retro Gaming","Iconic Childhood Treats"],
   },
   {
-    _id: 'gourmet_bihar_thekua',
-    slug: 'bihars-thekua',
-    name: 'Bihar’s Thekua',
-    subCopy: 'Classic Bihari thekua, crisp outside, soft inside, timeless taste.',
-    category: 'gourmet-food',
-    categoryLabel: 'Gourmet Food',
+    _id: "crockery_set_japanese",
+    slug: "crockery-set-japanese",
+    name: "Japanese Crockery & Tableware Set",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Artisanal Japanese ceramic tableware, cup, brass strainer & brass spoon.",
+    category: "hampers",
+    categoryLabel: "Gift Hampers",
     inside_items: [
-      { item: 'Handcrafted Bihari Thekua', weight: '200g' },
-    ],
-    packaging_style: 'Classic Bihari thekua, crisp outside, soft inside, timeless taste.',
-    description: 'Classic Bihari thekua, crisp outside, soft inside, timeless taste.',
+      {
+            "item": "Japanese Ceramic Teacup",
+            "description": "Hand-thrown cup with speckled texture."
+      },
+      {
+            "item": "Brass Tea Strainer",
+            "description": "Hand-finished fine mesh tea strainer."
+      },
+      {
+            "item": "Hand-Forged Brass Spoon",
+            "description": "Golden brass tableware accent."
+      }
+],
+    packaging_style: "Gift Presentation Set",
+    description: "A curated collection of Japanese ceramic tableware designed for serene tablescapes. Finished with organic reactive glazes and earthy stoneware textures for an authentic dining ritual.",
     price: 0,
-    image: '/images/pics/thekuap.png',
-    highlights: ['Generational Heritage Recipe', 'Stone-Ground Whole Wheat', 'Pure Desi Ghee'],
-    shelfLife: '45 Days',
-    dietary: '100% Vegetarian',
-  },
-
-  /* ═══════════════════════════════════════════════
-     2. BEVERAGES
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'beverage_niloufer_founders_tea',
-    slug: 'cafe-niloufer-founders-blended-tea',
-    name: 'Café Niloufer Founders Blended Tea',
-    subCopy: 'A signature aromatic blend from the iconic 1920 tea house.',
-    category: 'beverages',
-    categoryLabel: 'Beverages',
-    inside_items: [
-      { item: 'Café Niloufer Founders Blended Tea', weight: '200g' },
-    ],
-    packaging_style: 'A signature aromatic blend from the iconic 1920 tea house.',
-    description: 'A signature aromatic blend from the iconic 1920 tea house.',
-    price: 0,
-    image: '/images/pics/blendedtea.png',
-    highlights: ['Historic 1920 Recipe', 'Artisanal Tea Blend', 'Rich & Full-Bodied'],
-    shelfLife: '365 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/hampers/hamper_crockery_set.jpg",
+    highlights: ["Handmade Ceramic Stoneware","Earthy Reactive Glazes","Minimalist Zen Tableware"],
   },
   {
-    _id: 'beverage_royal_assam_tea',
-    slug: 'royal-assam-tea',
-    name: 'Royal Assam Tea',
-    subCopy: 'Rich, malty & full-bodied Assam goodness.',
-    category: 'beverages',
-    categoryLabel: 'Beverages',
+    _id: "tea",
+    slug: "tea",
+    name: "Artisanal Tea",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Single-estate fragrant tea leaves, full-bodied & soothing.",
+    category: "beverages",
+    categoryLabel: "Beverages",
     inside_items: [
-      { item: 'Royal Single-Estate Assam Tea', weight: '150g' },
-    ],
-    packaging_style: 'Rich, malty & full-bodied Assam goodness.',
-    description: 'Rich, malty & full-bodied Assam goodness.',
+      {
+            "item": "Artisanal Tea Leaves",
+            "weight": "100g",
+            "description": "Freshly packed single-origin tea."
+      }
+],
+    packaging_style: "Aroma-Seal Tin",
+    description: "Whole-leaf tea hand-selected from lush high-altitude estates, delivering notes of malt, floral sweetness and a golden amber liquor.",
     price: 0,
-    image: '/images/pics/assamtea.png',
-    highlights: ['Single-Estate Provenance', 'Golden Tips First Flush', 'Award-Winning Flavour'],
-    shelfLife: '730 Days',
-    dietary: '100% Vegetarian',
+    image: "/images/beverages/assam_tea.jpg",
+    highlights: ["100% Whole Leaf","Single Estate Harvest","Rich Antioxidants"],
   },
   {
-    _id: 'beverage_filter_kaapi',
-    slug: 'filter-kaapi',
-    name: 'Filter Kaapi',
-    subCopy: 'Bold, earthy & exceptionally satisfying authentic South Indian blend.',
-    category: 'beverages',
-    categoryLabel: 'Beverages',
+    _id: "strainer",
+    slug: "strainer",
+    name: "Brass Tea Strainer",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Handcrafted pure brass fine mesh tea strainer.",
+    category: "decor-spiritual",
+    categoryLabel: "Tableware & Crockery",
     inside_items: [
-      { item: 'Filter Kaapi Ground Coffee', weight: '200g' },
-    ],
-    packaging_style: 'Bold, earthy & exceptionally satisfying authentic South Indian blend.',
-    description: 'Bold, earthy & exceptionally satisfying authentic South Indian blend.',
+      {
+            "item": "Brass Tea Strainer",
+            "description": "Hand-forged brass with ergonomic handle."
+      }
+],
+    packaging_style: "Cotton Pouch",
+    description: "A timeless heirloom strainer crafted from pure brass with intricate woven mesh, elevating daily tea rituals into an art form.",
     price: 0,
-    image: '/images/pics/filterkaapi.png',
-    highlights: ['Single-Estate Harvest', 'Bold Earthy Notes', 'Freshly Roasted Beans'],
-    shelfLife: '180 Days',
-    dietary: '100% Vegetarian',
-  },
-
-  /* ═══════════════════════════════════════════════
-     3. DECOR & SPIRITUAL
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'decor_brass_diyas',
-    slug: 'brass-diyas',
-    name: 'Brass Diyas',
-    subCopy: 'Timeless radiance for sacred spaces.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
-    inside_items: [
-      { item: 'Handcrafted Brass Diya', weight: 'Set' },
-    ],
-    packaging_style: 'Timeless radiance for sacred spaces.',
-    description: 'Timeless radiance for sacred spaces.',
-    price: 0,
-    image: '/images/decor/brass_diya.jpg',
-    highlights: ['Pure Solid Brass', 'Heirloom Polish', 'Tarnish-Resistant Finish'],
-    dietary: 'Sacred Decor',
+    image: "/images/items/strainer.jpg",
+    highlights: ["Pure Solid Brass","Fine Mesh Filtration","Heirloom Handcraft"],
   },
   {
-    _id: 'decor_phool_incense',
-    slug: 'phool-incense',
-    name: 'Phool Incense',
-    subCopy: 'Handcrafted aromas rooted in tradition.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "japanese_cup",
+    slug: "japanese-cup",
+    name: "Japanese Ceramic Cup",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Hand-thrown Japanese ceramic teacup with natural glaze.",
+    category: "decor-spiritual",
+    categoryLabel: "Tableware & Crockery",
     inside_items: [
-      { item: 'Phool Organic Temple Flower Incense', weight: 'Pack' },
-    ],
-    packaging_style: 'Handcrafted aromas rooted in tradition.',
-    description: 'Handcrafted aromas rooted in tradition.',
+      {
+            "item": "Japanese Teacup",
+            "weight": "180ml",
+            "description": "Handcrafted stoneware ceramic cup."
+      }
+],
+    packaging_style: "Protective Gift Sleeve",
+    description: "Individually thrown by skilled artisans with tactile wabi-sabi finishes and comfortable hand-feel for tea and warm brews.",
     price: 0,
-    image: '/images/decor/phool_incense.jpg',
-    highlights: ['100% Charcoal-Free', 'Eco-Conscious Temple Flowers', 'Calming Fragrance'],
-    dietary: 'Eco-Friendly',
+    image: "/images/items/japanese_cup.jpg",
+    highlights: ["Handmade Stoneware","Heat Retentive","Lead-Free Glaze"],
   },
   {
-    _id: 'decor_scented_soy_candles',
-    slug: 'scented-soy-candles',
-    name: 'Scented Soy Candles',
-    subCopy: 'Pure, calming & crafted for every mood.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "brass_spoon",
+    slug: "brass-spoon",
+    name: "Brass Spoon",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Traditional hand-beaten brass spoon with heritage detail.",
+    category: "decor-spiritual",
+    categoryLabel: "Tableware & Crockery",
     inside_items: [
-      { item: 'Hand-Poured Scented Soy Candle', weight: '160g' },
-    ],
-    packaging_style: 'Pure, calming & crafted for every mood.',
-    description: 'Pure, calming & crafted for every mood.',
+      {
+            "item": "Hand-Forged Brass Spoon",
+            "description": "15cm solid brass spoon."
+      }
+],
+    packaging_style: "Protective Sleeve",
+    description: "A classic golden brass spoon hand-forged with traditional hammer marks and warm, lustrous heirloom charm.",
     price: 0,
-    image: '/images/pics/candles.png',
-    highlights: ['35+ Hours Burn Time', 'Clean Toxin-Free Soy Wax', 'Therapeutic Scent'],
-    dietary: 'Clean Living',
+    image: "/images/items/brass_spoon.jpg",
+    highlights: ["Hand-Beaten Solid Brass","Naturally Anti-Microbial","Heirloom Quality"],
   },
   {
-    _id: 'decor_coasters',
-    slug: 'coasters',
-    name: 'Coasters',
-    subCopy: 'Elegant accents for every surface.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "sugar_packets",
+    slug: "sugar-packets",
+    name: "Demerara & Cane Sugar Packets",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Natural unrefined golden demerara sugar sachets.",
+    category: "gourmet-food",
+    categoryLabel: "Gourmet Food",
     inside_items: [
-      { item: 'Laser-Etched Accent Coasters', weight: 'Set of 4' },
-    ],
-    packaging_style: 'Elegant accents for every surface.',
-    description: 'Elegant accents for every surface.',
+      {
+            "item": "Demerara Sugar Sachets",
+            "weight": "10 Sachets",
+            "description": "Natural unrefined sugar portions."
+      }
+],
+    packaging_style: "Individual Portions",
+    description: "Unrefined, molasses-rich golden demerara crystals that add subtle caramel notes to tea, coffee and warm infusions.",
     price: 0,
-    image: '/images/decor/coasters.png',
-    highlights: ['Etched Mandala Design', 'Heat Resistant', 'Surface Protective'],
-    dietary: 'Home Decor',
+    image: "/images/items/sugar_packets.jpg",
+    highlights: ["100% Unrefined","Rich Caramel Flavour","Eco Paper Sachets"],
   },
   {
-    _id: 'decor_mini_planters',
-    slug: 'mini-planters',
-    name: 'Mini Planters',
-    subCopy: 'Green touches for beautiful corners.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "coffee_filter_sleepy_owl_davidoff",
+    slug: "coffee-filter-sleepy-owl-davidoff",
+    name: "Filter Coffee (Sleepy Owl / Davidoff)",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Slow-roasted premium filter coffee with rich chocolate undertones.",
+    category: "beverages",
+    categoryLabel: "Beverages",
     inside_items: [
-      { item: 'Textured Ceramic Mini Planter', weight: '1 Piece' },
-    ],
-    packaging_style: 'Green touches for beautiful corners.',
-    description: 'Green touches for beautiful corners.',
+      {
+            "item": "Filter Coffee Blend",
+            "weight": "150g",
+            "description": "Slow-roasted artisan filter coffee."
+      }
+],
+    packaging_style: "Nitrogen-Flushed Pouch",
+    description: "A full-bodied, artisanal dark roast roasted to perfection with notes of toasted hazelnut, cocoa nibs and velvet crema.",
     price: 0,
-    image: '/images/decor/miniplanters.png',
-    highlights: ['Textured Artisan Ceramic', 'Low Maintenance Plant', 'Air Purifying Desk Decor'],
-    dietary: 'Botanical Living',
+    image: "/images/beverages/sleepy_owl.jpg",
+    highlights: ["100% Arabica & Robusta Blend","Freshly Ground Roast","Intense Aroma"],
   },
   {
-    _id: 'decor_brass_tree',
-    slug: 'brass-tree',
-    name: 'Brass Tree',
-    subCopy: 'Symbol of prosperity and abundance.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "mug",
+    slug: "mug",
+    name: "Artisan Ceramic Mug",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Matte-glazed comfort stoneware coffee mug.",
+    category: "decor-spiritual",
+    categoryLabel: "Tableware & Crockery",
     inside_items: [
-      { item: 'Solid Cast Brass Kalpavriksha Tree', weight: '1 Piece' },
-    ],
-    packaging_style: 'Symbol of prosperity and abundance.',
-    description: 'Symbol of prosperity and abundance.',
+      {
+            "item": "Ceramic Coffee Mug",
+            "weight": "320ml",
+            "description": "Stoneware coffee mug."
+      }
+],
+    packaging_style: "Cushioned Box",
+    description: "Heavyweight stoneware ceramic mug designed for slow mornings and quiet contemplation, with an organic earthy rim.",
     price: 0,
-    image: '/images/decor/brass_tree.jpg',
-    highlights: ['Kalpavriksha Wish-Fulfilling Motif', 'Solid Cast Metal', 'Auspicious Milestone Gift'],
-    dietary: 'Sacred Art',
+    image: "/images/items/mug.jpg",
+    highlights: ["Comfort Grip Handle","Microwave & Dishwasher Safe","Hand-Glazed Ceramic"],
   },
   {
-    _id: 'decor_crystal_tree',
-    slug: 'crystal-tree',
-    name: 'Crystal Tree',
-    subCopy: 'Energy, balance & positive vibes.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "small_brass_spoon",
+    slug: "small-brass-spoon",
+    name: "Small Brass Spoon",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Petite handcrafted brass stirring & dessert spoon.",
+    category: "decor-spiritual",
+    categoryLabel: "Tableware & Crockery",
     inside_items: [
-      { item: 'Natural Gemstone Crystal Tree', weight: '1 Piece' },
-    ],
-    packaging_style: 'Energy, balance & positive vibes.',
-    description: 'Energy, balance & positive vibes.',
+      {
+            "item": "Small Brass Spoon",
+            "description": "Petite 11cm solid brass spoon."
+      }
+],
+    packaging_style: "Protective Sleeve",
+    description: "A compact hand-finished brass spoon tailored for espresso cups, condiment jars and delicate dessert servings.",
     price: 0,
-    image: '/images/decor/crystal_tree.jpg',
-    highlights: ['Natural Healing Crystals', 'Flexible Golden Branches', 'Positive Energy Accent'],
-    dietary: 'Spiritual Wellness',
+    image: "/images/items/small_brass_spoon.jpg",
+    highlights: ["Solid Golden Brass","Petite 11cm Length","Artisanal Craft"],
   },
   {
-    _id: 'decor_copper_bottle',
-    slug: 'copper-bottle',
-    name: 'Copper Bottle',
-    subCopy: 'Pure hammered copper bottle with artisanal floral embossing.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "bhujia",
+    slug: "bhujia",
+    name: "Artisanal Savoury Bhujia",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Crispy, crunchy spiced savoury namkeen.",
+    category: "gourmet-food",
+    categoryLabel: "Gourmet Food",
     inside_items: [
-      { item: 'Pure Hammered Copper Bottle', weight: '750ml' },
-    ],
-    packaging_style: 'Pure hammered copper bottle with artisanal floral embossing.',
-    description: 'Pure hammered copper bottle with artisanal floral embossing for Ayurvedic health and wellness.',
+      {
+            "item": "Spiced Bhujia",
+            "weight": "150g",
+            "description": "Crisp traditional bhujia."
+      }
+],
+    packaging_style: "Resealable Foil Pouch",
+    description: "Handmade traditional crispy bhujia spun with freshly crushed black pepper, aromatic cloves and moth flour for pure savoury satisfaction.",
     price: 0,
-    image: '/images/decor/copper_bottle.png',
-    highlights: ['100% Pure Copper', 'Hand-Hammered Floral Embossing', 'Ayurvedic Health Properties'],
-    dietary: 'Heirloom Grade',
+    image: "/images/pics/bhujia.png",
+    highlights: ["Cold-Pressed Oil","Authentic Recipe","Zero Artificial Preservatives"],
   },
   {
-    _id: 'decor_emerald_zibu_symbol_wallet',
-    slug: 'emerald-zibu-symbol-wallet',
-    name: 'Emerald Zibu Symbol Wallet',
-    subCopy: 'Sacred manifestation wallet infused with gold Zibu prosperity symbols.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "chocolates",
+    slug: "chocolates",
+    name: "Artisanal Chocolates",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Handcrafted couverture dark and milk chocolates.",
+    category: "gourmet-food",
+    categoryLabel: "Gourmet Food",
     inside_items: [
-      { item: 'Emerald Vegan Leather Zibu Wallet', weight: '1 Piece' },
-    ],
-    packaging_style: 'Sacred manifestation wallet infused with gold Zibu prosperity symbols.',
-    description: 'Sacred manifestation wallet infused with gold Zibu prosperity symbols.',
+      {
+            "item": "Couverture Chocolates Box",
+            "weight": "120g",
+            "description": "Assorted fine chocolates."
+      }
+],
+    packaging_style: "Golden Foil Box",
+    description: "Velvety artisanal chocolate bonbons made from single-origin cacao beans, finished with pure cocoa butter and sea salt crystals.",
     price: 0,
-    image: '/images/decor/emerald_zibu_symbol_wallet.png',
-    highlights: ['Sacred Zibu Abundance Emblem', 'Gold Embossed Grabovoi Numbers', 'Premium Vegan Leather'],
-    dietary: 'Prosperity Keepsake',
+    image: "/images/pics/chikki.png",
+    highlights: ["Single-Origin Cacao","Couverture Quality","Zero Palm Oil"],
   },
   {
-    _id: 'decor_golden_fish_decor',
-    slug: 'golden-fish-decor',
-    name: 'Golden Fish Décor',
-    subCopy: 'Sculpted brass symbol of auspicious fortune, serenity, and fluid abundance.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "cookies",
+    slug: "cookies",
+    name: "Butter Vanilla Cookies",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Slow-baked golden butter cookies with vanilla bean.",
+    category: "gourmet-food",
+    categoryLabel: "Gourmet Food",
     inside_items: [
-      { item: 'Handcrafted Golden Fish Sculpture', weight: '1 Piece' },
-    ],
-    packaging_style: 'Sculpted brass symbol of auspicious fortune, serenity, and fluid abundance.',
-    description: 'Sculpted brass symbol of auspicious fortune, serenity, and fluid abundance.',
+      {
+            "item": "Butter Cookies",
+            "weight": "150g",
+            "description": "Slow-baked gourmet cookies."
+      }
+],
+    packaging_style: "Air-Tight Cookie Tin",
+    description: "Golden, crumbly tea-time cookies churned with farm-fresh cultured butter and fragrant Madagascar bourbon vanilla.",
     price: 0,
-    image: '/images/decor/golden_fish_decor.png',
-    highlights: ['Auspicious Feng Shui & Vastu Symbol', 'Gilded Lustre Finish', 'Artisanal Desk Centerpiece'],
-    dietary: 'Sacred Art',
+    image: "/images/pics/thekuap.png",
+    highlights: ["Cultured Farm Butter","Real Vanilla Bean","Crisp Crumb"],
   },
   {
-    _id: 'decor_ivory_nandi_gift_box',
-    slug: 'ivory-nandi-gift-box',
-    name: 'Ivory Nandi Gift Box',
-    subCopy: 'Hand-carved marble Nandi nestled in a botanical keepsake gift chest.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "sweets",
+    slug: "sweets",
+    name: "Traditional Gourmet Sweets",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Authentic festive mithai prepared with pure desi ghee.",
+    category: "gourmet-food",
+    categoryLabel: "Gourmet Food",
     inside_items: [
-      { item: 'Marble Finish Handcrafted Nandi Idol', weight: '1 Piece' },
-      { item: 'Dried Botanical & Ribbon Gift Chest', weight: 'Keepsake Box' },
-    ],
-    packaging_style: 'Hand-carved marble Nandi nestled in a botanical keepsake gift chest.',
-    description: 'Hand-carved marble Nandi nestled in a botanical keepsake gift chest.',
+      {
+            "item": "Festive Ghee Sweets",
+            "weight": "200g",
+            "description": "Traditional Indian festive sweets."
+      }
+],
+    packaging_style: "Festive Box",
+    description: "Handcrafted heritage confections made with pistachio, saffron, green cardamom and slow-cooked milk solids in pure A2 desi ghee.",
     price: 0,
-    image: '/images/decor/ivory_nandi_gift_box.png',
-    highlights: ['Serene Marble Finish', 'Festive Botanical Bedding', 'Luxe Ribbon Gift Chest'],
-    dietary: 'Devotional Keepsake',
+    image: "/images/items/sweets.jpg",
+    highlights: ["Pure Desi Ghee","Saffron & Pistachio","Freshly Prepared"],
   },
   {
-    _id: 'decor_seven_horses_framed_wall_art',
-    slug: 'seven-horses-framed-wall-art',
-    name: 'Seven Horses Framed Wall Art',
-    subCopy: 'Dynamic 3D golden galloping horses in an ornate Baroque frame for triumph and success.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "envelope_bookmarks",
+    slug: "envelope-bookmarks",
+    name: "Shagun Envelope & Bookmark Set",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Gold-foiled festive greeting envelopes with artistic bookmarks.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Gilded 3D Seven Horses Relief Art', weight: 'Framed Piece' },
-    ],
-    packaging_style: 'Dynamic 3D golden galloping horses in an ornate Baroque frame for triumph and success.',
-    description: 'Dynamic 3D golden galloping horses in an ornate Baroque frame for triumph and success.',
+      {
+            "item": "Envelope & Bookmark Pairing",
+            "description": "2 Shagun envelopes and 2 matching bookmarks."
+      }
+],
+    packaging_style: "Satin Ribbon Sleeve",
+    description: "A harmonious pairing of textured cotton-rag shagun envelopes foil-stamped with auspicious motifs, paired with illustrated book markers.",
     price: 0,
-    image: '/images/decor/seven_horses_framed_wall_art.png',
-    highlights: ['Vastu Surya Seven Horses Motif', 'High-Relief 3D Sculpting', 'Ornate Gold Leaf Frame'],
-    dietary: 'Corporate Wall Art',
+    image: "/images/items/envelope_bookmarks.jpg",
+    highlights: ["Handmade Cotton Rag Paper","Gold Leaf Detailing","Matching Bookmarks"],
   },
   {
-    _id: 'decor_zibu_intention_coin_set',
-    slug: 'zibu-intention-coin-set',
-    name: 'Zibu Intention Coin Set',
-    subCopy: 'Four engraved gold intention coins representing Abundance, Love, Protection, and Prosperity.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "designer_copper_bottle",
+    slug: "designer-copper-bottle",
+    name: "Designer Copper Bottle",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Pure handcrafted hammered copper bottle for everyday wellness.",
+    category: "wellness-lifestyle",
+    categoryLabel: "Wellness & Lifestyle",
     inside_items: [
-      { item: 'Engraved Zibu Gold Finish Coins', weight: 'Set of 4' },
-      { item: 'Velvet Drawstring Pouch', weight: 'Deep Wine Pouch' },
-    ],
-    packaging_style: 'Four engraved gold intention coins representing Abundance, Love, Protection, and Prosperity.',
-    description: 'Four engraved gold intention coins representing Abundance, Love, Protection, and Prosperity.',
+      {
+            "item": "Hammered Copper Bottle",
+            "weight": "750ml",
+            "description": "Pure copper water bottle."
+      }
+],
+    packaging_style: "Protective Cylinder Case",
+    description: "Hand-hammered pure copper water vessel offering ancient Ayurvedic benefits, leak-proof brass cap and a stunning polished exterior.",
     price: 0,
-    image: '/images/decor/zibu_intention_coin_set.png',
-    highlights: ['Four Core Sacred Intentions', 'Solid Weight Metal Coins', 'Rich Velvet Keepsake Pouch'],
-    dietary: 'Spiritual Wellness',
+    image: "/images/items/designer_copper_bottle.png",
+    highlights: ["100% Pure Copper","Ayurvedic Tamra Jal","Hand-Hammered Texture"],
   },
   {
-    _id: 'decor_zibu_symbol_cards_charms',
-    slug: 'zibu-symbol-cards-charms',
-    name: 'Zibu Symbol Cards & Charms',
-    subCopy: 'Sacred angelic number cards, golden decals, and good luck laughing Buddha charm.',
-    category: 'decor-spiritual',
-    categoryLabel: 'Decor & Spiritual',
+    _id: "eco_friendly_journal",
+    slug: "eco-friendly-journal",
+    name: "Eco-Friendly Journal",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Sustainable recycled cotton paper journal with cloth spine.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Brushed Gold Angel Number Plates (111, 444, 777, 888)', weight: 'Set of 4' },
-      { item: 'Sheet of 16 Metallic Zibu Decals', weight: '1 Sheet' },
-      { item: 'Golden Laughing Buddha Star Charm & Pouch', weight: '1 Set' },
-    ],
-    packaging_style: 'Sacred angelic number cards, golden decals, and good luck laughing Buddha charm.',
-    description: 'Sacred angelic number cards, golden decals, and good luck laughing Buddha charm.',
+      {
+            "item": "Eco Journal",
+            "weight": "160 Pages",
+            "description": "Handmade cotton journal."
+      }
+],
+    packaging_style: "Craft Box",
+    description: "Tree-free unruled diary made from upcycled cotton fabric waste, bound with hand-sewn signatures and a luxurious bookcloth spine.",
     price: 0,
-    image: '/images/decor/zibu_symbol_cards_charms.png',
-    highlights: ['Brushed Metal Angel Cards', 'Embroidered Velvet Pouch', 'Auspicious Fortune Charm'],
-    dietary: 'Holistic Energy',
-  },
-
-  /* ═══════════════════════════════════════════════
-     4. ETERNAL PAPER CO / PERSONALISATION
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'personalisation_visiting_card_qr',
-    slug: 'company-visiting-card-qr',
-    name: 'Company Visiting Card QR',
-    subCopy: 'Share your details instantly with a smart QR solution.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Eternal Paper Co',
-    inside_items: [
-      { item: 'Smart Visiting Card with Dynamic QR', weight: 'Custom' },
-    ],
-    packaging_style: 'Share your details instantly with a smart QR solution.',
-    description: 'Share your details instantly with a smart QR solution.',
-    price: 0,
-    image: '/images/personalisation/personal_QR_card.jpg',
-    highlights: ['Instant One-Tap Contact Save', 'Dynamic Cloud Link Updates', 'Gold Hot-Foil Stamping'],
-    dietary: 'Smart Digital Solution',
+    image: "/images/items/eco_friendly_journal.jpg",
+    highlights: ["100% Tree-Free Paper","Lay-Flat Binding","120 GSM Smooth Texture"],
   },
   {
-    _id: 'personalisation_leadership_greeting_qr',
-    slug: 'festive-greeting-qr-from-leadership',
-    name: 'Festive Greeting QR from Leadership',
-    subCopy: 'Send warm festive wishes directly from leadership.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Eternal Paper Co',
+    _id: "good_pen",
+    slug: "good-pen",
+    name: "Good Pen (Weighted Rollerball)",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Balanced weighted metal rollerball pen for precision writing.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Festive Greeting Card with Leadership Video QR', weight: 'Custom' },
-    ],
-    packaging_style: 'Send warm festive wishes directly from leadership.',
-    description: 'Send warm festive wishes directly from leadership.',
+      {
+            "item": "Weighted Metal Pen",
+            "description": "Fine executive writing instrument."
+      }
+],
+    packaging_style: "Sliding Pen Sleeve",
+    description: "Engineered with a solid brass core, silky matte finish and smooth German liquid-gel refill for effortless note-taking.",
     price: 0,
-    image: '/images/personalisation/festive.jpg',
-    highlights: ['Personalised Video Streaming', 'Handmade Deckle-Edge Paper', 'Gold Wax-Sealed Presentation'],
-    dietary: 'Interactive Video Greeting',
-  },
-
-  /* ═══════════════════════════════════════════════
-     5. WELLNESS & LIFESTYLE
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'wellness_vision_boards',
-    slug: 'vision-boards-goal-canvas',
-    name: 'Vision Boards & Goal Canvas',
-    subCopy: 'Empower goals and visualize aspirations with custom goal-setting prompts.',
-    category: 'wellness-lifestyle',
-    categoryLabel: 'Wellness & Lifestyle',
-    inside_items: [
-      { item: 'Framed Vision Canvas & Pin Kit', weight: '1 Set' },
-    ],
-    packaging_style: 'Empower goals and visualize aspirations with custom goal-setting prompts.',
-    description: 'Empower goals and visualize aspirations with custom goal-setting prompts and structured milestone layouts.',
-    price: 0,
-    image: '/images/wellness/vision_boards.jpg',
-    highlights: ['Goal Visualisation', 'Custom Pin Accessories', 'Archival Canvas Board'],
-    dietary: 'Mindfulness Tool',
+    image: "/images/items/good_pen.jpg",
+    highlights: ["Solid Brass Core","Balanced Center of Gravity","0.7mm German Gel Cartridge"],
   },
   {
-    _id: 'wellness_affirmation_cards',
-    slug: 'daily-affirmation-cards',
-    name: 'Daily Affirmation Cards',
-    subCopy: 'Daily mindset rituals designed to inspire clarity, resilience and positivity.',
-    category: 'wellness-lifestyle',
-    categoryLabel: 'Wellness & Lifestyle',
+    _id: "video_game_retro_handheld",
+    slug: "video-game-retro-handheld",
+    name: "Retro 8-Bit Video Game",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Pocket retro handheld video game with classic 80s & 90s titles.",
+    category: "3d-miniatures",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Daily Affirmation Deck with Wooden Stand', weight: '52 Cards' },
-    ],
-    packaging_style: 'Daily mindset rituals designed to inspire clarity, resilience and positivity.',
-    description: 'Daily mindset rituals designed to inspire clarity, resilience and positivity throughout the work week.',
+      {
+            "item": "Handheld Retro Console",
+            "description": "Electronic game console with charging cable."
+      }
+],
+    packaging_style: "Retro Graphic Box",
+    description: "Pocket-sized rechargeable handheld console pre-loaded with timeless pixel-art arcade adventures, colour screen and built-in speaker.",
     price: 0,
-    image: '/images/wellness/cards.jpg',
-    highlights: ['52 Weekly Mindset Prompts', 'Gold Hot-Foil Lettering', 'Solid Wood Desk Stand'],
-    dietary: 'Mindfulness',
+    image: "/images/items/video_game_retro_handheld.jpg",
+    highlights: ["Colour LCD Display","Classic Arcade Library","Rechargeable Battery"],
   },
   {
-    _id: 'wellness_manifestation_kits',
-    slug: 'manifestation-ritual-kit',
-    name: 'Manifestation Ritual Kit',
-    subCopy: 'Complete manifestation suite designed to cultivate focus and mindful intentions.',
-    category: 'wellness-lifestyle',
-    categoryLabel: 'Wellness & Lifestyle',
+    _id: "brick_game",
+    slug: "brick-game",
+    name: "Classic Brick Game",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Vintage 99-in-1 pocket brick puzzle console.",
+    category: "3d-miniatures",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Manifestation Oil & Aroma Diffuser Set', weight: '1 Set' },
-    ],
-    packaging_style: 'Complete manifestation suite designed to cultivate focus and mindful intentions.',
-    description: 'Complete manifestation suite designed to cultivate focus, positive energy and mindful intentions.',
+      {
+            "item": "Brick Game Handheld",
+            "description": "Pocket retro electronic brick game."
+      }
+],
+    packaging_style: "Window Gift Box",
+    description: "The definitive 90s handheld brick puzzle game featuring iconic falling-block puzzles, retro sound effects and nostalgic clicky buttons.",
     price: 0,
-    image: '/images/wellness/manifestation_kit.jpg',
-    highlights: ['Therapeutic Essential Oils', 'Natural Crystal Inclusions', 'Self-Care Ritual'],
-    dietary: 'Self-Care',
+    image: "/images/items/brick_game.jpg",
+    highlights: ["Authentic 90s Vintage","99 Game Variations","Battery Operated"],
   },
   {
-    _id: 'wellness_premium_massager',
-    slug: 'premium-pocket-massager',
-    name: 'Premium Pocket Massager',
-    subCopy: 'Compact, powerful deep-tissue pocket massager for instant relaxation.',
-    category: 'wellness-lifestyle',
-    categoryLabel: 'Wellness & Lifestyle',
+    _id: "orange_candies",
+    slug: "orange-candies",
+    name: "Vintage Orange Candies",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Classic sweet & tangy nostalgic sugar-dusted boiled candies.",
+    category: "gourmet-food",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Type-C Rechargeable Deep-Tissue Massager Gun', weight: '1 Device' },
-    ],
-    packaging_style: 'Compact, powerful deep-tissue pocket massager for instant relaxation.',
-    description: 'Compact, powerful deep-tissue pocket massager designed for instant muscle relief and executive relaxation.',
+      {
+            "item": "Orange Candies Jar",
+            "weight": "120g",
+            "description": "Classic hard boiled orange candies."
+      }
+],
+    packaging_style: "Vintage Glass Jar",
+    description: "The quintessential sweet-and-sour orange candy segments dusted with fine sugar crystal, taking you back to schoolyard afternoons.",
     price: 0,
-    image: '/images/wellness/massager.jpg',
-    highlights: ['Ultra-Quiet Brushless Motor', 'Type-C Fast Charging', 'Ergonomic Aviation Aluminium'],
-    dietary: 'Executive Wellness',
-  },
-
-  /* ═══════════════════════════════════════════════
-     6. INFINITY & BEYOND
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'stationery_travel_journals',
-    slug: 'travel-journals',
-    name: 'Travel Journals',
-    subCopy: 'Document adventures and meaningful thoughts on premium fountain-pen friendly archival paper.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
-    inside_items: [
-      { item: 'Hardbound Vegan Leather Travel Journal', weight: '192 Pages' },
-    ],
-    packaging_style: 'Document adventures and meaningful thoughts on premium fountain-pen friendly archival paper.',
-    description: 'Document adventures and meaningful thoughts on premium fountain-pen friendly heavyweight archival paper.',
-    price: 0,
-    image: '/images/infinity/travel_journel.jpg',
-    highlights: ['100 GSM Heavyweight Paper', 'Lay-Flat 180° Binding', 'Expandable Back Pocket'],
-    dietary: 'FSC Certified',
+    image: "/images/items/orange_candies.jpg",
+    highlights: ["Real Citrus Oils","Nostalgic Recipe","Sugar-Dusted Crunch"],
   },
   {
-    _id: 'stationery_vision_journals',
-    slug: 'vision-journals-2026',
-    name: 'Vision Journals 2026',
-    subCopy: 'Structured layouts for visionary goal tracking, daily reflections and action planning.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "eclairs",
+    slug: "eclairs",
+    name: "Chocolate Eclairs Toffees",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Chewy golden caramel with luscious chocolate center.",
+    category: "gourmet-food",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Quarterly Vision Planner & Journal', weight: '160 Pages' },
-    ],
-    packaging_style: 'Structured layouts for visionary goal tracking, daily reflections and action planning.',
-    description: 'Structured layouts for visionary goal tracking, daily reflections and executive action planning.',
+      {
+            "item": "Chocolate Eclairs",
+            "weight": "150g",
+            "description": "Individually wrapped caramel chocolate toffees."
+      }
+],
+    packaging_style: "Decorative Pouch",
+    description: "Rich, buttery chewy caramel toffees that melt away to reveal a velvety molten chocolate truffle center.",
     price: 0,
-    image: '/images/infinity/vision.jpg',
-    highlights: ['Structured Goal Frameworks', 'Gold Gilded Edges', 'Durable Vegan Leather'],
-    dietary: 'FSC Certified',
+    image: "/images/items/eclairs.jpg",
+    highlights: ["Chewy Caramel Shell","Rich Chocolate Filling","Festive Treat"],
   },
   {
-    _id: 'stationery_bookmarks',
-    slug: 'enamelled-metal-bookmarks',
-    name: 'Enamelled Metal Bookmarks',
-    subCopy: 'Precision laser-cut brass bookmarks adorned with vibrant botanical enamel.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "kinder_joy",
+    slug: "kinder-joy",
+    name: "Kinder Joy Treat & Toy",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Crispy wafer cocoa bites with an exciting surprise toy inside.",
+    category: "gourmet-food",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Enamelled Brass Bookmark with Silk Tassel', weight: 'Set of 2' },
-    ],
-    packaging_style: 'Precision laser-cut brass bookmarks adorned with vibrant botanical enamel.',
-    description: 'Precision laser-cut brass bookmarks adorned with vibrant botanical enamel and luxury silk tassels.',
+      {
+            "item": "Kinder Joy Egg",
+            "description": "Confectionery egg with toy surprise."
+      }
+],
+    packaging_style: "Collector Egg Packaging",
+    description: "Two crispy cocoa wafer balls floating in layered milky cocoa cream on one side, and an interactive collectible surprise toy on the other.",
     price: 0,
-    image: '/images/infinity/bookmarks.jpg',
-    highlights: ['Solid Brass Base', 'Vibrant Enamel Coloring', 'Silk Ribbon Tassel'],
-    dietary: 'Stationery Gift',
+    image: "/images/items/kinder_joy.jpg",
+    highlights: ["Dual Chamber Pod","Milky Cocoa Cream","Collectible Mystery Toy"],
   },
   {
-    _id: 'stationery_custom_keychains',
-    slug: 'custom-keychains',
-    name: 'Custom Keychains',
-    subCopy: 'Sophisticated handcrafted keychains custom engraved or debossed with initials.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "hotwheels",
+    slug: "hotwheels",
+    name: "Hotwheels Die-Cast Car",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Original die-cast metal miniature collector race car.",
+    category: "3d-miniatures",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Personalised Vegan Leather Key Fob', weight: '1 Piece' },
-    ],
-    packaging_style: 'Sophisticated handcrafted keychains custom engraved or debossed with initials.',
-    description: 'Sophisticated handcrafted keychains custom engraved or debossed with initials or brand logos.',
+      {
+            "item": "Hotwheels Race Car",
+            "description": "1:64 scale die-cast model vehicle."
+      }
+],
+    packaging_style: "Blister Pack",
+    description: "Authentic miniature high-performance die-cast metal model with aerodynamic styling, rolling wheels and vibrant collector paintwork.",
     price: 0,
-    image: '/images/infinity/custom_keychain.jpg',
-    highlights: ['Debossed Monogramming', 'Heavy Brass Hardware', 'Scratch Resistant'],
-    dietary: 'Accessory',
+    image: "/images/items/hotwheels.jpg",
+    highlights: ["Original Die-Cast Metal","Collector Edition","Precision Scaling"],
   },
   {
-    _id: 'stationery_premium_notebooks',
-    slug: 'premium-industry-notebooks',
-    name: 'Premium Industry Notebooks',
-    subCopy: 'Engineered for corporate professionals with durable covers and bleed-proof ivory paper.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "remote_control_car",
+    slug: "remote-control-car",
+    name: "Mini Remote Control Car",
+    brand: 'The Gourmet Gifts',
+    subCopy: "High-speed mini RC drift vehicle with wireless controller.",
+    category: "3d-miniatures",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Executive Ruled Hardcover Notebook & Pen', weight: '1 Set' },
-    ],
-    packaging_style: 'Engineered for corporate professionals with durable covers and bleed-proof ivory paper.',
-    description: 'Engineered for corporate professionals with durable covers, pen holders and bleed-proof ivory paper.',
+      {
+            "item": "Mini RC Car & Controller",
+            "description": "Radio-controlled car with handheld remote."
+      }
+],
+    packaging_style: "Display Box",
+    description: "Pocket-sized radio-controlled race vehicle capable of rapid acceleration, sharp corner drifts and endless indoor racing fun.",
     price: 0,
-    image: '/images/infinity/Premium_Industry_Notebooks.jpg',
-    highlights: ['Bleed-Proof Paper', 'Integrated Pen Holder', 'Professional Finish'],
-    dietary: 'Corporate Stationery',
+    image: "/images/items/remote_control_car.jpg",
+    highlights: ["Wireless 2.4GHz Control","High-Torque Motor","Durable Polycarbonate Shell"],
   },
   {
-    _id: 'stationery_industry_calendars',
-    slug: 'industry-desk-calendars-2026',
-    name: 'Industry Desk Calendars 2026',
-    subCopy: 'Minimalist, functional monthly desk calendars with inspirational typography.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "reynolds_trimax",
+    slug: "reynolds-trimax",
+    name: "Reynolds Trimax Gel Pen",
+    brand: 'The Gourmet Gifts',
+    subCopy: "The legendary smooth liquid-gel precision writing instrument.",
+    category: "infinity-beyond",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Spiral Gold Wire Desk Calendar with Stand', weight: '12 Months' },
-    ],
-    packaging_style: 'Minimalist, functional monthly desk calendars with inspirational typography.',
-    description: 'Minimalist, functional monthly desk calendars with inspirational corporate typography and habit trackers.',
+      {
+            "item": "Reynolds Trimax Pen",
+            "description": "0.5mm precision gel roller pen."
+      }
+],
+    packaging_style: "Protective Casing",
+    description: "The schoolhouse favourite that defined neat handwriting, featuring precision tip geometry, vibrant dark liquid ink and comfortable ribbed grip.",
     price: 0,
-    image: '/images/infinity/calender.jpg',
-    highlights: ['Thick 300 GSM Art Board', 'Habit Tracking Section', 'Solid Wood Base'],
-    dietary: 'Desk Essential',
+    image: "/images/items/reynolds_trimax.jpg",
+    highlights: ["Fluid Ink Flow","Waterproof Gel Formula","Classic Nostalgia"],
   },
   {
-    _id: 'stationery_affirmation_decks',
-    slug: 'affirmation-decks',
-    name: 'Affirmation Decks',
-    subCopy: 'Empowering cards designed for team morale, executive focus and personal well-being.',
-    category: 'infinity-beyond',
-    categoryLabel: 'Infinity & Beyond',
+    _id: "mini_diary",
+    slug: "mini-diary",
+    name: "Pocket Mini Diary",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Pocket companion journal with golden edge-gilded pages.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Executive Mindset Affirmation Deck', weight: '52 Cards' },
-    ],
-    packaging_style: 'Empowering cards designed for team morale, executive focus and personal well-being.',
-    description: 'Empowering cards designed for team morale, executive focus and personal well-being.',
+      {
+            "item": "Mini Pocket Diary",
+            "weight": "96 Pages",
+            "description": "Compact pocket notebook."
+      }
+],
+    packaging_style: "Satin Sleeve",
+    description: "A discreet pocketbook bound in textured tactile board with gold foil titling, ribbon marker and premium smooth unruled stationery leaves.",
     price: 0,
-    image: '/images/infinity/Affirmation_Decks.jpg',
-    highlights: ['Matte Velvet Touch Cards', 'Weekly Mindset Themes', 'Compact Flip Box'],
-    dietary: 'Mindset Tool',
-  },
-
-  /* ═══════════════════════════════════════════════
-     7. 3D MINIATURES
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'miniature_truck',
-    slug: 'truck-miniature',
-    name: 'Truck Miniature',
-    subCopy: 'Precision scale model commercial delivery truck with custom corporate livery branding.',
-    category: '3d-miniatures',
-    categoryLabel: '3D Miniatures',
-    inside_items: [
-      { item: 'Precision Scale Model Commercial Delivery Truck', weight: '1:64 Scale' },
-    ],
-    packaging_style: 'Precision scale model commercial delivery truck with custom corporate livery branding.',
-    description: 'Precision scale model commercial delivery truck with custom corporate livery branding, rolling wheels and desktop display stand.',
-    price: 0,
-    image: '/images/miniature/truck.jpg',
-    highlights: ['Custom Livery Branding', 'Die-Cast Metal Body', 'Executive Desk Showpiece'],
-    dietary: 'Corporate Add-On',
+    image: "/images/items/mini_diary.jpg",
+    highlights: ["Pocket Portable Size","Gold Edge Foil","Satin Bookmark"],
   },
   {
-    _id: 'miniature_car',
-    slug: 'car-miniature',
-    name: 'Car Miniature',
-    subCopy: 'Detailed executive vehicle replica with high-gloss automotive finish.',
-    category: '3d-miniatures',
-    categoryLabel: '3D Miniatures',
+    _id: "music_player_ipod",
+    slug: "music-player-ipod",
+    name: "Music Player (iPod Clip Type)",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Retro portable clip-on digital MP3 music player.",
+    category: "wellness-lifestyle",
+    categoryLabel: "Childhood & Kids",
     inside_items: [
-      { item: 'Die-Cast Luxury Car Model on Display Plinth', weight: '1:43 Scale' },
-    ],
-    packaging_style: 'Detailed executive vehicle replica with high-gloss automotive finish.',
-    description: 'Detailed executive vehicle replica with high-gloss automotive finish mounted on a premium matte display plinth.',
+      {
+            "item": "Portable MP3 Player",
+            "description": "Clip-on audio device with earphones."
+      }
+],
+    packaging_style: "Aluminium Body Case",
+    description: "Minimalist metallic clip-on music player reminiscent of classic early 2000s music devices, complete with tactile physical control buttons.",
     price: 0,
-    image: '/images/miniature/car_mini.jpg',
-    highlights: ['High-Gloss Automotive Finish', 'Opening Doors & Rubber Tyres', 'Collector Grade'],
-    dietary: 'Corporate Add-On',
+    image: "/images/items/music_player_ipod.jpg",
+    highlights: ["Clip-On Wearable Design","Tactile Click Wheel","Hi-Fi Audio Output"],
   },
   {
-    _id: 'miniature_construction_equipment',
-    slug: 'construction-equipment-model',
-    name: 'Construction Equipment Model',
-    subCopy: 'Articulated metal scale excavator model for infrastructure & industrial milestones.',
-    category: '3d-miniatures',
-    categoryLabel: '3D Miniatures',
+    _id: "bookmarks",
+    slug: "bookmarks",
+    name: "Artisan Bookmarks Set",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Set of botanical & architectural textured cotton bookmarks.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Articulated Metal Scale Excavator Model', weight: '1:50 Scale' },
-    ],
-    packaging_style: 'Articulated metal scale excavator model for infrastructure & industrial milestones.',
-    description: 'Articulated hydraulic excavator scale model engineered for infrastructure, logistics, manufacturing and real estate milestone corporate gifts.',
+      {
+            "item": "Bookmarks Pack",
+            "weight": "Set of 4",
+            "description": "Artisanal letterpress bookmarks."
+      }
+],
+    packaging_style: "Glassine Envelope",
+    description: "Heavy 350 GSM handmade cotton card bookmarks decorated with delicate letterpress foil impressions and silk tassel accents.",
     price: 0,
-    image: '/images/miniature/construction.png',
-    highlights: ['Movable Boom & Bucket', 'All-Metal Alloy Construction', 'Project Milestone Gift'],
-    dietary: 'Corporate Add-On',
+    image: "/images/items/bookmarks.jpg",
+    highlights: ["Handmade 350 GSM Cotton Card","Letterpress Foil Work","Silk Ribbon Tassel"],
   },
   {
-    _id: 'miniature_mascot_figurine',
-    slug: 'mascot-figurine',
-    name: 'Mascot Figurine',
-    subCopy: 'Handcrafted bespoke brand mascot figurine wearing custom corporate attire.',
-    category: '3d-miniatures',
-    categoryLabel: '3D Miniatures',
+    _id: "shagun_envelopes",
+    slug: "shagun-envelopes",
+    name: "Luxury Shagun Envelopes",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Regal gold-embossed celebratory shagun envelopes on handmade paper.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Sculpted Resin Brand Mascot Figurine', weight: '1 Piece' },
-    ],
-    packaging_style: 'Handcrafted bespoke brand mascot figurine wearing custom corporate attire.',
-    description: 'Handcrafted and 3D sculpted bespoke brand mascot figurine wearing custom corporate attire, celebrating company identity.',
+      {
+            "item": "Shagun Envelopes",
+            "weight": "Pack of 5",
+            "description": "Gold foil auspicious cash envelopes."
+      }
+],
+    packaging_style: "Bespoke Keepsake Pouch",
+    description: "Bespoke celebratory cash gift envelopes pressed on deep jewel-toned handmade papers with intricate royal gold foil embellishments.",
     price: 0,
-    image: '/images/miniature/mascot_figurine.jpg',
-    highlights: ['Custom Mascot Sculpting', 'Hand-Painted Company Colors', 'Unique Brand Keepsake'],
-    dietary: 'Custom Corporate Add-On',
-  },
-
-  /* ═══════════════════════════════════════════════
-     8. OFFICE & TRAVEL BAGS (CORPORATE 01)
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'corp_office_bag',
-    slug: 'corporate-office-bag',
-    name: 'Office Bag',
-    subCopy: 'Structured Full-Grain Leather Briefcase for executives.',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
-    inside_items: [
-      { item: 'Full-Grain Leather Briefcase', weight: '1 Piece' },
-    ],
-    packaging_style: 'Structured Full-Grain Leather Briefcase',
-    description: 'Structured Full-Grain Leather Briefcase with padded laptop compartment and brass hardware.',
-    price: 0,
-    image: '/images/corporate/OfficeTravelBags/office_bag.jpg',
-    highlights: ['Full-Grain Leather', 'Brass Hardware', 'Padded Laptop Sleeve'],
+    image: "/images/items/shagun_envelopes.jpg",
+    highlights: ["Handmade Deckled Paper","Intricate Foil Motifs","Auspicious Festive Gifting"],
   },
   {
-    _id: 'corp_laptop_bag',
-    slug: 'corporate-laptop-bag',
-    name: 'Laptop Bag',
-    subCopy: 'Espresso Leather Messenger Sleeve with shock absorption.',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
+    _id: "thank_you_cards",
+    slug: "thank-you-cards",
+    name: "Letterpress Thank You Cards",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Letterpress gratitude note cards with tailored deckled-edge envelopes.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Leather Messenger Laptop Sleeve', weight: '1 Piece' },
-    ],
-    packaging_style: 'Espresso Leather Messenger Sleeve',
-    description: 'Espresso Leather Messenger Sleeve designed for seamless daily commutes and device safety.',
+      {
+            "item": "Thank You Cards & Envelopes",
+            "weight": "Pack of 6",
+            "description": "Luxury gratitude stationery."
+      }
+],
+    packaging_style: "Stationery Gift Box",
+    description: "Heavyweight cotton note cards with deep debossed gold typography to express heartfelt appreciation with enduring dignity.",
     price: 0,
-    image: '/images/corporate/OfficeTravelBags/LaptopBag.jpg',
-    highlights: ['Shock Absorbing Lining', 'Detachable Strap', 'Water-Resistant Finish'],
+    image: "/images/items/thank_you_cards.jpg",
+    highlights: ["100% Cotton Paper","Deep Letterpress Impression","Deckled Flap Envelopes"],
   },
   {
-    _id: 'corp_trolley_bag',
-    slug: 'corporate-trolley-bag',
-    name: 'Trolley Bag',
-    subCopy: 'Executive Wheeled Carry-On Suitcase with telescopic handle.',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
+    _id: "announcement_cards",
+    slug: "announcement-cards",
+    name: "Announcement Cards (Boy / Girl)",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Pastel gold-foiled birth celebration & announcement cards.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Wheeled Executive Carry-On', weight: '1 Piece' },
-    ],
-    packaging_style: 'Executive Wheeled Carry-On Suitcase',
-    description: 'Executive Wheeled Carry-On Suitcase designed for multi-city business journeys.',
+      {
+            "item": "Milestone Announcement Cards",
+            "weight": "Pack of 6",
+            "description": "Baby celebration stationery."
+      }
+],
+    packaging_style: "Pastel Keepsake Box",
+    description: "Charming pastel stationery suites created to share joyful milestones, birth announcements and baby welcome celebrations.",
     price: 0,
-    image: '/images/corporate/OfficeTravelBags/TrolleyBag.jpg',
-    highlights: ['Multi-Stage Aluminium Handle', 'Dedicated Tech Organizer', 'Lightweight Build'],
+    image: "/images/items/announcement_cards.jpg",
+    highlights: ["Soft Pastel Tones","Gilded Foil Calligraphy","Lined Envelopes"],
   },
   {
-    _id: 'corp_duffel_bag',
-    slug: 'corporate-duffel-bag',
-    name: 'Duffel Bag',
-    subCopy: 'Textured Leather Weekender Duffel with shoe compartment.',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
+    _id: "fridge_magnets",
+    slug: "fridge-magnets",
+    name: "Artistic Fridge Magnets",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Laser-cut wooden and resin keepsake decorative fridge magnets.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Weekender Duffel Bag', weight: '1 Piece' },
-    ],
-    packaging_style: 'Textured Leather Weekender Duffel',
-    description: 'Textured Leather Weekender Duffel with separate ventilated shoe compartment and luggage sleeve.',
+      {
+            "item": "Fridge Magnets Set",
+            "weight": "Set of 3",
+            "description": "Artistic keepsake magnets."
+      }
+],
+    packaging_style: "Backing Card",
+    description: "Hand-painted wooden and resin magnets with whimsical cultural illustrations and strong magnetic hold for kitchen and board spaces.",
     price: 0,
-    image: '/images/corporate/OfficeTravelBags/Duffel Bag.jpg',
-    highlights: ['Shoe Compartment', 'Premium Metal Zippers', 'Reinforced Base'],
+    image: "/images/items/fridge_magnets.jpg",
+    highlights: ["Handmade Resin & Wood","High-Strength Neodymium Magnet","Vibrant Artwork"],
   },
   {
-    _id: 'corp_backpack',
-    slug: 'corporate-backpack',
-    name: 'Backpack',
-    subCopy: 'Ergonomic Commute Tech Backpack with USB charging pass-through.',
-    category: 'office-travel-bags',
-    categoryLabel: 'Office & Travel Bags',
+    _id: "diary_pen_customized_set",
+    slug: "diary-pen-customized-set",
+    name: "Diary & Pen Customized Sets — 3",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Bespoke tri-pack journal set accompanied by matching luxury pens.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Ergonomic Tech Backpack', weight: '1 Piece' },
-    ],
-    packaging_style: 'Ergonomic Commute Tech Backpack',
-    description: 'Ergonomic Commute Tech Backpack with airflow back padding and organized device slots.',
+      {
+            "item": "Bespoke Journals (Set of 3)",
+            "description": "3 Notebooks in plain, ruled, grid formats."
+      },
+      {
+            "item": "Luxury Pens (Set of 3)",
+            "description": "Precision metal rollerball pens."
+      }
+],
+    packaging_style: "Hardcover Slipcase",
+    description: "A comprehensive creative stationery wardrobe consisting of three theme-bound journals (ruled, grid, plain) and three smooth-writing executive pens.",
     price: 0,
-    image: '/images/corporate/OfficeTravelBags/Backpack.jpg',
-    highlights: ['Airflow Padding', 'Hidden Security Pocket', '15.6" Laptop Compartment'],
-  },
-
-  /* ═══════════════════════════════════════════════
-     9. ELECTRONICS (CORPORATE 02)
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'corp_headphones',
-    slug: 'corporate-headphones',
-    name: 'Headphones',
-    subCopy: 'Active Noise Cancelling Studio Audio with 40-hour battery life.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
-    inside_items: [
-      { item: 'ANC Wireless Headphones', weight: '1 Unit' },
-    ],
-    packaging_style: 'Active Noise Cancelling Studio Audio',
-    description: 'Active Noise Cancelling Studio Audio featuring plush memory foam ear cushions and high-fidelity sound.',
-    price: 0,
-    image: '/images/corporate/electronics/Headphones.jpg',
-    highlights: ['Active Noise Cancellation', '40H Battery Life', 'Foldable Ergonomic Design'],
+    image: "/images/items/diary_pen_customized_set.jpg",
+    highlights: ["Three Distinct Notebook Layouts","Matching Executive Pens","Luxury Desk Presentation"],
   },
   {
-    _id: 'corp_bluetooth_speaker',
-    slug: 'corporate-bluetooth-speaker',
-    name: 'Bluetooth Speaker',
-    subCopy: 'Acoustic Fabric Executive Soundbar with deep bass response.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
+    _id: "cool_stickers",
+    slug: "cool-stickers",
+    name: "Cool Vinyl Art Stickers",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Vibrant waterproof vinyl die-cut stickers for journals & tech.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: 'Executive Acoustic Bluetooth Speaker', weight: '1 Unit' },
-    ],
-    packaging_style: 'Acoustic Fabric Executive Soundbar',
-    description: 'Acoustic Fabric Executive Soundbar delivering 360-degree room-filling sound in a sleek metal enclosure.',
+      {
+            "item": "Vinyl Art Sticker Pack",
+            "weight": "Pack of 12",
+            "description": "Die-cut vinyl illustrated stickers."
+      }
+],
+    packaging_style: "Pocket Foil Pack",
+    description: "Durable matte-coated vinyl art stickers with playful retro, quirky and motivational graphics resistant to scratches, water and sun.",
     price: 0,
-    image: '/images/corporate/electronics/Bluetooth Speaker.jpg',
-    highlights: ['360° Soundstage', 'Fabric Acoustic Wrap', 'Dual Passive Radiators'],
+    image: "/images/items/cool_stickers.jpg",
+    highlights: ["Waterproof & UV Resistant","Matte Laminated Vinyl","Residue-Free Adhesive"],
   },
   {
-    _id: 'corp_power_bank',
-    slug: 'corporate-power-bank',
-    name: 'Power Bank',
-    subCopy: 'Slim 10,000mAh Fast Charging Alloy with dual output ports.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
+    _id: "sustainable_diary_bottle_pen",
+    slug: "sustainable-diary-bottle-pen",
+    name: "Sustainable Diary + Bottle + Pen",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Curated eco-conscious trio: seed-paper diary, copper bottle and pen.",
+    category: "infinity-beyond",
+    categoryLabel: "Eternal Paper Co.",
     inside_items: [
-      { item: '10000mAh Metal Fast Charge Power Bank', weight: '1 Unit' },
-    ],
-    packaging_style: 'Slim 10,000mAh Fast Charging Alloy',
-    description: 'Slim 10,000mAh Fast Charging Alloy power bank with LED power indicator and multi-device support.',
+      {
+            "item": "Plantable Seed Paper Diary",
+            "description": "Recycled cotton paper embedded with wildflower seeds."
+      },
+      {
+            "item": "Hand-Crafted Copper Bottle",
+            "weight": "650ml",
+            "description": "Pure hammered copper bottle."
+      },
+      {
+            "item": "Bamboo Precision Pen",
+            "description": "Sustainable bamboo rollerball pen."
+      }
+],
+    packaging_style: "Eco Kraft Presentation Trunk",
+    description: "A unified earth-first daily companion set featuring a plantable seed-paper journal, pure designer copper hydration bottle and bamboo ballpoint pen.",
     price: 0,
-    image: '/images/corporate/electronics/powerbank.jpg',
-    highlights: ['PD 22.5W Fast Charging', 'Anodized Aluminum Body', 'Overheat Protection'],
+    image: "/images/items/sustainable_diary_bottle_pen.jpg",
+    highlights: ["Plantable Seed Paper","Pure Copper Bottle","Zero Plastic Packaging"],
   },
   {
-    _id: 'corp_tws_earbuds',
-    slug: 'corporate-tws-earbuds',
-    name: 'TWS Earbuds',
-    subCopy: 'Low-Latency Wireless In-Ear Acoustics with environmental noise cancellation.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
+    _id: "scented_candles",
+    slug: "scented-candles",
+    name: "Artisanal Scented Candles",
+    brand: 'The Gourmet Gifts',
+    subCopy: "Hand-poured pure soy wax candle infused with calming botanical oils.",
+    category: "decor-spiritual",
+    categoryLabel: "Home Fragrance",
     inside_items: [
-      { item: 'TWS Wireless In-Ear Earbuds', weight: '1 Pair' },
-    ],
-    packaging_style: 'Low-Latency Wireless In-Ear Acoustics',
-    description: 'Low-Latency Wireless In-Ear Acoustics offering crystal-clear conference calls and immersive music.',
+      {
+            "item": "Scented Soy Candle",
+            "weight": "220g",
+            "description": "Aromatic hand-poured glass candle."
+      }
+],
+    packaging_style: "Gold-Foil Cylindrical Box",
+    description: "Slow-burning natural soy wax candle poured in heavy frosted glass with lead-free cotton wick, releasing gentle notes of white tea, amber and bergamot.",
     price: 0,
-    image: '/images/corporate/electronics/TWS Earbuds.jpg',
-    highlights: ['ENC Call Clarity', 'Touch Controls', 'Type-C Wireless Charging Case'],
-  },
-  {
-    _id: 'corp_wireless_charger',
-    slug: 'corporate-wireless-charger',
-    name: 'Wireless Charger',
-    subCopy: 'Circular Leatherette Fast Induction Pad for desk charging.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
-    inside_items: [
-      { item: 'Fast Wireless Induction Charging Pad', weight: '1 Unit' },
-    ],
-    packaging_style: 'Circular Leatherette Fast Induction Pad',
-    description: 'Circular Leatherette Fast Induction Pad with non-slip base and foreign object detection.',
-    price: 0,
-    image: '/images/corporate/electronics/Wireless Charger.jpg',
-    highlights: ['15W Qi Fast Charge', 'Premium Leatherette Surface', 'Slim Aluminum Rim'],
-  },
-  {
-    _id: 'corp_desk_gadgets',
-    slug: 'corporate-desk-gadgets',
-    name: 'Desk Gadgets',
-    subCopy: 'Executive 3-in-1 Magnetic Charging Station & Workspace Dock.',
-    category: 'electronics-audio',
-    categoryLabel: 'Electronics',
-    inside_items: [
-      { item: '3-in-1 Executive Magnetic Charging Station', weight: '1 Unit' },
-    ],
-    packaging_style: 'Executive 3-in-1 Workspace Charging Dock',
-    description: 'Executive 3-in-1 Workspace Charging Dock crafted with matte alloy and soft-touch pads for cable-free executive workspaces.',
-    price: 0,
-    image: '/images/corporate/electronics/Desk Gadgets.jpg',
-    highlights: ['Multi-Device Mag Charging', 'Matte Alloy Finish', 'Smart Cable Management'],
-  },
-
-  /* ═══════════════════════════════════════════════
-     10. STATIONERY & DESK (CORPORATE 03)
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'corp_pen_set',
-    slug: 'corporate-premium-pen-set',
-    name: 'Premium Pen Set',
-    subCopy: 'Dual Rollerball & Fountain Brass Casing in presentation box.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'Dual Brass Rollerball & Fountain Pen Set', weight: 'Set of 2' },
-    ],
-    packaging_style: 'Dual Rollerball & Fountain Brass Casing',
-    description: 'Dual Rollerball & Fountain Brass Casing crafted for smooth effortless writing and executive signatures.',
-    price: 0,
-    image: '/images/corporate/stationary/Premium Pen Set.jpg',
-    highlights: ['Solid Heavy Brass', 'German Ceramic Refills', 'Gilded Gift Case'],
-  },
-  {
-    _id: 'corp_paper_weight',
-    slug: 'corporate-paper-weight',
-    name: 'Paper Weight',
-    subCopy: 'Faceted Optic Crystal Sphere on Brass pedestal.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'Optic Crystal Paper Weight', weight: '1 Unit' },
-    ],
-    packaging_style: 'Faceted Optic Crystal Sphere on Brass',
-    description: 'Faceted Optic Crystal Sphere on Brass pedestal adding executive presence to workspace desks.',
-    price: 0,
-    image: '/images/corporate/stationary/Paper Weight.jpg',
-    highlights: ['K9 Optic Crystal', 'Solid Brass Stand', 'Precision Faceted Cuts'],
-  },
-  {
-    _id: 'corp_table_clock',
-    slug: 'corporate-table-clock',
-    name: 'Table Clock',
-    subCopy: 'Heritage Architectural Desk Timepiece with silent sweep movement.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'Architectural Desk Table Clock', weight: '1 Unit' },
-    ],
-    packaging_style: 'Heritage Architectural Desk Timepiece',
-    description: 'Heritage Architectural Desk Timepiece combining metal geometry with silent quartz accuracy.',
-    price: 0,
-    image: '/images/catalogue_items/category/tableclock.webp',
-    highlights: ['Silent Sweep Quartz', 'Brushed Metal Finish', 'Heirloom Desk Piece'],
-  },
-  {
-    _id: 'corp_diary_2026',
-    slug: 'corporate-diary-2026',
-    name: 'Diary 2026',
-    subCopy: 'Midnight Bound Executive Journal with daily milestone tracking.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'Executive Hardbound 2026 Planner Diary', weight: '1 Unit' },
-    ],
-    packaging_style: 'Midnight Bound Executive Journal',
-    description: 'Midnight Bound Executive Journal with premium 100 GSM bleed-resistant ivory pages.',
-    price: 0,
-    image: '/images/corporate/stationary/Diary 2026.jpg',
-    highlights: ['100 GSM Ivory Paper', 'Gold Debossed Cover', 'Monthly Goal Pages'],
-  },
-  {
-    _id: 'corp_desk_organizer',
-    slug: 'corporate-desk-organizer',
-    name: 'Desk Organizer',
-    subCopy: 'Tiered Full-Grain Leather Utility Caddy for stationery and accessories.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'Leather Desk Utility Caddy', weight: '1 Unit' },
-    ],
-    packaging_style: 'Tiered Full-Grain Leather Utility Caddy',
-    description: 'Tiered Full-Grain Leather Utility Caddy keeping workspace stationery neatly organized.',
-    price: 0,
-    image: '/images/corporate/stationary/Desk Organizer.jpg',
-    highlights: ['Full-Grain Leather Wrap', 'Soft Suede Lining', 'Modular Sections'],
-  },
-  {
-    _id: 'corp_passport_holder',
-    slug: 'corporate-passport-holder',
-    name: 'Passport Holder',
-    subCopy: 'Travel Passport & Boarding Wallet with RFID protection.',
-    category: 'stationery-desk',
-    categoryLabel: 'Stationery & Desk',
-    inside_items: [
-      { item: 'RFID Leather Travel Passport Wallet', weight: '1 Unit' },
-    ],
-    packaging_style: 'Travel Passport & Boarding Wallet',
-    description: 'Travel Passport & Boarding Wallet designed to protect documents and boarding passes.',
-    price: 0,
-    image: '/images/corporate/stationary/Passport Holder.jpg',
-    highlights: ['RFID Blocking Shield', 'Card & Currency Slots', 'Slim Travel Profile'],
-  },
-
-  /* ═══════════════════════════════════════════════
-     11. APPAREL (CORPORATE 04)
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'corp_custom_tshirts',
-    slug: 'corporate-customised-tshirts',
-    name: 'Customised T-Shirts',
-    subCopy: 'Bio-Washed Organic Cotton Corporate Apparel with bespoke branding.',
-    category: 'corporate-apparel',
-    categoryLabel: 'Apparel',
-    inside_items: [
-      { item: 'Bio-Washed Organic Cotton T-Shirt', weight: '1 Unit' },
-    ],
-    packaging_style: 'Bio-Washed Organic Cotton Corporate Apparel',
-    description: 'Bio-Washed Organic Cotton Corporate Apparel tailored for team offsites, corporate events and brand representation.',
-    price: 0,
-    image: '/images/catalogue_items/category/appreal.png',
-    highlights: ['220 GSM Combed Cotton', 'Custom Crest Embroidery', 'Pre-Shrunk Bio-Wash'],
-  },
-
-  /* ═══════════════════════════════════════════════
-     12. RECOGNITION (CORPORATE 05)
-     ═══════════════════════════════════════════════ */
-  {
-    _id: 'corp_acrylic_trophy',
-    slug: 'corporate-acrylic-trophy',
-    name: 'Acrylic Trophy',
-    subCopy: 'Custom Commemorative Recognition Award with precision laser engraving.',
-    category: 'awards-recognition',
-    categoryLabel: 'Recognition',
-    inside_items: [
-      { item: 'Commemorative Recognition Trophy', weight: '1 Unit' },
-    ],
-    packaging_style: 'Custom Commemorative Recognition Award',
-    description: 'Custom Commemorative Recognition Award celebrating employee excellence, institutional milestones and corporate leadership.',
-    price: 0,
-    image: '/images/corporate/customtees/awards.jpg',
-    highlights: ['Ultra-Clear Cast Acrylic', 'Laser-Etched Personalisation', 'Weighted Wooden Plinth'],
-  },
+    image: "/images/items/scented_candles.jpg",
+    highlights: ["100% Pure Soy Wax","Botanical Essential Oils","45+ Hours Clean Burn"],
+  }
 ];
 
 export function getHamperBySlug(slug: string): HamperData | undefined {
-  return HAMPERS_CATALOG.find((h) => h.slug === slug || (slug === 'gujarats-namkeen' && h.slug === 'chilli-cheese-bhujia') || (slug === 'coorg-chikmagalur-coffee' && h.slug === 'filter-kaapi') || (slug === 'sleepy-owl-coffee' && h.slug === 'filter-kaapi') || (slug === 'halmari-assam-tea' && h.slug === 'royal-assam-tea'));
+  return HAMPERS_CATALOG.find((h) => h.slug === slug);
 }

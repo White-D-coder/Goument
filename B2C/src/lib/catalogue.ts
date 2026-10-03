@@ -11,7 +11,7 @@ export async function catalogue(search = '', sort = 'newest', page = 1) {
   if (!Array.isArray(data.products)) throw new Error('Invalid catalogue');
   return { products: data.products as Product[], pages: data.pages as number, total: data.total as number, preview: false };
  } catch {
-  const matches = HAMPERS_CATALOG.filter(p => `${p.name} ${p.categoryLabel}`.toLowerCase().includes(search.toLowerCase()));
+  const matches = HAMPERS_CATALOG.filter(p => `${p.name} ${p.categoryLabel} ${p.category} ${p.subCopy}`.toLowerCase().includes(search.toLowerCase()));
   return { products: matches.slice((page - 1) * 12, page * 12).map(p => ({ _id: p._id, giftItemId: p._id, slug: p.slug, name: p.name, categoryLabel: p.categoryLabel, description: { short: p.subCopy, long: p.description }, basePrice: 0, currency: 'INR', inventory: 0, variants: [], images: [{ public_id: p.image }], preview: true } as Product)), pages: Math.ceil(matches.length / 12), total: matches.length, preview: true };
  }
 }

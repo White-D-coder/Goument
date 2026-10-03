@@ -266,3 +266,14 @@ Latest asset selection (2026-10-01): only the three user-specified root images (
 ## 2026-10-01 — Collection showcase replaces alternating rows
 
 CURRENT / IMPLEMENTED: featured categories now share one interactive photo/burgundy panel with Gourmet/Candles/Paper tabs. Responsive layout, keyboard focus, decoded-image selection and unchanged shopping destinations verified. Lint/TypeScript and24 browser layout states passed, plus touch/loading/failure/reduced-motion checks. See UI_SYSTEM/TESTING; commerce-service status and TODO priorities remain unchanged.
+
+## 2026-10-02 — Local MongoDB replica set & owner provisioning
+
+CURRENT / IMPLEMENTED: resolved Atlas network timeout by launching local MongoDB replica set (rs0 on port 27017) with transaction support. Provisioned two OWNER identities (keyursatra@gmail.com and Deeptanubhunia0@gmail.com) with bcrypt hashes, full owner permissions and audit log entries via `B2C/backend/admin/setup-owners.js`. Started B2C auth service on port 5003; verified `/api/v1/auth/config`, `/api/v1/auth/gift/count`, `/api/v1/auth/login` and `/api/v1/auth/admin/session` returning 200 OK.
+
+## 2026-10-02 — Catalogue replacement with 36 master items & 6 gift hampers
+
+CURRENT / IMPLEMENTED: completely replaced previous catalogue across B2C backend and storefront. Replaced `B2C/backend/gifting/items.json` and `B2C/src/lib/catalogue-preview.ts` with the 36 unique items (Tea, Strainer, Japanese Cup, Brass Spoon, Sugar Packets, Filter Coffee, Mug, Small Brass Spoon, Bhujia, Chocolates, Cookies, Sweets, Envelope Bookmarks, Designer Copper Bottle, Eco Friendly Journal, Good Pen, Video Game, Brick Game, Orange Candies, Eclairs, Kinder Joy, Hotwheels, RC Car, Reynolds Trimax, Mini Diary, iPod Music Player, Bookmarks, Shagun Envelopes, Thank You Cards, Announcement Cards, Gift Boxes, Fridge Magnets, Diary Pen Sets, Cool Stickers, Sustainable Diary+Bottle+Pen, Scented Candles) plus the 6 curated Gift Hampers (Tea Set, Coffee Set, Diwali Celebration OG Hamper, Generation Set Aesthetic, Childhood Hamper, Japanese Crockery Set).
+Seeded all 42 products, categories, variants, and inventory records into local MongoDB. All 12 gift-cart tests, TypeScript, 96 database tests, and production build passed.
+
+

@@ -57,8 +57,11 @@
 .commerce-home .assurance-strip > div { display: grid; grid-template-columns: auto 1fr; text-align: left; column-gap: 16px; align-content: center; }
 .commerce-home .assurance-strip svg { grid-row: 1 / 3; align-self: center; margin: 0; }
 .commerce-home .assurance-strip h3,.commerce-home .assurance-strip p { grid-column: 2; }
-.commerce-home .brand-story { max-width: 1440px; margin: auto; padding: 48px 5%; scroll-margin-top: 110px; }
-.commerce-home .brand-story > .text-link { padding-block: 8px; }
+.commerce-home .brand-story { width: 100%; max-width: 100%; margin: 0; padding: 32px max(5%, calc((100vw - 1296px) / 2)); scroll-margin-top: 110px; text-align: center; }
+.commerce-home .brand-story .eyebrow { margin: 0 0 8px; font-size: 9px; letter-spacing: .16em; }
+.commerce-home .brand-story h2 { font-size: clamp(22px, 2vw, 28px); margin: 0 0 8px; line-height: 1.15; }
+.commerce-home .brand-story > p:not(.eyebrow) { font-family: var(--font-cormorant); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.5; max-width: 580px; margin: 0 auto 12px; }
+.commerce-home .brand-story > .text-link { padding-block: 4px; margin: 0 auto; }
 
 .shopping-rail { min-width: 0; }
 .shopping-rail > [role='region'] { scroll-snap-type: x proximity; scrollbar-width: none; }

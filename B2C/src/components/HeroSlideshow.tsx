@@ -4,9 +4,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 const slides = [
- { src: '/images/brand/hero.png', alt: 'The Gourmet Gifts signature boxes in ivory, lavender, burgundy and midnight blue', width: 1770, height: 889 },
- { src: '/images/pics/ChatGPT Image Sep 23, 2026, 09_50_14 PM-1.png', alt: 'Lavender Gourmet Gifts box with savoury snacks, tea, nuts and a floral candle', width: 1448, height: 1086 },
- { src: '/images/small_anipics/framee.png', alt: 'Ivory, forest-green and charcoal gift hampers with gourmet treats by candlelight', width: 1672, height: 941 },
+ { src: '/images/brand/hero_optimized.jpg', alt: 'The Gourmet Gifts signature boxes in ivory, lavender, burgundy and midnight blue', width: 1770, height: 889 },
+ { src: '/images/pics/hero_slide2.jpg', alt: 'Lavender Gourmet Gifts box with savoury snacks, tea, nuts and a floral candle', width: 1448, height: 1086 },
+ { src: '/images/small_anipics/framee_optimized.jpg', alt: 'Ivory, forest-green and charcoal gift hampers with gourmet treats by candlelight', width: 1672, height: 941 },
 ];
 
 export default function HeroSlideshow() {

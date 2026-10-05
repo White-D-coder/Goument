@@ -1,6 +1,20 @@
 # Changelog
 
-## 2026-10-05 — Eliminate scroll lag and streamline store to 4 core products
+## 2026-10-05 — Luxury Hamper Cards Redesign, Cormorant Typography & Header Streamline
+
+- **Hamper Card Creative Redesign**:
+  - Restyled the 4 hamper cards in the Curated Gift Hampers section with high-end luxury boutique aesthetics.
+  - **Centered Typography**: Centered all card texts (title, flourish divider, description, price, button).
+  - **Floating Badges**: Added frosted glassmorphism pill badge for category on top-left of image (`gift-card-badge`) and circular wishlist jewel button on top-right (`card-save-floating`).
+  - **Decorative Flourish**: Added delicate gold hairline divider with centered sparkle `✦` between title and description.
+  - **Centered Price & Full-Width CTA**: Centered price stack (`PRICE \n ₹...`) with prominent typography, anchored by a full-width pill `ADD TO CART` button with rich wine velvet gradient, subtle gold border, and hover lift.
+- **Typography Consistency**:
+  - Restored Cormorant Garamond across all titles, display headings, brand wordmark, and storefront sections per user selection.
+- **Header Announcement Bar**:
+  - Removed top announcement bar from [`Header.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Header.tsx) per user request for a cleaner, editorial header presentation.
+- **Verification**: Verified Next.js build passes with 0 errors (`11/11` pages statically prerendered), verified visual fidelity via browser subagent screenshots, and pushed changes to both `origin` and `fork`.
+
+
 
 - **Scroll Performance Optimization**:
   - **GoldPopper Canvas**: Disabled full-viewport fixed `<canvas>` animation on mobile (< 768px) and when reduced motion is preferred; on desktop, automatically unmounts and stops `requestAnimationFrame` after 2.6s to free GPU layers.

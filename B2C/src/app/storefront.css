@@ -52,25 +52,25 @@
 }
 
 .commerce-home .home-section { padding-inline: var(--edit-gutter); background: transparent; }
-.commerce-home .collection-section { padding-top: 36px; }
+.commerce-home .collection-section { padding-top: 18px; padding-bottom: 8px; }
 .commerce-home .section-heading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 10px;
-  margin-bottom: 36px;
+  gap: 4px;
+  margin-bottom: 16px;
 }
 .commerce-home .section-heading h2 {
   margin: 0;
   text-align: center;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: clamp(34px, 4vw, 50px);
+  font-size: clamp(32px, 3.6vw, 46px);
   font-weight: 500;
   letter-spacing: -0.02em;
 }
-.commerce-home .section-heading > .text-link { flex-shrink: 0; min-height: 36px; margin: 0 auto; color: var(--wine); }
+.commerce-home .section-heading > .text-link { flex-shrink: 0; min-height: 28px; margin: 0 auto; color: var(--wine); }
 
 .commerce-home .shopping-rail {
   width: 100%;
@@ -83,14 +83,14 @@
 }
 
 .commerce-home .collection-circles {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: clamp(20px, 3.5vw, 44px);
-  max-width: 980px;
-  margin: 0 auto;
-  align-items: start;
-  justify-content: center;
-  padding-top: 4px;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: clamp(14px, 2.2vw, 24px) !important;
+  max-width: 580px !important;
+  margin: 0 auto !important;
+  padding-top: 0 !important;
 }
 .commerce-home .collection-circles a {
   display: flex;
@@ -98,34 +98,44 @@
   align-items: center;
   text-align: center;
   text-decoration: none;
+  width: clamp(94px, 12vw, 118px);
+  flex-shrink: 0;
 }
 .commerce-home .collection-circles a > div {
   width: 100%;
-  max-width: 140px;
   aspect-ratio: 1;
   border-radius: 50%;
   margin: 0 auto;
   overflow: hidden;
+  box-shadow: 0 4px 14px rgba(34, 25, 18, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  transition: transform 350ms cubic-bezier(.22,1,.36,1), box-shadow 350ms ease, border-color 300ms ease;
+}
+.commerce-home .collection-circles a:hover > div {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(184, 134, 11, 0.18);
+  border-color: rgba(197, 160, 89, 0.65);
 }
 .commerce-home .collection-circles h3 {
-  margin-top: 14px;
+  margin-top: 10px;
   text-align: center;
   font-family: var(--font-jakarta), system-ui, sans-serif !important;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.35;
   letter-spacing: 0.01em;
   width: 100%;
 }
 
 .commerce-home .signature-section {
-  padding-top: 44px;
+  padding-top: 18px;
   padding-bottom: 24px;
   scroll-margin-top: 110px;
 }
 .commerce-home .signature-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: clamp(16px, 2vw, 26px);
+  gap: clamp(16px, 2vw, 24px);
   max-width: 1240px;
   margin: 0 auto;
   justify-content: center;

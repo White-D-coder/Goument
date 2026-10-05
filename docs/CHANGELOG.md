@@ -12,6 +12,11 @@
   - Restored Cormorant Garamond across all titles, display headings, brand wordmark, and storefront sections per user selection.
 - **Header Announcement Bar**:
   - Removed top announcement bar from [`Header.tsx`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/components/Header.tsx) per user request for a cleaner, editorial header presentation.
+- **Title Optimization**:
+  - Shortened `"Diary, Bottle & Pen Set (With Custom Branding)"` to **`"Diary, Bottle & Pen Set"`** across frontend preview ([`catalogue-preview.ts`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/lib/catalogue-preview.ts)), backend items ([`items.json`](file:///Users/deeptanubhunia/Desktop/gour/B2C/backend/gifting/items.json)), and MongoDB Atlas, allowing the card title to fit neatly in a single line.
+  - Adjusted card title height and centering in [`product-cards.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/product-cards.css) to eliminate unused vertical whitespace.
+- **Collection Circles Spacing**:
+  - Tightened the 4 collection circles layout in [`storefront.css`](file:///Users/deeptanubhunia/Desktop/gour/B2C/src/app/storefront.css) (`max-width: 580px`, `gap: clamp(14px, 2.2vw, 24px)`) and reduced dead section padding between Collection and Hampers sections.
 - **Verification**: Verified Next.js build passes with 0 errors (`11/11` pages statically prerendered), verified visual fidelity via browser subagent screenshots, and pushed changes to both `origin` and `fork`.
 
 

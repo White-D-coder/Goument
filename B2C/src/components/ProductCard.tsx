@@ -40,13 +40,18 @@ export default function ProductCard({product,compact=false}:{product:Product;com
    <Link className="gift-card-photo" href={href} aria-label={`View ${product.name}`} tabIndex={-1}>
     <img src={productImage(product)} alt={(Array.isArray(product.images) && product.images[0]?.alt) || product.name} loading="lazy" decoding="async"/>
    </Link>
+   {category && <span className="gift-card-badge">{category}</span>}
    <button type="button" className="card-save-floating" aria-pressed={saved} aria-label={`${saved ? 'Unsave' : 'Save'} ${product.name} in wishlist`} title={saved ? 'Saved in wishlist' : 'Save to wishlist'} onClick={toggleSaved}>
     <Heart size={18} strokeWidth={1.8} fill={saved ? '#8E1B32' : 'none'} color={saved ? '#8E1B32' : '#332924'}/>
    </button>
   </div>
   <div className="gift-card-content">
-   {category && <p className="gift-card-category">{category}</p>}
    <h3 className="gift-card-title"><Link href={href}>{product.name}</Link></h3>
+   <div className="gift-card-flourish" aria-hidden="true">
+    <span className="flourish-line" />
+    <span className="flourish-sparkle">✦</span>
+    <span className="flourish-line" />
+   </div>
    <p className="gift-card-description">{typeof product.description === "string" ? product.description : (product.description?.short || "")}</p>
    <div className="gift-card-bottom-row">
     <div className="gift-card-price-wrap">

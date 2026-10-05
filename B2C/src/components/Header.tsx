@@ -43,7 +43,17 @@ export default function Header() {
  }, []);
 
  useEffect(() => {
-  const updateScrollState = () => setIsScrolled(window.scrollY > 40);
+  let ticking = false;
+  const updateScrollState = () => {
+   if (!ticking) {
+    window.requestAnimationFrame(() => {
+     const scrolled = window.scrollY > 40;
+     setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
+     ticking = false;
+    });
+    ticking = true;
+   }
+  };
   updateScrollState();
   window.addEventListener('scroll', updateScrollState, { passive: true });
   return () => window.removeEventListener('scroll', updateScrollState);

@@ -1,8 +1,8 @@
 /* Warm storefront surfaces; keep the light paper token for cards and imagery. */
 :root {
-  --canvas: #F2EAE7;
-  --surface-rose: #E9D9D5;
-  --surface-soft: #EDE2DC;
+  --canvas: #FEFCF9;
+  --surface-rose: transparent;
+  --surface-soft: rgba(245, 240, 232, 0.65);
   --muted: #665E5A;
   --on-wine-muted: #DEC9BD;
   --champagne: #DFC299;
@@ -11,15 +11,15 @@
 body { background: var(--canvas); }
 
 .commerce-home .signature-section {
-  background: var(--surface-rose);
-  border-radius: 28px;
-  padding-top: 32px;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding-top: 36px;
   margin-bottom: 28px;
 }
 .commerce-home .signature-intro h2,
 .commerce-home .brand-story h2 { color: var(--wine); }
 .commerce-home .assurance-strip { background: var(--surface-soft); }
-.commerce-home .brand-story { background: var(--surface-rose); }
+.commerce-home .brand-story { background: transparent; }
 .commerce-home .assurance-strip p,
 .commerce-home .brand-story > span { color: var(--muted); }
 
@@ -40,7 +40,8 @@ body { background: var(--canvas); }
 
 @media (max-width: 760px) {
   .commerce-home .signature-section {
-    border-radius: 20px;
+    background: transparent !important;
+    border-radius: 0 !important;
     padding-top: 24px;
     margin-bottom: 24px;
   }

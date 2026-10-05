@@ -31,19 +31,19 @@ export default function ProductCard({product,compact=false}:{product:Product;com
  }
  return <article data-reveal className={`product-card gift-product-card sculpted-product-card${compact?' shop-product-card':''}`}>
   <Link className="gift-card-photo" href={href} aria-label={`View ${product.name}`} tabIndex={-1}>
-   <img src={productImage(product)} alt={product.images[0]?.alt||product.name} loading="lazy"/>
+   <img src={productImage(product)} alt={(Array.isArray(product.images) && (product.images[0]?.alt || product.images[0]?.altText)) || product.name} loading="lazy"/>
    <span className="card-photo-shade" aria-hidden="true"/>
    <svg className="card-photo-curve" viewBox="0 0 500 130" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 34 Q0 14 24 14 H125 C210 14 228 108 365 108 H475 Q500 108 500 130 H0 Z"/></svg>
   </Link>
   <div className="gift-card-content">
    {category&&<p className="gift-card-category">{category}</p>}
    <h3 className="gift-card-title"><Link href={href}>{product.name}</Link></h3>
-   <p className="gift-card-description">{product.description.short}</p>
+   <p className="gift-card-description">{typeof product.description === "string" ? product.description : (product.description?.short || product.shortDescription || "")}</p>
    <div className="card-save-row">
     <span className={`gift-card-price${product.preview?' card-preview-label':''}`}>{product.preview?'Collection preview':money(product.basePrice,product.currency)}</span>
     <button type="button" className="card-save-button" aria-pressed={saved} aria-label={`${saved?'Unsave':'Save'} ${product.name} on this device`} title={saved?'Saved on this device':'Save on this device'} onClick={toggleSaved}><Heart size={20} strokeWidth={1.7} fill={saved?'currentColor':'none'}/></button>
    </div>
-   {product.giftItemId?<AddGiftToCartButton itemId={product.giftItemId} name={product.name} className="gift-card-action card-pill-action"/>:<Link className="gift-card-action card-pill-action" href={href}><span>{product.preview?'View details':product.variants.length?'Choose options':'Shop this item'}</span><ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/></Link>}
+   {product.giftItemId?<AddGiftToCartButton itemId={product.giftItemId} name={product.name} className="gift-card-action card-pill-action"/>:<Link className="gift-card-action card-pill-action" href={href}><span>{product.preview?'View details':product.variants?.length?'Choose options':'Shop this item'}</span><ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/></Link>}
    <span className={saveError?'card-save-error':'card-feedback'} role="status">{message}</span>
   </div>
  </article>;

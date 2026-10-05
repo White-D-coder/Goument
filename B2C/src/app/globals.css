@@ -17,23 +17,24 @@ html{scroll-behavior:smooth;scroll-padding-top:30px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.collection-circles img,.occasion-grid img{transition:none}}
 
 @media(min-width:761px) and (max-width:1100px){.occasion-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.occasion-grid h3{font-size:13px}}
-.b2b-store-footer{display:block;position:relative;overflow:hidden;background:#fff;color:#000;padding:32px 20px 24px}
+footer.b2b-store-footer, .b2b-store-footer{display:block !important;visibility:visible !important;opacity:1 !important;position:relative;overflow:hidden;background:var(--wine,#4A0404);color:var(--paper,#faf8f2);padding:32px 20px 24px;width:100%}
 .b2b-store-footer::before{content:"";position:absolute;top:0;left:0;width:min(500px,70vw);height:280px;pointer-events:none;background:radial-gradient(circle at 15% 90%,rgba(212,175,55,.12),rgba(181,175,166,.04) 35%,transparent 70%);filter:blur(30px)}
 .b2b-footer-inner{position:relative;z-index:1;width:100%;max-width:1440px;margin:0 auto}
 .b2b-footer-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:24px}
-.b2b-footer-wordmark{display:flex;flex-wrap:wrap;gap:0 14px;color:#000;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,5vw,60px);font-weight:500;line-height:1.1;text-transform:uppercase;transition:color .2s}
-.b2b-footer-wordmark:hover{color:var(--wine)}
-.b2b-footer-heading p{margin:0;color:rgba(0,0,0,.75);font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-style:italic;letter-spacing:.03em;text-align:right}
+.b2b-footer-wordmark{display:flex;flex-wrap:wrap;gap:0 14px;color:var(--paper,#faf8f2);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,5vw,60px);font-weight:500;line-height:1.1;text-transform:uppercase;transition:color .2s}
+.b2b-footer-wordmark:hover{color:var(--champagne,#DFC299)}
+.b2b-footer-heading p{margin:0;color:var(--on-wine-muted,#DEC9BD);font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-style:italic;letter-spacing:.03em;text-align:right}
 .b2b-footer-columns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding:28px 0}
-.b2b-footer-column h2{margin:0 0 12px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.b2b-footer-column h2{margin:0 0 12px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne,#DFC299)}
 .b2b-footer-column ul{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
 .b2b-footer-column li{min-width:0;line-height:1.55}
-.b2b-footer-column a,.b2b-footer-entity span{color:#4a4742;font-size:12px;overflow-wrap:anywhere;transition:color .2s}
-.b2b-footer-column a:hover{color:var(--wine)}
+.b2b-footer-column a,.b2b-footer-entity span{color:var(--on-wine-muted,#DEC9BD);font-size:12px;overflow-wrap:anywhere;transition:color .2s}
+.b2b-footer-column a:hover{color:var(--paper,#faf8f2)}
 .b2b-footer-entity{display:flex;flex-direction:column;margin-bottom:4px}
-.b2b-footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;color:#5c5851;font-size:12px}
-.b2b-footer-bottom span:last-child{color:#8c847b;font-size:10px;letter-spacing:.15em;text-align:right;text-transform:uppercase}
-@media(max-width:760px){.b2b-store-footer{padding:30px 5% 22px}.b2b-footer-heading{align-items:flex-start;flex-direction:column;gap:8px}.b2b-footer-heading p{text-align:left}.b2b-footer-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;padding:24px 0}.b2b-footer-wordmark{gap:0 9px;font-size:34px}.b2b-footer-column h2{font-size:10px;letter-spacing:.15em}.b2b-footer-column a,.b2b-footer-entity span{font-size:11px}.b2b-footer-bottom{align-items:flex-start;flex-direction:column;gap:8px}.b2b-footer-bottom span:last-child{text-align:left}}
+.b2b-footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;color:var(--on-wine-muted,#DEC9BD);font-size:12px}
+.b2b-footer-bottom span:last-child{color:var(--on-wine-muted,#DEC9BD);font-size:10px;letter-spacing:.15em;text-align:right;text-transform:uppercase}
+@media(max-width:760px){footer.b2b-store-footer, .b2b-store-footer{display:block !important;visibility:visible !important;opacity:1 !important;padding:30px 5% 22px !important}.b2b-footer-heading{align-items:flex-start;flex-direction:column;gap:8px}.b2b-footer-heading p{text-align:left}.b2b-footer-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;padding:24px 0}.b2b-footer-wordmark{gap:0 9px;font-size:30px}.b2b-footer-column h2{font-size:10px;letter-spacing:.15em}.b2b-footer-column a,.b2b-footer-entity span{font-size:11px}.b2b-footer-bottom{align-items:flex-start;flex-direction:column;gap:8px}.b2b-footer-bottom span:last-child{text-align:left}}
+@media(max-width:480px){.b2b-footer-columns{grid-template-columns:1fr;gap:20px;padding:18px 0}.b2b-footer-wordmark{font-size:26px}}
 .header{position:sticky;top:0;z-index:30}
 .header .brand.scrolled{gap:0}
 .header .brand>span.brand-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:23px;letter-spacing:.02em;line-height:1.1;color:var(--wine);white-space:nowrap}

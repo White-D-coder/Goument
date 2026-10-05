@@ -21,30 +21,48 @@ export default function ProductCard({product,compact=false}:{product:Product;com
  const [saveError,setSaveError]=useState(false);
  const category=product.categoryLabel||product.categories?.[0]?.name;
  const href=`/products/${product.slug}`;
- function toggleSaved(){
+ function toggleSaved(e: React.MouseEvent) {
+  e.preventDefault();
+  e.stopPropagation();
   setSaveError(false);
-  try{
-   const current=favourites(),next=current.includes(product._id)?current.filter(id=>id!==product._id):[product._id,...current].slice(0,500);
-   localStorage.setItem(favouritesKey,JSON.stringify(next));window.dispatchEvent(new Event(favouritesEvent));
-   setMessage(next.includes(product._id)?'Saved on this device.':'Removed from saved items.');
-  }catch{setSaveError(true);setMessage('Could not save on this device. Please check your browser storage settings.');}
+  try {
+   const current = favourites(), next = current.includes(product._id) ? current.filter(id => id !== product._id) : [product._id, ...current].slice(0, 500);
+   localStorage.setItem(favouritesKey, JSON.stringify(next));
+   window.dispatchEvent(new Event(favouritesEvent));
+   setMessage(next.includes(product._id) ? 'Saved in wishlist.' : 'Removed from wishlist.');
+  } catch {
+   setSaveError(true);
+   setMessage('Could not save to wishlist.');
+  }
  }
- return <article data-reveal className={`product-card gift-product-card sculpted-product-card${compact?' shop-product-card':''}`}>
-  <Link className="gift-card-photo" href={href} aria-label={`View ${product.name}`} tabIndex={-1}>
-   <img src={productImage(product)} alt={(Array.isArray(product.images) && product.images[0]?.alt) || product.name} loading="lazy" decoding="async"/>
-   <span className="card-photo-shade" aria-hidden="true"/>
-   <svg className="card-photo-curve" viewBox="0 0 500 130" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 34 Q0 14 24 14 H125 C210 14 228 108 365 108 H475 Q500 108 500 130 H0 Z"/></svg>
-  </Link>
+ return <article data-reveal className={`product-card gift-product-card luxury-hamper-card${compact ? ' shop-product-card' : ''}`}>
+  <div className="gift-card-media">
+   <Link className="gift-card-photo" href={href} aria-label={`View ${product.name}`} tabIndex={-1}>
+    <img src={productImage(product)} alt={(Array.isArray(product.images) && product.images[0]?.alt) || product.name} loading="lazy" decoding="async"/>
+   </Link>
+   <button type="button" className="card-save-floating" aria-pressed={saved} aria-label={`${saved ? 'Unsave' : 'Save'} ${product.name} in wishlist`} title={saved ? 'Saved in wishlist' : 'Save to wishlist'} onClick={toggleSaved}>
+    <Heart size={18} strokeWidth={1.8} fill={saved ? '#8E1B32' : 'none'} color={saved ? '#8E1B32' : '#332924'}/>
+   </button>
+  </div>
   <div className="gift-card-content">
-   {category&&<p className="gift-card-category">{category}</p>}
+   {category && <p className="gift-card-category">{category}</p>}
    <h3 className="gift-card-title"><Link href={href}>{product.name}</Link></h3>
    <p className="gift-card-description">{typeof product.description === "string" ? product.description : (product.description?.short || "")}</p>
-   <div className="card-save-row">
-    <span className={`gift-card-price${product.preview?' card-preview-label':''}`}>{product.preview?'Collection preview':money(product.basePrice,product.currency)}</span>
-    <button type="button" className="card-save-button" aria-pressed={saved} aria-label={`${saved?'Unsave':'Save'} ${product.name} on this device`} title={saved?'Saved on this device':'Save on this device'} onClick={toggleSaved}><Heart size={20} strokeWidth={1.7} fill={saved?'currentColor':'none'}/></button>
+   <div className="gift-card-bottom-row">
+    <div className="gift-card-price-wrap">
+     <span className="price-label">Price</span>
+     <span className={`gift-card-price${product.preview ? ' card-preview-label' : ''}`}>{product.preview ? 'Collection preview' : money(product.basePrice, product.currency)}</span>
+    </div>
+    {product.giftItemId ? (
+     <AddGiftToCartButton itemId={product.giftItemId} name={product.name} className="card-luxury-btn" />
+    ) : (
+     <Link className="card-luxury-btn" href={href}>
+      <span>{product.preview ? 'Details' : 'Explore'}</span>
+      <ShoppingBag size={14} strokeWidth={1.8} aria-hidden="true" />
+     </Link>
+    )}
    </div>
-   {product.giftItemId?<AddGiftToCartButton itemId={product.giftItemId} name={product.name} className="gift-card-action card-pill-action"/>:<Link className="gift-card-action card-pill-action" href={href}><span>{product.preview?'View details':product.variants?.length?'Choose options':'Shop this item'}</span><ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/></Link>}
-   <span className={saveError?'card-save-error':'card-feedback'} role="status">{message}</span>
+   <span className={saveError ? 'card-save-error' : 'card-feedback'} role="status">{message}</span>
   </div>
  </article>;
 }

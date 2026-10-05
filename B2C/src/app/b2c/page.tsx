@@ -6,6 +6,10 @@ import HeroTitle from '@/components/HeroTitle';
 import GoldPopperSprinkle from '@/components/GoldPopperSprinkle';
 import ShoppingRail from '@/components/ShoppingRail';
 
+import ProductCard from '@/components/ProductCard';
+import { catalogue } from '@/lib/catalogue';
+import type { Product } from '@/lib/types';
+
 const collections = [
  ['Shagun Envelopes','/images/items/shagun_envelopes.webp','shagun'],
  ['Laddoo Candles','/images/items/laddoo_candles.webp','candles'],
@@ -22,7 +26,9 @@ const occasions = [
 
 const shop = (query:string) => `/shop${query ? `?search=${encodeURIComponent(query)}` : ''}`;
 
-export default function Home() {
+export default async function Home() {
+ const { products } = await catalogue();
+
  return <div className="reference-home commerce-home">
   <GoldPopperSprinkle />
   <section className="gift-hero hero-editorial" aria-labelledby="hero-title">
@@ -43,6 +49,17 @@ export default function Home() {
      </Link>
     ))}
    </ShoppingRail>
+  </section>
+  <section className="home-section signature-section" id="hampers">
+   <div className="section-heading" data-reveal>
+    <h2>Curated Gift Hampers</h2>
+    <Link className="text-link" href="/shop">View All Hampers <ArrowRight size={14}/></Link>
+   </div>
+   <div className="signature-grid">
+    {products.slice(0, 4).map((product: Product) => (
+     <ProductCard key={product._id} product={product} />
+    ))}
+   </div>
   </section>
   <section className="home-section" id="occasions">
    <div className="section-heading" data-reveal>

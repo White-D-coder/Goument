@@ -57,6 +57,21 @@
   width: 100%;
 }
 
+.commerce-home .signature-section {
+  padding-top: 44px;
+  padding-bottom: 24px;
+  scroll-margin-top: 110px;
+}
+.commerce-home .signature-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2vw, 26px);
+  max-width: 1240px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .commerce-home #occasions { padding-top: 40px; padding-bottom: 48px; scroll-margin-top: 110px; }
 .commerce-home .occasion-grid {
   display: grid !important;

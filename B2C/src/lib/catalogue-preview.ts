@@ -142,7 +142,7 @@ export const HAMPERS_CATALOG: HamperData[] = [
   {
     _id: "diary_bottle_pen_set",
     slug: "diary-bottle-pen-set",
-    name: "Diary, Bottle & Pen Set",
+    name: "Custom Diary Gift Set",
     brand: "The Gourmet Gifts Bespoke",
     subCopy: "Bespoke corporate gifting trio featuring a vegan leather notebook, insulated bottle, and metal pen with personalized logo branding.",
     category: "corporate",

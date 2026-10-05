@@ -1,6 +1,23 @@
 # Changelog
 
-## 2026-10-03 — Resolve Vercel 500 FUNCTION_INVOCATION_FAILED with static ISR prerendering
+## 2026-10-05 — Eliminate scroll lag and streamline store to 4 core products
+
+- **Scroll Performance Optimization**:
+  - **GoldPopper Canvas**: Disabled full-viewport fixed `<canvas>` animation on mobile (< 768px) and when reduced motion is preferred; on desktop, automatically unmounts and stops `requestAnimationFrame` after 2.6s to free GPU layers.
+  - **Scroll Listener Throttling**: Throttled scroll handlers in `Header.tsx` and `ShoppingRail.tsx` via `requestAnimationFrame` and state diffing; updated rail progress bar directly on the DOM ref to eliminate 60+ React re-renders per second during horizontal scroll.
+  - **Motion & Compositing**: Disabled continuous subtree `MutationObserver` and WAAPI `translateY` animations on mobile devices in `StorefrontMotion.tsx`. Replaced global `scroll-behavior: smooth` with `-webkit-overflow-scrolling: touch` for buttery smooth native momentum scrolling on mobile.
+  - **Image Compression**: Converted uncompressed ~2MB PNGs into ~25KB WebPs with `decoding="async"`, dropping total page image memory and bandwidth by over 97%.
+- **Catalogue & Inventory Streamlining (4 Core Products)**:
+  - Streamlined B2C store to only 4 active products:
+    1. **Luxury Shagun Envelopes** (`shagun-envelopes`, ₹499)
+    2. **Artisanal Laddoo Candles** (`laddoo-candles`, ₹799)
+    3. **Handcrafted Artisanal Bookmarks** (`bookmarks`, ₹349)
+    4. **Diary, Bottle & Pen Set with Custom Branding** (`diary-bottle-pen-set`, ₹1,499)
+  - Generated and installed ultra-luxurious editorial imagery for Artisanal Laddoo Candles.
+  - Updated `B2C/backend/gifting/items.json`, MongoDB Atlas database (all other items archived), `catalogue-preview.ts`, `/shop` filters, and the `/b2c` storefront (collections, signature grid, and featured edits).
+- **Verification**: Verified clean Next.js build (`11/11` pages statically prerendered), verified MongoDB Atlas active items, verified backend `/api/v1/auth/gift/catalogue` API output, and pushed to both `origin` and `fork`.
+
+
 
 - **Root Cause**: Next.js `/b2c` route was set to `force-dynamic` with `cache: 'no-store'` fetch pointing to external backend. When backend was unavailable or sleeping on Vercel, the serverless Lambda function timed out and crashed with `500 FUNCTION_INVOCATION_FAILED`. Additionally, `outputFileTracingRoot` was disrupting Vercel file tracing.
 - **Resolution**:

@@ -1,32 +1,27 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function GoldPopperSprinkle() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [visible, setVisible] = React.useState(false);
 
   useEffect(() => {
-    // Only run on desktop/larger viewports and when reduced-motion is not requested
-    if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-    setVisible(true);
-  }, []);
-
-  useEffect(() => {
-    if (!visible) return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (window.innerWidth < 768 || motion.matches || document.hidden) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let isRunning = true;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    canvas.hidden = false;
 
     const handleResize = () => {
-      if (!canvas) return;
+      if (!isRunning) return;
+      if (window.innerWidth < 768) { stop(); return; }
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
@@ -64,13 +59,19 @@ export default function GoldPopperSprinkle() {
     }));
 
     let frame = 0;
-    let isRunning = true;
-
-    // Hard timeout to free GPU resources after initial celebration
-    const timer = setTimeout(() => {
+    const stop = () => {
       isRunning = false;
-      setVisible(false);
-    }, 2600);
+      cancelAnimationFrame(animationFrameId);
+      canvas.hidden = true;
+      canvas.width = 0;
+      canvas.height = 0;
+    };
+    const handlePreference = () => { if (motion.matches) stop(); };
+    const handleVisibility = () => { if (document.hidden) stop(); };
+    motion.addEventListener('change', handlePreference);
+    document.addEventListener('visibilitychange', handleVisibility);
+    // Release the canvas backing store after the initial celebration.
+    const timer = setTimeout(stop, 2600);
 
     const drawLeaf = (x: number, y: number, size: number, angle: number, flip: number, alpha: number) => {
       ctx.save();
@@ -177,8 +178,7 @@ export default function GoldPopperSprinkle() {
         animationFrameId = requestAnimationFrame(render);
       } else {
         ctx.clearRect(0, 0, width, height);
-        isRunning = false;
-        setVisible(false);
+        stop();
       }
     };
 
@@ -187,15 +187,16 @@ export default function GoldPopperSprinkle() {
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      motion.removeEventListener('change', handlePreference);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      stop();
     };
-  }, [visible]);
-
-  if (!visible) return null;
+  }, []);
 
   return (
     <canvas
       ref={canvasRef}
+      hidden
       className="fixed inset-0 pointer-events-none z-[100] w-full h-full"
       style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999, width: '100vw', height: '100vh' }}
     />

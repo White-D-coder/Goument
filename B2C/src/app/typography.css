@@ -116,6 +116,7 @@
     line-height: 1.6;
   }
 :root {
+  --font-title: 'Cormorant Garamond', Georgia, serif;
   --font-cormorant: 'Cormorant Garamond', Georgia, serif;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -233,4 +234,24 @@ input, select { font-family: var(--font-jakarta); font-size: 15px; font-weight: 
   font-family: inherit;
   font-weight: inherit;
   font-style: inherit;
+}
+
+/* Latest title direction: use one premium editorial family throughout the storefront.
+   Keep existing size/weight roles, body/menu fonts and admin typography intact. */
+#main :is(h1, h2, h3, h4):not(:where(.admin-shell *, .admin-gate *)) {
+  font-family: var(--font-title) !important;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+/* Match frontend_appview's 15px body/type-body paragraphs at every breakpoint. */
+#main p:not(:where(.admin-shell *, .admin-gate *, .eyebrow, .pdp-eyebrow, .tgg-kicker, .tgg-place, .preview-caption, .tgg-small-note)) {
+  font-size: 15px;
+}
+
+/* Phone titles use the storefront's clean sans face for a simpler read. */
+@media (max-width: 640px) {
+  #main :is(h1, h2, h3, h4):not(:where(.admin-shell *, .admin-gate *)) {
+    font-family: var(--font-jakarta) !important;
+  }
 }

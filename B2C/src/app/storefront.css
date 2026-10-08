@@ -311,8 +311,8 @@
 @media (max-width: 760px) {
  .commerce-home { --edit-gutter: 20px; }
  .commerce-home .collection-section { padding-top: 22px; }
- .commerce-home .collection-circles { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px 8px; overflow: visible; padding-block: 2px; }
- .commerce-home .collection-circles a { min-width: 0; }
+ .commerce-home .collection-circles { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px 8px; overflow: visible; padding-block: 2px; }
+ .commerce-home .collection-circles a { min-width: 0; flex: 1 1 0; max-width: 118px; }
  .commerce-home .collection-circles a > div { width: 100%; max-width: 82px; }
  .commerce-home .collection-circles h3 { overflow-wrap: normal; }
  .commerce-home .collection-circles h3 { margin-top: 10px; }

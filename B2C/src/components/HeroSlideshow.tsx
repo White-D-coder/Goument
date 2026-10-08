@@ -1,12 +1,12 @@
 'use client';
 
-/* eslint-disable @next/next/no-img-element -- Keep the full existing photographs visible. */
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const slides = [
- { src: '/images/brand/hero_optimized.jpg', alt: 'The Gourmet Gifts signature boxes in ivory, lavender, burgundy and midnight blue', width: 1770, height: 889 },
- { src: '/images/pics/hero_slide2.jpg', alt: 'Lavender Gourmet Gifts box with savoury snacks, tea, nuts and a floral candle', width: 1448, height: 1086 },
- { src: '/images/small_anipics/framee_optimized.jpg', alt: 'Ivory, forest-green and charcoal gift hampers with gourmet treats by candlelight', width: 1672, height: 941 },
+ { src: '/images/brand/burgundy_india_hamper.webp', alt: 'Burgundy India gift hamper with gourmet snacks and keepsakes', width: 1448, height: 1086 },
+ { src: '/images/pics/hero_slide2.webp', alt: 'Lavender Gourmet Gifts box with savoury snacks, tea, nuts and a floral candle', width: 1448, height: 1086 },
+ { src: '/images/brand/burgundy_india_hamper.webp', alt: 'Burgundy India gift hamper with gourmet snacks and keepsakes', width: 1448, height: 1086 },
 ];
 
 export default function HeroSlideshow() {
@@ -44,8 +44,7 @@ export default function HeroSlideshow() {
   let timer: ReturnType<typeof setTimeout> | undefined;
   const schedule = () => {
    clearTimeout(timer);
-   const focused = hero.contains(document.activeElement);
-   if (motion.matches || document.hidden || !visible || focused) return;
+   if (motion.matches || document.hidden || !visible) return;
    timer = setTimeout(() => {
     const order = [...ready].sort((a, b) => a - b);
     const next = order.find(index => index > activeIndex) ?? order[0];
@@ -56,16 +55,12 @@ export default function HeroSlideshow() {
   observer.observe(hero);
   motion.addEventListener('change', schedule);
   document.addEventListener('visibilitychange', schedule);
-  hero.addEventListener('focusin', schedule);
-  hero.addEventListener('focusout', schedule);
   schedule();
   return () => {
    clearTimeout(timer);
    observer.disconnect();
    motion.removeEventListener('change', schedule);
    document.removeEventListener('visibilitychange', schedule);
-   hero.removeEventListener('focusin', schedule);
-   hero.removeEventListener('focusout', schedule);
   };
  }, [activeIndex, ready]);
 
@@ -73,11 +68,11 @@ export default function HeroSlideshow() {
   <div className="hero-slideshow" ref={stage} aria-live="off">
    {slides.map((slide, index) => <div
     className={`hero-slide${index === frame.current ? ' hero-slide--current' : index === frame.previous ? ' hero-slide--previous' : ''}`}
-    key={slide.src} aria-hidden={index !== frame.current}
+    key={`${slide.src}-${index}`} aria-hidden={index !== frame.current}
    >
-    {index > 0 && <div className="hero-slide-backdrop" style={{ backgroundImage: `url("${slide.src}")` }} aria-hidden="true"/>}
-    <img className="gift-hero-image" src={slide.src} alt={slide.alt} width={slide.width} height={slide.height}
-     fetchPriority={index === 0 ? 'high' : 'low'} decoding={index === 0 ? 'auto' : 'async'}/>
+    <Image className="gift-hero-image" src={slide.src} alt={slide.alt} fill sizes="100vw"
+     preload={index === 0} loading={index === 0 ? undefined : 'eager'}
+     fetchPriority={index === 0 ? undefined : 'low'} />
    </div>)}
   </div>
  );

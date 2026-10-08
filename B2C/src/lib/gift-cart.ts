@@ -35,21 +35,28 @@ export async function waitForGiftCartBeforeSignIn(): Promise<void> {
 }
 
 export function addGiftItem(id: string): Promise<Draft> {
+ return changeGiftItemQuantity(id, 1);
+}
+
+export function changeGiftItemQuantity(id: string, change: 1 | -1): Promise<Draft> {
  return queueGiftCartWrite(async () => {
+  if (change !== 1 && change !== -1) throw new Error('Invalid quantity change.');
   for (let attempt = 0; attempt < 2; attempt++) {
    const draft = await api<Draft>('/auth/gift/draft');
    const existing = draft.items.find(item => item.id === id);
-   if ((existing?.quantity || 0) >= 99) throw new Error('You already have 99 of this item in your cart.');
+   const quantity = (existing?.quantity || 0) + change;
+   if (quantity > 99) throw new Error('You already have 99 of this item in your cart.');
+   if (quantity < 0) return draft;
    const items = existing
-    ? draft.items.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item)
-    : [...draft.items, { id, quantity: 1 }];
+    ? draft.items.flatMap(item => item.id !== id ? [item] : quantity ? [{ ...item, quantity }] : [])
+    : [...draft.items, { id, quantity }];
    let saved: Draft;
    try {
     saved = await api<Draft>('/auth/gift/draft', 'PUT', { revision: draft.revision, boxes: draft.boxes, items });
    } catch (error) {
     // A rejected revision can be retried safely. An ambiguous network failure cannot.
     if (error instanceof ApiError && error.status === 409 && attempt === 0) continue;
-    if (!(error instanceof ApiError)) throw new Error('Could not confirm the addition. Check your cart before trying again.');
+    if (!(error instanceof ApiError)) throw new Error('Could not confirm the cart change. Check your cart before trying again.');
     throw error;
    }
    window.dispatchEvent(new Event('b2c-cart-change'));

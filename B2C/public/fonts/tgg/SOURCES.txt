@@ -1,0 +1,36 @@
+The Gourmet Gifts self-hosted brand fonts
+Downloaded 2026-10-07 from the official Google Fonts service.
+
+Both WOFF2 assets are normal-style variable fonts using the Latin subset.
+CSS exposes the verified supported variable ranges: Cormorant Garamond 300–700
+and Plus Jakarta Sans 200–800, preserving existing weights on other routes.
+Homepage role styles limit their own use to a few approved weights.
+
+Stylesheet request:
+https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap
+
+Cormorant Garamond Latin WOFF2:
+https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2
+License source:
+https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/OFL.txt
+Local license: CormorantGaramond-OFL.txt
+
+Plus Jakarta Sans Latin WOFF2:
+https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2
+License source:
+https://raw.githubusercontent.com/google/fonts/main/ofl/plusjakartasans/OFL.txt
+Local license: PlusJakartaSans-OFL.txt
+
+Original binary assets are redistributed unchanged. Other scripts/glyphs use
+the application's existing fallback fonts; no additional font subset is loaded.
+
+Manrope Latin WOFF2 added 2026-10-07 for the user's storefront title revision:
+https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSvfedN4.woff2
+Official stylesheet request:
+https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap
+License source:
+https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/OFL.txt
+Local license: Manrope-OFL.txt
+Verified supported variable weight range: 200–800. Latin binary: 24,576 bytes.
+Menu and body roles retain Plus Jakarta Sans; legacy/admin serif roles retain
+Cormorant Garamond. No additional online stylesheet is used at runtime.

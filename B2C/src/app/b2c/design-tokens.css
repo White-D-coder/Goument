@@ -1,0 +1,29 @@
+/* Home design tokens: shared values, independent from legacy card/commerce styles. */
+.tgg-home {
+  --tgg-ivory: #faf8f2;
+  --tgg-white: #fffdf8;
+  --tgg-stone: #efebe2;
+  --tgg-burgundy: #4a0404;
+  --tgg-ink: #302b27;
+  --tgg-muted: #70665e;
+  --tgg-gold: #a68a60;
+  --tgg-line: #ded7cc;
+  --tgg-serif: 'Cormorant Garamond', Georgia, serif;
+  --tgg-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --tgg-title: clamp(42px, 4.2vw, 58px);
+  --tgg-heading: clamp(26px, 2.25vw, 34px);
+  --tgg-body: 14px;
+  --tgg-space-1: 8px;
+  --tgg-space-2: 16px;
+  --tgg-space-3: 24px;
+  --tgg-space-4: 40px;
+  --tgg-space-5: 64px;
+  --tgg-space-6: 40px;
+  --tgg-content: 1280px;
+  --tgg-radius: 2px;
+  --tgg-ease: cubic-bezier(.22, .61, .36, 1);
+  --tgg-duration: 260ms;
+}
+@media (max-width: 700px) {
+  .tgg-home { --tgg-title: 42px; --tgg-heading: 27px; --tgg-space-5: 48px; --tgg-space-6: 32px; }
+}

@@ -1,5 +1,38 @@
 # User Flows
 
+## 2026-10-07 — Consumer-first Home discovery (R58)
+
+CURRENT / IMPLEMENTED: Home → Shop Gifts or Explore Collections → browse eight occasion covers/four favourites → existing collection/product page → priced gift cart action or enquiry-only hamper details. Occasion covers link to existing suitable destinations; they do not create backend occasion categories. The three principal collections remain Hampers, Laddoo Candles and merged Premium Stationery. India remains one product with Burgundy/Lavender detail thumbnails.
+
+The quieter lower-page story explains flavours, photographed hamper contents and presentation, then introduces Wedding/Tea-Coffee gifts. Make it personal → required recipient/message, optional sender and occasion → native text validation/300-character bound → prepare an encoded email draft. The visitor sends from their own mail client; no note is saved to cart/order and no complimentary service is implied. Corporate links reach the separate corporate site. Home's focused footer retains existing email/company/GST details; account remains reachable through the phone menu.
+
+Shop opens Envelopes/Hampers; in short mobile viewports the menu scrolls vertically. Escape closes Shop to its trigger, then the main menu to its button. Native FAQs remain usable without JS. Approved testimonials render only when actual endorsed data is supplied. Earlier Home order/restoration records below are SUPERSEDED ON HOME by R58; Shop/PDP/cart contracts remain. Evidence and limits: TESTING.
+
+
+## 2026-10-07 — Editorial product detail and personalisation enquiry
+
+CURRENT / IMPLEMENTED: collection → product gallery (India thumbnail switch retained) → product name/short description → catalogue price and existing cart action, or Price on enquiry for preview hampers → contents/lifestyle/personalisation → expandable finer details → related gifts or corporate enquiry. Desktop purchase information remains beside gallery scrolling; phones/short viewports use ordinary flow. Gift product add/+/- retains the existing cookie/revision/queue flow and failure retention.
+
+Personalise → expand gift-note module → enter up to300 characters → Email this request opens the visitor's email composer with product and note encoded. Bulk/preview/delivery links also compose enquiries to the existing footer concierge address. No email is sent by the site; no note is attached to a cart/order; availability/charges are explicitly subject to confirmation. Product navigation resets local note, purchase and gallery state. Actual email delivery/live backend writes were not verified.
+
+## 2026-10-07 — Restore the previous homepage
+
+CURRENT / IMPLEMENTED: Home again follows the earlier hero → two hamper cards → three collection choices → occasion rail → assurance/brand story journey. Hero, Shop dropdown and product detail destinations retain prior behavior; India Hamper keeps its Burgundy/Lavender thumbnail gallery. Removed the recently introduced scroll-story/stacking interaction at the user’s request.
+
+## 2026-10-07 — Editorial Home journey
+
+SUPERSEDED / REVERTED: user explicitly rejected this redesign and requested the previous homepage. The implementation and its dedicated tests/assets have been removed; details below record the attempted design and its historical checks.
+
+HISTORICAL / REVERTED: arrive on burgundy → image mask/headline introduction → scroll or activate the discover cue → same photo contracts into an ivory brand statement → continue through three sticky gift-story chapters → four collection pages stack in order → choose an existing collection route or continue to the two hamper product cards. Reverse scrolling restores prior scene/chapter states. Our Story anchors to ProductStory and Occasions anchors to the collection stack. Reduced motion/short screens expose normal unpinned content; no-JS retains sequential content and links. Catalogue/cart/payment behavior is unchanged. Checks: TESTING.
+
+## 2026-10-07 — Shop collection navigation
+
+CURRENT / IMPLEMENTED: open Shop → choose Envelopes or Hampers → dedicated collection page → existing product detail/cart actions. On smaller screens, open the main menu before expanding Shop; choosing a collection closes both menus. Keyboard users open with Enter/Space, Tab through links and press Escape to close/refocus Shop. Sort submissions and pagination remain on the selected collection route; Home/Shop breadcrumbs return to the broader catalogue. Empty collections offer all gifts and the existing gift builder. Product/cart/payment contracts are unchanged. Runtime evidence: TESTING.
+
+## 2026-10-05 — Compact gift detail quantity controls
+
+CURRENT / IMPLEMENTED: open gift detail → read existing draft quantity → Add to Cart → confirmed saved quantity shows beside the button → +/- apply one-unit changes → minus at1 removes row/counter. Pending controls are disabled; failures keep the last confirmed quantity and show an alert. Add remains an increment action while the counter is visible. Reopening reads the same cookie-owned draft. Duplicate/open copy and redundant success/pricing paragraphs removed. Card additions, cart packaging and sign-in continuity retain their current paths. No live persistence checked in this increment; browser responses are mocked (TESTING).
+
 ## 2026-09-30 — Guest shopping through sign-in
 
 CURRENT / IMPLEMENTED: guest Add to Cart → confirmed saved selection → Account → finish pending cart work → email signup/login or Google redirect → same cart with previous quantities/boxes → continue adding while signed in. Refresh and repeated login read the existing draft; no login-time copying/merging. Builder/cart reads that can create a cookie and quantity/box writes share the card queue so a late old page cannot replace the active cookie. Failed pending work blocks sign-in navigation with a review-cart message; no ambiguous write replay. Checkout remains authenticated. Configured Atlas is currently unavailable; isolated Mongo tests establish code behavior only.

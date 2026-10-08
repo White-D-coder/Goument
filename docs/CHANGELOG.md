@@ -1,4 +1,276 @@
+## 2026-10-09 — Redesign lower product-detail sections (R96)
+
+CURRENT / IMPLEMENTED source: join the product lifestyle image and giving statement into one responsive editorial row, make personalisation a tighter three-step panel, and contain the finer details accordions in an ivory card. Preserve all copy and interactions. Verification pending.
+
+## 2026-10-09 — Remove the PDP “What’s inside” story section (R95)
+
+CURRENT / IMPLEMENTED source: remove the complete numbered photo-and-copy contents story and its CTA from the product detail page. Keep the hero gallery and the separate collapsed “What’s included” accordion. Typecheck, production build, CSS parsing and `git diff --check` passed; browser appearance remains UNKNOWN.
+
+## 2026-10-09 — Keep phone titles in regular sans font (R94)
+
+CURRENT / IMPLEMENTED source: use Plus Jakarta Sans for B2C page/section/card headings on phones through 640px; keep Cormorant Garamond on larger screens. Admin typography is excluded. CSS parsing and `git diff --check` passed; browser appearance was not verified.
+
+## 2026-10-09 — Unify B2C titles with Cormorant Garamond (R93)
+
+CURRENT / IMPLEMENTED source: give B2C page, section and card headings one professional editorial face using the existing local Cormorant Garamond font on larger screens. R94 uses Jakarta for phone titles. Preserve typography sizes and other roles: Jakarta body/navigation/controls, admin display, spacing, colors and commerce. Supersedes the recent mixed Pagio/Manrope title direction. Typecheck, production build, CSS parsing and `git diff --check` passed; browser appearance was not verified.
+
+## 2026-10-09 — Phone-first storefront pass (R91–R92)
+
+CURRENT / IMPLEMENTED source: tighten mobile layouts across consumer storefront routes, prioritizing product photography and compact cards while reducing nonessential editorial copy and section spacing. Keep core selection, enquiry, account, order, delivery and payment controls available. Home philosophy keeps its heading and short value labels but hides long descriptive copy on phones. Footer `Shop`, `Discover` and contact headings now use Cormorant Garamond with smaller phone sizing. Desktop/tablet layouts are not intentionally changed. Browser/device appearance not verified.
+
+## 2026-10-09 — Show only hamper image and title on phones (R90)
+
+CURRENT / IMPLEMENTED source: hide the Home hamper description and Explore button on phones, leaving the linked image and linked product title. Desktop/tablet content is unchanged. Browser verification not run.
+
+## 2026-10-09 — Open Shop dropdown on hover (R89)
+
+CURRENT / IMPLEMENTED source: Shop categories now appear on hover and close on pointer leave. Touch click toggling and keyboard dismissal/focus remain. Browser verification not run.
+
+## 2026-10-09 — Add all four categories to the Shop dropdown (R88)
+
+CURRENT / IMPLEMENTED source: replace the current two dropdown entries with Envelopes, Hampers, Laddoo Candles and Premium Stationery. Each entry opens its filter on the main Shop page. Browser verification not run.
+
+## 2026-10-09 — Emphasize hamper photos on phones (R87)
+
+CURRENT / IMPLEMENTED source: give phone hamper photos more space and tighten their title/copy/action panels while keeping carousel and desktop/tablet styles intact. Browser verification not run.
+
+## 2026-10-09 — Hide Gourmet Story intro on phones (R86)
+
+CURRENT / IMPLEMENTED source: remove the title, paragraph and Explore gourmet hampers link from the phone layout while retaining the story carousel/cards and larger viewport presentation. Browser verification not run.
+
+## 2026-10-09 — Add a phone-only hamper carousel (R85)
+
+CURRENT / IMPLEMENTED source: Home hampers now sit side by side in a swipeable, scroll-snapping carousel on phone widths, with a partial next card visible. Tablet/desktop grids remain unchanged. Browser verification not run.
+
+## 2026-10-09 — Keep Envelopes and Hampers in All gifts (R84)
+
+CURRENT / IMPLEMENTED source: sidebar category links now filter the main Shop route, and the unfiltered catalogue includes both existing hamper previews alongside its current products. Preview cards remain enquiry-only; direct collection routes are preserved. Browser verification not run.
+
+## 2026-10-09 — Round the corporate CTA section
+
+CURRENT / IMPLEMENTED source: added matching rounded top corners to the Home corporate CTA section, with a smaller radius on phones.
+
+## 2026-10-09 — Add watermark to hamper section corners
+
+CURRENT / IMPLEMENTED source: added the existing mandala to both top corners of the Home hamper section, with a short fade down the section. Existing card positions and watermark asset remain. Browser verification not run.
+
+## 2026-10-09 — Hide Home viewport scrollbar
+
+CURRENT / IMPLEMENTED source: hide the B2C Home viewport scrollbar with cross-browser CSS while preserving page scrolling and existing inner carousel rails. Browser verification not run.
+
+## 2026-10-09 — Restore the Home side watermark
+
+CURRENT / IMPLEMENTED source: applied the existing Diwali mandala background to the B2C Home at 26% opacity with a horizontal edge mask, keeping the motif behind its content. Reuses the existing image; no asset or dependency added. Browser verification not run.
+
 # Changelog
+
+## 2026-10-08 — Center Home FAQ (R79)
+
+CURRENT / IMPLEMENTED source: centered the FAQ heading, questions and answers in a responsive max-width column while retaining the accordion controls and interaction.
+
+## 2026-10-08 — Smooth flavour-story carousel (R78)
+
+CURRENT / IMPLEMENTED source: made the three Home flavour cards swipeable and scroll-snapped, with previous/next controls, keyboard access and reduced-motion support.
+
+## 2026-10-08 — Remove Home packaging feature (R77)
+
+CURRENT / IMPLEMENTED source: removed the packaging section, its three photo captions and dedicated styles from the Home page.
+
+## 2026-10-08 — Remove hero calls to action (R76)
+
+CURRENT / IMPLEMENTED source: removed the three Home hero links and centered the monogram on the background image.
+
+## 2026-10-08 — Replace Home hero copy with TGG monogram (R75)
+
+CURRENT / IMPLEMENTED source: recolor the supplied monogram white over its transparent background, replacing the hero headline/supporting paragraph. Keep accessible h1 text, existing actions and reveal motion.
+
+## 2026-10-08 — Remove stacked Home hero spacing (R74)
+
+CURRENT / IMPLEMENTED source: consolidated text-group spacing, removed the nested mobile margin that doubled the gap above the calls to action and tightened vertical padding.
+
+## 2026-10-08 — Improve Home hero readability (R73)
+
+CURRENT / IMPLEMENTED source: allowed the hero to grow on short viewports, increased background shading for text contrast, separated the two shop actions visually, clarified the Corporate link and changed the headline font to Manrope.
+
+## 2026-10-08 — Editorial Gourmet Story section (R72)
+
+CURRENT / IMPLEMENTED source: reorganized the regional flavour section into a split heading/intro and three numbered image stories with a compact mobile composition. Existing content and routes are preserved.
+
+## 2026-10-08 — India hamper hero and larger headline (R71)
+
+CURRENT / IMPLEMENTED source: set the India hamper photo as the first hero slide, apply Cormorant Garamond directly to the hero title and enlarge it responsively, and remove the divider before Brand Philosophy.
+
+## 2026-10-08 — Remove Home hero pause/play control (R70)
+
+CURRENT / IMPLEMENTED source: removed the visible pause/play control and its desktop/mobile CSS; the slideshow continues its existing timed crossfades.
+
+## 2026-10-08 — Remove Home collection and occasion feature sections (R69)
+
+CURRENT / IMPLEMENTED source: removed the three-link collection strip and “Good gifts, in good company” Wedding/Tea & Coffee feature block. Hero and header collection actions now lead to `/shop`; dedicated catalogue routes remain. No browser preview was run.
+
+## 2026-10-08 — Centered Home hero and footer-matched animation (R68)
+
+CURRENT / IMPLEMENTED source: centered the hero copy/actions, switched the brand/headline to Cormorant and the supporting copy to Jakarta, and matched the `frontend_appview` footer wordmark's staggered rise/blur transition with reduced-motion support. Used the requested concise supporting copy. No browser preview was run.
+
+## 2026-10-08 — Remove Home favourites heading (R66)
+
+SUPERSEDED IN PART by R67: heading removal was followed by removal of the Home product-card block.
+
+## 2026-10-08 — Home hampers lead directly to collections (R67)
+
+SUPERSEDED by R69: the collection strip was subsequently removed from Home. Dedicated Shop collection routes remain current.
+
+## 2026-10-08 — Home headline typography (R65)
+
+CURRENT / IMPLEMENTED source: changed Home section and product headings from the oversized Cormorant/Manrope mix to bundled Pagio Regular, with tighter responsive sizes and more restrained tracking. R68 supersedes this font change for the hero. Body, navigation and commerce controls remain unchanged. No browser preview/build was run.
+
+## 2026-10-08 — Home favourites product cards (R64)
+
+SUPERSEDED ON HOME by R67: these feature cards were removed from Home. Dedicated Shop/product cards remain.
+
+## 2026-10-08 — Overlay hamper cards and quieter Home headline (R63)
+
+CURRENT / IMPLEMENTED source: removed the hamper capsule and separate text panel; centered copy now reveals over the image on hover/focus, stays visible on touch, and does not zoom the photo. Reduced and changed the hero headline to a refined display face with warmer supporting copy; R65 supersedes its temporary Cormorant assignment. Commerce routes/data and SEO metadata remain unchanged. No build/browser check was run; see CURRENT_STATUS.
+
+## 2026-10-08 — Hampers replace Home occasion discovery (R62)
+
+CURRENT / IMPLEMENTED source at R62; R67 removed post-hamper Candles/Shagun feature cards; R69 removed the later collection strip and Wedding/Tea & Coffee feature section. R62 replaced the post-hero occasion grid with the Ivory and India preview hampers over the pinned hero photograph. Latest interaction redesign places centered product text directly over each image, revealing it softly on hover/focus and keeping it visible on touch; removed the capsule and separate panel. Image zoom is disabled. Existing enquiry-only state and detail links remain. Home navigation/footer point to the Hamper showcase. Dedicated Shop navigation and collections remain. No tests/build/browser checks were run; visual acceptance is UNKNOWN.
+
+## 2026-10-08 — Split-rail occasions layout (R61)
+
+SUPERSEDED ON HOME by R62; no longer mounted.
+
+## 2026-10-08 — Home occasion mosaic (R60)
+
+SUPERSEDED IN PART by R61 for desktop/tablet arrangement. The tile photo treatment and mobile composition remain current.
+
+## 2026-10-08 — Home hero/occasion scroll layer and titles (R59)
+
+CURRENT / IMPLEMENTED source: the full-screen hero stays sticky behind the “Who are you thinking of?” occasion panel while it scrolls upward, then leaves when the opening wrapper ends. The full-width ivory occasion panel has rounded top corners and responsive overlap/spacing. Storefront title font roles switch to Manrope while navbar/body typography stays Plus Jakarta Sans. No tests or build were run; runtime and visual acceptance are UNKNOWN.
+
+## 2026-10-07 — Minimal premium B2C Home (R58)
+
+CURRENT / IMPLEMENTED source: rebuilt Home from the latest consumer ecommerce brief using ivory/burgundy/sparse-gold, existing photographs, short serif headlines and reusable typed sections. Compact lavender-photo opening; eight occasion covers; four favourites with real price/enquiry boundaries; three collection links; brand/assurance/region/contents/packaging stories; Wedding and Tea/Coffee features; validated personalisation email form; secondary corporate entry; truthful testimonials/FAQ and Home-only footer. The dark burgundy split and oversized panoramic attempts were rejected and replaced. Earlier R55/R54/R57 Home presentation/order is superseded; dedicated Shop/PDP and commerce invariants remain.
+
+Self-hosted the existing Cormorant/Jakarta Latin variable fonts (65,048bytes with official OFL/provenance), removed Google font stylesheet requests, scoped Home tokens/styles, added restrained optional mask motion and responsive image sizing/preload. Metadata/schema use the confirmed `https://b2c-tau-weld.vercel.app/b2c` canonical and rendered content. Moved loading fallbacks away from the root Home boundary. Final technical checks and limitations are in TESTING; this entry records implemented source, not a production deployment or commercial readiness claim. Existing policy/stock/endorsement unknowns remain.
+
+## 2026-10-07 — Rework rejected hamper cards
+
+SUPERSEDED ON HOME by R58. The dedicated Hampers card rules remain; checks below are historical evidence for this earlier increment.
+
+CURRENT / IMPLEMENTED: fixed Home's four-column CSS override by separating the hamper grid from the legacy signature grid. Introduced two wide cards/one phone column on Home and the Hampers collection, with fine whole-card borders, larger contained photos, compact typography, Price on enquiry and View hamper arrow links. Other card styles and product details remain unchanged. TypeScript, scoped ESLint, CSS parsing and14 responsive route/viewport checks pass; details and limits in TESTING.
+
+## 2026-10-07 — Premium editorial product inside pages
+
+CURRENT / IMPLEMENTED: replaced the compact product detail layout with large responsive photography, desktop sticky purchase information, contents storytelling, personalisation enquiry, native accordions, related products and a burgundy consultation CTA. Retained India thumbnail variants and existing gift-cart writes/counters. Restored catalogue price visibility in the gift purchase panel; preview hampers remain enquiry-only. Added300-character gift-note email composition without changing cart/API contracts. Route-scoped CSS preserves Home/shared cards/navigation. Local TypeScript/scoped lint,23 existing regression tests and responsive browser/cart checks pass; policy/live-commerce limitations remain documented in TESTING/TODO.
+
+SUPERSEDED ON HOME by R58 (2026-10-07): earlier moved the existing hamper section before collections, preserving markup/styles/actions. Scoped ESLint and HTTP-rendered order were verified for that version.
+
+## 2026-10-07 — Restore the previous homepage
+
+SUPERSEDED ON HOME by R58's later explicit redesign brief. R52/R53's rejected scenes remain removed.
+
+CURRENT / IMPLEMENTED: reverted the rejected cinematic hero/product-story/collection-stack redesign. Previous homepage sections, header branding and motion restored; new scene source/styles/tests and three derivative images removed. Earlier hamper/gallery/navigation/card changes preserved. TypeScript, scoped lint,7 current tests and HTTP-rendered Home check pass.
+
+## 2026-10-07 — Cinematic hero, product story and magazine collections
+
+SUPERSEDED / REVERTED: user explicitly rejected this redesign and requested the previous homepage. The implementation and its dedicated tests/assets have been removed; details below record the attempted design and its historical checks.
+
+HISTORICAL / REVERTED: replaced Home's conventional opening and small collection/occasion rows with a full-screen mask reveal, scroll-contracted framed image/brand statement, three-stage pinned product narrative and four native sticky collection panels. Existing photos/typefaces/brand palette and two preview hamper products retained. Removed Home mounting of particles/slideshow/generic fade-ups, added same-image WebP assets and accessible reduced-motion/short-height fallbacks. Header wordmark/contrast follow the editorial scene. TypeScript, scoped lint,15 tests, CSS/diff and responsive browser checks pass. A lifecycle regression test caught/fixed reduced-motion header contrast caching; browser harness was corrected to await streamed Shop content. TESTING records evidence and production limits.
+
+## 2026-10-07 — Include text and actions inside the frame
+
+CURRENT / IMPLEMENTED: moved gold decoration from the photograph to the full ProductCard in response to the user's correction. Reused asset with proportional corner slices, ivory card surface and responsive content clearance. Photo/title/amount/cart action/feedback now share one frame. CSS parsing, diff check and responsive full-card containment/button-access checks pass; no asset regeneration or commerce change.
+
+## 2026-10-07 — Reference gold filigree frame
+
+CURRENT / IMPLEMENTED: replaced the user-rejected plain mount with a built-in-imagegen transparent frame based on the supplied ornate gold reference. Four scrollwork corners, double rectangular rules and fleur-de-lis motifs surround a12%-inset rounded photograph. Optimized sibling WebP preserves alpha; original assets retained. CSS and final-source responsive checks pass; alpha analysis verifies decoration does not visibly cross into the photo. Prompt/provenance and verification limits: UI_SYSTEM/TESTING.
+
+## 2026-10-07 — Cut-corner stationery frame
+
+CURRENT / IMPLEMENTED: replaced the arched product-photo frame with an ivory stationery mount, narrow antique-gold outer/inner edges and small diagonal corners. Scoped native CSS adapts insets/corners on phones; photographs stay contained and stationary. Existing card type, content, actions and grids retained. Previewed on existing photographs before applying source; CSS parsing, diff check and responsive final-source browser checks pass. Visual acceptance remains UNKNOWN.
+
+## 2026-10-07 — Envelopes and Hampers under Shop
+
+CURRENT / IMPLEMENTED: added an accessible desktop/mobile Shop disclosure and dedicated collection pages with existing photographs, cards, fixed catalogue searches, sort/pagination and clear empty states. Updated Home/Shop hamper destinations; retained the merged Home Premium Stationery collection. Browser inspection exposed a pre-existing mobile wordmark width issue hiding the menu button; responsive header spacing,18px wordmark and wrapping fix that within this navigation task. TypeScript, scoped lint, seven existing tests, CSS parsing and isolated responsive browser checks pass. Verification limits and test-harness corrections: TESTING. Catalogue category/Atlas-count debt recorded without backend changes.
+
+## 2026-10-05 — Typography audit and identified conflict
+
+CURRENT / IMPLEMENTED: documented actual storefront fonts, role sizes at1440/390px,7 globally configured custom families plus dormant Kids font, unused declarations and Arial Google-sign-in exception. Confirmed footer h2 intended Jakarta is overridden by global important Cormorant rule; recorded P2 follow-up and action-style inconsistency. Audit-only: no CSS/TSX/font asset changes.
+
+## 2026-10-05 — Arched product card direction
+
+CURRENT / IMPLEMENTED: replaced the rejected nested rounded card with a fine gold arch around tall product photography and open details. Centered burgundy serif titles and solid44px burgundy actions; no outer surface/border/shadow/hover lift. Photos remain contained and stationary; original fonts/images and purchase/preview behavior retained. CSS parsing, diff check and responsive final-source browser checks pass. Visual acceptance remains UNKNOWN.
+
+## 2026-10-05 — Photo-first product card revision
+
+CURRENT / IMPLEMENTED: redesigned shared Home/Shop cards with a gold-framed photograph, quiet ivory surface, left-aligned serif name and smaller amount.44px outlined action has label/icon separation, burgundy hover and visible focus. Disabled card ornament pseudo-elements and lift, replacing accumulated card CSS with one scoped definition. Existing images/fonts/cart and preview branches retained. CSS parsing, diff check and isolated responsive browser checks pass; TESTING records scope.
+
+## 2026-10-05 — Compact card revision after visual rejection
+
+CURRENT / IMPLEMENTED: replaced the oversized crest header with a small gold ornament integrated into the inner top rule. Photo clearance drops to38px desktop /30px phone; descriptions and hidden flourish are removed. Compact name/amount/action stack uses a flat burgundy button with6px corners and no shadow. Existing images, font families, preview/cart branches and no-zoom rules preserved. TypeScript, scoped ProductCard lint, CSS parsing and responsive Chrome checks pass; details in TESTING.
+
+## 2026-10-05 — Royal crest above product photos
+
+CURRENT / IMPLEMENTED: reference-inspired transparent gold crown/lotus artwork now replaces the top border on Home/Shop cards. Added a720×405 alpha WebP and an open-top sibling SVG; centered crest has reserved space and responsive size capped at180px. Photographs stay inside the side frame below the ornament; no image zoom or return of removed capsules/likes. CSS/SVG parsing, alpha metadata/empty-pixel samples and diff check pass. Responsive browser checks: TESTING.
+
+## 2026-10-05 — Photos inside the inner frame
+
+CURRENT / IMPLEMENTED: inset shared Home/Shop product photos on the top and both sides using clamp(14px,5%,26px), so the inner gold border and corner strokes remain clear. Replaces flush photo placement while preserving frame, typography, actions and disabled image zoom. CSS parsing passed; responsive browser evidence: TESTING.
+
+## 2026-10-05 — Remove card capsules and like button
+
+CURRENT / IMPLEMENTED: removed the top category badge and wishlist heart on Home/Shop cards, including unused favourite hooks/subscription/feedback and matching CSS. Existing royal frame, photos, no-zoom treatment, product content and cart/detail actions retained. Verified TypeScript, scoped ProductCard ESLint, CSS parsing and diff check; browser DOM/layout checks documented in TESTING. No backend/storage deletion/payment change or production build.
+
+## 2026-10-05 — Minimal royal frame and no image hover zoom
+
+CURRENT / IMPLEMENTED: designed an original941byte SVG frame with antique-gold outline, subtle corner details and small gold/burgundy diamond accents for shared Home/Shop cards. Replaces the active floral raster asset; earlier designs preserved. Product photo reaches the top at full inner width; frame stays inset3px. Moved floating controls to18px desktop /12px phone. Removed image hover scaling and transform transition using a scoped rule that wins over existing global hover scales.
+
+VERIFIED: CSS/SVG parsing, diff check and isolated Chrome Home/Shop at320/390/768/1440px pass layout/border/control checks. Actual desktop pointer hover on each route keeps image transform:none and transition:0s after850ms. Desktop/phone screenshots inspected. No cart writes, TypeScript/build or backend/provider checks rerun for this CSS/vector-only change.
+
+## 2026-10-05 — Blue floral and gold frame trial
+
+CURRENT / IMPLEMENTED: switched shared Home/Shop cards to a transparent cut-out of the latest blue-flower/gold-scrollwork reference. New768×1085 alpha WebP210,652bytes; prior frames preserved. Card/control border accents now use existing gold#c5a059. Photo remains full width from the top;3px inset and readable/clickable controls retained.
+
+VERIFIED: CSS parsing, alpha inspection, diff check and isolated Chrome Home/Shop at320/390/768/1440px: photo alignment, complete-border styles, loaded images, no layout overflow and fitting/separate controls pass; action/heart hit targets remain accessible. Desktop/phone screenshots inspected. No production build/typecheck/cart/backend/provider checks rerun for this art/CSS-only trial.
+
+## 2026-10-05 — Fix the photo gap and clipped frame top
+
+CURRENT / IMPLEMENTED: removed50px desktop /28px phone top padding and extended card photos to the full inner width. Text retains its gutters/bottom spacing. Added a continuous peach1px outline and inset the existing floral overlay3px to protect it from rounded corner clipping. Repositioned category/wishlist controls below the top ornaments. Existing assets/type/cart behavior retained.
+
+VERIFIED: CSS parsing and isolated Chrome Home/Shop at320/390/768/1440px. Every photo starts1px below the card edge (only the border) and spans card width minus2px; complete border/inset styles, loaded photos, fitting buttons, non-overlapping controls and action/heart hit targets pass. Desktop/phone screenshots inspected. No cart writes, asset generation, typecheck/build or backend checks for this CSS-only correction.
+
+## 2026-10-05 — Cut-out frame on top of cards
+
+CURRENT / IMPLEMENTED: replaced the opaque floral card background with a transparent cut-out overlay above the photo. New alpha WebP137,586bytes,768×1152; centre removed with built-in imagegen and original retained. A pointer-transparent pseudo-element frames Home/Shop cards; content and controls retain readable/clickable layers. Layout/type/photos/cart flow unchanged. CSS parsing, alpha inspection and responsive browser layer/fit/hit-target checks pass; TESTING records exact limits.
+
+## 2026-10-05 — Floral card frame and product-detail counter
+
+CURRENT / IMPLEMENTED: added a reference-inspired floral invitation frame to shared Home/Shop cards using one38,042byte WebP. Responsive clear-centre padding, peach border and sage/pink ornaments retain existing photographs, fonts, amounts and actions. Added confirmed +/- quantity beside Add to Cart on gift details, removed repeated marketing/success/pricing text, and collapsed distinct additional information. Serialized delta helper preserves other items/boxes and existing revision handling; zero removes the item.
+
+Verified TypeScript/scoped lint,19 helper/API regressions, CSS parsing and Home/Shop browser fit at320/390/768/1440px; desktop/phone screenshots inspected. Product add/increment/error retention/decrement/reload/removal pass with isolated mocked draft responses and no live cart writes. TESTING records exact behavior and harness limits. No production build or backend/payment/deployment change.
+
+## 2026-10-05 — Reduce B2C loading/rendering costs
+
+Added Next's smooth-scroll marker, stopped repetitive header React state updates during scrolling, removed hidden blurred hero backdrops, compressed the three current hero photos from1.41MB to444KB at unchanged dimensions, and bounded/released confetti canvas memory without effect-driven React state. Existing design, slide order, crossfade and commerce logic retained.
+
+TypeScript/scoped lint, seven combined regressions, CSS/image checks and fresh homepage HTML pass. Warm homepageHTTP200 in0.593s; local development rebuilds also show76–183s trace spans. A before-change browser check reproduced poor scroll cadence; further browser diagnostics were declined, so post-change smoothness is unverified. No build/deployment or bundler switch. Full lint retains types.ts error/GiftBuilder warning; GoldPopper error resolved.
+
+## 2026-10-05 — Remove card Price label
+
+CURRENT / IMPLEMENTED: removed the standalone Price text from shared Home/Shop ProductCard and deleted its unused desktop/mobile CSS. Amount/preview text and card actions remain. Scoped ESLint, CSS parsing and local homepage HTML verification passed: four card amounts present, no price-label element. No commerce behavior change.
+
+## 2026-10-05 — Shagun merged into the stationery collection
+
+CURRENT / IMPLEMENTED: clarified the collection list to three options: Hampers, Laddoo Candles and Premium Stationery. Removed separate Shagun links from Home/Shop and shared category metadata; the merged stationery collection uses the existing Shagun envelopes image. Mobile links flex to fit the reduced row. Stationery search already includes envelopes, bookmarks and diary sets and remains unchanged.
+
+Verified TypeScript, scoped lint, CSS parsing and fresh local homepage HTML with exactly three collection titles and the expected stationery image. No browser geometry check or production build run; no database/payment changes.
+
+## 2026-10-05 — Merge stationery collection and update discovery links
+
+CURRENT / IMPLEMENTED: Home/Shop collection navigation now lists Hampers, Laddoo Candles, Premium Stationery and Shagun. Premium Stationery includes existing envelopes, bookmarks and custom diary gift sets; Shagun remains a focused shortcut. Completed the unfinished adapter with envelope inclusion, complete source pagination, duplicate removal and global stationery price/date ordering. Existing products, imagery and layout preserved.
+
+Verified TypeScript, scoped ESLint, three catalogue regressions and local HTTP-rendered labels/destinations/results. Full lint reports existing GoldPopperSprinkle/types errors and GiftBuilder warning; no browser visual check or production build run. No database, payment or deployment changes.
 
 ## 2026-10-05 — Luxury Hamper Cards Redesign, Cormorant Typography & Header Streamline
 

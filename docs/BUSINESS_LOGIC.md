@@ -86,3 +86,7 @@ Payment refund investigation derives `paidMinor - completedMinor - reservedMinor
 FUTURE / REQUIRED: configured provider refund execution/approval, invoice numbering/legal seller rules/PDF/private download, cancellation/stock/payment compensation, carrier automation, notification delivery and compatible durable jobs. UNKNOWN business policies stay explicit; no routine process is described as automated solely because a model/state enum exists.
 
 Sources: `B2C/backend/admin/{commands,mutations,reads,dashboard,staff,settings}.js`; existing `database/transactions/{inventory,coupons,payments,refunds}.js`.
+
+## 2026-10-05 — Gift detail quantity deltas
+
+CURRENT / IMPLEMENTED client: addition and decrement share one serialized read/modify/PUT operation against the latest GiftDraft. Each change is exactly+1 or-1; maximum99 is retained, zero removes the row, absent decrement reads without writing. A409 rereads/reapplies once; ambiguous failures do not replay or emit success. Box selections and unrelated item rows are copied from the latest draft. Pending saves disable detail controls; only confirmed saved quantities are displayed. Server packing/ownership/pricing/order/payment contracts unchanged. Verification: TESTING; live cart persistence UNKNOWN in this increment.

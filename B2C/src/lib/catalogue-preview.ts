@@ -41,15 +41,6 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
     pastelHover: 'group-hover:bg-[#EAEFE6]',
   },
   {
-    id: 'shagun',
-    label: 'Shagun Envelopes',
-    subtitle: 'Gold-foiled festive envelopes on handmade paper.',
-    image: '/images/items/shagun_envelopes.webp',
-    borderRadius: '53% 47% 41% 59% / 68% 66% 34% 32%',
-    pastelActive: 'bg-[#F6D07A]',
-    pastelHover: 'group-hover:bg-[#FCF0CE]',
-  },
-  {
     id: 'candles',
     label: 'Laddoo Candles',
     subtitle: 'Hand-sculpted festive motichoor laddoo wax candles.',
@@ -59,19 +50,10 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
     pastelHover: 'group-hover:bg-[#FBECE2]',
   },
   {
-    id: 'bookmarks',
-    label: 'Bookmarks',
-    subtitle: 'Artisanal illustrated keepsake bookmarks with silk tassels.',
-    image: '/images/items/bookmarks.webp',
-    borderRadius: '48% 52% 47% 53% / 58% 46% 54% 42%',
-    pastelActive: 'bg-[#988184]',
-    pastelHover: 'group-hover:bg-[#E8E2E3]',
-  },
-  {
-    id: 'corporate',
-    label: 'Diary & Pen Sets',
-    subtitle: 'Executive journal, insulated flask & pen with custom branding.',
-    image: '/images/items/sustainable_diary_bottle_pen.webp',
+    id: 'stationery',
+    label: 'Premium Stationery',
+    subtitle: 'Shagun envelopes, artisanal bookmarks and custom diary gift sets.',
+    image: '/images/items/shagun_envelopes.webp',
     borderRadius: '55% 45% 60% 40% / 50% 55% 45% 50%',
     pastelActive: 'bg-[#B08968]',
     pastelHover: 'group-hover:bg-[#EDE0D4]',
@@ -126,7 +108,7 @@ export const HAMPERS_CATALOG: HamperData[] = [
     brand: "Eternal Paper Co.",
     subCopy: "Intricately illustrated keepsake bookmarks with silk tassels and gold foil details.",
     category: "bookmarks",
-    categoryLabel: "Bookmarks",
+    categoryLabel: "Premium Stationery",
     inside_items: [
       {
         item: "Artisanal Keepsake Bookmarks",
@@ -146,7 +128,7 @@ export const HAMPERS_CATALOG: HamperData[] = [
     brand: "The Gourmet Gifts Bespoke",
     subCopy: "Bespoke corporate gifting trio featuring a vegan leather notebook, insulated bottle, and metal pen with personalized logo branding.",
     category: "corporate",
-    categoryLabel: "Executive Sets",
+    categoryLabel: "Premium Stationery",
     inside_items: [
       {
         item: "Executive Hardcover Diary",

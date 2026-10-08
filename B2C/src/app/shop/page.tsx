@@ -5,7 +5,7 @@ import ProductCard from '@/components/ProductCard';
 import { catalogue } from '@/lib/catalogue';
 import './shop.css';
 export const metadata = { title: 'The collection' };
-const edits = [['All gifts',''],['Shagun Envelopes','shagun'],['Laddoo Candles','candles'],['Bookmarks','bookmarks'],['Diary & Pen Sets','corporate']] as const;
+const edits = [['All gifts',''],['Envelopes','envelope'],['Hampers','hamper'],['Laddoo Candles','candles'],['Premium Stationery','stationery']] as const;
 export default async function Shop({searchParams}:{searchParams:Promise<{search?:string;sort?:string;page?:string}>}) {
  const params=await searchParams;
  const search=typeof params.search==='string'?params.search.trim():'';

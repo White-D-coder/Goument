@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="1088" viewBox="0 0 768 1088" preserveAspectRatio="none">
+  <defs>
+    <path id="corner" d="M62 24H34Q24 24 24 34V62M24 24L37 37M31 37L37 31"/>
+    <g id="jewel">
+      <path d="M360 12H370M398 12H408M384 4L392 12L384 20L376 12Z"/>
+      <path d="M384 9L387 12L384 15L381 12Z" fill="#4a0404" stroke="none"/>
+    </g>
+  </defs>
+  <g fill="none" stroke="#b89555" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M350 12H24Q12 12 12 24V1064Q12 1076 24 1076H350M418 12H744Q756 12 756 24V1064Q756 1076 744 1076H418"/>
+    <use href="#corner"/>
+    <use href="#corner" transform="translate(768 0) scale(-1 1)"/>
+    <use href="#corner" transform="translate(0 1088) scale(1 -1)"/>
+    <use href="#corner" transform="translate(768 1088) scale(-1 -1)"/>
+    <use href="#jewel" transform="translate(0 1088) scale(1 -1)"/>
+  </g>
+</svg>

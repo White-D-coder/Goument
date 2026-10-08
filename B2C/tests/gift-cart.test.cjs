@@ -13,7 +13,7 @@ function load(api) {
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
  vm.runInNewContext(compiled, { exports, require: name => { assert.equal(name, './api'); return { api, ApiError }; }, window: { dispatchEvent: e => events.push(e.type) }, Event });
- return { add: exports.addGiftItem, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
 }
 
 test('confirmed add preserves boxes and unrelated selections and increments the same item', async () => {
@@ -160,4 +160,51 @@ test('sign-in also waits for a builder save when there are no product-card addit
  assert.equal(navigated, false);
  release(); await Promise.all([saving, signingIn]);
  assert.equal(navigated, true);
+});
+
+test('counter decrement preserves packaging and other items, and zero removes the item', async () => {
+ let state = { ...empty(), revision: 3, boxes: [{ id: 'box', quantity: 1 }], items: [{ id: 'first', quantity: 2 }, { id: 'other', quantity: 4 }] };
+ const { change, events } = load(async (_url, method, body) => {
+  if (!method) return plain(state);
+  assert.equal(body.revision, state.revision);
+  state = { ...plain(body), revision: state.revision + 1 }; return plain(state);
+ });
+ await change('first', -1);
+ assert.deepEqual(state.items, [{ id: 'first', quantity: 1 }, { id: 'other', quantity: 4 }]);
+ await change('first', -1);
+ assert.deepEqual(state.items, [{ id: 'other', quantity: 4 }]);
+ assert.deepEqual(state.boxes, [{ id: 'box', quantity: 1 }]);
+ assert.equal(events.length, 2);
+});
+
+test('counter conflict retries the decrement against the latest quantity', async () => {
+ let state = { ...empty(), items: [{ id: 'first', quantity: 2 }] }, writes = 0;
+ const { change } = load(async (_url, method, body) => {
+  if (!method) return plain(state);
+  if (++writes === 1) {
+   state = { ...empty(), revision: 1, items: [{ id: 'first', quantity: 5 }, { id: 'other', quantity: 3 }] };
+   throw new ApiError('Changed', 409);
+  }
+  assert.equal(body.revision, 1); state = { ...plain(body), revision: 2 }; return plain(state);
+ });
+ await change('first', -1);
+ assert.deepEqual(state.items, [{ id: 'first', quantity: 4 }, { id: 'other', quantity: 3 }]);
+ assert.equal(writes, 2);
+});
+
+test('counter failures do not publish success or retry ambiguous writes', async () => {
+ let writes = 0;
+ const { change, events } = load(async (_url, method) => {
+  if (!method) return { ...empty(), items: [{ id: 'first', quantity: 2 }] };
+  writes++; throw new Error('Response lost');
+ });
+ await assert.rejects(change('first', -1), /Check your cart/);
+ assert.equal(writes, 1); assert.equal(events.length, 0);
+});
+
+test('decrementing an absent item does not write or create a zero quantity', async () => {
+ let writes = 0;
+ const { change, events } = load(async (_url, method) => { if (!method) return empty(); writes++; });
+ const result = await change('first', -1);
+ assert.equal(result.items.length, 0); assert.equal(writes, 0); assert.equal(events.length, 0);
 });

@@ -75,3 +75,24 @@
  .shop-edit .shop-product-card .gift-card-title { margin-bottom:5px; }
  .shop-edit .shop-product-card .gift-card-description { margin-bottom:6px; }
 }
+
+/* Phone storefront: lead with the gift photos and keep the catalogue compact. */
+@media(max-width:640px) {
+ .shop-edit { padding-top:10px; padding-bottom:18px; }
+ .shop-breadcrumb { margin-bottom:12px; }
+ .shop-intro { display:grid; grid-template-columns:minmax(0,1fr); padding:0; overflow:visible; background:transparent; }
+ .shop-intro-copy { display:block; padding:0 0 12px; }
+ .shop-intro .eyebrow,.shop-intro-description,.shop-intro-action { display:none; }
+ .shop-edit .shop-intro h1 { margin:0; font-size:34px; line-height:1.05; }
+ .shop-intro-visual { grid-column:auto; grid-row:auto; margin:0; aspect-ratio:1.6; overflow:hidden; border-radius:14px; }
+ .shop-intro-visual img { position:absolute; border-radius:14px; }
+ .shop-catalogue-layout { padding-top:14px; }
+ .shop-collections nav { gap:16px; margin-bottom:10px; }
+ .shop-toolbar { padding-bottom:0; }
+ .shop-results-meta { margin:8px 0 12px; }
+ .shop-edit .shop-product-grid { gap:18px 10px; }
+ .shop-edit .shop-product-card .gift-card-description { display:none; }
+ .shop-edit .shop-product-card .gift-card-title { font-size:12px; line-height:1.35; }
+ .shop-product-card .gift-card-content { padding-top:8px; }
+ .shop-product-card .gift-card-photo img { object-fit:contain; transform:none !important; }
+}

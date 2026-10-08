@@ -164,6 +164,34 @@ footer.b2b-store-footer, .b2b-store-footer{display:block !important;visibility:v
 .delivery-layout .notice { margin:20px 0; }
 @media(max-width:700px){.delivery-layout{grid-template-columns:1fr;gap:24px}.delivery-fields{grid-template-columns:1fr;gap:12px}.delivery-summary{padding:18px}.checkout-steps{font-size:11px}.checkout-steps span{margin:0 3px}}
 
+/* Phone storefront rhythm for gift building, cart and account surfaces. */
+@media(max-width:600px) {
+  #main .section { padding-top:24px; padding-bottom:24px; }
+  #main .gift-builder > .section-intro,
+  #main .gift-builder .builder-context p,
+  #main .builder-item > p,
+  #main .box-card p { display:none; }
+  #main .gift-builder > h1 { font-size:34px; line-height:1.08; margin-bottom:8px; }
+  #main .builder-filters { margin:10px 0 14px; }
+  #main .builder-grid,#main .boxes-grid,#main .cart-box-grid { gap:16px 10px; }
+  #main .builder-item-photo,#main .box-photo { aspect-ratio:1.08; overflow:hidden; border-radius:12px; }
+  #main .builder-item h2 { font-size:12px; line-height:1.35; }
+  #main .builder-item-action > .text-link { font-size:11px; }
+  #main .gift-cart-layout h2,#main .gift-box-options > h2 { font-size:21px; margin:8px 0; }
+  #main .gift-cart-row { padding:9px 0; }
+  #main .gift-cart-row > img { width:56px; height:56px; border-radius:8px; }
+  #main .gift-review { padding:14px; }
+  #main .gift-review p { font-size:11px; margin-bottom:8px; }
+  #main .account-page > .section-heading { margin-bottom:16px; }
+  #main .account-page .auth-intro-text > p:not(.eyebrow) { display:none; }
+  #main .account-page .auth-intro-text h1 { font-size:34px; }
+  #main .account-page .auth-layout { min-height:0; gap:12px; }
+  #main .account-page .auth-form { gap:12px; padding:16px; }
+  #main .account-page .auth-form h2 { font-size:25px; }
+  #main .orders-table { margin:14px 0; }
+  #main .orders-table-row { gap:6px; padding:12px; }
+}
+
 /* Payment options in checkout */
 .payment-options-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid #ddd8ce; }
 .payment-options-section h2 { font-size: 22px; margin-bottom: 16px; }
@@ -629,10 +657,18 @@ footer.b2b-store-footer, .b2b-store-footer{display:block !important;visibility:v
   z-index: 0;
   overflow: hidden;
 }
+.gift-purchase-controls { display: flex; align-items: center; gap: 12px; }
+.gift-purchase-controls > .button { min-width: 0; gap: 10px; }
+.gift-purchase-controls .gift-counter { flex-shrink: 0; }
+.gift-purchase > .cart-add-error { margin: 8px 0 0; }
+@media (max-width: 380px) {
+ .gift-purchase-controls { gap: 8px; }
+ .gift-purchase-controls > .button { padding-inline: 12px; }
+}
+
 .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
 .hero-slide--previous { opacity: 1; }
 .hero-slide--current { z-index: 1; opacity: 1; transition: opacity 1200ms ease-in-out; }
-.hero-slide-backdrop { position: absolute; inset: -12px; background-position: center; background-size: cover; filter: blur(12px); }
 .reference-home .hero-editorial .hero-slideshow .gift-hero-image {
   position: absolute; inset: 0; display: block; width: 100%; height: 100%;
   object-fit: cover; object-position: center; opacity: 1;

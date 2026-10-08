@@ -28,13 +28,13 @@ const edits = [
   },
   {
     id: 'corporate',
-    label: 'Executive Sets',
+    label: 'Premium Stationery',
     title: 'Diary, Bottle & Pen Set',
     description: 'Executive journal, insulated bottle & pen with custom logo branding.',
     image: '/images/items/sustainable_diary_bottle_pen.webp',
     alt: 'Executive diary bottle and pen set with custom branding',
-    href: '/products/diary-bottle-pen-set',
-    action: 'Custom Branding Sets',
+    href: '/shop?search=stationery',
+    action: 'Explore Stationery',
   },
 ];
 

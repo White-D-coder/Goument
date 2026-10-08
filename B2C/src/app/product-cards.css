@@ -1,294 +1,1515 @@
-/* Luxury Hamper Card: refined boutique silhouette, hairline gold border, floating badges, centered typography & elegant flourish. */
+/* ============================================================
+   PREMIUM LUXURY PRODUCT CARDS
+   FINAL CONSOLIDATED VERSION
+   ============================================================ */
+
 #main .luxury-hamper-card {
+  --wine: #4a0404;
+  --wine-hover: #650e0e;
+  --cream: #f7f2e9;
+  --panel: #eee8df;
+  --image-bg: #e8e0d5;
+  --text: #514638;
+  --border: rgba(74, 4, 4, 0.08);
+  --ease-luxury: cubic-bezier(.16, 1, .3, 1);
+
   position: relative;
+  isolation: isolate;
+
   display: flex;
   flex-direction: column;
-  min-width: 0;
+
   width: 100%;
+  min-width: 0;
   height: 100%;
+
   padding: 0;
+
   overflow: hidden;
-  border-radius: 20px;
-  background: #FFFFFF;
-  border: 1px solid rgba(197, 160, 89, 0.32);
-  box-shadow: 0 6px 24px -4px rgba(34, 25, 18, 0.06), 0 2px 6px -1px rgba(34, 25, 18, 0.03);
-  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 380ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease;
+
+  background: var(--cream);
+
+  border: 1px solid var(--border);
+  border-radius: 24px;
+
+  box-shadow:
+    0 8px 24px rgba(55, 25, 10, 0.045);
+
+  transform: translate3d(0, 0, 0);
+
+  transition:
+    transform 650ms var(--ease-luxury),
+    box-shadow 650ms var(--ease-luxury),
+    border-color 450ms ease;
 }
+
+
+/* ============================================================
+   REMOVE OLD GOLD FRAME
+   ============================================================ */
+
+#main .luxury-hamper-card::before,
+#main .luxury-hamper-card::after {
+  content: none;
+}
+
+
+/* ============================================================
+   CARD HOVER
+   ============================================================ */
 
 #main .luxury-hamper-card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 22px 46px -8px rgba(184, 134, 11, 0.18), 0 8px 22px -4px rgba(122, 25, 44, 0.1);
-  border-color: rgba(197, 160, 89, 0.72);
+  transform: translate3d(0, -5px, 0);
+
+  border-color: rgba(74, 4, 4, 0.14);
+
+  box-shadow:
+    0 20px 45px rgba(55, 25, 10, 0.09);
 }
 
-.luxury-hamper-card .gift-card-media {
+
+/* ============================================================
+   IMAGE STAGE
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-media {
   position: relative;
+
+  flex-shrink: 0;
+
   width: 100%;
-  aspect-ratio: 1.05;
+
+  aspect-ratio: 0.98;
+
+  padding: 0;
+
   overflow: hidden;
-  background: #FAF7F2;
+
+  background: var(--image-bg);
+
+  border: 0;
+
+  border-radius:
+    24px
+    24px
+    0
+    0;
 }
 
-.luxury-hamper-card .gift-card-photo {
+
+/* ============================================================
+   IMAGE GRADIENT
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-media::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  height: 30%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(40, 15, 8, 0.10) 100%
+    );
+
+  opacity: 0.45;
+
+  transition:
+    opacity 650ms ease;
+}
+
+
+#main .luxury-hamper-card:hover
+.gift-card-media::after {
+  opacity: 0.18;
+}
+
+
+/* ============================================================
+   PRODUCT PHOTO
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-photo {
+  position: relative;
+
   display: block;
+
   width: 100%;
   height: 100%;
+
   overflow: hidden;
+
+  background: var(--image-bg);
+
+  border-radius:
+    24px
+    24px
+    0
+    0;
 }
 
-.luxury-hamper-card .gift-card-photo img {
+
+/* ============================================================
+   PRODUCT IMAGE
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-photo img {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   object-position: center;
-  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  transform:
+    scale(1.01)
+    translate3d(0, 0, 0);
+
+  will-change: transform;
+
+  transition:
+    transform 1.2s var(--ease-luxury),
+    filter 800ms ease;
 }
 
-.luxury-hamper-card:hover .gift-card-photo img {
-  transform: scale(1.06);
+
+#main .luxury-hamper-card:hover
+.gift-card-photo img {
+  transform:
+    scale(1.06)
+    translate3d(0, -0.8%, 0);
+
+  filter:
+    saturate(1.02)
+    contrast(1.01);
 }
 
-/* Floating category badge on top-left of image */
-.luxury-hamper-card .gift-card-badge {
+
+/* ============================================================
+   IMAGE LIGHT SWEEP
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-photo::after {
+  content: '';
+
   position: absolute;
-  top: 13px;
-  left: 13px;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 160, 89, 0.42);
-  color: #8C6527;
-  font-family: var(--font-jakarta);
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+  top: 0;
+  left: -125%;
+
+  width: 65%;
+  height: 100%;
+
   pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 100%
+    );
+
+  transform: skewX(-16deg);
+
+  transition:
+    left 1s var(--ease-luxury);
 }
 
-/* Floating wishlist jewel button on top-right */
-.luxury-hamper-card .card-save-floating {
+
+#main .luxury-hamper-card:hover
+.gift-card-photo::after {
+  left: 145%;
+}
+
+
+/* ============================================================
+   FLOATING CONTENT PANEL
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-content {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+  flex: 1;
+
+  flex-direction: column;
+  align-items: stretch;
+
+  margin-top: -42px;
+
+  padding:
+    21px
+    22px
+    19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f1ebe2 0%,
+      #e9e1d6 100%
+    );
+
+  border-radius:
+    28px
+    28px
+    24px
+    24px;
+
+  text-align: left;
+
+  box-shadow:
+    0 -5px 18px rgba(55, 25, 10, 0.025);
+
+  transform:
+    translate3d(0, 0, 0);
+
+  transition:
+    transform 600ms var(--ease-luxury),
+    box-shadow 600ms var(--ease-luxury);
+}
+
+
+#main .luxury-hamper-card:hover
+.gift-card-content {
+  transform:
+    translate3d(0, -4px, 0);
+
+  box-shadow:
+    0 -8px 25px rgba(55, 25, 10, 0.055);
+}
+
+
+/* ============================================================
+   PANEL HANDLE
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-content::before {
+  content: '';
+
   position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 4;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 160, 89, 0.32);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 250ms ease, background 250ms ease, box-shadow 250ms ease;
-}
 
-.luxury-hamper-card .card-save-floating:hover {
-  transform: scale(1.12);
-  background: #FFFFFF;
-  box-shadow: 0 6px 18px rgba(122, 25, 44, 0.18);
-}
+  top: 10px;
+  left: 50%;
 
-/* Centered card content */
-.luxury-hamper-card .gift-card-content {
-  padding: 20px 20px 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex: 1;
-}
+  width: 30px;
+  height: 3px;
 
-.luxury-hamper-card .gift-card-title {
-  margin: 0 0 8px;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 20.5px;
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: #1C1510;
-  text-align: center;
-  min-height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  transform:
+    translateX(-50%);
 
-.luxury-hamper-card .gift-card-title a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 200ms ease;
-}
-
-.luxury-hamper-card .gift-card-title a:hover {
-  color: var(--wine);
-}
-
-/* Subtle luxury gold sparkle divider */
-.luxury-hamper-card .gift-card-flourish {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 100px;
-  margin: 0 auto 12px;
-}
-
-.luxury-hamper-card .flourish-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.75), transparent);
-}
-
-.luxury-hamper-card .flourish-sparkle {
-  color: #C5A059;
-  font-size: 9px;
-  line-height: 1;
-  opacity: 0.95;
-}
-
-.luxury-hamper-card .gift-card-description {
-  margin: 0 auto 16px;
-  font-family: var(--font-jakarta);
-  font-size: 12px;
-  line-height: 1.6;
-  color: #726A62;
-  text-align: center;
-  max-width: 94%;
-  min-height: 38px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Bottom centered price & action */
-.luxury-hamper-card .gift-card-bottom-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(197, 160, 89, 0.22);
-  gap: 11px;
-}
-
-.luxury-hamper-card .gift-card-price-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 2px;
-}
-
-.luxury-hamper-card .price-label {
-  font-family: var(--font-jakarta);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #9C9184;
-  line-height: 1;
-}
-
-.luxury-hamper-card .gift-card-price {
-  font-family: var(--font-jakarta);
-  font-size: 21px;
-  font-weight: 700;
-  color: #1C1510;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-}
-
-/* Full-width luxury pill CTA button */
-.luxury-hamper-card .card-luxury-btn {
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 11px 22px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #7A192C 0%, #460713 100%);
-  color: #FFFFFF;
-  font-family: var(--font-jakarta);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 4px 14px rgba(122, 25, 44, 0.26);
-  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
+
+  background:
+    rgba(74, 4, 4, 0.18);
+
+  transition:
+    width 450ms var(--ease-luxury),
+    background-color 300ms ease;
 }
 
-.luxury-hamper-card .card-luxury-btn:hover {
-  background: linear-gradient(135deg, #8F1B33 0%, #590918 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(122, 25, 44, 0.38);
+
+#main .luxury-hamper-card:hover
+.gift-card-content::before {
+  width: 44px;
+
+  background:
+    rgba(74, 4, 4, 0.28);
 }
 
-.luxury-hamper-card .card-luxury-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(122, 25, 44, 0.2);
-}
 
-.luxury-hamper-card .card-feedback {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+/* ============================================================
+   PRODUCT TITLE
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-title {
+  display: block;
+
+  min-height: 0;
+  height: auto;
+
+  margin:
+    3px
+    0
+    8px;
+
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+
+  font-family:
+    var(--font-title) !important;
+
+  font-size: 21px;
+
+  font-weight: 500;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.015em;
+
+  text-align: left;
+
+  text-wrap: balance;
+
+  color:
+    var(--wine);
+
+  transform:
+    translate3d(0, 0, 0);
+
+  transition:
+    transform 500ms var(--ease-luxury),
+    color 300ms ease;
 }
 
-.luxury-hamper-card .card-save-error {
-  margin-top: 6px;
-  font-size: 10px;
-  color: var(--wine);
+
+#main .luxury-hamper-card:hover
+.gift-card-title {
+  transform:
+    translate3d(2px, -1px, 0);
+
+  color:
+    var(--wine-hover);
 }
 
-/* Responsive grid adjustments */
-#main .shop-edit .shop-product-grid { grid-template-columns: repeat(auto-fill,minmax(min(100%,260px),1fr)); }
+
+#main .luxury-hamper-card .gift-card-title a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+#main .luxury-hamper-card .gift-card-title a:hover {
+  color: inherit;
+}
+
+
+/* ============================================================
+   PRICE + CTA ROW
+   NO DIVIDER
+   NO ARTIFICIAL GAP
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-bottom-row {
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  gap: 12px;
+
+  border: 0 !important;
+
+  border-top: 0 !important;
+
+  border-bottom: 0 !important;
+
+  box-shadow: none;
+}
+
+
+/* Kill any inherited pseudo divider */
+
+#main .luxury-hamper-card
+.gift-card-bottom-row::before,
+#main .luxury-hamper-card
+.gift-card-bottom-row::after {
+  content: none !important;
+
+  display: none !important;
+}
+
+
+/* ============================================================
+   PRICE
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-price-wrap {
+  flex: 1;
+
+  min-width: 0;
+
+  margin: 0;
+
+  padding: 0;
+
+  text-align: left;
+
+  transform:
+    translate3d(0, 0, 0);
+
+  transition:
+    transform 450ms var(--ease-luxury);
+}
+
+
+#main .luxury-hamper-card:hover
+.gift-card-price-wrap {
+  transform:
+    translate3d(2px, 0, 0);
+}
+
+
+#main .luxury-hamper-card .gift-card-price {
+  display: block;
+
+  margin: 0;
+
+  padding: 0;
+
+  font-family:
+    var(--font-jakarta);
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.02em;
+
+  color:
+    var(--text);
+}
+
+
+/* ============================================================
+   CTA
+   ============================================================ */
+
+#main .luxury-hamper-card .card-luxury-btn {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: auto;
+
+  min-height: 40px;
+
+  margin: 0;
+
+  padding:
+    9px
+    15px;
+
+  gap: 8px;
+
+  border:
+    1px solid rgba(74, 4, 4, 0.12);
+
+  border-radius:
+    999px;
+
+  background:
+    var(--wine);
+
+  color:
+    #fffdf9;
+
+  font-family:
+    var(--font-jakarta);
+
+  font-size:
+    11px;
+
+  font-weight:
+    500;
+
+  line-height:
+    1.2;
+
+  letter-spacing:
+    0;
+
+  text-transform:
+    none;
+
+  text-decoration:
+    none;
+
+  white-space:
+    nowrap;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 4px 12px rgba(74, 4, 4, 0.10);
+
+  transition:
+    transform 400ms var(--ease-luxury),
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 400ms var(--ease-luxury),
+    gap 400ms var(--ease-luxury);
+}
+
+
+#main .luxury-hamper-card .card-luxury-btn:hover {
+  transform:
+    translate3d(0, -2px, 0);
+
+  background:
+    var(--wine-hover);
+
+  border-color:
+    var(--wine-hover);
+
+  color:
+    #fffdf9;
+
+  box-shadow:
+    0 8px 18px rgba(74, 4, 4, 0.17);
+
+  gap:
+    10px;
+}
+
+
+#main .luxury-hamper-card .card-luxury-btn:focus-visible {
+  outline:
+    2px solid var(--wine);
+
+  outline-offset:
+    4px;
+}
+
+
+#main .luxury-hamper-card .card-luxury-btn svg {
+  width: 15px;
+  height: 15px;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 400ms var(--ease-luxury);
+}
+
+
+#main .luxury-hamper-card .card-luxury-btn:hover svg {
+  transform:
+    translateX(3px);
+}
+
+
+#main .luxury-hamper-card .card-luxury-btn:disabled {
+  opacity: 0.65;
+
+  cursor: wait;
+}
+
+
+/* ============================================================
+   CART FEEDBACK
+   ============================================================ */
+
+#main .luxury-hamper-card .cart-add-feedback {
+  margin-top: 8px;
+
+  font-family:
+    var(--font-jakarta);
+
+  font-size:
+    11px;
+
+  line-height:
+    1.5;
+
+  color:
+    var(--text);
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+#main .luxury-hamper-card .cart-add-feedback:empty {
+  display: none;
+}
+
+
+/* ============================================================
+   SHOP GRID
+   ============================================================ */
+
+#main .shop-edit .shop-product-grid {
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(
+        min(100%, 260px),
+        1fr
+      )
+    );
+
+  gap:
+    26px;
+}
+
+
+/* ============================================================
+   HOMEPAGE GRID
+   ============================================================ */
 
 @media (min-width: 680px) and (max-width: 1080px) {
-  #main .commerce-home .signature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 24px 16px; }
+
+  #main .commerce-home .signature-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap:
+      24px
+      16px;
+  }
 }
+
+
+/* ============================================================
+   MOBILE GENERAL
+   ============================================================ */
 
 @media (max-width: 679px) {
-  #main .commerce-home .signature-grid, #main .shop-edit .shop-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; width: 100%; gap: 14px 10px; }
-  .luxury-hamper-card .gift-card-content { padding: 14px 12px 16px; }
-  .luxury-hamper-card .gift-card-badge { top: 8px; left: 8px; padding: 3px 8px; font-size: 8px; letter-spacing: 0.1em; }
-  .luxury-hamper-card .card-save-floating { top: 8px; right: 8px; width: 30px; height: 30px; }
-  .luxury-hamper-card .card-save-floating svg { width: 14px; height: 14px; }
-  .luxury-hamper-card .gift-card-title { font-size: 14px; min-height: 38px; margin-bottom: 6px; }
-  .luxury-hamper-card .gift-card-flourish { max-width: 60px; margin-bottom: 8px; }
-  .luxury-hamper-card .gift-card-description { font-size: 11px; margin-bottom: 12px; min-height: 32px; }
-  .luxury-hamper-card .gift-card-bottom-row { padding-top: 10px; gap: 8px; }
-  .luxury-hamper-card .price-label { font-size: 8.5px; }
-  .luxury-hamper-card .gift-card-price { font-size: 16px; }
-  .luxury-hamper-card .card-luxury-btn { padding: 9px 12px; font-size: 10px; gap: 5px; }
-  .luxury-hamper-card .card-luxury-btn svg { width: 14px; height: 14px; }
+
+  #main .commerce-home .signature-grid,
+  #main .shop-edit:not([data-collection='hampers'])
+  .shop-product-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    width: 100%;
+
+    gap:
+      13px
+      10px;
+  }
+
+
+  #main .luxury-hamper-card {
+    border-radius:
+      18px;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-media {
+    aspect-ratio:
+      0.98;
+
+    border-radius:
+      18px
+      18px
+      0
+      0;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-photo {
+    border-radius:
+      18px
+      18px
+      0
+      0;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-content {
+    margin-top:
+      -32px;
+
+    padding:
+      18px
+      13px
+      15px;
+
+    border-radius:
+      22px
+      22px
+      18px
+      18px;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-content::before {
+    top:
+      9px;
+
+    width:
+      26px;
+
+    height:
+      3px;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-title {
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+
+    margin:
+      2px
+      0
+      7px !important;
+
+    padding:
+      0 !important;
+
+    font-size:
+      16px;
+
+    line-height:
+      1.2;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-bottom-row {
+    flex-direction:
+      row !important;
+
+    align-items:
+      center !important;
+
+    justify-content:
+      space-between !important;
+
+    margin:
+      0 !important;
+
+    padding:
+      0 !important;
+
+    gap:
+      8px;
+
+    border:
+      0 !important;
+  }
+
+
+  #main .luxury-hamper-card .gift-card-price {
+    font-size:
+      12px;
+
+    margin:
+      0 !important;
+
+    padding:
+      0 !important;
+  }
+
+
+  #main .luxury-hamper-card .card-luxury-btn {
+    width:
+      auto;
+
+    min-height:
+      36px;
+
+    padding:
+      7px
+      11px;
+
+    font-size:
+      10px;
+  }
 }
+
+
+/* ============================================================
+   HAMPERS COLLECTION
+   ============================================================ */
+
+#main .shop-edit[data-collection='hampers']
+.shop-product-grid {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    28px;
+}
+
+
+/* ============================================================
+   HAMPER PRODUCT CARD
+   ============================================================ */
+
+#main .luxury-hamper-card.hamper-product-card {
+  height:
+    100%;
+
+  padding:
+    0;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid rgba(74, 4, 4, 0.08);
+
+  border-radius:
+    24px;
+
+  background:
+    #faf7f0;
+
+  box-shadow:
+    0 8px 24px rgba(55, 25, 10, 0.04);
+
+  transition:
+    transform 650ms var(--ease-luxury),
+    border-color 450ms ease,
+    box-shadow 650ms var(--ease-luxury);
+}
+
+
+#main .luxury-hamper-card.hamper-product-card:hover {
+  transform:
+    translate3d(0, -5px, 0);
+
+  border-color:
+    rgba(74, 4, 4, 0.14);
+
+  box-shadow:
+    0 20px 45px rgba(55, 25, 10, 0.09);
+}
+
+
+/* ============================================================
+   HAMPER IMAGE
+   ============================================================ */
+
+#main .hamper-product-card .gift-card-media {
+  aspect-ratio:
+    0.98;
+
+  background:
+    #eee7dc;
+
+  border-radius:
+    24px
+    24px
+    0
+    0;
+}
+
+
+#main .hamper-product-card .gift-card-photo {
+  background:
+    #eee7dc;
+
+  border-radius:
+    24px
+    24px
+    0
+    0;
+}
+
+
+#main .hamper-product-card .gift-card-photo img {
+  object-fit:
+    contain;
+
+  background:
+    #eee7dc;
+
+  transform:
+    scale(1.015);
+
+  transition:
+    transform 1.25s var(--ease-luxury),
+    filter 800ms ease;
+}
+
+
+#main .hamper-product-card:hover
+.gift-card-photo img {
+  transform:
+    scale(1.065);
+
+  filter:
+    saturate(1.02)
+    contrast(1.01);
+}
+
+
+/* ============================================================
+   HAMPER FLOATING CONTENT
+   ============================================================ */
+
+#main .hamper-product-card .gift-card-content {
+  position:
+    relative;
+
+  z-index:
+    5;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  align-items:
+    center;
+
+  column-gap:
+    14px;
+
+  margin-top:
+    -38px;
+
+  padding:
+    21px
+    19px
+    18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f1ebe2 0%,
+      #e8e0d5 100%
+    );
+
+  border-radius:
+    28px
+    28px
+    24px
+    24px;
+
+  text-align:
+    left;
+
+  box-shadow:
+    0 -5px 18px rgba(55, 25, 10, 0.025);
+
+  transition:
+    transform 600ms var(--ease-luxury),
+    box-shadow 600ms var(--ease-luxury);
+}
+
+
+#main .hamper-product-card:hover
+.gift-card-content {
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 -8px 24px rgba(55, 25, 10, 0.055);
+}
+
+
+/* ============================================================
+   HAMPER HANDLE
+   ============================================================ */
+
+#main .hamper-product-card .gift-card-content::before {
+  content:
+    '';
+
+  position:
+    absolute;
+
+  top:
+    10px;
+
+  left:
+    50%;
+
+  width:
+    30px;
+
+  height:
+    3px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(74, 4, 4, 0.18);
+
+  transition:
+    width 450ms var(--ease-luxury),
+    background-color 300ms ease;
+}
+
+
+#main .hamper-product-card:hover
+.gift-card-content::before {
+  width:
+    44px;
+
+  background:
+    rgba(74, 4, 4, 0.28);
+}
+
+
+/* ============================================================
+   HAMPER TITLE
+   ============================================================ */
+
+#main .hamper-product-card .gift-card-title {
+  grid-column:
+    1;
+
+  min-height:
+    0 !important;
+
+  height:
+    auto !important;
+
+  margin:
+    3px
+    0
+    8px !important;
+
+  padding:
+    0 !important;
+
+  text-align:
+    left;
+
+  text-wrap:
+    balance;
+
+  font-size:
+    clamp(22px, 2.3vw, 30px);
+
+  line-height:
+    1.12;
+}
+
+
+#main .hamper-product-card:hover
+.gift-card-title {
+  transform:
+    translate3d(2px, -1px, 0);
+
+  color:
+    var(--wine-hover);
+}
+
+
+/* ============================================================
+   HAMPER BOTTOM ROW
+   ============================================================ */
+
+#main .hamper-product-card .gift-card-bottom-row {
+  display:
+    contents;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  border:
+    0 !important;
+}
+
+
+#main .hamper-product-card .gift-card-price-wrap {
+  grid-column:
+    1;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  text-align:
+    left;
+}
+
+
+#main .hamper-product-card .gift-card-price {
+  display:
+    block;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  font-size:
+    11px;
+
+  font-weight:
+    400;
+
+  color:
+    #6e6257;
+
+  line-height:
+    1.5;
+
+  letter-spacing:
+    0;
+}
+
+
+/* ============================================================
+   HAMPER CTA
+   ============================================================ */
+
+#main .hamper-product-card .card-luxury-btn {
+  grid-column:
+    2;
+
+  grid-row:
+    1 / 3;
+
+  width:
+    auto;
+
+  min-height:
+    38px;
+
+  margin:
+    0;
+
+  padding:
+    8px
+    13px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  border:
+    1px solid rgba(74, 4, 4, 0.16);
+
+  border-radius:
+    999px;
+
+  background:
+    var(--wine);
+
+  color:
+    #fffdf9;
+
+  font-family:
+    var(--font-jakarta);
+
+  font-size:
+    10px;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    .01em;
+
+  box-shadow:
+    0 4px 11px rgba(74, 4, 4, 0.10);
+
+  transition:
+    transform 400ms var(--ease-luxury),
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 400ms var(--ease-luxury),
+    gap 400ms var(--ease-luxury);
+}
+
+
+#main .hamper-product-card .card-luxury-btn:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    var(--wine-hover);
+
+  color:
+    #fffdf9;
+
+  border-color:
+    var(--wine-hover);
+
+  box-shadow:
+    0 8px 18px rgba(74, 4, 4, 0.17);
+
+  gap:
+    10px;
+
+  text-decoration:
+    none;
+}
+
+
+#main .hamper-product-card .cart-add-feedback {
+  grid-column:
+    1 / -1;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  #main .hamper-product-card .gift-card-content {
+    margin-top:
+      -34px;
+
+    padding:
+      19px
+      15px
+      16px;
+
+    column-gap:
+      10px;
+  }
+
+
+  #main .hamper-product-card .card-luxury-btn {
+    grid-column:
+      1 / -1;
+
+    grid-row:
+      auto;
+
+    justify-content:
+      center;
+
+    width:
+      100%;
+
+    margin-top:
+      4px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE HAMPERS
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  #main .shop-edit[data-collection='hampers']
+  .shop-product-grid {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      20px;
+  }
+
+
+  #main .luxury-hamper-card.hamper-product-card {
+    border-radius:
+      18px;
+  }
+
+
+  #main .hamper-product-card .gift-card-media {
+    aspect-ratio:
+      0.98;
+
+    border-radius:
+      18px
+      18px
+      0
+      0;
+  }
+
+
+  #main .hamper-product-card .gift-card-photo {
+    border-radius:
+      18px
+      18px
+      0
+      0;
+  }
+
+
+  #main .hamper-product-card .gift-card-content {
+    margin-top:
+      -32px;
+
+    padding:
+      18px
+      13px
+      15px;
+
+    border-radius:
+      22px
+      22px
+      18px
+      18px;
+
+    column-gap:
+      10px;
+  }
+
+
+  #main .hamper-product-card .gift-card-title {
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+
+    margin:
+      2px
+      0
+      6px !important;
+
+    padding:
+      0 !important;
+
+    font-size:
+      21px;
+  }
+
+
+  #main .hamper-product-card .gift-card-price {
+    font-size:
+      10px;
+  }
+
+
+  #main .hamper-product-card .card-luxury-btn {
+    width:
+      100%;
+
+    min-height:
+      36px;
+
+    padding:
+      7px
+      11px;
+
+    font-size:
+      10px;
+  }
+}
+
+
+/* ============================================================
+   HARD FINAL OVERRIDE
+   Ensures old/global CSS cannot restore the divider
+   ============================================================ */
+
+#main .luxury-hamper-card .gift-card-bottom-row {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+
+  box-shadow: none !important;
+}
+
+
+#main .luxury-hamper-card .gift-card-bottom-row::before,
+#main .luxury-hamper-card .gift-card-bottom-row::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+#main .luxury-hamper-card .gift-card-title {
+  min-height: 0 !important;
+  height: auto !important;
+
+  margin-bottom: 8px !important;
+}
+
+
+#main .luxury-hamper-card .gift-card-price-wrap,
+#main .luxury-hamper-card .gift-card-price {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
-  #main .luxury-hamper-card:hover { transform: none; }
-  #main .luxury-hamper-card, #main .luxury-hamper-card .gift-card-photo img, .card-save-floating, #main .luxury-hamper-card .card-luxury-btn { transition: none; }
+
+  #main .luxury-hamper-card,
+  #main .luxury-hamper-card *,
+  #main .luxury-hamper-card::before,
+  #main .luxury-hamper-card::after {
+    transition:
+      none !important;
+
+    animation:
+      none !important;
+  }
 }
 
+/* Phone catalogue cards prioritize product photography over supporting copy. */
+@media (max-width: 600px) {
+  #main .shop-edit .shop-product-card .gift-card-description { display: none !important; }
+  #main .shop-edit[data-collection='hampers'] .shop-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px 10px !important;
+  }
+  #main .shop-edit[data-collection='hampers'] .hamper-product-card .gift-card-media {
+    aspect-ratio: 1.05 !important;
+  }
+  #main .shop-edit[data-collection='hampers'] .hamper-product-card .gift-card-content {
+    margin-top: -18px !important;
+    padding: 12px 10px 10px !important;
+  }
+  #main .shop-edit[data-collection='hampers'] .hamper-product-card .gift-card-title {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+  #main .shop-edit[data-collection='hampers'] .hamper-product-card .card-luxury-btn {
+    display: none !important;
+  }
+}

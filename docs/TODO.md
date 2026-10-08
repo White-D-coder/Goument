@@ -22,9 +22,20 @@ Priorities below are initial engineering triage from source findings, not an app
 
 ## P2
 
+- [ ] Product detail commercial completion (2026-10-07): confirm Ivory/India prices, saleable product/variant mappings, final contents/pack quantities, dimensions, tax/shipping/lead-time/return terms and whether notes/branding are included or charged. Current PDP truthfully uses preview enquiries and photographed contents. Gift-note requests compose email; no message field exists in GiftDraft and no note-to-order workflow is implemented. These facts must be established before enabling hamper cart/benefit promises.
+- [ ] Catalogue photography mismatch observed during PDP work (2026-10-07): `diary-bottle-pen-set` source describes a diary/bottle/pen trio, but its existing `sustainable_diary_bottle_pen.webp` photograph shows a desk organiser. Confirm the intended product and obtain matching photography; this UI task does not rewrite its existing identity/price/contents or pretend that photograph depicts individual included items.
+
+- [ ] No-JavaScript storefront rendering (observed2026-10-07): disabling page scripts during a product navigation leaves the inherited Next loading shell visible while product markup is streamed into a hidden boundary. Full no-JS rendering is not verified; investigate inherited loading/streaming behavior within an explicit progressive-enhancement task. Current normal/reduced-motion JavaScript flows pass.
+
+- [ ] B2C typography cleanup (audit2026-10-05): resolve footer h2 Jakarta/Cormorant !important conflict; agree shared heading/body/action scales, casing and tracking; assess9–11px microcopy; remove unused Cinzel/script/Momcake declarations only within approved font scope while preserving admin Pagio/brand needs. Source/runtime mapping in UI_SYSTEM; this audit did not authorize a font redesign.
+
+- [ ] B2C frontend lint debt (observed2026-10-05): types.ts explicit-any and GiftBuilder unused selection remain. GoldPopperSprinkle synchronous effect state resolved in the performance increment, with scoped/full lint evidence. Full lint remains failing.
+- [ ] B2C performance follow-up: measure post-change scroll cadence on the user’s device and investigate slow local webpack rebuilds. The2026-10-07 editorial experiment was rejected/reverted; prior optimized slideshow/canvas behavior is restored. Before-change jank and76–183s development compile/invalidation spans were observed; further layer-isolation diagnostic was declined2026-10-05. Smaller assets/lifecycle checks do not establish production frame-rate improvement.
+
 - [ ] Verify rendered canonicals/schema/sitemap coverage; reduced-motion and xs breakpoint behavior.
 - [ ] Measure image/bundle/query performance; then address demonstrated bottlenecks.
 - [ ] Resolve template README font claims and catalogue local-data/backend divergence.
+- [ ] B2C collection data/search integrity (source inspection2026-10-07): populate actual hamper products; local HAMPERS_CATALOG currently contains only individual gifts. Existing product.service Atlas totals count all active products instead of search matches, and an unknown category silently removes the filter. Establish explicit category membership and correct search counts before relying on category IDs or pagination totals. New Shop collection pages reuse existing search/fallback; this UI change does not fix these backend issues.
 
 ## P3
 
@@ -83,3 +94,10 @@ Sign-in and account-owned delivery capture implemented. FUTURE / REQUIRED: conne
 ## Same-browser cart continuity — 2026-09-30
 
 CURRENT / IMPLEMENTED: guest/signed-in additions and pre-login cart retention through signup, password login and Google callback; pending writes/cookie handshakes serialize and Account waits before redirects. Existing cross-device/customer-cart merge task remains separate; no schema/ownership merge implemented. Real configured-runtime validation remains blocked by Atlas above.
+
+## 2026-10-07 — R58 Home follow-through
+
+- CURRENT / IMPLEMENTED: consumer-first Home design, semantic/static rendering, local fonts, responsive photo/card layouts and focused Home chrome. Verification/limits: TESTING.
+- UNKNOWN: approved customer quotes/client logos are not supplied. TestimonialStrip exists but empty data remains hidden; never publish demo identities or fictional endorsements.
+- UNKNOWN: final hamper prices/contents/stock, personalisation charges, delivery/tax/return terms and production Core Web Vitals remain unestablished. The UI uses existing catalogue amounts and explicit enquiry/photo-preview boundaries. No new commercial policy is authorized by R58.
+- FUTURE / REQUIRED: after a real deployment, measure LCP/CLS/INP on physical phone/desktop and verify canonical/indexing with the configured storefront domain. This task did not deploy.

@@ -1,5 +1,12 @@
 # SEO
 
+## 2026-10-07 — B2C Home canonical and rendered semantics (R58)
+
+CURRENT / IMPLEMENTED: Home uses the user-confirmed public URL `https://b2c-tau-weld.vercel.app/b2c`. Optional NEXT_PUBLIC_SITE_URL accepts a valid HTTP(S) origin and falls back safely to that deployment. Page metadata defines absolute title, description, canonical and large-image Open Graph/Twitter values. One real H1, semantic section headings, descriptive product alt text, native links/forms/disclosures and server-rendered copy replace client-only presentation.
+
+Home JSON-LD describes Organization/WebSite/WebPage, the four rendered products and six actual FAQ answers. Preview hampers carry no offers; priced individual gifts use existing catalogue amounts/currencies. No availability, ratings, reviews or invented policies appear. JSON is escaped before embedding. No schema/robots/sitemap changes to other frontends or commerce pages. Current production/no-JS and browser semantics checks: TESTING. Search indexing, canonical selection and rich-result eligibility are UNKNOWN; FAQ markup does not imply a Google rich-result entitlement.
+
+
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.
 
 ## Implementation

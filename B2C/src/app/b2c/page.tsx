@@ -1,91 +1,40 @@
-/* eslint-disable @next/next/no-img-element -- Existing local catalogue photography. */
-import Link from 'next/link';
-import { ArrowRight, Gift, Heart, Leaf, Gem } from 'lucide-react';
-import HeroSlideshow from '@/components/HeroSlideshow';
 import HeroTitle from '@/components/HeroTitle';
-import GoldPopperSprinkle from '@/components/GoldPopperSprinkle';
-import ShoppingRail from '@/components/ShoppingRail';
+import HeroSlideshow from '@/components/HeroSlideshow';
+import HomeMotion from '@/components/home/HomeMotion';
+import HomeFAQ from '@/components/home/HomeFAQ';
+import { SectionHeading, HomeProductCard, BrandPhilosophy, GourmetStory, CorporateBand } from '@/components/home/HomeSections';
+import { flavourStories, homeFAQs } from '@/lib/home-content';
+import { CURATED_HAMPERS } from '@/lib/curated-hampers';
+import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
+import './home.css';
 
-import ProductCard from '@/components/ProductCard';
-import { catalogue } from '@/lib/catalogue';
-import type { Product } from '@/lib/types';
+export const metadata = homeMetadata;
+const corporateUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL || 'https://thegourmetgifts.co/';
 
-const collections = [
- ['Shagun Envelopes','/images/items/shagun_envelopes.webp','shagun'],
- ['Laddoo Candles','/images/items/laddoo_candles.webp','candles'],
- ['Bookmarks','/images/items/bookmarks.webp','bookmarks'],
- ['Diary & Pen Sets','/images/items/sustainable_diary_bottle_pen.webp','corporate'],
-];
+export default function Home() {
+  const structuredData = homeStructuredData([], homeFAQs);
+  return <div className="atelier-home tgg-home">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
+    <HomeMotion />
+    <div className="tgg-home-opening">
+      <section className="tgg-hero" aria-labelledby="hero-title">
+        <HeroSlideshow />
+        <div className="tgg-hero-shade" aria-hidden="true" />
+        <div className="tgg-hero-frame" aria-hidden="true" />
+        <div className="tgg-hero-copy">
+          <HeroTitle />
+        </div>
+      </section>
 
-const occasions = [
- ['Weddings & Shagun','/images/items/shagun_envelopes.webp','shagun'],
- ['Festive & Celebrations','/images/items/laddoo_candles.webp','candles'],
- ['Thoughtful Keepsakes','/images/items/bookmarks.webp','bookmarks'],
- ['Corporate Branding','/images/items/sustainable_diary_bottle_pen.webp','corporate'],
-];
+      <section className="tgg-hamper-showcase tgg-section" id="hampers" aria-labelledby="hamper-heading">
+        <SectionHeading kicker="Curated with care" title="Our Gift Hampers" id="hamper-heading" />
+        <div className="tgg-hamper-grid">{CURATED_HAMPERS.map(product => <HomeProductCard key={product._id} product={product} sizes="(max-width: 700px) 88vw, (max-width: 900px) 92vw, (max-width: 1400px) 46vw, 650px" />)}</div>
+      </section>
+    </div>
 
-const shop = (query:string) => `/shop${query ? `?search=${encodeURIComponent(query)}` : ''}`;
-
-export default async function Home() {
- const { products } = await catalogue();
-
- return <div className="reference-home commerce-home">
-  <GoldPopperSprinkle />
-  <section className="gift-hero hero-editorial" aria-labelledby="hero-title">
-   <HeroSlideshow/>
-   <div className="gift-hero-shade" aria-hidden="true"/>
-   <HeroTitle/>
-  </section>
-  <section className="home-section collection-section">
-   <div className="section-heading" data-reveal>
-    <h2>Shop Our Collections</h2>
-    <Link className="text-link" href="/shop">View All <ArrowRight size={14}/></Link>
-   </div>
-   <ShoppingRail className="collection-circles" label="Collections">
-    {collections.map(([title,image,query],index)=>(
-     <Link data-reveal data-reveal-delay={index*50} key={title} href={shop(query)}>
-      <div><img src={image} alt="" loading="lazy" decoding="async"/></div>
-      <h3>{title}</h3>
-     </Link>
-    ))}
-   </ShoppingRail>
-  </section>
-  <section className="home-section signature-section" id="hampers">
-   <div className="section-heading" data-reveal>
-    <h2>Curated Gift Hampers</h2>
-    <Link className="text-link" href="/shop">View All Hampers <ArrowRight size={14}/></Link>
-   </div>
-   <div className="signature-grid">
-    {products.slice(0, 4).map((product: Product) => (
-     <ProductCard key={product._id} product={product} />
-    ))}
-   </div>
-  </section>
-  <section className="home-section" id="occasions">
-   <div className="section-heading" data-reveal>
-    <h2>Gifts for Every Occasion</h2>
-    <Link className="text-link" href="/shop">Explore All Gifts <ArrowRight size={14}/></Link>
-   </div>
-   <ShoppingRail className="occasion-grid" label="Occasions">
-    {occasions.map(([title,image,query],index)=>(
-     <Link data-reveal data-reveal-delay={index*50} href={shop(query)} key={title}>
-      <img src={image} alt="" loading="lazy" decoding="async"/>
-      <h3><span className="occasion-label">{title}</span></h3>
-     </Link>
-    ))}
-   </ShoppingRail>
-  </section>
-  <section className="assurance-strip" aria-label="Our approach">
-   {[[Gem,'Considered Details','The little things, beautifully chosen'],[Gift,'Beautiful Packaging','Made for the joy of unwrapping'],[Leaf,'Everyday Indulgence','A moment to savour'],[Heart,'A Personal Touch','For someone who matters']].map(([Icon,title,copy])=>{
-    const Symbol=Icon as typeof Gift;
-    return <div data-reveal key={String(title)}><Symbol size={30} strokeWidth={1}/><h3>{String(title)}</h3><p>{String(copy)}</p></div>;
-   })}
-  </section>
-  <section className="brand-story" id="our-story" data-reveal>
-   <p className="eyebrow">THE ART OF GIFTING</p>
-   <h2>Thoughtfully Curated, Beautifully Given.</h2>
-   <p>From artisanal flavours to handcrafted keepsakes, each gift is chosen to create an unforgettable moment.</p>
-   <Link className="text-link" href="/shop">Explore the Collection <ArrowRight size={14}/></Link>
-  </section>
- </div>;
+    <GourmetStory stories={flavourStories} />
+    <BrandPhilosophy />
+    <div className="tgg-section"><HomeFAQ items={homeFAQs} /></div>
+    <CorporateBand href={corporateUrl} />
+  </div>;
 }

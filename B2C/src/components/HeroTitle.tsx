@@ -1,35 +1,38 @@
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+'use client';
 
-const titleWords = ['Thoughtful', 'gifts', 'for', 'brighter', 'moments.'];
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import Image from 'next/image';
+
+const titleContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+// Matches the footer wordmark's restrained rise, blur and ease.
+const titleWord: Variants = {
+  hidden: { opacity: 0, y: 24, scale: 0.98, filter: 'blur(10px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function HeroTitle() {
-  return (
-    <div className="gift-hero-content">
-      <h1 id="hero-title" className="hero-editorial-h1">
-        {titleWords.map((word, i) => (
-          <span
-            key={i}
-            className="hero-word-reveal"
-            style={{ animationDelay: `${0.08 + i * 0.08}s` }}
-          >
-            {word}&nbsp;
-          </span>
-        ))}
-      </h1>
+  const reduceMotion = useReducedMotion();
 
-      <p className="hero-description hero-fade-item" style={{ animationDelay: '0.45s' }}>
-        Little luxuries for the people who matter.
-      </p>
-
-      <div className="hero-buttons hero-fade-item" style={{ animationDelay: '0.6s' }}>
-        <Link href="/shop" className="button light hero-cta-btn">
-          Shop the Collection <ArrowRight size={15} aria-hidden="true" />
-        </Link>
-        <Link href="#occasions" className="button outline-light hero-sub-btn">
-          By Occasion <ArrowRight size={15} aria-hidden="true" />
-        </Link>
-      </div>
-    </div>
-  );
+  return <motion.div
+    className="tgg-hero-title"
+    variants={titleContainer}
+    initial={reduceMotion ? false : 'hidden'}
+    animate={reduceMotion ? 'show' : undefined}
+    whileInView={reduceMotion ? undefined : 'show'}
+    viewport={{ once: true, margin: '-60px' }}
+  >
+    <motion.h1 id="hero-title" className="tgg-hero-monogram" aria-label="The Gourmet Gifts" variants={reduceMotion ? { show: { opacity: 1, y: 0, scale: 1, filter: 'none', transition: { duration: 0 } } } : titleWord}>
+      <Image src="/images/brand/hero-monogram.png" alt="" aria-hidden="true" width={1494} height={788} sizes="(max-width: 700px) 86vw, (max-width: 878px) 82vw, 720px" preload />
+    </motion.h1>
+  </motion.div>;
 }

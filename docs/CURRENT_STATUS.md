@@ -580,3 +580,7 @@ CURRENT / IMPLEMENTED source: the ivory Home card displays “Ivory Hamper”; b
 ## 2026-10-09 — Home collection cards
 
 CURRENT / IMPLEMENTED source: Home presents three collection cards for envelopes, scented candles, and Eternal Paper Co. stationery. The Eternal Paper Co. card groups bookmark and diary discovery. Cards link to collection pages; `/shop/candles` and `/shop/stationery` now use the shared collection layout. The separate hamper showcase is unchanged. Typecheck and production build passed; focused ESLint has no errors (two existing `<img>` warnings in HomeSections). Build warns that it inferred the workspace root from multiple lockfiles.
+
+## 2026-10-10 — Home packaging feature image
+
+CURRENT / IMPLEMENTED source: the Home packaging feature uses `/images/brand/cta_1_1.png` with alternative text describing its open gift hamper. `npm run typecheck` and `git diff --check` pass; focused ESLint has no errors and reports two existing `<img>` warnings in HomeSections.

@@ -743,3 +743,7 @@ CURRENT / IMPLEMENTED: Home hamper card labels follow their product identity: �
 ## 2026-10-09 — Home collection discovery cards
 
 CURRENT / IMPLEMENTED source: render three Home collection cards for Luxury Shagun Envelopes, Scented Candles and Eternal Paper Co. (one combined bookmarks/stationery card). Link each card to a complete collection listing. Reuse the existing Envelopes collection page and the shared collection layout for new Candles and Premium Stationery routes. Leave the separate hamper showcase intact.
+
+## 2026-10-10 — Home packaging feature image
+
+CURRENT / IMPLEMENTED source: the packaging feature uses `B2C/public/images/brand/cta_1_1.png`; its alt text describes the open hamper and curated treats.

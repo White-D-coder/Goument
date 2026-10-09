@@ -84,7 +84,7 @@ export function HomeCollectionCard({ title, description, image, href }: { title:
 export function PackagingFeature() {
   return <section className="tgg-packaging" id="packaging" aria-labelledby="packaging-heading">
     <div className="tgg-packaging-visual">
-      <ProductPhoto src="/images/brand/festive.png" alt="Thoughtfully arranged gift boxes ready to be shared" sizes="(max-width: 760px) 100vw, 52vw" />
+      <ProductPhoto src="/images/brand/cta_1_1.png" alt="An open gift hamper with curated treats nestled in satin" sizes="(max-width: 760px) 100vw, 52vw" />
     </div>
     <div className="tgg-packaging-copy">
       <p className="tgg-kicker">Because every gift tells a story</p>

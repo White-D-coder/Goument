@@ -948,3 +948,7 @@ Removed the color-specific title overrides from both India Hamper photo cards. H
 ## 2026-10-09 — Home collection cards
 
 Replaced individual envelope/candle/bookmark/diary product cards with three collection links: Luxury Shagun Envelopes, Scented Candles, and Eternal Paper Co. The stationery card combines bookmark and diary discovery into one entry. Envelopes keeps its existing collection route; added matching Candles and Premium Stationery collection pages. Hamper showcase is unchanged.
+
+## 2026-10-10 — Update Home packaging feature photo
+
+Use the supplied `cta_1_1.png` image in the Home packaging/CTA feature and update its alternative text to describe the open curated hamper.

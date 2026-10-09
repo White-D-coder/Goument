@@ -491,6 +491,12 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   gap: 18px;
 }
 
+.tgg-collection-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
 .tgg-favourite-card {
   min-width: 0;
   overflow: hidden;
@@ -560,6 +566,33 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 
 .tgg-favourite-info h3 a:hover {
   color: var(--tgg-burgundy);
+}
+
+.tgg-collection-description {
+  min-height: 2.8em;
+  margin: 2px 0 10px;
+  color: var(--tgg-muted);
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.tgg-collection-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--tgg-burgundy);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.tgg-collection-link svg {
+  transition: transform 180ms ease;
+}
+
+.tgg-collection-link:hover svg {
+  transform: translateX(3px);
 }
 
 /* =========================================
@@ -690,6 +723,10 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
     gap: 14px;
   }
 
+  .tgg-collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .tgg-sketch-heading {
     padding-right: 125px;
     padding-left: 125px;
@@ -711,6 +748,10 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
     gap: 12px 10px;
   }
 
+  .tgg-collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .tgg-favourite-card {
     border-radius: 7px;
   }
@@ -726,6 +767,16 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-favourite-info h3 {
     min-height: 2.6em;
     font-size: 14px;
+  }
+
+  .tgg-collection-description {
+    min-height: 3.5em;
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  .tgg-collection-link {
+    font-size: 11px;
   }
 
   .tgg-favourite-bottom {
@@ -1276,6 +1327,12 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-hamper-card { flex-basis: 88%; }
   .tgg-favourite-grid { gap: 8px; }
 }
+
+.tgg-collection-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) {
+  .tgg-collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tgg-hero-slide, .tgg-hero-dots button::before { transition: none; }
   .tgg-home *, .tgg-home *::before, .tgg-home *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
@@ -1665,4 +1722,3 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
     margin-bottom: 18px;
   }
 }
-

@@ -573,3 +573,10 @@ CURRENT / IMPLEMENTED: resolved Atlas network timeout by launching local MongoDB
 
 CURRENT / IMPLEMENTED: completely replaced previous catalogue across B2C backend and storefront. Replaced `B2C/backend/gifting/items.json` and `B2C/src/lib/catalogue-preview.ts` with the 36 unique items (Tea, Strainer, Japanese Cup, Brass Spoon, Sugar Packets, Filter Coffee, Mug, Small Brass Spoon, Bhujia, Chocolates, Cookies, Sweets, Envelope Bookmarks, Designer Copper Bottle, Eco Friendly Journal, Good Pen, Video Game, Brick Game, Orange Candies, Eclairs, Kinder Joy, Hotwheels, RC Car, Reynolds Trimax, Mini Diary, iPod Music Player, Bookmarks, Shagun Envelopes, Thank You Cards, Announcement Cards, Gift Boxes, Fridge Magnets, Diary Pen Sets, Cool Stickers, Sustainable Diary+Bottle+Pen, Scented Candles) plus the 6 curated Gift Hampers (Tea Set, Coffee Set, Diwali Celebration OG Hamper, Generation Set Aesthetic, Childhood Hamper, Japanese Crockery Set).
 Seeded all 42 products, categories, variants, and inventory records into local MongoDB. All 12 gift-cart tests, TypeScript, 96 database tests, and production build passed.
+# 2026-10-09 — India hamper Home card label
+
+CURRENT / IMPLEMENTED source: the ivory Home card displays “Ivory Hamper”; both burgundy/lavender cards display “India Hamper.” All keep their existing detail routes and photos. Verified with `npm run typecheck` and `git diff --check` on 2026-10-09.
+
+## 2026-10-09 — Home collection cards
+
+CURRENT / IMPLEMENTED source: Home presents three collection cards for envelopes, scented candles, and Eternal Paper Co. stationery. The Eternal Paper Co. card groups bookmark and diary discovery. Cards link to collection pages; `/shop/candles` and `/shop/stationery` now use the shared collection layout. The separate hamper showcase is unchanged. Typecheck and production build passed; focused ESLint has no errors (two existing `<img>` warnings in HomeSections). Build warns that it inferred the workspace root from multiple lockfiles.

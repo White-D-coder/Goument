@@ -1,38 +1,27 @@
 import HomeFAQ from '@/components/home/HomeFAQ';
-import { BrandPhilosophy, CorporateBand, HomeFavouriteCard, HomeHamperCard, HomeHero, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
+import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
-import { HAMPERS_CATALOG } from '@/lib/catalogue-preview';
 import { homeFAQs } from '@/lib/home-content';
 import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
-import type { Product } from '@/lib/types';
 import './home.css';
 
 export const metadata = homeMetadata;
 const corporateUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL || 'https://thegourmetgifts.co/';
 
-const favouriteProducts: Product[] = HAMPERS_CATALOG.map(item => ({
-  _id: item._id,
-  slug: item.slug,
-  name: item.name,
-  basePrice: item.price * 100,
-  currency: 'INR',
-  description: { short: item.subCopy, long: item.description },
-  inventory: 0,
-  images: [{ public_id: item.image, alt: item.name }],
-  variants: [],
-  categories: [{ name: item.categoryLabel, slug: item.category }],
-  categoryLabel: item.categoryLabel,
-  giftItemId: item._id,
-}));
+const homeCollections = [
+  { title: 'Luxury Shagun Envelopes', description: 'Thoughtful envelopes for meaningful celebrations.', image: '/images/items/shagun_envelopes.webp', href: '/shop/envelopes' },
+  { title: 'Scented Candles', description: 'Festive candles, ready to make a moment feel special.', image: '/images/items/laddoo_candles.webp', href: '/shop/candles' },
+  { title: 'Eternal Paper Co.', description: 'Bookmarks, diaries and considered stationery.', image: '/images/items/bookmarks.webp', href: '/shop/stationery' },
+];
 
 const hamperCards = [
   { product: CURATED_HAMPERS[0] },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[0].public_id, title: 'India Hamper · Burgundy' },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[1].public_id, title: 'India Hamper · Lavender' },
+  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[0].public_id },
+  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[1].public_id },
 ];
 
 export default function Home() {
-  const structuredData = homeStructuredData([...CURATED_HAMPERS, ...favouriteProducts], homeFAQs);
+  const structuredData = homeStructuredData(CURATED_HAMPERS, homeFAQs);
   return <div className="atelier-home tgg-home">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
 
@@ -45,7 +34,7 @@ export default function Home() {
 
     <section className="tgg-favourites tgg-section" aria-labelledby="favourites-heading">
       <SectionHeading kicker="Our favourites" title="Thoughtful picks just for you" id="favourites-heading" href="/shop" action="View all gifts" />
-      <div className="tgg-favourite-grid">{HAMPERS_CATALOG.map(product => <HomeFavouriteCard key={product._id} product={product} />)}</div>
+      <div className="tgg-favourite-grid tgg-collection-grid">{homeCollections.map(collection => <HomeCollectionCard key={collection.href} {...collection} />)}</div>
     </section>
 
     <PackagingFeature />

@@ -941,3 +941,10 @@ Changed the Corporate navbar destination from B2C search to the active main B2B 
 ## 2026-10-01 — User-selected hero photos
 
 Replaced the slideshow photo list with only the three supplied root assets in the requested order: brand/hero.png, pics/ChatGPT Image Sep 23, 2026, 09_50_14 PM-1.png, small_anipics/framee.png. Copied exact files into B2C/public and updated intrinsic dimensions/alt text. Hero styling and transition logic retained. SHA-256 copy checks and lint passed; local Chrome loaded all three images, verified the0→1→2→0 sequence with1600ms fades, and found no overflow at1440/390px. Canonical UI/requirement/decision memory updated; priorities unchanged.
+# 2026-10-09 — Correct Home hamper card labels
+
+Removed the color-specific title overrides from both India Hamper photo cards. Home labels the ivory photo “Ivory Hamper” and both burgundy/lavender photos “India Hamper”; detail routes and photography are unchanged. B2C typecheck and `git diff --check` passed.
+
+## 2026-10-09 — Home collection cards
+
+Replaced individual envelope/candle/bookmark/diary product cards with three collection links: Luxury Shagun Envelopes, Scented Candles, and Eternal Paper Co. The stationery card combines bookmark and diary discovery into one entry. Envelopes keeps its existing collection route; added matching Candles and Premium Stationery collection pages. Hamper showcase is unchanged.

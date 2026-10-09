@@ -275,3 +275,10 @@ R45 (2026-10-01) CURRENT / PARTIAL overall: the user's owner/admin operations di
 | Verification | CURRENT / IMPLEMENTED checks: full frontend lint, TypeScript, eight admin client contract tests and an isolated production build pass. Backend authorization/transaction and real API/browser checks are tracked in TESTING. Provider consent, payment capture, invoice legality and production deployment are not established by frontend tests. |
 
 Sources: `B2C/src/app/admin`, `src/components/admin`, `src/lib/admin`, `backend/admin` and existing auth/database services. Canonical UI details: UI_SYSTEM; operational/security rules: ADMIN_FLOWS, AUTH_SYSTEM, SECURITY and API_CONTRACTS. This requirement authorizes the scoped operations implementation, not invented business policies, unrelated storefront redesigns, automatic owner grants, dependency migrations or production deployment.
+# 2026-10-09 — Correct Home hamper card labels
+
+CURRENT / IMPLEMENTED: the ivory photo card uses the “Ivory Hamper” identity; both burgundy and lavender India photos use “India Hamper.” Keep each photo and its existing product destination aligned with that identity.
+
+## 2026-10-09 — Home collection discovery
+
+CURRENT / IMPLEMENTED: the Home discovery area contains three collection cards: Luxury Shagun Envelopes, Scented Candles, and Eternal Paper Co. (combining bookmarks and diary/stationery discovery). Each opens its full collection listing, not an individual product detail page. Keep the existing hamper showcase and its product destinations unchanged.

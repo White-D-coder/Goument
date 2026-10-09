@@ -736,3 +736,10 @@ CURRENT / IMPLEMENTED UI flows:
 CURRENT / PARTIAL: refund initiation/approval, cancellation compensation, carrier writes, notification delivery/retry and private invoice/PDF generation are unavailable actions with server capability reasons. Existing records remain inspectable. Catalogue forms cover supported fields and approved image URLs; they do not provide an upload pipeline or every possible media/SEO/variant-attribute edit. Settings do not invent tax, refund, invoice, shipping or revenue-recognition policy. No export/bulk-action UI or customer-data editing is claimed.
 
 Sources: `B2C/src/app/admin`, `B2C/src/components/admin`, `B2C/src/lib/admin`, the Account allowlisted return and root chrome wrapper. Verification performed for this increment: full frontend ESLint and TypeScript pass; eight admin client contract tests pass; production webpack build passes in a temporary source copy without .env files, preserving the live `.next` directory. Actual API/browser evidence and deployment limits are recorded separately in TESTING/CURRENT_STATUS; a build is not proof of live provider or database connectivity.
+# 2026-10-09 — Correct Home hamper card labels
+
+CURRENT / IMPLEMENTED: Home hamper card labels follow their product identity: “Ivory Hamper” for the ivory photo, and “India Hamper” for both burgundy and lavender photos. Photos and product destinations remain paired with the corresponding product.
+
+## 2026-10-09 — Home collection discovery cards
+
+CURRENT / IMPLEMENTED source: render three Home collection cards for Luxury Shagun Envelopes, Scented Candles and Eternal Paper Co. (one combined bookmarks/stationery card). Link each card to a complete collection listing. Reuse the existing Envelopes collection page and the shared collection layout for new Candles and Premium Stationery routes. Leave the separate hamper showcase intact.

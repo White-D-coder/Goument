@@ -6,9 +6,7 @@ import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather } from 'lucid
 import ProductPhoto from '@/components/ProductPhoto';
 import QuantityControl from '@/components/QuantityControl';
 import HomeHeroSlideshow from '@/components/home/HomeHeroSlideshow';
-import AddGiftToCartButton from '@/components/AddGiftToCartButton';
-import { money, productImage, type Product } from '@/lib/types';
-import type { HamperData } from '@/lib/catalogue-preview';
+import { productImage, type Product } from '@/lib/types';
 import type { Testimonial } from '@/lib/home-content';
 
 export function SectionHeading({ kicker, title, id, href, action }: { kicker: string; title: string; id: string; href?: string; action?: string }) {
@@ -69,16 +67,16 @@ export function HomeHamperCard({ product, image, title }: { product: Product; im
   </article>;
 }
 
-/** Existing catalogue gifts retain their IDs, listed amounts and gift-cart flow. */
-export function HomeFavouriteCard({ product }: { product: HamperData }) {
-  const href = `/products/${product.slug}`;
-  return <article className="tgg-favourite-card">
-    <Link className="tgg-favourite-photo" href={href} aria-label={`View ${product.name}`}>
-      <ProductPhoto src={product.image} alt={product.name} sizes="(max-width: 600px) 44vw, (max-width: 1000px) 30vw, 18vw" />
+/** Home discovery cards route to their complete collection listings. */
+export function HomeCollectionCard({ title, description, image, href }: { title: string; description: string; image: string; href: string }) {
+  return <article className="tgg-favourite-card tgg-collection-card">
+    <Link className="tgg-favourite-photo" href={href} aria-label={`Explore ${title}`}>
+      <ProductPhoto src={image} alt={title} sizes="(max-width: 600px) 44vw, (max-width: 1000px) 30vw, 24vw" />
     </Link>
     <div className="tgg-favourite-info">
-      <h3><Link href={href}>{product.name}</Link></h3>
-      <div className="tgg-favourite-bottom"><span>{money(product.price * 100, 'INR')}</span><AddGiftToCartButton itemId={product._id} name={product.name} className="tgg-favourite-add" withQuantity compact /></div>
+      <h3><Link href={href}>{title}</Link></h3>
+      <p className="tgg-collection-description">{description}</p>
+      <Link className="tgg-collection-link" href={href}>Explore collection <ArrowRight size={15} aria-hidden="true" /></Link>
     </div>
   </article>;
 }

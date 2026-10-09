@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" fill="none">
+  <g stroke="#8F201D" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <!-- flowing ribbon trail -->
+    <path d="M12 228 C74 190 108 257 170 229 S246 187 286 222 S346 247 398 218 C444 193 472 215 504 228"/>
+    <path d="M18 233 C82 197 112 263 173 235 S247 193 286 228 S350 252 400 224" stroke-width="1.05" opacity=".7"/>
+    <path d="M496 229 C535 251 557 245 572 219 C589 190 570 178 560 194 C548 214 571 236 593 229"/>
+    <!-- small gift -->
+    <path d="M470 158 L571 158 L571 248 L470 248 Z"/>
+    <path d="M461 150 L580 150 L580 165 L461 165 Z"/>
+    <path d="M511 158 L511 246 M527 158 L527 246" stroke-width="1.5"/>
+    <path d="M519 150 C490 145 481 128 493 118 C506 109 517 128 520 150 C522 127 535 110 547 119 C560 129 544 146 519 150 Z"/>
+    <path d="M520 150 L520 158"/>
+    <!-- large gift -->
+    <path d="M566 104 L704 104 L704 251 L566 251 Z"/>
+    <path d="M556 91 L714 91 L714 108 L556 108 Z"/>
+    <path d="M631 104 L631 248 M646 104 L646 248" stroke-width="1.6"/>
+    <path d="M636 91 C602 85 586 64 602 48 C618 34 635 62 637 91 C641 59 662 34 680 49 C698 65 674 85 636 91 Z"/>
+    <path d="M637 91 L637 104"/>
+    <!-- trailing bow ribbon -->
+    <path d="M637 94 C605 104 589 129 573 146 C558 162 548 175 555 187 C561 198 575 188 576 177"/>
+    <path d="M646 96 C672 112 684 135 697 158 C712 184 730 188 742 176"/>
+    <path d="M646 98 C659 124 655 144 651 164" stroke-width="1.25" opacity=".8"/>
+    <!-- sketch detail lines -->
+    <path d="M478 171 L478 238 M487 170 L487 240 M577 116 L577 241 M585 115 L585 238 M694 117 L694 237" stroke-width=".9" opacity=".55"/>
+    <path d="M563 109 L704 109 M472 170 L568 170" stroke-width=".9" opacity=".55"/>
+    <!-- little sparkles -->
+    <path d="M430 159 L434 170 L445 174 L434 178 L430 190 L426 178 L415 174 L426 170 Z" stroke-width="1.5"/>
+    <path d="M721 65 L724 73 L732 76 L724 79 L721 87 L718 79 L710 76 L718 73 Z" stroke-width="1.5"/>
+    <path d="M690 269 L693 276 L700 279 L693 282 L690 289 L687 282 L680 279 L687 276 Z" stroke-width="1.3"/>
+    <circle cx="453" cy="210" r="2.4" fill="#8F201D" stroke="none"/>
+    <circle cx="746" cy="222" r="2" fill="#8F201D" stroke="none"/>
+    <circle cx="535" cy="133" r="1.8" fill="#8F201D" stroke="none"/>
+  </g>
+</svg>

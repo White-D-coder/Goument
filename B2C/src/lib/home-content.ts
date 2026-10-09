@@ -3,12 +3,6 @@ export type ContentsSlide = { name: string; image: string; alt: string; href: st
 export type Testimonial = { quote: string; name: string; context?: string; logo?: string };
 
 // Regions describe culinary traditions from the supplied brief, not manufacturing certificates.
-export const flavourStories = [
-  { name: 'Thekua', place: 'A Bihari favourite', image: '/images/pics/thekuap.webp', alt: 'The 1970 Shop Thekua tin and a bowl of thekua', copy: 'A crisp bite, familiar flavours and a little nostalgia.' },
-  { name: 'Chilli Cheese Bhujia', place: 'A Mumbai-inspired twist', image: '/images/pics/bhujia.webp', alt: 'Bombay Sweet Shop Chilli Cheese Bhujia', copy: 'A playful savoury note from Bombay Sweet Shop.' },
-  { name: 'Tea, worth a pause', place: 'Assam to Hyderabad', image: '/images/pics/blendedtea.webp', alt: 'Café Niloufer blended tea', copy: 'The comfort of a good cup, made for slow conversations.' },
-];
-
 // A photo-led preview, not the final contents/quantities contract.
 export const ivoryInside: InsideItem[] = [
   { name: 'The 1970 Shop Thekua', place: 'A Bihari favourite', why: 'For a familiar flavour with a little nostalgia.' },

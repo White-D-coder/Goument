@@ -7,7 +7,7 @@ import { api } from '@/lib/api';
 import type { Draft } from '@/hooks/useGiftDraft';
 import QuantityControl from './QuantityControl';
 
-export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean }) {
+export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean }) {
  const [status, setStatus] = useState<'idle'|'adding'|'added'|'error'>('idle');
  const [message, setMessage] = useState('');
  const locked = useRef(false);
@@ -47,12 +47,12 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
    setStatus('error'); setMessage(error instanceof Error ? error.message : 'Unable to update your cart. Please try again.');
   } finally { locked.current = false; }
  }
- if (withQuantity) return <div className="gift-purchase">
+ if (withQuantity) return <div className={`gift-purchase${compact ? ' gift-purchase--compact' : ''}`}>
   <div className="gift-purchase-controls">
-   <button type="button" className={className} disabled={status === 'adding' || quantity >= 99} aria-busy={status === 'adding'} aria-label={`Add ${name} to cart`} onClick={() => void add()}>
+   {(!compact || quantity === 0) && <button type="button" className={className} disabled={status === 'adding' || quantity >= 99} aria-busy={status === 'adding'} aria-label={`Add ${name} to cart`} onClick={() => void add()}>
     <span>{status === 'adding' ? quantity ? 'Updating…' : 'Adding…' : 'Add to Cart'}</span>
     <ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/>
-   </button>
+   </button>}
    {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={status === 'adding'} onChange={next => void add(next > quantity ? 1 : -1)}/>}
   </div>
   {status === 'error' && <p className="cart-add-error" role="alert">{message}</p>}

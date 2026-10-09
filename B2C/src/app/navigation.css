@@ -123,3 +123,32 @@
 
 .header .brand > span.brand-name { font-family: 'Pagio', Georgia, serif; font-weight: 400; font-synthesis: none; }
 .header .brand > img { width: 64px; height: 64px; }
+
+/* Keep the original B2C masthead in flow so the split hero starts directly below it. */
+.header.home-header--editorial {
+  --header-height: 78px;
+  height: var(--header-height);
+  margin-bottom: 0;
+  border-bottom: 0 !important;
+  background: #fbf5ed !important;
+  box-shadow: none !important;
+}
+.header.home-header--editorial.hero-transparent,
+.header.home-header--editorial.scrolled { background: #fbf5ed !important; }
+.header.home-header--editorial.hero-transparent { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+.header.home-header--editorial.scrolled { border-bottom: 1px solid #e8ded2 !important; box-shadow: 0 2px 10px rgba(0,0,0,.08) !important; }
+.header.home-header--editorial.hero-transparent::before { content: ''; position: absolute; z-index: 0; inset: 0; background: url('/images/patterns/diwali_mandala_bg.jpg') repeat center top / 600px auto; opacity: .2; mask-image: linear-gradient(90deg,#0009,transparent 13%,transparent 87%,#0009); pointer-events: none; }
+.header.home-header--editorial .header-inner { position: relative; z-index: 1; }
+.header.home-header--editorial .brand,
+.header.home-header--editorial .nav:not(.open) > a,
+.header.home-header--editorial .nav-actions .icon,
+.header.home-header--editorial .shop-navigation-trigger,
+.header.home-header--editorial.hero-transparent .nav:not(.open) > a,
+.header.home-header--editorial.hero-transparent .nav-actions .icon,
+.header.home-header--editorial.hero-transparent .icon svg,
+.header.home-header--editorial.hero-transparent .shop-navigation-trigger { color: #4a1012; stroke: currentColor; }
+@media (max-width: 1023px) {
+  .header.home-header--editorial { --header-height: 72px; }
+  .header.home-header--editorial { margin-bottom: 0; }
+  .header.home-header--editorial .nav.open { background: #fbf5ed; }
+}

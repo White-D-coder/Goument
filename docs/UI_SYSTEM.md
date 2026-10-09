@@ -1,3 +1,63 @@
+## 2026-10-09 — Remove the Home navbar/hero spacer (R112)
+
+CURRENT / IMPLEMENTED source: remove Home top padding so no blank band separates the transparent-on-load navbar from the hero. Keep the navbar in normal flow and ivory on scroll.
+
+## 2026-10-09 — Keep navbar separate from Home hero (R111)
+
+CURRENT / IMPLEMENTED source: keep the transparent-on-load navbar in normal flow and restore 40px desktop/24px phone top spacing before the hero. The ivory scroll background remains.
+
+## 2026-10-09 — Transparent navbar over Home hero (R110, SUPERSEDED by R111)
+
+CURRENT / IMPLEMENTED source: overlap the transparent Home navbar with the hero image at the page top, then reveal the ivory header background on scroll. This supersedes the top padding from R108.
+
+## 2026-10-09 — Raise watermark and use white hero typography (R109)
+
+CURRENT / IMPLEMENTED source: extend the existing masked mandala watermark behind the transparent header at the page top. Keep hero copy white with a subtle dark left-image gradient; use a dark copy surface when the image and text stack.
+
+## 2026-10-09 — Increase navbar-to-hero spacing (R108, SUPERSEDED by R110; restored by R111)
+
+CURRENT / IMPLEMENTED source: add 40px above the hero on desktop and 24px on phones, using Home top padding to prevent margin collapse.
+
+## 2026-10-09 — Space the Home hero below its navbar (R107, SUPERSEDED by R108; placement restored by R111)
+
+CURRENT / IMPLEMENTED source: keep the transparent-on-load navbar in normal flow; add 18px desktop and 12px phone spacing before the full-width hero banner. The background still appears on scroll.
+
+## 2026-10-09 — Overlay Home navbar on hero (R106, SUPERSEDED by R107)
+
+CURRENT / IMPLEMENTED source: place the transparent navbar over the Home hero at page top, then reveal the warm ivory surface, divider and shadow after scrolling. Overlay via header spacing so no gap opens between nav and hero.
+
+## 2026-10-09 — Full-width Home hero slideshow (R105)
+
+CURRENT / IMPLEMENTED source: remove the side-by-side Home hero partition. Show each supplied wide gift photo across the full desktop banner and place copy on the uncluttered left side; retain the fade and bottom-centered dots. Match the shared 2.88:1 image ratio so the full photograph remains visible. Stack photo and copy on phones.
+
+## 2026-10-09 — Transparent Home navbar on load (R104, SUPERSEDED by R106)
+
+CURRENT / IMPLEMENTED source: Home's original monogram navigation starts transparent, then gains an ivory surface, divider and subtle shadow on scroll. Keep the nav in flow and retain its no-gap connection to the hero.
+
+## 2026-10-09 — Home hero image slideshow (R103)
+
+CURRENT / IMPLEMENTED source: place three existing product photographs in the split hero visual. Crossfade automatically, use bottom-centered dots for direct selection, preserve contain framing and respect reduced-motion preference.
+
+## 2026-10-09 — Restore Home navbar and close hero gap (R102)
+
+CURRENT / IMPLEMENTED source: Home returns to the established monogram with Shop, Hampers, Collections and Corporate navigation. Keep the existing four-category dropdown. Use a warm solid header in normal page flow and begin the split hero directly below it. Browser appearance UNKNOWN.
+
+## 2026-10-09 — Increase Home watermark opacity (R101)
+
+CURRENT / IMPLEMENTED source: use 20% opacity for the existing B2C Home page-edge mandala watermark, retaining the edge mask, multiply blend and behind-content stacking.
+
+## 2026-10-09 — Rounded split Home hero (R100)
+
+CURRENT / IMPLEMENTED source: use an inset rounded banner with distinct copy and image columns, soft warm/lilac tinting, and a 16:9 framed photo. Keep text out of the photo area. At phone widths, stack the photo above the copy.
+
+## 2026-10-09 — Center Home section titles (R99)
+
+CURRENT / IMPLEMENTED source: center section headings, product/hamper card titles, packaging feature title, FAQ heading and corporate CTA title. The Hero h1 remains left aligned. Desktop heading actions stay to the right; phone actions stack under the centered heading.
+
+## 2026-10-09 — Remove flavour-story section; enforce image frames (R98)
+
+CURRENT / IMPLEMENTED source: remove the complete Home regional flavour-story and carousel. Place the hero photo only in the visual column, using explicit grid areas, positioning and stacking so it never extends behind copy. Home hamper, favourite and packaging images fill their image frame, with hover scaling disabled. Browser appearance UNKNOWN.
+
 ## 2026-10-09 — Regular sans titles on phones (R94)
 
 CURRENT / IMPLEMENTED source: use Plus Jakarta Sans on B2C h1–h4 at phone widths (<=640px) for a cleaner, less decorative title style. Keep existing sizes/weight hierarchy and desktop/tablet Cormorant Garamond. Admin typography is excluded. Browser appearance is UNKNOWN.
@@ -55,6 +115,10 @@ CURRENT / IMPLEMENTED source: when `.tgg-home` is present, CSS hides the viewpor
 CURRENT / IMPLEMENTED source: `.tgg-home::before` reuses `/images/patterns/diwali_mandala_bg.jpg` at 26% opacity with repeating tiles and a centered horizontal gradient mask, confining the mandala decoration to the page edges behind content. The page establishes its own stacking context for reliable layering; the overlay ignores pointer input. No new artwork/dependency or other page theme changes. Browser appearance remains unverified.
 
 # UI System
+
+# 2026-10-09 — Editorial Home storefront redesign (R97)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: Home uses a solid ivory editorial masthead, split hero, three same-sized hamper tiles from existing preview photos, responsive catalogue cards, and a packaging feature with burgundy and warm neutral tones. Keep card photography in contain framing. On phones, hamper previews use a horizontal snap rail with image/title links only, while catalogue cards use two columns and compact quantity controls. Keep the mandala edge watermark at 20% opacity and hide the Home viewport scrollbar without disabling scrolling. Sources: `B2C/src/components/Header.tsx`, `ShopNavigation.tsx`, `home/HomeSections.tsx`, `B2C/src/app/b2c/home.css`.
 
 ## 2026-10-08 — Center Home FAQ (R79)
 

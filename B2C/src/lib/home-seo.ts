@@ -22,10 +22,10 @@ const homeUrl = absoluteUrl('/b2c');
 const title = 'The Gourmet Gifts — Curated Hampers & Thoughtful Gifting';
 const description = 'Discover curated gift hampers, laddoo candles and premium stationery. Thoughtful gifts for celebrations, weddings and the people who matter.';
 const hero = {
-  url: absoluteUrl('/images/brand/hero_optimized.webp'),
-  width: 1770,
-  height: 889,
-  alt: 'The Gourmet Gifts presentation boxes in ivory, lavender, burgundy and midnight blue',
+  url: absoluteUrl('/images/small_anipics/framee_optimized.webp'),
+  width: 1672,
+  height: 941,
+  alt: 'The Gourmet Gifts curated boxes with gourmet treats and keepsakes',
 };
 
 export const homeMetadata: Metadata = {

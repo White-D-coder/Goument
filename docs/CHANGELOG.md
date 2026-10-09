@@ -1,6 +1,70 @@
+## 2026-10-09 — Remove spacer between Home navbar and hero (R112)
+
+CURRENT / IMPLEMENTED source: remove the Home top padding that created a blank patterned band between the navbar and hero. Keep the navbar in normal flow and transparent at page top, with its ivory background on scroll; hero starts immediately below the navbar. Verification pending.
+
+## 2026-10-09 — Restore Home hero spacing below the navbar (R111)
+
+CURRENT / IMPLEMENTED source: keep the navbar transparent at page top and ivory on scroll without overlapping the hero. Restore the 40px desktop/24px phone gap and preserve the hero's vertical position. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Overlay the transparent Home navbar again (R110, SUPERSEDED by R111)
+
+CURRENT / IMPLEMENTED source: place the initial transparent navbar over the hero so the full-width image is visible beneath it; retain the ivory background after scrolling. Remove the extra page-top padding that separated navbar from hero. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Raise the Home watermark and use white hero copy (R109)
+
+CURRENT / IMPLEMENTED source: extend the top-corner mandala watermark into the transparent Home navbar. Set the hero kicker, headline, description and promise labels white; add a dark left-side fade on desktop and a dark copy panel when the hero stacks. Production build, focused ESLint and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Increase spacing before the Home hero (R108, SUPERSEDED by R110; restored by R111)
+
+CURRENT / IMPLEMENTED source: use 40px top spacing on desktop and 24px on phones before the full-width hero. This replaces the smaller spacing that still looked cramped. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Add breathing room above the Home hero (R107)
+
+CURRENT / IMPLEMENTED source: keep the transparent-on-load navbar in normal flow and add a small 18px desktop/12px phone gap above the full-width hero banner. This replaces the hero-overlapping header placement. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Overlay Home navbar on the hero (R106, SUPERSEDED by R107)
+
+CURRENT / IMPLEMENTED source: make the transparent Home navbar overlap the hero image at the top of the page; reveal its ivory background, divider and shadow after scrolling. Keep the hero immediately beneath the header so there is no gap. Verification pending.
+
+## 2026-10-09 — Use full-width supplied Home hero images (R105)
+
+CURRENT / IMPLEMENTED source: replace the split hero with the user's three wide banner images as full-bleed slideshow frames, overlay copy on the clear left side and retain bottom-centered fading slide dots. Preserve each image's full 2.88:1 frame; phones stack the complete image above the copy. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+## 2026-10-09 — Restore transparent-on-load Home navbar (R104)
+
+CURRENT / IMPLEMENTED source: keep the Home navbar transparent at the top of the page, then show the ivory background, divider and subtle shadow after scrolling. Keep the header in normal flow so the hero remains directly below it. Production build and `git diff --check` pass; browser appearance remains UNKNOWN.
+
+## 2026-10-09 — Add a fading Home hero slideshow (R103)
+
+CURRENT / IMPLEMENTED source: cycle three existing gift photos in the split hero with a crossfade and bottom-centered, keyboard-operable slide dots. Keep the entire image visible with `object-fit: contain`; disable autoplay for reduced-motion preference. Typecheck, focused ESLint, production build and `git diff --check` pass; browser appearance remains UNKNOWN.
+
+## 2026-10-09 — Restore the B2C navbar and remove the hero gap (R102)
+
+CURRENT / IMPLEMENTED source: restore the B2C Home monogram, Shop label and Hampers/Collections/Corporate links while keeping the four-category hover menu. Keep the navbar in normal flow and remove the split hero's top margin so it begins immediately below the header. Typecheck, focused ESLint, production build and `git diff --check` pass; browser appearance remains UNKNOWN.
+
+## 2026-10-09 — Increase Home watermark opacity (R101)
+
+CURRENT / IMPLEMENTED source: raise the side watermark opacity from 10% to 20%; preserve its mask and placement. `git diff --check` passes.
+
+## 2026-10-09 — Refresh the Home hero banner (R100)
+
+CURRENT / IMPLEMENTED source: use a softly tinted, rounded inset hero with copy separated from the right-side product photo. Keep the full 16:9 photo frame, existing copy and actions, and stack the photo over copy on phones. Production build, focused ESLint and `git diff --check` pass.
+
+## 2026-10-09 — Center Home titles (R99)
+
+CURRENT / IMPLEMENTED source: center section headings, feature titles, card titles and corporate/FAQ headings across Home; leave the hero headline left aligned. Preserve desktop side actions and stack them below the title on phones. Typecheck, production build, focused ESLint and `git diff --check` pass.
+
+## 2026-10-09 — Remove Home flavour-story section and correct image framing (R98)
+
+CURRENT / IMPLEMENTED source: remove the entire regional flavour-story section and its carousel. Lock the hero photo to the visual grid column so it cannot sit behind hero copy, and make card/feature images fill their frames without hover scaling. Typecheck, production build, focused ESLint and `git diff --check` pass; browser appearance remains UNKNOWN.
+
+## 2026-10-09 — Redesign B2C Home to the gifting storefront reference (R97)
+
+CURRENT / IMPLEMENTED source: reshape Home into a warm split hero, three hamper tiles from the two existing hamper identities and India color photos, catalogue favourites and a packaging feature. Use existing prices and enquiry statuses; preserve the phone hamper carousel, short phone copy, lower story/FAQ/corporate sections and cart controls. Typecheck, production build, focused ESLint and `git diff --check` pass. Full ESLint reports an existing `no-explicit-any` issue in `src/lib/types.ts`; visual behavior remains UNKNOWN because browser automation is unavailable.
+
 ## 2026-10-09 — Redesign lower product-detail sections (R96)
 
-CURRENT / IMPLEMENTED source: join the product lifestyle image and giving statement into one responsive editorial row, make personalisation a tighter three-step panel, and contain the finer details accordions in an ivory card. Preserve all copy and interactions. Verification pending.
+CURRENT / IMPLEMENTED source: join the product lifestyle image and giving statement into one responsive editorial row, make personalisation a tighter three-step panel, and contain the finer details accordions in an ivory card. Preserve all copy and interactions. Typecheck, production build, CSS parsing and `git diff --check` passed; browser appearance remains UNKNOWN.
 
 ## 2026-10-09 — Remove the PDP “What’s inside” story section (R95)
 

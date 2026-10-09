@@ -1,3 +1,67 @@
+## 2026-10-09 — Remove Home navbar/hero separator (R112)
+
+CURRENT / IMPLEMENTED source: remove `.tgg-home` top padding because it created an unwanted visible band between the navbar and hero. Keep the header in normal flow, transparent on initial load and ivory on scroll. This supersedes R111's 40px/24px spacing.
+
+## 2026-10-09 — Keep transparent navbar separate from hero (R111)
+
+CURRENT / IMPLEMENTED source: retain transparent-on-load and ivory-on-scroll navbar styling, but keep the header in normal flow. Restore R108's 40px desktop/24px phone gap after the user clarified that the hero should not be raised under the navbar.
+
+## 2026-10-09 — Show hero image through initial navbar (R110, SUPERSEDED by R111)
+
+CURRENT / IMPLEMENTED source: overlap the Home navbar with the hero so its transparent initial state reveals the image, then show the ivory header background after scroll. This supersedes R108's extra top spacing, which left only the ivory page background behind the transparent header.
+
+## 2026-10-09 — White hero copy and watermark at the page top (R109)
+
+CURRENT / IMPLEMENTED source: use white hero text as requested; darken only the left image area with a soft gradient for contrast, and use a solid dark copy panel when stacked. Extend the existing edge watermark behind the initial transparent navbar.
+
+## 2026-10-09 — Increase the Home hero separation (R108, SUPERSEDED by R110; restored by R111)
+
+CURRENT / IMPLEMENTED source: replace R107's 18px/12px spacing with 40px desktop and 24px phone spacing after the user reported it still looked too close.
+
+## 2026-10-09 — Separate Home navbar from hero (R107, SUPERSEDED by R108; placement restored by R111)
+
+CURRENT / IMPLEMENTED source: keep the transparent-at-top/ivory-on-scroll navbar in normal flow and add a modest gap below it: 18px desktop, 12px phone. This supersedes R106's overlapping header, which brought the hero too close to the page top and navbar.
+
+## 2026-10-09 — Overlay Home navbar on hero (R106, SUPERSEDED by R107)
+
+CURRENT / IMPLEMENTED source: place the Home navbar over the hero image at initial scroll position, transparent with dark readable controls over the photo's clear area. On scroll, show the ivory background, divider and shadow. This supersedes R104's normal-flow header placement; retain the no-gap hero geometry.
+
+## 2026-10-09 — Full-width Home hero photography (R105)
+
+CURRENT / IMPLEMENTED source: use the three user-supplied wide banner images across the complete desktop hero instead of a side-by-side image partition. Overlay existing copy on their open left side; keep the full image visible using their shared 2.88:1 ratio. Phones show each complete image above the copy.
+
+## 2026-10-09 — Home header reveals background on scroll (R104, SUPERSEDED by R106)
+
+CURRENT / IMPLEMENTED source: keep the initial Home navbar transparent and reveal its ivory background, divider and subtle shadow after scroll. Preserve normal header flow and the direct navbar-to-hero placement.
+
+## 2026-10-09 — Home hero image rotation (R103)
+
+CURRENT / IMPLEMENTED source: rotate three existing gift photos in the Home hero with a fade and direct-selection dots. Use a 5.2 second interval, keep images fully visible, and stop autoplay for reduced-motion preference. Do not alter hero copy or dimensions.
+
+## 2026-10-09 — Restore B2C navbar while retaining the refreshed hero (R102)
+
+CURRENT / IMPLEMENTED source: use the established Home monogram and navigation labels (`Shop`, `Hampers`, `Collections`, `Corporate`) after the user asked to restore the prior navbar. Keep the four-category Shop dropdown and current split hero. Put the masthead in normal flow and remove the hero's top margin so there is no gap or overlap.
+
+## 2026-10-09 — Increase Home watermark opacity (R101)
+
+CURRENT / IMPLEMENTED source: change the existing page-edge mandala watermark from 10% to 20% opacity. Keep the edge mask, blend mode, image and stacking so text/action contrast remains consistent.
+
+## 2026-10-09 — Rounded split Home hero (R100)
+
+CURRENT / IMPLEMENTED source: follow the new banner reference with a rounded, inset hero surface, readable copy on the left, and a separate product photograph on the right. Keep the existing brand copy and commerce link; do not make the photo a background beneath text. Match the image's 16:9 frame to avoid unwanted cropping. Stack image before copy on phones.
+
+## 2026-10-09 — Center Home titles (R99)
+
+CURRENT / IMPLEMENTED source: center Home section headings and card/feature titles, while preserving the hero headline's left alignment. Keep View all actions at the heading row's right side on desktop and put them below the title on phones to prevent collisions.
+
+## 2026-10-09 — Remove Home flavour stories and fix image framing (R98)
+
+CURRENT / IMPLEMENTED source: the complete “Familiar flavours. Fresh discoveries.” Home section is removed, including its regional story carousel, copy and action. This supersedes R78's Home flavour-carousel decision. The hero visual is confined to its right-hand grid area with explicit stacking, and image cards fill their frames without hover scaling. Preserve the existing product photographs and destinations.
+
+## 2026-10-09 — Align B2C Home with the gifting storefront reference (R97)
+
+CURRENT / IMPLEMENTED source: use the reference's warm ivory navigation and split hero, followed by three hamper tiles using the two existing enquiry-only identities and real burgundy/lavender India photos, then catalogue cards and an image-led packaging feature. Do not add prices, stock, or delivery promises to the previews. Preserve cart IDs and links for saleable catalogue entries. Phone hamper cards remain a swipe row with image/title only; other supporting copy is compact. This supersedes older Home composition decisions for the visible top-level page, while preserving lower story, philosophy, FAQ and corporate content. Browser appearance is UNKNOWN.
+
 ## 2026-10-09 — Recompose lower product-detail sections (R96)
 
 CURRENT / IMPLEMENTED source: redesign the supplied lower PDP composition as three related treatments: a side-by-side lifestyle image and giving statement, a concise three-step personalisation panel, and a contained finer-details panel. Retain existing copy, links, native accordions, section order and reduced-content phone behavior. The lifestyle image uses contain framing so the full supplied photograph stays visible. Sources: `/products/[slug]/page.tsx`, `product-detail.css`. Verification is recorded in CURRENT_STATUS and TESTING.

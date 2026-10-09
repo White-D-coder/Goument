@@ -22,7 +22,7 @@ export default function ProductCard({
   return (
     <article
       data-reveal
-      className={`product-card gift-product-card luxury-hamper-card${
+      className={`product-card gift-product-card b2c-product-card${
         compact ? ' shop-product-card' : ''
       }${isHamper ? ' hamper-product-card' : ''}`}
     >

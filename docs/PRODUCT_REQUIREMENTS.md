@@ -30,6 +30,38 @@ R80 (2026-10-09) CURRENT / IMPLEMENTED source: apply the previously approved man
 
 # Product Requirements
 
+R112 (2026-10-09) CURRENT / IMPLEMENTED source: remove the Home top spacer so the hero starts immediately below the navbar; retain the in-flow header, initial transparent background, and ivory scroll state. Verification pending; appearance UNKNOWN.
+
+R111 (2026-10-09) SUPERSEDED by R112: restored 40px/24px spacing below the navbar; user clarified the spacer should be removed.
+
+R110 (2026-10-09) SUPERSEDED by R111: the navbar overlay moved the hero too far upward; the current layout keeps the hero below the navbar.
+
+R109 (2026-10-09) CURRENT / IMPLEMENTED source: extend the Home edge watermark into the initial transparent navbar. Set hero copy and promise labels white, with a left-side desktop contrast fade and a dark stacked text panel. Production build, focused ESLint and `git diff --check` pass; appearance UNKNOWN.
+
+R108 (2026-10-09) SUPERSEDED by R110; RESTORED by R111: 40px/24px top padding separates the hero from the transparent navbar.
+
+R107 (2026-10-09) SUPERSEDED by R108: initial in-flow spacing was too small; see the current 40px desktop/24px phone spacing requirement.
+
+R106 (2026-10-09) SUPERSEDED by R111: briefly overlaid the Home navbar on the hero; R111 restores normal flow with space below the header while retaining transparent-on-load and ivory-on-scroll states.
+
+R105 (2026-10-09) CURRENT / IMPLEMENTED source: remove the split Home hero. Use the provided 2129 × 739 images as complete banner-width slideshow frames, overlaying copy on left negative space and retaining fade/dots. Preserve full framing and stack photo before copy on phones. Production build and `git diff --check` pass; browser appearance UNKNOWN.
+
+R104 (2026-10-09) SUPERSEDED by R111: Home navbar starts transparent and reveals an ivory background, divider and shadow after scroll; R111 retains the behavior with the restored spacing.
+
+R103 (2026-10-09) CURRENT / IMPLEMENTED source: crossfade the Home hero through three existing gift photos and place direct-selection dots at the image's bottom center. Preserve full image framing; turn off autoplay when reduced motion is preferred. Typecheck, focused ESLint, production build and `git diff --check` pass; visual acceptance UNKNOWN.
+
+R102 (2026-10-09) CURRENT / IMPLEMENTED source: restore the prior Home navbar's monogram and Shop/Hampers/Collections/Corporate labels. Keep the four requested Shop categories and hover behavior. Place the header in normal flow and remove the split hero's top margin. Typecheck, focused ESLint, production build and `git diff --check` pass; visual acceptance UNKNOWN.
+
+R101 (2026-10-09) CURRENT / IMPLEMENTED source: raise the B2C Home side watermark opacity from 10% to 20%, preserving its edge mask and background stacking. `git diff --check` passes.
+
+R100 (2026-10-09) CURRENT / IMPLEMENTED source: style the B2C hero as an inset rounded split banner, with left-aligned brand copy in its own panel and the existing product photo in a right-side 16:9 frame. Stack image above copy on phones and retain the existing Shop link. Production build, focused ESLint and `git diff --check` pass.
+
+R99 (2026-10-09) CURRENT / IMPLEMENTED source: center all section-level and card titles on B2C Home while leaving the hero headline left aligned. Retain right-side section actions on desktop and place them beneath the heading on phones. Typecheck, production build, focused ESLint and `git diff --check` pass.
+
+R98 (2026-10-09) CURRENT / IMPLEMENTED source: remove the complete Home “Familiar flavours. Fresh discoveries.” regional story section, including images and Explore gourmet hampers action. Keep the hero image restricted to the visual side of the split hero and ensure Home imagery fills its intended card frames without hover scaling. Preserve remaining Home sections, links and commerce behavior. Typecheck, production build, focused ESLint and `git diff --check` pass; visual acceptance UNKNOWN.
+
+R97 (2026-10-09) CURRENT / IMPLEMENTED source: restyle B2C Home around a gifting storefront: split hero, three hamper tiles from existing preview images, favourite catalogue gifts and packaging story. Use actual catalogue prices/IDs and existing product pages/cart behavior; previews remain enquiry-only. Keep existing secondary Home content. On phones, hamper previews are image/title links in a horizontal snap row; favourites use a compact two-column grid. Do not claim unverified delivery coverage. Typecheck, production build, focused ESLint and `git diff --check` pass. Full ESLint reports a pre-existing error in `src/lib/types.ts`; browser appearance remains UNKNOWN. Sources: `B2C/src/app/b2c/page.tsx`, `home.css`, `Header.tsx`, `HomeSections.tsx`.
+
 R79 (2026-10-08) CURRENT / IMPLEMENTED source: center the Home FAQ title and accordion content in a constrained responsive column. Center question/answer copy while keeping the disclosure icon at the row edge; preserve native details/summary interaction. Source: `B2C/src/app/b2c/home.css`, `B2C/src/components/home/HomeFAQ.tsx`. Verification: `git diff --check`; visual acceptance UNKNOWN.
 
 R78 (2026-10-08) CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: turn the Home regional flavour cards into a responsive horizontal carousel with native swipe/scroll, scroll snapping, keyboard focus and previous/next buttons. Move one card per button activation, omit autoplay and honor reduced motion. Preserve all three images, captions, source copy and the Hampers link. Source: `B2C/src/components/home/HomeStoryCarousel.tsx`, `B2C/src/components/home/HomeSections.tsx`, `B2C/src/app/b2c/home.css`. Verification: TypeScript, scoped ESLint and `git diff --check`; browser preview not available.

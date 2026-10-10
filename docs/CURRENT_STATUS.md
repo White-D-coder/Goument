@@ -1,3 +1,7 @@
+## 2026-10-10 — Trim product-detail copy on phones (R115)
+
+CURRENT / IMPLEMENTED source: hide mobile breadcrumbs and repeated delivery/bulk/help copy, clamp product descriptions to two lines, and remove the phone-only image/story panel with no visible copy. Keep product title, short description, primary price/cart bar, gift-note personalize control and collapsed product detail disclosures. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass; visual browser review remains UNKNOWN because localhost:3000 is unavailable.
+
 ## 2026-10-10 — Product detail phone layout (R114)
 
 CURRENT / IMPLEMENTED source: make product detail pages phone-first around a square rounded gallery, compact product information and a fixed safe-area-aware purchase bar. Existing price/enquiry state, AddGiftToCartButton quantity state and checkout action remain unchanged. Gallery thumbnails render as pagination dots on phones when multiple real images exist; the Shagun local fallback currently supplies one image, so no extra slides are invented. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass. Local page/browser rendering is UNKNOWN because localhost:3000 is unavailable.

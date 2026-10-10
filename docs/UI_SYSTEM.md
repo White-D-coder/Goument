@@ -1,3 +1,7 @@
+## 2026-10-10 — Reduce mobile PDP text (R115)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: hide phone breadcrumbs, repeated purchase-meta text, and the image-only lifestyle row. Clamp product description to two lines and keep the gift-note personalize action without its explanatory paragraph until expanded. Preserve price/cart controls, note form's explicit enquiry disclaimer when expanded, and collapsed product detail accordions. Desktop stays unchanged. Source: `B2C/src/app/products/[slug]/product-detail.css`.
+
 ## 2026-10-10 — Mobile product detail layout (R114)
 
 CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: on phone PDPs, show the contained gallery as a near-square rounded image with centered pagination dots for galleries with multiple real photos. Keep the product title and short description compact. Pin the existing price/enquiry and Add to Cart controls to a translucent bottom bar with safe-area padding; after a confirmed gift-draft addition, show the existing quantity counter and checkout link in that bar. No fabricated image, brand badge, variant, price or payment behavior. Desktop PDP remains unchanged. Sources: `B2C/src/app/products/[slug]/product-detail.css`, `ProductGallery`, `BuyPanel`.

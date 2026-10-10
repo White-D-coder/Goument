@@ -1,5 +1,9 @@
 # Testing
 
+## 2026-10-10 — Reduce mobile PDP copy (R115)
+
+VERIFIED: `npm run typecheck`; scoped ESLint on PDP route/gallery/purchase components; PostCSS parse of `product-detail.css`; `git diff --check`. No local server was available at `localhost:3000`; no mobile browser screenshot/interaction test was run. Visual density and viewport fit remain UNKNOWN.
+
 ## 2026-10-10 — Mobile product detail layout (R114)
 
 VERIFIED: `npm run typecheck`; scoped ESLint on PDP route/gallery/purchase components; PostCSS parse of `product-detail.css`; `git diff --check`. The Shagun route could not be loaded from localhost because no server is listening on port3000. No screenshot/device interaction test was run. Responsive visual appearance and safe-area behavior remain UNKNOWN.

@@ -1,3 +1,7 @@
+## 2026-10-10 — Reduce phone PDP copy (R115)
+
+CURRENT / IMPLEMENTED source: hide breadcrumbs and duplicate purchase-meta text on phones, clamp descriptions to two lines, remove the image-only lifestyle row, and compact the gift-note panel. Preserve the title, primary product description, fixed purchase bar, gift-note action and collapsed detail accordions. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass. Browser appearance UNKNOWN because localhost:3000 is unavailable.
+
 ## 2026-10-10 — Redesign product detail phone layout (R114)
 
 CURRENT / IMPLEMENTED source: on phone PDPs, use a near-square rounded gallery, compact title/description, thumbnail dots when real multiple images exist, and a fixed bottom purchase bar for current price/enquiry and cart actions. Existing confirmed quantity and checkout behavior stays within the bar after adding. Desktop layout and purchase/API contracts are unchanged. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass; browser appearance UNKNOWN (local server unavailable).

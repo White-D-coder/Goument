@@ -88,8 +88,8 @@ Sign-in and account-owned delivery capture implemented. FUTURE / REQUIRED: conne
 
 ## Current runtime blocker — 2026-09-30
 
-- [ ] Restore configured Atlas connectivity and repeat a real gift-cart save/reload. Existing service and a fresh read-only Mongoose connection fail; underlying server errors report ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR, causing draft503 responses. Follow-up confirmed SRV/A DNS and TCP succeed; verified SNI TLS and explicit TLS1.2 fail. User confirmation of the current public IP's Active Atlas access-list entry is pending; exact infrastructure/network cause is UNKNOWN. Do not disable TLS validation or infer invalid credentials from this error. Restored Add to Cart passed against a temporary local database; that does not close this blocker.
-- [x] Gift-route503 source handler now uses cart-specific messaging with no connection-detail leakage; GET/PUT failure regression passes. Existing5003 process still needs a healthy restart after Atlas recovers to load this source change. This does not close the connectivity blocker.
+- [ ] Restore configured Atlas connectivity and repeat a real gift-cart save/reload. Historical read-only Mongoose checks reported ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR after SRV/A DNS and TCP succeeded; SNI TLS and explicit TLS1.2 failed. Exact infrastructure/network cause remains UNKNOWN. Local development now uses an isolated replica set and gift-draft GET/PUT/reload passed through Next; this does not close the Atlas/production connectivity item. Do not disable TLS validation or infer invalid credentials from this error.
+- [x] Gift-route503 source handler now uses cart-specific messaging with no connection-detail leakage; GET/PUT regression passes. On 2026-10-10 the auth service was restarted against the isolated local replica set and the proxied gift-draft read/write was verified. This does not close the Atlas connectivity blocker.
 
 ## Same-browser cart continuity — 2026-09-30
 

@@ -1,3 +1,13 @@
+## 2026-10-10 — Product detail phone layout (R114)
+
+CURRENT / IMPLEMENTED source: make product detail pages phone-first around a square rounded gallery, compact product information and a fixed safe-area-aware purchase bar. Existing price/enquiry state, AddGiftToCartButton quantity state and checkout action remain unchanged. Gallery thumbnails render as pagination dots on phones when multiple real images exist; the Shagun local fallback currently supplies one image, so no extra slides are invented. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass. Local page/browser rendering is UNKNOWN because localhost:3000 is unavailable.
+
+## 2026-10-10 — Restore local B2C auth and gift-draft runtime
+
+CURRENT / IMPLEMENTED: `B2C/backend/.env` now targets an isolated local Mongo replica set (`gourmet_b2c_schema_dev`) instead of the previously configured Atlas database. The ignored `B2C/backend/data/local-mongo` directory holds local dev data. Local Mongo and auth service are running; Next auth proxy on port3000 returns200 for gift-draft GET/PUT and the written selection reads back after reload. Signed-out `/auth/me` returns the expected401. The disposable test draft was cleared.
+
+UNKNOWN / EXTERNAL: the former Atlas TLS failure is not fixed or retested; local auth no longer depends on it. No credentials or customer records were copied. Verification only establishes local development persistence, not production database connectivity.
+
 ## 2026-10-09 — Remove Home navbar/hero partition (R112)
 
 CURRENT / IMPLEMENTED source: remove the top spacer so the Home hero begins directly after the in-flow navbar. Keep initial transparency and scroll background behavior. Verification pending; visual appearance UNKNOWN.

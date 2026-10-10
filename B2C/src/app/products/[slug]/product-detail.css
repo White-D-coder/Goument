@@ -135,16 +135,72 @@
   .pdp-related-grid { gap: 20px; }
 }
 @media (max-width: 600px) {
-  .pdp .pdp-wrap { width: calc(100% - 40px); }
-  .pdp .pdp-breadcrumb { font-size: 10px; gap: 8px; padding-block: 20px; }
-  .pdp .pdp-hero { gap: 28px; }
-  .pdp .pdp-photography { margin-inline: -20px; }
-  .pdp .product-gallery-thumbnails { padding-inline: 20px; }
-  .pdp .pdp-purchase h1 { font-size: 42px; }
-  .pdp .pdp-eyebrow { font-size: 9px; margin-bottom: 12px; }
-  .pdp-occasion { font-size: 10px; line-height: 1.8; margin-bottom: 16px; }
-  .pdp-description { font-size: 13px; }
-  .pdp .buy-panel { margin-top: 23px; padding-top: 22px; }
+  .pdp .pdp-wrap { width: calc(100% - 32px); }
+  .pdp .pdp-breadcrumb { display: none; }
+  .pdp .pdp-hero { gap: 16px; padding-bottom: 32px; }
+  .pdp .pdp-photography { margin-inline: 0; }
+  .pdp .detail-image { aspect-ratio: 1; border-radius: 20px; }
+  .pdp .detail-image img { object-fit: cover; border-radius: 20px; }
+  .pdp .product-gallery-thumbnails { display: flex; justify-content: center; align-items: center; gap: 4px; margin-top: 6px; padding: 0; }
+  .pdp .product-gallery-thumbnails button { display: grid; width: 24px; height: 24px; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; box-shadow: none; }
+  .pdp .product-gallery-thumbnails button::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #c9c5bf; transition: width 180ms ease, background-color 180ms ease; }
+  .pdp .product-gallery-thumbnails button[aria-pressed='true']::before { width: 18px; border-radius: 99px; background: var(--pdp-burgundy); }
+  .pdp .product-gallery-thumbnails img { display: none; }
+  .pdp .pdp-purchase { padding-bottom: 8px; }
+  .pdp .pdp-purchase h1 { font-size: 25px; line-height: 1.2; margin-bottom: 6px; }
+  .pdp .pdp-eyebrow { font-size: 9px; margin-bottom: 5px; }
+  .pdp-occasion { display: none; }
+  .pdp-description { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 13px; line-height: 1.6; margin-bottom: 0; }
+  .pdp .pdp-purchase-meta,
+  .pdp .pdp-editorial { display: none; }
+  .pdp .pdp-details > div:first-child > p:not(.pdp-eyebrow),
+  .pdp .pdp-details > div:first-child > .pdp-link { display: none; }
+  .pdp .pdp-details > div:first-child > .pdp-eyebrow { margin-bottom: 4px; }
+  .pdp .pdp-note { padding: 16px; }
+  .pdp .pdp-note > .pdp-eyebrow,
+  .pdp .pdp-note > p { display: none; }
+  .pdp .pdp-note h2 { margin-bottom: 4px; font-size: 21px; }
+  .pdp .pdp-note summary { min-height: 36px; }
+  .pdp .buy-panel {
+    position: fixed;
+    z-index: 80;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid #eee9e1;
+    background: rgb(255 253 249 / 96%);
+    box-shadow: 0 -8px 28px rgb(48 41 34 / 10%);
+    backdrop-filter: blur(16px);
+  }
+  .pdp .buy-panel .price,
+  .pdp .buy-panel .pdp-quote { margin: 0; font-size: 12px; line-height: 1.35; }
+  .pdp .buy-panel .price { font-size: 16px; }
+  .pdp .buy-panel .pdp-purchase-help { display: none; }
+  .pdp .buy-panel .gift-purchase { min-width: 0; }
+  .pdp .buy-panel .gift-purchase-controls { gap: 0; }
+  .pdp .buy-panel .gift-purchase-controls > .button {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    border-radius: 28px;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .pdp .buy-panel .gift-purchase-controls > .button svg { display: block; }
+  .pdp .buy-panel .gift-counter { width: 100%; height: 48px; border: 1px solid var(--pdp-line); border-radius: 26px; }
+  .pdp .buy-panel .gift-counter button { flex: 1; width: auto; height: 46px; }
+  .pdp .buy-panel .gift-counter output { width: 34px; }
+  .pdp .buy-panel .gift-purchase-checkout { min-height: 42px; margin-top: 8px; border-radius: 24px; font-size: 11px; }
+  .pdp { padding-bottom: calc(138px + env(safe-area-inset-bottom)); }
   .pdp .pdp-section-heading { display: block; margin-bottom: 28px; }
   .pdp-section-heading > p,.pdp-section-heading > .pdp-link { margin-top: 18px; }
   .pdp-lifestyle { aspect-ratio: 16 / 10; }
@@ -162,9 +218,9 @@
 
 /* Phone product pages keep the essential gift details and photo stories up front. */
 @media (max-width: 600px) {
-  .pdp .pdp-hero { gap: 20px; padding-bottom: 34px; }
-  .pdp .pdp-purchase h1 { font-size: 36px; }
-  .pdp-description { line-height: 1.65; }
+  .pdp .pdp-hero { gap: 16px; padding-bottom: 24px; }
+  .pdp .pdp-purchase h1 { font-size: 25px; }
+  .pdp-description { line-height: 1.6; }
   .pdp .pdp-details,.pdp .pdp-related { padding-block: 38px; }
   .pdp-editorial { padding-block: 28px; }
   .pdp .pdp-philosophy,.pdp .pdp-corporate { display:none; }

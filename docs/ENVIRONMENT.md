@@ -64,6 +64,10 @@ B2C_DATABASE_URI: required MongoDB replica-set connection URI for the new module
 
 Google auth needs server-only GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, AUTH_ORIGIN (local http://localhost:3001), optional AUTH_PORT (5003), and existing B2C_DATABASE_URI/NAME. Placeholder keys added to local ignored .env and .env.example; values never logged. Google Web application redirect URI must exactly match AUTH_ORIGIN + /api/v1/auth/google/callback. Frontend AUTH_BACKEND_URL defaults localhost5003. Run npm --prefix B2C/backend run auth:start; restart after updating credentials. Atlas connection and schema installation verified; Google client credentials absent at implementation time.
 
+## 2026-10-10 — Local B2C auth development database
+
+The ignored `B2C/backend/.env` now targets `mongodb://127.0.0.1:27017/?replicaSet=rs0` and database `gourmet_b2c_schema_dev`. Local Mongo data is stored under ignored `B2C/backend/data/local-mongo`; start `mongod --dbpath B2C/backend/data/local-mongo --bind_ip 127.0.0.1 --port 27017 --replSet rs0`, initialize the replica set once if the data directory is new, then run `npm --prefix B2C/backend run auth:start`. `AUTH_ORIGIN` is set to `http://localhost:3000` for the current storefront; Google callback registration at that origin remains unverified. This is development-only and separate from legacy `MONGODB_URI`. Atlas connectivity remains unresolved; do not treat the local database as deployed/persistent customer storage.
+
 ## Razorpay — 2026-09-30
 
 RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET are server-only fields in B2C/backend/.env. All three required; restart auth service5003 after editing. Start with test keys. Only public Key ID is returned in checkout options. Presence check found all three absent; no values printed.

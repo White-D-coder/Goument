@@ -1,3 +1,11 @@
+## 2026-10-10 — Redesign product detail phone layout (R114)
+
+CURRENT / IMPLEMENTED source: on phone PDPs, use a near-square rounded gallery, compact title/description, thumbnail dots when real multiple images exist, and a fixed bottom purchase bar for current price/enquiry and cart actions. Existing confirmed quantity and checkout behavior stays within the bar after adding. Desktop layout and purchase/API contracts are unchanged. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass; browser appearance UNKNOWN (local server unavailable).
+
+## 2026-10-10 — Restore local B2C auth runtime
+
+CURRENT / IMPLEMENTED: point the ignored B2C backend `.env` at an isolated local Mongo replica set and `gourmet_b2c_schema_dev`; preserve unrelated environment settings. Run MongoDB using the ignored `B2C/backend/data/local-mongo` directory and start the existing auth service. The configured Next proxy's gift-draft GET/PUT/reload all returned200; signed-out `/auth/me` returned expected401. Cleared the disposable test item after verification. Atlas connectivity remains UNKNOWN/unresolved and was not contacted by this local test. No secrets or customer records were logged or documented.
+
 ## 2026-10-09 — Remove spacer between Home navbar and hero (R112)
 
 CURRENT / IMPLEMENTED source: remove the Home top padding that created a blank patterned band between the navbar and hero. Keep the navbar in normal flow and transparent at page top, with its ivory background on scroll; hero starts immediately below the navbar. Verification pending.

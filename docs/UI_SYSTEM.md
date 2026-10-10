@@ -1,3 +1,7 @@
+## 2026-10-10 — Mobile product detail layout (R114)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: on phone PDPs, show the contained gallery as a near-square rounded image with centered pagination dots for galleries with multiple real photos. Keep the product title and short description compact. Pin the existing price/enquiry and Add to Cart controls to a translucent bottom bar with safe-area padding; after a confirmed gift-draft addition, show the existing quantity counter and checkout link in that bar. No fabricated image, brand badge, variant, price or payment behavior. Desktop PDP remains unchanged. Sources: `B2C/src/app/products/[slug]/product-detail.css`, `ProductGallery`, `BuyPanel`.
+
 ## 2026-10-09 — Remove the Home navbar/hero spacer (R112)
 
 CURRENT / IMPLEMENTED source: remove Home top padding so no blank band separates the transparent-on-load navbar from the hero. Keep the navbar in normal flow and ivory on scroll.

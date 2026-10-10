@@ -1,5 +1,9 @@
 # Testing
 
+## 2026-10-10 — Mobile product detail layout (R114)
+
+VERIFIED: `npm run typecheck`; scoped ESLint on PDP route/gallery/purchase components; PostCSS parse of `product-detail.css`; `git diff --check`. The Shagun route could not be loaded from localhost because no server is listening on port3000. No screenshot/device interaction test was run. Responsive visual appearance and safe-area behavior remain UNKNOWN.
+
 ## 2026-10-07 — Consumer-first premium Home (R58)
 
 VERIFIED: full B2C `tsc --noEmit`; scoped ESLint on Home, all new Home components/data/SEO, Header/Footer/chrome and loading components; PostCSS parsing of all five affected CSS files; `git diff --check`; 23 existing catalogue/performance/gift-cart Node cases pass. These existing tests cover catalogue merges, cart serialization/revisions/errors/quantity retention and retained header/effect lifecycle; they do not establish visual acceptance or live-service health.
@@ -419,3 +423,7 @@ Evidence: /private/tmp/gour-showcase-report.json, gour-showcase-interactions.jso
 ## 2026-10-01 — Selected hero asset verification
 
 SHA-256 comparisons confirm all three B2C public assets match the exact root files supplied by the user. B2C npm run lint passed. Local Chrome confirmed only the requested three sources and native dimensions1770×889,1448×1086,1672×941, including the filename containing spaces. Observed rotation0→1→2→0,1600ms incoming transitions over an opaque previous frame, contain fitting and no horizontal overflow at1440px and390px. Isolated browser closed; running application services retained. Temporary verification script: /private/tmp/gour-selected-hero-check.mjs. Existing slideshow guards were unchanged and were not exhaustively retested for this asset-only update; no backend or payment checks were needed.
+
+## 2026-10-10 — Local auth runtime recovery
+
+Started MongoDB8.0 as a loopback-only single-node replica set using the ignored `B2C/backend/data/local-mongo` directory and isolated `gourmet_b2c_schema_dev`; started `npm --prefix B2C/backend run auth:start` from `B2C/backend/.env`. Through the already-running Next proxy on port3000, guest GET draft returned200, PUT returned200 with revision1, and a subsequent GET returned the saved item. The temporary test item was cleared. Signed-out GET `/auth/me` returned401 as expected. No Atlas request was made; live Atlas connectivity remains unverified. This verifies local development only.

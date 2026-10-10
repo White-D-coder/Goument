@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather, Search, SlidersHorizontal } from 'lucide-react';
 import ProductPhoto from '@/components/ProductPhoto';
-import QuantityControl from '@/components/QuantityControl';
+import AddGiftToCartButton from '@/components/AddGiftToCartButton';
 import HomeHeroSlideshow from '@/components/home/HomeHeroSlideshow';
 import { productImage, type Product } from '@/lib/types';
 import type { Testimonial } from '@/lib/home-content';
@@ -37,14 +36,39 @@ export function HomeHero() {
   </section>;
 }
 
-/** Preview hampers keep their enquiry-only status and existing detail destinations. */
+const mobileCategories = [
+  { title: 'Envelopes', image: '/images/items/shagun_envelopes.webp', href: '/shop/envelopes' },
+  { title: 'Hampers', image: '/images/brand/ivory_hamper.webp', href: '/shop/hampers' },
+  { title: 'Candles', image: '/images/items/laddoo_candles.webp', href: '/shop/candles' },
+  { title: 'Stationery', image: '/images/items/bookmarks.webp', href: '/shop/stationery' },
+];
+
+export function HomeMobileSearch() {
+  return <section className="tgg-mobile-search-wrap" aria-label="Search gifts">
+    <form action="/shop" className="tgg-mobile-search">
+      <Search size={17} aria-hidden="true" />
+      <label className="tgg-visually-hidden" htmlFor="home-mobile-search">Search gifts</label>
+      <input id="home-mobile-search" type="search" name="search" placeholder="What are you looking for?" />
+      <button type="submit" aria-label="Browse gifts"><SlidersHorizontal size={18} aria-hidden="true" /></button>
+    </form>
+  </section>;
+}
+
+export function HomeMobileCategories() {
+  return <nav className="tgg-mobile-categories" aria-label="Gift collections">
+    {mobileCategories.map(item => <Link key={item.href} href={item.href}>
+      <ProductPhoto src={item.image} alt="" sizes="42px" />
+      <span>{item.title}</span>
+    </Link>)}
+  </nav>;
+}
+
+/** Preview hampers can be saved to the gift bag; their prices remain enquiry-only. */
 export function HomeHamperCard({ product, image, title }: { product: Product; image?: string; title?: string }) {
   const href = `/products/${product.slug}`;
   const cardTitle = title || product.name;
   const cardImage = image || productImage(product);
   const cardAlt = product.images.find(item => item.public_id === cardImage)?.alt || cardTitle;
-  const [quantity, setQuantity] = useState(0);
-
   return <article className="tgg-hamper-card">
     <Link className="tgg-hamper-photo" href={href} aria-label={`View ${cardTitle}`}>
       <ProductPhoto src={cardImage} alt={cardAlt} sizes="(max-width: 700px) 86vw, (max-width: 1100px) 45vw, 30vw" />
@@ -53,15 +77,7 @@ export function HomeHamperCard({ product, image, title }: { product: Product; im
       <h3><Link href={href}>{cardTitle}</Link></h3>
       <p>{product.description.short}</p>
       <div className="tgg-hamper-bottom">
-        <div className="tgg-hamper-purchase">
-          {quantity === 0 ? (
-            <button type="button" className="tgg-hamper-cart-button" onClick={() => setQuantity(1)}>
-              Add to cart
-            </button>
-          ) : (
-            <QuantityControl name={cardTitle} value={quantity} onChange={value => setQuantity(Math.max(0, value))} />
-          )}
-        </div>
+        {product.giftItemId && <AddGiftToCartButton itemId={product.giftItemId} name={cardTitle} withQuantity />}
       </div>
     </div>
   </article>;

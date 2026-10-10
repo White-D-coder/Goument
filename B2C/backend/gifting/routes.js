@@ -12,6 +12,12 @@ function packing(draft) {
   const count = draft?.items?.reduce((n, item) => n + item.quantity, 0) || 0;
   return count === 0 ? 'EMPTY' : 'READY';
 }
+function hasEnquiryOnlyHamper(draft) {
+  return Boolean(draft?.items?.some(row => {
+    const item = known(row.id, items);
+    return item?.category === 'Gift Hampers' || String(row.id).endsWith('_hamper');
+  }));
+}
 function payload(draft) {
   const itemsList = draft?.items?.map(({ id, quantity }) => ({ id, quantity })) || [];
   const fulfillment = calculatePackaging(itemsList);
@@ -74,6 +80,7 @@ function mountGifting(app, { db, cookie, run }) {
     await identity(db, req.cookies.b2c_session);
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') return res.status(409).json({ message: 'Add items to your bag before checkout.', packing: draft ? packing(draft) : 'EMPTY' });
+    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     const fulfillment = calculatePackaging(draft.items);
     res.json({ packing: 'READY', fulfillment, checkoutAvailable: false, next: '/checkout' });
   }));
@@ -83,6 +90,7 @@ function mountGifting(app, { db, cookie, run }) {
     const { customer } = await identity(db, req.cookies.b2c_session);
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') throw fail('Please review your items in your bag.', 409);
+    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     const addresses = await db.models.CustomerAddress.find({customerId:customer._id}).sort({updatedAt:-1}).limit(20);
     const fulfillment = calculatePackaging(draft.items);
     res.json({
@@ -97,6 +105,8 @@ function mountGifting(app, { db, cookie, run }) {
   }));
   app.post(`${base}/address`, run(async (req,res) => {
     const { customer } = await identity(db, req.cookies.b2c_session);
+    const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
+    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     const body=req.body;
     if (!body || Object.keys(body).some(k=>!fields.includes(k)&&k!=='id')) throw fail('Invalid delivery details.');
     const input={};
@@ -136,6 +146,7 @@ function mountGifting(app, { db, cookie, run }) {
     const key = owner(req);
     const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') throw fail('Your gift bag has no items. Please select items first.', 409);
+    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
 
     const addressDoc = (req.body?.addressId ? await db.models.CustomerAddress.findOne({ _id: req.body.addressId, customerId: customer._id }) : null) || await db.models.CustomerAddress.findOne({ customerId: customer._id }).sort({ updatedAt: -1 });
     if (!addressDoc) throw fail('Please enter your delivery details first.', 400);

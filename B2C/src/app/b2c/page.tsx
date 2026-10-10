@@ -1,5 +1,5 @@
 import HomeFAQ from '@/components/home/HomeFAQ';
-import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
+import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, HomeMobileCategories, HomeMobileSearch, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { homeFAQs } from '@/lib/home-content';
 import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
@@ -25,7 +25,9 @@ export default function Home() {
   return <div className="atelier-home tgg-home">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
 
+    <HomeMobileSearch />
     <HomeHero />
+    <HomeMobileCategories />
 
     <section className="tgg-hamper-showcase tgg-section" id="hampers" aria-labelledby="hamper-heading">
       <SectionHeading kicker="Curated hampers" title="Hampers for every occasion" id="hamper-heading" href="/shop/hampers" action="View all hampers" />

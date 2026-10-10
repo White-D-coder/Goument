@@ -32,12 +32,14 @@ export default function BuyPanel({ product }: { product: Product }) {
   if (product.preview) return <div className="buy-panel pdp-preview">
     <p className="pdp-quote">Price on enquiry</p>
     <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>
-    <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>
+    {product.giftItemId
+      ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout />
+      : <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>}
   </div>;
 
   if (product.giftItemId) return <div className="buy-panel">
     <p className="price">{money(product.basePrice, product.currency)}</p>
-    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity/>
+    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout />
   </div>;
 
   return <div className="buy-panel">

@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { api, ApiError } from '@/lib/api';
 import { giftApi, useGiftDraft } from '@/hooks/useGiftDraft';
+import { giftingEnquiry } from '@/lib/product-editorial';
 import QuantityControl from './QuantityControl';
 
 export default function GiftCart() {
@@ -33,6 +34,9 @@ export default function GiftCart() {
 
   const totalItems = draft?.items.reduce((n, i) => n + i.quantity, 0) || 0;
   const isReady = (draft?.items.length || 0) > 0;
+  const enquiryHamper = draft?.items
+    .map(row => catalogue?.items.find(item => item.id === row.id))
+    .find(item => item?.category === 'Gift Hampers');
 
   return (
     <section className="section gift-cart">
@@ -91,12 +95,15 @@ export default function GiftCart() {
             <aside className="gift-review">
               <h2>The finishing touch</h2>
               <p aria-live="polite">
-                {isReady ? 'Your gift selection is ready for checkout.' : 'Add your favourites to get started.'}
+                {enquiryHamper
+                  ? 'Hamper pricing needs confirmation before checkout. Please enquire with our team.'
+                  : isReady ? 'Your gift selection is ready for checkout.' : 'Add your favourites to get started.'}
               </p>
+              {enquiryHamper && <Link className="text-link" href={giftingEnquiry(enquiryHamper.name)}>Enquire about this hamper →</Link>}
               <p>{totalItems} {totalItems === 1 ? 'item' : 'items'}</p>
               <button
                 className="button"
-                disabled={busy || checking || !isReady}
+                disabled={busy || checking || !isReady || Boolean(enquiryHamper)}
                 onClick={() => void check()}
               >
                 {checking ? 'Checking…' : 'Continue to checkout'}
@@ -113,4 +120,3 @@ export default function GiftCart() {
     </section>
   );
 }
-

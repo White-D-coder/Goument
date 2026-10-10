@@ -1,5 +1,21 @@
 [
   {
+    "id": "ivory_hamper",
+    "slug": "ivory-hamper",
+    "name": "Ivory Hamper",
+    "image": "/images/brand/ivory_hamper.webp",
+    "description": "A thoughtful gift, presented in our ivory hamper box.",
+    "category": "Gift Hampers"
+  },
+  {
+    "id": "india_hamper",
+    "slug": "india-hamper",
+    "name": "India Hamper",
+    "image": "/images/brand/burgundy_india_hamper.webp",
+    "description": "Our India Hamper, shown in burgundy and lavender.",
+    "category": "Gift Hampers"
+  },
+  {
     "id": "shagun_envelopes",
     "slug": "shagun-envelopes",
     "name": "Luxury Shagun Envelopes",

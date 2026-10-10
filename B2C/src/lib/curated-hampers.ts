@@ -15,6 +15,7 @@ export const CURATED_HAMPERS: Product[] = [
     inventory: 0,
     variants: [],
     preview: true,
+    giftItemId: 'ivory_hamper',
     images: [{ public_id: '/images/brand/ivory_hamper.webp', alt: 'Ivory Hamper' }],
   },
   {
@@ -29,6 +30,7 @@ export const CURATED_HAMPERS: Product[] = [
     inventory: 0,
     variants: [],
     preview: true,
+    giftItemId: 'india_hamper',
     images: [
       { public_id: '/images/brand/burgundy_india_hamper.webp', alt: 'India Hamper in burgundy' },
       { public_id: '/images/brand/lavender_india_hamper.webp', alt: 'India Hamper in lavender' },

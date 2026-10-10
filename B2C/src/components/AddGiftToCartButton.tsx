@@ -1,13 +1,13 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Check, ShoppingBag } from 'lucide-react';
+import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
 import { addGiftItem, changeGiftItemQuantity, queueGiftCartWrite } from '@/lib/gift-cart';
 import { api } from '@/lib/api';
 import type { Draft } from '@/hooks/useGiftDraft';
 import QuantityControl from './QuantityControl';
 
-export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean }) {
+export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false, showCheckout = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean }) {
  const [status, setStatus] = useState<'idle'|'adding'|'added'|'error'>('idle');
  const [message, setMessage] = useState('');
  const locked = useRef(false);
@@ -53,8 +53,9 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
     <span>{status === 'adding' ? quantity ? 'Updating…' : 'Adding…' : 'Add to Cart'}</span>
     <ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/>
    </button>}
-   {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={status === 'adding'} onChange={next => void add(next > quantity ? 1 : -1)}/>}
+  {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={status === 'adding'} onChange={next => void add(next > quantity ? 1 : -1)}/>}
   </div>
+  {showCheckout && quantity > 0 && <Link className="button gift-purchase-checkout" href="/cart">Proceed to checkout <ArrowRight size={16} aria-hidden="true" /></Link>}
   {status === 'error' && <p className="cart-add-error" role="alert">{message}</p>}
  </div>;
  return <>

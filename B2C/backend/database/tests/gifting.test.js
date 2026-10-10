@@ -29,6 +29,20 @@ test('box selection persists; exact fit, overflow, multiple and mixed boxes are 
  const loaded=await agent.get(base+'/draft');expect(loaded.body.items[0].quantity).toBe(9);expect(JSON.stringify(loaded.body)).not.toContain('capacity');
  const check=await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);expect(check.body.checkoutAvailable).toBe(false);expect(await db.models.Order.countDocuments()).toBe(0);
 });
+test('preview hampers save to the gift bag but cannot enter checkout with an assumed price',async()=>{
+ const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
+ const hamper=items.find(item=>item.id==='india_hamper');expect(hamper?.category).toBe('Gift Hampers');
+ const draft=(await save(agent,{revision:0,boxes:[],items:[{id:hamper.id,quantity:1}]}).expect(200)).body;
+ expect(draft.packing).toBe('READY');
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409)
+  .expect(({body})=>expect(body.message).toMatch(/Hamper pricing needs confirmation/));
+ await agent.get(base+'/checkout').expect(409);
+ const address={recipientName:'Test Recipient',phone:'+91 9876543210',addressLine1:'Test Street',city:'Mumbai',state:'Maharashtra',postalCode:'400001',country:'IN'};
+ await agent.post(base+'/address').set('Origin',origin).send(address).expect(409);
+ await agent.post(base+'/order').set('Origin',origin).send({paymentMethod:'UPI'}).expect(409);
+ expect(await db.models.CustomerAddress.countDocuments()).toBe(0);
+ expect(await db.models.Order.countDocuments()).toBe(0);
+});
 test('unknown IDs, duplicate entries, negative/fractional/oversized quantities and client capacities reject',async()=>{
  const agent=request.agent(app);await agent.get(base+'/draft');
  for(const quantity of [0,-1,1.5,100,'2'])await save(agent,selection(quantity)).expect(400);

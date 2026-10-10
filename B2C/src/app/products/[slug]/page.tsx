@@ -97,18 +97,6 @@ export default async function Detail({ params }: PageProps) {
       </div>
     </section>
 
-    <section className="pdp-personalisation" aria-labelledby="personalisation-heading">
-      <div className="pdp-wrap">
-        <div className="pdp-section-heading"><div><p className="pdp-eyebrow">A gesture with your signature</p><h2 id="personalisation-heading">Make it yours.</h2></div><p>Tell us what you have in mind.<br/>We’ll help you explore the possibilities.</p></div>
-        <div className="pdp-personalisation-grid">
-          <article><span>01</span><h3>Add your identity</h3><p>Explore a name, company logo or occasion branding with our team.</p></article>
-          <article><span>02</span><h3>Include a message</h3><p>Request a personal note, written in your words, for their moment.</p></article>
-          <article><span>03</span><h3>Gift at scale</h3><p>Discuss a curation for your team, clients, wedding or celebration.</p></article>
-        </div>
-        <a className="pdp-link" href={bulkEnquiry}>Planning 10+ gifts? Talk to our gifting team <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-
     <section className="pdp-details pdp-wrap" id="gift-details" aria-labelledby="details-heading">
       <div><p className="pdp-eyebrow">Good to know</p><h2 id="details-heading">The finer details.</h2><p>A little more about your gift.</p><a className="pdp-link" href={enquiry}>Ask us a question <span aria-hidden="true">→</span></a></div>
       <div className="pdp-accordions">

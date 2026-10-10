@@ -13,6 +13,8 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 .tgg-home svg { flex-shrink: 0; }
 .tgg-home a:focus-visible, .tgg-home button:focus-visible, .tgg-home summary:focus-visible { outline: 2px solid var(--tgg-burgundy); outline-offset: 4px; }
 .tgg-home section[id] { scroll-margin-top: 82px; }
+.tgg-mobile-search-wrap,.tgg-mobile-categories { display: none; }
+.tgg-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .tgg-section { width: min(100%, var(--tgg-content)); margin-inline: auto; padding: 48px 34px; }
 .tgg-kicker { margin-bottom: 10px !important; color: var(--tgg-muted); font-family: var(--tgg-sans); font-size: 10px; font-weight: 500; line-height: 1.5; letter-spacing: .18em; text-transform: uppercase; }
 .tgg-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 38px; border-bottom: 1px solid var(--tgg-line); color: var(--tgg-burgundy); font-size: 12px; font-weight: 500; transition: border-color .2s ease; }
@@ -85,6 +87,85 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-home .tgg-hamper-showcase > .tgg-section-heading,
   .tgg-home .tgg-favourites > .tgg-section-heading {
     margin-bottom: 18px;
+  }
+}
+
+/* Compact mobile discovery follows the phone reference: search, hero, then categories. */
+@media (max-width: 700px) {
+  .tgg-mobile-search-wrap {
+    display: block;
+    padding: 10px 14px 12px;
+  }
+  .tgg-mobile-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 48px;
+    padding: 0 8px 0 14px;
+    border: 1px solid #eee8df;
+    border-radius: 28px;
+    background: #fffdfa;
+    color: #8b8177;
+    box-shadow: 0 5px 18px #3923160a;
+  }
+  .tgg-mobile-search:focus-within { border-color: #c6a77c; }
+  .tgg-mobile-search input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--tgg-ink);
+    font: inherit;
+    font-size: 13px;
+  }
+  .tgg-mobile-search input::placeholder { color: #9b9288; opacity: 1; }
+  .tgg-mobile-search button {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--tgg-ink);
+  }
+  .tgg-mobile-categories {
+    display: flex;
+    gap: 9px;
+    overflow-x: auto;
+    padding: 12px 14px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tgg-mobile-categories::-webkit-scrollbar { display: none; }
+  .tgg-mobile-categories a {
+    position: relative;
+    display: flex;
+    flex: 0 0 118px;
+    align-items: center;
+    min-height: 56px;
+    overflow: hidden;
+    padding: 8px 48px 8px 10px;
+    border: 1px solid #eee6dc;
+    border-radius: 12px;
+    background: #fffdfa;
+    color: var(--tgg-ink);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .tgg-mobile-categories a img {
+    position: absolute !important;
+    top: 7px;
+    right: 6px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
 /* ============================================================
@@ -1278,7 +1359,7 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-section-heading h2 { font-size: 27px; }
   .tgg-section-heading > .tgg-link { position: static; gap: 6px; margin-top: 3px; font-size: 10px; }
   .tgg-section-subtitle { margin: 6px 0 16px !important; font-size: 11px; }
-  .tgg-hero { width: calc(100% - 24px); margin-top: 0; border-radius: 16px; }
+  .tgg-hero { width: calc(100% - 28px); margin-top: 0; border-radius: 16px; }
   .tgg-hero-copy { padding: 24px 20px 22px; }
   .tgg-hero-copy h1 { max-width: none; font-size: clamp(39px,10.5vw,50px); }
   .tgg-hero-description { max-width: 38ch; margin-top: 10px !important; font-size: 13px; }

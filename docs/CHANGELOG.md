@@ -952,3 +952,15 @@ Replaced individual envelope/candle/bookmark/diary product cards with three coll
 ## 2026-10-10 — Update Home packaging feature photo
 
 Use the supplied `cta_1_1.png` image in the Home packaging/CTA feature and update its alternative text to describe the open curated hamper.
+## 2026-10-10 — Remove product personalisation section (R113)
+
+CURRENT / IMPLEMENTED source: remove the “A gesture with your signature / Make it yours” section and its unused styles from product detail pages. Keep the purchase enquiry links and gift-note request control intact.
+## 2026-10-10 — Add saved hamper cart and guarded checkout action (R114)
+
+CURRENT / IMPLEMENTED source: after adding an Ivory/India preview hamper, product detail pages replace Add to Cart with its quantity counter and show a full-width Proceed to checkout action below, opening the gift bag. Add both preview hampers to the saved gift-draft catalogue, exclude them from loose-item curation, and block checkout/address/order routes while their prices remain unconfirmed. Keep the enquiry path available; payment/order availability remains disabled for preview hampers. TypeScript and diff checks pass; the gifting integration suite could not start because the sandbox denied MongoMemoryServer's local socket bind (`listen EPERM`, 0.0.0.0:10791).
+## 2026-10-10 — Repair mobile Home discovery layout (R115)
+
+CURRENT / IMPLEMENTED source: style the phone search and category rows, keep both hidden on wider screens, and place search before the hero and categories after it to match the supplied mobile reference. The first markup addition had no styles or responsive visibility rules; this caused the unstyled controls to appear in the page flow.
+## 2026-10-10 — Route local auth requests to the local B2C service (R116)
+
+CURRENT / IMPLEMENTED source: use the documented local auth backend (`127.0.0.1:5003`) as the development default, while keeping the existing remote production default and explicit `AUTH_BACKEND_URL` override. This prevents local draft updates from silently reaching a deployment without the local hamper draft catalogue. The `GET /auth/me` 401 remains expected for signed-out visitors.

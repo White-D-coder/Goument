@@ -1,3 +1,5 @@
+R157 (2026-10-12) CURRENT / IMPLEMENTED: fix missing browser favicon by registering the existing GG PNG in shared B2C root metadata. Source: root layout; local response verification: TESTING.
+
 R156 (2026-10-12) CURRENT / IMPLEMENTED: apply the “Hampers for every occasion” heading family throughout the B2C storefront and unify styled buttons across phone/tablet/desktop using the current rounded Shop now appearance. Preserve responsive title sizing, button destinations/handlers, accessible focus/disabled states and contextual colour variants. Supersedes prior phone/card font exceptions and disparate button appearance. Sources: root layout/shared storefront-ui.css; evidence: TESTING.
 
 R155 (2026-10-12) CURRENT / IMPLEMENTED: phone navbar must keep only the GG logo after scrolling and must not replace it with the full The Gourmet Gifts name. Apply to the shared phone header; preserve larger-screen branding and navbar controls. Sources: Brand/navigation.css; verification: TESTING.

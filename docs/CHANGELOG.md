@@ -1,3 +1,11 @@
+## 2026-10-12 — Diagnose Google redirect mismatch (R158)
+
+CURRENT / PARTIAL: inspect auth flow and local authorization response without following Google redirects or exposing credentials/state. Confirm exact callback3000 and explain same-client Authorized redirect URIs requirement using official Google docs. Correct stale3001 auth setup instructions; no auth code or actual environment/Console changes. Provider issue remains unresolved pending configuration alignment. Evidence: TESTING.
+
+## 2026-10-12 — Link existing GG favicon (R157)
+
+CURRENT / IMPLEMENTED: add explicit root Metadata icons for the existing32×32 `/favicon.png`; resolve missing icon tags without replacing artwork. Typecheck, rendered metadata and exact asset-response checks pass. Evidence/limits: TESTING.
+
 ## 2026-10-12 — Unify storefront typography and buttons (R156)
 
 CURRENT / IMPLEMENTED: add one root-imported storefront style sheet to apply the hamper-heading font to all public titles and the rounded Shop now appearance to styled actions across viewports. Preserve contextual inverse/outline colours, disabled/hidden controls and operations styling; make tablet collection actions labelled. Existing routes and handlers remain. Verification and limits: TESTING.

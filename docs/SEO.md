@@ -1,3 +1,7 @@
+## 2026-10-12 — Register existing B2C favicon (R157)
+
+CURRENT / IMPLEMENTED: root Metadata declares the existing `/favicon.png` as a32×32 PNG icon and shortcut icon for inherited route metadata. The file in public alone did not generate a browser icon link; baseline Home HTML contained no icon tags while the asset returned200. Reuse the supplied GG asset unchanged; no new artwork or route. Installed Next metadata documentation consulted. Verification: TESTING; deployed browser cache state UNKNOWN.
+
 # SEO
 
 ## 2026-10-07 — B2C Home canonical and rendered semantics (R58)

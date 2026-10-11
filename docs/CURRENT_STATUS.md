@@ -1,3 +1,11 @@
+## 2026-10-12 — Google400 redirect mismatch investigated (R158)
+
+CURRENT / PARTIAL: local Google login start is healthy302 and emits the3000 storefront callback. Reported provider rejection requires matching registration in that OAuth client's Google Console; actual registered list and reported environment are UNKNOWN. Setup README corrected; auth code/configuration unchanged. No completed Google sign-in verified. Evidence: TESTING; TODO priorities unchanged.
+
+## 2026-10-12 — Missing favicon fixed (R157)
+
+CURRENT / IMPLEMENTED: root metadata links the existing GG PNG as icon/shortcut icon. Typecheck and diff check pass; scoped layout ESLint has zero errors and one existing unused-disable warning. Home/Shop/Ivory HTTP responses contain both correct links; icon returns200 with matching file bytes. TODO priorities unchanged.
+
 ## 2026-10-12 — Consistent title font and buttons (R156)
 
 CURRENT / IMPLEMENTED: public headings use Cormorant Garamond at every width; styled actions share9px corners,44px minimum height and12px Jakarta text. Tablet collection actions show labels. Typecheck, CSS parse/diff and42 responsive page/width checks pass; scoped layout ESLint has zero errors and one pre-existing unused-disable warning. Navigation, keyboard focus and filter dialog checks pass; phone/tablet/desktop screenshots inspected. Existing tablet heading/action overlap recorded in TODO; priorities unchanged.

@@ -1,3 +1,7 @@
+## 2026-10-12 — Google redirect mismatch diagnosis (R158)
+
+CURRENT / PARTIAL: user reports Google400 `redirect_uri_mismatch`. Local `/api/v1/auth/google` returns302 to Google's fixed authorization host with callback `http://localhost:3000/api/v1/auth/google/callback`, configured client presence, state and S256 PKCE. Callback is built from configured `origin` in auth/app.js and reused for token exchange. Google requires an exact registered URI for the same OAuth client. Console registrations and whether the reported failure was local/production are UNKNOWN; no live login success claimed. No auth implementation, identity, cookies, state validation or provider configuration changed. README's stale3001 setup example corrected to the verified current3000 origin with explicit AUTH_ORIGIN; fallback remains unchanged. Evidence: TESTING.
+
 # Authentication System
 
 ## 2026-10-11 — Local auth availability recovery (R133)

@@ -1,3 +1,7 @@
+## 2026-10-12 — GG favicon metadata (R157)
+
+CURRENT / IMPLEMENTED: browser-tab branding uses the existing32×32 GG `public/favicon.png`, now explicitly linked in root Metadata for all inheriting B2C pages. Asset and navbar artwork remain unchanged. Verification: TESTING.
+
 ## 2026-10-12 — Shared storefront titles and rounded actions (R156)
 
 CURRENT / IMPLEMENTED: use the Cormorant Garamond family from “Hampers for every occasion” for public page, section and card headings at every width. Keep existing responsive heading sizes/weights and body/navigation fonts. Supersedes R94’s phone sans family and the Home hero/collection sans exceptions; footer headings use the same family.

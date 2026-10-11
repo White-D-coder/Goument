@@ -3,8 +3,8 @@
 This service uses the new MongoDB `users` and `customers` collections. It runs independently of the legacy payment/Redis backend, so those provider credentials are not required to sign in.
 
 1. Create a **Web application** OAuth client in Google Cloud / Google Auth Platform. Configure the consent screen, audience and test users if the app is in testing.
-2. Add authorized redirect URI: `http://localhost:3001/api/v1/auth/google/callback` (use your exact HTTPS origin in production).
-3. Set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in `B2C/backend/.env`. Set `AUTH_ORIGIN` to the same storefront origin, and retain `B2C_DATABASE_URI` / `B2C_DATABASE_NAME`. Never put the secret in a `NEXT_PUBLIC_*` variable.
+2. In that OAuth client's **Authorized redirect URIs**, add `http://localhost:3000/api/v1/auth/google/callback` for the current local storefront. Use your exact HTTPS storefront origin plus `/api/v1/auth/google/callback` in production. Scheme, host, port, path and trailing slash must match the request exactly; adding a JavaScript origin alone does not register the callback.
+3. Set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in `B2C/backend/.env`. Explicitly set `AUTH_ORIGIN=http://localhost:3000` for current local development (the legacy server fallback/example still uses3001), and retain `B2C_DATABASE_URI` / `B2C_DATABASE_NAME`. Never put the secret in a `NEXT_PUBLIC_*` variable.
 4. Run `npm --prefix B2C/backend run auth:start`. Restart after environment changes. Start B2C separately with `npm --prefix B2C run dev`, then open `/account`.
 
 Next proxies `/api/v1/auth/*` to `AUTH_BACKEND_URL` (default `http://127.0.0.1:5003`). The auth server listens on loopback; production reverse proxy/container networking needs explicit deployment configuration.

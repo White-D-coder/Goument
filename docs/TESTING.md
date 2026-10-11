@@ -1,3 +1,11 @@
+## 2026-10-12 — Google redirect URI diagnosis (R158)
+
+VERIFIED: local GET `/api/v1/auth/google` with manual redirect handling returns302 to accounts.google.com; parsed callback is `http://localhost:3000/api/v1/auth/google/callback`, client/state are present and code_challenge_method is S256. Only non-secret callback and boolean presence were printed; full authorization URLs, cookies, states and credentials were not logged. Source inspection confirms configured origin supplies the same callback for authorization/token exchange. Official Google OAuth web-server documentation confirms exact-match registration and same-client requirement. Auth setup README port corrected; `git diff --check` passes. No token exchange, login, database/account mutation, Google Console access, environment edits or process restart; no auth code changes/new tests. Runtime checks are local only; reported-error environment and actual Console registration remain UNKNOWN.
+
+## 2026-10-12 — Favicon metadata (R157)
+
+VERIFIED: baseline `/favicon.png` returned200/image/png but Home HTML contained no icon links. After the root Metadata change, local Home/Shop/Ivory product responses return200 and contain both shortcut icon and icon links to `/favicon.png`, with image/png and32×32 attributes. Fetched asset bytes exactly match the existing public file. `npm run typecheck` and `git diff --check` pass. Scoped layout ESLint reports zero errors and one pre-existing unused-disable warning. Existing favicon visually inspected. No browser-tab UI/cache, production deployment or full build verification; no new unit tests or asset changes.
+
 ## 2026-10-12 — Shared titles and rounded actions (R156)
 
 VERIFIED: `npm run typecheck`, PostCSS parsing of the new shared stylesheet and `git diff --check` pass. Scoped root-layout ESLint reports zero errors and one existing unused `no-page-custom-font` disable warning. Isolated Chrome checks Home/Shop/Ivory/India/cart/account at320/390/640/641/768/1024/1440px: all visible headings use Cormorant Garamond, visible styled actions have9px corners,12px/600 text, normal casing and at least44px height, with no action-text/page overflow. Google sign-in is included; GG remains visible on phones and Buy now remains limited to the existing Ivory phone context. Phone/tablet/desktop Home and phone product screenshots inspected.

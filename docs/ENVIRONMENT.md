@@ -1,3 +1,7 @@
+## 2026-10-12 — Verify callback before changing OAuth settings (R158)
+
+CURRENT / PARTIAL: running local auth emits `http://localhost:3000/api/v1/auth/google/callback`. Register that exact URI under Authorized redirect URIs for the OAuth client used by this service; JavaScript origins alone are insufficient. Earlier3001 registration examples do not describe current local runtime. Production callback must match its explicitly configured storefront origin; actual production origin/Google Console registration remain UNKNOWN. No environment secrets read, logged or edited; no service restart. Auth README now specifies the current3000 development origin. Evidence: TESTING.
+
 ## 2026-10-11 — Restore stopped local auth dependencies (R133)
 
 CURRENT / IMPLEMENTED locally: the Next storefront was running while its existing Mongo and auth listeners were stopped, causing proxy500s. Restarted the existing replica set from `B2C/backend/data/local-mongo` with loopback27017 and `rs0`, then `npm --prefix B2C/backend run auth:start` on5003. Confirmed the existing configuration targets only the isolated local development database; no `.env` values changed. Count/catalogue/draft now return200 through Next; signed-out me returns401. This is a running local session, not an autostart or production fix. If stopped again, follow the Mongo/auth startup commands in the2026-10-10 entry below; the storefront alone does not start them. No new initialization/seed was needed.

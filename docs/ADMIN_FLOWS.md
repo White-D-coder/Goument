@@ -1,3 +1,7 @@
+## 2026-10-12 — Requested local admin sign-in (R159, pending owner authorization)
+
+CURRENT / PARTIAL: opened local `/admin` in the user's browser. Both Google and password methods exist in the shared Account UI, but the user-selected existing active account currently has CUSTOMER role, Google identity and no password method. Read-only checks find zero OWNER/ADMIN users and no completed bootstrap in the isolated local development database. Login alone cannot provide administrative access. Prepared the existing first-owner bootstrap path for that explicitly selected account and requested confirmation for full local OWNER access; no role/account/password/session changes have been made. Source service refuses automatic Google-to-password linking by email. Evidence: TESTING. No customer identities or credential values recorded here.
+
 # Admin Flows
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

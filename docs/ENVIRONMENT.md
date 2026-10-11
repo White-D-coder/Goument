@@ -1,3 +1,7 @@
+## 2026-10-12 — Reported Google error environment clarified (R158)
+
+CURRENT / PARTIAL: user confirms the redirect mismatch occurred on localhost:3000. The verified callback remains `http://localhost:3000/api/v1/auth/google/callback`; actual Google Console registration and completed consent are still unverified.
+
 ## 2026-10-12 — Verify callback before changing OAuth settings (R158)
 
 CURRENT / PARTIAL: running local auth emits `http://localhost:3000/api/v1/auth/google/callback`. Register that exact URI under Authorized redirect URIs for the OAuth client used by this service; JavaScript origins alone are insufficient. Earlier3001 registration examples do not describe current local runtime. Production callback must match its explicitly configured storefront origin; actual production origin/Google Console registration remain UNKNOWN. No environment secrets read, logged or edited; no service restart. Auth README now specifies the current3000 development origin. Evidence: TESTING.

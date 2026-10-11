@@ -1,3 +1,7 @@
+## 2026-10-12 — Prepare requested local admin access (R159)
+
+CURRENT / PARTIAL: inspect existing role/sign-in flow, open `/admin`, verify specified account through read-only local queries and prepare the guarded first-owner route. User confirmation requested before elevating CUSTOMER to full OWNER; roles/credentials/sessions unchanged. Existing two focused bootstrap and state-bound Google-return tests pass against a disposable database. Evidence: TESTING.
+
 ## 2026-10-12 — Diagnose Google redirect mismatch (R158)
 
 CURRENT / PARTIAL: inspect auth flow and local authorization response without following Google redirects or exposing credentials/state. Confirm exact callback3000 and explain same-client Authorized redirect URIs requirement using official Google docs. Correct stale3001 auth setup instructions; no auth code or actual environment/Console changes. Provider issue remains unresolved pending configuration alignment. Evidence: TESTING.

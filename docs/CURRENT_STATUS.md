@@ -1,3 +1,7 @@
+## 2026-10-12 — B2C admin sign-in prepared (R159)
+
+CURRENT / PARTIAL: local admin/sign-in pages return200 and browser opening succeeds; Google is enabled. Selected existing account is Google-only CUSTOMER, with no local OWNER/ADMIN provisioned. Full local OWNER bootstrap approval requested; no elevation or login has been completed. Two existing isolated bootstrap/admin-return tests pass. Evidence: TESTING. Record provisioning-script security debt in TODO without changing priority ordering.
+
 ## 2026-10-12 — Google400 redirect mismatch investigated (R158)
 
 CURRENT / PARTIAL: local Google login start is healthy302 and emits the3000 storefront callback. Reported provider rejection requires matching registration in that OAuth client's Google Console; actual registered list and reported environment are UNKNOWN. Setup README corrected; auth code/configuration unchanged. No completed Google sign-in verified. Evidence: TESTING; TODO priorities unchanged.

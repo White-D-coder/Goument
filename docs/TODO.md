@@ -14,6 +14,8 @@ Priorities below are initial engineering triage from source findings, not an app
 
 ## P1
 
+- [ ] B2C owner setup CLI security (observed2026-10-12): `backend/admin/setup-owners.js` contains plaintext default privileged passwords and can reset existing passwords, activate identities and reassign Customer.userId by email. It is a CLI, not a public endpoint. Require explicit safe operator inputs and preserve identity/history in a separately authorized correction; use the guarded existing first-owner bootstrap for the currently selected local account only after approval. No credential values recorded.
+
 - [ ] S04/S06: restrictive credentialed CORS, public endpoint validation/abuse controls, template/PII exposure review.
 - [ ] E08/S07/S08: complete historical data/identity strategy, durable vault storage, retention and concurrent-write handling.
 - [ ] Align effective page controls and health path; preserve current availability until explicitly changed.

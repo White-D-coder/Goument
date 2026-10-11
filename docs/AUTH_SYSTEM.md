@@ -1,3 +1,7 @@
+## 2026-10-12 — Local admin sign-in requires provisioned role (R159)
+
+CURRENT / PARTIAL: the specified local account supports Google only and is currently CUSTOMER; there are no local privileged accounts. Public sign-in does not elevate permissions. Existing first-owner bootstrap would add OWNER to the selected existing User, record an audit and revoke previous sessions; explicit user confirmation is pending. Do not use the separate bulk setup-owners script to reset credentials or reassign customer ownership. Account remains unchanged. Evidence: TESTING.
+
 ## 2026-10-12 — Google redirect mismatch diagnosis (R158)
 
 CURRENT / PARTIAL: user reports Google400 `redirect_uri_mismatch`. Local `/api/v1/auth/google` returns302 to Google's fixed authorization host with callback `http://localhost:3000/api/v1/auth/google/callback`, configured client presence, state and S256 PKCE. Callback is built from configured `origin` in auth/app.js and reused for token exchange. Google requires an exact registered URI for the same OAuth client. Console registrations and whether the reported failure was local/production are UNKNOWN; no live login success claimed. No auth implementation, identity, cookies, state validation or provider configuration changed. README's stale3001 setup example corrected to the verified current3000 origin with explicit AUTH_ORIGIN; fallback remains unchanged. Evidence: TESTING.

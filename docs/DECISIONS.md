@@ -1,3 +1,11 @@
+## 2026-10-12 — Shop actions replace Home starting prices (R148)
+
+CURRENT / IMPLEMENTED: user explicitly requests buttons instead of prices, each opening the selected collection. Supersede R144's Home price-display decision and R147's prefix adjustment; remove the unused helper and optional price prop rather than leave hidden data. Reuse the existing per-card Link and href without new product/cart/price contracts. Keep phone/tablet actions, compact desktop frames and centered bold copy. Affected: B2C Home presentation only; evidence: TESTING.
+
+## 2026-10-12 — Apply product-card reference to existing collections (R144)
+
+CURRENT / IMPLEMENTED: user explicitly requests the reference appearance for desktop “Thoughtful picks just for you.” Keep the established three collection cards and full-collection destinations rather than replace their identities with the screenshot's Grand Confectionery Chest. Show starting prices from the existing local catalogue because each card represents a collection. Do not introduce a fabricated ₹6,499 product, checkout values or new price rules. Override the general serif-title direction only for these desktop card titles to match the reference's sans appearance. Preserve phone/tablet treatment below1024px. Sources: Home page, HomeCollectionCard, Home CSS; verification: TESTING.
+
 ## 2026-10-12 — Keep temporary prices separate from commercial money (R142)
 
 CURRENT / IMPLEMENTED: user asks for some prices for now; choose Ivory ₹2,499 / India ₹2,999 as sample amounts, not approved commercial quotes. Supersede prior enquiry-only storefront labels for these previews with a separate display helper and Sample suffix. Non-preview products retain their actual pricing. Preserve basePrice0, inventory0, preview=true, variants and gift/payment contracts. Reason: deliver requested preview prices while leaving final commercial rules outstanding. Affected: storefront price presentation; evidence: TESTING.

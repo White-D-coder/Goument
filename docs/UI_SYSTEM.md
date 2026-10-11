@@ -1,3 +1,51 @@
+## 2026-10-12 — Remove adjacent Home padding stack (R153)
+
+CURRENT / IMPLEMENTED: consecutive top-level Home `.tgg-section` siblings suppress the following section’s top padding. The preceding bottom padding owns the gap:40px desktop,32px tablet,24px phone. Applies to Hampers→Favourites and Philosophy→FAQ; retain R149 outer-edge padding around hero/packaging/corporate and zero nested FAQ padding. Supersedes R149’s doubled internal boundary padding. Source: Home CSS; evidence: TESTING.
+
+## 2026-10-12 — Single padding between Ivory sections (R152)
+
+CURRENT / IMPLEMENTED: after removing Ivory details, stop adjacent hero/editorial/related padding from adding together. Hero bottom padding and editorial bottom padding are0; editorial and related own their top spacing through `--pdp-section-gap`:64px desktop,48px through900px,24px through640px. Related retains the same value below its cards; phone editorial remains hidden, leaving one24px purchase-to-related gap. Keep card/gallery/purchase dimensions and other product styles. Source: product-detail.css; evidence: TESTING.
+
+## 2026-10-12 — Remove Ivory details at every width (R151)
+
+CURRENT / IMPLEMENTED: Ivory Hamper no longer renders the “The finer details” heading, introduction or accordion panel at any viewport. Extend R141’s phone removal to desktop/tablet through the existing isIvory render condition; remove the redundant phone hiding rule. Related gifts follow the editorial section without a removed-panel gap. Other product details retain their existing presentation. Sources: product page/product-detail.css; evidence: TESTING.
+
+## 2026-10-12 — B2C footer matches navbar links (R150)
+
+CURRENT / IMPLEMENTED: Home footer Shop column uses the four navbar categories Envelopes/Hampers/Laddoo Candles/Premium Stationery with the same `/shop?search=` destinations; Discover contains Shop plus Home navbar links. Standard B2C footer replaces legacy Occasions with Explore using its navbar options, and limits Catalogue Categories to the same four Shop categories. Retain standard Quick Navigation and concierge details, both footer variants’ layout classes, typography, contact/entity/copyright and40% wallpaper.
+
+Share public navbar options and category definitions in `lib/storefront-navigation.ts`, consumed by Header, ShopNavigation and Footer; preserve the pre-existing Home versus other-page navbar options/corporate URL fallback. No header authentication, dropdown handlers, roles or admin links are changed/exposed. This replaces legacy B2B footer category content only inside B2C. Evidence: TESTING.
+
+## 2026-10-12 — Consistent Home section padding (R149)
+
+CURRENT / IMPLEMENTED: top-level Home content sections and corporate band share vertical padding through `--tgg-section-padding-block`:40px desktop,32px through900px and24px through640px. Clear only the nested FAQ section’s vertical padding to remove the former double inset; retain its columns, horizontal padding and disclosures. Hero, packaging interior, card dimensions and internal text/action spacing retain their styles. Supersedes scattered outer vertical padding values for these sections. Source: `b2c/home.css`; evidence: TESTING.
+
+## 2026-10-12 — Collection buttons replace Home prices (R148)
+
+CURRENT / IMPLEMENTED: remove favourites price labels and their Home-only calculation/prop/styles. Reuse the existing collection Link as a centered burgundy “Shop now” action on desktop, capped at180px with a44px minimum height and9px corners. Bottom-align actions within equal cards; retain bold centered titles, inset photos and existing phone/tablet presentation. Each action uses the same href as its card image/title: `/shop/envelopes`, `/shop/candles`, `/shop/stationery`. Supersedes R144/R147 price rows and desktop action hiding. Sources: Home page, HomeCollectionCard, Home CSS; evidence: TESTING.
+
+## 2026-10-12 — Center desktop collection copy (R147)
+
+CURRENT / IMPLEMENTED: center desktop favourites titles, descriptions and price labels; use700-weight titles and remove the visible “From” prefix. Keep the existing catalogue-derived minimum amounts, inset image frames and compact dimensions. Supersedes R144–R146 left alignment,500-weight titles and prefix only. Phone/tablet styling remains. Sources: `b2c/home.css`, `b2c/page.tsx`; evidence: TESTING.
+
+## 2026-10-12 — Inset desktop collection photos (R146)
+
+CURRENT / IMPLEMENTED: desktop favourites photos sit inside their white card with8px top/side margins and all four corners rounded to11px. Together with the1px border, the9px inset follows the20px outer corner concentrically. Retain R145 compact sizing, square photos, text/price styling and existing collection destinations. Supersedes R144/R145 flush-photo corners only at1024px+; phone/tablet presentation remains. Source: `B2C/src/app/b2c/home.css`; evidence: TESTING.
+
+## 2026-10-12 — Compact desktop favourites (R145)
+
+CURRENT / IMPLEMENTED: reduce desktop favourites grid max-width to1020px/gap20px, use square photos,20px card corners/padding,18–20px titles,13px descriptions and20px prices. Keep the R144 white reference treatment, collection data/links and aligned price row. Scope remains1024px+; phone/tablet sizing remains. Supersedes R144 desktop size values. Source: Home CSS; evidence: TESTING.
+
+## 2026-10-12 — Desktop favourites reference cards (R144)
+
+CURRENT / IMPLEMENTED: at1024px and above, “Thoughtful picks just for you” uses three equal-height white collection cards,24px corners/subtle shadows, edge-to-edge0.89-ratio photographs and24px information padding. Use19–23px Jakarta titles, muted14px descriptions and bottom-aligned bold22px starting prices. Hide the photo decoration and round Explore action on desktop; image/title links still open the same full collection. Preserve existing phone/tablet cards and Explore actions; the new price row is hidden below1024px.
+
+Starting labels derive from the existing local HAMPERS_CATALOG display amounts and matching collection categories: envelopes From ₹499, candles From ₹799, stationery From ₹349. These are collection starting labels, not the reference screenshot's different product/price, and do not change catalogue/checkout data. Scope the Jakarta !important override to these desktop titles to win against typography.css's global title family. Reuse HomeCollectionCard with an optional priceLabel. Sources: b2c/page.tsx, home.css, HomeSections.tsx; verification: TESTING. Supersedes earlier desktop inset-photo/cream/round-arrow presentation only.
+
+## 2026-10-12 — Footer wallpaper at40% (R143)
+
+CURRENT / IMPLEMENTED: both B2C Home and standard storefront footers use the supplied `/images/Pale Baroque Swirl Wallpaper.png` as a full-size centered cover background on their existing ::before layer at opacity.4. Replace the previous limited blurred radial decoration; keep the white base and existing content above the noninteractive layer at full opacity. Source: `components/home/home-footer.css`; verification: TESTING.
+
 ## 2026-10-12 — Temporary hamper display prices (R142)
 
 CURRENT / IMPLEMENTED: display Ivory ₹2,499 and India ₹2,999 with a Sample suffix in BuyPanel, Shop ProductCard and related cards at all sizes. Reuse `lib/product-pricing.ts`. Preview-Shop copy now requests final price/availability confirmation. Existing Home cards retain their presentation.

@@ -3,13 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
-
-const shopCategories = [
-  { title: 'Envelopes', search: 'envelope' },
-  { title: 'Hampers', search: 'hamper' },
-  { title: 'Laddoo Candles', search: 'candles' },
-  { title: 'Premium Stationery', search: 'stationery' },
-] as const;
+import { shopCategories } from '@/lib/storefront-navigation';
 
 export default function ShopNavigation({ onNavigate }: { onNavigate: () => void }) {
   const [expanded, setExpanded] = useState(false);

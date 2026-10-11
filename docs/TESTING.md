@@ -1,3 +1,49 @@
+## 2026-10-12 — Home double padding fixed (R153)
+
+VERIFIED: PostCSS parse and `git diff --check` pass. Chrome at320/390/640/768/1024/1440px measures actual card-grid-to-next-heading and approach-grid-to-FAQ-intro gaps at24/24/24/32/40/40px respectively. Favourites/FAQ top padding0; nested FAQ padding0; first-section, packaging-side and bottom padding retain the responsive token. No page overflow; collection-card dimensions retain prior values. Desktop gap screenshot inspected. CSS-only spacing correction; no new unit tests, typecheck, production build, API mutations or cart writes.
+
+## 2026-10-12 — Ivory padding stack removed (R152)
+
+VERIFIED: PostCSS parse and `git diff --check` pass. Before/after Chrome measurements at390/768/1440px confirm Ivory hero/editorial bottom padding0 and editorial/related top padding24/48/64px; related bottom uses the same token. Adjacent sections do not overlap or cause page overflow. Related-card, purchase and main-photo dimensions exactly match baseline at each width. All India hero/editorial/related positions/dimensions/padding match baseline. Desktop/phone screenshots inspected. CSS-only spacing adjustment; no new unit tests, typecheck, production build, API mutations or cart writes.
+
+## 2026-10-12 — Ivory details removed across viewports (R151)
+
+VERIFIED: `npm run typecheck`, scoped product-page ESLint (zero errors/warnings), PostCSS parse and `git diff --check` pass. Chrome at390/768/1024/1440px confirms Ivory contains no details section/heading/id, purchase and related content remain, page width does not overflow and related gifts follow editorial without a leftover panel gap. India retains its visible section/heading at all four widths. Desktop related-section screenshot inspected. Temporary comparison initially counted class/id selectors on the same section as separate elements; corrected expected union count and reran successfully. No new unit tests, production build, API mutations or cart writes.
+
+## 2026-10-12 — B2C footer navbar parity (R150)
+
+VERIFIED: `npm run typecheck`, scoped ESLint for Footer/Header/ShopNavigation/storefront-navigation (zero errors/warnings) and `git diff --check` pass. Chrome Home/Shop/Ivory PDP at320/390/768/1440px confirms each visible main navbar option has an identical footer label/href, all four category labels/search URLs match the dropdown, old corporate occasion/unrelated category lists are absent, contact/company/GST/location text remains, and footer/page links do not overflow. Wallpaper opacity stays0.4. Dropdown opens and Escape closes it; footer category accepts focus and clicking Premium Stationery opens `/shop?search=stationery` with page heading present. Home phone and Shop desktop screenshots inspected. Source diff retains CSS and header interactions; no new unit tests, production build, external corporate navigation, API mutations or cart writes.
+
+## 2026-10-12 — Home section padding (R149)
+
+VERIFIED: PostCSS parses Home CSS; `git diff --check` passes. Browser baseline measured nested FAQ padding in addition to its outer wrapper at390/768/1440px. Final isolated Chrome checks at320/390/640/768/1024/1280/1440/1920px confirm every targeted top-level section has24/32/40px top/bottom padding at the intended breakpoints, nested FAQ vertical padding is0, and sections do not overlap or cause page/text overflow. Collection-card dimensions match R148 exactly; desktop title/button/frame checks pass and phone hero remains260px. At390/1440px, opening a FAQ increases its height and moves the corporate band by the same amount. Full phone/desktop screenshots inspected. The temporary browser script initially had a duplicate screenshot-variable declaration; corrected before the successful run. CSS-only change; no new unit tests, typecheck, build, API mutations or cart writes.
+
+## 2026-10-12 — Home collection Shop buttons (R148)
+
+VERIFIED: `npm run typecheck`, scoped ESLint on Home page/HomeSections (zero errors, two existing philosophy artwork img warnings), PostCSS parse and `git diff --check` pass. Chrome at320/390/640/768/1024/1280/1440/1920px confirms no page/text overflow, no price rows, preserved image/title/action destinations, inset geometry, centered700-weight desktop titles, equal desktop card heights and bottom-aligned centered buttons at least44px high. Phone/tablet dimensions retain R147 values. Actual clicks open `/shop/envelopes`, `/shop/candles`, `/shop/stationery` with page headings present. Desktop screenshot inspected. Initial temporary check compared title-case innerText to CSS-uppercase rendering; corrected the check to normalize case, then all checks passed. No new unit tests, production build, API mutations or cart writes.
+
+## 2026-10-12 — Centered desktop favourites (R147)
+
+VERIFIED: scoped ESLint on `src/app/b2c/page.tsx`, PostCSS parsing and `git diff --check` pass. Isolated Chrome at320/390/640/768/1024/1280/1440/1920px confirms no page/text overflow and existing collection links. Desktop titles compute to700 weight and centered alignment; description and price also center. Labels are ₹499.00/₹799.00/₹349.00 without “From”; equal card heights, aligned prices and inset photo geometry remain. Phone/tablet dimensions and visibility match R146. Desktop screenshot inspected. No new unit tests, build, API changes or cart writes for this presentation adjustment.
+
+## 2026-10-12 — Inset desktop collection photos (R146)
+
+VERIFIED: PostCSS parses Home CSS; `git diff --check` passes. Isolated Chrome at320/390/640/768/1024/1280/1440/1920px confirms no page/text overflow, equal desktop card heights/aligned prices and existing labels/routes. At1024px+ every photo has8px top/side margins, a9px measured inset including the border, square proportions and11px corners inside20px card corners. Phone/tablet dimensions match R145; actions/prices retain breakpoint behavior.1440px desktop screenshot inspected. CSS-only refinement; no new unit tests, build, API changes or cart writes.
+
+## 2026-10-12 — Compact desktop favourites (R145)
+
+VERIFIED: PostCSS parses Home CSS; `git diff --check` passes. Chrome at320/390/640/768/1024/1280/1440/1920px confirms no page/text overflow, equal desktop heights/aligned prices, retained source price labels/routes, Jakarta titles and20px square-photo cards.1440px cards now326.66×491.27px compared with R144's357.33×588.95px.320/390/640/768 card dimensions match the prior run exactly; phone/tablet actions remain and prices stay hidden. Desktop screenshot inspected. CSS-only sizing adjustment; no new unit tests, build, API changes or cart writes.
+
+## 2026-10-12 — Desktop favourites cards (R144)
+
+VERIFIED: B2C TypeScript; scoped ESLint on Home page/HomeSections (zero errors, two existing no-img-element warnings on philosophy artwork); PostCSS parse of Home CSS; `git diff --check`. Isolated Chrome at320/390/640/768/1024/1280/1440/1920px: no horizontal page/text overflow, same collection/photo/title destinations, and the three expected source-derived From labels. At1024px+ cards have equal heights and aligned price rows,24px corners, white surfaces, flush0.89-ratio photos, left-aligned Jakarta titles and no photo star/round action. Below1024px price row is hidden and existing actions remain; phones retain two columns,16px corners,1.25 photos and centered titles. Native title link focus succeeds.390/1440px screenshots inspected.
+
+The first sans-font verification failed because typography.css's global !important title rule won. Added an ID-scoped desktop card-title !important override; repeated all eight widths and font-family assertions pass. No permanent unit tests for this reversible presentation change, full build, real cart mutations or API/payment changes. Starting values are existing local catalogue display data, not newly verified live quotes. User visual acceptance UNKNOWN.
+
+## 2026-10-12 — Footer wallpaper (R143)
+
+VERIFIED: local image1672×941 inspected; PostCSS parses home-footer.css; `git diff --check` passes. Isolated Chrome Home/PDP at390/1440px confirms successful image decode, computed ::before wallpaper URL, opacity0.4, cover sizing, no blur, full footer dimensions (excluding1px border), pointer-events:none and content opacity1/z-index1. Footer links pass pointer hit tests and pages have no horizontal overflow.390px Home screenshot inspected. CSS-only change; no new unit tests, TypeScript/build, asset edits or backend/cart writes.
+
 ## 2026-10-12 — Temporary hamper prices (R142)
 
 VERIFIED: B2C TypeScript/scoped ESLint and `node --test tests/catalogue.test.cjs tests/gift-cart.test.cjs`:23/23 pass. Isolated module assertions confirm both INR Sample labels; unknown/prototype slugs and non-preview Ivory return null; authoritative curated records retain basePrice0, inventory0, preview=true and no variants. No permanent new tests for this reversible presentation change.

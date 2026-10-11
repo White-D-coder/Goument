@@ -84,7 +84,7 @@ export function HomeCollectionCard({ title, description, image, href }: { title:
     <div className="tgg-favourite-info">
       <h3><Link href={href}>{title}</Link></h3>
       <p className="tgg-collection-description">{description}</p>
-      <Link className="tgg-collection-link" href={href} aria-label={`Explore ${title}`}><span className="tgg-collection-action-desktop">Explore collection</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>
+      <Link className="tgg-collection-link" href={href} aria-label={`Shop ${title}`}><span className="tgg-collection-action-desktop">Shop now</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>
     </div>
   </article>;
 }

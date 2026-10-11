@@ -1,3 +1,47 @@
+## 2026-10-12 — Fix screenshot’s double Home padding (R153)
+
+CURRENT / IMPLEMENTED: add one Home-only adjacent-section rule so bottom/top padding no longer sums across consecutive content sections. Desktop gap80→40px, tablet64→32px, phone48→24px. Supersedes R149 internal boundary spacing; R152 was the separate Ivory product spacing adjustment. CSS parse/diff and responsive browser measurements pass; see TESTING.
+
+## 2026-10-12 — Remove product padding stack (R152)
+
+CURRENT / IMPLEMENTED: remove Ivory hero/editorial bottom padding and use one64/48/24px section-gap token for editorial/related top spacing. Desktop hero-to-editorial stacked padding falls from204px to64px; editorial-to-related from162px to64px. Phone purchase-to-related falls from48px to24px. Keep content and card geometry. CSS parse/diff and responsive baseline comparisons pass; see TESTING.
+
+## 2026-10-12 — Remove desktop Ivory details panel (R151)
+
+CURRENT / IMPLEMENTED: conditionally omit Ivory’s finer-details section and remove its obsolete phone-only CSS hide rule. Extend the previous phone request to all viewports without changing other product details. Typecheck/scoped lint, CSS parse/diff and responsive browser checks pass; see TESTING.
+
+## 2026-10-12 — Match B2C footer navigation to navbar (R150)
+
+CURRENT / IMPLEMENTED: replace footer link lists with the corresponding B2C navbar options and Shop categories. Extract public destination data for Header/ShopNavigation/Footer consistency; keep existing navbar behavior and corporate fallbacks. Preserve footer layouts, wallpaper and contact details. Typecheck/scoped lint/diff and responsive/navigation browser checks pass; see TESTING.
+
+## 2026-10-12 — Fix Home section padding (R149)
+
+CURRENT / IMPLEMENTED: standardize top-level Home section/corporate vertical padding and remove extra nested FAQ padding. Local baseline showed FAQ outer+inner padding stacking to98px above/120px below on desktop and68px/74px on phone; it now has one40px desktop/24px phone inset. Preserve existing card styles and content. CSS parse/diff and responsive browser checks pass; see TESTING.
+
+## 2026-10-12 — Replace collection prices with Shop buttons (R148)
+
+CURRENT / IMPLEMENTED: remove the Home collection price helper/prop/row and display the existing collection links as burgundy desktop Shop now buttons. Keep card-specific destinations, centered bold text and inset photos; phone/tablet actions retain their presentation. Typecheck/scoped lint, CSS parse/diff, responsive checks and three click navigations pass; see TESTING.
+
+## 2026-10-12 — Center card copy and remove price prefix (R147)
+
+CURRENT / IMPLEMENTED: center desktop collection title/description/price, increase title weight to700 and remove the Home price prefix. Keep catalogue-derived amounts and responsive card dimensions. Scoped lint, CSS parse/diff and browser checks pass; see TESTING.
+
+## 2026-10-12 — Round inset desktop photos (R146)
+
+CURRENT / IMPLEMENTED: inset desktop favourites photos8px from the card interior and round all image corners to11px, following the20px outer frame. Preserve existing compact layout, photos, links and prices. CSS parse/diff and responsive browser checks pass; see TESTING.
+
+## 2026-10-12 — Reduce desktop card size (R145)
+
+CURRENT / IMPLEMENTED: compact desktop favourites using a1020px grid, square photos, reduced padding and slightly smaller type. Preserve white card design, collection links/data and phone/tablet sizing. CSS parse/diff and eight-width browser checks pass; see TESTING.
+
+## 2026-10-12 — Match desktop favourites to card reference (R144)
+
+CURRENT / IMPLEMENTED: restyle Home collection cards at1024px+ with large flush photos,24px white rounded cards, left-aligned sans titles/copy and bottom-aligned bold prices. Reuse HomeCollectionCard with an optional priceLabel derived from existing local catalogue starting prices. Retain current collection routes and phone/tablet cards/actions. Typecheck/scoped lint, CSS parse/diff and responsive browser checks pass; evidence: TESTING.
+
+## 2026-10-12 — Add40% footer wallpaper (R143)
+
+CURRENT / IMPLEMENTED: replace footer radial decoration with the supplied wallpaper, centered/cover across the footer at opacity.4 without blur. Retain content styling and interactions. CSS parse/diff and both-footer phone/desktop browser checks pass; see TESTING.
+
 ## 2026-10-12 — Add sample hamper prices (R142)
 
 CURRENT / IMPLEMENTED: use a shared presentation helper for Ivory ₹2,499 / India ₹2,999 Sample labels in PDP, related cards and Shop; update preview price copy. Actual product prices, inventory, preview eligibility and sort/checkout behavior remain. TypeScript, scoped lint,23 catalogue/cart tests, helper/data assertions, browser checks and diff checks pass. Evidence: TESTING.

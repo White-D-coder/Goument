@@ -1,3 +1,25 @@
+R153 (2026-10-12) CURRENT / IMPLEMENTED: fix the supplied Home screenshot’s double gap after hamper cards. Consecutive content sections use one padding amount instead of bottom+top padding, preserving card design and other section edges. Source: Home CSS; verification: TESTING.
+
+R152 (2026-10-12) CURRENT / IMPLEMENTED: remove stacked padding between the current Ivory product sections following the finer-details removal. Each visible content transition uses one responsive gap instead of adding neighboring top/bottom padding. Preserve existing photos, cards, controls and other product pages. Source: product CSS; verification: TESTING.
+
+R151 (2026-10-12) CURRENT / IMPLEMENTED: remove the previously hidden Ivory phone “The finer details” panel from desktop too. Omit that entire section for Ivory at all sizes while preserving other product pages and surrounding purchase/related content. Supersedes R141 phone-only scope. Sources: product page/CSS; verification: TESTING.
+
+R150 (2026-10-12) CURRENT / IMPLEMENTED: B2C footer should contain B2C navbar options and categories, with the rest of its design retained. Match visible main navbar options for Home/other-page variants and all four Shop dropdown labels/search destinations. Preserve footer contact details and40% wallpaper. Sources: Footer, Header, ShopNavigation, shared storefront-navigation; verification: TESTING.
+
+R149 (2026-10-12) CURRENT / IMPLEMENTED: fix spacing between Home sections without another card/content redesign. Use consistent responsive vertical section padding and eliminate doubled FAQ padding. Preserve current typography, cards, actions and section contents. Source: Home CSS; verification: TESTING.
+
+R148 (2026-10-12) CURRENT / IMPLEMENTED: replace desktop Home favourites prices with a button opening that specific card’s Shop collection. Use burgundy “Shop now” links to Envelopes, Candles and Stationery respectively. Preserve prior centered bold titles and inset photo frames. Sources: Home page/component/CSS; verification: TESTING.
+
+R147 (2026-10-12) CURRENT / IMPLEMENTED: center desktop favourites card copy, bold the title and remove “From” from the displayed price. Apply consistently across the three collection cards, preserving their amounts, destinations and inset photos. Sources: Home page/CSS; verification: TESTING.
+
+R146 (2026-10-12) CURRENT / IMPLEMENTED: place the desktop favourites image frame inside the card frame, with a visible white inset and rounded corners matching the surrounding card curve. Use8px margins and11px image corners inside the20px card. Retain compact cards and phone/tablet layouts. Source: Home CSS; verification: TESTING.
+
+R145 (2026-10-12) CURRENT / IMPLEMENTED: make the latest desktop favourites cards a little smaller, retaining their reference appearance. Reduce photo height, grid width, internal spacing and typography at1024px+; preserve phone/tablet cards. Source: Home CSS; verification: TESTING.
+
+R144 (2026-10-12) CURRENT / IMPLEMENTED: style desktop “Thoughtful picks just for you” cards like the supplied reference: large flush photographs, rounded white surfaces, left-aligned title/description and bold bottom price. Keep the three existing collection identities/photos/destinations and derive starting prices from the existing local catalogue. Apply through a1024px minimum breakpoint; phone/tablet presentation and actions remain. Sources: HomeCollectionCard and Home page/CSS; verification: TESTING.
+
+R143 (2026-10-12) CURRENT / IMPLEMENTED: use the supplied Pale Baroque Swirl Wallpaper as the B2C footer background at40% opacity on phone and desktop. Apply opacity to the background layer, preserving fully visible text/links. Source: home-footer.css; verification: TESTING.
+
 R142 (2026-10-12) CURRENT / IMPLEMENTED: add temporary sample prices Ivory ₹2,499 and India ₹2,999 consistently to PDP, related cards and Shop. Label Sample and retain final confirmation. Keep authoritative product/variant prices, preview status, checkout eligibility and unrelated product prices unchanged. Sources: product-pricing and consumers; verification: TESTING.
 
 R141 (2026-10-11) CURRENT / IMPLEMENTED: remove “The finer details” section from the current Ivory phone view through640px. Preserve larger-screen and other-product details. Source: product CSS; checks: TESTING.

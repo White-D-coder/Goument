@@ -1,3 +1,47 @@
+## 2026-10-12 — Single gaps between Home content sections (R153)
+
+CURRENT / IMPLEMENTED: remove following top padding between adjacent Home content sections. Hampers→Favourites and Philosophy→FAQ now measure40/32/24px across desktop/tablet/phone. CSS parse/diff and six-width browser checks pass; desktop screenshot inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Remove stacked Ivory section padding (R152)
+
+CURRENT / IMPLEMENTED: Ivory hero/editorial/related gaps are owned once at64/48/24px, replacing adjacent padding sums. CSS parse/diff and390/768/1440px browser comparisons pass; gallery/purchase/related-card dimensions and India layout retain baseline values. Desktop/phone screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Remove Ivory desktop finer details (R151)
+
+CURRENT / IMPLEMENTED: Ivory’s finer-details panel is absent from rendering at every width. Typecheck/scoped lint, CSS parse/diff and Ivory/India browser checks at390/768/1024/1440px pass; desktop screenshot inspected. Related content follows normally; India details remain. TODO priorities unchanged.
+
+## 2026-10-12 — B2C footer navigation (R150)
+
+CURRENT / IMPLEMENTED: both B2C footer variants use shared navbar destinations and four Shop categories instead of legacy category/occasion content. Design/contact details remain. Typecheck/scoped lint/diff checks and Home/Shop/PDP browser checks at320/390/768/1440px pass, including a footer category click and dropdown Escape dismissal. Phone/desktop screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Even Home section spacing (R149)
+
+CURRENT / IMPLEMENTED: Home sections share40/32/24px responsive vertical padding; remove nested FAQ vertical padding. CSS parse/diff and eight-width browser checks pass, including FAQ expansion and unchanged collection-card dimensions. Phone/desktop screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Shop buttons on favourites (R148)
+
+CURRENT / IMPLEMENTED: desktop favourites show centered burgundy Shop now buttons instead of prices. Each opens its own collection; all three browser click navigations pass. Typecheck, scoped lint (two existing artwork warnings), CSS parse/diff and eight-width checks pass; desktop screenshot inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Centered favourites text (R147)
+
+CURRENT / IMPLEMENTED: desktop favourites now have centered copy, bold titles and price amounts without “From.” Scoped page lint, CSS parse/diff and eight-width browser checks pass; desktop screenshot inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Inset desktop card images (R146)
+
+CURRENT / IMPLEMENTED: favourites photos now have an inset white frame and four rounded corners following the card curve. CSS parse/diff and eight-width browser checks pass; desktop screenshot inspected. Phone/tablet measurements retain R145 values. TODO priorities unchanged.
+
+## 2026-10-12 — Smaller desktop favourites (R145)
+
+CURRENT / IMPLEMENTED: desktop collection cards are more compact; at1440px each is about327×491px instead of357×589px. CSS parse/diff and eight-width browser checks pass; desktop screenshot inspected. Phone/tablet metrics retain R144 values. TODO priorities unchanged.
+
+## 2026-10-12 — Desktop collection-card redesign (R144)
+
+CURRENT / IMPLEMENTED: desktop favourites now use photo-led rounded white cards, sans titles, muted copy and aligned starting prices from the existing local catalogue. Phone/tablet cards retain their layout/actions. Typecheck, scoped lint (two existing artwork warnings), CSS parse/diff and eight-width browser checks pass; phone/desktop screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Footer background wallpaper (R143)
+
+CURRENT / IMPLEMENTED: Home and standard B2C footer backgrounds use the supplied wallpaper at40% opacity. Text/links remain fully opaque. CSS parse/diff checks and390/1440px Chrome checks on both footer variants pass; screenshot inspected. TODO priorities unchanged.
+
 ## 2026-10-12 — Temporary hamper prices (R142)
 
 CURRENT / IMPLEMENTED: Ivory ₹2,499 and India ₹2,999 Sample labels appear in PDP, related cards and Shop. Authoritative data stays unpriced/preview and existing checkout restrictions remain. TypeScript/scoped lint,23 catalogue/cart tests, helper/data assertions and responsive Chrome checks pass; screenshot inspected. Commercial completion remains on TODO; priorities unchanged.

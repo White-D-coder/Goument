@@ -319,14 +319,24 @@
 
 .pdp .gift-purchase-buy-now,.pdp-buy-now-help { display:none; }
 
+/* One section owns each Ivory gap; adjacent top/bottom padding must not add up. */
+.pdp-ivory { --pdp-section-gap:64px; }
+.pdp-ivory .pdp-hero { padding-bottom:0; }
+.pdp-ivory .pdp-editorial { padding-block:var(--pdp-section-gap) 0; }
+.pdp-ivory .pdp-related { padding-block:var(--pdp-section-gap); }
+
+@media (max-width:900px) {
+ .pdp-ivory { --pdp-section-gap:48px; }
+}
+
 /* Ivory Hamper phone detail: product information followed by purchase actions. */
 @media (max-width:640px) {
- .pdp.pdp-ivory { padding-bottom:0; }
+ .pdp.pdp-ivory { --pdp-section-gap:24px; padding-bottom:0; }
  .pdp-ivory .pdp-wrap { width:calc(100% - 32px); }
  .pdp-ivory .pdp-mobile-back { display:flex; align-items:center; gap:9px; min-height:44px; padding-block:8px; font-size:11px; color:#74645a; }
  .pdp-ivory .pdp-mobile-back > span { color:#4a0404; font-size:19px; }
  .pdp-ivory .pdp-breadcrumb { display:none; }
- .pdp-ivory .pdp-hero { gap:18px; padding-bottom:24px; }
+ .pdp-ivory .pdp-hero { gap:18px; padding-bottom:0; }
  .pdp-ivory .detail-image { max-height:440px; border:1px solid #e9e2d8; border-radius:20px; background:#f0e9dd; }
  .pdp-ivory .detail-image img { object-fit:contain; border-radius:19px; }
  .pdp-ivory .product-gallery-thumbnails { margin-top:10px; }
@@ -339,8 +349,7 @@
  .pdp-ivory .pdp-description-phone { display:inline; }
  .pdp-ivory .pdp-occasion,.pdp-ivory .pdp-purchase-meta { display:none; }
  .pdp-ivory .pdp-note { display:none; }
- .pdp-ivory .pdp-details { display:none; }
- .pdp-ivory .pdp-related { padding-block:24px 30px; border-top:0; }
+ .pdp-ivory .pdp-related { padding-block:var(--pdp-section-gap); border-top:0; }
  .pdp-ivory .pdp-section-heading { display:block; margin-bottom:16px; }
  .pdp-ivory .pdp-section-heading h2 { color:#302922; font-size:22px; }
  .pdp-ivory .pdp-section-heading .pdp-eyebrow { margin-bottom:7px; font-size:9px; }

@@ -2060,6 +2060,23 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 /* ACCESSIBILITY */
 .tgg-collection-action-mobile { display:none; }
 
+/* Desktop collection cards follow the photo-led white reference cards. */
+@media (min-width:1024px) {
+ .tgg-home .tgg-collection-grid { max-width:1020px; gap:20px; }
+ .tgg-home .tgg-collection-card { display:flex; flex-direction:column; border:1px solid #e5dfd6; border-radius:20px; background:#fff; box-shadow:0 2px 5px #3029220a; }
+ .tgg-home .tgg-collection-card:hover { transform:translateY(-3px); border-color:#d4c7b7; box-shadow:0 8px 22px #3029220d; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo { flex-shrink:0; aspect-ratio:1; margin:8px 8px 0; border-radius:11px; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo::before { display:none; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo img { transform:none; }
+ .tgg-home .tgg-collection-card .tgg-favourite-info { display:flex; flex:1; flex-direction:column; align-items:stretch; gap:0; padding:20px; background:#fff; text-align:center; }
+ .tgg-home .tgg-collection-card h3 { min-height:0; margin:0 0 10px; color:#262321; font-family:var(--font-jakarta); font-size:clamp(18px,1.4vw,20px); font-weight:700; line-height:1.35; text-align:center; text-wrap:pretty; }
+ #main .tgg-home .tgg-collection-card h3 { font-family:var(--font-jakarta) !important; }
+ .tgg-home .tgg-collection-card h3 a { color:inherit; }
+ #main .tgg-home .tgg-collection-card .tgg-collection-description { min-height:3.2em; margin:0 0 18px; color:#817b72; font-size:13px; line-height:1.6; text-align:center; }
+ .tgg-home .tgg-collection-card .tgg-collection-link { display:flex; align-items:center; justify-content:center; align-self:center; gap:8px; width:100%; max-width:180px; height:auto; min-height:44px; margin:auto 0 0; padding:10px 16px; border:1px solid #4a0404; border-radius:9px; background:#4a0404; color:#fffdf8; font-size:12px; font-weight:700; line-height:1.4; letter-spacing:.04em; text-transform:uppercase; }
+ .tgg-home .tgg-collection-card .tgg-collection-link:hover { transform:none; border-color:#650c0c; background:#650c0c; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tgg-collection-grid .tgg-favourite-card,
   .tgg-collection-grid .tgg-favourite-photo img,
@@ -2105,4 +2122,18 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
  .tgg-home .tgg-packaging-copy h2,
  .tgg-home .tgg-packaging-copy > p { text-align:center; }
  .tgg-home .tgg-packaging-copy .tgg-button { align-self:center; }
+}
+
+/* Keep vertical section spacing consistent without doubling nested FAQ padding. */
+.tgg-home { --tgg-section-padding-block:40px; }
+.tgg-home > :is(.tgg-section, .tgg-corporate) { padding-block:var(--tgg-section-padding-block); }
+.tgg-home > .tgg-section + .tgg-section { padding-top:0; }
+.tgg-home > .tgg-faq-section > .tgg-faq { padding-block:0; }
+
+@media (max-width:900px) {
+ .tgg-home { --tgg-section-padding-block:32px; }
+}
+
+@media (max-width:640px) {
+ .tgg-home { --tgg-section-padding-block:24px; }
 }

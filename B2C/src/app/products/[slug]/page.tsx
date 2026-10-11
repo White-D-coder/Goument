@@ -100,13 +100,13 @@ export default async function Detail({ params }: PageProps) {
       </div>
     </section>
 
-    <section className="pdp-details pdp-wrap" id="gift-details" aria-labelledby="details-heading">
+    {!isIvory && <section className="pdp-details pdp-wrap" id="gift-details" aria-labelledby="details-heading">
       <div><p className="pdp-eyebrow">Good to know</p><h2 id="details-heading">The finer details.</h2><p>A little more about your gift.</p><a className="pdp-link" href={enquiry}>Ask us a question <span aria-hidden="true">→</span></a></div>
       <div className="pdp-accordions">
         {details.map(detail => <details key={detail.title} name="gift-details"><summary>{detail.title}<span aria-hidden="true"/></summary><div className="pdp-accordion-content"><p>{detail.text}</p>{detail.title === 'Returns & replacement' && <a className="pdp-link" href={enquiry}>Contact our team <span aria-hidden="true">→</span></a>}</div></details>)}
         {editorial.long && !editorial.story.length && <details name="gift-details"><summary>About this gift<span aria-hidden="true"/></summary><div className="pdp-accordion-content"><p>{editorial.long}</p></div></details>}
       </div>
-    </section>
+    </section>}
 
     <Suspense fallback={<div className="pdp-wrap pdp-related-loading" role="status">Finding more thoughtful gifts…</div>}><RelatedGifts slug={product.slug}/></Suspense>
 

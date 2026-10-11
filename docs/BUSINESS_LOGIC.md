@@ -1,3 +1,7 @@
+## 2026-10-12 — Sample price labels (R142)
+
+CURRENT / IMPLEMENTED UI: Ivory ₹2,499 / India ₹2,999 in `src/lib/product-pricing.ts` are temporary Sample labels, never authoritative quotes, cart totals or payable money. Curated Product.basePrice remains0; preview hamper checkout guards remain. Final pricing/tax/delivery and saleability remain FUTURE / REQUIRED. Evidence: TESTING.
+
 # Business Logic
 
 ## 2026-09-30 — Gift cart authentication invariant

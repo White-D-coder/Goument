@@ -1,4 +1,122 @@
+## 2026-10-12 — Temporary hamper prices (R142)
+
+VERIFIED: B2C TypeScript/scoped ESLint and `node --test tests/catalogue.test.cjs tests/gift-cart.test.cjs`:23/23 pass. Isolated module assertions confirm both INR Sample labels; unknown/prototype slugs and non-preview Ivory return null; authoritative curated records retain basePrice0, inventory0, preview=true and no variants. No permanent new tests for this reversible presentation change.
+
+Initial helper placement in curated-hampers.ts introduced a runtime types import into the pure-data VM test:22/23 passed; mapping failed `require is not defined`. Moved formatting to product-pricing.ts and restored the data module, retaining the test harness;23/23 pass. No catalogue data changes.
+
+VERIFIED: both PDPs at320/390/640/1440px show the matching price and opposite hamper's matching related price, with no overflow.390px `/shop/hampers`, `/shop?search=hamper` and `/shop` show both amounts and updated preview notes where applicable, preserving existing non-hamper prices.390px screenshot inspected. `git diff --check` passes. No real cart writes, orders, payment testing or production build; existing guard source is unchanged and no payment-readiness claim is made.
+
+## 2026-10-11 — Hide Ivory phone finer details (R141)
+
+VERIFIED: PostCSS parse; scoped rule inspection confirms `.pdp-ivory .pdp-details { display:none }` is inside the640px phone media block; `git diff --check`. Visibility-only CSS change; no browser run, new unit tests, TypeScript/build or API/cart writes.
+
+## 2026-10-11 — Phone related-photo fit (R140)
+
+VERIFIED: isolated Chrome320/390/640px confirms all three related photos use centered cover and their image elements match the frame dimensions. Equal card/image/text/action sizing and alignment assertions still pass.768/1440px retain contain; no page overflow at all five widths.390px screenshot inspected. PostCSS parse and `git diff --check` pass. CSS-only change; no new unit tests, real cart writes or production build.
+
+## 2026-10-11 — Equal phone related cards (R139)
+
+VERIFIED: PostCSS parses product CSS; `git diff --check` passes. Isolated Chrome320/390/640px asserts all three Ivory related cards have equal widths/heights and aligned/equal-sized photo, title, price and action rows within1px; actions are44px high. Card dimensions:161.27×280.36,200.47×314.45 and340.47×436.19 respectively. No page overflow at those widths or768/1440px.Constrain title-link width and allow wrapping; the repeated five-width run passes, including explicit title-link containment assertions. Updated390px screenshot inspected. No JS/API changes, cart writes, new unit tests or production build for this CSS-only adjustment; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Ivory phone ecommerce controls (R138)
+
+VERIFIED: B2C `npm run typecheck`; scoped ESLint for `AddGiftToCartButton.tsx`, `BuyPanel.tsx`, `lib/gift-cart.ts` and the modified cart test; PostCSS parse of product CSS; `node --test tests/gift-cart.test.cjs tests/api.test.cjs`:23/23 pass. Four new cart tests cover ensure-once under concurrent requests/preservation of other items and boxes, retaining quantity99 without a write,409 reread retaining another tab's quantity, and ambiguous-save rejection without replay/success. Initial cart-only run was19/20: the old mapping test searched only catalogue-preview.ts and missed the existing two curated hamper gift IDs. Corrected the test to evaluate both current data exports; no catalogue/API data was changed.
+
+The first explicit ESLint run including the CommonJS test file rejected its six existing require imports under the shared TypeScript rule. Add a documented file-level exception for that Node/VM harness, retaining its current module format; the subsequent scoped run passes.
+
+VERIFIED: isolated headless Chrome at320/390/640/768/1440px: no page overflow, in-flow purchase section and two48px aligned actions on phones, hidden kicker/note, preserved enquiry price and no larger-screen Buy now.1440px Ivory and390px India hero/photo/title/purchase/details metrics match the existing before snapshots.390px purchase and counter screenshots inspected.
+
+Browser fetch mocks only: Buy now503 stays on the PDP with an error; add becomes quantity1; plus reaches2; failed plus retains2; decrement/removal restores Add to Cart while preserving other selections/boxes. Double-click during a held Buy now save causes one write, disables actions and does not navigate until release; confirmed save opens `/cart`, where existing hamper price-confirmation copy and disabled checkout are present. Native keyboard Enter on Buy now with quantity3 opens cart with quantity3 and no extra write. No real cart writes, orders, auth/provider flows, full production build or physical phone/safe-area test. User visual acceptance UNKNOWN.
+
 # Testing
+
+## 2026-10-11 — Ivory Hamper phone redesign (R137)
+
+VERIFIED: B2C typecheck, scoped ESLint on product page, PostCSS parse and `git diff --check`. Installed Next Link docs consulted. Isolated Chrome checks320/390/640/768/1440px: exact viewport width/no horizontal overflow; phones show All hampers, centered28px name, short source description and a fixed16px-radius bar inset12px with contained44px actions. Price on enquiry and exactly one truthful thumbnail remain. Larger screens hide the added link/short copy;1440px hero tracks/title size/bar position/details padding match captured before values. India Hamper390px comparison matches its before measurements.
+
+Native Enter opens the gift-note disclosure; email request remains mailto. Product-details disclosure opens. Mocked browser draft add shows quantity1 and existing `/cart` checkout link; a503 on increment leaves quantity1 and contains its error within the163px bar, with234px bottom reserve. Mocked removal returns to zero; footer clears the bar. No real cart writes. Separate390px checks confirm the initial70px bar stays at y762–832 through scrolling, note opening/closing and detail expansion. Phone initial/details/error/scroll screenshots inspected. Temporary keyboard check initially omitted Enter's character event; added full native input before the passing run. Temporary scripts/screenshots remain under `/private/tmp`. No production build, physical-device/safe-area hardware test, real checkout or deployment; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Home phone refinements, gallery and API recovery (R132–R136)
+
+VERIFIED: B2C typecheck; scoped ESLint on HomeSections and ProductGallery (zero errors, two existing artwork image warnings); PostCSS parse of Home CSS, PDP CSS and product-gallery CSS; `git diff --check`.
+
+Isolated Chrome Home checks at320/390/640/768/1440px: no horizontal overflow; phone collection grid has two columns, centered titles/descriptions, two-line39.6px descriptions, contained44px burgundy Explore actions and existing collection hrefs. Larger cards retain three columns, left alignment and circular actions. Phone philosophy has four116px tiles with12px labels,22–27px heading and hidden side art/long copy; larger art/copy remain. Packaging panel items/title/description center on phones and retain larger left alignment.390px card/philosophy/packaging screenshots inspected.
+
+PDP India Hamper checks at320/390/640/1440px: exact requested viewport width and no page overflow; phone thumbnails show both source photos in a nowrap row with2.1 ratio and52–71px hit height. Selecting lavender updates the main image and pressed state. Ivory Hamper shows exactly one phone thumbnail; its larger single-photo controls remain hidden. Larger India thumbnails retain68×58px presentation. Phone gallery screenshot inspected. The first check exposed a shared15px paragraph override; strengthened only the phone description selector. Button innerText reflects uppercase CSS; normalized the harness case. The initial PDP assertion compared scroll width to an expanded innerWidth and missed a6px existing related-carousel overflow; corrected the14px gutter and asserted the requested viewport width before the passing rerun.
+
+Local API evidence: port3000 was listening while5003/27017 were absent; Next gift count returned plain500 and direct5003 refused connection. Restarted Mongo using the existing local data directory, verified auth configuration points to the isolated local development database without printing values, then started the existing auth service. Proxied count/catalogue return200; signed-out me returns401; disposable guest draft GET returns200/revision0/empty selection/DRAFT. Browser repeats count/catalogue/me checks. No cart writes, account login, customer queries, seed, provider test or production deployment. No new production build or physical-device test. Services remain running; temporary scripts/screenshots/logs stay under `/private/tmp`. User visual acceptance UNKNOWN.
+
+## 2026-10-11 — Phone Shop header search (R131)
+
+VERIFIED: PostCSS parses Shop CSS; inspected Header's existing `/shop#gift-search` link against the scoped selector, which applies only through640px when `.shop-edit` is present. Existing phone inline-search hiding and category/sort query fields are retained. `git diff --check` passes. No new browser review, build or application tests for this CSS-only visibility change; visual acceptance UNKNOWN.
+
+## 2026-10-11 — Bottom phone Shop filter (R130)
+
+VERIFIED: B2C typecheck; scoped ESLint on `ShopMobileFilters`, `ShopCollectionPage` and Shop page; PostCSS parse; `git diff --check`. Installed Next client-boundary documentation consulted. Isolated Chrome at320/390/640px confirms the bar remains at the844px viewport bottom before/after scrolling with no horizontal overflow; at768/1440px it is hidden. Phone pointer hit opens the sheet; initial focus and subsequent Tab remain inside, Escape closes and restores trigger focus, and body overflow locks while open. Selecting Envelopes closes the sheet and reaches its existing filter; submitting price-desc sort retains `search=envelope` and the sort URL. Resizing to768px closes an open sheet. Dedicated `/shop/hampers` keeps its selected category and omits preview sorting.390px sheet and scrolled-bar screenshots inspected. Final bottom body padding reserves the65px bar plus safe area; a separate390px check confirms footer bottom778.6px clears bar top779px, and backdrop-tap dismissal passes.
+
+The first temporary navigation check read the dialog before the sort response rendered; added a presence wait before the passing rerun. The separate footer harness initially used the reset desktop viewport; explicitly set390px and instant scrolling (and corrected temporary string quoting) before its passing run. Temporary script/screenshots remain under `/private/tmp`. No production build, physical-device/safe-area hardware test, real cart writes or catalogue price-sort correctness test; existing catalogue fallback behavior is outside this UI change. User visual acceptance UNKNOWN.
+
+## 2026-10-11 — Phone Shop button colour (R129)
+
+VERIFIED: PostCSS parses Shop CSS and `git diff --check` passes. Colour declarations remain inside the existing640px phone breakpoint; larger-screen rules and action handlers were not edited. No new browser review, build or application tests for this colour-only change; visual acceptance UNKNOWN.
+
+## 2026-10-11 — Shop phone search/alignment (R128)
+
+VERIFIED: PostCSS parses Shop CSS; isolated Chrome at320/390/640px confirms hidden search, centered titles/descriptions/prices and no page overflow. At768/1440px search remains flex-visible and title/price alignment remains left. Filtered `/shop?search=hamper` retains `search=hamper` in FormData despite the hidden field; its existing preview state has no sort control. Dedicated `/shop/candles` title centering passes; the main Shop screenshot retains its available sort control.390px screenshot inspected; `git diff --check` passes. Temporary script/screenshot remain under `/private/tmp`. No build, application test suite, live cart writes or physical-device test repeated for this CSS-only change; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Shop phone reference (R127)
+
+VERIFIED: B2C typecheck; scoped ESLint on Shop page, ProductCard, ShopCategoryLink and ShopCollectionPage (no errors/warnings); PostCSS parse of Shop CSS; final `npm run build`; `git diff --check`. Installed Next image docs consulted for the reused fill-photo wrapper. Build retains the existing multiple-lockfile root warning; generated next-env change restored.
+
+Isolated Chrome checks `/shop` at320/390/640/768/1440px: no page overflow, exactly two tracks on all three phone widths, all six sampled cards retain source prices/preview labels, descriptions clamp to two lines and every phone action fits its card/full content width at44px high. Photo rail scrolls at320/390px and naturally fits at640px; active check is visible. Above640px category photos and new descriptions are hidden; existing one/four-track layouts at768/1440px remain.390px and1440px screenshots inspected. Clicking Hampers reaches the existing search route with two preview products and selected badge; `/shop/candles` retains its selected dedicated route and two-column phone grid. Keyboard Tab/focus checked separately. Mocked browser draft GET/PUT verifies Add to Cart success, quantity stays1 after503 and error copy remains inside the card; error screenshot inspected. No real cart writes.
+
+Corrections during verification: first rail assertion incorrectly required overflow at640px despite all thumbnails fitting; corrected the harness. Inherited global description styles initially won on desktop; added the scoped ID rule before final passing checks. The first collection measurement ran before its viewport/styles settled; waiting for fonts/styles yielded390px/two tracks. Existing local dev server reused after the preview attempt detected it. Temporary scripts/screenshots stay under `/private/tmp`. No physical-device, live cart/provider, real stock/price verification or deployment; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — One-line Home hamper descriptions (R126)
+
+VERIFIED: B2C typecheck, scoped ESLint on Home page/sections (zero errors, two existing artwork warnings), PostCSS parse and `git diff --check`. Isolated Chrome verifies all three descriptions are visible, fit without truncation and occupy one line at320/390/640px; at768/1440px the original descriptions remain visible.390px card screenshot inspected. Temporary check/script under `/private/tmp`; existing local dev server reused. No production build, physical-device or commerce test; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Phone hero text/button redesign (R125)
+
+VERIFIED: B2C typecheck, scoped ESLint on `HomeSections.tsx` (zero errors, two existing artwork `no-img-element` warnings), PostCSS parse and `git diff --check`. Isolated Chrome at320/390/640px verifies the new visible copy and computed Jakarta family, center alignment, ivory button with8px corners/44px height, absent photo overlay,260px hero, contained copy and no overflow. CTA/dot pointer hit tests and manual slide selection pass. At768/1440px original heading, button colour and layout measurements remain. All three390px slide screenshots inspected. Temporary script/screenshots are under `/private/tmp`; existing local dev server reused. No build, physical-device, formal contrast audit or commerce tests. Existing desktop dot overlap remains tracked in TODO; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Remove phone hero overlay (R124)
+
+VERIFIED: PostCSS parse and temporary Node declaration checks at320/390/640/768/1440px: phone overlay background resolves to `none`;768px retains `transparent` and1440px retains its original gradient. `git diff --check` passes. Browser appearance/contrast UNKNOWN; no browser, build or application test suite repeated for this CSS-only change.
+
+## 2026-10-11 — Phone hero centering (R123)
+
+VERIFIED: PostCSS parse and temporary Node assertions resolving the copy panel's alignment declarations at320/390/640/768/1440px; center text/items through640px, with existing larger-screen flex-start alignment retained. `git diff --check` passes. Browser review, build and application tests were not repeated for this CSS-only alignment change.
+
+## 2026-10-11 — Phone hero typography refinement (R122)
+
+VERIFIED: B2C typecheck, scoped ESLint on `HomeSections.tsx` (zero errors, two existing `no-img-element` warnings), PostCSS parse and `git diff --check`. Isolated Chrome at320/390/640px shows only “Thoughtful gifts. Made special.” in the visible heading with computed Cormorant family; at768/1440px the original headline remains. Phone frame stays260px with no overflow, contained copy,44px CTA, working CTA/dot hit targets and manual slide selection.390px screenshot inspected. Temporary script initially escaped its whitespace regex incorrectly; fixed the harness before the passing run. Preview start detected the existing dev server, which was reused. No production build, physical-device or commerce verification; existing desktop dot overlap remains tracked in TODO.
+
+## 2026-10-11 — Simplify phone hero copy (R121)
+
+VERIFIED: PostCSS parse of Home CSS and `git diff --check`. Isolated Chrome at320/390/640px confirms kicker, description and promise row are `display:none`; the photo fills the260px frame, copy fits,44px CTA/dots pass pointer hit tests, and no horizontal overflow occurs. At768/1440px the three text areas remain visible and existing layouts retain their R120 measurements. Phone slide selection updates its pressed state;390px screenshot inspected. Existing desktop dot overlap remains recorded in TODO. Temporary check script/screenshot are under `/private/tmp`. No build, application test suite or physical-device test was run for this CSS-only change; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Remove phone search and use photo-backed hero (R120)
+
+VERIFIED: B2C `npm run typecheck`; scoped ESLint on `src/app/b2c/page.tsx` and `src/components/home/HomeSections.tsx` (zero errors, two existing `no-img-element` warnings on philosophy artwork); PostCSS parse of Home CSS; `git diff --check`. Isolated headless Chrome at320/390/640/768/1440px confirms search markup absent, collection strip hidden and no horizontal page overflow. At all three phone widths the photo fills the hero, copy is transparent and fits, CTA is44px high, CTA/dots pass pointer hit tests; hero heights are359.7/359.9/340px. Phone manual slide selection updates `aria-pressed`.390px screenshot inspected. Larger layouts retain contain photography and their existing positioning.
+
+Limits/findings: initial sandbox preview bind failed with `EPERM`; the escalated dev attempt detected another existing B2C server, which was used without stopping it. First browser attempt selected a Chrome UI target; corrected to the page. Initial slide assertion ran before hydration; waiting on React through the127.0.0.1 origin stalled, and server logs reported a blocked dev origin. The final localhost-origin run passes. At1440px the pre-existing copy panel overlaps the center dots' pointer targets; recorded separately in TODO. No production build/deployment, live cart write or physical-device test. Temporary browser scripts/screenshots are under `/private/tmp`, not repository tests.
+
+## 2026-10-11 — Hide Home phone collection strip (R119)
+
+VERIFIED: PostCSS parses `B2C/src/app/b2c/home.css`; a temporary Node assertion checks applicable `.tgg-mobile-categories` display declarations at320/390/640/700/701/1024/1440px and resolves each to `none`. `git diff --check` passes. No browser/device screenshot review was run; visual acceptance UNKNOWN. No build or application test suite was run for this CSS visibility change.
+
+## 2026-10-11 — Compact Home hero on phones (R118)
+
+VERIFIED: PostCSS parse of `src/app/b2c/home.css`, B2C typecheck, focused ESLint on Home sections/slideshow, production build and `git diff --check`. CSS rules are scoped to the existing `max-width:640px` breakpoint. No local browser server was available for screenshot review; phone visual acceptance remains UNKNOWN.
+
+## 2026-10-11 — Hosted B2C image delivery (R117)
+
+VERIFIED: B2C `npm run typecheck`, focused ESLint for `ProductPhoto.tsx` and `HomeHeroSlideshow.tsx`, production `npm run build`, and checks that all three Home WebP sources exist and are git-tracked. Source audit found the previous first hero path was not present under `B2C/public`; it pointed at a repository-root asset that is outside the B2C app. `curl` to the documented Vercel domain failed DNS resolution; a local production server could not bind because the sandbox returned `EPERM`. No hosted HTTP status or browser image decode was verified; hosted image visibility remains UNKNOWN.
+
+## 2026-10-11 — Shared product page refinement (R116)
+
+VERIFIED: B2C `npm run typecheck`; focused ESLint on `src/components/BuyPanel.tsx`; PostCSS parse of `src/app/products/[slug]/product-detail.css`; `npm run build`; and `git diff --check`. Build compiles and generates the dynamic product route; Next reports the existing multiple-lockfile workspace-root warning. `localhost:3000/products/shagun-envelopes` returns connection failure because no local server is listening. No screenshot, device, touch or safe-area browser test was run; visual acceptance remains UNKNOWN.
 
 ## 2026-10-10 — Reduce mobile PDP copy (R115)
 

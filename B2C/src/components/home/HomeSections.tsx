@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather, Search, SlidersHorizontal } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather } from 'lucide-react';
 import ProductPhoto from '@/components/ProductPhoto';
 import AddGiftToCartButton from '@/components/AddGiftToCartButton';
 import HomeHeroSlideshow from '@/components/home/HomeHeroSlideshow';
@@ -25,7 +25,10 @@ export function HomeHero() {
   return <section className="tgg-hero" aria-labelledby="hero-title">
     <div className="tgg-hero-copy">
       <p className="tgg-kicker">Thoughtful gifts<br/>for every occasion</p>
-      <h1 id="hero-title">Make everyday<br className="tgg-desktop-break"/> moments special.</h1>
+      <h1 id="hero-title">
+        <span className="tgg-hero-title-desktop">Make everyday<br className="tgg-desktop-break"/> moments special.</span>
+        <span className="tgg-hero-title-mobile">Good gifts. <span>Great moments.</span></span>
+      </h1>
       <p className="tgg-hero-description">Curated hampers and thoughtful finds to celebrate the people and moments that matter.</p>
       <Link className="tgg-button" href="/shop">Shop now <ArrowRight size={17} aria-hidden="true"/></Link>
       <ul className="tgg-hero-promises" aria-label="Our approach to gifting">
@@ -43,17 +46,6 @@ const mobileCategories = [
   { title: 'Stationery', image: '/images/items/bookmarks.webp', href: '/shop/stationery' },
 ];
 
-export function HomeMobileSearch() {
-  return <section className="tgg-mobile-search-wrap" aria-label="Search gifts">
-    <form action="/shop" className="tgg-mobile-search">
-      <Search size={17} aria-hidden="true" />
-      <label className="tgg-visually-hidden" htmlFor="home-mobile-search">Search gifts</label>
-      <input id="home-mobile-search" type="search" name="search" placeholder="What are you looking for?" />
-      <button type="submit" aria-label="Browse gifts"><SlidersHorizontal size={18} aria-hidden="true" /></button>
-    </form>
-  </section>;
-}
-
 export function HomeMobileCategories() {
   return <nav className="tgg-mobile-categories" aria-label="Gift collections">
     {mobileCategories.map(item => <Link key={item.href} href={item.href}>
@@ -64,7 +56,7 @@ export function HomeMobileCategories() {
 }
 
 /** Preview hampers can be saved to the gift bag; their prices remain enquiry-only. */
-export function HomeHamperCard({ product, image, title }: { product: Product; image?: string; title?: string }) {
+export function HomeHamperCard({ product, image, title, mobileDescription }: { product: Product; image?: string; title?: string; mobileDescription?: string }) {
   const href = `/products/${product.slug}`;
   const cardTitle = title || product.name;
   const cardImage = image || productImage(product);
@@ -75,7 +67,7 @@ export function HomeHamperCard({ product, image, title }: { product: Product; im
     </Link>
     <div className="tgg-hamper-info">
       <h3><Link href={href}>{cardTitle}</Link></h3>
-      <p>{product.description.short}</p>
+      <p><span className="tgg-hamper-description-desktop">{product.description.short}</span><span className="tgg-hamper-description-mobile">{mobileDescription || product.description.short}</span></p>
       <div className="tgg-hamper-bottom">
         {product.giftItemId && <AddGiftToCartButton itemId={product.giftItemId} name={cardTitle} withQuantity />}
       </div>
@@ -92,7 +84,7 @@ export function HomeCollectionCard({ title, description, image, href }: { title:
     <div className="tgg-favourite-info">
       <h3><Link href={href}>{title}</Link></h3>
       <p className="tgg-collection-description">{description}</p>
-      <Link className="tgg-collection-link" href={href}>Explore collection <ArrowRight size={15} aria-hidden="true" /></Link>
+      <Link className="tgg-collection-link" href={href} aria-label={`Explore ${title}`}><span className="tgg-collection-action-desktop">Explore collection</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>
     </div>
   </article>;
 }

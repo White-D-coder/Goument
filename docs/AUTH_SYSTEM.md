@@ -1,5 +1,9 @@
 # Authentication System
 
+## 2026-10-11 — Local auth availability recovery (R133)
+
+CURRENT / IMPLEMENTED locally: reported500s came from Next rewriting to the stopped loopback auth service, whose local Mongo dependency was also stopped. Restored the existing isolated Mongo/auth processes; Next-proxied guest count/catalogue/draft return200 and unauthenticated me returns401. Cookie/session/ownership logic and API payloads are unchanged. No login or production connectivity test; see ENVIRONMENT and TESTING.
+
 ## 2026-09-30 — Guest cart continuity through sign-in
 
 CURRENT / IMPLEMENTED: adding/loading/updating a gift cart is guest-capable and uses the existing b2c_gift cookie independently of b2c_session. Registration, password login, Google callback and logout preserve its items, quantities and box selections. Account now waits for pending cart work before email sign-in, Google navigation and checkout redirects; an unconfirmed write shows a review-cart error instead of navigating. Leaving Account while waiting cancels the delayed redirect, not the cart save. Duplicate sign-in clicks are locked. Cookie-owned /auth/* calls no longer access legacy localStorage/X-Session-Id.

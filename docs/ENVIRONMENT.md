@@ -1,3 +1,7 @@
+## 2026-10-11 — Restore stopped local auth dependencies (R133)
+
+CURRENT / IMPLEMENTED locally: the Next storefront was running while its existing Mongo and auth listeners were stopped, causing proxy500s. Restarted the existing replica set from `B2C/backend/data/local-mongo` with loopback27017 and `rs0`, then `npm --prefix B2C/backend run auth:start` on5003. Confirmed the existing configuration targets only the isolated local development database; no `.env` values changed. Count/catalogue/draft now return200 through Next; signed-out me returns401. This is a running local session, not an autostart or production fix. If stopped again, follow the Mongo/auth startup commands in the2026-10-10 entry below; the storefront alone does not start them. No new initialization/seed was needed.
+
 # Environment
 
 ## 2026-09-30 — Atlas runtime recovery check

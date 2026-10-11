@@ -39,12 +39,22 @@ export function addGiftItem(id: string): Promise<Draft> {
 }
 
 export function changeGiftItemQuantity(id: string, change: 1 | -1): Promise<Draft> {
+ return updateGiftItem(id, change);
+}
+
+// Buy now keeps the selected quantity, adding one only when it is absent.
+export function ensureGiftItem(id: string): Promise<Draft> {
+ return updateGiftItem(id, 'ensure');
+}
+
+function updateGiftItem(id: string, change: 1 | -1 | 'ensure'): Promise<Draft> {
  return queueGiftCartWrite(async () => {
-  if (change !== 1 && change !== -1) throw new Error('Invalid quantity change.');
+  if (change !== 1 && change !== -1 && change !== 'ensure') throw new Error('Invalid quantity change.');
   for (let attempt = 0; attempt < 2; attempt++) {
    const draft = await api<Draft>('/auth/gift/draft');
    const existing = draft.items.find(item => item.id === id);
-   const quantity = (existing?.quantity || 0) + change;
+   if (change === 'ensure' && existing?.quantity) return draft;
+   const quantity = (existing?.quantity || 0) + (change === 'ensure' ? 1 : change);
    if (quantity > 99) throw new Error('You already have 99 of this item in your cart.');
    if (quantity < 0) return draft;
    const items = existing

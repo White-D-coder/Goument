@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, ShoppingBag } from 'lucide-react';
 import { Product, money, productImage } from '@/lib/types';
+import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
 
 export default function ProductCard({
@@ -51,6 +52,7 @@ export default function ProductCard({
         <h3 className="gift-card-title">
           <Link href={href}>{product.name}</Link>
         </h3>
+        {compact && product.description.short && <p className="gift-card-description">{product.description.short}</p>}
 
         <div className="gift-card-bottom-row">
           {/* Price / Preview Status */}
@@ -61,9 +63,9 @@ export default function ProductCard({
               }`}
             >
               {product.preview
-                ? isHamper
+                ? temporaryHamperPriceLabel(product) || (isHamper
                   ? 'Price on enquiry'
-                  : 'Collection preview'
+                  : 'Collection preview')
                 : money(product.basePrice, product.currency)}
             </span>
           </div>

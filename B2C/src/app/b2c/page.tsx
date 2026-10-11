@@ -1,5 +1,5 @@
 import HomeFAQ from '@/components/home/HomeFAQ';
-import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, HomeMobileCategories, HomeMobileSearch, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
+import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, HomeMobileCategories, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { homeFAQs } from '@/lib/home-content';
 import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
@@ -15,9 +15,9 @@ const homeCollections = [
 ];
 
 const hamperCards = [
-  { product: CURATED_HAMPERS[0] },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[0].public_id },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[1].public_id },
+  { product: CURATED_HAMPERS[0], mobileDescription: 'A thoughtful gift in ivory.' },
+  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[0].public_id, mobileDescription: 'A little taste of India.' },
+  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[1].public_id, mobileDescription: 'A little taste of India.' },
 ];
 
 export default function Home() {
@@ -25,7 +25,6 @@ export default function Home() {
   return <div className="atelier-home tgg-home">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
 
-    <HomeMobileSearch />
     <HomeHero />
     <HomeMobileCategories />
 

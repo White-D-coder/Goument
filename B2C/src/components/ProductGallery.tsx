@@ -22,8 +22,8 @@ export default function ProductGallery({ images, name, contain = false }: {
       <div className="detail-image">
         <ProductPhoto id={imageId} src={current.src} alt={current.alt} sizes="(max-width: 900px) 100vw, 58vw" priority />
       </div>
-      {images.length > 1 && (
-        <div className="product-gallery-thumbnails" role="group" aria-label={`${name} photos`}>
+      {images.length > 0 && (
+        <div className={`product-gallery-thumbnails${images.length === 1 ? ' product-gallery-thumbnails--single' : ''}`} role="group" aria-label={`${name} photos`}>
           {images.map((image, index) => (
             <button
               key={image.src}

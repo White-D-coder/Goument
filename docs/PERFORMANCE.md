@@ -1,5 +1,9 @@
 # Performance
 
+## 2026-10-11 — B2C hero image assets (R117)
+
+CURRENT / IMPLEMENTED: the Home slideshow now references the existing 2129×739 / 2126×740 WebP derivatives (home-hero-1/2/3) inside the B2C app's public directory. This replaces a root-level PNG reference that would not be included in a B2C-rooted deployment and avoids shipping the larger original PNG versions. Shared ProductPhoto retries a public asset URL if Next image optimization fails. Typecheck, focused lint and production build pass; hosted delivery and real-device transfer/LCP remain UNKNOWN.
+
 ## 2026-10-07 — Home image/font/motion delivery (R58)
 
 CURRENT / IMPLEMENTED: Home is a static server-rendered composition with typed catalogue/editorial data. Its one open-hamper hero has reserved4:3 geometry and responsive Next Image preload; below-fold local photos remain lazy/responsive. No slideshow, sprinkle canvas, ornate frame bitmap, third-party motion library or continuous Home scroll loop is mounted. Optional IntersectionObserver-triggered mask decoration uses the Web Animations API once per element (900ms/5% desktop,600ms/3% phone), cancels on focus/reduced-motion changes and cleans up on navigation. Normal native scrolling remains.

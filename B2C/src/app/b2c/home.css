@@ -13,8 +13,7 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 .tgg-home svg { flex-shrink: 0; }
 .tgg-home a:focus-visible, .tgg-home button:focus-visible, .tgg-home summary:focus-visible { outline: 2px solid var(--tgg-burgundy); outline-offset: 4px; }
 .tgg-home section[id] { scroll-margin-top: 82px; }
-.tgg-mobile-search-wrap,.tgg-mobile-categories { display: none; }
-.tgg-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.tgg-mobile-categories { display: none; }
 .tgg-section { width: min(100%, var(--tgg-content)); margin-inline: auto; padding: 48px 34px; }
 .tgg-kicker { margin-bottom: 10px !important; color: var(--tgg-muted); font-family: var(--tgg-sans); font-size: 10px; font-weight: 500; line-height: 1.5; letter-spacing: .18em; text-transform: uppercase; }
 .tgg-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 38px; border-bottom: 1px solid var(--tgg-line); color: var(--tgg-burgundy); font-size: 12px; font-weight: 500; transition: border-color .2s ease; }
@@ -36,6 +35,7 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 .tgg-hero-copy h1,
 .tgg-hero-description { color: #fff; }
 .tgg-hero-copy h1 { max-width: 14ch; font-size: clamp(40px,4.5vw,62px); line-height: .99; letter-spacing: -.04em; }
+.tgg-hero-title-mobile { display: none; }
 .tgg-hero-description { max-width: 42ch; margin-top: 18px !important; font-size: 15px; line-height: 1.65; }
 .tgg-hero-copy > .tgg-button { min-width: 150px; margin-top: 22px; }
 .tgg-hero-visual { position: absolute; z-index: 0; inset: 0; width: 100%; min-width: 0; min-height: 0; overflow: hidden; background: #e9dce3; }
@@ -90,51 +90,10 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   }
 }
 
-/* Compact mobile discovery follows the phone reference: search, hero, then categories. */
+/* The phone collection strip stays hidden at the user's request. */
 @media (max-width: 700px) {
-  .tgg-mobile-search-wrap {
-    display: block;
-    padding: 10px 14px 12px;
-  }
-  .tgg-mobile-search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 48px;
-    padding: 0 8px 0 14px;
-    border: 1px solid #eee8df;
-    border-radius: 28px;
-    background: #fffdfa;
-    color: #8b8177;
-    box-shadow: 0 5px 18px #3923160a;
-  }
-  .tgg-mobile-search:focus-within { border-color: #c6a77c; }
-  .tgg-mobile-search input {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    color: var(--tgg-ink);
-    font: inherit;
-    font-size: 13px;
-  }
-  .tgg-mobile-search input::placeholder { color: #9b9288; opacity: 1; }
-  .tgg-mobile-search button {
-    display: grid;
-    width: 34px;
-    height: 34px;
-    place-items: center;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--tgg-ink);
-  }
   .tgg-mobile-categories {
-    display: flex;
+    display: none;
     gap: 9px;
     overflow-x: auto;
     padding: 12px 14px 4px;
@@ -322,6 +281,7 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   line-height: 1.5;
   text-align: center;
 }
+.tgg-hamper-description-mobile { display: none; }
 
 
 /* ============================================================
@@ -1359,16 +1319,23 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-section-heading h2 { font-size: 27px; }
   .tgg-section-heading > .tgg-link { position: static; gap: 6px; margin-top: 3px; font-size: 10px; }
   .tgg-section-subtitle { margin: 6px 0 16px !important; font-size: 11px; }
-  .tgg-hero { width: calc(100% - 28px); margin-top: 0; border-radius: 16px; }
-  .tgg-hero-copy { padding: 24px 20px 22px; }
-  .tgg-hero-copy h1 { max-width: none; font-size: clamp(39px,10.5vw,50px); }
-  .tgg-hero-description { max-width: 38ch; margin-top: 10px !important; font-size: 13px; }
-  .tgg-hero-copy > .tgg-button { min-height: 42px; margin-top: 14px; }
-  .tgg-hero-visual { order: 0; width: 100%; min-height: 0; aspect-ratio: 2129 / 739; }
-  .tgg-hero-visual img { object-fit: contain; object-position: center; }
-  .tgg-hero-promises { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; margin-top: 18px; }
-  .tgg-hero-promises li { align-items: center; text-align: center; font-size: 9px; }
-  .tgg-hero-promises li > span { width: 30px; height: 30px; }
+  /* One compact photo-backed frame; content can grow with larger accessibility text. */
+  .tgg-hero { display: block; isolation: isolate; width: calc(100% - 28px); min-height: 260px; margin-top: 0; border-radius: 16px; }
+  .tgg-hero-copy { z-index: 3; align-items: center; min-height: 260px; padding: 24px 24px 44px; background: transparent; text-align: center; }
+  .tgg-hero-copy .tgg-kicker,
+  .tgg-hero-description,
+  .tgg-hero-promises { display: none; }
+  #main .tgg-home .tgg-hero-copy h1 { max-width: none; font-family: var(--tgg-sans) !important; font-size: clamp(27px,7vw,32px); font-weight: 600; line-height: 1.16; letter-spacing: -.025em; text-shadow: 0 1px 2px #0008; }
+  .tgg-hero-title-desktop { display: none; }
+  .tgg-hero-title-mobile { display: block; }
+  .tgg-hero-title-mobile > span { display: block; margin-top: 4px; color: inherit; font-weight: 500; }
+  .tgg-hero-copy > .tgg-button { min-width: 160px; min-height: 44px; gap: 26px; margin-top: 20px; padding: 11px 18px; border: 1px solid #fffdf8; border-radius: 8px; background: #fffdf8; color: var(--tgg-burgundy) !important; font-size: 12px; font-weight: 600; letter-spacing: .01em; }
+  .tgg-hero-copy > .tgg-button:hover { border-color: #eee7db; background: #eee7db; }
+  .tgg-hero-copy > .tgg-button:focus-visible { outline-color: #fffdf8; }
+  .tgg-hero-visual { position: absolute; z-index: auto; inset: 0; width: 100%; min-height: 0; aspect-ratio: auto; }
+  .tgg-hero-visual::after { background: none; }
+  .tgg-hero-visual img { object-fit: cover; object-position: 65% center; }
+  .tgg-hero-dots { z-index: 4; bottom: 8px; }
   .tgg-hamper-showcase { padding-top: 28px; padding-bottom: 26px; }
   .tgg-hamper-grid { display: flex; gap: 12px; margin-right: -18px; padding-right: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .tgg-hamper-grid::-webkit-scrollbar { display: none; }
@@ -1376,7 +1343,10 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-hamper-photo { aspect-ratio: 1.35; }
   .tgg-hamper-info { padding: 10px 11px; }
   .tgg-hamper-info h3 { font-size: 19px; }
-  .tgg-hamper-info > p, .tgg-hamper-bottom { display: none; }
+  .tgg-hamper-info > p { display: block; margin: 5px 0 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .tgg-hamper-description-desktop { display: none; }
+  .tgg-hamper-description-mobile { display: inline; }
+  .tgg-hamper-bottom { display: none; }
   .tgg-favourites { padding-top: 22px; padding-bottom: 30px; }
   .tgg-favourite-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
   .tgg-favourite-photo { aspect-ratio: 1.05; }
@@ -1404,7 +1374,7 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 }
 @media (max-width: 360px) {
   .tgg-section { padding-inline: 14px; }
-  .tgg-hero-copy { padding-inline: 16px; }
+  .tgg-hero-copy { padding-inline: 22px; }
   .tgg-hamper-card { flex-basis: 88%; }
   .tgg-favourite-grid { gap: 8px; }
 }
@@ -2088,6 +2058,8 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 }
 
 /* ACCESSIBILITY */
+.tgg-collection-action-mobile { display:none; }
+
 @media (prefers-reduced-motion: reduce) {
   .tgg-collection-grid .tgg-favourite-card,
   .tgg-collection-grid .tgg-favourite-photo img,
@@ -2099,4 +2071,38 @@ html:has(.tgg-home)::-webkit-scrollbar { display: none; }
   .tgg-collection-grid .tgg-collection-link:hover {
     transform: none;
   }
+}
+
+/* Match phone collection discovery cards to the compact Shop presentation. */
+@media (max-width:640px) {
+ .tgg-home .tgg-collection-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 14px; }
+ .tgg-home .tgg-collection-card { display:flex; flex-direction:column; border:1px solid #e9e2d8; border-radius:16px; background:#fff; }
+ .tgg-home .tgg-collection-card:hover { transform:none; box-shadow:none; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo { flex-shrink:0; aspect-ratio:1.25; margin:0; border-radius:15px 15px 0 0; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo::before { display:none; }
+ .tgg-home .tgg-collection-card .tgg-favourite-photo img { transform:none; }
+ .tgg-home .tgg-collection-card .tgg-favourite-info { display:flex; flex:1; flex-direction:column; align-items:stretch; gap:0; padding:14px 12px 12px; text-align:center; }
+ .tgg-home .tgg-collection-card h3 { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; min-height:2.8em; margin:0 0 7px; font-size:clamp(13px,3.7vw,16px); font-weight:600; line-height:1.4; text-align:center; text-wrap:pretty; }
+ #main .tgg-home .tgg-collection-card .tgg-collection-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; min-height:3.3em; margin:0 0 14px; color:#81776b; font-size:12px; line-height:1.65; text-align:center; }
+ .tgg-home .tgg-collection-card .tgg-collection-link { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; height:auto; min-height:44px; margin-top:auto; padding:10px 6px; border:1px solid #4a0404; border-radius:9px; background:#4a0404; color:#fffdf8; font-size:10px; font-weight:700; line-height:1.2; letter-spacing:.04em; text-transform:uppercase; }
+ .tgg-home .tgg-collection-card .tgg-collection-link:hover { transform:none; border-color:#650c0c; background:#650c0c; }
+ .tgg-home .tgg-collection-link svg { width:13px; height:13px; flex-shrink:0; }
+ .tgg-home .tgg-collection-action-desktop { display:none; }
+ .tgg-home .tgg-collection-action-mobile { display:inline; }
+
+ /* Give each gifting value its own balanced, readable tile. */
+ .tgg-home .tgg-philosophy { padding-top:26px; padding-bottom:28px; }
+ .tgg-home .tgg-philosophy > .tgg-kicker { margin-bottom:9px !important; font-size:9px; letter-spacing:.18em; }
+ .tgg-home .tgg-philosophy-title { margin-bottom:18px; }
+ .tgg-home .tgg-philosophy-title h2 { font-size:clamp(22px,6vw,27px); line-height:1.2; }
+ .tgg-home .tgg-philosophy-title__art { display:none; }
+ .tgg-home .tgg-approach { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:0; border-radius:0; background:transparent; }
+ .tgg-home .tgg-approach > div { justify-content:center; gap:10px; min-height:116px; padding:16px 10px; border:1px solid #e9e2d8; border-radius:14px; background:#f3eee6; }
+ .tgg-home .tgg-approach svg { width:26px; height:26px; margin:0; }
+ .tgg-home .tgg-approach h3 { display:grid; place-items:center; max-width:16ch; min-height:3em; font-size:12px; font-weight:500; line-height:1.5; }
+
+ .tgg-home .tgg-packaging-copy { align-items:center; text-align:center; }
+ .tgg-home .tgg-packaging-copy h2,
+ .tgg-home .tgg-packaging-copy > p { text-align:center; }
+ .tgg-home .tgg-packaging-copy .tgg-button { align-self:center; }
 }

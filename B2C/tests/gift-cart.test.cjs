@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Node's CommonJS test harness loads transpiled TypeScript in an isolated VM. */
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -13,8 +14,54 @@ function load(api) {
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
  vm.runInNewContext(compiled, { exports, require: name => { assert.equal(name, './api'); return { api, ApiError }; }, window: { dispatchEvent: e => events.push(e.type) }, Event });
- return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
 }
+
+test('buy now saves an absent item once, preserving packaging and other selections', async () => {
+ let state = { ...empty(), revision: 3, boxes: [{ id: 'box', quantity: 2 }], items: [{ id: 'other', quantity: 4 }] }, writes = 0;
+ const { ensure, events } = load(async (_url, method, body) => {
+  if (!method) return plain(state);
+  writes++; assert.equal(body.revision, state.revision);
+  state = { ...plain(body), revision: state.revision + 1 }; return plain(state);
+ });
+ await Promise.all([ensure('ivory_hamper'), ensure('ivory_hamper')]);
+ assert.equal(writes, 1);
+ assert.deepEqual(state.items, [{ id: 'other', quantity: 4 }, { id: 'ivory_hamper', quantity: 1 }]);
+ assert.deepEqual(state.boxes, [{ id: 'box', quantity: 2 }]);
+ assert.deepEqual(events, ['b2c-cart-change']);
+});
+
+test('buy now keeps the latest quantity without an unnecessary write, including at the limit', async () => {
+ const state = { ...empty(), items: [{ id: 'ivory_hamper', quantity: 99 }] };
+ const { ensure, events } = load(async (_url, method) => {
+  assert.equal(method, undefined); return plain(state);
+ });
+ assert.deepEqual(plain(await ensure('ivory_hamper')), state);
+ assert.deepEqual(events, []);
+});
+
+test('buy now revision retry keeps a quantity added by another tab instead of adding again', async () => {
+ let state = empty(), writes = 0;
+ const { ensure, events } = load(async (_url, method) => {
+  if (!method) return plain(state);
+  writes++;
+  state = { ...empty(), revision: 1, items: [{ id: 'ivory_hamper', quantity: 3 }] };
+  throw new ApiError('Changed in another tab', 409);
+ });
+ const result = await ensure('ivory_hamper');
+ assert.equal(result.items[0].quantity, 3); assert.equal(writes, 1);
+ assert.deepEqual(events, []);
+});
+
+test('buy now rejects an unconfirmed save and never retries or announces success', async () => {
+ let writes = 0;
+ const { ensure, events } = load(async (_url, method) => {
+  if (!method) return empty();
+  writes++; throw new Error('Response lost');
+ });
+ await assert.rejects(ensure('ivory_hamper'), /Check your cart/);
+ assert.equal(writes, 1); assert.deepEqual(events, []);
+});
 
 test('confirmed add preserves boxes and unrelated selections and increments the same item', async () => {
  let state = { ...empty(), revision: 4, boxes: [{ id: 'box_maroon_bloom', quantity: 2 }], items: [{ id: 'gourmet_makhana', quantity: 3 }, { id: 'other', quantity: 2 }] };
@@ -94,8 +141,17 @@ test('server error is visible and does not poison subsequent additions', async (
 });
 
 test('preview product mapping matches the server gift catalogue exactly', () => {
- const preview = fs.readFileSync(path.join(__dirname, '../src/lib/catalogue-preview.ts'), 'utf8');
- const ids = [...preview.matchAll(/_id:\s*['"]([^'"]+)['"]/g)].map(match => match[1]);
+ function catalogueData(file, key) {
+  const source = fs.readFileSync(path.join(__dirname, `../src/lib/${file}.ts`), 'utf8');
+  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+  const exports = {};
+  vm.runInNewContext(compiled, { exports });
+  return Array.from(exports[key]);
+ }
+ const ids = [
+  ...catalogueData('catalogue-preview', 'HAMPERS_CATALOG').map(item => item._id),
+  ...catalogueData('curated-hampers', 'CURATED_HAMPERS').map(item => item.giftItemId)
+ ];
  const items = JSON.parse(fs.readFileSync(path.join(__dirname, '../backend/gifting/items.json'), 'utf8'));
  assert.equal(new Set(ids).size, ids.length);
  assert.deepEqual(ids.sort(), items.map(item => item.id).sort());

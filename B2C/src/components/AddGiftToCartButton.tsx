@@ -1,17 +1,20 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
-import { addGiftItem, changeGiftItemQuantity, queueGiftCartWrite } from '@/lib/gift-cart';
+import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, queueGiftCartWrite } from '@/lib/gift-cart';
 import { api } from '@/lib/api';
 import type { Draft } from '@/hooks/useGiftDraft';
 import QuantityControl from './QuantityControl';
 
-export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false, showCheckout = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean }) {
- const [status, setStatus] = useState<'idle'|'adding'|'added'|'error'>('idle');
+export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false, showCheckout = false, phoneBuyNow = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean; phoneBuyNow?: boolean }) {
+ const router = useRouter();
+ const [status, setStatus] = useState<'idle'|'adding'|'buying'|'added'|'error'>('idle');
  const [message, setMessage] = useState('');
  const locked = useRef(false);
  const [quantity, setQuantity] = useState(0);
+ const busy = status === 'adding' || status === 'buying';
  useEffect(() => {
   if (!withQuantity) return;
   let active = true;
@@ -47,14 +50,29 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
    setStatus('error'); setMessage(error instanceof Error ? error.message : 'Unable to update your cart. Please try again.');
   } finally { locked.current = false; }
  }
+ async function buyNow() {
+  if (locked.current) return;
+  locked.current = true;
+  setStatus('buying'); setMessage('');
+  try {
+   const draft = await ensureGiftItem(itemId);
+   setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
+   // The existing cart reviews enquiry pricing before allowing checkout.
+   router.push('/cart');
+   setStatus('idle');
+  } catch (error) {
+   setStatus('error'); setMessage(error instanceof Error ? error.message : 'Unable to open your cart. Please try again.');
+  } finally { locked.current = false; }
+ }
  if (withQuantity) return <div className={`gift-purchase${compact ? ' gift-purchase--compact' : ''}`}>
   <div className="gift-purchase-controls">
-   {(!compact || quantity === 0) && <button type="button" className={className} disabled={status === 'adding' || quantity >= 99} aria-busy={status === 'adding'} aria-label={`Add ${name} to cart`} onClick={() => void add()}>
+   {(!compact || quantity === 0) && <button type="button" className={className} disabled={busy || quantity >= 99} aria-busy={busy} aria-label={`Add ${name} to cart`} onClick={() => void add()}>
     <span>{status === 'adding' ? quantity ? 'Updating…' : 'Adding…' : 'Add to Cart'}</span>
     <ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/>
    </button>}
-  {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={status === 'adding'} onChange={next => void add(next > quantity ? 1 : -1)}/>}
+  {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={busy} onChange={next => void add(next > quantity ? 1 : -1)}/>}
   </div>
+  {phoneBuyNow && <button type="button" className="button gift-purchase-buy-now" disabled={busy} aria-busy={status === 'buying'} onClick={() => void buyNow()}>{status === 'buying' ? 'Opening…' : 'Buy now'} <ArrowRight size={16} aria-hidden="true" /></button>}
   {showCheckout && quantity > 0 && <Link className="button gift-purchase-checkout" href="/cart">Proceed to checkout <ArrowRight size={16} aria-hidden="true" /></Link>}
   {status === 'error' && <p className="cart-add-error" role="alert">{message}</p>}
  </div>;

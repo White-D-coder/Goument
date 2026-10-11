@@ -22,7 +22,9 @@ Priorities below are initial engineering triage from source findings, not an app
 
 ## P2
 
-- [ ] Product detail commercial completion (2026-10-07): confirm Ivory/India prices, saleable product/variant mappings, final contents/pack quantities, dimensions, tax/shipping/lead-time/return terms and whether notes/branding are included or charged. Current PDP truthfully uses preview enquiries and photographed contents. Hamper Add to Cart saves an enquiry-only draft selection; checkout/address/order routes reject it until pricing is confirmed. Gift-note requests compose email; no message field exists in GiftDraft and no note-to-order workflow is implemented. Confirmed commercial data and verified checkout must precede sale activation.
+- [ ] Home desktop slideshow dots (observed2026-10-11): at1440px the existing copy panel overlaps the centered dots, so pointer hit tests fail. Phone layering is corrected within R120; review desktop stacking separately without redesigning its hero.
+
+- [ ] Product detail commercial completion (2026-10-07): confirm Ivory/India prices, saleable product/variant mappings, final contents/pack quantities, dimensions, tax/shipping/lead-time/return terms and whether notes/branding are included or charged. Current PDP uses temporary Sample display prices (R142), final-price enquiries and photographed contents; these display constants do not establish authoritative sale prices. Hamper Add to Cart saves an enquiry-only draft selection; checkout/address/order routes reject it until pricing is confirmed. Gift-note requests compose email; no message field exists in GiftDraft and no note-to-order workflow is implemented. Confirmed commercial data and verified checkout must precede sale activation.
 - [ ] Catalogue photography mismatch observed during PDP work (2026-10-07): `diary-bottle-pen-set` source describes a diary/bottle/pen trio, but its existing `sustainable_diary_bottle_pen.webp` photograph shows a desk organiser. Confirm the intended product and obtain matching photography; this UI task does not rewrite its existing identity/price/contents or pretend that photograph depicts individual included items.
 
 - [ ] No-JavaScript storefront rendering (observed2026-10-07): disabling page scripts during a product navigation leaves the inherited Next loading shell visible while product markup is streamed into a hidden boundary. Full no-JS rendering is not verified; investigate inherited loading/streaming behavior within an explicit progressive-enhancement task. Current normal/reduced-motion JavaScript flows pass.
@@ -36,6 +38,8 @@ Priorities below are initial engineering triage from source findings, not an app
 - [ ] Measure image/bundle/query performance; then address demonstrated bottlenecks.
 - [ ] Resolve template README font claims and catalogue local-data/backend divergence.
 - [ ] B2C collection data/search integrity (source inspection2026-10-07): populate actual hamper products; local HAMPERS_CATALOG currently contains only individual gifts. Existing product.service Atlas totals count all active products instead of search matches, and an unknown category silently removes the filter. Establish explicit category membership and correct search counts before relying on category IDs or pagination totals. New Shop collection pages reuse existing search/fallback; this UI change does not fix these backend issues.
+
+- [ ] B2C catalogue fallback integrity (observed2026-10-11): `catalogue.ts` synthesizes a `(match.price || 499) * 100` amount and inventory50 when API fields are absent; its offline branch also supplies inventory50. Treat these as source defects requiring authoritative pricing/availability or explicit unavailable states before commerce activation. R127 changes presentation only and does not verify these amounts or stock.
 
 ## P3
 

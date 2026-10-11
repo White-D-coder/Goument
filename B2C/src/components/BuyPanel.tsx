@@ -6,6 +6,7 @@ import { Minus, Plus } from 'lucide-react';
 import { cartMutation } from '@/lib/api';
 import { Product, money } from '@/lib/types';
 import { giftingEnquiry } from '@/lib/product-editorial';
+import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
 
 export default function BuyPanel({ product }: { product: Product }) {
@@ -30,20 +31,21 @@ export default function BuyPanel({ product }: { product: Product }) {
   }
 
   if (product.preview) return <div className="buy-panel pdp-preview">
-    <p className="pdp-quote">Price on enquiry</p>
+    <p className="pdp-quote">{temporaryHamperPriceLabel(product) || 'Price on enquiry'}</p>
     <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>
     {product.giftItemId
-      ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout />
+      ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow={product.slug === 'ivory-hamper'} />
       : <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>}
+    {product.slug === 'ivory-hamper' && <p className="pdp-buy-now-help">Price confirmed before checkout.</p>}
   </div>;
 
   if (product.giftItemId) return <div className="buy-panel">
-    <p className="price">{money(product.basePrice, product.currency)}</p>
-    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout />
+    <p className="price"><span className="pdp-price-label">Price</span>{money(product.basePrice, product.currency)}</p>
+    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow={product.slug === 'ivory-hamper'} />
   </div>;
 
-  return <div className="buy-panel">
-    <p className="price">{money(variant?.price ?? product.basePrice, product.currency)}</p>
+  return <div className="buy-panel pdp-catalog-purchase">
+    <p className="price"><span className="pdp-price-label">Price</span>{money(variant?.price ?? product.basePrice, product.currency)}</p>
     {product.variants.length > 0 && <fieldset className="pdp-options" disabled={busy}>
       <legend>Choose an option</legend>
       <div>{product.variants.map(option => <label key={option.sku}>

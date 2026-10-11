@@ -1,3 +1,33 @@
+## 2026-10-12 — Keep temporary prices separate from commercial money (R142)
+
+CURRENT / IMPLEMENTED: user asks for some prices for now; choose Ivory ₹2,499 / India ₹2,999 as sample amounts, not approved commercial quotes. Supersede prior enquiry-only storefront labels for these previews with a separate display helper and Sample suffix. Non-preview products retain their actual pricing. Preserve basePrice0, inventory0, preview=true, variants and gift/payment contracts. Reason: deliver requested preview prices while leaving final commercial rules outstanding. Affected: storefront price presentation; evidence: TESTING.
+
+## 2026-10-11 — Conventional phone controls without activating unpriced checkout (R138)
+
+CURRENT / IMPLEMENTED. User requests normal product title/description, Add to Cart opening a counter, and Buy now in place of the Ivory summary/Personalise card. Supersede R137 centered summary/floating-bar/note presentation on this phone route. Reuse the existing compact cart counter and opt into one Buy now control within the same component instance, preserving larger-screen behavior.
+
+Conflict: a Buy now payment shortcut would imply saleability, while `curated-hampers.ts` identifies Ivory as an unpriced preview and the existing cart/server explicitly block hamper checkout. Resolve by ensuring the draft selection and opening the existing `/cart` review, with visible price-confirmation copy; do not bypass eligibility or fabricate prices. Preserve an already-selected quantity instead of incrementing on Buy now, and preserve unrelated selections. Reason: reviewable conventional controls within the current authorized UI scope; commercial completion remains required separately. Sources: `AddGiftToCartButton`, `gift-cart`, `GiftCart`, API_CONTRACTS. Validation: TESTING.
+
+## 2026-10-11 — Scope Ivory phone redesign to the requested product (R137; summary/note/floating controls SUPERSEDED by R138)
+
+CURRENT / IMPLEMENTED: use a slug-derived `.pdp-ivory` class and the existing product short description for the phone redesign. Reason: user named the Ivory Hamper page, while shared gallery/cart/note components serve other products and must retain their behavior. Keep all styling through640px; use existing cart handlers and enquiry status without new saleability/price assumptions. Affected: B2C product page/CSS and UI requirements. Evidence: TESTING; larger Ivory and India phone comparisons pass.
+
+## 2026-10-11 — Apply the reference to Shop phone presentation (R127)
+
+CURRENT / IMPLEMENTED. Reason: user requests the supplied category-thumbnail/product-card layout on phone Shop. Reuse real collection labels/images and current destinations; do not create the sample's food/beverage/decor taxonomy or replace cart behavior with an unestablished universal enquiry flow. Extend the existing compact ProductCard with source descriptions, hidden on larger screens, and share category-link markup across Shop/collection pages. Scope styling through640px with explicit selectors against inherited card rules. Preserve prices, preview state, product identities and cart handlers. Supersedes earlier phone Shop text-only categories and minimal cards; other storefront/B2B designs are unchanged.
+
+## 2026-10-11 — Compact sans copy and ivory phone action (R125)
+
+CURRENT / IMPLEMENTED. Reason: user rejected the current hero text and Shop now button. Replace the R122 phone serif/copy treatment with a short, moderately sized Jakarta headline and an ivory rectangular action using the existing palette. Preserve prior instructions to center phone content and remove the coloured image overlay. A small neutral text shadow separates glyphs from photos without adding a backdrop. Scope: phone hero only; retain larger-screen presentation and existing `/shop` action. No new font or asset dependency.
+
+## 2026-10-11 — Short serif headline on the phone hero (R122; phone copy/type/button SUPERSEDED by R125)
+
+CURRENT / IMPLEMENTED. Reason: user rejected the minimal hero's text styling. Use short responsive copy and the already bundled Cormorant family for this hero only, superseding R94's sans-family choice here and R121's retained phone headline. Keep shared phone headings and larger-screen Home headline unchanged. Use CSS visibility for responsive spans, avoiding viewport JavaScript and duplicate visible/accessibility titles. Affected systems: B2C Home presentation only.
+
+## 2026-10-11 — Put the photo behind the complete phone hero (R120)
+
+CURRENT / IMPLEMENTED. Reason: user explicitly requests removing the phone search, filling the frame background with the image and reducing its height. Supersede R105/R118's phone stacking/full-photo framing only: use cover cropping and a transparent copy panel within one compact frame. Keep content-driven growth above340px rather than a fixed height to avoid clipping enlarged text. Raise phone dots above copy within an isolated stacking context. Remove the now-unused Home search component/styles; do not change Shop search, carousel state or larger hero layouts. Affected systems: B2C Home UI only.
+
 ## 2026-10-09 — Remove Home navbar/hero separator (R112)
 
 CURRENT / IMPLEMENTED source: remove `.tgg-home` top padding because it created an unwanted visible band between the navbar and hero. Keep the header in normal flow, transparent on initial load and ivory on scroll. This supersedes R111's 40px/24px spacing.

@@ -1,3 +1,97 @@
+## 2026-10-12 — Temporary hamper prices (R142)
+
+CURRENT / IMPLEMENTED: Ivory ₹2,499 and India ₹2,999 Sample labels appear in PDP, related cards and Shop. Authoritative data stays unpriced/preview and existing checkout restrictions remain. TypeScript/scoped lint,23 catalogue/cart tests, helper/data assertions and responsive Chrome checks pass; screenshot inspected. Commercial completion remains on TODO; priorities unchanged.
+
+## 2026-10-11 — Hide Ivory phone details (R141)
+
+CURRENT / IMPLEMENTED: remove the complete “The finer details” section from Ivory phone presentation. CSS parse/scoped-rule and diff checks pass. Existing TODO priorities unchanged.
+
+## 2026-10-11 — Phone related-photo fit (R140)
+
+CURRENT / IMPLEMENTED: Ivory phone related photos fill their equal frames with centered cover; main photos and larger related photos retain their fit. Five-width Chrome, CSS parse and diff checks pass;390px screenshot inspected. TODO priorities unchanged.
+
+## 2026-10-11 — Equal related-card sizing (R139)
+
+CURRENT / IMPLEMENTED: Ivory phone related cards now use equal photo/title areas and bottom-aligned actions. CSS parse, diff check and Chrome320/390/640px dimension/alignment assertions pass;768/1440px remain overflow-free.390px screenshot inspected. Existing TODO priorities unchanged.
+
+## 2026-10-11 — Ivory phone ecommerce purchase layout (R138)
+
+CURRENT / IMPLEMENTED: Ivory phone summary now has a normal left-aligned title/short description, enquiry price and in-flow Add to Cart/Buy now row. Confirmed add becomes a quantity counter; Buy now retains any selected quantity, ensures a saved draft and opens cart review. Primary phone note panel and floating bar are removed. Price confirmation/checkout restrictions remain. Typecheck, scoped lint,23 cart/API tests, CSS parse and five-width browser checks pass, including mocked failure/quantity/navigation and desktop/India comparisons. Screenshots inspected. Commercial completion remains on the existing TODO; priorities unchanged.
+
+## 2026-10-11 — Ivory Hamper phone redesign (R137; summary/note/floating controls SUPERSEDED by R138)
+
+CURRENT / IMPLEMENTED: Ivory Hamper now has a phone return link, centered summary card, compact note/accordion panels, rounded related cards and an inset floating burgundy cart bar. Preserve source imagery, enquiry pricing and cart/note semantics. Typecheck, scoped lint, CSS parse and five-width Chrome checks pass; note keyboard access, details, scroll states, mocked cart add/remove/503 feedback and footer clearance pass. Screenshots inspected; larger Ivory/India phone comparisons retain prior layout. TODO priorities unchanged.
+
+## 2026-10-11 — Phone Home/PDP refinements and local API recovery (R132–R136)
+
+CURRENT / IMPLEMENTED: Home collection cards match the compact centered Shop phone cards with burgundy actions; philosophy uses balanced2×2 tiles; packaging copy/Shop gifts are centered. PDP phone galleries show rounded real-photo thumbnails and retain selection, including one preview when only one image exists. Correct the6px phone related-carousel overflow found during checks. Typecheck, scoped lint (two existing artwork warnings), CSS parse and browser checks pass; screenshots inspected.
+
+CURRENT / IMPLEMENTED locally: the reported auth500s were caused by stopped local Mongo/auth listeners. Restarted the existing isolated replica-set database and auth service. Through Next, gift count/catalogue/draft return200 and signed-out me returns expected401. No environment values, contracts or customer records changed; local services remain running. Startup commands are in ENVIRONMENT; no autostart or deployment implied. TODO priorities unchanged.
+
+## 2026-10-11 — Hide phone Shop header search (R131)
+
+CURRENT / IMPLEMENTED source: phone Shop/collections hide the header search entry as well as the existing inline field. CSS parse and diff checks pass; no new browser review. TODO priorities unchanged.
+
+## 2026-10-11 — Sticky bottom phone filter (R130)
+
+CURRENT / IMPLEMENTED: phone Shop/collections have a fixed bottom Filter action opening category links and available sorting in a modal sheet. Reserve safe-area/footer space; preserve query/route/preview behavior and larger layouts. Typecheck, scoped lint, CSS parse and five-width Chrome checks pass; keyboard dismissal/focus return, category navigation, query-preserving sort, resize closure and preview collection checks pass. Screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-11 — Colour phone Shop buttons (R129)
+
+CURRENT / IMPLEMENTED source: phone Shop/collection buttons now have burgundy fill and ivory text. CSS parse and diff checks pass; no new browser review. TODO priorities unchanged.
+
+## 2026-10-11 — Hide Shop phone search and center card text (R128)
+
+CURRENT / IMPLEMENTED: hide Shop search through640px and center card titles, descriptions and prices across Shop/collections. CSS parse and five-width Chrome checks pass; filtered form retains its search query and phone screenshot inspected. Larger-screen search/alignment and TODO priorities unchanged.
+
+## 2026-10-11 — Reference-style Shop phone catalogue (R127)
+
+CURRENT / IMPLEMENTED: Shop and dedicated collections use a photo category rail with selected check badge, two-column phone cards, two-line descriptions and full-width outlined actions. Keep existing category destinations, product prices, preview labels and cart handlers. Compact the phone introduction and retain search/sort; larger layouts keep their current presentation. Typecheck, scoped lint, CSS parsing, final production build and responsive/navigation checks pass. Mocked cart success/error checks pass without real writes; phone/desktop screenshots inspected. Existing catalogue fallback debt recorded in TODO; priorities unchanged.
+
+## 2026-10-11 — One-line phone hamper descriptions (R126)
+
+CURRENT / IMPLEMENTED: show a concise centered description below each Home hamper title on phones. All three descriptions fit one line at320/390/640px; desktop descriptions retain their existing copy. Typecheck, scoped lint, CSS parse and five-width browser checks pass; phone screenshot inspected. TODO priorities unchanged.
+
+## 2026-10-11 — Redesign phone hero text and button (R125)
+
+CURRENT / IMPLEMENTED: use compact “Good gifts. / Great moments.” sans-serif copy and an ivory Shop now button with burgundy text and8px corners on phones. Keep centered alignment,260px frame and unfiltered photos. Typecheck, scoped lint, CSS parse and five-width Chrome checks pass; all three phone slide screenshots inspected. Larger hero presentation and TODO priorities unchanged.
+
+## 2026-10-11 — Remove phone hero colour overlay (R124)
+
+CURRENT / IMPLEMENTED source: remove the warm red/brown gradient behind the phone hero text. Keep centered text, photo slideshow and Shop now. CSS parse and five-width overlay checks pass; no new browser review. TODO priorities unchanged.
+
+## 2026-10-11 — Center phone hero copy (R123)
+
+CURRENT / IMPLEMENTED source: center the phone hero heading and Shop now. CSS parse and five-width alignment-rule checks pass; no new browser review. TODO priorities unchanged.
+
+## 2026-10-11 — Refine phone hero headline (R122)
+
+CURRENT / IMPLEMENTED: replace the phone headline with “Thoughtful gifts. / Made special.” using the bundled Cormorant serif, a warm second line, wider insets and compact Shop now button. Keep the260px photo frame and minimal R121 content. Typecheck, scoped lint, CSS parse and five-width browser checks pass;390px screenshot inspected. Larger headline remains unchanged; TODO priorities unchanged.
+
+## 2026-10-11 — Simplify phone hero text (R121)
+
+CURRENT / IMPLEMENTED: on phones through640px, keep only the existing hero headline and Shop now button over the slideshow. Hide the kicker, description and benefit row; reduce the minimum frame height to260px with content growth allowed. CSS parsing and five-width browser checks pass; phone screenshot inspected. Desktop/tablet copy remains visible. TODO priorities unchanged.
+
+## 2026-10-11 — Remove phone search and overlay hero photo (R120)
+
+CURRENT / IMPLEMENTED: remove the Home-only phone search bar and place the existing slideshow behind the complete phone hero frame. Use a transparent copy panel, dark contrast fade and compact content-driven height (340–360px in checked phone widths). Browser checks at320/390/640/768/1440px confirm no page overflow; phone photo coverage, CTA/dot hit targets and manual slide selection pass. Phone screenshot inspected. Tablet/desktop hero rules retained. Existing desktop dot overlap recorded in TODO; no priority change.
+
+## 2026-10-11 — Hide Home phone collection strip (R119)
+
+CURRENT / IMPLEMENTED source: hide the small collection-photo strip beneath the Home hero on phones. Desktop visibility remains unchanged; search and main hamper/collection sections remain available. CSS parse and seven-width display-rule checks pass; browser visual acceptance UNKNOWN. TODO priorities unchanged.
+
+## 2026-10-11 — Compact Home hero on phones (R118)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: reduce the mobile Home hero's oversized headline to a balanced two-line scale, shorten supporting copy typography, and tighten padding, CTA and four promise icons. Keep the image-first slide, destinations, copy and all desktop rules. CSS parse, B2C checks and diff checks recorded in TESTING.
+
+## 2026-10-11 — Fix hosted B2C image paths and optimizer fallback (R117)
+
+CURRENT / IMPLEMENTED source: the first Home hero image referenced a root-level file outside `B2C/public`, so the B2C deployment could not serve it. All three slides now use the tracked, optimized WebP hero assets under `B2C/public/images/brand`. Shared `ProductPhoto` retries the original local asset if Next image optimization errors. Typecheck, focused lint and production build pass. Live hosted requests remain UNKNOWN; this environment cannot resolve the configured Vercel hostname or bind a local test server.
+
+## 2026-10-11 — Refine product detail presentation (R116)
+
+CURRENT / IMPLEMENTED source: polish shared product pages in the existing ivory/burgundy/gold theme. Desktop uses a framed gallery and purchase card; phones use a contained square gallery, shorter text and an accessible fixed cart/enquiry area with safe-area padding. Gift quantity/checkout behavior is preserved, while catalogue variant controls remain in page flow. B2C typecheck, focused lint, stylesheet parse, production build and diff checks pass. Visual browser acceptance UNKNOWN because localhost:3000 is unavailable.
+
 ## 2026-10-10 — Trim product-detail copy on phones (R115)
 
 CURRENT / IMPLEMENTED source: hide mobile breadcrumbs and repeated delivery/bulk/help copy, clamp product descriptions to two lines, and remove the phone-only image/story panel with no visible copy. Keep product title, short description, primary price/cart bar, gift-note personalize control and collapsed product detail disclosures. Typecheck, scoped ESLint, CSS parse and `git diff --check` pass; visual browser review remains UNKNOWN because localhost:3000 is unavailable.

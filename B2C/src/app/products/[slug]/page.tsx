@@ -6,6 +6,7 @@ import ProductGallery from '@/components/ProductGallery';
 import ProductPhoto from '@/components/ProductPhoto';
 import GiftNoteRequest from '@/components/GiftNoteRequest';
 import { productBySlug } from '@/lib/catalogue';
+import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
 import { giftingEnquiry, productEditorial } from '@/lib/product-editorial';
 import { money, productImage } from '@/lib/types';
 import './product-detail.css';
@@ -28,7 +29,7 @@ async function RelatedGifts({ slug }: { slug: string }) {
         <ProductPhoto src={productImage(product)} alt={product.name} sizes="(max-width: 600px) 90vw, 30vw"/>
       </Link>
       <h3><Link href={`/products/${product.slug}`}>{product.name}</Link></h3>
-      <p>{product.preview ? 'Price on enquiry' : money(product.basePrice, product.currency)}</p>
+      <p>{product.preview ? temporaryHamperPriceLabel(product) || 'Price on enquiry' : money(product.basePrice, product.currency)}</p>
       <Link className="pdp-link" href={`/products/${product.slug}`}>View gift <span aria-hidden="true">→</span></Link>
     </article>)}</div>
   </section>;
@@ -40,6 +41,7 @@ export default async function Detail({ params }: PageProps) {
   const editorial = productEditorial(product);
   const enquiry = giftingEnquiry(product.name);
   const bulkEnquiry = giftingEnquiry(product.name, 'I am planning gifts for a team, event or celebration. Please share the personalisation options, pricing and lead time.');
+  const isIvory = product.slug === 'ivory-hamper';
   const gallery = product.images.length
     ? product.images.map(image => ({ src: productImage({ ...product, images: [image] }), alt: image.alt || product.name }))
     : [{ src: productImage(product), alt: product.name }];
@@ -53,7 +55,8 @@ export default async function Detail({ params }: PageProps) {
     { title: 'Returns & replacement', text: 'Please ask our team about the terms for your selection before ordering. For an existing order, email us with your order reference and a description of the issue.' },
   ];
 
-  return <div className="product-detail-edit pdp">
+  return <div className={`product-detail-edit pdp${isIvory ? ' pdp-ivory' : ''}`}>
+    {isIvory && <Link className="pdp-mobile-back pdp-wrap" href="/shop/hampers"><span aria-hidden="true">←</span> All hampers</Link>}
     <nav className="pdp-breadcrumb pdp-wrap" aria-label="Breadcrumb">
       <Link href="/b2c">Home</Link><span aria-hidden="true">/</span>
       <Link href={editorial.isHamper ? '/shop/hampers' : '/shop'}>{editorial.isHamper ? 'Hampers' : 'Gifts'}</Link><span aria-hidden="true">/</span>
@@ -76,7 +79,7 @@ export default async function Detail({ params }: PageProps) {
         <p className="pdp-eyebrow">{editorial.eyebrow}</p>
         <h1 id="product-name">{product.name}</h1>
         <p className="pdp-occasion">{editorial.occasion}</p>
-        <p className="pdp-description">{editorial.description}</p>
+        <p className="pdp-description"><span className="pdp-description-full">{editorial.description}</span>{isIvory && <span className="pdp-description-phone">{product.description.short || editorial.description}</span>}</p>
         <BuyPanel key={`purchase-${product.slug}`} product={product}/>
         <div className="pdp-purchase-meta">
           <p>For delivery dates, <a href={enquiry}>check with our team</a>.</p>

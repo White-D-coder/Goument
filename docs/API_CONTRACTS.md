@@ -1,4 +1,12 @@
+## 2026-10-11 — Ivory phone Buy now consumer (R138)
+
+CURRENT / IMPLEMENTED client behavior only: opt-in Buy now reads the latest gift draft through the existing shared queue, returns an existing selected quantity unchanged or saves one missing item using the same revision/boxes/items PUT and bounded409 handling, then opens `/cart`. Failure remains an error without navigation. No HTTP/schema contract, authentication, price, checkout eligibility or order/payment behavior changes. Unpriced hamper checkout remains blocked. Sources: `lib/gift-cart.ts`, `AddGiftToCartButton.tsx`; verification: TESTING.
+
 # API Contracts
+
+## 2026-10-11 — Local auth proxy availability (R133)
+
+CURRENT / IMPLEMENTED locally: no contract changes. With existing Mongo/auth services restarted, `/api/v1/auth/gift/count`, `/gift/catalogue` and `/gift/draft` return200 through Next, and signed-out `/api/v1/auth/me` returns401. Before restart, auth5003 was absent and Next returned plain500. This verifies local availability only; no fake zero/success fallback introduced. Evidence: TESTING; startup: ENVIRONMENT.
 
 ## 2026-09-30 — Guest/signed-in gift cart continuity
 

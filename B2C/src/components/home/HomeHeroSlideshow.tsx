@@ -5,15 +5,15 @@ import ProductPhoto from '@/components/ProductPhoto';
 
 const slides = [
   {
-    src: '/images/brand/Gourmet%20Gifts%20in%20Golden%20Light.png',
+    src: '/images/brand/home-hero-1.webp',
     alt: 'The Gourmet Gifts curated boxes with gourmet treats and keepsakes',
   },
   {
-    src: '/images/brand/Luxury%20Festive%20Gourmet%20Gift%20Hamper.png',
+    src: '/images/brand/home-hero-2.webp',
     alt: 'The India Hamper in burgundy with regional treats',
   },
   {
-    src: '/images/brand/Luxury%20Gourmet%20Gift%20Hamper%20Still%20Life.png',
+    src: '/images/brand/home-hero-3.webp',
     alt: 'The India Hamper in lavender with thoughtfully selected gifts',
   },
 ];

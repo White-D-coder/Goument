@@ -1,10 +1,116 @@
+## 2026-10-12 — Temporary hamper display prices (R142)
+
+CURRENT / IMPLEMENTED: display Ivory ₹2,499 and India ₹2,999 with a Sample suffix in BuyPanel, Shop ProductCard and related cards at all sizes. Reuse `lib/product-pricing.ts`. Preview-Shop copy now requests final price/availability confirmation. Existing Home cards retain their presentation.
+
+These assistant-chosen sample amounts implement the user's temporary-price request only. They are separate from authoritative Product.basePrice and never feed totals, sorting, inventory, draft writes, checkout or orders. Curated hampers remain preview=true, basePrice0, inventory0 and no variants; final-confirmation copy and existing checkout guards remain. Supersedes prior enquiry-only labels for these two previews. Sources: product-pricing and price consumers; evidence: TESTING.
+
+## 2026-10-11 — Remove Ivory phone details section (R141)
+
+CURRENT / IMPLEMENTED: hide the complete Ivory “The finer details” heading/accordion section through640px, including its layout space. The next visible section after the purchase summary is related gifts. Supersedes R137's phone details card; larger screens and other product routes retain their details. Source: product CSS; checks: TESTING.
+
+## 2026-10-11 — Fill phone related-photo frames (R140)
+
+CURRENT / IMPLEMENTED: Ivory phone related-card photos use centered `object-fit: cover` through640px to fill their existing equal image frames. This replaces contain letterboxing in these cards, with proportional edge cropping. Main product/gallery photos and larger-screen related photos retain their fit. Source: product CSS; verification: TESTING.
+
+## 2026-10-11 — Equal Ivory phone related cards (R139)
+
+CURRENT / IMPLEMENTED: Ivory phone “You may also like” cards use a flex column, non-shrinking equal-ratio photo, minimum two-line title area and bottom-aligned View gift action. Keep the existing56% card width, photos, labels, prices and links. Through640px, all three cards have equal image/title/price/action dimensions and aligned rows. Larger-screen layout retains existing rules. Source: `products/[slug]/product-detail.css`; evidence: TESTING.
+
+## 2026-10-11 — Conventional Ivory phone purchase section (R138)
+
+CURRENT / IMPLEMENTED: through640px, replace the Ivory centered summary/note card and floating cart bar with a left-aligned26px product title, existing short description, enquiry price and two48px purchase controls in normal document flow. Add to Cart is outlined burgundy and becomes the existing minus/quantity/plus control after a confirmed save; Buy now is filled burgundy and remains alongside it. Hide the decorative kicker and primary gift-note panel on this phone route; retain the Personalisation information accordion and larger-screen note form. Remove the former floating-bar footer reservation. Gallery, details and related cards retain R137 presentation.
+
+Buy now ensures the item is in the current gift draft, retaining an existing quantity and preserving all other items/boxes, then opens `/cart`. Saves use the existing serialized revision-aware queue, with only an explicit409 retry. Failed/unconfirmed saves stay on the product and show an error; controls lock while pending. Explain “Price confirmed before checkout.” Preview hamper checkout remains unavailable under the existing cart/server rules. Larger screens retain the existing Add/quantity/Proceed to checkout presentation; other products do not opt into the new phone action. Sources: `BuyPanel`, `AddGiftToCartButton`, `lib/gift-cart`, `products/[slug]/product-detail.css`; evidence: TESTING. Supersedes R137 summary, note visibility and floating purchase layout only.
+
+## 2026-10-11 — Ivory Hamper phone redesign (R137; summary/note/floating controls SUPERSEDED by R138)
+
+CURRENT / IMPLEMENTED: scope the requested product-page redesign to `.pdp-ivory` through640px. Add a44px All hampers return link, contained rounded photograph and existing real-photo thumbnails. Present the product name in centered28px Jakarta with the existing short description in a white18px-radius summary card; larger screens keep full editorial copy. Gift-note entry uses a compact soft-ivory panel with an accessible disclosure and16px textarea. Details use a compact white accordion card; related gifts use rounded horizontal cards with burgundy links. Compact the existing corporate enquiry section.
+
+Use an inset floating purchase bar with ivory surface,16px corners and44px burgundy actions. Preserve Price on enquiry, existing draft quantity/checkout/error handling and gift-note email semantics. Reserve body/footer space for initial, checkout and error heights, including safe-area inset. Other product routes and larger Ivory layouts keep their current presentation. Sources: `B2C/src/app/products/[slug]/page.tsx`, `product-detail.css`; verification: TESTING.
+
+## 2026-10-11 — Home phone cards, philosophy and packaging (R132/R134/R136)
+
+CURRENT / IMPLEMENTED: through640px, reuse HomeCollectionCard for two-column white cards matching the Shop phone presentation: edge-to-edge1.25-ratio photos,16px corners, centered compact titles/two-line descriptions and full-width44px burgundy Explore actions. Hide the decorative photo star and replace the phone circular arrow with a labeled action; keep existing collection routes and desktop presentation. Desktop action copy stays Explore collection; each action has a collection-specific accessible label. The scoped description rule wins over the shared15px paragraph rule.
+
+Phone philosophy uses a compact22–27px centered heading without the side art, four balanced116px value tiles in a2×2 grid,26px gold icons and12px labels. Keep existing names and hidden long copy. Packaging kicker, two-line heading, description and Shop gifts action are centered through640px. Larger layouts retain their existing cards, art and text alignment. Sources: `B2C/src/app/b2c/home.css`, `B2C/src/components/home/HomeSections.tsx`; verification: TESTING.
+
+## 2026-10-11 — Rounded phone product thumbnails (R135)
+
+CURRENT / IMPLEMENTED: phone product galleries show real product photo thumbnails below the main image, replacing pagination dots through640px. Use a native horizontal scroll/snap row with rounded2.1-ratio previews, burgundy selected border, existing button labels/pressed state and image-selection handler. A single-photo product shows one truthful phone thumbnail; larger screens retain hidden single-photo controls and existing multi-photo thumbnails. Do not add unrelated product images. Match the phone related-carousel gutter to the14px wrapper inset to remove the6px overflow found during verification. Sources: `ProductGallery.tsx`, `product-gallery.css`, `products/[slug]/product-detail.css`; verification: TESTING.
+
+## 2026-10-11 — No phone Shop search entry (R131)
+
+CURRENT / IMPLEMENTED source: hide the header Search gifts link on phone Shop and dedicated collections through640px, alongside the already-hidden inline search field. Scope the header selector to pages containing `.shop-edit`; retain larger-screen and other-route search presentation. Category/sort query fields remain available internally. Source: `B2C/src/app/shop/shop.css`; verification: TESTING.
+
+## 2026-10-11 — Bottom phone Shop filter (R130)
+
+CURRENT / IMPLEMENTED: through640px, Shop and dedicated collections show a fixed bottom burgundy Filter control with44px hit target and safe-area padding. It opens a native modal bottom sheet with existing category links/selected check and available sort controls. Hide the former in-flow phone sort controls; keep the photo category rail. Main-Shop sorting preserves the current search query; dedicated sorting retains its collection route. Preview collections omit unavailable sorting. The native dialog supports Escape, focus containment/return and backdrop/close dismissal; close it when resizing above640px. Reserve bottom body space for page/footer content and lock background scroll while open. Larger layouts keep existing search/sort/navigation. Reuse `ShopMobileFilters` across both page renderers; no catalogue/cart contract edits. Sources: `B2C/src/components/ShopMobileFilters.tsx`, `ShopCollectionPage.tsx`, `app/shop/page.tsx`, `shop.css`; verification: TESTING.
+
+## 2026-10-11 — Filled phone Shop buttons (R129)
+
+CURRENT / IMPLEMENTED source: phone Shop/collection card actions use burgundy `#4a0404` fill/border and ivory `#fffdf8` text/icons, with `#650c0c` hover fill. Retain existing dimensions and action handlers. Supersedes R127's outlined phone action colours. Source: `B2C/src/app/shop/shop.css`; verification: TESTING.
+
+## 2026-10-11 — Shop phone search and card alignment (R128)
+
+CURRENT / IMPLEMENTED: through640px, hide the main Shop search field and center product-card titles, descriptions and prices on Shop and dedicated collections. Keep the search input in its existing form so the active category query is preserved when submitting available sort controls. Larger-screen search/alignment retain existing rules. Supersedes R127's visible phone search field and left-aligned card text. Source: `B2C/src/app/shop/shop.css`; browser evidence: TESTING.
+
+## 2026-10-11 — Shop phone reference layout (R127)
+
+CURRENT / IMPLEMENTED: through640px, Shop and collection pages use the supplied reference's horizontal photo filters and two-column white cards. Reuse the five existing collection choices/photos: All gifts, Envelopes, Hampers, Scented Candles and Premium Stationery. Rounded76px thumbnails have uppercase labels, a gold selected outline and burgundy check; native links retain keyboard/focus access and scrolling. `ShopCategoryLink` is shared by the search-based main Shop and the existing dedicated collection navigation; destinations are preserved.
+
+Phone cards use a1.25 photo ratio,16px outer corners, clear two-line titles/descriptions, existing price/preview text and a full-width44px outlined action. Reuse `ProductCard`; descriptions render for compact cards but stay hidden above640px. Keep current Add to Cart/product-link semantics rather than assigning the reference's Enquire label to every product. Preserve hamper contain framing; other photos fill their frames without phone zoom. Center and compact the intro, hide its phone-only large photo/breadcrumb, retain working search/sort/counts/empty states/pagination. Larger layouts and Home remain unchanged. Sources: `B2C/src/app/shop/page.tsx`, `shop.css`, `ProductCard.tsx`, `ShopCategoryLink.tsx`, `ShopCollectionPage.tsx`. Verification: TESTING; user visual acceptance UNKNOWN. Supersedes earlier compact phone Shop cards and text-only category rail.
+
+## 2026-10-11 — Single-line phone hamper copy (R126)
+
+CURRENT / IMPLEMENTED: through640px, show “A thoughtful gift in ivory.” under Ivory Hamper and “A little taste of India.” under both India Hamper cards. Center descriptions with5px top spacing and one-line overflow protection. Larger screens keep the original product descriptions. Supersedes earlier phone image/title-only hamper treatment; purchase row remains hidden. Reuse `HomeHamperCard` with optional `mobileDescription`; product records/contracts are unchanged. Sources: `b2c/page.tsx`, `b2c/home.css`, `HomeSections.tsx`. Phone screenshot inspected; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Clean phone hero text and ivory action (R125)
+
+CURRENT / IMPLEMENTED: replace R122's phone serif/copy treatment with “Good gifts. / Great moments.” in bundled Plus Jakarta Sans,27–32px,600/500 weight and1.16 line-height. Use a small neutral glyph shadow for separation from the unfiltered photo; no coloured backdrop or blur layer. Shop now becomes a160px minimum-width ivory button with burgundy12px semibold text,8px corners,44px minimum height and ivory focus outline. Retain centered alignment, hidden secondary copy,260px frame and R124's absent overlay. Larger-screen title and burgundy pill remain unchanged. Sources: `B2C/src/app/b2c/home.css`, `B2C/src/components/home/HomeSections.tsx`. All three390px slide screenshots inspected; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Remove phone hero tint (R124)
+
+CURRENT / IMPLEMENTED source: through640px, set `.tgg-hero-visual::after` background to `none` at the user's request, removing R120's warm dark gradient. Copy remains transparent and centered; keep original image colours, typography and burgundy Shop now. Larger-screen overlay rules retain their existing values. Browser appearance/contrast after removal UNKNOWN.
+
+## 2026-10-11 — Center phone hero copy (R123)
+
+CURRENT / IMPLEMENTED: through640px, center both hero title lines and Shop now with `text-align: center` and `align-items: center` on the copy panel. Retain R122 copy, typography and spacing. Larger layouts keep left alignment. Source: `B2C/src/app/b2c/home.css`.
+
+## 2026-10-11 — Phone hero title refinement (R122)
+
+CURRENT / IMPLEMENTED: phone hero alone uses the existing Cormorant Garamond family as an exception to R94's global phone sans titles. Show “Thoughtful gifts.” above a lighter warm-ivory “Made special.” at36–44px with relaxed line-height/tracking,22–24px insets and18px before the132px minimum-width Shop now control. Keep44px button height,260px frame and R121's hidden secondary content. Responsive spans retain the existing larger-screen headline; only the visible span contributes to the heading's accessible name. Sources: `B2C/src/components/home/HomeSections.tsx`, `B2C/src/app/b2c/home.css`. Phone screenshot inspected; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Minimal phone hero copy (R121)
+
+CURRENT / IMPLEMENTED: through640px, hide the hero kicker, description and complete promise-icon/label row. Retain the headline, Shop now, cover-photo slideshow and accessible dots. Reduce hero/copy minimum height from340px to260px and allow content to grow. Supersedes R118/R120's phone supporting-copy/promise visibility and minimum height; larger viewport content remains unchanged. Source: `B2C/src/app/b2c/home.css`. Local390px screenshot inspected; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Compact photo-backed phone hero (R120)
+
+CURRENT / IMPLEMENTED: remove `HomeMobileSearch` markup/component and its dedicated styles. At640px and below, use one rounded hero frame with the existing slideshow absolutely filling its background (`object-fit: cover`, 65% horizontal focal point), transparent copy and a dark gradient for white-text contrast. Phone framing supersedes R105/R118's stacked full-photo/copy treatment; the landscape photos crop to fill this frame. Keep compact R118 typography, four promises and Shop now; minimum height is340px and content may grow, with44px bottom padding reserving the slide dots. An isolated hero stacking context puts dots above copy for pointer access. Keep R119's category strip hidden and retain larger hero layouts. Sources: `B2C/src/app/b2c/home.css`, `page.tsx`, `HomeSections.tsx`. Local phone screenshot inspected; user visual acceptance UNKNOWN.
+
+## 2026-10-11 — Hide Home phone collection strip (R119)
+
+CURRENT / IMPLEMENTED source: `.tgg-mobile-categories` remains `display: none` through the existing 700px phone breakpoint as well as larger widths, removing the collection-photo strip and its layout space beneath the hero. Supersedes the category-row visibility from the 2026-10-10 mobile discovery increment. Search, hero, main hamper showcase and collection cards retain their current presentation. Source: `B2C/src/app/b2c/home.css`. Browser visual acceptance UNKNOWN.
+
+## 2026-10-11 — Compact Home hero on phones (R118)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: at widths up to640px, use a 31–36px balanced hero headline, tighter kicker/support text, reduced copy-panel padding and compact CTA/promises. Keep the four promise labels in one row and preserve the image-first carousel, original theme and every desktop rule. Source: `B2C/src/app/b2c/home.css`.
+
+## 2026-10-11 — Hosted B2C image delivery (R117)
+
+CURRENT / IMPLEMENTED source; hosted rendering UNKNOWN: Home hero images now use the three tracked optimized files `home-hero-1.webp` through `home-hero-3.webp` in `B2C/public/images/brand`; the former first source existed outside the deployed app root. Shared `ProductPhoto` first uses responsive Next image delivery, then switches to the original local URL if optimization errors. External/provider URLs keep their existing direct delivery. Source: `B2C/src/components/home/HomeHeroSlideshow.tsx`, `B2C/src/components/ProductPhoto.tsx`.
+
+## 2026-10-11 — Refine product detail page presentation (R116)
+
+CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: retain the ivory, burgundy and antique-gold palette while giving product pages a contained rounded gallery, balanced desktop purchase card, compact phone hierarchy and fixed safe-area-aware gift cart/enquiry bar. Product shots use `object-fit: contain` on phones. Gift cart count and checkout remain inside the bar; ordinary catalogue variants keep their option, quantity and feedback controls in document flow. The sticky bar keeps a matching price label and uses the existing product price/enquiry logic. Sources: `B2C/src/app/products/[slug]/product-detail.css`, `B2C/src/components/BuyPanel.tsx`.
+
 ## 2026-10-10 — Reduce mobile PDP text (R115)
 
-CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: hide phone breadcrumbs, repeated purchase-meta text, and the image-only lifestyle row. Clamp product description to two lines and keep the gift-note personalize action without its explanatory paragraph until expanded. Preserve price/cart controls, note form's explicit enquiry disclaimer when expanded, and collapsed product detail accordions. Desktop stays unchanged. Source: `B2C/src/app/products/[slug]/product-detail.css`.
+CURRENT / IMPLEMENTED phone behavior; desktop presentation refined by R116: hide phone breadcrumbs, repeated purchase-meta text, and the image-only lifestyle row. Clamp product description to two lines and keep the gift-note personalize action without its explanatory paragraph until expanded. Preserve price/cart controls, note form's explicit enquiry disclaimer when expanded, and collapsed product detail accordions. Source: `B2C/src/app/products/[slug]/product-detail.css`.
 
 ## 2026-10-10 — Mobile product detail layout (R114)
 
-CURRENT / IMPLEMENTED source; visual acceptance UNKNOWN: on phone PDPs, show the contained gallery as a near-square rounded image with centered pagination dots for galleries with multiple real photos. Keep the product title and short description compact. Pin the existing price/enquiry and Add to Cart controls to a translucent bottom bar with safe-area padding; after a confirmed gift-draft addition, show the existing quantity counter and checkout link in that bar. No fabricated image, brand badge, variant, price or payment behavior. Desktop PDP remains unchanged. Sources: `B2C/src/app/products/[slug]/product-detail.css`, `ProductGallery`, `BuyPanel`.
+CURRENT / IMPLEMENTED phone behavior; desktop layout later refined by R116: on phone PDPs, show the contained gallery as a near-square rounded image with centered pagination dots for galleries with multiple real photos. Keep the product title and short description compact. Pin the existing price/enquiry and Add to Cart controls to a translucent bottom bar with safe-area padding; after a confirmed gift-draft addition, show the existing quantity counter and checkout link in that bar. No fabricated image, brand badge, variant, price or payment behavior. Sources: `B2C/src/app/products/[slug]/product-detail.css`, `ProductGallery`, `BuyPanel`.
 
 ## 2026-10-09 — Remove the Home navbar/hero spacer (R112)
 

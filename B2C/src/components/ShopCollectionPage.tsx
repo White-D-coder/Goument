@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
+import ShopCategoryLink from '@/components/ShopCategoryLink';
+import ShopMobileFilters from '@/components/ShopMobileFilters';
 import { catalogue } from '@/lib/catalogue';
 import { shopCollections, type ShopCollection } from '@/lib/shop-collections';
 import '@/app/shop/shop.css';
@@ -44,11 +46,9 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
         <aside className="shop-collections">
           <p className="eyebrow">EXPLORE THE EDIT</p>
           <nav aria-label="Explore collections">
-            <Link href="/shop">All gifts <ArrowRight size={13} aria-hidden="true" /></Link>
+            <ShopCategoryLink href="/shop" label="All gifts" image="/images/brand/hero-curated-gifts.jpeg" />
             {Object.values(shopCollections).map(item => (
-              <Link key={item.href} href={item.href} aria-current={item.href === edit.href ? 'page' : undefined}>
-                {item.title} <ArrowRight size={13} aria-hidden="true" />
-              </Link>
+              <ShopCategoryLink key={item.href} href={item.href} label={item.title} image={item.image} active={item.href === edit.href} />
             ))}
           </nav>
           <Link className="shop-all-boxes" href="/build">Curate your gift <ArrowRight size={14} aria-hidden="true" /></Link>
@@ -91,9 +91,16 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
               {page < data.pages ? <Link href={pageHref(page + 1)}>Next <ArrowRight size={16} aria-hidden="true" /></Link> : <span />}
             </nav>
           )}
-          {data.preview && <p className="shop-preview-note">Collection preview · pricing coming soon.</p>}
+          {data.preview && <p className="shop-preview-note">Sample prices shown. Final price and availability confirmed on enquiry.</p>}
         </div>
       </div>
+      <ShopMobileFilters
+        categories={[
+          { label: 'All gifts', href: '/shop', active: false },
+          ...Object.values(shopCollections).map(item => ({ label: item.title, href: item.href, active: item.href === edit.href })),
+        ]}
+        action={edit.href} sort={sort} showSort={!data.preview && data.products.length > 0}
+      />
     </section>
   );
 }

@@ -9,7 +9,6 @@ export default function GiftBuilder({selectedBox}:{selectedBox?:string}) {
  const {draft,catalogue,error,busy,change,reload}=useGiftDraft(selectedBox);
  const [search,setSearch]=useState('');const [category,setCategory]=useState('All');
  const total=draft?.items.reduce((n,i)=>n+i.quantity,0)||0;
- const selected=catalogue?.boxes.filter(b=>draft?.boxes.some(row=>row.id===b.id))||[];
  const curatableItems=catalogue?.items.filter(i=>i.category!=='Gift Hampers')||[];
  const items=curatableItems.filter(i=>(category==='All'||i.category===category)&&`${i.name} ${i.description}`.toLowerCase().includes(search.toLowerCase()));
  return <section className="section gift-builder"><p className="eyebrow">MAKE IT PERSONAL</p><h1>Little things. All their favourites.</h1><p className="section-intro">Select what you love from our master catalogue of gourmet treats, artisanal beverages, stationery, and handcrafted keepsakes.</p>

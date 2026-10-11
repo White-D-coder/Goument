@@ -17,7 +17,7 @@ function mount(name,{width=1440,reduced=false}={}){
  const exports={};
  const source=fs.readFileSync(`src/components/${name}.tsx`,'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
- vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name==='next/navigation'?{usePathname:()=>'/b2c'}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
+ vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='next/navigation'?{usePathname:()=>'/b2c'}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
  exports.default();
  return {effects,states,events,motion,motionEvents,window,canvas,timers,frames,flush:()=>{const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn());}};
 }

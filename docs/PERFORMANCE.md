@@ -1,3 +1,36 @@
+## 2026-10-12 — Image loading reliability (R162)
+
+CURRENT / IMPLEMENTED: shared per-source recovery prevents one optimizer error disabling optimization on subsequent gallery photos. Local optimizer failure retries original once; missing original yields accessible fixed-frame placeholder, avoiding a broken-image icon or retry loop. Main gallery keeps current decoded photo while requesting the next; responsive thumbnail sizes replace raw full-resolution downloads. Home hero rotates/selects only ready photos and can recover from a failed initial slide. Existing eager/high-priority first hero and product images, lazy offscreen cards, image fitting and reduced-motion/offscreen animation controls retained.
+
+VERIFIED isolated production: all24 referenced local image assets exist and decode; cold390px4×CPU/1.6Mbps100ms Home/Shop/Ivory/India scrolled image checks report no broken loaded images, placeholders or overflow.390/1440 gallery switching and optimized thumbnail geometry pass. Six deliberate optimizer/original/delay/slide failures recover as intended. These are reliability checks; no new LCP/transfer comparison is claimed over R161. Offscreen horizontal lazy images are intentionally deferred until relevant. Physical devices, third-party image availability and deployed optimizer/CDN remain UNKNOWN. See TESTING.
+
+## 2026-10-12 — Current optimized B2C delivery (R161)
+
+CURRENT / IMPLEMENTED: lossily compressed derivatives preserve original artwork and existing geometry: footer wallpaper2,462,291→145,932bytes (40% opacity retained), FAQ illustration→49,552bytes (lazy600×400), GG logo→5,722bytes, mandala→96,562bytes. Originals retained. Product cards reuse the existing responsive Next ProductPhoto component; image fitting/radii unchanged. Removed unused Manrope preload/font face. A viewport-height streaming placeholder prevents the footer entering the initial loading viewport; loaded section spacing unchanged. Hero interval stops offscreen, hidden or under reduced motion. Derivatives have one-day public cache headers.
+
+Public catalogue work shares a2.5s deadline, caps100items/page and20pages with batches of3; a15s per-process public-data cooldown suppresses repeated network/5xx/429 outage calls. Invalid4xx requests cannot trip it; no identity data cached. Public backend queries use projection, bounded inputs and3s maxTimeMS. These bounds improve failure latency without claiming cross-instance outage coordination.
+
+| Production lab, cold390px,4× CPU,1.6Mbps/100ms | Home R160 | Home R161 | Shop R161 |
+| --- | --- | --- | --- |
+| Transferred bytes | 4,893,000 approximately | 707,661 | 650,728 |
+| LCP | 9.828s | 3.344s | 2.204s |
+| Full load | 25.549s | 4.073s | 3.794s |
+| CLS | See historical audit | 0.00721 | 0.00340 |
+
+Home measured bytes decrease~86%, full load~84%, LCP~66%. Single local samples are not field guarantees; Home LCP still exceeds2.5s under that simulated constraint. Shop baseline slow-network navigation did not finish measurement; no numerical load-time comparison is claimed. Unthrottled cold-cache Home/Shop/Ivory at390/1440px transfer~0.65–0.91MB; CLS0–0.00177, no JS exceptions/broken images/overflow. Scripted scroll median/p95~17ms, no intervals>50ms. Twelve320/390/768/1440px layouts, filter/Escape and hero lifecycle checks pass; phone Home/Shop screenshots inspected. Physical-device, deployed CDN, authenticated checkout and production traffic measurements remain UNKNOWN. TESTING owns commands/artifacts. Historical results below are retained.
+
+## 2026-10-12 — Measured B2C delivery audit (R160)
+
+CURRENT / PARTIAL: isolated production build passed (Next16.2.10, webpack; compile6.9s); source/public/node_modules copied or symlinked to a temporary build without .env/customer data. This avoids changing the running development build. Production rewrite defaults were used; deployed environment/CDN and real-device field metrics remain UNKNOWN.
+
+Chrome cold-cache measurements on localhost at390px/4x CPU and1440px/normal CPU covered Home, Shop and Ivory. Resource transfer totals after settling were approximately4.75–6.49MB. The footer's raw `Pale Baroque Swirl Wallpaper.png` downloaded2,462,591bytes including response overhead on every checked page, despite0.4 visual opacity. Home's eager FAQ `icon2.png` added1,315,538bytes; shared LOGOs.svg about295,798bytes and mandala JPEG347,191bytes. Original-file size alone was not treated as network evidence. Compress/resize these decorations, use suitable delivery formats and defer offscreen decorations without changing the approved design.
+
+On simulated1.6Mbps/100ms latency/4x CPU, Home LCP9.83s and load25.55s were observed, transferring4.90MB. This is one local lab sample, not a field CWV or live-site speed guarantee. Throttled Shop had LCP4.39s but did not finish loading within the measurement window (loadEventEnd0); its final transfer/load figures are therefore unavailable. No permanent scroll stall was observed:120-frame scripted scroll samples had median/p9517ms and zero intervals above50ms. Headless cadence does not establish physical-device smoothness.
+
+One initial cold phone Shop sample had CLS0.469; three explicit repeat loads were0 and the throttled sample0.0034. Treat as intermittent timing evidence needing investigation, not a consistently reproduced layout defect. Home unthrottled phone LCP1.35s and normal desktop pages0.08–0.22s were local, cache/context-dependent samples. No broken loaded images, horizontal overflow or browser exceptions in the six settled page checks; anonymous me401 and canceled prefetch requests are expected, not500s.
+
+Source risks: unused Manrope preload in layout (only its font declaration remains); stationery search can await up to100 pages per each of3 parallel search streams, with8s per-fetch timeout and no total deadline; serverless cold start installs schema/indexes. These are source findings, not measured high-load regressions. Local dev Cart response took8.14s once, without proving production Cart latency. See TESTING for artifacts and limits. Historical R58 static/no-slideshow description does not describe today's HomeHeroSlideshow implementation.
+
 # Performance
 
 ## 2026-10-11 — B2C hero image assets (R117)

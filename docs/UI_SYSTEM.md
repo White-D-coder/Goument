@@ -1,3 +1,7 @@
+## 2026-10-12 — Image readiness and recovery (R162)
+
+CURRENT / IMPLEMENTED: retain established image frame dimensions, fitting, artwork and corner radii. ProductPhoto recovery resets per source; local optimizer failure tries original once, terminal failure shows a neutral accessible image placeholder in the same frame. Hero only presents loaded photos, promotes requested pending photos to eager loading, skips failed slides and recovers when its initial photo fails. Offscreen/hidden/reduced-motion pause behavior retained. Gallery displays current photo until requested photo loads, marks pending thumbnail busy and restores current selection on failure. Only current plus pending main frames mount; pending loads eagerly. Thumbnails reuse responsive ProductPhoto at150px phone/72px desktop source sizes. Gallery frames retain prior contain/cover CSS. Contents autoplay must not switch to a missing-image placeholder. TESTING owns browser evidence.
+
 ## 2026-10-12 — GG favicon metadata (R157)
 
 CURRENT / IMPLEMENTED: browser-tab branding uses the existing32×32 GG `public/favicon.png`, now explicitly linked in root Metadata for all inheriting B2C pages. Asset and navbar artwork remain unchanged. Verification: TESTING.

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Existing decorative SVG artwork. */
 'use client';
 
 import Link from 'next/link';

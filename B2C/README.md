@@ -10,7 +10,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3001. Home, searchable/paginated catalogue, product detail, bag, account and checkout-availability screens exist. Existing catalogue imagery appears as explicitly labelled read-only previews when the backend is unavailable; no invented prices or purchasable preview products.
+Open http://localhost:3000. Home, searchable/paginated catalogue, product detail, bag, account and checkout-availability screens exist. Existing catalogue imagery appears as explicitly labelled read-only previews when the backend is unavailable; no invented prices or purchasable preview products.
 
 ## Connect the backend
 
@@ -25,3 +25,9 @@ Real product retrieval, server cart add/update/remove, session header, signup/lo
 Backend source is copied from the existing service including the tested signup-role fix. It inherits the documented socket/CORS/payment/inventory risks; this is not a production-ready backend. This increment does not open checkout or resolve those inherited defects. Original backend/docs changes from the prior turn are retained; not silently reverted.
 
 Validation: `npm run typecheck`, `npm run build`, `npm run lint`, `npm run test:backend`. External Mongo/Redis/Stripe/SMTP connectivity is not established by a frontend build. Local dependency symlinks may be present for verification using existing installations; use npm ci for an independent install.
+
+## 2026-10-12 — Current optimized B2C runtime
+
+Use independent npm installs in B2C and B2C/backend; the tracked frontend dependency symlink has been removed so updating B2C does not modify the B2B app. Next16.4 is pinned. Current database-backed auth/admin runs with `npm --prefix backend run auth:start` on loopback5003, with AUTH_ORIGIN explicitly set to the storefront3000. Install the owned schema with `npm --prefix backend run db:install` before startup/schema upgrades; startup/serverless handlers do not run schema migrations. Production requires exact AUTH_ORIGIN and B2C database settings. The older backend command/topology above is historical, distinct from this auth/admin entrypoint.
+
+Private APIs use exact Origin mutation checks and no-store. OAuth handshakes share temporary Mongo state across instances. Preview/fallback records are never saleable inventory; temporary Ivory/India Sample labels remain separate. Checkout is still gated. Root docs SECURITY/PERFORMANCE/TESTING contain the actual validation and limits. WebP derivatives preserve the existing artwork; optimized decoration responses cache for one day and may revalidate stale for seven days. Change their URLs when replacing artwork during that cache window.

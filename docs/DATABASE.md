@@ -1,3 +1,9 @@
+## 2026-10-12 — B2C OAuthFlow model and explicit schema lifecycle (R161)
+
+CURRENT / IMPLEMENTED: B2C schema now25collections,101explicit indexes (32unique); including automatic_id indexes126total/57unique. New private `oauth_flows`: stateHash/bindingHash64hex, bounded private nonce/PKCE verifier, allowlisted next, expiresAt and mutable timestamps. Unique stateHash index `oauth_state_once`; `oauth_flow_expiry` TTL0. Atomic conditional findOneAndDelete is allowed only for this short-lived model; other guarded query mutation protections remain unchanged. Expiry checked in the consume predicate, independent of delayed TTL cleanup. DATA_MODELS owns generated field/index details.
+
+Startup and serverless cold starts no longer install schema. Explicit `npm --prefix backend run db:install` loads operator configuration; use the owned isolated B2C DB, never legacy collections. Locally only the new OAuth collection/validator/indexes were installed against guarded loopback dev/test configuration; no account/customer/session/order/payment records changed. Full disposable103-test database suite passes. Deployed schema/index state remains UNKNOWN and must be installed before releasing this auth version.
+
 # Database
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

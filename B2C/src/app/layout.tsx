@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-page-custom-font -- App Router root layout is shared by every page. */
 import type { Metadata } from 'next';
 import StorefrontChrome from '@/components/admin/StorefrontChrome';
 import './globals.css';
@@ -18,4 +17,4 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png',
   },
 };
-export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en" data-scroll-behavior="smooth"><head><link rel="preload" href="/fonts/tgg/manrope-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/></head><body><a className="skip" href="#main">Skip to content</a><StorefrontChrome placement="header"/><main id="main">{children}</main><StorefrontChrome placement="footer"/></body></html>;}
+export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en" data-scroll-behavior="smooth"><body><a className="skip" href="#main">Skip to content</a><StorefrontChrome placement="header"/><main id="main">{children}</main><StorefrontChrome placement="footer"/></body></html>;}

@@ -37,6 +37,7 @@ function buildModels(connection) {
       await checkReferences(this, schema, connection, this.$session(), this.isNew);
     });
     for (const operation of ['updateOne', 'updateMany', 'findOneAndUpdate', 'replaceOne', 'findOneAndReplace', 'deleteMany', 'findOneAndDelete']) {
+      if (options.oauthFlow && operation === 'findOneAndDelete') continue;
       schema.pre(operation, function () { throw new Error('Use database repositories and guarded document saves; no query updates/deletes'); });
     }
     schema.pre('deleteOne', { document: true, query: true }, function () { throw new Error('Deletion requires an explicit retention/migration policy'); });
@@ -61,6 +62,14 @@ function buildModels(connection) {
   } });
   unique(s, { googleSubject: 1 }, 'user_google_identity', present('googleSubject'));
   unique(s, { emailNormalized: 1 }, 'user_email_identity'); index(s, { phoneNormalized: 1 }, 'user_phone_lookup');
+  s = define('OAuthFlow', 'oauth_flows', {
+    stateHash: hash(), bindingHash: hash(),
+    nonce: { ...text(true, 128), select: false }, verifier: { ...text(true, 128), select: false },
+    next: { ...text(true, 100), validate: value => /^(?:\/account|\/checkout(?:\?order=[a-f0-9]{24})?|\/admin)$/.test(value) },
+    expiresAt: date(true)
+  }, { oauthFlow: true });
+  unique(s, { stateHash: 1 }, 'oauth_state_once');
+  index(s, { expiresAt: 1 }, 'oauth_flow_expiry', { expireAfterSeconds: 0 });
   s = define('Customer', 'customers', { userId: ref('User', false), firstName: text(true), lastName: text(), email: email(), emailNormalized: { ...email(), lowercase: true }, phone: text(), phoneNormalized: text(), status: status('CustomerStatus', 'ACTIVE'), avatarUrl: url(), dateOfBirth: date(), marketingConsent: { type: Boolean }, lastOrderAt: date(), totalOrders: integer(true, 0, 0), totalSpentMinor: integer(true, 0, 0), totalsCurrency: { ...currency(), required: false } }, { states: { status: 'CustomerStatus' }, check() { this.emailNormalized = this.email.trim().toLowerCase(); if (this.totalSpentMinor && !this.totalsCurrency) throw new Error('Derived spend requires currency'); } });
   unique(s, { userId: 1 }, 'customer_user_identity', { userId: { $type: 'objectId' } }); index(s, { emailNormalized: 1 }, 'customer_email_lookup'); index(s, { phoneNormalized: 1 }, 'customer_phone_lookup'); index(s, { status: 1, createdAt: -1, _id: -1 }, 'customer_status_history');
   s = define('CustomerAddress', 'customer_addresses', { customerId: ref('Customer'), ...address.obj, label: text(), isDefaultShipping: bool(), isDefaultBilling: bool() });

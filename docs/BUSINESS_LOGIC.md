@@ -1,3 +1,7 @@
+## 2026-10-12 — Truthful public fallback (R161)
+
+CURRENT / IMPLEMENTED: frontend no longer invents₹499 or50units when backend omits authoritative sale price/stock. Missing/invalid values remain zero/preview; offline catalogue uses inventory0/basePrice0/preview=true. Existing explicitly labelled Ivory/India Sample price helpers are display-only and unchanged; no commercial activation or payable-money inference. Public DTO is content-only; server gifting/checkout authority and existing unpriced-hamper guards remain. Request deadline/fanout/outage cooldown reduce backend failure cost without caching customer state. Tests cover invalid/error fallback and current item-first/cart ownership flows. Final commercial pricing/tax/delivery remains FUTURE / REQUIRED.
+
 ## 2026-10-12 — Sample price labels (R142)
 
 CURRENT / IMPLEMENTED UI: Ivory ₹2,499 / India ₹2,999 in `src/lib/product-pricing.ts` are temporary Sample labels, never authoritative quotes, cart totals or payable money. Curated Product.basePrice remains0; preview hamper checkout guards remain. Final pricing/tax/delivery and saleability remain FUTURE / REQUIRED. Evidence: TESTING.

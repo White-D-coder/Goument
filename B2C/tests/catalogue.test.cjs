@@ -62,3 +62,17 @@ test('ordinary searches preserve API pagination and a failed merged source uses 
   assert.equal(merged.total, 3);
   assert.deepEqual(Array.from(merged.products, product => product._id), ['bookmarks', 'shagun_envelopes', 'diary_bottle_pen_set']);
 });
+
+test('outages and missing commercial fields never invent saleable prices or stock',async()=>{
+ const offline=await load(async()=>{throw Error('Offline');})('stationery');assert.equal(offline.preview,true);assert.ok(offline.products.every(p=>p.preview&&p.basePrice===0&&p.inventory===0));
+ const result=await load(async()=>({ok:true,json:async()=>({products:[{_id:'fixture',name:'Unpriced'}],pages:1,total:1})}))('test');assert.equal(result.products[0].preview,true);assert.equal(result.products[0].basePrice,0);assert.equal(result.products[0].inventory,0);
+});
+test('stationery requests share one deadline and reject excessive page fanout',async()=>{
+ const signals=[];const data=await load(async(_url,options)=>{signals.push(options.signal);return {ok:true,json:async()=>({products:[],pages:99})};})('stationery');assert.equal(data.preview,true);assert.equal(signals.length,3);assert.ok(signals.every(signal=>signal===signals[0]));
+});
+
+
+test('a backend outage has a short public-data cooldown; invalid requests cannot trip it',async()=>{
+ let failures=0;const offline=load(async()=>{failures++;throw Error('Backend unavailable');});await offline('shagun');await offline('bookmarks');assert.equal(failures,1);
+ let requests=0;const invalid=load(async()=>{requests++;return {ok:false,status:400};});await invalid('invalid');await invalid('shagun');assert.equal(requests,2);
+});

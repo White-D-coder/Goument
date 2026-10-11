@@ -1,4 +1,6 @@
 .product-gallery { min-width: 0; }
+.product-gallery-frame { position: absolute; inset: 0; }
+.product-gallery-thumbnail-photo { display: block; position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 3px; }
 .product-gallery-contain .detail-image img { object-fit: contain; background: #f5f0e7; }
 .product-gallery-thumbnails { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 .product-gallery-thumbnails--single { display:none; }

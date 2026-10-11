@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductPhoto from '@/components/ProductPhoto';
 
 const slides = [
@@ -20,20 +20,35 @@ const slides = [
 
 export default function HomeHeroSlideshow() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [ready, setReady] = useState<number[]>([]);
+  const [requested, setRequested] = useState<number | null>(null);
+  const [unavailable, setUnavailable] = useState<number[]>([]);
+  const visual = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionPreference.matches) return;
-
-    const timer = window.setInterval(() => {
-      setActiveIndex(index => (index + 1) % slides.length);
-    }, 5200);
-
-    return () => window.clearInterval(timer);
-  }, []);
+    let visible = true;
+    let timer: number | undefined;
+    const update = () => {
+      window.clearInterval(timer);
+      timer = undefined;
+      if (visible && !document.hidden && !motionPreference.matches && ready.length > 1 && requested === null) {
+        timer = window.setInterval(() => setActiveIndex(index => {
+          const order = [...ready].sort((a, b) => a - b);
+          return order.find(next => next > index) ?? order[0];
+        }), 5200);
+      }
+    };
+    const observer = new IntersectionObserver(([entry]) => {visible=entry.isIntersecting;update();});
+    if (visual.current) observer.observe(visual.current);
+    motionPreference.addEventListener('change', update);
+    document.addEventListener('visibilitychange', update);
+    update();
+    return () => {window.clearInterval(timer);observer.disconnect();motionPreference.removeEventListener('change',update);document.removeEventListener('visibilitychange',update);};
+  }, [ready, requested]);
 
   return (
-    <div className="tgg-hero-visual" aria-label="Featured gifts" aria-roledescription="carousel">
+    <div ref={visual} className="tgg-hero-visual" aria-label="Featured gifts" aria-roledescription="carousel">
       {slides.map((slide, index) => (
         <div
           key={slide.src}
@@ -44,7 +59,17 @@ export default function HomeHeroSlideshow() {
             src={slide.src}
             alt={slide.alt}
             sizes="(max-width: 760px) 100vw, 54vw"
-            priority={index === 0}
+            priority={index === 0 || index === requested}
+            onReady={() => {
+              setReady(current => current.includes(index) ? current : [...current, index]);
+              if (index === requested || unavailable.includes(activeIndex)) { setActiveIndex(index); setRequested(null); }
+            }}
+            onUnavailable={() => {
+              setUnavailable(current => current.includes(index) ? current : [...current, index]);
+              setReady(current => current.filter(loaded => loaded !== index));
+              if (index === activeIndex && ready.length) setActiveIndex(ready[0]);
+              if (index === requested) setRequested(null);
+            }}
           />
         </div>
       ))}
@@ -56,7 +81,12 @@ export default function HomeHeroSlideshow() {
             className={index === activeIndex ? 'is-active' : ''}
             aria-label={`Show image ${index + 1}: ${slide.alt}`}
             aria-pressed={index === activeIndex}
-            onClick={() => setActiveIndex(index)}
+            aria-busy={index === requested}
+            disabled={unavailable.includes(index)}
+            onClick={() => {
+              if (ready.includes(index)) { setActiveIndex(index); setRequested(null); }
+              else setRequested(index);
+            }}
           />
         ))}
       </div>

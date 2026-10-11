@@ -26,8 +26,9 @@ export default function HomeContentsCarousel({ slides }: { slides: ContentsSlide
         const next = (active + 1) % slides.length;
         const image = section.querySelectorAll<HTMLImageElement>('.tgg-inside-image img')[next];
         try {
-          if (image) image.loading = 'eager';
-          await image?.decode();
+          if (!image) return;
+          image.loading = 'eager';
+          await image.decode();
           if (!disposed && visible && !document.hidden) setActive(next);
         } catch {
           // Keep the current photo and its matching text when a secondary image fails.

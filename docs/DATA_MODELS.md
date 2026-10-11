@@ -1,3 +1,7 @@
+## 2026-10-12 — Temporary OAuth model (R161)
+
+CURRENT / IMPLEMENTED: OAuthFlow adds the25th isolated B2C model. Private ten-minute browser-bound handshake; state/binding hashed, nonce/verifier select:false, allowlisted next and expiresAt. Unique stateHash plus TTL expiry; atomic conditional consume before provider I/O. No User/Customer/history cardinality change. Only this model permits findOneAndDelete through guarded queries. Generated current reference below regenerated from source (25collections/101explicit indexes); local new-collection install and103-test evidence in DATABASE/TESTING. Production installation remains required.
+
 # Data Models
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.
@@ -519,11 +523,11 @@ The prior sections describe the legacy schema. The following new collection desi
 
 State enums and transition graphs will be centralized. Status enum does not establish permission to execute a commercial transition. This task implements database guards and transaction primitives only; HTTP staff permissions, payment gateway verification, tax/refund approval and retention policy remain separate/UNKNOWN.
 
-## Generated B2C field/index reference — 2026-10-01
+## Generated B2C field/index reference — 2026-10-12
 
 Source: B2C/backend/database/models and validators. Regenerate with npm run db:describe -- --write-docs. This section describes the new isolated database, not legacy src/features models. Every collection has ObjectId _id; implicit _id unique indexes are reported separately. Mutable records carry createdAt/updatedAt; event records carry createdAt only, plus domain dates. The __v/version field is an optimistic-write guard, not a business identifier.
 
-Collections: 24; explicit indexes: 99; explicit unique constraints: 31; with implicit _id indexes: 123/55.
+Collections: 25; explicit indexes: 101; explicit unique constraints: 32; with implicit _id indexes: 126/57.
 
 ### users
 
@@ -561,6 +565,30 @@ State guards: {"status":"UserStatus"}. Initial-state restriction: {}. Frozen pat
 | user email identity | {"emailNormalized":1} | yes | non-sparse |
 | user phone lookup | {"phoneNormalized":1} | no | non-sparse |
 | users admin cursor | {"createdAt":-1,"_id":-1} | no | non-sparse |
+
+### oauth_flows
+
+Purpose: Single-use browser-bound Google OAuth handshake. Lifecycle: Temporary. Hashed state and binding; private nonce/PKCE verifier; expires after ten minutes. Atomic consume and TTL cleanup.
+
+State guards: {}. Initial-state restriction: {}. Frozen paths: append-only if event; see invariant rules. References below are validated on create/change; MongoDB itself has no cross-collection foreign keys.
+
+| Field | Type | Required | Default | Constraint/reference |
+| --- | --- | --- | --- | --- |
+| stateHash | String | required | none | minLength 1; maxLength 64; pattern ^[a-f0-9]{64}$ |
+| bindingHash | String | required | none | minLength 1; maxLength 64; pattern ^[a-f0-9]{64}$ |
+| nonce | String | required | none | minLength 1; maxLength 128; excluded by default projection |
+| verifier | String | required | none | minLength 1; maxLength 128; excluded by default projection |
+| next | String | required | none | minLength 1; maxLength 100; custom validator; see source/rules |
+| expiresAt | Date | required | none | schema casting/strict types |
+| _id | ObjectId | required | none | schema casting/strict types |
+| createdAt | Date | optional | Mongoose timestamp | schema casting/strict types |
+| updatedAt | Date | optional | Mongoose timestamp | schema casting/strict types |
+| __v | Number | optional | 0; optimistic version | schema casting/strict types |
+
+| Index / query purpose | Keys | Unique | Sparse / partial / TTL |
+| --- | --- | --- | --- |
+| oauth state once | {"stateHash":1} | yes | non-sparse |
+| oauth flow expiry | {"expiresAt":1} | no | TTL 0s |
 
 ### customers
 
@@ -609,6 +637,7 @@ State guards: {}. Initial-state restriction: {}. Frozen paths: append-only if ev
 | customerId | ObjectId | required | none | ref Customer |
 | recipientName | String | required | none | minLength 1; maxLength 250 |
 | phone | String | optional | none | minLength 1; maxLength 250 |
+| email | String | optional | none | maxLength 254; pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ |
 | addressLine1 | String | required | none | minLength 1; maxLength 250 |
 | addressLine2 | String | optional | none | minLength 1; maxLength 250 |
 | landmark | String | optional | none | minLength 1; maxLength 250 |
@@ -885,6 +914,7 @@ State guards: {"status":"OrderStatus","paymentStatus":"OrderPaymentStatus","fulf
 | shippingAddressSnapshot | embedded | required | none | schema casting/strict types |
 | shippingAddressSnapshot.recipientName | String | required | none | minLength 1; maxLength 250 |
 | shippingAddressSnapshot.phone | String | optional | none | minLength 1; maxLength 250 |
+| shippingAddressSnapshot.email | String | optional | none | maxLength 254; pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ |
 | shippingAddressSnapshot.addressLine1 | String | required | none | minLength 1; maxLength 250 |
 | shippingAddressSnapshot.addressLine2 | String | optional | none | minLength 1; maxLength 250 |
 | shippingAddressSnapshot.landmark | String | optional | none | minLength 1; maxLength 250 |
@@ -895,6 +925,7 @@ State guards: {"status":"OrderStatus","paymentStatus":"OrderPaymentStatus","fulf
 | billingAddressSnapshot | embedded | required | none | schema casting/strict types |
 | billingAddressSnapshot.recipientName | String | required | none | minLength 1; maxLength 250 |
 | billingAddressSnapshot.phone | String | optional | none | minLength 1; maxLength 250 |
+| billingAddressSnapshot.email | String | optional | none | maxLength 254; pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ |
 | billingAddressSnapshot.addressLine1 | String | required | none | minLength 1; maxLength 250 |
 | billingAddressSnapshot.addressLine2 | String | optional | none | minLength 1; maxLength 250 |
 | billingAddressSnapshot.landmark | String | optional | none | minLength 1; maxLength 250 |
@@ -1111,6 +1142,7 @@ State guards: {"status":"InvoiceStatus"}. Initial-state restriction: {"status":[
 | customerSnapshot.billingAddress | embedded | required | none | schema casting/strict types |
 | customerSnapshot.billingAddress.recipientName | String | required | none | minLength 1; maxLength 250 |
 | customerSnapshot.billingAddress.phone | String | optional | none | minLength 1; maxLength 250 |
+| customerSnapshot.billingAddress.email | String | optional | none | maxLength 254; pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ |
 | customerSnapshot.billingAddress.addressLine1 | String | required | none | minLength 1; maxLength 250 |
 | customerSnapshot.billingAddress.addressLine2 | String | optional | none | minLength 1; maxLength 250 |
 | customerSnapshot.billingAddress.landmark | String | optional | none | minLength 1; maxLength 250 |

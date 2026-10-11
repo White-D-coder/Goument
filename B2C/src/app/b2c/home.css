@@ -4,7 +4,7 @@
 html:has(.tgg-home) { scrollbar-width: none; -ms-overflow-style: none; }
 html:has(.tgg-home)::-webkit-scrollbar { display: none; }
 .tgg-home { position: relative; isolation: isolate; overflow: clip; padding-top: 0; background: var(--tgg-ivory); color: var(--tgg-ink); font-family: var(--tgg-sans); font-size: var(--tgg-body); line-height: 1.65; }
-.tgg-home::before { content: ''; position: absolute; z-index: -1; inset: 0; background: url('/images/patterns/diwali_mandala_bg.jpg') repeat center top / 600px auto; opacity: .2; mix-blend-mode: multiply; mask-image: linear-gradient(90deg,#0009,transparent 13%,transparent 87%,#0009); pointer-events: none; }
+.tgg-home::before { content: ''; position: absolute; z-index: -1; inset: 0; background: url('/images/patterns/diwali-mandala.webp') repeat center top / 600px auto; opacity: .2; mix-blend-mode: multiply; mask-image: linear-gradient(90deg,#0009,transparent 13%,transparent 87%,#0009); pointer-events: none; }
 .tgg-home *, .tgg-home *::before, .tgg-home *::after { box-sizing: border-box; }
 .tgg-home h1, .tgg-home h2, .tgg-home h3, .tgg-home p, .tgg-home figure { margin: 0; }
 .tgg-home h1, .tgg-home h2, .tgg-home h3 { font-family: var(--tgg-serif); font-weight: 400; letter-spacing: -.025em; }

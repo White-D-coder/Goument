@@ -1,3 +1,23 @@
+## 2026-10-12 — Harden B2C image loading (R162)
+
+User requires images to load reliably after optimization. Fixed ProductPhoto recovery carrying between source changes; shared local optimizer→original recovery is bounded and terminal failure gets an accessible placeholder. Home hero rotation/dot selections wait for loaded photos, exclude failures and can recover from a failed first image. Product gallery preserves its loaded frame until a requested photo loads, cancels failed selection, and uses responsive thumbnails sized for the existing phone strip/desktop frames. Contents autoplay retains the current photo when no real next image exists. Healthy design and source photography preserved.
+
+Verified24 referenced local assets decode; four full-page slow-phone image checks, gallery switches/geometry at390/1440 and six injected failure/delay scenarios pass. Typecheck/lint/isolated production build and41 client tests pass. Phone/desktop gallery screenshots inspected. No DB/provider/session/deployment change. See TESTING for exact evidence and corrected harness/lint attempts; R161 delivery metrics remain historical measurements, not a new timing claim.
+
+## 2026-10-12 — B2C security/backend/performance fixes (R161)
+
+User authorized correcting and optimizing the R160 audit. Updated only B2C source/dependencies and canonical memory: remove unsafe privileged defaults, exact Origin/private no-store, database-backed atomic OAuth consume, retryable/coalesced serverless initialization, readiness503, generic errors, raw webhook/provider wiring, safe bounded catalogue queries and truthful preview fallback. Removed B2C's tracked dependency symlink to isolate upgrades from B2B. Next16.4 and compatible dependency updates yield zero production audit alerts in both packages.
+
+Preserved visual design while compressing four assets, using responsive product images, removing unused font preload, reserving streaming layout height and pausing offscreen/reduced-motion hero animation. Public catalogue requests share a2.5s deadline, bounded fanout and15s outage cooldown. Full103 backend/41 client tests, lint/typecheck/build and responsive/browser checks pass; slow-phone Home transfer~86% smaller and full load~84% shorter in measured local samples. Stale test fixtures were adapted to current item-first contracts, not obsolete box behavior. Only the new OAuth collection/indexes installed locally; accounts/customer history/session digests untouched. Existing local services restarted with updated dependencies; temporary audit services closed after verification. No release/provider transaction. TODO ordering retained; completed R160 items marked with remaining operational checks separated. See TESTING for attempted failures and limitations.
+
+## 2026-10-12 — Complete requested B2C final-check audit (R160)
+
+Read-only source/runtime/dependency and isolated browser/build/database checks; findings and verification limits recorded in SECURITY, PERFORMANCE, TESTING, AUTH_SYSTEM, API_CONTRACTS, PAYMENT_SYSTEM and DEPLOYMENT. No application remediation/dependency update/deployment or customer/payment mutation. Build/typecheck pass; full lint and stale fixture/mock tests fail. Newly verified dependency critical alerts are added to P0 review without reordering existing P0 work; wrapper/privacy/delivery follow-ups added alongside existing priorities because this audit supplies new evidence. Actual exploitability/deployed configuration remains unestablished. Local owner setup debt remains open despite the separate approved R159 bootstrap succeeding.
+
+## 2026-10-12 — Complete approved local owner access (R159)
+
+CURRENT / IMPLEMENTED locally: apply the user-approved first OWNER grant through existing audited bootstrap and verify preserved identity/customer ownership and revoked old sessions. Open genuine Google sign-in with `/admin` return; subsequently observe a fresh OWNER session. No password reset, bulk owner setup, fabricated session, application code or production changes. Evidence: TESTING.
+
 ## 2026-10-12 — Prepare requested local admin access (R159)
 
 CURRENT / PARTIAL: inspect existing role/sign-in flow, open `/admin`, verify specified account through read-only local queries and prepare the guarded first-owner route. User confirmation requested before elevating CUSTOMER to full OWNER; roles/credentials/sessions unchanged. Existing two focused bootstrap and state-bound Google-return tests pass against a disposable database. Evidence: TESTING.

@@ -2,7 +2,6 @@ const { MongoMemoryReplSet } = require('mongodb-memory-server');
 const request = require('supertest');
 const { connectDatabase, installSchema } = require('../client');
 const { createAuthApp } = require('../../auth/app');
-const boxes = require('../../gifting/boxes.json');
 const items = require('../../gifting/items.json');
 jest.setTimeout(120000);
 const origin = 'http://localhost:3001', base = '/api/v1/auth/gift';
@@ -13,20 +12,17 @@ afterEach(async () => {for(const m of Object.values(db.models))await m.collectio
 afterAll(async () => {if(db)await db.connection.close();if(mongo)await mongo.stop();});
 const save = (agent,body) => agent.put(base+'/draft').set('Origin',origin).send(body);
 async function login(agent,email='buyer@example.test'){await agent.post('/api/v1/auth/register').set('Origin',origin).send({name:'Test Buyer',email,password:'test-password-long'}).expect(201);}
-const selection = (quantity=1,boxQuantity=1,revision=0) => ({revision, boxes:[{id:boxes[0].id,quantity:boxQuantity}],items:[{id:items[0].id,quantity}]});
+const selection = (quantity=1,boxQuantity=1,revision=0) => ({revision, boxes:[],items:[{id:items.find(item=>item.category!=='Gift Hampers').id,quantity}]});
 test('catalogue hides server capacities and browser cookie is opaque, HttpOnly; count does not create sessions',async()=>{
- const r=await request(app).get(base+'/catalogue').expect(200);expect(r.body.boxes).toHaveLength(8);expect(JSON.stringify(r.body)).not.toMatch(/capacity|Slots/);
+ const r=await request(app).get(base+'/catalogue').expect(200);expect(r.body.boxes).toEqual([]);expect(JSON.stringify(r.body)).not.toMatch(/capacity|Slots/);
  const count=await request(app).get(base+'/count');expect(count.headers['set-cookie']).toBeUndefined();
  const start=await request(app).get(base+'/draft');expect(start.headers['set-cookie'][0]).toMatch(/HttpOnly/);expect(start.headers['set-cookie'][0]).toMatch(/SameSite=Lax/);
 });
-test('box selection persists; exact fit, overflow, multiple and mixed boxes are server checked without blocking item additions',async()=>{
+test('item-first packing is calculated on the server without customer-selected boxes',async()=>{
  const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
- let r=await save(agent,selection(4)).expect(200);expect(r.body.packing).toBe('READY');expect(r.body.revision).toBe(1);
- r=await save(agent,selection(5,1,r.body.revision)).expect(200);expect(r.body.packing).toBe('NEEDS_BOXES');
- await agent.post(base+'/checkout-check').set('Origin',origin).send({capacity:1000}).expect(409);
- r=await save(agent,selection(5,2,r.body.revision)).expect(200);expect(r.body.packing).toBe('READY');
- r=await save(agent,{...selection(9,1,r.body.revision),boxes:[{id:boxes[0].id,quantity:1},{id:boxes[1].id,quantity:1}]}).expect(200);expect(r.body.packing).toBe('READY');
- const loaded=await agent.get(base+'/draft');expect(loaded.body.items[0].quantity).toBe(9);expect(JSON.stringify(loaded.body)).not.toContain('capacity');
+ let r=await save(agent,selection(4)).expect(200);expect(r.body.packing).toBe('READY');expect(r.body.fulfillment.looseBoxes).toBe(1);
+ r=await save(agent,selection(6,1,r.body.revision)).expect(200);expect(r.body.fulfillment.looseBoxes).toBe(2);
+ const loaded=await agent.get(base+'/draft');expect(loaded.body.items[0].quantity).toBe(6);expect(loaded.body.boxes).toEqual([]);
  const check=await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);expect(check.body.checkoutAvailable).toBe(false);expect(await db.models.Order.countDocuments()).toBe(0);
 });
 test('preview hampers save to the gift bag but cannot enter checkout with an assumed price',async()=>{
@@ -48,7 +44,7 @@ test('unknown IDs, duplicate entries, negative/fractional/oversized quantities a
  for(const quantity of [0,-1,1.5,100,'2'])await save(agent,selection(quantity)).expect(400);
  await save(agent,{...selection(),capacity:10000}).expect(400);
  await save(agent,{...selection(),items:[{id:'invented',quantity:1}]}).expect(400);
- await save(agent,{...selection(),boxes:[{id:boxes[0].id,quantity:1,capacity:10000}]}).expect(400);
+ await save(agent,{...selection(),items:[{id:items[0].id,quantity:1,capacity:10000}]}).expect(400);
  await save(agent,{...selection(),items:[...selection().items,...selection().items]}).expect(400);
  expect(await db.models.GiftDraft.countDocuments()).toBe(0);
 });
@@ -67,11 +63,12 @@ test('simultaneous saves have one winner; stale retries cannot silently overwrit
  const edits=await Promise.all([save(agent,selection(3,1,draft.revision)),save(agent,selection(4,1,draft.revision))]);expect(edits.map(r=>r.status).sort()).toEqual([200,409]);
  await save(agent,selection(1,1,0)).expect(409);expect(await db.models.GiftDraft.countDocuments()).toBe(1);
 });
-test('removing boxes or items recomputes fit and prevents checkout for empty or unpackaged drafts',async()=>{
+test('item-only drafts remain ready and empty drafts prevent checkout',async()=>{
  const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');let r=await save(agent,selection());
- r=await save(agent,{revision:r.body.revision,items:selection().items,boxes:[]});expect(r.body.packing).toBe('CHOOSE_BOX');
- await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409);
+ r=await save(agent,{revision:r.body.revision,items:selection().items,boxes:[]});expect(r.body.packing).toBe('READY');
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);
  r=await save(agent,{revision:r.body.revision,items:[],boxes:[]});expect(r.body.packing).toBe('EMPTY');
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409);
 });
 
 test('checkout requires sign-in, keeps guest selection after login and isolates saved delivery addresses',async()=>{
@@ -95,13 +92,13 @@ test('checkout requires sign-in, keeps guest selection after login and isolates 
  expect(await db.models.Order.countDocuments()).toBe(0);
 });
 
-test('guest items and box quantities survive registration, logout and password login without duplicating the browser cart', async () => {
+test('guest items and quantities survive registration, logout and password login without duplicating the browser cart', async () => {
  const agent = request.agent(app);
  const started = await agent.get(base + '/draft').expect(200);
  const giftCookie = started.headers['set-cookie'].find(value => value.startsWith('b2c_gift=')).split(';')[0];
  const guestSelection = {
   revision: 0,
-  boxes: [{ id: boxes[0].id, quantity: 2 }, { id: boxes[1].id, quantity: 1 }],
+  boxes: [],
   items: [{ id: items[0].id, quantity: 2 }, { id: items[1].id, quantity: 3 }],
  };
  const guest = (await save(agent, guestSelection).expect(200)).body;
@@ -160,7 +157,7 @@ test('Google callback and repeat sign-in preserve guest cart ownership, quantiti
  const giftCookie = started.headers['set-cookie'].find(value => value.startsWith('b2c_gift=')).split(';')[0];
  const guest = (await save(agent, {
   revision: 0,
-  boxes: [{ id: boxes[0].id, quantity: 2 }],
+  boxes: [],
   items: [{ id: items[0].id, quantity: 4 }, { id: items[1].id, quantity: 2 }],
  }).expect(200)).body;
  await agent.post(base + '/checkout-check').set('Origin', origin).send({}).expect(401);

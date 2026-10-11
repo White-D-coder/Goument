@@ -9,7 +9,7 @@ export type Product = {
 export type CartItem = { productId: string; variantSku?: string; quantity: number };
 export type User = { id: string; name: string; email: string; role: string };
 export const money = (amount: number, currency = 'INR') => new Intl.NumberFormat('en-IN', { style: 'currency', currency, maximumFractionDigits: 2 }).format((typeof amount === 'number' && !Number.isNaN(amount) ? amount : 0) / 100);
-export function productImage(product: Product | any) {
+export function productImage(product: { images?: (string | { url?: string; public_id?: string })[]; image?: string } | null | undefined) {
  if (!product) return '/images/brand/hero.png';
  const first = Array.isArray(product.images) && product.images.length > 0 ? product.images[0] : null;
  const raw = typeof first === 'string' ? first : first?.url || first?.public_id || product.image;

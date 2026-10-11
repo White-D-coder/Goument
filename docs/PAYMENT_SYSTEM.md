@@ -1,3 +1,11 @@
+## 2026-10-12 — B2C wrapper payment parity (R161)
+
+CURRENT / IMPLEMENTED and fixture-verified: serverless entrypoint constructs the existing Razorpay adapter from explicit provider configuration and passes it to auth/payment routes. Signed webhook is mounted before JSON; raw body/signature handling now matches standalone auth. Browser payment routes retain exact Origin/private-cache protections; generic errors conceal internals. No external provider transaction, capture, refund, order/stock mutation, or checkout activation performed. Real provider/deployed webhook verification remains FUTURE / REQUIRED; missing keys keep existing availability gates. Standalone/schema-backed tests passing do not prove production commerce readiness. Supersedes R160 wrapper-specific parser/adapter findings only; legacy Stripe/integrity debt remains separate.
+
+## 2026-10-12 — B2C serverless payment integration gap (R160)
+
+CURRENT / BROKEN in inspected wrapper integration: unlike standalone `auth/server.js`, `backend/api/index.js` never initializes/passes razorpayGateway, so createAuthApp defaults paymentGateway to null even if provider environment exists. Its outer express.json also consumes webhook bytes before express.raw. With only a mocked gateway and ignored fixture event, the identical JSON request returns200 standalone and400 Invalid webhook signature through wrapper, without calling the raw verifier. This is reproducible middleware failure; no real charge/webhook or deployed function was invoked. Standalone Razorpay regression suite passes but does not cover this entrypoint. Deployed route/configuration is UNKNOWN; payments must remain gated until this integration and provider verification are complete. No activation or financial-data changes authorized/performed by the audit.
+
 # Payment System
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

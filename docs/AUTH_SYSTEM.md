@@ -1,3 +1,17 @@
+## 2026-10-12 — B2C durable OAuth and privacy (R161)
+
+CURRENT / IMPLEMENTED: replace in-process Google flow Map with OAuthFlow in the isolated B2C database. State/binding hashed; nonce/verifier private; ten-minute expiry checked at atomic findOneAndDelete before exchange, with TTL cleanup and an active-flow admission check. Two app instances/concurrent callbacks tested: exactly one exchange. Session cookie names, path, SameSite/secure/HttpOnly settings, customer ownership and session digests preserved. No role grant or password reset in this increment; retired bulk owner CLI refuses to run, existing guarded provision-owner command remains.
+
+All unsafe browser auth methods require exact configured Origin, absent Origin403. Signed webhook remains outside that browser-origin check. Auth prefix returns private,no-store; admin/webhook retain no-store overrides. General limiter remains process-local; login/admin buckets remain persisted. Trusted proxy deployment UNKNOWN. Explicit schema installation before startup now required; local install touched only the new OAuth collection/indexes. Existing approved owner/login preserved; a fresh real Google callback after this change is not runtime-verified. See DATABASE, DEPLOYMENT, SECURITY and TESTING. Supersedes R160 OAuth/cache/Origin open status only.
+
+## 2026-10-12 — B2C origin/cache/deployment audit (R160)
+
+CURRENT / PARTIAL: approved local OWNER session from R159 preserved. Signed-out me/orders/admin endpoints reject401; no session was fabricated/read from the user browser. Current auth mutation middleware additionally admits any Vercel/Cloudflare/localtunnel suffix and absent Origin, so earlier exact-Origin wording is superseded by source and isolated routing evidence. Cookie SameSite/HttpOnly/host scope remains a separate control. Session-owned customer routes lack blanket explicit no-store. OAuth flows/rate maps remain process-local; multi-instance callback reliability and trusted proxy handling remain UNKNOWN. These are unresolved findings, not a production login failure observed in this audit. See SECURITY/TESTING.
+
+## 2026-10-12 — Approved local OWNER and genuine Google session (R159)
+
+CURRENT / IMPLEMENTED locally: explicit user approval authorized first-owner provisioning for their selected existing Google-only account. Existing guarded bootstrap completed, prior sessions were revoked and Google identity/customer ownership were preserved. The user then completed the genuine browser Google flow: a fresh nonexpired persisted session was observed with OWNER role. No session was fabricated, authentication bypassed or password created/reset. Application auth code and production accounts are unchanged. Evidence: TESTING.
+
 ## 2026-10-12 — Local admin sign-in requires provisioned role (R159)
 
 CURRENT / PARTIAL: the specified local account supports Google only and is currently CUSTOMER; there are no local privileged accounts. Public sign-in does not elevate permissions. Existing first-owner bootstrap would add OWNER to the selected existing User, record an audit and revoke previous sessions; explicit user confirmation is pending. Do not use the separate bulk setup-owners script to reset credentials or reassign customer ownership. Account remains unchanged. Evidence: TESTING.

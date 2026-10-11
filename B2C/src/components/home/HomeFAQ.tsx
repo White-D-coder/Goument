@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Pre-sized local WebP decoration, loaded lazily. */
 import { Plus } from 'lucide-react';
 
 type FAQItem = { question: string; answer: string };
@@ -19,8 +20,12 @@ export default function HomeFAQ({ items }: { items: FAQItem[] }) {
 
   <img
     className="tgg-faq-title-icon"
-    src="/images/brand/icon2.png"
+    src="/images/brand/faq-gift.webp"
     alt=""
+    width={600}
+    height={400}
+    loading="lazy"
+    decoding="async"
     aria-hidden="true"
   />
 </div>

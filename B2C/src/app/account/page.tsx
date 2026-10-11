@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { ShieldCheck, ArrowRight, Sparkles, Gift } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -16,6 +17,7 @@ type Order = {
 };
 
 export default function Account(){
+ const router=useRouter();
  const signInLocked=useRef(false);
  const mounted=useRef(false);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;};},[]);
@@ -36,10 +38,12 @@ export default function Account(){
  async function googleSignIn(){
   if(signInLocked.current)return;
   signInLocked.current=true;setError('');setBusy(true);
+  // OAuth needs a document navigation to process the API redirect and its cookies.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination
   try{await prepareSignIn();if(!mounted.current)return;const next=checkoutReturn();window.location.assign('/api/v1/auth/google'+(next?'?next='+encodeURIComponent(next):''));}
   catch(e){if(mounted.current){setError(e instanceof Error?e.message:'Unable to start sign-in.');setBusy(false);}signInLocked.current=false;}
  }
- async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();if(signInLocked.current)return;signInLocked.current=true;setError('');setBusy(true);const form=new FormData(e.currentTarget);try{await prepareSignIn();if(!mounted.current)return;await api(signup?'/auth/register':'/auth/login','POST',{email:form.get('email'),password:form.get('password'),...(signup?{name:form.get('name')}:{})});const profile=await api<{user:User}>('/auth/me');if(!mounted.current)return;const next=checkoutReturn();if(next){await waitForGiftCartBeforeSignIn();if(mounted.current)window.location.assign(next);return;}setUser(profile.user);window.dispatchEvent(new Event('b2c-cart-change'));}catch(e){if(mounted.current)setError(e instanceof Error?e.message:'Unable to sign in.');}finally{if(mounted.current)setBusy(false);signInLocked.current=false;}}
+ async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();if(signInLocked.current)return;signInLocked.current=true;setError('');setBusy(true);const form=new FormData(e.currentTarget);try{await prepareSignIn();if(!mounted.current)return;await api(signup?'/auth/register':'/auth/login','POST',{email:form.get('email'),password:form.get('password'),...(signup?{name:form.get('name')}:{})});const profile=await api<{user:User}>('/auth/me');if(!mounted.current)return;const next=checkoutReturn();if(next){await waitForGiftCartBeforeSignIn();if(mounted.current)router.push(next);return;}setUser(profile.user);window.dispatchEvent(new Event('b2c-cart-change'));}catch(e){if(mounted.current)setError(e instanceof Error?e.message:'Unable to sign in.');}finally{if(mounted.current)setBusy(false);signInLocked.current=false;}}
  async function logout(){setBusy(true);setError('');try{await api('/auth/logout','POST',{});setUser(null);setOrders([]);setPage(1);setCursors([null]);setNextCursor(null);window.dispatchEvent(new Event('b2c-cart-change'));}catch(e){setError(e instanceof Error?e.message:'Unable to sign out.');}finally{setBusy(false);}}
  const isPrivileged = Boolean(user && ['admin', 'owner'].includes(user.role?.toLowerCase()));
  if(loading)return <section className="section empty" role="status">Loading your account…</section>;

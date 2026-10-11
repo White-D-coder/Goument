@@ -37,8 +37,8 @@ async function pending(f, suffix = '1') {
 async function captured(f) { const p = await pending(f); await confirmPayment(db, p.event); return p; }
 const successes = results => results.filter(r => r.status === 'fulfilled');
 
-test('all24 collections and explicit unique/partial indexes install', async () => {
- expect(Object.keys(db.models)).toHaveLength(24);
+test('all25 collections and explicit unique/partial indexes install', async () => {
+ expect(Object.keys(db.models)).toHaveLength(25);
  for (const model of Object.values(db.models)) { const actual = await model.collection.indexes(); for (const [, o] of model.schema.indexes()) { const found = actual.find(i => i.name === o.name); expect(found).toBeDefined(); if (o.unique) expect(found.unique).toBe(true); if(o.partialFilterExpression) expect(found.partialFilterExpression).toEqual(o.partialFilterExpression); } }
 });
 test('registration forces customer role, hides hash and enforces normalized uniqueness', async () => {

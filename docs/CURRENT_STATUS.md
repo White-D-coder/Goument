@@ -1,3 +1,19 @@
+## 2026-10-12 — B2C reliable image loading (R162)
+
+CURRENT / IMPLEMENTED locally: shared ProductPhoto resets recovery for each source, attempts original local asset after optimizer failure and shows an accessible bounded placeholder only if the original also fails. Hero chooses only loaded photos and recovers from a failed initial slide; gallery retains current photo until requested image loads and preserves it on failure. Gallery thumbnails now responsive optimized images. Existing fitting/frames/corners/content retained. All24 referenced local images exist/decode; slow-phone Home/Shop/Ivory/India and six deliberate failure/recovery scenarios pass, with phone/desktop gallery screenshots inspected. Typecheck/lint/build and41 client tests pass. No backend/account/payment/deployment change. TESTING owns limits/evidence.
+
+## 2026-10-12 — B2C audit corrections and delivery optimization (R161)
+
+CURRENT / IMPLEMENTED locally: R160 dependency, unsafe owner CLI, wrapper/parser/error, Origin/private-cache, OAuth state and public catalogue findings corrected in B2C. Next16.4 and independent dependency installs; both production dependency audits report zero vulnerabilities. Existing accounts, ownership, sessions, payment/preview gates and established design preserved. Production Home transfer ~4.89MB→0.71MB; simulated slow-phone load25.55s→4.07s and LCP9.83s→3.34s (single local lab samples). Typecheck, lint, production build,103 database tests,41 client tests and12 responsive layouts pass. No deployment or real provider transaction. Distributed general rate limits/trusted proxy, production schema installation and integration verification remain open; legacy applications' findings remain separate. SECURITY, PERFORMANCE and TESTING own details. Supersedes R160's current B2C remediation/test status, preserving its historical evidence.
+
+## 2026-10-12 — B2C security/backend/performance audit completed (R160)
+
+CURRENT / PARTIAL: no observed customer-data leak or signed-out admin bypass in tested local paths; not release-clean. Dependency audits report critical/high alerts; privileged CLI defaults, wrapper error exposure/raw-webhook/parser/provider wiring, broad Origin and missing private-cache policy remain. Slow-network Home LCP9.83s/load25.55s with heavy decorative transfers; no persistent headless scroll stall. Build/typecheck pass; lint fails; client37/38 and database87/97 pass, failures traced to stale mocks/box fixtures. No corrective source/dependency change, deployment or user-data mutation. Scope, limits and evidence: SECURITY, PERFORMANCE, TESTING. Existing legacy priorities remain; newly evidenced B2C audit work added to TODO with explicit rationale in CHANGELOG.
+
+## 2026-10-12 — Local OWNER access and Google sign-in confirmed (R159)
+
+CURRENT / IMPLEMENTED locally: approved first-owner bootstrap completed for the explicitly selected existing account; Google identity/customer ownership preserved, prior sessions revoked and one audit recorded. Browser Google flow uses `/admin` return and a new nonexpired OWNER session was observed. Supersedes earlier pending approval. Authenticated admin UI/API contents were not directly inspected; production unchanged. Evidence: TESTING; TODO priorities unchanged.
+
 ## 2026-10-12 — B2C admin sign-in prepared (R159)
 
 CURRENT / PARTIAL: local admin/sign-in pages return200 and browser opening succeeds; Google is enabled. Selected existing account is Google-only CUSTOMER, with no local OWNER/ADMIN provisioned. Full local OWNER bootstrap approval requested; no elevation or login has been completed. Two existing isolated bootstrap/admin-return tests pass. Evidence: TESTING. Record provisioning-script security debt in TODO without changing priority ordering.

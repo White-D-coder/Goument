@@ -1,10 +1,12 @@
 # Prioritized TODO
 
-Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.
+Last reviewed: 2026-10-12 for B2C R161 fixes; other-system priorities retain their prior source evidence. Production deployment remains unverified.
 
 Priorities below are initial engineering triage from source findings, not an approved feature schedule. P0=critical, P1=important, P2=enhancement, P3=future. Preserve ordering unless new evidence/user priority changes it; record reason in CHANGELOG.
 
 ## P0
+
+- [x] B2C R160 dependency security review — R161 corrected2026-10-12: independent B2C installs, Next16.4/compatible updates and unused frontend dependency removal; both production audits0, build/typecheck/lint/regressions pass. Historical baseline and advisory limits retained in SECURITY.
 
 - [x] S01: public registration assigns customer server-side; malicious-role and existing-admin regression tests added (2026-09-27).
 - [ ] S02/S03: authorize socket admin membership and remove reliance on source fallback admin/encryption credentials; establish required configuration.
@@ -14,15 +16,24 @@ Priorities below are initial engineering triage from source findings, not an app
 
 ## P1
 
-- [ ] B2C owner setup CLI security (observed2026-10-12): `backend/admin/setup-owners.js` contains plaintext default privileged passwords and can reset existing passwords, activate identities and reassign Customer.userId by email. It is a CLI, not a public endpoint. Require explicit safe operator inputs and preserve identity/history in a separately authorized correction; use the guarded existing first-owner bootstrap for the currently selected local account only after approval. No credential values recorded.
+- [x] B2C R160 serverless entrypoint — R161 raw webhook/provider wiring, parser/error boundaries, explicit schema lifecycle, coalesced/retryable init and readiness503 corrected; entrypoint regressions pass. Real deployed/provider verification remains separate.
+- [ ] B2C R160 privacy/auth boundaries — CURRENT / PARTIAL R161: exact Origin, private no-store and cross-instance persistent atomic OAuth implemented/tested. Remaining: distributed general rate limiter and deployed trusted-proxy/CDN evidence. Preserve existing cookies, identity and permissions; no tested customer leak/admin bypass demonstrated.
+- [x] B2C R160 catalogue contracts — R161 safe DTO/literal bounded query,2.5s shared fetch budget/bounded fanout and truthful preview/price/stock fallback tested; checkout gates retained. Historical findings in SECURITY/PERFORMANCE.
+
+- [x] B2C owner setup CLI security — R161 retired unsafe bulk/default-password CLI; guarded explicit-user-ID operator command retained. Regression proves retired script cannot touch DB; no account mutation. R159 approved local owner remains. Historical finding in SECURITY; no credential values recorded.
 
 - [ ] S04/S06: restrictive credentialed CORS, public endpoint validation/abuse controls, template/PII exposure review.
 - [ ] E08/S07/S08: complete historical data/identity strategy, durable vault storage, retention and concurrent-write handling.
 - [ ] Align effective page controls and health path; preserve current availability until explicitly changed.
-- [ ] Establish runtime/deployment ownership, transaction-ready DB, backups and integration verification evidence.
+- [ ] Establish runtime/deployment ownership, transaction-ready DB, backups and integration verification evidence. B2C R161 additionally requires explicit OAuthFlow schema/index installation before release and real provider webhook verification; local tests do not establish production readiness.
 - [ ] Run relevant existing suites and add regression scenarios from TESTING; establish separate typecheck because build ignores errors.
 
 ## P2
+
+- [x] B2C reliable image loading (R162,2026-10-12): per-source bounded recovery, load-aware hero/gallery, optimized thumbnails;24 assets decode, slow-phone/responsive and injected-failure checks pass. Deployed/physical-device image delivery remains unverified; see TESTING.
+
+- [x] B2C R160 measured delivery — R161 compressed assets/responsive images/unused font removal/streaming layout and offscreen hero fixes verified. Slow-phone Home25.55→4.07s,4.89→0.71MB; physical-device/deployed field validation remains future. PERFORMANCE owns lab conditions and historical evidence.
+- [x] B2C R160 test reliability — R161 fixtures/mocks adapted to current item-first/empty-box/Header contracts;103/103 database and41/41 client tests plus full lint pass. Ownership/cart/payment guards retained; historical failures in TESTING.
 
 - [ ] Home desktop slideshow dots (observed2026-10-11): at1440px the existing copy panel overlaps the centered dots, so pointer hit tests fail. Phone layering is corrected within R120; review desktop stacking separately without redesigning its hero.
 

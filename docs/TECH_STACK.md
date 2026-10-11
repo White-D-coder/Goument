@@ -1,3 +1,7 @@
+## 2026-10-12 — B2C dependency isolation/update (R161)
+
+CURRENT / IMPLEMENTED B2C only: Next/eslint-config-next16.4.0 pinned, React/ReactDOM19.2.4 retained. Frontend runtime dependencies reduced to Next, React/ReactDOM, Framer Motion and Lucide after import inspection; unused Axios, XLSX, mail/query/state/animation/cache packages removed from this storefront, not other apps. Compatible backend Express4.22.3/Joi17.13.8/uuid11.1.1 and transitives updated. Both production audits zero vulnerabilities; dev-only packages not certified. B2C frontend/backend independent npm installs replace local shared symlinks. Mongoose8 retained, new OAuthFlow model uses existing Mongo/crypto, no extra service/provider introduced. Original main/alternate stack inventory below remains separate and unchanged. Build/typecheck/lint and103 backend/41 client tests pass.
+
 # Tech Stack
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

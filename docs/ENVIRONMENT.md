@@ -1,3 +1,11 @@
+## 2026-10-12 — Isolated B2C installs and local verification (R161)
+
+CURRENT / IMPLEMENTED: remove tracked B2C/node_modules symlink and use independent ignored installs in B2C and B2C/backend; package locks support npm ci without upgrading B2B modules. Next16.4/React19.2.4. Existing local storefront3000 and standalone auth5003 restarted with updated code; existing Mongo loopback service retained. No .env content copied/printed, credential changes or account/session revocation. Only new OAuthFlow schema installed using a guarded loopback dev/test connection. Production build/browser checks used private temporary artifacts/server/profile; checks complete and temporary services closed. Production environment/proxy/schema configuration remains UNKNOWN. See DEPLOYMENT for explicit installer before startup.
+
+## 2026-10-12 — Local first OWNER provisioned (R159)
+
+CURRENT / IMPLEMENTED locally: the user-approved existing account now has OWNER in the isolated loopback dev database. Bootstrap/audit/session revocation verified; Google reauthentication produced a new persisted session. No environment settings, service processes, production databases or Google Console settings changed. No user identifiers or secrets recorded. Earlier first-owner-not-provisioned status describes the prior increment. Evidence: TESTING.
+
 ## 2026-10-12 — Reported Google error environment clarified (R158)
 
 CURRENT / PARTIAL: user confirms the redirect mismatch occurred on localhost:3000. The verified callback remains `http://localhost:3000/api/v1/auth/google/callback`; actual Google Console registration and completed consent are still unverified.

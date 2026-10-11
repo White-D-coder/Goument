@@ -80,3 +80,20 @@ test('Google checkout return is state-bound and external return URLs are rejecte
   expect(callback.headers.location).toBe(origin+expected);
  }
 });
+
+test('OAuth handshake survives another app instance and atomically rejects concurrent callback replay',async()=>{
+ const start=await request(app).get('/api/v1/auth/google?next=/admin').expect(302);
+ const state=new URL(start.headers.location).searchParams.get('state');const cookie=start.headers['set-cookie'][0].split(';')[0];
+ const second=createAuthApp({db,origin,clientId:'test-client',clientSecret:'test-secret',provider});
+ const responses=await Promise.all([app,second].map(instance=>request(instance).get('/api/v1/auth/google/callback').set('Cookie',cookie).query({state,code:'fixture'}).expect(302)));
+ expect(responses.map(r=>r.headers.location).sort()).toEqual([origin+'/account?authError=expired',origin+'/admin'].sort());expect(provider.exchange).toHaveBeenCalledTimes(1);expect(await db.models.OAuthFlow.countDocuments()).toBe(0);
+});
+test('expired OAuth records reject before exchange, exact Origin and private response policy apply',async()=>{
+ const start=await request(app).get('/api/v1/auth/google').expect(302);const state=new URL(start.headers.location).searchParams.get('state');const cookie=start.headers['set-cookie'][0].split(';')[0];
+ const expired=await db.models.OAuthFlow.findOne({stateHash:auth.digest(state)}).select('+nonce +verifier');expired.expiresAt=new Date(0);await expired.save();
+ await request(app).get('/api/v1/auth/google/callback').set('Cookie',cookie).query({state,code:'fixture'}).expect(302).expect('Location',origin+'/account?authError=expired');expect(provider.exchange).not.toHaveBeenCalled();
+ for(const evil of ['https://untrusted.vercel.app','https://untrusted.trycloudflare.com','https://untrusted.localtunnel.me'])await request(app).post('/api/v1/auth/logout').set('Origin',evil).send({}).expect(403);
+ await request(app).post('/api/v1/auth/logout').send({}).expect(403);
+ const agent=request.agent(app);await agent.post('/api/v1/auth/register').set('Origin',origin).send({name:'Private',email:'private@example.test',password:'fixture-password-long'}).expect(201);
+ for(const path of ['/me','/orders','/gift/draft','/gift/count']){const r=await agent.get('/api/v1/auth'+path).expect(200);expect(r.headers['cache-control']).toMatch(/no-store/);}
+});

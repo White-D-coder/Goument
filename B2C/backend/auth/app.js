@@ -10,18 +10,21 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   const secure = url.protocol === 'https:';
   const cookie = { httpOnly: true, secure, sameSite: 'lax', path: '/api/v1/auth' };
   const sessionName = 'b2c_session'; const flowName = 'b2c_google_flow';
-  const flows = new Map(); const rates = new Map();
+  const rates = new Map();
   const safeNext = value => typeof value === 'string' && /^(?:\/checkout(?:\?order=[a-f0-9]{24})?|\/admin)$/.test(value) ? value : '/account';
   const configured = Boolean(clientId && clientSecret);
   const google = provider || (configured ? googleProvider({ clientId, clientSecret, redirectUri: `${origin}/api/v1/auth/google/callback` }) : null);
   const app = express(); app.disable('x-powered-by'); app.use(helmet()); app.use(cookieParser());
+  app.use('/api/v1/auth', (req,res,next)=>{res.set('Cache-Control','private, no-store');next();});
   require('../payments/routes').mountWebhook(app,{db,gateway:paymentGateway,express});
+  app.use('/api/v1/auth', (req,res,next)=>{
+    if (!['GET','HEAD','OPTIONS'].includes(req.method) && req.get('origin') !== origin) return res.status(403).json({ message: 'Request origin not allowed' });
+    next();
+  });
   const publicJson = express.json({ limit: '8kb' });
   const adminJson = express.json({ limit: '128kb' });
   app.use((req,res,next)=>(req.path === '/api/v1/auth/admin' || req.path.startsWith('/api/v1/auth/admin/') ? adminJson : publicJson)(req,res,next));
   app.use('/api/v1/auth', (req,res,next)=>{
-    const reqOrigin = req.get('origin');
-    if (req.method !== 'GET' && reqOrigin && ![origin, 'http://localhost:3000', 'http://localhost:3001'].includes(reqOrigin) && !reqOrigin.endsWith('.trycloudflare.com') && !reqOrigin.endsWith('.localtunnel.me') && !reqOrigin.endsWith('.vercel.app')) return res.status(403).json({ message: 'Request origin not allowed' });
     // Operations uses persisted per-actor/IP read, write and sensitive buckets.
     if (req.path === '/admin' || req.path.startsWith('/admin/')) return next();
     const now=Date.now();for(const [key,value]of rates)if(value.until<now)rates.delete(key);
@@ -31,19 +34,21 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   const run = fn => (req,res,next) => Promise.resolve(fn(req,res)).catch(next);
   const signedIn = (res,token) => { res.cookie(sessionName,token,{...cookie,maxAge:service.SESSION_MS}); };
   app.get('/api/v1/auth/config', (req,res)=>res.json({googleEnabled:configured}));
-  app.get('/api/v1/auth/google', (req,res)=>{
+  app.get('/api/v1/auth/google', run(async(req,res)=>{
     if(!configured)return res.redirect(`${origin}/account?authError=unavailable`);
-    for(const [key,value]of flows)if(value.expires<Date.now())flows.delete(key);
-    if(flows.size>=1000)return res.redirect(`${origin}/account?authError=busy`);
-    const state=service.random();const binding=service.random();const flow={next:safeNext(req.query.next),nonce:service.random(),verifier:service.random(),binding:service.digest(binding),expires:Date.now()+600000};
-    flows.set(state,flow);res.cookie(flowName,binding,{...cookie,maxAge:600000});res.redirect(google.authorization({state,...flow}));
-  });
+    if(await db.models.OAuthFlow.countDocuments({expiresAt:{$gt:new Date()}}).maxTimeMS(3000)>=1000)return res.redirect(`${origin}/account?authError=busy`);
+    const state=service.random();const binding=service.random();const flow={stateHash:service.digest(state),next:safeNext(req.query.next),nonce:service.random(),verifier:service.random(),bindingHash:service.digest(binding),expiresAt:new Date(Date.now()+600000)};
+    await db.models.OAuthFlow.create(flow);
+    res.cookie(flowName,binding,{...cookie,maxAge:600000});res.redirect(google.authorization({state,...flow}));
+  }));
   app.get('/api/v1/auth/google/callback',run(async(req,res)=>{
-    const state=typeof req.query.state==='string'?req.query.state:'';const flow=flows.get(state);
-    const bound=typeof req.cookies[flowName]==='string'&&flow?.binding===service.digest(req.cookies[flowName]);
+    const state=typeof req.query.state==='string'?req.query.state:'';
+    const binding=typeof req.cookies[flowName]==='string'?req.cookies[flowName]:'';
     res.clearCookie(flowName,cookie);
-    if(!flow||!bound||flow.expires<Date.now())return res.redirect(`${origin}/account?authError=expired`);
-    flows.delete(state); // consume before token exchange; callback replay never logs in again
+    if(!/^[A-Za-z0-9_-]{43}$/.test(state)||!/^[A-Za-z0-9_-]{43}$/.test(binding))return res.redirect(`${origin}/account?authError=expired`);
+    // Atomic consume across instances, before provider I/O; TTL is cleanup, not authorization.
+    const flow=await db.models.OAuthFlow.findOneAndDelete({stateHash:service.digest(state),bindingHash:service.digest(binding),expiresAt:{$gt:new Date()}}).select('+nonce +verifier').maxTimeMS(3000).lean();
+    if(!flow)return res.redirect(`${origin}/account?authError=expired`);
     const accountError = code => `${origin}/account?authError=${code}&next=${encodeURIComponent(flow.next)}`;
     if(req.query.error)return res.redirect(accountError('cancelled'));
     if(typeof req.query.code!=='string'||req.query.code.length>4096)return res.redirect(accountError('failed'));

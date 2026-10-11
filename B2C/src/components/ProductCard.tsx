@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Existing local and provider catalogue images. */
 'use client';
 
 import Link from 'next/link';
@@ -6,6 +5,7 @@ import { ArrowUpRight, ShoppingBag } from 'lucide-react';
 import { Product, money, productImage } from '@/lib/types';
 import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
+import ProductPhoto from './ProductPhoto';
 
 export default function ProductCard({
   product,
@@ -35,14 +35,13 @@ export default function ProductCard({
           aria-label={`View ${product.name}`}
           tabIndex={-1}
         >
-          <img
+          <ProductPhoto
             src={productImage(product)}
             alt={
               (Array.isArray(product.images) && product.images[0]?.alt) ||
               product.name
             }
-            loading="lazy"
-            decoding="async"
+            sizes="(max-width: 640px) 46vw, (max-width: 1000px) 45vw, 30vw"
           />
         </Link>
       </div>

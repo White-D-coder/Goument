@@ -1,3 +1,15 @@
+## 2026-10-12 — Consistent title font and buttons (R156)
+
+CURRENT / IMPLEMENTED: public headings use Cormorant Garamond at every width; styled actions share9px corners,44px minimum height and12px Jakarta text. Tablet collection actions show labels. Typecheck, CSS parse/diff and42 responsive page/width checks pass; scoped layout ESLint has zero errors and one pre-existing unused-disable warning. Navigation, keyboard focus and filter dialog checks pass; phone/tablet/desktop screenshots inspected. Existing tablet heading/action overlap recorded in TODO; priorities unchanged.
+
+## 2026-10-12 — Phone navbar keeps GG logo (R155)
+
+CURRENT / IMPLEMENTED: phone header retains GG before/after scroll; full brand name stays hidden. Typecheck/scoped lint, CSS parse/diff and seven-width checks on Home/Shop/PDP pass, including scroll-return, no overflow/brand-action overlap, and logo navigation. Phone screenshots inspected. TODO priorities unchanged.
+
+## 2026-10-12 — Stable B2C navbar options (R154)
+
+CURRENT / IMPLEMENTED: route changes retain Shop/Hampers/Collections/Corporate; Our Story no longer replaces Collections. Footer matches. Typecheck/scoped lint/diff and responsive browser checks pass, including actual Home→Collections→product→Collections navigation and mobile menu/dropdown controls. Navbar screenshot inspected. TODO priorities unchanged.
+
 ## 2026-10-12 — Single gaps between Home content sections (R153)
 
 CURRENT / IMPLEMENTED: remove following top padding between adjacent Home content sections. Hampers→Favourites and Philosophy→FAQ now measure40/32/24px across desktop/tablet/phone. CSS parse/diff and six-width browser checks pass; desktop screenshot inspected. TODO priorities unchanged.

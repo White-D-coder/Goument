@@ -1,3 +1,17 @@
+## 2026-10-12 — Shared storefront titles and rounded actions (R156)
+
+CURRENT / IMPLEMENTED: use the Cormorant Garamond family from “Hampers for every occasion” for public page, section and card headings at every width. Keep existing responsive heading sizes/weights and body/navigation fonts. Supersedes R94’s phone sans family and the Home hero/collection sans exceptions; footer headings use the same family.
+
+All styled public actions share Shop now’s9px corners,44px minimum height,12px Jakarta text at600 weight, normal casing,.01em tracking and consistent inset/icon spacing. Primary actions use burgundy; hero/corporate inverse actions and secondary outlined purchase controls retain contrasting roles. Include catalogue, collection, related-gift, account/order, payment and filter actions. Google retains its neutral surface and original logo sizing. Icon controls, tabs, text links, disclosures and gallery controls retain their roles; hidden purchase actions remain hidden. Counters use matching corners and44px height. Tablet collection circles become labelled actions within the existing card grid. Centralize this in root-imported `B2C/src/app/storefront-ui.css`; an explicit important CSS layer resolves legacy route font/colour overrides independently of navigation order. Exclude operations shell/gate. No commercial or auth behavior changes. Evidence: TESTING.
+
+## 2026-10-12 — GG-only phone navbar (R155)
+
+CURRENT / IMPLEMENTED: phone headers through640px always show the original `/images/brand/LOGOs.svg` GG artwork, including scrolled/solid Home, Shop and product headers. Hide the full brand-name span on phones and retain the logo image across React scroll-state changes. Above640px preserve the existing initial-logo/scrolled-wordmark presentation. Keep the home link’s accessible name/destination and current artwork sizing; no viewport JavaScript or new asset. Sources: Brand, navigation.css; evidence: TESTING.
+
+## 2026-10-12 — Keep navbar options stable across routes (R154)
+
+CURRENT / IMPLEMENTED: public B2C navbar always shows Shop, Hampers, Collections and Corporate. Remove the non-Home substitution of Our Story for Collections and decorative chevrons on plain non-Home links; Shop retains its real dropdown. The shared navigation function is route-independent and uses the existing Home corporate destination/configured override consistently. Both footer navigation lists use this same set. Preserve Home/non-Home header surface/scroll behavior, mobile controls, account/cart and role-gated admin behavior. Supersedes R150’s route-specific public-option/corporate-fallback preservation. Sources: Header, Footer, storefront-navigation; evidence: TESTING.
+
 ## 2026-10-12 — Remove adjacent Home padding stack (R153)
 
 CURRENT / IMPLEMENTED: consecutive top-level Home `.tgg-section` siblings suppress the following section’s top padding. The preceding bottom padding owns the gap:40px desktop,32px tablet,24px phone. Applies to Hampers→Favourites and Philosophy→FAQ; retain R149 outer-edge padding around hero/packaging/corporate and zero nested FAQ padding. Supersedes R149’s doubled internal boundary padding. Source: Home CSS; evidence: TESTING.

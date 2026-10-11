@@ -1,0 +1,143 @@
+/* Public storefront type and actions, shared by every route and viewport.
+   The important layer deliberately wins over older route-level !important
+   font/colour rules regardless of Next's stylesheet navigation order. */
+:root {
+  --storefront-title-font: 'Cormorant Garamond', Georgia, serif;
+  --storefront-action-radius: 9px;
+  --storefront-action-fill: #4a0404;
+  --storefront-action-hover: #650c0c;
+  --storefront-action-ink: #fffdf8;
+}
+
+@layer storefront-ui {
+  #main :is(h1, h2, h3, h4, h5, h6):not(:where(.admin-shell *, .admin-gate *)),
+  footer.tgg-reference-footer :is(h2, h3, h4) {
+    font-family: var(--storefront-title-font) !important;
+  }
+
+  #main :is(
+    .button,
+    .tgg-button,
+    .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary,
+    .tgg-collection-link,
+    .pdp-related-grid .pdp-link,
+    .shop-filter-bar > button,
+    .shop-filter-sort button
+  ):not(:where(.admin-shell *, .admin-gate *)) {
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    min-height: 44px !important;
+    padding: 11px 16px !important;
+    border: 1px solid var(--action-border, var(--storefront-action-fill)) !important;
+    border-radius: var(--storefront-action-radius) !important;
+    background: var(--action-fill, var(--storefront-action-fill)) !important;
+    color: var(--action-ink, var(--storefront-action-ink)) !important;
+    font-family: var(--font-jakarta) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .01em !important;
+    text-transform: none !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: background-color 180ms ease, border-color 180ms ease !important;
+  }
+
+  #main :is(.button, .tgg-button, .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary, .tgg-collection-link,
+    .pdp-related-grid .pdp-link, .shop-filter-bar > button, .shop-filter-sort button)
+    :is(svg, span[aria-hidden='true']):not(:where(.admin-shell *, .admin-gate *)) {
+    transform: none !important;
+  }
+
+  #main :is(.button, .tgg-button, .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary, .tgg-collection-link,
+    .pdp-related-grid .pdp-link, .shop-filter-bar > button, .shop-filter-sort button)
+    :where(svg):not(:where(.admin-shell *, .admin-gate *, .google-signin *)) {
+    flex-shrink: 0;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  #main :is(.button, .tgg-button, .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary, .tgg-collection-link,
+    .pdp-related-grid .pdp-link, .shop-filter-bar > button, .shop-filter-sort button):hover:not(:disabled):not(:where(.admin-shell *, .admin-gate *)) {
+    background: var(--action-hover, var(--storefront-action-hover)) !important;
+    border-color: var(--action-hover-border, var(--action-hover, var(--storefront-action-hover))) !important;
+  }
+
+  #main :is(.button, .tgg-button, .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary, .tgg-collection-link,
+    .pdp-related-grid .pdp-link, .shop-filter-bar > button, .shop-filter-sort button):focus-visible:not(:where(.admin-shell *, .admin-gate *)) {
+    outline: 2px solid var(--action-focus, var(--storefront-action-fill)) !important;
+    outline-offset: 4px !important;
+  }
+
+  #main :is(.gift-counter, .quantity):not(:where(.admin-shell *, .admin-gate *)) {
+    overflow: hidden;
+    border-radius: var(--storefront-action-radius) !important;
+  }
+  #main .gift-counter:not(:where(.admin-shell *, .admin-gate *)) { height: 44px !important; }
+  #main .gift-counter button:not(:where(.admin-shell *, .admin-gate *)) { height: 42px !important; }
+  #main .tgg-collection-card .tgg-collection-link { display: flex !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #main :is(.button, .tgg-button, .card-luxury-btn, .account-explore-cta, .order-cta-btn, .google-signin, .button-pay-primary, .tgg-collection-link,
+      .pdp-related-grid .pdp-link, .shop-filter-bar > button, .shop-filter-sort button) {
+      transition: none !important;
+    }
+  }
+}
+
+/* Inverse and secondary actions use the same geometry and typography. */
+#main :is(.tgg-hero-copy > .tgg-button, .tgg-button--light,
+  .button.light, .button.outline-light, .pdp-corporate .button) {
+  --action-fill: #fffdf8;
+  --action-border: #fffdf8;
+  --action-ink: #4a0404;
+  --action-hover: #eee7db;
+  --action-focus: #fffdf8;
+}
+#main .button.outline {
+  --action-fill: transparent;
+  --action-border: #4a0404;
+  --action-ink: #4a0404;
+  --action-hover: #f0e9dd;
+  --action-hover-border: #4a0404;
+}
+
+#main .google-signin {
+  --action-fill: #fffdf8;
+  --action-border: #ded7cc;
+  --action-ink: #302b27;
+  --action-hover: #f0e9dd;
+  --action-hover-border: #ded7cc;
+}
+
+/* Replace the old tablet arrow circle with the same labelled card action. */
+#main .tgg-home .tgg-collection-card .tgg-collection-link {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  align-self: center;
+  margin-top: auto;
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+  #main .tgg-home .tgg-collection-card { display: flex; flex-direction: column; }
+  #main .tgg-home .tgg-collection-card .tgg-favourite-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+}
+@media (max-width: 640px) {
+  #main .pdp-ivory .gift-purchase-controls > .button {
+    --action-fill: transparent;
+    --action-border: #4a0404;
+    --action-ink: #4a0404;
+    --action-hover: #f0e9dd;
+    --action-hover-border: #4a0404;
+  }
+}

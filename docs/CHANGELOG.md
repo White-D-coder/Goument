@@ -1,3 +1,15 @@
+## 2026-10-12 — Unify storefront typography and buttons (R156)
+
+CURRENT / IMPLEMENTED: add one root-imported storefront style sheet to apply the hamper-heading font to all public titles and the rounded Shop now appearance to styled actions across viewports. Preserve contextual inverse/outline colours, disabled/hidden controls and operations styling; make tablet collection actions labelled. Existing routes and handlers remain. Verification and limits: TESTING.
+
+## 2026-10-12 — Keep GG branding on phone scroll (R155)
+
+CURRENT / IMPLEMENTED: retain the existing logo image in Brand and switch its responsive visibility with header CSS. Phones through640px show GG in every state; larger screens preserve the previous scroll wordmark. Accessibility label/home link and header controls remain. Typecheck/scoped lint, CSS parse/diff and responsive browser checks pass; see TESTING.
+
+## 2026-10-12 — Preserve navbar choices after Collections navigation (R154)
+
+CURRENT / IMPLEMENTED: remove public navigation’s Home/non-Home branch and plain-link decorative chevrons. Keep the established Home menu and corporate destination across routes; update both footer consumers to the route-independent helper. Preserve navbar controls and surface behavior. Typecheck/scoped lint/diff and responsive/click-navigation checks pass; see TESTING.
+
 ## 2026-10-12 — Fix screenshot’s double Home padding (R153)
 
 CURRENT / IMPLEMENTED: add one Home-only adjacent-section rule so bottom/top padding no longer sums across consecutive content sections. Desktop gap80→40px, tablet64→32px, phone48→24px. Supersedes R149 internal boundary spacing; R152 was the separate Ivory product spacing adjustment. CSS parse/diff and responsive browser measurements pass; see TESTING.

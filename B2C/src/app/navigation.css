@@ -123,6 +123,13 @@
 
 .header .brand > span.brand-name { font-family: 'Pagio', Georgia, serif; font-weight: 400; font-synthesis: none; }
 .header .brand > img { width: 64px; height: 64px; }
+.header .brand.scrolled > .brand-logo { display: none; }
+
+/* Phones keep the GG artwork in both initial and scrolled header states. */
+@media (max-width: 640px) {
+  .header .brand.scrolled > .brand-logo { display: block; }
+  .header .brand > span.brand-name { display: none; }
+}
 
 /* Keep the original B2C masthead in flow so the split hero starts directly below it. */
 .header.home-header--editorial {

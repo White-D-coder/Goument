@@ -9,10 +9,8 @@ export const shopCategories = [
 export const shopCategoryLinks = shopCategories.map(({ title, search }) =>
   [title, `/shop?search=${encodeURIComponent(search)}`] as const);
 
-export function storefrontNavigation(home: boolean): [string, string][] {
+export function storefrontNavigation(): [string, string][] {
   const corporateSiteUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL
-    || (home || process.env.NODE_ENV === 'production' ? 'https://thegourmetgifts.co/' : 'http://localhost:3000/');
-  return home
-    ? [['Hampers', '/b2c#hampers'], ['Collections', '/shop'], ['Corporate', corporateSiteUrl]]
-    : [['Hampers', '/b2c#hampers'], ['Corporate', corporateSiteUrl], ['Our Story', '/b2c#our-story']];
+    || 'https://thegourmetgifts.co/';
+  return [['Hampers', '/b2c#hampers'], ['Collections', '/shop'], ['Corporate', corporateSiteUrl]];
 }

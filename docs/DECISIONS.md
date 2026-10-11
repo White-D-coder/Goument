@@ -1,3 +1,11 @@
+## 2026-10-12 — One title family and action appearance (R156)
+
+CURRENT / IMPLEMENTED: explicit user direction supersedes R94’s phone sans-title direction and R144’s collection-title sans exception. Select the existing Cormorant Garamond family used by the referenced hamper heading and retain responsive scales/weights. Use Shop now’s compact rounded9px geometry and shared Jakarta action text throughout the public storefront. Preserve inverse/outlined roles for contrast and purchase hierarchy. An important cascade layer wins existing route-specific important declarations without depending on retained Next route CSS order; installed Next CSS documentation was consulted. Exclude operations and avoid a contract/handler rewrite. Affected: B2C public presentation; evidence: TESTING.
+
+## 2026-10-12 — One public navbar on every storefront route (R154)
+
+CURRENT / IMPLEMENTED: explicit user direction supersedes R150’s preservation of different Home/other-page navbar options. Home’s Shop/Hampers/Collections/Corporate list and configured-or-existing Home corporate URL now apply consistently; the legacy Our Story substitution and development-only corporate Home URL are removed from public navigation. Footer follows the same shared options. Header surface classes and role/account/cart logic remain independent of this content choice. Reason: Collections must remain available after navigation. Sources: shared storefront-navigation, Header, Footer; evidence: TESTING.
+
 ## 2026-10-12 — Shop actions replace Home starting prices (R148)
 
 CURRENT / IMPLEMENTED: user explicitly requests buttons instead of prices, each opening the selected collection. Supersede R144's Home price-display decision and R147's prefix adjustment; remove the unused helper and optional price prop rather than leave hidden data. Reuse the existing per-card Link and href without new product/cart/price contracts. Keep phone/tablet actions, compact desktop frames and centered bold copy. Affected: B2C Home presentation only; evidence: TESTING.

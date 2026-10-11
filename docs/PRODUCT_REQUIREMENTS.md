@@ -1,3 +1,9 @@
+R156 (2026-10-12) CURRENT / IMPLEMENTED: apply the “Hampers for every occasion” heading family throughout the B2C storefront and unify styled buttons across phone/tablet/desktop using the current rounded Shop now appearance. Preserve responsive title sizing, button destinations/handlers, accessible focus/disabled states and contextual colour variants. Supersedes prior phone/card font exceptions and disparate button appearance. Sources: root layout/shared storefront-ui.css; evidence: TESTING.
+
+R155 (2026-10-12) CURRENT / IMPLEMENTED: phone navbar must keep only the GG logo after scrolling and must not replace it with the full The Gourmet Gifts name. Apply to the shared phone header; preserve larger-screen branding and navbar controls. Sources: Brand/navigation.css; verification: TESTING.
+
+R154 (2026-10-12) CURRENT / IMPLEMENTED: keep the existing desktop Home navbar options on every B2C page. Clicking Collections must not remove Collections or insert Our Story. Use stable Shop/Hampers/Collections/Corporate options and matching footer public links. Sources: Header, Footer, shared navigation; verification: TESTING.
+
 R153 (2026-10-12) CURRENT / IMPLEMENTED: fix the supplied Home screenshot’s double gap after hamper cards. Consecutive content sections use one padding amount instead of bottom+top padding, preserving card design and other section edges. Source: Home CSS; verification: TESTING.
 
 R152 (2026-10-12) CURRENT / IMPLEMENTED: remove stacked padding between the current Ivory product sections following the finer-details removal. Each visible content transition uses one responsive gap instead of adding neighboring top/bottom padding. Preserve existing photos, cards, controls and other product pages. Source: product CSS; verification: TESTING.

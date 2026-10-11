@@ -29,6 +29,8 @@ Priorities below are initial engineering triage from source findings, not an app
 
 - [ ] No-JavaScript storefront rendering (observed2026-10-07): disabling page scripts during a product navigation leaves the inherited Next loading shell visible while product markup is streamed into a hidden boundary. Full no-JS rendering is not verified; investigate inherited loading/streaming behavior within an explicit progressive-enhancement task. Current normal/reduced-motion JavaScript flows pass.
 
+- [ ] Home tablet heading/action overlap (observed2026-10-12 at768px): the inherited `clamp(64px, 3.5vw, 46px)` keeps section headings at64px and the absolutely positioned View all gifts link overlaps the favourites title. R156 changes font family/button appearance and preserves title scales; review heading sizing/action layout separately.
+
 - [ ] B2C typography cleanup (audit2026-10-05): resolve footer h2 Jakarta/Cormorant !important conflict; agree shared heading/body/action scales, casing and tracking; assess9–11px microcopy; remove unused Cinzel/script/Momcake declarations only within approved font scope while preserving admin Pagio/brand needs. Source/runtime mapping in UI_SYSTEM; this audit did not authorize a font redesign.
 
 - [ ] B2C frontend lint debt (observed2026-10-05): types.ts explicit-any and GiftBuilder unused selection remain. GoldPopperSprinkle synchronous effect state resolved in the performance increment, with scoped/full lint evidence. Full lint remains failing.

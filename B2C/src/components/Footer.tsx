@@ -10,7 +10,7 @@ const homeFooterColumns = [
 	},
 	{
 		title: 'Discover',
-		links: [['Shop', '/shop'], ...storefrontNavigation(true)],
+		links: [['Shop', '/shop'], ...storefrontNavigation()],
 	},
 ];
 
@@ -41,7 +41,7 @@ function HomeFooter() {
 const footerColumns = [
 	{
 		title: 'Explore',
-		links: [['Shop', '/shop'], ...storefrontNavigation(false)],
+		links: [['Shop', '/shop'], ...storefrontNavigation()],
 	},
 	{
 		title: 'Catalogue Categories',

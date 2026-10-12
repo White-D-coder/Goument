@@ -1,3 +1,17 @@
+## 2026-10-12 — Consistent display amounts through cart (R220)
+
+CURRENT / IMPLEMENTED locally: each registered gift's cart unit price uses the same existing numeric preview amount as cards/PDP, including all nine₹99 envelopes and fixed candle figures. Multiply confirmed quantities in integer paise; subtotal/total include GST/delivery without surcharge. Printing metadata does not change price or units. Supersedes prior exclusion of preview figures from cart and candle-range presentation; unknown IDs/packaging remain incomplete. This display arithmetic is not a server-owned saleable quote; order/payment/stock guards remain unchanged.
+
+## 2026-10-12 — Required Lotus name before checkout (R216/R219)
+
+CURRENT / IMPLEMENTED locally: Lotus name printing is required by latest user steering, SUPERSEDING initial optional/Skip handling. PDP Add/Buy now/name save validate name; direct card Add may keep an unresolved draft until cart name prompt. Save/edit affects metadata only, preserves quantity and other lines. Missing/legacy Skip cannot pass checkout-check, checkout view or address capture; valid PRINT does not bypass existing price/stock/payment gates. One1–80-character name per existing Lotus line; no inferred fee, saleable stock or order-print fulfillment claim. Pack of 20 strip expands to all envelope cards except Home, without changing quantity/pack arithmetic. Required future order metadata snapshot is tracked in TODO; no historical rewrite.
+
+## 2026-10-12 — Inclusive GST and delivery (R213)
+
+CURRENT / IMPLEMENTED locally: explicit latest user policy includes GST and delivery in listed item prices. This SUPERSEDES R192 extra18% and R193 before-delivery/internal₹100–300 policy. GiftCart helper multiplies each known inclusive unit bound by confirmed integer quantity1–99, sums in paise and returns Total equal to subtotal; no additive GST/delivery fields. Ivory1×₹2,499=₹2,499;2×=₹4,998. Existing candle₹200–500 range and unknown item/packaging incomplete-total semantics retained. No browser money becomes order authority.
+
+UNKNOWN: included-GST accounting allocation/jurisdiction, exact saleable candle/hamper/packaging prices and SKU mappings/serviceability. Inclusion does not mean tax rate0 or authorize changing invoice/order snapshots. FUTURE / REQUIRED: authoritative inclusive quote/reservation bridge. Order409/checkoutAvailable:false/paymentAvailable:false retained; no schema/customer/stock/history mutation. TESTING verifies arithmetic and financial guards.
+
 ## 2026-10-12 — Numeric preview cards and draft-only photo selections (R196–R197)
 
 CURRENT / IMPLEMENTED locally: current user authorizes sample display amounts on every card and removes the visible Sample/estimated suffix. Shared UI helper supplies the figures documented in UI_SYSTEM; live product amounts retain actual basePrice/currency. New display samples do not become cart calculation inputs, inventory, quote authority or order snapshots. Existing before-delivery cart calculation/18% extra GST/candle range/unpriced-item behavior retained; exact commercial pricing remains required. Nine photographed envelopes and two candles now support independent registered draft quantities using existing loose-item packing rules; no stock reservation or payment readiness implied. Orders remain fail-closed409, checkoutAvailable:false. Earlier enquiry-only UI requirements for these previews are superseded by current user card behavior. See API_CONTRACTS/TESTING.

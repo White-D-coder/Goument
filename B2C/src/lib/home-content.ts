@@ -37,5 +37,5 @@ export const homeFAQs = [
   { question: 'Can I include a personal message?', answer: 'Open your chosen gift’s page and use the gift-note enquiry to request a personal message. Our team will confirm the available options and any charges.' },
   { question: 'Why do some hampers show pricing on enquiry?', answer: 'Prices and availability for those curations are confirmed by our team. Open the gift page to request the current details. Gifts with an existing catalogue price show that amount directly.' },
   { question: 'Do you help with corporate gifting?', answer: 'Yes. Use Explore Corporate Gifting to discuss gifts for teams, clients and events, including your quantity, occasion, budget and personalisation needs.' },
-  { question: 'How do I check delivery details?', answer: 'Contact our team for availability, timing and charges for your chosen gift and delivery location.' },
+  { question: 'How do I check delivery details?', answer: 'Delivery is included. Contact our team for availability and timing for your chosen gift and delivery location.' },
 ];

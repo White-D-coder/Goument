@@ -6,6 +6,7 @@ const items = require('./items.json');
 const fail = (message, status = 400) => Object.assign(new Error(message), { status });
 const publicBoxes = boxes.map(({ capacity, ...box }) => box);
 const { calculatePackaging } = require('./packaging');
+const { validatePersonalisation, requirePersonalisation } = require('./personalisation');
 const known = (id, source) => source.find(entry => entry.id === id);
 
 function packing(draft) {
@@ -19,7 +20,7 @@ function hasEnquiryOnlyHamper(draft) {
   }));
 }
 function payload(draft) {
-  const itemsList = draft?.items?.map(({ id, quantity }) => ({ id, quantity })) || [];
+  const itemsList = draft?.items?.map(({ id, quantity, personalisation }) => ({ id, quantity, ...(personalisation ? { personalisation: personalisation.toObject() } : {}) })) || [];
   const fulfillment = calculatePackaging(itemsList);
   return {
     revision: draft ? draft.__v + 1 : 0,
@@ -31,15 +32,18 @@ function payload(draft) {
     checkoutAvailable: false
   };
 }
-function validate(body) {
+function validate(body, previous) {
   if (!body || Object.keys(body).some(k => !['revision', 'boxes', 'items'].includes(k)) || !Number.isSafeInteger(body.revision) || body.revision < 0) throw fail('Invalid selection. Reload your gift and try again.');
   if (body.boxes !== undefined && !Array.isArray(body.boxes)) throw fail('Invalid gift selection.');
   const itemRows = body.items;
   if (!Array.isArray(itemRows) || itemRows.length > 100 || new Set(itemRows.map(r => r?.id)).size !== itemRows.length) throw fail('Invalid gift selection.');
   for (const row of itemRows) {
-    if (!row || Object.keys(row).some(k => !['id', 'quantity'].includes(k)) || !known(row.id, items) || !Number.isSafeInteger(row.quantity) || row.quantity < 1 || row.quantity > 99) {
+    if (!row || Object.keys(row).some(k => !['id', 'quantity', 'personalisation'].includes(k)) || !known(row.id, items) || !Number.isSafeInteger(row.quantity) || row.quantity < 1 || row.quantity > 99) {
       throw fail('Please choose a valid item and quantity.');
     }
+    // Retain an existing legacy Skip during unrelated edits, never create a new one.
+    const legacySkip = previous?.items.some(item => item.id === row.id && item.personalisation?.mode === 'SKIP');
+    validatePersonalisation(row.id, row.personalisation, Boolean(legacySkip));
   }
 }
 function mountGifting(app, { db, cookie, run }) {
@@ -65,8 +69,8 @@ function mountGifting(app, { db, cookie, run }) {
   }));
   app.put(`${base}/draft`, run(async (req, res) => {
     const key = owner(req); if (!key) throw fail('Reload your gift to restore its session.', 409);
-    validate(req.body);
     let draft = await db.models.GiftDraft.findOne({ ownerHash: key });
+    validate(req.body, draft);
     if ((draft ? draft.__v + 1 : 0) !== req.body.revision) throw fail('Your gift changed in another tab. Latest selection loaded; please try again.', 409);
     if (!draft) draft = new db.models.GiftDraft({ ownerHash: key });
     draft.boxes = req.body.boxes; draft.items = req.body.items;
@@ -81,6 +85,7 @@ function mountGifting(app, { db, cookie, run }) {
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') return res.status(409).json({ message: 'Add items to your bag before checkout.', packing: draft ? packing(draft) : 'EMPTY' });
     if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
+    requirePersonalisation(draft);
     const fulfillment = calculatePackaging(draft.items);
     res.json({ packing: 'READY', fulfillment, checkoutAvailable: false, next: '/checkout' });
   }));
@@ -91,13 +96,14 @@ function mountGifting(app, { db, cookie, run }) {
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') throw fail('Please review your items in your bag.', 409);
     if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
+    requirePersonalisation(draft);
     const addresses = await db.models.CustomerAddress.find({customerId:customer._id}).sort({updatedAt:-1}).limit(20);
     const fulfillment = calculatePackaging(draft.items);
     res.json({
       addresses: addresses.map(addressView),
       selection: {
         boxes: [],
-        items: draft.items.map(r => ({ name: known(r.id, items)?.name || r.id, quantity: r.quantity }))
+        items: draft.items.map(r => ({ name: known(r.id, items)?.name || r.id, quantity: r.quantity, ...(r.personalisation ? { personalisation: r.personalisation.toObject() } : {}) }))
       },
       fulfillment,
       paymentAvailable: false
@@ -107,6 +113,8 @@ function mountGifting(app, { db, cookie, run }) {
     const { customer } = await identity(db, req.cookies.b2c_session);
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
+    if (!draft || packing(draft) !== 'READY') throw fail('Please review your items in your bag.', 409);
+    requirePersonalisation(draft);
     const body=req.body;
     if (!body || Object.keys(body).some(k=>!fields.includes(k)&&k!=='id')) throw fail('Invalid delivery details.');
     const input={};
@@ -150,7 +158,7 @@ function mountGifting(app, { db, cookie, run }) {
 
     // Cart estimates are not an authoritative, reserved order quote. Never
     // replace the missing commercial bridge with a flat per-item valuation.
-    throw fail('Final item prices, GST and delivery must be confirmed before an order can be created.', 409);
+    throw fail('Final inclusive item prices and stock must be confirmed before an order can be created.', 409);
   }));
 }
 module.exports = { mountGifting, packing, validate };

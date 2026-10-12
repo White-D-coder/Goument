@@ -1,3 +1,11 @@
+## 2026-10-12 — Bounded temporary bootstrap failure recovery (R214)
+
+CURRENT / IMPLEMENTED locally: allowlisted me/config/gift-count/catalogue/draft GETs retry a503 once after a finite server cooldown≤1s (default1s); credentials/cookies/auth ownership unchanged.401/429 and all auth/cart/order mutations are never auto replayed. Existing concurrent bootstrap sharing and draft read/write queue retained; no settled private cache or permission fabrication. Persistent failures remain errors/manual Retry. TESTING/API_CONTRACTS own exact boundaries and evidence; hosted failure cause UNKNOWN.
+
+## 2026-10-12 — Bootstrap traffic isolation (R206)
+
+CURRENT / IMPLEMENTED locally: allowlisted storefront bootstrap GET/HEAD traffic gets separate bounded300/minute per-IP bucket so browsing does not exhaust existing60/minute auth/OAuth/write allowance. Persisted login/admin guards, Origin/cookie/session/identity rules retained; Retry-After added to process-local429. Frontend coalesces only concurrent me/count/config reads and clears sharing before mutations; no settled private response cache, automatic mutation retry or permission authority added. SECURITY/API_CONTRACTS/TESTING own exact boundaries and evidence; distributed/deployed-proxy limits remain open.
+
 ## 2026-10-12 — Separate account refresh from cart changes (R166)
 
 CURRENT / IMPLEMENTED client optimization: Header checks /auth/me on mount and b2c-auth-change, while b2c-cart-change updates only its bag count. Account emits auth event after confirmed password sign-in/profile read and successful logout, including return-to-admin/checkout cases; Google document navigation still mounts a fresh Header. Separate request IDs prevent stale auth/count responses winning. Endpoint, credentials, cookies, identity and server authorization unchanged. Anonymous me401 remains expected, not converted to fabricated authentication or guest200. Regression verifies cart changes avoid additional auth calls and sign-out clears staff link; hosted anonymous401 and successful gift GETs observed. TESTING owns scope; production publication not performed.

@@ -96,9 +96,11 @@ function buildModels(connection) {
   s = define('GiftDraft', 'gift_drafts', {
     ownerHash: hash(),
     boxes: list(sub({ id: text(true, 100), quantity: { ...integer(true, 1), max: 99 } }), 8),
-    items: list(sub({ id: text(true, 100), quantity: { ...integer(true, 1), max: 99 } }), 100)
+    items: list(sub({ id: text(true, 100), quantity: { ...integer(true, 1), max: 99 }, personalisation: { type: sub({ mode: { type: String, required: true, enum: ['PRINT', 'SKIP'] }, name: text(false, 80) }) } }), 100)
   }, { frozen: ['ownerHash'], check() {
     for (const entries of [this.boxes, this.items]) if (new Set(entries.map(i => i.id)).size !== entries.length) throw new Error('Duplicate gift selection');
+    // Legacy Skip records remain readable; checkout now requires a print name.
+    for (const item of this.items) require('../../gifting/personalisation').validatePersonalisation(item.id, item.personalisation?.toObject(), true);
   } });
   unique(s, { ownerHash: 1 }, 'one_gift_draft_per_browser');
   const orderFrozen = ['orderNumber', 'customerId', 'items', 'pricing', 'coupon', 'shippingAddressSnapshot', 'billingAddressSnapshot', 'customerSnapshot', 'idempotencyKey', 'requestHash'];

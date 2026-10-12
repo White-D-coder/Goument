@@ -1,3 +1,7 @@
+## 2026-10-12 — GiftDraft Lotus personalisation semantics (R216/R219)
+
+CURRENT / IMPLEMENTED locally: items[].personalisation is optional for unresolved/legacy draft compatibility. Embedded mode PRINT requires a1–80trimmed-character name with no control/line-separator characters, Lotus ID only. Legacy SKIP mode is retained in storage schema for reads/preserving existing rows; new API Skip decisions rejected and legacy Skip never satisfies checkout/address gate. Existing row id/quantity remains the identity/cardinality, one print name per Lotus line. Generated field table below describes structural optionality, not permission to checkout without a name. No historical/customer/order snapshot changes; future priced order bridge must explicitly preserve printing metadata. DATABASE/API_CONTRACTS/TESTING own rollout and evidence.
+
 ## 2026-10-12 — Temporary OAuth model (R161)
 
 CURRENT / IMPLEMENTED: OAuthFlow adds the25th isolated B2C model. Private ten-minute browser-bound handshake; state/binding hashed, nonce/verifier select:false, allowlisted next and expiresAt. Unique stateHash plus TTL expiry; atomic conditional consume before provider I/O. No User/Customer/history cardinality change. Only this model permits findOneAndDelete through guarded queries. Generated current reference below regenerated from source (25collections/101explicit indexes); local new-collection install and103-test evidence in DATABASE/TESTING. Production installation remains required.
@@ -866,6 +870,9 @@ State guards: {}. Initial-state restriction: {}. Frozen paths: ownerHash. Refere
 | items | embedded[] | optional | [] | custom validator; see source/rules; bounded array |
 | items[].id | String | required | none | minLength 1; maxLength 100 |
 | items[].quantity | Number | required | none | min 1; max 99; custom validator; see source/rules |
+| items[].personalisation | embedded | optional | none | schema casting/strict types |
+| items[].personalisation.mode | String | required | none | enum PRINT, SKIP |
+| items[].personalisation.name | String | optional | none | minLength 1; maxLength 80 |
 | _id | ObjectId | required | none | schema casting/strict types |
 | createdAt | Date | optional | Mongoose timestamp | schema casting/strict types |
 | updatedAt | Date | optional | Mongoose timestamp | schema casting/strict types |

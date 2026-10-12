@@ -1,3 +1,11 @@
+## 2026-10-12 — Local healthy, hosted temporary503 (R214)
+
+VERIFIED read-only: existing local Next3000/auth5003/Mongo27017 remain running; direct/proxied gift catalogue/count/draft200, signed-out me401/private,no-store. First configured public backend catalogue read503/no-store then count/draft200/me401; underlying hosted cause UNKNOWN without logs. No environment/config/schema/provider change, restart or deployment. Client adds bounded temporary-read retry locally; TESTING/API_CONTRACTS own limits. Temporary isolated Chrome stopped after fixture checks; user services retained.
+
+## 2026-10-12 — Apply local429 fix and Lotus metadata (R206/R210)
+
+CURRENT / IMPLEMENTED locally: guarded existing auth5003 process/cwd and unchanged loopback development config before restart to load rate-bucket fix and ep1_3.webp metadata. Proxied count/draft/catalogue200, signed-out me401, private,no-store preserved. No env edits/schema installer/seed/customer mutation. Next3000/Mongo retained; no hosted deployment. TESTING records final browser evidence.
+
 ## 2026-10-12 — Reload registered photo metadata (R197/R201)
 
 CURRENT / IMPLEMENTED locally: existing standalone auth5003 process/cwd and unchanged known loopback rs0 dev DB/localhost3000 config guarded before restart to load11 registered draft selections, then latest Laddoo image metadata. No env edits/values printed/schema installer/seed/customer mutation. Proxied catalogue/count/draft200 and signed-out me401/private,no-store retained. User Next3000/Mongo retained. Temporary browser uses fixtures for writes; no hosted deployment/autostart claim. See TESTING.

@@ -1,0 +1,26 @@
+.envelope-print-field { width: 100%; margin: 20px 0 0; }
+.envelope-print-field label { display: block; margin-bottom: 8px; color: var(--wine, #4a0404); font-size: 14px; font-weight: 600; }
+#main .envelope-print-field input { display: block; box-sizing: border-box; width: 100%; max-width: none; min-height: 48px; padding: 12px 14px; border: 1px solid #ded3c4; border-radius: 12px; background: #fffdf9; color: var(--ink); font: inherit; font-size: 16px; }
+.envelope-print-field input:focus-visible { outline: 2px solid var(--wine, #4a0404); outline-offset: 2px; }
+#main .envelope-print-field p { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+#main .envelope-print-field .envelope-print-error { color: var(--wine, #4a0404); }
+.envelope-print-save { margin-top: 10px; }
+.envelope-name-dialog { box-sizing: border-box; width: min(480px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 28px; border: 1px solid #e9e1d6; border-radius: 22px; background: #fffdf9; color: var(--ink); overflow-y: auto; }
+.envelope-name-dialog::backdrop { background: rgb(31 20 18 / 45%); }
+.envelope-name-dialog-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+#main .envelope-name-dialog h2 { margin: 0; color: var(--wine, #4a0404); font-family: var(--font-title); font-size: 32px; line-height: 1.15; }
+.envelope-name-dialog-heading button { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--wine, #4a0404); font-size: 26px; line-height: 1; }
+#main .envelope-name-dialog > p { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.envelope-name-dialog-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 24px; }
+.envelope-name-dialog-actions .button { flex: 1; }
+#main .gift-cart-print-name { margin: 10px 0 4px; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.gift-cart-print-action { margin-top: 6px; font-size: 12px; }
+.delivery-print-name { display: block; margin-top: 6px; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .envelope-name-dialog { padding: 22px; }
+  #main .envelope-name-dialog h2 { font-size: 28px; }
+  .pdp .buy-panel .gift-purchase--personalised > .gift-purchase-controls { grid-column: 1; grid-row: 1; }
+  .pdp .buy-panel .gift-purchase--personalised > .gift-purchase-buy-now { grid-column: 2; grid-row: 1; }
+  .pdp .buy-panel .gift-purchase--personalised > .envelope-print-field { grid-column: 1 / -1; grid-row: 2; margin-top: 8px; }
+  .pdp .buy-panel .gift-purchase--personalised > .envelope-print-save { grid-column: 1 / -1; grid-row: 3; justify-self: start; }
+}

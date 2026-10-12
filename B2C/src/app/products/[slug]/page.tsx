@@ -8,7 +8,7 @@ import { productBySlug } from '@/lib/catalogue';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import { productEditorial } from '@/lib/product-editorial';
-import { productPriceLabel } from '@/lib/product-pricing';
+import ProductCard from '@/components/ProductCard';
 import { productImage } from '@/lib/types';
 import './product-detail.css';
 
@@ -25,14 +25,7 @@ async function RelatedGifts({ slug }: { slug: string }) {
   if (!products.length) return null;
   return <section className="pdp-related pdp-wrap" aria-labelledby="related-heading">
     <div className="pdp-section-heading"><div><p className="pdp-eyebrow">More thoughtful gestures</p><h2 id="related-heading">You may also like</h2></div><Link className="pdp-link" href="/shop">Explore all gifts <span aria-hidden="true">→</span></Link></div>
-    <div className="pdp-related-grid">{products.map(product => <article key={product.slug}>
-      <Link href={`/products/${product.slug}`} className="pdp-related-photo" aria-label={`View ${product.name}`}>
-        <ProductPhoto src={productImage(product)} alt={product.name} sizes="(max-width: 600px) 90vw, 30vw"/>
-      </Link>
-      <h3><Link href={`/products/${product.slug}`}>{product.name}</Link></h3>
-      <p>{productPriceLabel(product)}</p>
-      <Link className="pdp-link" href={`/products/${product.slug}`}>View gift <span aria-hidden="true">→</span></Link>
-    </article>)}</div>
+    <div className="pdp-related-grid">{products.map(product => <ProductCard key={product.slug} product={product} compact />)}</div>
   </section>;
 }
 
@@ -57,13 +50,6 @@ export default async function Detail({ params }: PageProps) {
     <section className="pdp-hero pdp-wrap" aria-labelledby="product-name">
       <div className={`pdp-photography${product.slug.startsWith('india-hamper') ? ' pdp-landscape' : ''}`}>
         <ProductGallery key={product.slug} images={gallery} name={product.name} contain/>
-        {editorial.isPhotographedHamper && <div className="pdp-gallery-details">
-          {editorial.story.slice(0, 2).map(item => <figure key={item.title}>
-            <div className="pdp-detail-photo"><ProductPhoto src={item.image!} alt={item.alt!} sizes="(max-width: 600px) 45vw, 28vw"/></div>
-            <figcaption>{item.title}</figcaption>
-          </figure>)}
-        </div>}
-        <p className="pdp-photo-caption">{editorial.isPhotographedHamper ? 'A closer look at the photographed curation.' : 'The details make the gesture.'}</p>
       </div>
 
       <div className="pdp-purchase">
@@ -75,6 +61,15 @@ export default async function Detail({ params }: PageProps) {
           {CURATED_HAMPERS.filter(item => item.slug.startsWith('india-hamper')).map(item => <Link key={item.slug} href={`/products/${item.slug}`} aria-current={item.slug === product.slug ? 'page' : undefined}>{item.slug.endsWith('lavender') ? 'Lavender' : 'Burgundy'}</Link>)}
         </nav>}
         <BuyPanel key={`purchase-${product.slug}`} product={product}/>
+      </div>
+      <div className="pdp-gallery-supplement">
+        {editorial.isPhotographedHamper && <div className="pdp-gallery-details">
+          {editorial.story.slice(0, 2).map(item => <figure key={item.title}>
+            <div className="pdp-detail-photo"><ProductPhoto src={item.image!} alt={item.alt!} sizes="(max-width: 600px) 45vw, 28vw"/></div>
+            <figcaption>{item.title}</figcaption>
+          </figure>)}
+        </div>}
+        <p className="pdp-photo-caption">{editorial.isPhotographedHamper ? 'A closer look at the photographed curation.' : 'The details make the gesture.'}</p>
       </div>
     </section>
 

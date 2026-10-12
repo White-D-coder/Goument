@@ -1,3 +1,41 @@
+## 2026-10-12 — Card/cart display-price consistency (R220)
+
+CURRENT / IMPLEMENTED locally: shared product-pricing.ts amount resolver supplies both preview card/PDP labels and gift cart unit/subtotal/total calculations. All registered envelopes retain₹99, Laddoo₹299, Floral₹349, Himalayan₹499, bookmarks₹349 and existing hamper/diary/generic historical figures. Quantity/name/reload changes cannot switch known items to Price pending or old candle ranges. Prices remain GST/delivery-inclusive; no new charge. Unknown unregistered IDs/packaging remain pending, unavailable checkout guards retained. Existing numeric figures unchanged. SUPERSEDES earlier preview-price exclusion/candle-range display only. Pack strip category predicate also falls back to envelope slug for online records lacking categories. TESTING owns evidence.
+
+## 2026-10-12 — Envelope names, pack strips and gallery sizing (R216–R219)
+
+CURRENT / IMPLEMENTED locally: Lotus purchase controls reuse PrintNameField below Add/counter, full-width including phone. Label Name to print, required input,80-character limit, inline validation and concise printing help. Existing draft name loads without overwriting active edits. Save name changes metadata without adding units; edited names save before cart navigation. Empty/whitespace/control-character input blocks PDP Add/Buy now/name save. Catalogue direct Add remains available without an inline field; cart prompts before proceeding. Native dialog includes required input, Save name & continue, close and Escape; closing leaves checkout unresolved. No Optional/Skip choice. Failed saves keep input/dialog and confirmed quantities, no automatic mutation replay. Preview checkout guards stay active even after name save.
+
+Shared ProductCard uses category slug envelopes (or envelope slug when categories are absent) for Pack of 20: full-width bottom image overlay, minimum48px, white90% background, opaque centered burgundy text. All nine photographed envelopes and related cards share it; independent Home collection card has none. SUPERSEDES R215 Lotus-only scope; display wording does not alter cart quantity/price semantics.
+
+Desktop (>900px) PDP uses size containment on the left grid cell, flex gallery with flexible main frame/fixed thumbnail row, and the intrinsic purchase panel to determine equal total height. Existing supplementary photographs/caption remain in the next left grid row. Content/name/error changes resize both columns without ResizeObserver/layout polling. Stacked tablet and existing shortened phone ratios/top gap retained; related carousel retained. R216's specific print-name control is newly requested and distinct from R207's removed generic note/enquiry panel. TESTING owns evidence.
+
+## 2026-10-12 — Lotus image pack label (R215)
+
+CURRENT / IMPLEMENTED locally: ProductCard for lotus-shagun-envelope places Pack of 20 inside its photo link at bottom, full width,48px minimum height,12px vertical padding, rgb(255 255 255 /90%) background. Opaque14px semibold Jakarta/burgundy centered text; image retains original frame/crop. Explicit bottom strip request supersedes earlier no-image-label preference for this Lotus strip only; no capsule above image. Other products/Home collection cards unchanged. No purchase-quantity/price/money contract change. TESTING owns four responsive checks.
+
+## 2026-10-12 — Inclusive summary and centered product cards (R213–R214)
+
+CURRENT / IMPLEMENTED locally: GiftCart shows quantity/unit/line prices, item subtotal and prominent Total; no GST surcharge, delivery row, excl.GST suffix or Total before delivery. Note says GST and delivery included. Unknown item/packaging prices still prevent a complete total. FAQ confirms included delivery while requesting availability/timing; legacy cart and checkout-unavailable copy use inclusive terms. Footer seller GST registration and address capture remain. R192/R193 surcharge presentation SUPERSEDED.
+
+Shared storefront-cards.css centers existing product/Home hamper/Home collection title, short one-line description and22–36px burgundy price; full-width actions/counters retained. Reuses ProductCard in related carousel; no new component/image capsule or hover change. Supersedes R211 left alignment only.20 Home/Candles/Lotus/cart checks at320/375/425/768/1440 pass with no overflow; phone/desktop screenshots inspected. TESTING owns API recovery/error/quantity guard evidence.
+
+## 2026-10-12 — Lotus Home card is collection navigation (R212)
+
+CURRENT / IMPLEMENTED locally: explicit user correction makes Home's Lotus card an Envelopes collection entry. Keep current Lotus photo/title/description/style, show From ₹99.00 using shared prefix presentation, link image/title/Shop now (phone Explore) to /shop/envelopes. Omit giftItemId from this Home discovery datum so it navigates instead of adding. This SUPERSEDES R211 Home Lotus direct Add behavior only; Lotus catalogue/PDP/cart identity remains. Source: b2c/page.tsx; TESTING records checks.
+
+## 2026-10-12 — Minimal product-card reference (R211)
+
+CURRENT / IMPLEMENTED locally: current user authorizes card presentation changes using supplied reference's hierarchy while maintaining existing theme: image, serif title, one short paragraph line, large price, Add to Cart. No image capsule/ratings/offers/badges added. Existing filled photographs, mild corners and card hover/static-image behavior retained. Title uses existing shared Cormorant role; content now left-aligned. Description always renders from short/long description (generic presentation fallback only if absent), displays one line with ellipsis while retaining full DOM text. Bold burgundy Jakarta price uses clamp(22px,11cqi,36px), responding to card width; purchase action/counter spans content width. Preserve grid/phone carousel sizing. Existing action-error/confirmed quantity behavior retained.
+
+Shop/collection and PDP related products reuse ProductCard. Related carousel remains three products with its existing responsive scrolling and now supports the same Add/counter interaction. Home hampers and discovery cards share spacing/price role; Lotus discovery maps its existing gift ID to Add/counter. Scented Candles/Eternal Paper Co. remain category navigation, not arbitrary SKU adds; starting-price From prefix is small above amount to avoid narrow-card clipping. Existing display-only prices/stock/checkout rules untouched. Supersedes earlier centered card-content/small-price styling only; cart/PDP main-price roles unchanged. Sources: ProductCard/HomeSections/Home page/PDP related render/storefront-cards.css. Evidence: TESTING.
+
+## 2026-10-12 — Final product-page scope and stationery taxonomy (R207–R210)
+
+CURRENT / IMPLEMENTED locally: pasted product-page lower content removal covers delivery/bulk enquiry links, GiftNoteRequest panel, presentation-box editorial/story, corporate band and footer on /products/* only. Home/Shop/other public footers remain. RelatedGifts carousel was initially removed with the pasted block; current explicit user clarification SUPERSEDES that interpretation and restores the existing three cards, prices/links and phone horizontal scroll. Keep product gallery, description, colour selection and purchase controls.
+
+Stationery contains bookmarks/diary sets, excluding all envelope designs online and offline before totals/pagination. Existing Envelopes collection and All Gifts still contain the nine designs; no draft/history deletion. Stationery discovery copy/photo now use bookmarks. Lotus supplied ep1_3.png is main/card/cart metadata image through ep1_3.webp, followed by existing ep1/ep1_1/ep1_2 views; name/ID/slug unchanged. PERFORMANCE/TESTING record compression and checks.
+
 ## 2026-10-12 — Unified prices, photo selections and latest visual rules (R196–R205)
 
 CURRENT / IMPLEMENTED locally in B2C:

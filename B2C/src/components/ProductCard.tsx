@@ -19,6 +19,8 @@ export default function ProductCard({
   const isHamper = product.categories?.some(
     (category) => category.slug === 'hampers'
   );
+  const isEnvelope = product.categories?.some(category => category.slug === 'envelopes')
+    || /(?:^|-)envelopes?$/.test(product.slug);
   const priceLabel = productPriceLabel(product);
 
   return (
@@ -44,6 +46,7 @@ export default function ProductCard({
             }
             sizes="(max-width: 640px) 46vw, (max-width: 1000px) 45vw, 30vw"
           />
+          {isEnvelope && <span className="gift-card-pack-strip">Pack of 20</span>}
         </Link>
       </div>
 
@@ -52,7 +55,7 @@ export default function ProductCard({
         <h3 className="gift-card-title">
           <Link href={href}>{product.name}</Link>
         </h3>
-        {compact && product.description.short && <p className="gift-card-description">{product.description.short}</p>}
+        <p className="gift-card-description">{product.description.short || product.description.long || 'A thoughtful gift, beautifully presented.'}</p>
 
         <div className="gift-card-bottom-row">
           {priceLabel && <div className="gift-card-price-wrap">

@@ -1,3 +1,33 @@
+R220 (2026-10-12) CURRENT / IMPLEMENTED locally: user reports card prices disappearing in cart. Preserve the same existing displayed unit price across card/PDP/cart, quantities, printing-name saves and reload; sum inclusive amounts without extra GST/delivery. Shared display-price resolver covers all registered gift IDs/slugs; replace stale candle range and missing envelope/bookmark amounts. Do not silently assign a price to unknown/unregistered items, enable payments or rewrite orders/basePrice. SUPERSEDES R196/R213 “preview figures excluded from cart” and old range presentation only. Sources: product-pricing.ts/gift-cart-pricing.ts/GiftItem type; TESTING/API_CONTRACTS/BUSINESS_LOGIC.
+
+R219 (2026-10-12) CURRENT / IMPLEMENTED locally: latest explicit instruction makes Lotus print name compulsory, SUPERSEDING R216's initial optional/Skip implementation. Remove Optional/Skip UI, block blank PDP Add/Buy now/name save and require PRINT name before server checkout/address preparation. Existing legacy Skip is unresolved; never invent/rewrite customer names. User may close dialog and continue browsing. Sources: PrintNameField/AddGiftToCartButton/GiftCart and gifting/personalisation.js; API_CONTRACTS/TESTING.
+
+R218 (2026-10-12) CURRENT / IMPLEMENTED locally: desktop product main image plus thumbnails must equal the adjacent text/purchase panel's total height. CSS grid containment/flex follows content changes; supplementary photos/caption retain a separate left row. Phone/tablet framing and related products remain. Sources: product page/product-detail.css; UI_SYSTEM/TESTING.
+
+R217 (2026-10-12) CURRENT / IMPLEMENTED locally: expand R215 Pack of 20 strip to every envelope ProductCard, excluding Home collection navigation. Preserve existing white90%/burgundy treatment, identities and price/quantity arithmetic. ProductCard category predicate; UI_SYSTEM/TESTING.
+
+R216 (2026-10-12) CURRENT / IMPLEMENTED locally with optional/Skip behavior SUPERSEDED by R219: add Lotus name-print field under purchase controls; save name with draft, retain it across cart edits/reload/sign-in, prompt at cart checkout if missing and expose edits/review. Strict bounds, cookie ownership, revisions, errors and unavailable-payment guards retained. Shared cards may save an unnamed selection for later completion. Sources: BuyPanel/PrintNameField/AddGiftToCartButton/GiftCart/DeliveryCheckout, gift-cart/hooks and GiftDraft/gifting routes. DATABASE/DATA_MODELS/API_CONTRACTS/BUSINESS_LOGIC/TESTING own persistence and evidence.
+
+R215 (2026-10-12) CURRENT / IMPLEMENTED locally: add thick90%-white full-width strip with centered Pack of 20 at bottom of pictured Lotus product card image. Scope this presentation to Lotus; retain theme and existing purchase behavior. ProductCard/storefront-cards.css; UI_SYSTEM/TESTING.
+
+R213 (2026-10-12) CURRENT / IMPLEMENTED locally: current user says listed prices include GST and delivery. Cart sums inclusive item prices × quantity, removes extra18%/delivery rows and before-delivery/excl.GST wording. SUPERSEDES R192/R193 extra-charge policy; internal included-tax allocation remains UNKNOWN, existing unknown-price/packaging and order/payment guards retained. BUSINESS_LOGIC/UI_SYSTEM/TESTING.
+
+R214 (2026-10-12) CURRENT / IMPLEMENTED locally for UI/resilience: center shared card text and handle temporary503 on allowlisted GETs with one bounded retry; never replay mutations. CURRENT / PARTIAL hosted: first public catalogue read503 then subsequent reads200; actual hosting/dependency cause UNKNOWN and no deployment performed. API_CONTRACTS/UI_SYSTEM/TESTING.
+
+R212 (2026-10-12) CURRENT / IMPLEMENTED locally: Home Lotus discovery card shows From ₹99.00 and opens /shop/envelopes through image/title/action; use collection navigation instead of direct product Add. Retain photo/theme/product catalogue/PDP behavior. Source: b2c/page.tsx; UI_SYSTEM/TESTING.
+
+R211 (2026-10-12) CURRENT / IMPLEMENTED locally: supplied card reference governs simple photo → title → one short paragraph line → large price → Add to Cart hierarchy, preserving ivory/burgundy/serif theme and no capsule above image. Share ProductCard across catalogue and retained related carousel; update Home card hierarchy/price/action where product identity exists. Existing cart counter/error behavior and commerce guards retained; category cards remain collection links. Sources: ProductCard/HomeSections/Home/PDP/storefront-cards.css; UI_SYSTEM/TESTING.
+
+R210 (2026-10-12) CURRENT / IMPLEMENTED locally: supplied envelopes/ep1_3.png becomes Lotus ep1 main/card/gallery photo; compress web copy, retain original and prior gallery views. UI_SYSTEM/PERFORMANCE/TESTING.
+
+R209 (2026-10-12) CURRENT / IMPLEMENTED locally: retain other-product carousel on product pages, correcting R207 removal interpretation. Existing related cards/prices/links and phone scroll restored. UI_SYSTEM/TESTING.
+
+R208 (2026-10-12) CURRENT / IMPLEMENTED locally: remove nine envelopes from Stationery because they belong to Envelopes; online/offline filtering and discovery copy/photo updated, other collections/identities retained. catalogue.ts/catalogue-preview.ts; UI_SYSTEM/TESTING.
+
+R207 (2026-10-12) CURRENT / IMPLEMENTED locally: remove pasted product lower enquiry/personalisation/editorial/corporate content and product-page footer; other-route footers retained. Related products explicitly retained by R209. Product page/StorefrontChrome; UI_SYSTEM/TESTING.
+
+R206 (2026-10-12) CURRENT / IMPLEMENTED locally: fix reported browsing429 for count/me/draft by isolating bounded frequent bootstrap reads from credential/write rate budget, coalescing concurrent bootstrap calls and preserving authentication/security/ownership guards. auth/rate-limit.js/api.ts; API_CONTRACTS/SECURITY/TESTING.
+
 R205 (2026-10-12) CURRENT / IMPLEMENTED locally: product-page purchase price font30% larger than previous at each breakpoint; existing font/weight and card/cart roles retained. Source: product-detail.css; UI_SYSTEM/TESTING.
 
 R204 (2026-10-12) CURRENT / IMPLEMENTED locally: restore horizontal line only beneath FAQ Q1–Q5, superseding R200 removal for those rows only. Source: storefront-ui.css; UI_SYSTEM/TESTING.

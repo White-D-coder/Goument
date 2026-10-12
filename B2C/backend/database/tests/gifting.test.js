@@ -44,7 +44,7 @@ test('candle estimates cannot become placeholder-priced orders or clear the save
  const rows=[{id:'laddoo_candles',quantity:2}];
  const draft=(await save(agent,{revision:0,boxes:[],items:rows}).expect(200)).body;
  await agent.post(base+'/order').set('Origin',origin).send({paymentMethod:'UPI',subtotalMinor:40000,shippingMinor:10000,taxMinor:7200}).expect(409)
-  .expect(({body})=>expect(body.message).toMatch(/Final item prices, GST and delivery must be confirmed/));
+  .expect(({body})=>expect(body.message).toMatch(/Final inclusive item prices and stock must be confirmed/));
  expect(await db.models.Order.countDocuments()).toBe(0);
  const loaded=(await agent.get(base+'/draft').expect(200)).body;
  expect(loaded.items).toEqual(rows);expect(loaded.revision).toBe(draft.revision);
@@ -264,4 +264,73 @@ test('India colour rows persist independently and retain unspecified legacy draf
  const publicItems=(await agent.get(base+'/catalogue').expect(200)).body.items;
  for(const colour of ['burgundy','lavender'])expect(publicItems.find(item=>item.id===`india_hamper_${colour}`)).toMatchObject({name:`India Hamper · ${colour[0].toUpperCase()+colour.slice(1)}`,image:`/images/brand/${colour}_india_hamper.webp`,category:'Gift Hampers'});
  expect((await request.agent(app).get(base+'/draft').expect(200)).body.items).toEqual([]);
+});
+
+test('Lotus print names persist through reload/sign-in with unchanged quantities and private ownership',async()=>{
+ const agent=request.agent(app);await agent.get(base+'/draft');
+ const row={id:'preview-envelope-ep1',quantity:2,personalisation:{mode:'PRINT',name:'  Riya & आरव  '}};
+ let saved=(await save(agent,{revision:0,boxes:[],items:[row,{id:'laddoo_candles',quantity:1}]}).expect(200)).body;
+ expect(saved.items[0]).toEqual({...row,personalisation:{mode:'PRINT',name:'Riya & आरव'}});
+ expect(saved.checkoutAvailable).toBe(false);
+ await login(agent);expect((await agent.get(base+'/draft').expect(200)).body).toEqual(saved);
+ expect((await agent.get(base+'/count').expect(200)).body.count).toBe(3);
+ expect((await request.agent(app).get(base+'/draft').expect(200)).body.items).toEqual([]);
+ const checkout=(await agent.get(base+'/checkout').expect(200)).body;
+ expect(checkout.selection.items[0].personalisation).toEqual({mode:'PRINT',name:'Riya & आरव'});
+ expect(checkout.paymentAvailable).toBe(false);
+ saved=(await save(agent,{revision:saved.revision,boxes:saved.boxes,items:saved.items.map(r=>r.id===row.id?{...r,quantity:3}:r)}).expect(200)).body;
+ expect(saved.items[0].personalisation.name).toBe('Riya & आरव');
+ await save(agent,{revision:saved.revision,boxes:[],items:saved.items.map(r=>r.id===row.id?{...r,personalisation:{mode:'SKIP'}}:r)}).expect(400);
+ expect((await agent.get(base+'/checkout')).body.selection.items[0].personalisation.name).toBe('Riya & आरव');
+ await agent.post(base+'/order').set('Origin',origin).send({}).expect(409);
+ expect(await db.models.Order.countDocuments()).toBe(0);
+ expect((await agent.get(base+'/draft')).body.revision).toBe(saved.revision);
+});
+
+test('Lotus requires a name before checkout/address preparation; legacy Skip cannot bypass it',async()=>{
+ const agent=request.agent(app);await agent.get(base+'/draft');await login(agent);
+ let saved=(await save(agent,{revision:0,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1}]}).expect(200)).body;
+ expect(saved.items[0].personalisation).toBeUndefined();
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409).expect(r=>expect(r.body.message).toMatch(/print name/));
+ await agent.get(base+'/checkout').expect(409);
+ const address={recipientName:'Test Recipient',phone:'9876543210',addressLine1:'Test Street',city:'Mumbai',state:'Maharashtra',postalCode:'400001',country:'IN'};
+ await agent.post(base+'/address').set('Origin',origin).send(address).expect(409);
+ expect(await db.models.CustomerAddress.countDocuments()).toBe(0);
+ // Existing legacy records remain readable/editable but never satisfy required printing.
+ await db.models.GiftDraft.collection.updateOne({},{$set:{'items.0.personalisation':{mode:'SKIP'}}});
+ saved=(await agent.get(base+'/draft').expect(200)).body;
+ saved=(await save(agent,{revision:saved.revision,boxes:[],items:[{...saved.items[0],quantity:2}]}).expect(200)).body;
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409);
+ await agent.get(base+'/checkout').expect(409);
+ await agent.post(base+'/address').set('Origin',origin).send(address).expect(409);
+ expect(await db.models.CustomerAddress.countDocuments()).toBe(0);
+ for(const personalisation of [{mode:'PRINT',name:'Example Name'}]){
+  saved=(await save(agent,{revision:saved.revision,boxes:[],items:[{...saved.items[0],personalisation}]}).expect(200)).body;
+  expect((await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200)).body.checkoutAvailable).toBe(false);
+  expect((await agent.get(base+'/checkout').expect(200)).body.paymentAvailable).toBe(false);
+ }
+ const stale={revision:0,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation:{mode:'PRINT',name:'Stale Name'}}]};
+ await save(agent,stale).expect(409);expect((await agent.get(base+'/draft')).body.items[0].personalisation).toEqual({mode:'PRINT',name:'Example Name'});
+ saved=(await save(agent,{revision:saved.revision,boxes:[],items:[]}).expect(200)).body;
+ saved=(await save(agent,{revision:saved.revision,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1}]}).expect(200)).body;
+ expect(saved.items[0].personalisation).toBeUndefined();
+});
+
+test('personalisation is bounded and Lotus-only; invalid input never mutates a saved draft',async()=>{
+ const agent=request.agent(app);await agent.get(base+'/draft');
+ const saved=(await save(agent,{revision:0,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation:{mode:'PRINT',name:'Original'}}]}).expect(200)).body;
+ const invalid=[null,[],{},'name',{mode:'SKIP'},{mode:'PRINT',name:''},{mode:'PRINT',name:'   '},{mode:'PRINT',name:'a'.repeat(81)},{mode:'PRINT',name:'First\nSecond'},{mode:'PRINT',name:'Name\u0000'},{mode:'PRINT',name:123},{mode:'OTHER',name:'Name'},{mode:'SKIP',name:'Name'},{mode:'SKIP',ownerHash:'spoof'},{mode:'PRINT',name:'Name',priceMinor:1}];
+ for(const personalisation of invalid)await save(agent,{revision:saved.revision,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation}]}).expect(400);
+ await save(agent,{revision:saved.revision,boxes:[],items:[{id:'preview-envelope-ep2',quantity:1,personalisation:{mode:'PRINT',name:'Wrong Product'}}]}).expect(400);
+ expect((await agent.get(base+'/draft')).body).toEqual(saved);
+ const valid=(await save(agent,{revision:saved.revision,boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation:{mode:'PRINT',name:'a'.repeat(80)}}]}).expect(200)).body;
+ expect(valid.items[0].personalisation.name).toHaveLength(80);
+});
+
+test('GiftDraft model and generated Mongo validator protect personalisation structure while legacy rows remain valid',async()=>{
+ const draft=new db.models.GiftDraft({ownerHash:'a'.repeat(64),boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation:{mode:'SKIP',name:'invalid'}}]});
+ await expect(draft.save()).rejects.toThrow(/print name|Skip/);
+ await expect(db.models.GiftDraft.collection.insertOne({ownerHash:'b'.repeat(64),boxes:[],items:[{id:'preview-envelope-ep1',quantity:1,personalisation:{mode:'INVALID'}}],createdAt:new Date(),updatedAt:new Date(),__v:0})).rejects.toMatchObject({code:121});
+ const legacy=await db.models.GiftDraft.create({ownerHash:'c'.repeat(64),boxes:[],items:[{id:'preview-envelope-ep1',quantity:1}]});
+ expect(legacy.items[0].personalisation).toBeUndefined();
 });

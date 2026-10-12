@@ -15,7 +15,7 @@ const corporateUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL || 'https://theg
 const homeEnvelope = PHOTOGRAPHED_ENVELOPES[0];
 
 const homeCollections = [
-  { title: homeEnvelope.name, description: homeEnvelope.description.short || '', image: productImage(homeEnvelope), href: `/products/${homeEnvelope.slug}`, price: productPriceLabel(homeEnvelope) },
+  { title: homeEnvelope.name, description: homeEnvelope.description.short || '', image: productImage(homeEnvelope), href: '/shop/envelopes', price: `From ${productPriceLabel(homeEnvelope)}` },
   { title: 'Scented Candles', description: 'Festive candles, ready to make a moment feel special.', image: '/images/scented_candle/cn3-supplied.webp', href: '/shop/candles', price: `From ${sampleProductPriceLabel('laddoo-candles')}` },
   { title: 'Eternal Paper Co.', description: 'Bookmarks, diaries and considered stationery.', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery', price: `From ${sampleProductPriceLabel('bookmarks')}` },
 ];

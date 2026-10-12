@@ -1,3 +1,24 @@
+## 2026-10-12 — Storefront/admin gap confirmed (R221)
+
+CURRENT / PARTIAL, source-verified: preview products/display prices do not automatically create admin Product/Variant records; GiftDraft print names have no admin read/display flow, and draft Add is not an Order. FUTURE / REQUIRED alongside the existing catalogue/quote/order bridge: connect approved catalogue prices and confirmed order/printing snapshots to staff views before end-to-end operation claims. Do not expose anonymous drafts, seed/publish products or enable payments from this status question. ADMIN_FLOWS owns evidence; priorities unchanged.
+
+## 2026-10-12 — Required Lotus names and envelope UI (R216–R219)
+
+CURRENT / IMPLEMENTED locally: required Lotus PDP/cart print-name capture and server checkout/address gate; all envelope card strips with Home exception; desktop gallery/purchase equal-height CSS. Latest required policy supersedes initial optional/Skip approach. Existing pricing/payment/security priorities retained; no production deployment.
+
+FUTURE / REQUIRED within the already tracked authoritative order bridge: explicitly validate and snapshot confirmed print-name metadata into the eventual order/fulfillment contract before activating paid envelope orders. Current GiftDraft persistence/review does not claim an order-printing integration. Other environment additive GiftDraft validator rollout/runtime remains UNKNOWN; local compatible validator update is recorded in DATABASE/TESTING. No new customer-retention/matching or printing-price policy inferred.
+
+## 2026-10-12 — R213–R214 follow-through
+
+- [x] Remove extra GST/delivery from inclusive-price cart display and center shared card text; add single bounded503 retry for allowlisted reads while preserving mutations/errors/checkout guards. TESTING records69 client tests,16 gifting tests and20 responsive/fixture checks.
+- [ ] Investigate hosted transient503 if it recurs: first public catalogue request503 then count/draft200/me401; root hosting/dependency cause UNKNOWN without server logs. Local direct/proxied reads healthy. Client resilience is not a deployed backend fix; no deployment performed.
+- Latest inclusive user policy supersedes old extra18%/delivery-range planning policy. Authoritative inclusive prices/reservations, included-tax allocation, packaging and delivery serviceability remain open; existing P0 priorities retained.
+
+## 2026-10-12 — R206–R210 follow-through
+
+- [x] Separate bounded bootstrap rate traffic, deduplicate concurrent bootstrap reads, remove envelopes from Stationery, remove requested PDP extras while retaining related carousel, and replace Lotus main with supplied photo. Evidence: TESTING.
+- Existing distributed-rate/deployed-proxy and authoritative commerce priorities remain unchanged; no policy/schema/financial activation inferred.
+
 ## 2026-10-12 — R196–R205 follow-through
 
 - [x] Numeric preview-card display prices, removal of Sample suffix, photographed-envelope/candle draft actions, phone gallery spacing/height, divider/FAQ exception, continuous Home wallpaper, static image hover and larger PDP prices implemented locally; UI_SYSTEM/TESTING own scope/evidence.
@@ -7,7 +28,7 @@
 
 - [x] Shared Ivory title role, filled product-photo frames, mild cart corners, larger desktop cart, supplied candle cards/sub-images and calculated phone/desktop cart estimates implemented and verified; see UI_SYSTEM/TESTING.
 - [x] Unsafe flat-price gift-order path removed;409 preserves drafts and address capture no longer advertises payment readiness. Existing authoritative-quote/reservation activation priority below remains open.
-- [ ] Before final cart checkout: exact per-candle/per-pack prices and new candle saleable mappings/stock, confirmed hamper sale prices, delivery-price selection/serviceability and shipping-tax treatment, box/packaging charges and authoritative quote/reservation bridge. User establishes18% GST extra for item-price estimates/candles₹200–500; latest R193 keeps delivery₹100–300 internal, with shopper total before delivery and fee confirmed before payment; do not continue calling all estimate policy unknown or treat ranges as final sale prices. New candle names are descriptive/visible-label based pending official catalogue data. Direct legacy checkout form still permits address preparation; order creation safely rejects until the authoritative bridge exists. Existing P0 priorities retained.
+- [ ] Before final cart checkout: exact inclusive per-candle/per-pack prices and saleable mappings/stock, confirmed inclusive hamper prices, serviceability, internal included-GST accounting treatment, box/packaging pricing and authoritative quote/reservation bridge. R213 user-inclusive GST/delivery policy SUPERSEDES earlier R192 extra18% and R193 internal delivery-range/before-delivery policy; candle₹200–500 range is not a final saleable quote. New candle names remain descriptive pending official catalogue data. Legacy checkout permits address preparation; order creation safely rejects until the authoritative bridge exists. Existing P0 priorities retained.
 
 # Prioritized TODO
 

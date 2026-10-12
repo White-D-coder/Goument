@@ -3,10 +3,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiError } from '@/lib/api';
 import { queueGiftCartWrite } from '@/lib/gift-cart';
 import { publishGiftCart } from '@/lib/gift-cart-events';
-export type Selection = {id:string;quantity:number};
+import type { GiftPersonalisation } from '@/lib/gift-personalisation';
+export type Selection = {id:string;quantity:number;personalisation?:GiftPersonalisation};
 export type Draft = {revision:number;boxes:Selection[];items:Selection[];packing:'EMPTY'|'CHOOSE_BOX'|'NEEDS_BOXES'|'READY';checkoutAvailable:false};
 export type GiftBox = {id:string;name:string;subtitle:string;image:string};
-export type GiftItem = {id:string;name:string;image:string;description:string;category:string};
+export type GiftItem = {id:string;slug?:string;name:string;image:string;description:string;category:string};
 export type GiftCatalogue = {boxes:GiftBox[];items:GiftItem[]};
 export const giftApi = '/auth/gift';
 export function useGiftDraft(selectedBox?:string) {
@@ -41,7 +42,7 @@ export function useGiftDraft(selectedBox?:string) {
   if(locked.current||!current.current)return;
   locked.current=true;setBusy(true);setError('');
   const revision=current.current.revision;
-  try {publish(await queueGiftCartWrite(()=>api<Draft>(`${giftApi}/draft`,'PUT',{revision,boxes,items})));}
+  try {const saved=await queueGiftCartWrite(()=>api<Draft>(`${giftApi}/draft`,'PUT',{revision,boxes,items}));publish(saved);return saved;}
   catch(e){setError(e instanceof Error?e.message:'Unable to save. Please retry.');if(e instanceof ApiError&&e.status===409){try{publish(await queueGiftCartWrite(()=>api<Draft>(`${giftApi}/draft`)));}catch{/* keep last confirmed state */}}}
   finally{locked.current=false;setBusy(false);}
  };
@@ -52,5 +53,9 @@ export function useGiftDraft(selectedBox?:string) {
   if(quantity>0&&!value[kind].some(row=>row.id===id))rows.push({id,quantity});
   return save(kind==='boxes'?rows:value.boxes,kind==='items'?rows:value.items);
  };
- return {draft,catalogue,error,busy,change,save,reload:()=>{setError('');setRetry(n=>n+1);}};
+ const personalise=(id:string,personalisation:GiftPersonalisation)=>{
+  const value=current.current;if(!value||!value.items.some(row=>row.id===id))return Promise.resolve(undefined);
+  return save(value.boxes,value.items.map(row=>row.id===id?{...row,personalisation}:row));
+ };
+ return {draft,catalogue,error,busy,change,save,personalise,reload:()=>{setError('');setRetry(n=>n+1);}};
 }

@@ -1,3 +1,31 @@
+## 2026-10-12 — Preserve card prices in cart (R220)
+
+CURRENT / IMPLEMENTED locally: replace stale hamper-only/range cart resolver with the shared card/PDP numeric display amounts for all registered gifts, retaining GST/delivery-inclusive quantity totals. Fix missing₹99 envelope/bookmark prices and candle range mismatch; preserve prices through reload/name edits/failed saves. Unknown inputs still pending; no new figures/basePrice/order/payment changes. Actual catalogue-to-card/cart regression covers all19 IDs and1/2/99 quantities; TESTING records client/browser/typecheck evidence.
+
+## 2026-10-12 — Required Lotus printing names and envelope gallery refinement (R216–R219)
+
+CURRENT / IMPLEMENTED locally: add required Lotus print-name input below purchase controls, persist validated private/revisioned draft metadata, show/edit in cart and delivery review, and prompt at checkout for direct-card/legacy unresolved names. Remove Optional/Skip after latest user correction; server checkout/address preparation rejects missing/legacy Skip. Existing quantities, money/stock/order/payment gates and related carousel retained. Expand Pack of 20 strip to all envelope cards except Home. Desktop image plus thumbnails tracks adjacent purchase height through CSS; preserve extra photo details/caption in next left row and phone gallery sizing. Add persistence/validation/ownership/conflict regressions; generated model reference and guarded compatible local validator updated. TESTING owns exact results/attempts; no deployment/customer-history/order writes.
+
+## 2026-10-12 — Add Pack of 20 image strip (R215)
+
+CURRENT / IMPLEMENTED locally: current user requests thick90% white strip at bottom of pictured Lotus card image. ProductCard renders Lotus-only label; existing shared CSS provides full width/48px height/centered burgundy text. No asset/cart/pricing/backend change. Typecheck/scoped lint, CSS/diff and320/375/425/1440 browser checks pass; phone screenshot inspected.
+
+## 2026-10-12 — GST/delivery included; center cards and recover temporary503 (R213–R214)
+
+CURRENT / IMPLEMENTED locally: removed added18% GST and delivery bounds/rows from cart display calculation; inclusive item subtotal is Total. Updated cart, FAQ, legacy-cart and checkout/order-unavailable copy without opening payments or altering historic money. Centered shared Home/product/related card text. One bounded503 retry on allowlisted GETs retains private state/queue boundaries and never replays writes. Current user policy supersedes extra-charge and R211 left-alignment instructions. Verified typecheck/full lint,69 client tests,16 gifting tests, CSS/diff checks,20 responsive route-width checks and browser recovery/save-failure fixtures. Hosted transient503 observed; underlying cause UNKNOWN and no hosted patch deployed. TESTING owns details.
+
+## 2026-10-12 — Route Home Lotus card to the envelope collection (R212)
+
+CURRENT / IMPLEMENTED locally: change Home Lotus collection href to /shop/envelopes, prefix existing₹99 display amount with From and omit product draft ID so existing Shop now/Explore navigation renders. Image/title/action share destination; product catalogue/PDP unchanged. Typecheck/scoped lint, rendered link/price assertions and destination200/nine cards pass. No new tests/backend/style/build/deployment or real selection mutation.
+
+## 2026-10-12 — Clean card hierarchy with prominent prices (R211)
+
+CURRENT / IMPLEMENTED locally: current user reference asks only image/title/short paragraph/big price/Add to Cart in existing theme, no image capsule. ProductCard always renders description; related carousel reuses that component and existing Add/counter actions. Shared card rules left-align content, constrain description to one ellipsized line, scale bold burgundy prices22–36px with card width and make actions full-width. Home hampers/discovery share presentation; Lotus product card gains existing registered draft action; category cards keep collection navigation with small From prefix so narrow prices fit. Preserve image frames/hover rules and commerce boundaries. Typecheck/lint/66 existing client tests,48 responsive layout checks plus18 final checks and intercepted related-cart interaction pass; TESTING owns attempted corrections and limits. No backend/build/deployment/real selection mutation.
+
+## 2026-10-12 — Bounded browsing reads, stationery separation and product cleanup (R206–R210)
+
+CURRENT / IMPLEMENTED locally: reproduce shared60/minute per-IP auth budget exhaustion during repeated page loads; bootstrap reads now use separate300/minute bounded allowance, credential/OAuth/write budget60 unchanged, Retry-After supplied. Concurrent me/count/config calls coalesce only while pending; mutations invalidate sharing and drafts retain existing serialization. Stationery no longer queries/merges envelopes and filters accidental remote envelope matches before sorting/pagination. Product lower enquiry/note/story/corporate content and product-only footer removed; related carousel restored after explicit user clarification, preserving responsive scrolling. Supplied ep1_3.png becomes Lotus main, previous three views retained, optimized129,656B vs2,413,161B. Local auth reloaded; typecheck/lint/66 client and48 backend tests pass. Browser/check details and limits in TESTING; no deployment/model/order/payment activation.
+
 ## 2026-10-12 — Complete preview-card and responsive UI requests (R196–R205)
 
 CURRENT / IMPLEMENTED locally: centralize display-only preview prices across Home/listing/PDP/related cards; remove visible Sample/estimated labels. Register nine envelope and two candle draft IDs so photographed PDPs reuse existing purchase controls instead of enquiry-only panels. Preserve quantity/revision/ownership and unavailable checkout; no financial-model migration. Remove navbar bottom margin; add18px phone PDP spacing and reduce gallery height45%; remove decorative section/row lines except latest Q1–Q5 FAQ exception. Unify Home wallpaper behind navbar/hero, remove image zoom without changing card hover and enlarge PDP prices30%. Replace all Laddoo photo consumers with optimized supplied cn3.png. Verification and attempted harness corrections: TESTING; display-only money and order boundaries: BUSINESS_LOGIC/API_CONTRACTS. No deployment or real cart/customer/order mutation.

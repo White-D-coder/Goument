@@ -1,3 +1,11 @@
+## 2026-10-12 — Consistent card/cart display arithmetic (R220)
+
+CURRENT / IMPLEMENTED locally: registered gift cart uses existing card/PDP amounts, replacing missing preview amounts and stale candle ranges. Quantity multiplication remains integer paise, listed prices include GST/delivery. This supersedes prior exclusion of preview figures from cart display only. No accounting/tax allocation, ledger, invoice, authoritative quote or historical money changes. Existing order/payment availability guards remain; unknown catalogue entries are not priced via generic fallback.
+
+## 2026-10-12 — Inclusive price policy boundary (R213)
+
+CURRENT / IMPLEMENTED storefront only: explicit current user includes GST and delivery in listed prices, superseding additive18%/delivery-planning display policy. Cart adds no separate surcharge. This is not a tax-rate0 instruction: internal GST allocation/jurisdiction and invoice treatment remain UNKNOWN pending approved accounting rules. No finance ledger, immutable order/payment amounts, historical records or database models changed. Authoritative inclusive quote/reservation remains FUTURE / REQUIRED; payment availability guards retained. BUSINESS_LOGIC/PAYMENT_SYSTEM/TESTING.
+
 # Finance System
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

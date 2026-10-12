@@ -1,3 +1,35 @@
+## 2026-10-12 — Keep card prices in cart (R220)
+
+CURRENT / IMPLEMENTED locally: fixed mismatch where Lotus/envelopes/bookmarks lost displayed prices in cart and candles reverted to the old₹200–500 range. Cards/PDP/cart now share existing numeric display amounts; registered item IDs/slugs map to the same inclusive unit price, quantities and mixed totals calculate in paise. No extra GST/delivery added. Unknown unregistered items/packaging remain pending. SUPERSEDES R196/R213 exclusion of preview figures from cart calculations and old candle-range display only; order/payment/stock authority guards retained.73 client tests include all19 registered items at quantities1/2/99; TESTING owns browser/typecheck/backend evidence. No order/model/price-figure change or deployment.
+
+## 2026-10-12 — Required Lotus print names and aligned galleries (R216–R219)
+
+CURRENT / IMPLEMENTED locally: Lotus PDP has a required Name to print field below purchase controls. Name edits persist in the cookie-owned gift draft, survive reload/sign-in/quantity changes and appear in cart/delivery review. Direct card Add may save an unresolved selection; Continue opens a native name dialog, with no Optional/Skip choice. Missing names and legacy Skip cannot pass server checkout/address preparation. Final required-name steering SUPERSEDES the initially implemented optional/Skip approach. Existing checkout/payment availability and order409 guards remain.
+
+All envelope ProductCards now show the existing90%-white Pack of 20 image strip, SUPERSEDING R215 Lotus-only scope; Home collection navigation stays strip-free. Above900px main gallery plus thumbnails tracks purchase-panel height through CSS; existing extra photo details/caption occupy a separate grid row. Phone gallery spacing/short height and related carousel retained. TESTING owns checks and limits; no deployment, payment/order/history mutation or priority change.
+
+## 2026-10-12 — Lotus card pack strip (R215)
+
+CURRENT / IMPLEMENTED locally: Lotus product card image has a full-width48px bottom strip with90% white background and centered opaque burgundy Pack of 20 text. Reuses ProductCard across listings/related cards; other products/Home category navigation unchanged. Display-only pack wording, no quantity/price/order semantics changed. Typecheck/scoped lint, CSS/diff and four responsive checks pass; TESTING owns evidence. Priorities unchanged.
+
+## 2026-10-12 — Inclusive cart prices, centered cards and transient-read recovery (R213–R214)
+
+CURRENT / IMPLEMENTED locally: latest explicit user policy includes GST and delivery in listed prices, SUPERSEDING R192/R193 extra18%/delivery-planning rules. Cart total sums inclusive item prices × confirmed quantities in paise; no extra GST/delivery result fields, rows, exclusion labels or before-delivery total. Existing unknown-price/packaging handling and checkout/order guards remain. Shared Home/catalogue/related card title, description and price now centered, superseding R211 left alignment only.
+
+CURRENT / PARTIAL: reported503 was not reproduced locally (direct/proxied draft/count/catalogue200, anonymous me401). First hosted catalogue read returned503, subsequent hosted reads succeeded; underlying hosted failure cause UNKNOWN. Allowlisted bootstrap/draft GETs now retry503 once after an allowed ≤1s server cooldown; writes/401/429/network failures are not automatically replayed. Persistent failures remain visible with manual Retry.69 client tests,16 gifting tests, typecheck/lint and20 responsive fixture checks pass; TESTING owns evidence. No deployment/payment activation or financial/history/model mutation; existing priorities retained.
+
+## 2026-10-12 — Home Lotus discovers Envelopes (R212)
+
+CURRENT / IMPLEMENTED locally: Home Lotus discovery card image/title/Shop now all link to /shop/envelopes and display From ₹99.00, using existing starting-price prefix. No Home direct Add action; catalogue/PDP Lotus identity/cart controls retained. Supersedes R211 Home Lotus direct draft action only. Typecheck/scoped lint and local rendered-link/price/destination checks pass; TESTING owns evidence. Other card styling/priorities unchanged.
+
+## 2026-10-12 — Simple reference-led product cards (R211)
+
+CURRENT / IMPLEMENTED locally: product cards follow photo → existing serif title → one short description line → prominent burgundy price → full-width Add to Cart/counter. Catalogue/collections and retained PDP related carousel reuse ProductCard; Home hampers share the same hierarchy and Lotus discovery uses its existing draft action. Home category discovery remains navigation to collections. Existing ivory/burgundy theme, card hover, static images, identities/pricing/checkout guards retained; image remains capsule-free. Typecheck/lint/66 client tests and responsive/fixture checks pass; UI_SYSTEM/TESTING own scope/evidence. No backend/payment/model/deployment changes; priorities unchanged.
+
+## 2026-10-12 — Browsing 429 fix and latest product scope (R206–R210)
+
+CURRENT / IMPLEMENTED locally: separate bounded bootstrap-read rate bucket from existing auth/write allowance; coalesce concurrent me/count/config client reads without settled/private caching. Local auth reloaded with guarded unchanged development config. Stationery online/fallback excludes envelopes; envelope discovery/history IDs remain. Product pages remove delivery/bulk enquiry links, note panel, lifestyle/editorial and corporate blocks plus product-only footer; latest user correction explicitly retains related-product carousel. Lotus main now supplied ep1_3.png via94.6% smaller WebP, keeping previous three gallery photos. Typecheck/lint/66 client tests/48 auth/admin-security/gifting backend tests pass; TESTING owns browser evidence. No financial-model/customer/order mutation or deployment; priorities unchanged.
+
 ## 2026-10-12 — Preview prices, draft actions and storefront refinements (R196–R205)
 
 CURRENT / IMPLEMENTED locally: all preview product/Home/related cards show numeric display prices without Sample/estimated suffixes; nine photographed envelopes and two new candles have independent registered draft selections and existing Add/counter/cart actions. Preview basePrice/stock and checkout/order guards retained. Navbar bottom margin0; phone PDP gallery starts18px below its layout boundary and is45% shorter. Horizontal storefront section/row dividers removed, with current user exception under FAQ Q1–Q5 only. Home navbar/content share one ivory wallpaper canvas, avoiding colour/pattern restart; image hover zoom removed while card hover remains. PDP purchase prices enlarged30%. Latest supplied cn3.png now drives Laddoo cards/gallery/cart metadata through a93.9% smaller WebP. See UI_SYSTEM/TESTING/API_CONTRACTS/PERFORMANCE for evidence and limits. Existing financial activation/TODO priorities remain.

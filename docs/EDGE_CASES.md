@@ -1,3 +1,17 @@
+## 2026-10-12 — Registered gift prices persist across cart actions (R220)
+
+CURRENT / IMPLEMENTED locally: registered envelopes/bookmarks no longer become Price pending and candles no longer revert to the older range in cart. Shared resolver supports existing IDs even when optional catalogue slug is absent. All registered items agree with card labels at quantities1/2/99; mixed totals, reload, name-only save and failed quantity write retain confirmed price. Unknown IDs/invalid quantities/unpriced packaging remain incomplete, no arbitrary card fallback becomes a payable amount. Inclusive-charge and unavailable-payment guards retained; TESTING owns evidence.
+
+## 2026-10-12 — Lotus required-name edge cases (R216/R219)
+
+CURRENT / IMPLEMENTED locally: direct-card unnamed/legacy Skip selections prompt for a required name; closing/Escape does not resolve it and server checkout/address preparation remains409. Trimmed blank/>80/control/wrong-shape/other-product metadata rejects; Unicode names supported. Reload/sign-in/counters/other-row edits preserve confirmed names. Name-only save/Buy now at99 units does not increment; removed item is never resurrected; removing/readding resets metadata.409 reread preserves newer quantities, uncertain write is not replayed, failed save keeps input/modal and prevents navigation. Existing checkoutAvailable:false/paymentAvailable:false/order409 remain regardless of name. TESTING records isolated fixture evidence; actual printing/paid fulfillment not enabled.
+
+## 2026-10-12 — Included charges and transient503 (R213–R214)
+
+CURRENT / IMPLEMENTED locally: R192/R193 extra18%/before-delivery behavior SUPERSEDED by user-inclusive GST/delivery policy. Cart known totals equal inclusive item bounds × confirmed quantity; unknown item/packaging amounts still suppress complete total. No missing price becomes free or a payable order. Included-GST accounting allocation remains UNKNOWN.
+
+Temporary allowlisted GET503 retries once within server≤1s cooldown; persistent503 remains visible/manual Retry.401/429/network errors, longer/invalid cooldowns and ambiguous mutations stay explicit without auto replay. Browser fixtures verify failed PUT leaves confirmed quantity/total unchanged and is sent once, temporary draft503 recovers, persistent503 is not converted to empty cart and manual Retry works. No customer writes/stock/payment activation. TESTING owns evidence.
+
 # Edge Cases
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

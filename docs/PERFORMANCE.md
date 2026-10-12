@@ -1,3 +1,11 @@
+## 2026-10-12 — Transient-read retry limit (R214)
+
+CURRENT / IMPLEMENTED locally: one503 retry on allowlisted cookie-owned bootstrap/draft GETs after default1s or finite server cooldown≤1s; healthy requests add no delay. Existing pending-read sharing/serialized draft operations retained, no settled private cache and no mutation replay. Local read smoke1–17ms in this sample; hosted catalogue503289ms followed by count200238ms/draft200418ms/me401233ms. These observations do not meet or establish requested universal20ms budget; actual hosted cause UNKNOWN, no deployment. TESTING owns reproducible fixture evidence.
+
+## 2026-10-12 — Lotus main and concurrent bootstrap reads (R206/R210)
+
+CURRENT / IMPLEMENTED locally: supplied ep1_3.png1024×1536,2,413,161B retained; ep1_3.webp1024×1536,129,656B (94.6% smaller) is Lotus card/gallery/main/gift metadata image. Sharp rotate/inside1600/no enlargement/quality82/effort6; prior photos retained as gallery views. API coalesces concurrent me/count/config reads without settled caches, reducing duplicate development mount traffic. Bootstrap read/general rate buckets separated and still bounded. No new timing SLA/full performance benchmark; universal20ms remains unmet/UNKNOWN as documented in R189.
+
 ## 2026-10-12 — Latest supplied Laddoo image (R201–R203)
 
 CURRENT / IMPLEMENTED locally: supplied cn3.png1448×1086 (2,266,634B) retained; optimized cn3-supplied.webp1448×1086 (139,272B),93.9% smaller. Sharp rotation/inside1600/no enlargement/quality82/effort6; output decoded. All Laddoo photo consumers use the distinct optimized URL, preserving identity and avoiding stale old-photo cache. Earlier cn3.webp was removed by the user and is not restored. Home background now uses one decorative canvas instead of duplicated header/content canvases; image hover zoom removed per user while card hover remains. No new timing benchmark or universal20ms claim; R189 limits remain.

@@ -1,6 +1,7 @@
 import { api, ApiError } from './api';
 import type { Draft } from '@/hooks/useGiftDraft';
 import { publishGiftCart } from './gift-cart-events';
+import type { GiftPersonalisation } from './gift-personalisation';
 
 // Serialize the whole read/write operation, including the first cookie handshake.
 // Separate cards must not overwrite one another's selection or create competing sessions.
@@ -47,8 +48,8 @@ export async function waitForGiftCartBeforeSignIn(): Promise<void> {
  }
 }
 
-export function addGiftItem(id: string): Promise<Draft> {
- return changeGiftItemQuantity(id, 1);
+export function addGiftItem(id: string, personalisation?: GiftPersonalisation | null): Promise<Draft> {
+ return updateGiftItem(id, 1, personalisation);
 }
 
 export function changeGiftItemQuantity(id: string, change: 1 | -1): Promise<Draft> {
@@ -56,23 +57,32 @@ export function changeGiftItemQuantity(id: string, change: 1 | -1): Promise<Draf
 }
 
 // Buy now keeps the selected quantity, adding one only when it is absent.
-export function ensureGiftItem(id: string): Promise<Draft> {
- return updateGiftItem(id, 'ensure');
+export function ensureGiftItem(id: string, personalisation?: GiftPersonalisation | null): Promise<Draft> {
+ return updateGiftItem(id, 'ensure', personalisation);
 }
 
-function updateGiftItem(id: string, change: 1 | -1 | 'ensure'): Promise<Draft> {
+export function saveGiftPersonalisation(id: string, personalisation: GiftPersonalisation | null): Promise<Draft> {
+ return updateGiftItem(id, 'personalise', personalisation);
+}
+
+function updateGiftItem(id: string, change: 1 | -1 | 'ensure' | 'personalise', personalisation?: GiftPersonalisation | null): Promise<Draft> {
  return queueGiftCartWrite(async () => {
-  if (change !== 1 && change !== -1 && change !== 'ensure') throw new Error('Invalid quantity change.');
+  if (change !== 1 && change !== -1 && change !== 'ensure' && change !== 'personalise') throw new Error('Invalid quantity change.');
   for (let attempt = 0; attempt < 2; attempt++) {
    const draft = await api<Draft>('/auth/gift/draft');
    const existing = draft.items.find(item => item.id === id);
-   if (change === 'ensure' && existing?.quantity) return draft;
-   const quantity = (existing?.quantity || 0) + (change === 'ensure' ? 1 : change);
+   if (change === 'personalise' && !existing) throw new Error('This item is no longer in your bag. Add it again before saving a name.');
+   if (change === 'ensure' && existing?.quantity && personalisation === undefined) return draft;
+   const quantity = change === 'personalise' || (change === 'ensure' && existing)
+    ? existing!.quantity : (existing?.quantity || 0) + (change === -1 ? -1 : 1);
    if (quantity > 99) throw new Error('You already have 99 of this item in your cart.');
    if (quantity < 0) return draft;
+   const row = { ...existing, id, quantity };
+   if (personalisation === null) delete row.personalisation;
+   else if (personalisation !== undefined) row.personalisation = personalisation;
    const items = existing
-    ? draft.items.flatMap(item => item.id !== id ? [item] : quantity ? [{ ...item, quantity }] : [])
-    : [...draft.items, { id, quantity }];
+    ? draft.items.flatMap(item => item.id !== id ? [item] : quantity ? [row] : [])
+    : [...draft.items, row];
    let saved: Draft;
    try {
     saved = await api<Draft>('/auth/gift/draft', 'PUT', { revision: draft.revision, boxes: draft.boxes, items });

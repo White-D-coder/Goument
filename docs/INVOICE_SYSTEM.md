@@ -1,3 +1,7 @@
+## 2026-10-12 — Listed prices include charges (R213)
+
+CURRENT / REQUIRED policy: user includes GST and delivery in listed prices; implemented storefront total has no additive GST/delivery charge. This supersedes earlier extra18% display arithmetic only. UNKNOWN: included-GST allocation, jurisdiction and invoice tax breakdown; do not treat included as exempt/zero tax or rewrite historical snapshots. No invoice generation/model/finance mutation authorized or implemented by this UI change. BUSINESS_LOGIC/PAYMENT_SYSTEM own current boundary; TESTING owns checks.
+
 # Invoice System
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

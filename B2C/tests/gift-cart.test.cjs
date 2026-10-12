@@ -18,7 +18,7 @@ function load(api) {
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
  vm.runInNewContext(compiled, { exports, require: name => { if (name === './gift-cart-events') return eventExports; assert.equal(name, './api'); return { api, ApiError }; }, window, Event });
- return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events, cartEvents };
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, personalise: exports.saveGiftPersonalisation, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events, cartEvents };
 }
 
 test('cart listeners receive the saved server selection with no follow-up read', async () => {
@@ -319,4 +319,35 @@ test('India colour additions, Buy now and removals never combine colours or rewr
  assert.deepEqual(state.items, [{id:'india_hamper',quantity:4},{id:'india_hamper_burgundy',quantity:2},{id:'india_hamper_lavender',quantity:1}]);
  await cart.change('india_hamper_lavender', -1);
  assert.deepEqual(state.items, [{id:'india_hamper',quantity:4},{id:'india_hamper_burgundy',quantity:2}]);
+});
+
+test('print names survive generic Add/counter/Buy now and other selections without changing line identity',async()=>{
+ const name={mode:'PRINT',name:'Example & Name'};
+ let state={...empty(),items:[{id:'preview-envelope-ep1',quantity:2,personalisation:name},{id:'other',quantity:3}]};
+ const cart=load(async(_url,method,body)=>{if(!method)return plain(state);state={...plain(body),revision:state.revision+1};return plain(state);});
+ await cart.add('preview-envelope-ep1');await cart.change('preview-envelope-ep1',-1);await cart.ensure('preview-envelope-ep1');await cart.add('other');
+ assert.deepEqual(state.items,[{id:'preview-envelope-ep1',quantity:2,personalisation:name},{id:'other',quantity:4}]);
+ await cart.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Updated Name'});assert.equal(state.items[0].quantity,2);assert.deepEqual(state.items[0].personalisation,{mode:'PRINT',name:'Updated Name'});
+ await cart.add('preview-envelope-ep1');assert.deepEqual(state.items[0].personalisation,{mode:'PRINT',name:'Updated Name'});
+});
+
+test('name-only edits and Buy now at max quantity save without adding units; clearing resets the choice',async()=>{
+ let state={...empty(),items:[{id:'preview-envelope-ep1',quantity:99}]},writes=0;
+ const cart=load(async(_url,method,body)=>{if(!method)return plain(state);writes++;state={...plain(body),revision:state.revision+1};return plain(state);});
+ await cart.ensure('preview-envelope-ep1',{mode:'PRINT',name:'First Name'});
+ assert.equal(state.items[0].quantity,99);assert.equal(state.items[0].personalisation.name,'First Name');
+ await cart.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Updated Name'});assert.equal(state.items[0].quantity,99);
+ await cart.personalise('preview-envelope-ep1',null);assert.equal(state.items[0].personalisation,undefined);assert.equal(writes,3);
+});
+
+test('name writes do not resurrect removed items or replay uncertain saves; explicit revision retry preserves newer quantities',async()=>{
+ let writes=0;
+ const absent=load(async(_url,method)=>{if(!method)return empty();writes++;});
+ await assert.rejects(absent.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Example'}),/no longer in your bag/);assert.equal(writes,0);
+ let state={...empty(),items:[{id:'preview-envelope-ep1',quantity:2}]};
+ const failing=load(async(_url,method)=>{if(!method)return plain(state);writes++;throw new Error('Response lost');});
+ await assert.rejects(failing.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Unconfirmed'}),/Check your cart/);assert.equal(writes,1);assert.equal(failing.events.length,0);
+ writes=0;
+ const conflict=load(async(_url,method,body)=>{if(!method)return plain(state);writes++;if(writes===1){state={...state,revision:1,items:[{id:'preview-envelope-ep1',quantity:4},{id:'other',quantity:1}]};throw new ApiError('Conflict',409);}assert.equal(body.revision,1);state={...plain(body),revision:2};return plain(state);});
+ await conflict.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Confirmed'});assert.equal(writes,2);assert.equal(state.items[0].quantity,4);assert.equal(state.items[0].personalisation.name,'Confirmed');assert.deepEqual(state.items[1],{id:'other',quantity:1});
 });

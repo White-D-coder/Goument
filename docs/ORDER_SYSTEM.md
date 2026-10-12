@@ -1,3 +1,11 @@
+## 2026-10-12 — Required printing metadata and consistent display prices (R216/R219/R220)
+
+CURRENT / IMPLEMENTED locally: required Lotus PRINT name persists in GiftDraft/review and gates checkout/address preparation. Cart shares card/PDP display amounts for registered gifts, superseding stale missing/range display. No order schema/history/money/stock change; POST gift/order remains409 without order creation/draft clearing. Future authoritative order bridge must validate/snapshot print name before activation; current draft metadata does not claim printing fulfillment.
+
+## 2026-10-12 — Inclusive-price presentation without order activation (R213)
+
+CURRENT / IMPLEMENTED locally: user includes GST/delivery in listed prices, SUPERSEDING R192/R193 surcharge/before-delivery display policy. Cart sums inclusive item prices × quantity only; unknown-price rules retained. Gift-order rejection copy now requires final inclusive item prices and stock, still409 without saving order or clearing draft. Existing identity/readiness/hamper checks, immutable snapshots, reserved stock and payment availability guards retained. No order schema or historical record change. Authoritative inclusive quote/reservation bridge remains FUTURE / REQUIRED; internal GST allocation UNKNOWN. TESTING owns16 gifting regressions and client/browser evidence.
+
 ## 2026-10-12 — Photographed selections do not create priced orders (R197)
 
 CURRENT / IMPLEMENTED locally:11 new registered photographed draft selections persist independently under existing revision/ownership rules. Their numeric UI sample prices are not order inputs. Disposable Mongo test verifies order409 creates no order and preserves saved draft; existing historical identities/snapshots unchanged. No order schema/payment/stock change; authoritative quote/reservation activation remains FUTURE / REQUIRED. See API_CONTRACTS/TESTING.

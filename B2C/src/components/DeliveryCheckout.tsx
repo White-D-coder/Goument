@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { api, ApiError } from '@/lib/api';
+import type { GiftPersonalisation } from '@/lib/gift-personalisation';
+import './envelope-personalisation.css';
 
 type Address = {
   id?: string;
@@ -21,8 +23,8 @@ type Address = {
 type View = {
   addresses: Address[];
   selection: {
-    boxes?: { name: string; quantity: number }[];
-    items: { name: string; quantity: number }[];
+    boxes?: { name: string; quantity: number; personalisation?: never }[];
+    items: { name: string; quantity: number; personalisation?: GiftPersonalisation }[];
   };
 };
 
@@ -361,7 +363,7 @@ export default function DeliveryCheckout() {
             <h2>Your selection</h2>
             {[...(view.selection.boxes || []), ...(view.selection.items || [])].map((row, i) => (
               <div key={i}>
-                <span>{row.name}</span>
+                <span>{row.name}{row.personalisation?.mode === 'PRINT' && <small className="delivery-print-name">Name to print: {row.personalisation.name}</small>}</span>
                 <span>× {row.quantity}</span>
               </div>
             ))}

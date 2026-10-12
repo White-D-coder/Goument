@@ -1,3 +1,11 @@
+## 2026-10-12 — Consistent cart figures without payment activation (R220)
+
+CURRENT / IMPLEMENTED locally: shared card/PDP/cart display amounts replace pending registered-envelope/bookmark amounts and old candle range. Inclusive quantity totals do not add GST/delivery. This supersedes R196/R213 exclusion of preview figures from cart display arithmetic only; server-owned saleable quote/reservation, included-GST accounting and payment authority remain separate. checkoutAvailable:false/paymentAvailable:false/order409 retained, with required Lotus name an additional preparation gate. No provider/order/charge/history changes.
+
+## 2026-10-12 — Inclusive shopper prices (R213)
+
+CURRENT / IMPLEMENTED locally: latest explicit user policy SUPERSEDES R192/R193 extra18%/delivery-charge display rules. Cart Total equals known inclusive item subtotal, with no additional GST/delivery amount. Existing unknown-price/candle-range handling retained. Included-tax accounting allocation and authoritative saleable inclusive quote/reservation remain UNKNOWN/FUTURE / REQUIRED; no zero-tax inference, gateway amount change or historical money rewrite. Gift-order409, address paymentAvailable:false and checkoutAvailable:false retained. TESTING covers16 gifting regressions plus client arithmetic/UI; no payment/provider/deployment action.
+
 ## 2026-10-12 — Display-price and draft-action boundary (R196–R197)
 
 CURRENT / IMPLEMENTED locally: numeric card/PDP prices without Sample suffix and new photographed-item Add/cart actions are presentation/draft behavior only. Sample figures never enter server quotes/payments; authoritative pricing/reservation bridge remains FUTURE / REQUIRED. Existing unavailable checkout/payment responses and gift-order409 retained and regression checked. No payment/provider/model change. See BUSINESS_LOGIC/API_CONTRACTS/TESTING.

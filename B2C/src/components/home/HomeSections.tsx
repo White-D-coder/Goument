@@ -54,7 +54,7 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
 }
 
 /** Shared photo-first Home discovery cards link to a product or collection. */
-export function HomeCollectionCard({ title, description, image, href, price }: { title: string; description: string; image: string; href: string; price: string }) {
+export function HomeCollectionCard({ title, description, image, href, price, giftItemId }: { title: string; description: string; image: string; href: string; price: string; giftItemId?: string }) {
   return <article className="tgg-favourite-card tgg-collection-card">
     <Link className="tgg-favourite-photo" href={href} aria-label={`Explore ${title}`}>
       <ProductPhoto src={image} alt={title} sizes="(max-width: 600px) 44vw, (max-width: 1000px) 30vw, 24vw" />
@@ -62,8 +62,8 @@ export function HomeCollectionCard({ title, description, image, href, price }: {
     <div className="tgg-favourite-info">
       <h3><Link href={href}>{title}</Link></h3>
       <p className="tgg-collection-description">{description}</p>
-      <p className="tgg-collection-price">{price}</p>
-      <Link className="tgg-collection-link" href={href} aria-label={`Shop ${title}`}><span className="tgg-collection-action-desktop">Shop now</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>
+      <p className="tgg-collection-price">{price.startsWith('From ') ? <><span className="tgg-collection-price-prefix">From</span>{price.slice(5)}</> : price}</p>
+      {giftItemId ? <AddGiftToCartButton itemId={giftItemId} name={title} className="button" withQuantity compact /> : <Link className="tgg-collection-link" href={href} aria-label={`Shop ${title}`}><span className="tgg-collection-action-desktop">Shop now</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>}
     </div>
   </article>;
 }

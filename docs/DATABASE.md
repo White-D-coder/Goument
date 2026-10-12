@@ -1,3 +1,7 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED locally: two new catalogue products/variants/inventory pools for vibrant-art-bookmarks and wanderlust-bookmarks, approved gross34900paise each. Guarded recognized local development provisioning actually created only these two100-unit pools with ledger/audit entries, no existing stock reset. Current totals20 mapped products/29 SKU pools (India alias shared),30 registered gift IDs. No schema/index/model/history change in R225; hosted database untouched/unverified.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED: optional immutable Order.checkout embedded draftId/revision/snapshotRevision/expiresAt; optional order-item giftItemId/inclusiveUnitPriceMinor/taxRateBps/personalisation PRINT name. Inclusive money checks preserve existing net+tax line and pricing arithmetic. Two additive indexes: unique partial(checkout.draftId,checkout.revision), status+checkout.expiresAt. No collection/TTL/history rewrite:25collections,103 explicit indexes,33 explicit unique constraints.

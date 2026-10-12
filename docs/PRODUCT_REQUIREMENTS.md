@@ -1,3 +1,13 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+| Requirement | Status and traceability |
+| --- | --- |
+| R225 two new supplied bookmark cards, ₹349 each | CURRENT / IMPLEMENTED: bookmark-photos/catalogue-preview/catalogue + gifting/items/prices/provisioned ProductVariant/Inventory; existing card preserved; catalogue and checkout regressions |
+| R226 balanced counter and supplied phone hero photos | CURRENT / IMPLEMENTED: storefront-cards.css/HomeHeroSlideshow/ProductPhoto/home.css; responsive native picture and existing controls; TESTING |
+| R227 white hero copy/subtle dark blur and level collection text | CURRENT / IMPLEMENTED: latest steering supersedes gold/burgundy/no-overlay request; mobile home.css + shared collection title2lh; TESTING |
+
+No change to existing included GST/delivery, five-minute reservations, ownership or payment authority. Hosted deployment remains separate.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 | Requirement | Current scope | Source / data / API / UI / tests |

@@ -1,3 +1,9 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED assets: new bookmark originals2,601,835B +2,780,213B retain full originals and gain1024×1536 WebP253,412B +245,182B (90.7% combined reduction). Supplied phone_hero.png340,493B gains788×1400 phone-hero.webp79,154B (76.8% smaller). Reuse existing compressed vibrant-collection.webp for third phone slide, original Ivory WebP for first. Native picture media≤640px selects responsive optimized phone sources; existing deferred alternatives/manual dots/reduced-motion/data-saving behavior retained. Separate packaging imagery may still request the desktop festive source; do not claim no such asset downloads anywhere on mobile.
+
+Latest requested1px static photo blur/32% shade applies only to phone hero. No new whole-page timing benchmark or physical-device20ms guarantee; prior performance follow-ups remain open.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED R222: first/third Home source PNGs2493294B/2185273B gain content-hashed1920px WebP171168B/123634B (93.1%/94.3% smaller); originals retained. Slideshow loads one alternative after first readiness+2s, honors reduced-motion/Save-Data/2g/hidden/offscreen, manual dots still request slides. Remove reveal blur; keep opacity/transform. Only new hashed paths get1-year immutable cache. Existing responsive Next image optimization means source savings do not equal whole-page transfer savings.

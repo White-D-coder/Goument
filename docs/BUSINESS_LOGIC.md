@@ -1,3 +1,7 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED user-approved two new bookmark designs: ₹349 each, preserving listed GST/delivery-inclusive policy. Each distinct card/PDP/draft ID maps to its own ProductVariant/Inventory; existing bookmark remains ₹349. Local opening stock100 each through existing explicit provisioner, no existing price/stock reset. Server quote remains authoritative; no new tax/delivery/name/pack policy.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED approved B2C policy: listed gross INR includes18% GST and delivery, no additional charge. Envelopes10pcs₹1,499/20pcs₹2,499 per pack; quantity means pack count. All mapped initial SKU/pack stock100 via explicit ledger provisioning, not per-request seed/reset. Cart may save an unresolved name; both Lotus pack rows require their own PRINT name before payment. Generic India alias shares Burgundy physical inventory.

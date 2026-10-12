@@ -1,3 +1,11 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+Completed within current authorized scope; existing priorities unchanged:
+
+- [x] R225 add both supplied bookmark designs at approved ₹349 each, preserve existing card/identities, compress photos and provision only two new local100-unit pools. Hosted provisioning remains part of existing deployment follow-up.
+- [x] R226 distribute Home card quantity controls and select requested three phone hero images with responsive native sources.
+- [x] R227 latest white copy/subtle dark blur and aligned Home collection title/description/price rows. TESTING owns browser/build evidence.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 - [x] Local authorized draft→inclusive-priced order/reservation bridge,100 opening SKU/pack units, required print snapshots, PDP-only10/20 packs and removed image strips. Source/test details: PAYMENT_SYSTEM/UI_SYSTEM/TESTING.

@@ -1,3 +1,7 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED gift/catalogue has30 registered IDs after adding vibrant_art_bookmarks (vibrant-art-bookmarks) and wanderlust_bookmarks (wanderlust-bookmarks). Each has approved display34900paise; payable quote still reads mapped active Mongo variants. Existing catalogue fields, draft revisions/ownership, payment/order contracts unchanged. Distinct IDs remain distinct rows/stock pools; original bookmarks retained.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED B2C auth prefix /api/v1/auth (private,no-store; existing ownership/Origin gates):

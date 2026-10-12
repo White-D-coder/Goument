@@ -1,3 +1,9 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED: Home collection cards reserve2lh for titles, retaining centered shared serif typography, description/price/action hierarchy and theme; one-line candle title and two-line envelope title now place following rows at the same height. Shared card counter uses44px side buttons and a flexible centered quantity.
+
+At≤640px hero picture sources use Ivory, compressed phone_hero, then existing compressed Vibrant Indian-Inspired Bookmark Collection. Centered cover framing; desktop sources unchanged. Latest white hero title/brand text,32%-opacity dark shade and1px photo blur SUPERSEDE the briefly attempted gold/burgundy/no-overlay treatment after explicit user correction. CTA retains existing ivory/burgundy styling. Native image loading/recovery and reduced-motion/manual slideshow controls remain. Two additional bookmark cards/PDPs use existing components and ₹349 each; no new card design.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED: nine envelope PDPs reuse EnvelopePackSelector,20 pcs/10 pcs above the listed price. Defaults20 ₹2,499;10 ₹1,499. Buttons keep burgundy/ivory theme,40px minimum height and visible keyboard focus. Selection changes price and Add item identity together. No selector on product cards/cart/Home; cards default to their existing20-pack identity, cart shows chosen pack. Both Lotus sizes require a name; independent names persist. Related carousel retained.

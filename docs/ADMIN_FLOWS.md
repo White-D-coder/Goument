@@ -1,3 +1,7 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED locally: explicit guarded provisioning created two new bookmark Product/ProductVariant/Inventory records (100 opening units each, ₹349 inclusive). Existing admin resources read those records; draft additions are still not paid orders. No hosted admin provisioning/deployment verified; existing mappings/history untouched.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED locally: explicit catalogue provisioning populates existing Products/Variants/Inventory admin resources (18mapped products/27 SKU pools100 opening units), not guest drafts as paid orders. Order detail exposes chosen pack, gross unit amount, PRINT name and immutable checkout/address/customer/pricing snapshots. Orders appear only after a reserved checkout; payment/stock/finance status updates only on verified capture. Payment detail exposes safe reconciliationRequired reason for late capture; staff tooling/refund automation not added. Existing permission/ownership/history boundaries remain. No hosted admin data provision/deployment verified.

@@ -1,3 +1,9 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED locally: two distinct new bookmark cards/PDPs, Vibrant Art Bookmarks and Wanderlust Bookmarks, use the supplied compressed photographs and explicitly approved ₹349 each. Existing bookmark remains. Catalogue/cart/server mappings keep distinct identities; guarded local provisioning created only two new 100-unit stock pools without resetting existing inventory. Current mapped catalogue:20 products/29 SKU pools,30 registered gift IDs. Hosted provisioning/deployment remains unverified.
+
+Home quantity controls now place minus/quantity/plus across the frame. Phone hero uses supplied Ivory, phone_hero and Vibrant Indian-Inspired Bookmark Collection photos in order through responsive picture sources, with original desktop slides retained. Latest user steering SUPERSEDES no-overlay/gold-burgundy text: white text,32% dark shade and1px image blur on phone only. Home collection titles reserve two line heights so adjacent descriptions/prices align. TESTING/PERFORMANCE own evidence and limits.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED locally: R224 puts 20 pcs/10 pcs selection only inside envelope PDPs above price (20 ₹2,499;10 ₹1,499), keeps independent draft/SKU identities and required Lotus names, removes every translucent Pack of 20 image strip and tightens paragraph→selector→price spacing. Home remains Envelopes navigation, now From ₹1,499; related carousel retained.

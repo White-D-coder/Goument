@@ -1343,17 +1343,17 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
   .tgg-hero-copy .tgg-kicker,
   .tgg-hero-description,
   .tgg-hero-promises { display: none; }
-  .tgg-hero-copy .tgg-hero-brand { display: block; margin: 0 0 8px; color: var(--tgg-gold); font-family: var(--font-jakarta); font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: .12em; }
-  #main .tgg-home .tgg-hero-copy h1 { max-width: none; color: var(--tgg-burgundy); font-family: var(--tgg-sans) !important; font-size: clamp(34.5px,9vw,41px); font-weight: 600; line-height: 1.16; letter-spacing: -.025em; text-shadow: none; }
+  .tgg-hero-copy .tgg-hero-brand { display: block; margin: 0 0 8px; color: #fff; font-family: var(--font-jakarta); font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: .12em; }
+  #main .tgg-home .tgg-hero-copy h1 { max-width: none; color: #fff; font-family: var(--tgg-sans) !important; font-size: clamp(34.5px,9vw,41px); font-weight: 600; line-height: 1.16; letter-spacing: -.025em; text-shadow: none; }
   .tgg-hero-title-desktop { display: none; }
   .tgg-hero-title-mobile { display: block; }
-  .tgg-hero-title-mobile > .tgg-hero-second-line { display: block; margin-top: 4px; color: var(--tgg-gold); font-weight: 500; }
+  .tgg-hero-title-mobile > .tgg-hero-second-line { display: block; margin-top: 4px; color: inherit; font-weight: 500; }
   .tgg-hero-copy > .tgg-button { min-width: 160px; min-height: 44px; gap: 26px; margin-top: 20px; padding: 11px 18px; border: 1px solid #fffdf8; border-radius: 8px; background: #fffdf8; color: var(--tgg-burgundy) !important; font-size: 12px; font-weight: 600; letter-spacing: .01em; }
   .tgg-hero-copy > .tgg-button:hover { border-color: #eee7db; background: #eee7db; }
   .tgg-hero-copy > .tgg-button:focus-visible { outline-color: #fffdf8; }
   .tgg-hero-visual { position: absolute; z-index: auto; inset: 0; width: 100%; min-height: 0; aspect-ratio: auto; }
-  .tgg-hero-visual::after { background: none; }
-  .tgg-hero-visual img { object-fit: cover; object-position: center; }
+  .tgg-hero-visual::after { background: rgba(25, 12, 10, .32); }
+  .tgg-hero-visual img { object-fit: cover; object-position: center; filter: blur(1px); }
   .tgg-hero-dots { z-index: 4; bottom: 8px; }
   .tgg-hamper-showcase { padding-top: 28px; padding-bottom: 26px; }
   .tgg-hamper-grid { display: flex; gap: 12px; margin-right: -18px; padding-right: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }

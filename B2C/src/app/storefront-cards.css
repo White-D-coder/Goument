@@ -116,6 +116,10 @@
   text-overflow: ellipsis;
   text-align: center !important;
 }
+/* Keep adjacent collection descriptions and prices level when a title wraps. */
+#main .tgg-home .tgg-collection-card h3 {
+  min-height: 2lh !important;
+}
 #main :is(.gift-card-bottom-row, .tgg-hamper-bottom) {
   display: flex;
   flex-direction: column;

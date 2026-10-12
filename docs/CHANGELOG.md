@@ -1,3 +1,7 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED locally: add two supplied bookmark designs with independent catalogue/cart/SKU identities and approved ₹349 prices; retain existing bookmarks. Compress new photos90.7% combined; local additive provisioning creates two100-unit pools. Home card counter distributes controls evenly; native picture sources select three requested phone photos. Latest phone hero style is white copy with subtle dark shade/1px image blur; desktop unchanged. Reserve two title lines in Home discovery cards to align descriptions/prices. No deployment; TESTING records validation.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED locally: R222 optimized Home source photos/deferred slideshow/reveal; R223 added explicit catalogue100-unit provisioning, additive Order migration, server-inclusive quotes, five-minute transactional reservations/expiry, real order-payment navigation, verified capture stock/finance/idempotency, late-capture review and admin snapshots; R224 added PDP-only envelope pack prices/identities and removed image strips/tightened spacing. GiftBuilder hides duplicate10-pack entries and removes obsolete unavailable-price copy. Existing B2B/alternate frontends/history untouched.

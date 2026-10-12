@@ -1,3 +1,9 @@
+## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
+
+CURRENT / IMPLEMENTED decision: user explicitly approves both newly supplied bookmark designs at ₹349 each; preserve independent products/cart IDs and existing bookmark. Reuse current catalogue/admin stock provisioning, initial100 each per existing approval; no reset of existing stock or historical snapshots.
+
+CURRENT / IMPLEMENTED visual decision: latest explicit white-text/light-dark-blur instruction SUPERSEDES the preceding gold/burgundy and no-dark-overlay instructions for phone hero. Use existing white typography, static1px image blur and32% dark shade; original desktop unchanged. Native picture selects phone-specific photos without viewport JS. Collection titles reserve two line heights to align following rows without changing text/prices.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED decision: latest explicit user instruction approves existing listed amounts for checkout,18% GST included and no extra delivery charge,100 initial product/pack units, five-minute unpaid holds. Envelope correction is10 pcs ₹1,499 and20 pcs ₹2,499. This SUPERSEDES R192/R193 extra-charge policy, R220 display-only exclusion from authoritative quoting for explicitly provisioned/mapped products, and earlier blanket unavailable gift-order bridge. Missing gateway/mapping/price/stock still fails closed; unknown packaging charges remain unsupported.

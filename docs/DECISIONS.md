@@ -1,3 +1,11 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED decision: latest explicit user instruction approves existing listed amounts for checkout,18% GST included and no extra delivery charge,100 initial product/pack units, five-minute unpaid holds. Envelope correction is10 pcs ₹1,499 and20 pcs ₹2,499. This SUPERSEDES R192/R193 extra-charge policy, R220 display-only exclusion from authoritative quoting for explicitly provisioned/mapped products, and earlier blanket unavailable gift-order bridge. Missing gateway/mapping/price/stock still fails closed; unknown packaging charges remain unsupported.
+
+R224 SUPERSEDES R215/R217/R218-era image strip presentation: no Pack of 20 overlay on any card; pack buttons live only inside PDPs, above price. Historical20-pack IDs remain stable; new10-pack IDs preserve independent names/quantities/stock. India generic alias shares Burgundy inventory to avoid duplicate physical stock.
+
+Five-minute expiry is checked transactionally before sale; captured money after expiry is durably flagged for staff review, not an invented automatic refund. Scheduler configuration is required for idle-hold cleanup. These are local implementation decisions, not provider/deployment verification. Existing customer ownership/cardinality and historical order amounts are preserved.
+
 ## 2026-10-12 — Reuse existing displayed amounts in cart (R220)
 
 CURRENT / IMPLEMENTED decision: latest user explicitly rejects prices disappearing/changing on cart navigation. This SUPERSEDES the prior R196/R213 rule keeping preview figures out of cart arithmetic and retaining old candle ranges. Use the same existing display amount for each registered item across cards/PDP/cart; quantity multiplication in integer paise, GST/delivery already included. New shared resolver returns null for unknown slugs rather than the card's generic fallback figure. Keep historic generic IDs for saved carts. This presentation requirement does not authorize inventory/basePrice, server quote/payment amount or historical order changes; existing checkout/payment/order gates remain. Tests compare actual gift catalogue entries against card label/cart at1/2/99 units and verify mixed totals. No new price policy invented.

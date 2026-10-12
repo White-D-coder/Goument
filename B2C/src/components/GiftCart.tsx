@@ -5,12 +5,12 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { api, ApiError } from '@/lib/api';
 import { giftApi, useGiftDraft, type Draft } from '@/hooks/useGiftDraft';
-import { giftingEnquiry } from '@/lib/product-editorial';
+import { envelopePack, isEnvelopeGift } from '@/lib/envelope-packs';
 import { estimateGiftCart, priceRangeLabel, type PriceRange } from '@/lib/gift-cart-pricing';
 import QuantityControl from './QuantityControl';
 import ProductPhoto from './ProductPhoto';
 import PrintNameField from './PrintNameField';
-import { LOTUS_GIFT_ID, printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
+import { isLotusGift, printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
 import './gift-cart.css';
 
 function PriceAmount({ value }: { value: PriceRange }) {
@@ -23,6 +23,7 @@ export default function GiftCart() {
   const [review, setReview] = useState('');
   const [checking, setChecking] = useState(false);
   const nameDialog = useRef<HTMLDialogElement>(null);
+  const nameItemId = useRef('');
   const continueAfterName = useRef(false);
   const nameHeadingId = useId();
   const [printName, setPrintName] = useState('');
@@ -30,15 +31,12 @@ export default function GiftCart() {
   const [savingName, setSavingName] = useState(false);
 
   async function check(selection: Draft | null = draft) {
-    if (!selection?.checkoutAvailable || enquiryHamper) {
-      setReview('Your selection is saved. Final item prices need confirmation before checkout.');
-      return;
-    }
+    if (!selection?.items.length) return;
     setChecking(true);
     setReview('');
     try {
-      await api(`${giftApi}/checkout-check`, 'POST', {});
-      router.push('/checkout');
+      const result = await api<{ next: string }>(`${giftApi}/checkout-check`, 'POST', {});
+      router.push(result.next);
     } catch (e) {
       if (e instanceof ApiError && e.status === 401) {
         router.push('/account?next=%2Fcheckout');
@@ -53,14 +51,13 @@ export default function GiftCart() {
   const totalItems = draft?.items.reduce((n, i) => n + i.quantity, 0) || 0;
   const isReady = (draft?.items.length || 0) > 0;
   const estimate = estimateGiftCart(draft?.items || [], catalogue?.items || [], draft?.boxes || []);
-  const enquiryHamper = draft?.items
-    .map(row => catalogue?.items.find(item => item.id === row.id))
-    .find(item => item?.category === 'Gift Hampers');
-  const lotus = draft?.items.find(row => row.id === LOTUS_GIFT_ID);
+  const lotus = draft?.items.find(row => isLotusGift(row.id) && (row.personalisation?.mode !== 'PRINT' || printNameError(row.personalisation.name))) || draft?.items.find(row => isLotusGift(row.id));
   const needsPrintChoice = Boolean(lotus && (lotus.personalisation?.mode !== 'PRINT' || printNameError(lotus.personalisation.name)));
-  function openName(continueCheckout = false) {
+  function openName(continueCheckout = false, id = lotus?.id) {
     continueAfterName.current = continueCheckout;
-    setPrintName(lotus?.personalisation?.mode === 'PRINT' ? lotus.personalisation.name : '');
+    const selected = draft?.items.find(row => row.id === id);
+    nameItemId.current = id || '';
+    setPrintName(selected?.personalisation?.mode === 'PRINT' ? selected.personalisation.name : '');
     setNameError(''); nameDialog.current?.showModal();
   }
   async function saveName() {
@@ -70,13 +67,16 @@ export default function GiftCart() {
     setSavingName(true);
     try {
       const choice: GiftPersonalisation = { mode: 'PRINT', name: printName.trim() };
-      const saved = await personalise(LOTUS_GIFT_ID, choice);
+      const saved = await personalise(nameItemId.current, choice);
       if (!saved) { setNameError('Your name could not be saved. Please review your bag and try again.'); return; }
       nameDialog.current?.close();
-      if (continueAfterName.current) await check(saved);
+      if (continueAfterName.current) {
+        const next = saved.items.find(row => isLotusGift(row.id) && (row.personalisation?.mode !== 'PRINT' || printNameError(row.personalisation.name)));
+        if (next) { setReview('Enter a print name for each Lotus envelope pack before checkout.'); return; }
+        await check(saved);
+      }
     } finally { setSavingName(false); }
   }
-
   return (
     <section className="section gift-cart">
       <p className="eyebrow">THOUGHTFULLY CHOSEN</p>
@@ -103,16 +103,17 @@ export default function GiftCart() {
                 draft.items.map(row => {
                   const item = catalogue.items.find(i => i.id === row.id);
                   const line = estimate.lines.find(line => line.id === row.id);
+                  const rowNeedsName = row.personalisation?.mode !== 'PRINT' || printNameError(row.personalisation.name);
                   return (
                     <article key={row.id} className="gift-cart-row">
                       {item && <div className="gift-cart-photo"><ProductPhoto src={item.image} alt={item.name} sizes="(max-width: 640px) 112px, (max-width: 1000px) 180px, (max-width: 1199px) 220px, 260px" /></div>}
                       <div className="gift-cart-item-info">
                         <h3>{item?.name || 'Item unavailable'}</h3>
-                        {item && <p className="gift-cart-category">{item.category}</p>}
+                        {item && <p className="gift-cart-category">{item.category}</p>}{isEnvelopeGift(row.id) && <p className="gift-cart-pack-name">Pack of {envelopePack(row.id)}</p>}
                         <p className="gift-cart-price">{line?.unit ? `${priceRangeLabel(line.unit)} each` : 'Price pending confirmation'}</p>
-                        {row.id === LOTUS_GIFT_ID && <>
+                        {isLotusGift(row.id) && <>
                           {row.personalisation?.mode === 'PRINT' && <p className="gift-cart-print-name">Name to print: <strong>{row.personalisation.name}</strong></p>}
-                          <button type="button" className="text-link gift-cart-print-action" disabled={busy || savingName} onClick={() => openName()}>{needsPrintChoice ? 'Add a print name' : 'Edit name printing'}</button>
+                          <button type="button" className="text-link gift-cart-print-action" disabled={busy || savingName} onClick={() => openName(false, row.id)}>{rowNeedsName ? 'Add a print name' : 'Edit name printing'}</button>
                         </>}
                       </div>
                       <div className="gift-cart-line-price">
@@ -154,10 +155,9 @@ export default function GiftCart() {
                 <div className="gift-cart-total"><dt>Total</dt><dd>{estimate.total ? <PriceAmount value={estimate.total}/> : 'Price pending'}</dd></div>
               </dl>
               <p className="gift-cart-estimate-note">{estimate.incomplete ? 'Some selected prices need confirmation. ' : ''}{isReady ? 'GST and delivery included.' : 'Add your favourites to get started.'}</p>
-              {isReady && <Link className="text-link" href={giftingEnquiry(enquiryHamper?.name || 'my gift selection')}>Confirm final total →</Link>}
               <button
                 className="button"
-                disabled={busy || checking || savingName || !isReady || ((!draft.checkoutAvailable || Boolean(enquiryHamper)) && !needsPrintChoice)}
+                disabled={busy || checking || savingName || !isReady}
                 onClick={() => needsPrintChoice ? openName(true) : void check()}
               >
                 {checking ? 'Checking…' : 'Continue to checkout'}

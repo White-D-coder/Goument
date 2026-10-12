@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: reserved gift orders link the authenticated existing Customer and owned address, snapshot purchase-time recipient/customer/pack/PRINT metadata and appear through existing owned order history/admin relationships. Cookie-owned GiftDraft is not silently merged/reassigned or converted into customer history before order creation. No new identity matching, customer cardinality/deletion or historical profile/order rewrite. Later cart edits survive an earlier order capture. Actual provider/printing fulfillment remains unverified.
+
 # Customer System
 
 ## 2026-09-30 — Shopping before and after sign-in

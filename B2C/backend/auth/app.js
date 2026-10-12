@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const service = require('./service');
 const { googleProvider } = require('./google');
 const { page } = require('../database/queries');
-function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGateway = null }) {
+function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGateway = null, maintenanceSecret = process.env.CRON_SECRET }) {
   const url = new URL(origin);
   if (url.origin !== origin || (url.protocol !== 'https:' && !['http://localhost:3000','http://127.0.0.1:3000','http://localhost:3001','http://127.0.0.1:3001'].includes(origin))) throw new Error('AUTH_ORIGIN must be an exact HTTPS origin or local B2C origin');
   const secure = url.protocol === 'https:';
@@ -68,8 +68,9 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
     const result=await page(db.models.Order,{customerId:customer._id},{limit:10,after});
     res.json({orders:result.items.map(o=>({_id:String(o._id),orderNumber:o.orderNumber,status:o.status,total:o.pricing.grandTotalMinor,currency:o.pricing.currency,createdAt:o.createdAt})),next:result.next});
   }));
+  require('../gifting/maintenance').mountMaintenance(app, { db, secret: maintenanceSecret, run });
   require('../payments/routes').mountPayments(app,{db,gateway:paymentGateway,run});
-  require('../gifting/routes').mountGifting(app, { db, cookie, run });
+  require('../gifting/routes').mountGifting(app, { db, cookie, run, gateway: paymentGateway });
   require('../admin/routes').mountAdmin(app, { db });
   app.use((error,req,res,next)=>{
     void next;

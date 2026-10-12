@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: Order gains optional immutable checkout snapshot and enriched inclusive item/PRINT metadata; old records remain compatible. GiftDraft continues existing ownerHash/row IDs/quantity/__v;10-pack IDs add no draft schema field and both Lotus IDs permit required PRINT. ProductVariant attributes carry approved gift ID/included-tax/pack mapping; Inventory remains only stock authority. Generated field/index reference below was regenerated from actual schemas:25collections/103 explicit indexes/33 unique. No actual history/identity rewrite.
+
 ## 2026-10-12 — GiftDraft Lotus personalisation semantics (R216/R219)
 
 CURRENT / IMPLEMENTED locally: items[].personalisation is optional for unresolved/legacy draft compatibility. Embedded mode PRINT requires a1–80trimmed-character name with no control/line-separator characters, Lotus ID only. Legacy SKIP mode is retained in storage schema for reads/preserving existing rows; new API Skip decisions rejected and legacy Skip never satisfies checkout/address gate. Existing row id/quantity remains the identity/cardinality, one print name per Lotus line. Generated field table below describes structural optionality, not permission to checkout without a name. No historical/customer/order snapshot changes; future priced order bridge must explicitly preserve printing metadata. DATABASE/API_CONTRACTS/TESTING own rollout and evidence.
@@ -531,7 +535,7 @@ State enums and transition graphs will be centralized. Status enum does not esta
 
 Source: B2C/backend/database/models and validators. Regenerate with npm run db:describe -- --write-docs. This section describes the new isolated database, not legacy src/features models. Every collection has ObjectId _id; implicit _id unique indexes are reported separately. Mutable records carry createdAt/updatedAt; event records carry createdAt only, plus domain dates. The __v/version field is an optimistic-write guard, not a business identifier.
 
-Collections: 25; explicit indexes: 101; explicit unique constraints: 32; with implicit _id indexes: 126/57.
+Collections: 25; explicit indexes: 103; explicit unique constraints: 33; with implicit _id indexes: 128/58.
 
 ### users
 
@@ -886,16 +890,27 @@ State guards: {}. Initial-state restriction: {}. Frozen paths: ownerHash. Refere
 
 Purpose: Order lifecycle and purchase-time facts. Lifecycle: Transactional / Historical. Never reconstruct snapshots from mutable profiles/products; no deletion API.
 
-State guards: {"status":"OrderStatus","paymentStatus":"OrderPaymentStatus","fulfillmentStatus":"FulfillmentStatus"}. Initial-state restriction: {"status":["CREATED","PAYMENT_PENDING"],"paymentStatus":["PENDING"],"fulfillmentStatus":["UNFULFILLED"]}. Frozen paths: orderNumber, customerId, items, pricing, coupon, shippingAddressSnapshot, billingAddressSnapshot, customerSnapshot, idempotencyKey, requestHash. References below are validated on create/change; MongoDB itself has no cross-collection foreign keys.
+State guards: {"status":"OrderStatus","paymentStatus":"OrderPaymentStatus","fulfillmentStatus":"FulfillmentStatus"}. Initial-state restriction: {"status":["CREATED","PAYMENT_PENDING"],"paymentStatus":["PENDING"],"fulfillmentStatus":["UNFULFILLED"]}. Frozen paths: orderNumber, customerId, items, pricing, checkout, coupon, shippingAddressSnapshot, billingAddressSnapshot, customerSnapshot, idempotencyKey, requestHash. References below are validated on create/change; MongoDB itself has no cross-collection foreign keys.
 
 | Field | Type | Required | Default | Constraint/reference |
 | --- | --- | --- | --- | --- |
+| checkout | embedded | optional | none | schema casting/strict types |
+| checkout.draftId | ObjectId | required | none | ref GiftDraft |
+| checkout.revision | Number | required | none | min 1; max 9007199254740991; custom validator; see source/rules |
+| checkout.snapshotRevision | Number | required | none | min 1; max 9007199254740991; custom validator; see source/rules |
+| checkout.expiresAt | Date | required | none | schema casting/strict types |
 | orderNumber | String | required | none | minLength 1; maxLength 250 |
 | customerId | ObjectId | required | none | ref Customer |
 | status | String | required | "CREATED" | enum CREATED, PAYMENT_PENDING, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED, REFUNDED |
 | paymentStatus | String | required | "PENDING" | enum PENDING, FAILED, PAID, PARTIALLY_REFUNDED, REFUNDED |
 | fulfillmentStatus | String | required | "UNFULFILLED" | enum UNFULFILLED, PROCESSING, SHIPPED, DELIVERED, CANCELLED |
 | items | embedded[] | optional | [] | custom validator; see source/rules; bounded array |
+| items[].giftItemId | String | optional | none | minLength 1; maxLength 100 |
+| items[].inclusiveUnitPriceMinor | Number | optional | none | min 0; max 9007199254740991; custom validator; see source/rules |
+| items[].taxRateBps | Number | optional | none | min 0; max 10000; custom validator; see source/rules |
+| items[].personalisation | embedded | optional | none | schema casting/strict types |
+| items[].personalisation.mode | String | required | none | enum PRINT |
+| items[].personalisation.name | String | required | none | minLength 1; maxLength 80 |
 | items[].productId | ObjectId | optional | none | ref Product |
 | items[].variantId | ObjectId | optional | none | ref ProductVariant |
 | items[].sku | String | required | none | minLength 1; maxLength 250 |
@@ -965,6 +980,8 @@ State guards: {"status":"OrderStatus","paymentStatus":"OrderPaymentStatus","fulf
 | order fulfillmentStatus dashboard | {"fulfillmentStatus":1,"createdAt":-1} | no | non-sparse |
 | orders by date | {"createdAt":-1} | no | non-sparse |
 | orders by currency date | {"pricing.currency":1,"createdAt":-1,"_id":-1} | no | non-sparse |
+| gift checkout once | {"checkout.draftId":1,"checkout.revision":1} | yes | partial {"checkout.draftId":{"$type":"objectId"}} |
+| gift checkout expiry | {"status":1,"checkout.expiresAt":1} | no | non-sparse |
 | order status admin cursor | {"status":1,"createdAt":-1,"_id":-1} | no | non-sparse |
 | order paymentStatus admin cursor | {"paymentStatus":1,"createdAt":-1,"_id":-1} | no | non-sparse |
 | order fulfillmentStatus admin cursor | {"fulfillmentStatus":1,"createdAt":-1,"_id":-1} | no | non-sparse |

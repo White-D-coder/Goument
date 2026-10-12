@@ -1,3 +1,13 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+- [x] Local authorized draft→inclusive-priced order/reservation bridge,100 opening SKU/pack units, required print snapshots, PDP-only10/20 packs and removed image strips. Source/test details: PAYMENT_SYSTEM/UI_SYSTEM/TESTING.
+- [ ] Before hosted commerce activation: review/apply additive Order migration and explicit catalogue mapping/opening stock in the intended B2C DB (never reset existing stock); configure server-only Razorpay credentials/automatic capture/public signed webhook; complete actual test-mode end-to-end payment.
+- [ ] Configure trusted approximately1-minute expiry invocation with CRON_SECRET≥32 characters or supervised CLI. Endpoint processes≤100 overdue orders/batch; monitor backlog and repeat bounded batches as needed. No hosted scheduler was installed; on-demand recovery does not guarantee idle cleanup at exactly5minutes.
+- [ ] Operator reconciliation for uncertain gateway-order creation and late captured money; refund/serviceability/invoice policies remain UNKNOWN/unimplemented. No auto refund is invented.
+- [ ] Recheck hosted lag on physical device after deployment. Synthetic sample did not reproduce scroll lag, and slow-phone69ms long task remains;20ms universal budget not achieved.
+
+These entries update B2C-specific historical mapping/quote/stock/expiry blockers below, not original B2B/Stripe priorities. Old R180/R192/R196/R220 missing-authority facts are superseded only for explicitly provisioned mapped B2C items; photography/contents/serviceability/refund unknowns remain.
+
 ## 2026-10-12 — Storefront/admin gap confirmed (R221)
 
 CURRENT / PARTIAL, source-verified: preview products/display prices do not automatically create admin Product/Variant records; GiftDraft print names have no admin read/display flow, and draft Add is not an Order. FUTURE / REQUIRED alongside the existing catalogue/quote/order bridge: connect approved catalogue prices and confirmed order/printing snapshots to staff views before end-to-end operation claims. Do not expose anonymous drafts, seed/publish products or enable payments from this status question. ADMIN_FLOWS owns evidence; priorities unchanged.

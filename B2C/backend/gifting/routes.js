@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const { identity } = require('../auth/service');
 const { saveAddress } = require('../database/repositories');
 const boxes = require('./boxes.json');
-const items = require('./items.json');
+const items = require('./catalogue-items');
 const fail = (message, status = 400) => Object.assign(new Error(message), { status });
 const publicBoxes = boxes.map(({ capacity, ...box }) => box);
 const { calculatePackaging } = require('./packaging');
@@ -12,12 +12,6 @@ const known = (id, source) => source.find(entry => entry.id === id);
 function packing(draft) {
   const count = draft?.items?.reduce((n, item) => n + item.quantity, 0) || 0;
   return count === 0 ? 'EMPTY' : 'READY';
-}
-function hasEnquiryOnlyHamper(draft) {
-  return Boolean(draft?.items?.some(row => {
-    const item = known(row.id, items);
-    return item?.category === 'Gift Hampers' || String(row.id).endsWith('_hamper');
-  }));
 }
 function payload(draft) {
   const itemsList = draft?.items?.map(({ id, quantity, personalisation }) => ({ id, quantity, ...(personalisation ? { personalisation: personalisation.toObject() } : {}) })) || [];
@@ -46,14 +40,18 @@ function validate(body, previous) {
     validatePersonalisation(row.id, row.personalisation, Boolean(legacySkip));
   }
 }
-function mountGifting(app, { db, cookie, run }) {
+function mountGifting(app, { db, cookie, run, gateway = null }) {
   const base = '/api/v1/auth/gift';
   const cookieName = 'b2c_gift';
   const owner = req => {
     const token = req.cookies[cookieName];
     return typeof token === 'string' && /^[a-f0-9]{64}$/.test(token) ? crypto.createHash('sha256').update(token).digest('hex') : null;
   };
-  app.get(`${base}/catalogue`, (req, res) => res.json({ boxes: publicBoxes, items, mode: 'DRAFT' }));
+  app.get(`${base}/catalogue`, run(async (req, res) => {
+    let priced = items;
+    try { const rows = await require('./catalogue').saleableRows(db, items); priced = items.map((item, i) => ({ ...item, unitPriceMinor: rows[i].variant.priceMinor })); } catch (error) { if (error.status !== 409) throw error; }
+    res.json({ boxes: publicBoxes, items: priced, mode: 'DRAFT' });
+  }));
   app.get(`${base}/count`, run(async (req, res) => {
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     res.json({ count: draft ? draft.items.reduce((n, i) => n + i.quantity, 0) : 0 });
@@ -81,38 +79,42 @@ function mountGifting(app, { db, cookie, run }) {
     res.json(payload(draft));
   }));
   app.post(`${base}/checkout-check`, run(async (req, res) => {
-    await identity(db, req.cookies.b2c_session);
+    const { customer } = await identity(db, req.cookies.b2c_session);
+    await require('./checkout').expireReservations(db, { limit: 20 });
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') return res.status(409).json({ message: 'Add items to your bag before checkout.', packing: draft ? packing(draft) : 'EMPTY' });
-    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     requirePersonalisation(draft);
     const fulfillment = calculatePackaging(draft.items);
-    res.json({ packing: 'READY', fulfillment, checkoutAvailable: false, next: '/checkout' });
+    const existing = await db.models.Order.findOne({ 'checkout.draftId': draft._id, customerId: customer._id, status: 'PAYMENT_PENDING', 'checkout.expiresAt': { $gt: new Date() } });
+    if (existing) { if (draft.__v + 1 !== existing.checkout.snapshotRevision) throw fail('A payment is already in progress for your earlier selection. Check your account before starting another.',409); return res.json({ next: `/checkout?order=${existing._id}`, checkoutAvailable: Boolean(gateway) }); }
+    await require('./checkout').quote(db, draft);
+    res.json({ packing: 'READY', fulfillment, checkoutAvailable: Boolean(gateway), next: '/checkout' });
   }));
   const fields = ['recipientName','phone','email','addressLine1','addressLine2','landmark','city','state','postalCode','country'];
   const addressView = address => Object.fromEntries([['id', String(address._id)], ...fields.map(k => [k, address[k] || ''])]);
   app.get(`${base}/checkout`, run(async (req, res) => {
     const { customer } = await identity(db, req.cookies.b2c_session);
+    await require('./checkout').expireReservations(db, { limit: 20 });
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') throw fail('Please review your items in your bag.', 409);
-    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     requirePersonalisation(draft);
+    const quoted = await require('./checkout').quote(db, draft);
     const addresses = await db.models.CustomerAddress.find({customerId:customer._id}).sort({updatedAt:-1}).limit(20);
     const fulfillment = calculatePackaging(draft.items);
     res.json({
+      revision: draft.__v + 1, pricing: quoted.pricing,
       addresses: addresses.map(addressView),
       selection: {
         boxes: [],
-        items: draft.items.map(r => ({ name: known(r.id, items)?.name || r.id, quantity: r.quantity, ...(r.personalisation ? { personalisation: r.personalisation.toObject() } : {}) }))
+        items: draft.items.map(r => ({ name: known(r.id, items)?.name || r.id, packSize: known(r.id, items)?.packSize, quantity: r.quantity, ...(r.personalisation ? { personalisation: r.personalisation.toObject() } : {}) }))
       },
       fulfillment,
-      paymentAvailable: false
+      paymentAvailable: Boolean(gateway)
     });
   }));
   app.post(`${base}/address`, run(async (req,res) => {
     const { customer } = await identity(db, req.cookies.b2c_session);
     const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
-    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
     if (!draft || packing(draft) !== 'READY') throw fail('Please review your items in your bag.', 409);
     requirePersonalisation(draft);
     const body=req.body;
@@ -146,7 +148,7 @@ function mountGifting(app, { db, cookie, run }) {
     if(body.id && (typeof body.id!=='string'||!/^[a-f0-9]{24}$/i.test(body.id)||!await db.models.CustomerAddress.exists({_id:body.id,customerId:customer._id}))) throw fail('Address not found.',404);
     for(const key of ['email','addressLine2','landmark']) if(!input[key]) input[key]=undefined;
     const address=await saveAddress(db,customer._id,input,body.id||undefined);
-    res.json({address:addressView(address),paymentAvailable:false});
+    res.json({address:addressView(address),paymentAvailable:Boolean(gateway)});
   }));
 
   app.post(`${base}/order`, run(async (req, res) => {
@@ -154,11 +156,12 @@ function mountGifting(app, { db, cookie, run }) {
     const key = owner(req);
     const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
     if (!draft || packing(draft) !== 'READY') throw fail('Your gift bag has no items. Please select items first.', 409);
-    if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
 
-    // Cart estimates are not an authoritative, reserved order quote. Never
-    // replace the missing commercial bridge with a flat per-item valuation.
-    throw fail('Final inclusive item prices and stock must be confirmed before an order can be created.', 409);
+    requirePersonalisation(draft);
+    if (!gateway) throw fail('Online payment is not configured yet. Your bag is saved.', 409);
+    if (!req.body || Object.keys(req.body).some(key => !['addressId', 'revision', 'expectedTotalMinor'].includes(key))) throw fail('Invalid checkout request.');
+    const order = await require('./checkout').prepareOrder(db, { customerId: customer._id, ownerHash: key, ...req.body });
+    res.json({ orderId: String(order._id), orderNumber: order.orderNumber, expiresAt: order.checkout.expiresAt, pricing: order.pricing, next: `/checkout?order=${order._id}` });
   }));
 }
 module.exports = { mountGifting, packing, validate };

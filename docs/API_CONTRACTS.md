@@ -1,3 +1,22 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED B2C auth prefix /api/v1/auth (private,no-store; existing ownership/Origin gates):
+
+| Endpoint | Current contract |
+| --- | --- |
+| GET gift/catalogue |28 registered IDs including nine10-pack variants; optional Mongo-authoritative unitPriceMinor, packSize10/20; metadata fallback is not payable authority |
+| GET gift/draft |existing owner/revision contract, checkoutAvailable:false legacy draft marker; cart must call checkout-check, not treat marker as gateway state |
+| POST gift/checkout-check |auth/required names/stock quote; returns next /checkout or owned active /checkout?order=id; gateway capability boolean |
+| GET gift/checkout |owned addresses, draft revision, pack/name selection, server inclusive pricing and paymentAvailable |
+| POST gift/address |existing strict owned address capture; paymentAvailable reflects configured gateway, not a paid order |
+| POST gift/order |only addressId/revision/expectedTotalMinor; auth+cookie draft+mapped quote+atomic reserve; returns orderId/number/expiresAt/pricing/next; no prepayment cart clearing |
+| GET payments/config |configured and draftCheckoutAvailable reflect gateway config; quote/stock separately validated |
+| GET payments/orders/:id |owned immutable price/pack status/expiresAt and reconciliationRequired boolean |
+| POST payments/razorpay/order |orderId only; remaining timeout seconds with immutable provider options |
+| GET gift/maintenance/expire |no browser identity; exact Bearer CRON_SECRET≥32, private/no-store,≤100 overdue releases; trusted scheduler required |
+
+Public products batch mapped active variant prices/pack options/available stock; internal attributes/reservations omitted. Next cache60s; payment quote rechecks Mongo. New10-pack row IDs preview-envelope-epN-pack-10; old preview-envelope-epN remains20. Both Lotus IDs require PRINT before checkout. Missing/unknown/changed price or unpriced separate boxes rejects409. Existing cookie/session/historical identity preserved. See PAYMENT_SYSTEM for verified ingress/late capture contracts.
+
 ## 2026-10-12 — Shared cart/card display-price resolution (R220)
 
 CURRENT / IMPLEMENTED locally: frontend gift catalogue Item type now reflects existing optional slug. Existing registered ID/slug maps to shared card/PDP display amount for cart calculations; no price fields added to gift draft, catalogue endpoint or client order payload, no new server money trust. Saved selections need no migration; names/quantities/revisions remain independent of pricing. Unknown IDs/packaging stay pending. Old candle-range/preview-price exclusion SUPERSEDED for UI arithmetic only; server quote/order/payment guards retained. TESTING covers actual catalogue-to-label consistency and cart interactions.

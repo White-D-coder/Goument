@@ -1,3 +1,9 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED locally: R222 optimized Home source photos/deferred slideshow/reveal; R223 added explicit catalogue100-unit provisioning, additive Order migration, server-inclusive quotes, five-minute transactional reservations/expiry, real order-payment navigation, verified capture stock/finance/idempotency, late-capture review and admin snapshots; R224 added PDP-only envelope pack prices/identities and removed image strips/tightened spacing. GiftBuilder hides duplicate10-pack entries and removes obsolete unavailable-price copy. Existing B2B/alternate frontends/history untouched.
+
+Checks and measured limits are recorded in TESTING/PERFORMANCE. Local dev DB provision/migration and guarded unchanged-config auth restart were authorized; no hosted DB migration, deployment or real payment. Existing priorities retained; deployment/maintenance/provider work remains open.
+
 ## 2026-10-12 — Preserve card prices in cart (R220)
 
 CURRENT / IMPLEMENTED locally: replace stale hamper-only/range cart resolver with the shared card/PDP numeric display amounts for all registered gifts, retaining GST/delivery-inclusive quantity totals. Fix missing₹99 envelope/bookmark prices and candle range mismatch; preserve prices through reload/name edits/failed saves. Unknown inputs still pending; no new figures/basePrice/order/payment changes. Actual catalogue-to-card/cart regression covers all19 IDs and1/2/99 quantities; TESTING records client/browser/typecheck evidence.

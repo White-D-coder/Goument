@@ -1,4 +1,5 @@
 export const LOTUS_GIFT_ID = 'preview-envelope-ep1';
+export const isLotusGift = (id: string) => id === LOTUS_GIFT_ID || id === `${LOTUS_GIFT_ID}-pack-10`;
 // SKIP is a legacy draft read shape; it never satisfies the required-name gate.
 export type GiftPersonalisation = { mode: 'PRINT'; name: string } | { mode: 'SKIP' };
 export function printNameError(name: string): string {

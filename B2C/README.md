@@ -1,5 +1,21 @@
 # Gourmet B2C application
 
+## Current B2C checkout — 2026-10-12 (R223–R224)
+
+This section supersedes historical unavailable-commerce descriptions below for the new database-backed B2C auth service only. Local gift checkout uses mapped Mongo prices, owned address/order snapshots,5-minute atomic stock reservations and verified Razorpay capture. Listed prices include18% GST/delivery. Envelopes offer10pcs ₹1,499 or20pcs ₹2,499 inside the product page; Lotus requires a print name. Cart has direct checkout without a final-total email. Original backend/B2B frontends remain separate.
+
+Deployment is pending: hosted gateway configuration was checked and is unavailable. No real provider payment, hosted migration, provisioning or expiry scheduler was performed. Review the intended transaction-ready B2C database and backups first. For an already recognized installed schema, the additive upgrade and explicit approved catalogue setup are:
+
+```sh
+cd B2C/backend
+node database/migrations/gift-checkout-v1.js --apply
+node gifting/provision-catalogue.js --apply --opening-stock=100
+```
+
+Provisioning creates27 mapped SKU/pack pools across18products, with100 ledger-backed opening units each. India generic/Burgundy share stock. Existing mapped stock/prices are never reset on rerun; unrelated existing slugs are refused for operator review. Only the recognized local development database was actually migrated/provisioned here. New databases need existing schema installation first; never migrate/seed during requests or serverless cold starts.
+
+Configure existing server-only Razorpay credentials, automatic capture and public raw signed webhook, then verify a real test-mode payment/order/stock/history. Configure a trusted approximately1-minute expiry scheduler with server-only `CRON_SECRET`≥32characters, calling GET `/api/v1/auth/gift/maintenance/expire` with exact Bearer authorization; alternatively supervise `node gifting/expire-checkouts.js`. Both process≤100 overdue orders per invocation; monitor backlog. No scheduler is installed automatically. Late captured money is recorded for staff review without overselling; no automatic refund policy/tooling is invented. See backend/payments/README.md and root PAYMENT_SYSTEM/DEPLOYMENT/TESTING for limits.
+
 This directory contains the actual B2C application. Next.js storefront is at this root; Express backend is in `backend/`. It does not replace either original frontend or the original backend.
 
 ## Run the storefront

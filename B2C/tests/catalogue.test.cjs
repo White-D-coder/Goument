@@ -25,7 +25,7 @@ test('stationery includes bookmarks and diary sets; envelopes and candles remain
   for (const search of ['stationery', 'Premium Stationeries']) {
     const data = await catalogue(search);
     assert.deepEqual(Array.from(data.products.slice(0, 2), product => product._id), ['bookmarks', 'diary_bottle_pen_set']);
-    assert.equal(data.total, 2);
+    assert.equal(data.total, 4);
     assert.equal(data.products.filter(p => /envelope|shagun/i.test(p.slug+' '+p.name)).length, 0);
   }
   assert.equal((await catalogue('shagun')).products.length, 9);
@@ -44,7 +44,7 @@ test('merged API results include later pages, deduplicate and sort before pagina
     return { ok: true, json: async () => ({ products: rows, pages: term === 'bookmarks' ? 2 : 1 }) };
   });
   const data = await catalogue('stationery', 'price_desc', 2);
-  assert.equal(data.total, 15);
+  assert.equal(data.total, 17);
   assert.equal(data.pages, 2);
   assert.deepEqual(Array.from(data.products.slice(0, 3), product => product._id), ['item-2', 'item-1', 'item-0']);
   assert.ok(calls.includes('bookmarks:2'));
@@ -61,8 +61,8 @@ test('ordinary searches preserve API pagination and a failed merged source uses 
   assert.equal(ordinary.total, 40);
   assert.equal(ordinary.pages, 4);
   const merged = await catalogue('stationery', 'price_asc');
-  assert.equal(merged.total, 2);
-  assert.deepEqual(Array.from(merged.products.slice(0, 2), product => product._id), ['bookmarks', 'diary_bottle_pen_set']);
+  assert.equal(merged.total, 4);
+  assert.deepEqual(Array.from(merged.products, product => product._id), ['bookmarks', 'vibrant_art_bookmarks', 'wanderlust_bookmarks', 'diary_bottle_pen_set']);
 });
 
 test('outages and missing commercial fields never invent saleable prices or stock',async()=>{
@@ -120,8 +120,8 @@ test('supplied envelope designs list once, preserve galleries and map distinct d
  assert.equal((await productBySlug('baraat-shagun-envelope')).images.length, 2);
  assert.equal((await catalogue('teddy bear')).products[0].slug, 'teddy-bear-shagun-envelope');
  const first = await catalogue(), second = await catalogue('', 'newest', 2);
- assert.equal(first.total, 17); assert.equal(first.products.length, 12); assert.equal(second.products.length, 5);
- assert.equal(new Set([...first.products, ...second.products].map(p => p.slug)).size, 17);
+ assert.equal(first.total, 19); assert.equal(first.products.length, 12); assert.equal(second.products.length, 7);
+ assert.equal(new Set([...first.products, ...second.products].map(p => p.slug)).size, 19);
 });
 
 test('live catalogue merging preserves remote entries and paginates new photo previews without duplicates', async () => {
@@ -129,7 +129,7 @@ test('live catalogue merging preserves remote entries and paginates new photo pr
  const catalogue = load(async () => ({ok:true,json:async()=>({products:remote,pages:1,total:2})}));
  const first=await catalogue(), second=await catalogue('', 'newest', 2);
  const all=[...first.products,...second.products];
- assert.equal(first.total,16);assert.equal(first.products.length,12);assert.equal(second.products.length,4);
+ assert.equal(first.total,18);assert.equal(first.products.length,12);assert.equal(second.products.length,6);
  assert.equal(all.filter(p=>p.slug==='lotus-shagun-envelope').length,1);
  assert.ok(all.some(p=>p.slug==='existing-remote-gift'));
 });
@@ -173,4 +173,26 @@ test('Laddoo photos update online without replacing existing commercial fields',
  const product = await load(fetch,'productBySlug')('laddoo-candles');
  assert.equal(product.giftItemId,'laddoo_candles');assert.equal(product.basePrice,45000);assert.equal(product.inventory,8);assert.equal(product.preview,false);
  assert.equal(product.images[0].public_id,'/images/scented_candle/cn3-supplied.webp');
+});
+
+
+test('new bookmark designs are distinct cards in stationery/search/all gifts and retain online prices', async () => {
+ const offline=async()=>{throw Error('Offline');};
+ const collection=load(offline), detail=load(offline,'productBySlug');
+ const stationery=await collection('stationery');
+ assert.equal(stationery.total,4);
+ for(const [slug,id,image] of [['vibrant-art-bookmarks','vibrant_art_bookmarks','vibrant-art.webp'],['wanderlust-bookmarks','wanderlust_bookmarks','wanderlust-desk.webp']]) {
+  assert.equal(stationery.products.filter(p=>p.slug===slug).length,1);
+  const p=await detail(slug); assert.equal(p.giftItemId,id);assert.equal(p.images[0].public_id,'/images/bookmarks/'+image);
+  assert.ok(fs.existsSync(path.join(__dirname,'../public',p.images[0].public_id)));
+  assert.equal((await collection(slug.split('-')[0])).products[0].slug,slug);
+  const remote={_id:'remote-'+id,slug,name:p.name,basePrice:42000,inventory:7};
+  const online=await load(async()=>({ok:true,json:async()=>({data:remote})}),'productBySlug')(slug);
+  assert.equal(online.basePrice,42000);assert.equal(online.inventory,7);assert.equal(online.preview,false);assert.equal(online.images[0].public_id,p.images[0].public_id);
+ }
+ const remote={_id:'remote-vibrant',slug:'vibrant-art-bookmarks',name:'Vibrant Art Bookmarks',basePrice:42000,inventory:7};
+ const online=await load(async()=>({ok:true,json:async()=>({products:[remote],pages:1,total:1})}))('stationery');
+ assert.equal(online.products.filter(p=>p.slug===remote.slug).length,1);
+ assert.equal(online.products.find(p=>p.slug===remote.slug).basePrice,42000);
+ assert.ok(online.products.some(p=>p.slug==='wanderlust-bookmarks'));
 });

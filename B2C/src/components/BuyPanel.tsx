@@ -8,9 +8,12 @@ import { Product, money } from '@/lib/types';
 import { giftingEnquiry } from '@/lib/product-editorial';
 import { productPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
+import EnvelopePackSelector from './EnvelopePackSelector';
+import { envelopePackId, productEnvelopePackPrice, isEnvelopeGift, type EnvelopePack } from '@/lib/envelope-packs';
 
 export default function BuyPanel({ product }: { product: Product }) {
   const [sku, setSku] = useState(product.variants[0]?.sku || '');
+  const [pack, setPack] = useState<EnvelopePack>(20);
   const [quantity, setQuantity] = useState(1);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
@@ -30,13 +33,18 @@ export default function BuyPanel({ product }: { product: Product }) {
     } finally { setBusy(false); }
   }
 
+  if (product.giftItemId && isEnvelopeGift(product.giftItemId)) return <div className="buy-panel pdp-preview pdp-envelope-purchase">
+    <EnvelopePackSelector value={pack} onChange={setPack} />
+    <p className="pdp-quote">{money(productEnvelopePackPrice(product, pack), 'INR')}</p>
+    <AddGiftToCartButton key={pack} itemId={envelopePackId(product.giftItemId, pack)} name={`${product.name} · ${pack} pcs`} withQuantity compact showCheckout phoneBuyNow personalise={product.slug === 'lotus-shagun-envelope'} />
+  </div>;
+
   if (product.preview) return <div className="buy-panel pdp-preview">
     <p className="pdp-quote">{productPriceLabel(product)}</p>
     {!product.giftItemId && <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>}
     {product.giftItemId
       ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow personalise={product.slug === 'lotus-shagun-envelope'} />
       : <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>}
-    <p className="pdp-buy-now-help">Price confirmed before checkout.</p>
   </div>;
 
   if (product.giftItemId) return <div className="buy-panel">

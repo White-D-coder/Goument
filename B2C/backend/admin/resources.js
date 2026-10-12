@@ -1,13 +1,13 @@
 // Explicit response fields: never serialize whole database documents to the portal.
 const { enums } = require('../database/models/states');
 const resources = {
-  orders: { model: 'Order', permission: 'orders.read', states: enums.OrderStatus, search: ['orderNumber'], fields: 'orderNumber customerId status paymentStatus fulfillmentStatus pricing confirmedAt shippedAt deliveredAt cancelledAt', detail: 'items shippingAddressSnapshot billingAddressSnapshot customerSnapshot coupon' },
+  orders: { model: 'Order', permission: 'orders.read', states: enums.OrderStatus, search: ['orderNumber'], fields: 'orderNumber customerId status paymentStatus fulfillmentStatus pricing confirmedAt shippedAt deliveredAt cancelledAt', detail: 'checkout items shippingAddressSnapshot billingAddressSnapshot customerSnapshot coupon' },
   customers: { model: 'Customer', permission: 'customers.read', states: enums.CustomerStatus, search: ['emailNormalized', 'firstName', 'lastName'], fields: 'firstName lastName email phone status lastOrderAt', detail: '' },
   products: { model: 'Product', permission: 'products.read', states: enums.ProductStatus, search: ['name', 'slug'], fields: 'name slug shortDescription categoryIds brand status media tags', detail: 'description seo' },
   categories: { model: 'Category', permission: 'products.read', states: enums.CategoryStatus, search: ['name', 'slug'], fields: 'name slug description parentId status sortOrder imageUrl', detail: 'seo' },
   variants: { model: 'ProductVariant', permission: 'products.read', states: enums.VariantStatus, search: ['sku', 'name'], fields: 'productId sku name priceMinor compareAtPriceMinor currency status weightGrams media', detail: 'attributes dimensions' },
   inventory: { model: 'Inventory', permission: 'inventory.read', states: enums.InventoryStatus, search: ['sku'], fields: 'variantId sku availableQuantity reservedQuantity lowStockThreshold status', detail: '' },
-  payments: { model: 'Payment', permission: 'payments.read', states: enums.PaymentStatus, search: ['providerPaymentId', 'providerOrderId'], fields: 'orderId customerId provider providerOrderId providerPaymentId amountMinor currency status paidAt', detail: '' },
+  payments: { model: 'Payment', permission: 'payments.read', states: enums.PaymentStatus, search: ['providerPaymentId', 'providerOrderId'], fields: 'orderId customerId provider providerOrderId providerPaymentId amountMinor currency status paidAt', detail: 'metadata' },
   refunds: { model: 'Refund', permission: 'refunds.read', states: enums.RefundStatus, search: ['providerRefundId'], fields: 'orderId paymentId customerId amountMinor currency provider providerRefundId status requestedAt completedAt', detail: 'reason' },
   invoices: { model: 'Invoice', permission: 'invoices.read', states: enums.InvoiceStatus, search: ['invoiceNumber'], fields: 'invoiceNumber orderId customerId status grandTotalMinor currency issuedAt', detail: 'sellerSnapshot customerSnapshot items subtotalMinor discountMinor shippingMinor taxMinor' },
   coupons: { model: 'Coupon', permission: 'coupons.read', states: enums.CouponStatus, search: ['codeNormalized'], fields: 'code discountType percentageBps fixedAmountMinor currency minimumOrderMinor maximumDiscountMinor usageLimit perCustomerLimit totalUsed startsAt expiresAt status', detail: '' },
@@ -22,7 +22,8 @@ const nested = {
   billingAddressSnapshot: 'recipientName phone addressLine1 addressLine2 landmark city state postalCode country',
   customerSnapshot: 'name email phone billingAddress', billingAddress: 'recipientName phone addressLine1 addressLine2 landmark city state postalCode country',
   sellerSnapshot: 'name address email phone taxId', coupon: 'couponId code discountMinor',
-  items: 'productId variantId sku productName variantName description quantity unitPriceMinor discountMinor taxMinor lineTotalMinor totalMinor currency',
+  personalisation: 'mode name', checkout: 'revision snapshotRevision expiresAt', metadata: 'reconciliationRequired',
+  items: 'giftItemId inclusiveUnitPriceMinor taxRateBps personalisation productId variantId sku productName variantName description quantity unitPriceMinor discountMinor taxMinor lineTotalMinor totalMinor currency',
   dimensions: 'lengthCm widthCm heightCm',
 };
 function cleanValue(value, key) {

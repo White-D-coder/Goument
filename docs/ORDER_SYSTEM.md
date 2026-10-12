@@ -1,3 +1,9 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED locally: prepareOrder accepts owned draft+address, revision and expected gross total; server quote/active customer/price/publication/stock validation fences concurrent changes in the reservation transaction. Stable checkout draft+originalrevision unique index and request hash bind customer/address/total; duplicate requests return one order, conflicting payloads409. One pending order per draft enforced through draft write conflicts. Order.checkout stores immutable draftId, original revision, fenced snapshotRevision and expiresAt(now+5min); inclusive unit price, tax rate and required Lotus PRINT names snapshot per line. Historical orders without these optional fields remain valid/unmodified.
+
+PAYMENT_PENDING→CONFIRMED/PAID only after verified capture; unpaid expiry→CANCELLED plus RELEASE. Capture racing expiry yields one terminal inventory result. Later cart edits are retained; exact unchanged snapshot clears only after capture. Cart/delivery no longer mailto or simulate success. No actual print/shipping/invoice execution added. PAYMENT_SYSTEM/TESTING own limits.
+
 ## 2026-10-12 — Required printing metadata and consistent display prices (R216/R219/R220)
 
 CURRENT / IMPLEMENTED locally: required Lotus PRINT name persists in GiftDraft/review and gates checkout/address preparation. Cart shares card/PDP display amounts for registered gifts, superseding stale missing/range display. No order schema/history/money/stock change; POST gift/order remains409 without order creation/draft clearing. Future authoritative order bridge must validate/snapshot print name before activation; current draft metadata does not claim printing fulfillment.

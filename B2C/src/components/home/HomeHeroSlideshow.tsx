@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ProductPhoto from '@/components/ProductPhoto';
+import { HOME_FESTIVE_PHOTO, HOME_LAVENDER_PHOTO } from '@/lib/home-photos';
 
 const slides = [
   {
-    src: '/images/brand/Festive Gourmet Gift Hamper Still Life.png',
+    src: HOME_FESTIVE_PHOTO,
     alt: 'The Gourmet Gifts curated boxes with gourmet treats and keepsakes',
   },
   {
@@ -13,7 +14,7 @@ const slides = [
     alt: 'The India Hamper in burgundy with regional treats',
   },
   {
-    src: '/images/brand/hero3.png',
+    src: HOME_LAVENDER_PHOTO,
     alt: 'The India Hamper in lavender with thoughtfully selected gifts',
   },
 ];
@@ -23,7 +24,7 @@ export default function HomeHeroSlideshow() {
   const [ready, setReady] = useState<number[]>([]);
   const [requested, setRequested] = useState<number | null>(null);
   const [unavailable, setUnavailable] = useState<number[]>([]);
-  const [backgroundSlides, setBackgroundSlides] = useState(false);
+  const [backgroundSlide, setBackgroundSlide] = useState<number | null>(null);
   const visual = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,8 +39,12 @@ export default function HomeHeroSlideshow() {
       preload = undefined;
       // Hidden slides otherwise count as in-viewport lazy images and compete
       // with the first paint. A dot click can still request one immediately.
-      if (visible && !document.hidden && !motionPreference.matches && ready.length && !backgroundSlides) {
-        preload = window.setTimeout(() => setBackgroundSlides(true), 1200);
+      const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+      const conserveData = connection?.saveData || ['slow-2g', '2g'].includes(connection?.effectiveType || '');
+      const next = slides.findIndex((_, index) => !ready.includes(index) && !unavailable.includes(index));
+      if (visible && !document.hidden && !motionPreference.matches && !conserveData && ready.length && next >= 0 && (backgroundSlide === null || ready.includes(backgroundSlide) || unavailable.includes(backgroundSlide))) {
+        // Decode one alternative at a time, after the first image has settled.
+        preload = window.setTimeout(() => setBackgroundSlide(next), 2000);
       }
       if (visible && !document.hidden && !motionPreference.matches && ready.length > 1 && requested === null) {
         timer = window.setInterval(() => setActiveIndex(index => {
@@ -54,7 +59,7 @@ export default function HomeHeroSlideshow() {
     document.addEventListener('visibilitychange', update);
     update();
     return () => {window.clearInterval(timer);window.clearTimeout(preload);observer.disconnect();motionPreference.removeEventListener('change',update);document.removeEventListener('visibilitychange',update);};
-  }, [ready, requested, backgroundSlides]);
+  }, [ready, requested, backgroundSlide, unavailable]);
 
   return (
     <div ref={visual} className="tgg-hero-visual" aria-label="Featured gifts" aria-roledescription="carousel">
@@ -64,7 +69,7 @@ export default function HomeHeroSlideshow() {
           className={`tgg-hero-slide${index === activeIndex ? ' is-active' : ''}`}
           aria-hidden={index !== activeIndex}
         >
-          {(index === 0 || backgroundSlides || index === requested || ready.includes(index)) && <ProductPhoto
+          {(index === 0 || index === backgroundSlide || index === requested || ready.includes(index)) && <ProductPhoto
             src={slide.src}
             alt={slide.alt}
             sizes="(max-width: 760px) 100vw, (max-width: 1488px) calc(100vw - 48px), 1440px"
@@ -77,7 +82,7 @@ export default function HomeHeroSlideshow() {
               setUnavailable(current => current.includes(index) ? current : [...current, index]);
               setReady(current => current.filter(loaded => loaded !== index));
               if (index === activeIndex) {
-                setBackgroundSlides(true);
+                setBackgroundSlide(slides.findIndex((_, candidate) => candidate !== index && !unavailable.includes(candidate)));
                 if (ready.length) setActiveIndex(ready[0]);
               }
               if (index === requested) setRequested(null);

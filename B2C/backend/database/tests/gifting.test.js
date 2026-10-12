@@ -7,7 +7,7 @@ jest.setTimeout(120000);
 const origin = 'http://localhost:3001', base = '/api/v1/auth/gift';
 let mongo, db, app;
 beforeAll(async () => { mongo = await MongoMemoryReplSet.create({replSet:{storageEngine:'wiredTiger'}}); db = await connectDatabase({uri:mongo.getUri(),dbName:'gourmet_b2c_schema_test_gifting'}); await installSchema(db); });
-beforeEach(() => {app=createAuthApp({db,origin});});
+beforeEach(async () => { await require('../../gifting/catalogue').provisionCatalogue(db, 100); app=createAuthApp({db,origin}); });
 afterEach(async () => {for(const m of Object.values(db.models))await m.collection.deleteMany({});});
 afterAll(async () => {if(db)await db.connection.close();if(mongo)await mongo.stop();});
 const save = (agent,body) => agent.put(base+'/draft').set('Origin',origin).send(body);
@@ -25,18 +25,17 @@ test('item-first packing is calculated on the server without customer-selected b
  const loaded=await agent.get(base+'/draft');expect(loaded.body.items[0].quantity).toBe(6);expect(loaded.body.boxes).toEqual([]);
  const check=await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);expect(check.body.checkoutAvailable).toBe(false);expect(await db.models.Order.countDocuments()).toBe(0);
 });
-test.each(['india_hamper','india_hamper_burgundy','india_hamper_lavender'])('preview hamper %s saves but cannot enter checkout with an assumed price',async(id)=>{
+test.each(['india_hamper','india_hamper_burgundy','india_hamper_lavender'])('mapped hamper %s can prepare delivery but unconfigured gateway cannot create orders',async(id)=>{
  const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
  const hamper=items.find(item=>item.id===id);expect(hamper?.category).toBe('Gift Hampers');
  const draft=(await save(agent,{revision:0,boxes:[],items:[{id:hamper.id,quantity:1}]}).expect(200)).body;
  expect(draft.packing).toBe('READY');
- await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409)
-  .expect(({body})=>expect(body.message).toMatch(/Hamper pricing needs confirmation/));
- await agent.get(base+'/checkout').expect(409);
+ await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);
+ await agent.get(base+'/checkout').expect(200);
  const address={recipientName:'Test Recipient',phone:'+91 9876543210',addressLine1:'Test Street',city:'Mumbai',state:'Maharashtra',postalCode:'400001',country:'IN'};
- await agent.post(base+'/address').set('Origin',origin).send(address).expect(409);
+ await agent.post(base+'/address').set('Origin',origin).send(address).expect(200);
  await agent.post(base+'/order').set('Origin',origin).send({paymentMethod:'UPI'}).expect(409);
- expect(await db.models.CustomerAddress.countDocuments()).toBe(0);
+ expect(await db.models.CustomerAddress.countDocuments()).toBe(1);
  expect(await db.models.Order.countDocuments()).toBe(0);
 });
 test('candle estimates cannot become placeholder-priced orders or clear the saved draft',async()=>{
@@ -44,7 +43,7 @@ test('candle estimates cannot become placeholder-priced orders or clear the save
  const rows=[{id:'laddoo_candles',quantity:2}];
  const draft=(await save(agent,{revision:0,boxes:[],items:rows}).expect(200)).body;
  await agent.post(base+'/order').set('Origin',origin).send({paymentMethod:'UPI',subtotalMinor:40000,shippingMinor:10000,taxMinor:7200}).expect(409)
-  .expect(({body})=>expect(body.message).toMatch(/Final inclusive item prices and stock must be confirmed/));
+  .expect(({body})=>expect(body.message).toMatch(/Online payment is not configured/));
  expect(await db.models.Order.countDocuments()).toBe(0);
  const loaded=(await agent.get(base+'/draft').expect(200)).body;
  expect(loaded.items).toEqual(rows);expect(loaded.revision).toBe(draft.revision);

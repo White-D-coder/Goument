@@ -4,7 +4,7 @@ import { CURATED_HAMPERS, curatedHamperMatches } from './curated-hampers';
 import type { Product } from './types';
 import { PHOTOGRAPHED_ENVELOPES, photographedEnvelopeMatches, withEnvelopePhotos } from './photographed-envelopes';
 import { PHOTOGRAPHED_CANDLES, photographedCandleMatches, withCandlePhotos } from './photographed-candles';
-import { withBookmarkPhotos } from './bookmark-photos';
+import { withBookmarkPhotos, PHOTOGRAPHED_BOOKMARKS, photographedBookmarkMatches } from './bookmark-photos';
 const backend = process.env.BACKEND_URL || 'https://backendbtwoc.vercel.app';
 const isStationerySearch = (search: string) => /^(?:premium\s+)?stationer(?:y|ies)$/i.test(search.trim());
 type CatalogueApiProduct = {
@@ -66,7 +66,7 @@ function enrichProduct(prod: CatalogueApiProduct): Product {
   const img = prod.media?.[0]?.url || prod.images?.[0]?.public_id || prod.images?.[0]?.url || match?.image || '/images/brand/hero.png';
   return {
     _id: prod._id || match?._id || prod.slug || '',
-    giftItemId: match?._id || prod.giftItemId || prod._id || '',
+    giftItemId: prod.giftItemId || match?._id || prod._id || '',
     slug: prod.slug || match?.slug || '',
     name: prod.name || match?.name || '',
     categoryLabel: match?.categoryLabel || prod.categoryLabel || 'Curated Hamper',
@@ -98,9 +98,14 @@ function pageOf(products: Product[], page: number, preview: boolean) {
 export async function catalogue(search = '', sort = 'newest', page = 1) {
  const envelopes = photographedEnvelopeMatches(search);
  const candles = photographedCandleMatches(search);
+ const bookmarks = photographedBookmarkMatches(search);
  const hampers = curatedHamperMatches(search);
  if (hampers !== null) {
-  return { products: hampers.slice((page - 1) * 12, page * 12), pages: Math.ceil(hampers.length / 12), total: hampers.length, preview: true };
+  try {
+   const remote = await allMatchingProducts('hamper', sort, AbortSignal.timeout(2500));
+   const products = hampers.map(preview => { const found = remote.find(row => row.slug === preview.slug); return found ? enrichProduct(found) : preview; });
+   return pageOf(products, page, products.some(product => Boolean(product.preview)));
+  } catch { return pageOf(hampers, page, true); }
  }
  try {
   const stationerySearch = isStationerySearch(search);
@@ -109,14 +114,14 @@ export async function catalogue(search = '', sort = 'newest', page = 1) {
     const results = await Promise.all(['bookmarks', 'corporate'].map(term => allMatchingProducts(term, sort, deadline)));
     const matches = [...new Map(results.flat().map(product => [product._id || product.slug || product.name || '', product])).values()];
     if (sort === 'newest') matches.sort((a, b) => (Date.parse(b.createdAt || '') || 0) - (Date.parse(a.createdAt || '') || 0));
-    const products = visibleProducts(matches.map(enrichProduct)).filter(product => !isEnvelope(product));
+    const products = mergePreviews(matches.map(enrichProduct), PHOTOGRAPHED_BOOKMARKS).filter(product => !isEnvelope(product));
     if (sort === 'price_asc' || sort === 'price_desc') products.sort((a, b) => (sort === 'price_asc' ? 1 : -1) * (a.basePrice - b.basePrice));
    const total = products.length;
    return { products: products.slice((page - 1) * 12, page * 12), pages: Math.ceil(total / 12), total, preview: false };
   }
-  if (!search || envelopes.length || candles.length) {
+  if (!search || envelopes.length || candles.length || bookmarks.length) {
    const source = await allMatchingProducts(search, sort, AbortSignal.timeout(2500));
-   const previews = search ? [...envelopes, ...candles] : [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES];
+   const previews = search ? [...envelopes, ...candles, ...bookmarks] : [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES, ...PHOTOGRAPHED_BOOKMARKS];
    return pageOf(mergePreviews(source.map(enrichProduct), previews), page, true);
   }
   const data = await fetchCatalogue(search, sort, page);
@@ -136,15 +141,16 @@ export async function catalogue(search = '', sort = 'newest', page = 1) {
  }
 }
 export async function productBySlug(slug: string): Promise<Product | null> {
- const localPreview = [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES.filter(item => item.giftItemId !== 'laddoo_candles')].find(product => product.slug === (slug === 'india-hamper' ? 'india-hamper-burgundy' : slug));
- if (localPreview) return localPreview;
+ const localPreview = [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_BOOKMARKS, ...PHOTOGRAPHED_CANDLES.filter(item => item.giftItemId !== 'laddoo_candles')].find(product => product.slug === (slug === 'india-hamper' ? 'india-hamper-burgundy' : slug));
+
  try {
   const response = await publicCatalogueRequest(`${backend}/api/v1/products/${encodeURIComponent(slug)}`, AbortSignal.timeout(2500));
-  if (response.status === 404) return PHOTOGRAPHED_CANDLES.find(product => product.slug === slug) || null;
+  if (response.status === 404) return localPreview || PHOTOGRAPHED_CANDLES.find(product => product.slug === slug) || null;
   if (!response.ok) throw new Error('Unavailable');
   const data = await response.json() as CatalogueApiProduct & { data?: CatalogueApiProduct };
-  return withBookmarkPhotos(withCandlePhotos(enrichProduct(data.data || data)));
+  return withEnvelopePhotos(withBookmarkPhotos(withCandlePhotos(enrichProduct(data.data || data))));
  } catch {
+  if (localPreview) return localPreview;
   const p = HAMPERS_CATALOG.find(p => p.slug === slug);
   return p ? withBookmarkPhotos(withCandlePhotos({ _id: p._id, giftItemId: p._id, slug: p.slug, name: p.name, categoryLabel: p.categoryLabel, description: { short: p.subCopy, long: p.description }, basePrice: 0, currency: 'INR', inventory: 0, variants: [], images: [{ public_id: p.image }], preview: true })) : null;
  }

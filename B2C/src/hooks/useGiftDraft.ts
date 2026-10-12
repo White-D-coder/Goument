@@ -5,9 +5,9 @@ import { queueGiftCartWrite } from '@/lib/gift-cart';
 import { publishGiftCart } from '@/lib/gift-cart-events';
 import type { GiftPersonalisation } from '@/lib/gift-personalisation';
 export type Selection = {id:string;quantity:number;personalisation?:GiftPersonalisation};
-export type Draft = {revision:number;boxes:Selection[];items:Selection[];packing:'EMPTY'|'CHOOSE_BOX'|'NEEDS_BOXES'|'READY';checkoutAvailable:false};
+export type Draft = {revision:number;boxes:Selection[];items:Selection[];packing:'EMPTY'|'CHOOSE_BOX'|'NEEDS_BOXES'|'READY';checkoutAvailable:boolean};
 export type GiftBox = {id:string;name:string;subtitle:string;image:string};
-export type GiftItem = {id:string;slug?:string;name:string;image:string;description:string;category:string};
+export type GiftItem = {id:string;slug?:string;name:string;image:string;description:string;category:string;packSize?:10|20;unitPriceMinor?:number};
 export type GiftCatalogue = {boxes:GiftBox[];items:GiftItem[]};
 export const giftApi = '/auth/gift';
 export function useGiftDraft(selectedBox?:string) {

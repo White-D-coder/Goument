@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED R223: verified capture of new gift checkout uses existing immutable FinanceEvent CREDIT once per payment. Listed gross total includes18% GST; Order stores matching net+tax allocation in paise, no extra delivery charge. Captured payment after released hold records receipt/CREDIT once and staff-review metadata without confirming order/selling stock. This is operational money history, not an approved legal invoice/accounting/refund policy. No historical totals rewritten; real provider verification remains pending.
+
 ## 2026-10-12 — Consistent card/cart display arithmetic (R220)
 
 CURRENT / IMPLEMENTED locally: registered gift cart uses existing card/PDP amounts, replacing missing preview amounts and stale candle ranges. Quantity multiplication remains integer paise, listed prices include GST/delivery. This supersedes prior exclusion of preview figures from cart display only. No accounting/tax allocation, ledger, invoice, authoritative quote or historical money changes. Existing order/payment availability guards remain; unknown catalogue entries are not priced via generic fallback.

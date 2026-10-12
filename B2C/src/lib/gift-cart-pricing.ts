@@ -2,11 +2,11 @@ import { giftDisplayPriceMinor } from './product-pricing';
 
 export type PriceRange = { min: number; max: number };
 type Row = { id: string; quantity: number };
-type Item = { id: string; category: string; slug?: string };
+type Item = { id: string; category: string; slug?: string; unitPriceMinor?: number };
 const inr = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 });
 
 export function giftUnitEstimate(id: string, item?: Item): PriceRange | null {
-  const price = giftDisplayPriceMinor(id, item?.slug);
+  const price = Number.isSafeInteger(item?.unitPriceMinor) && (item?.unitPriceMinor ?? 0) >= 100 ? item!.unitPriceMinor! : giftDisplayPriceMinor(id, item?.slug);
   if (price !== null) return { min: price, max: price };
   return null;
 }

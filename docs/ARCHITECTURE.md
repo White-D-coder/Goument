@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: B2C gifting/catalogue-items adds nine10-pack IDs alongside existing20-pack IDs; explicit catalogue provisioning links to the existing Product→ProductVariant→Inventory ledger. Checkout quote reads these server records, snapshots an owned address/customer and reserves stock in one Mongo transaction; provider I/O stays outside retryable transactions. Existing signed Razorpay capture commits stock sale, payment/order/finance/audit and conditionally clears the unchanged draft. Bounded expiry uses an authenticated scheduler endpoint/CLI and on-demand recovery, not serverless interval timers. Public product data batches variant/stock projections; Next public cache is60s, checkout always revalidates. See PAYMENT_SYSTEM/DATABASE/DEPLOYMENT for rollout limits.
+
 # Architecture
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

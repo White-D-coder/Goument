@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-/** Preserve the existing rise/blur/stagger using bounded browser animations. */
+/** Keep the rise/stagger on compositor-friendly opacity and transforms. */
 export function useWordReveal<T extends HTMLElement>(selector: string, whenVisible = false, phoneOnly = false) {
  const scope = useRef<T>(null);
  useEffect(() => {
@@ -19,8 +19,8 @@ export function useWordReveal<T extends HTMLElement>(selector: string, whenVisib
    observer?.disconnect();
    root.querySelectorAll<HTMLElement>(selector).forEach((word, index) => {
     const animation = word.animate([
-     { opacity: 0, transform: 'translateY(24px) scale(.98)', filter: 'blur(10px)' },
-     { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0px)' },
+     { opacity: 0, transform: 'translateY(24px) scale(.98)' },
+     { opacity: 1, transform: 'translateY(0) scale(1)' },
     ], { duration: 700, delay: index * 80, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'backwards' });
     animations.add(animation);
     animation.onfinish = animation.oncancel = () => animations.delete(animation);

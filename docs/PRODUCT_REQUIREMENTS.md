@@ -1,3 +1,13 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+| Requirement | Current scope | Source / data / API / UI / tests |
+| --- | --- | --- |
+| R222 hosted delay/lag | CURRENT / PARTIAL: smaller Home photos/deferred alternatives/reveal; no physical-device or universal20ms proof | home-photos/HomeHeroSlideshow/useWordReveal; PERFORMANCE/TESTING |
+| R223 direct payment,100 stock,5min hold,included18% GST | CURRENT / IMPLEMENTED locally; deployment/provider/scheduler partial | gifting/catalogue/checkout; Order/Inventory/Payment/Finance; gift/order + Razorpay; DeliveryCheckout/admin; gift-checkout/razorpay regressions |
+| R224 envelope packs/spacing/no strip | CURRENT / IMPLEMENTED locally:10 ₹1,499;20 ₹2,499;PDP-only selectors;all card strips removed | catalogue-items/prices + distinct ProductVariant/GiftDraft IDs; BuyPanel/EnvelopePackSelector/ProductCard/cart; pricing/browser/backend tests |
+
+Latest R224 removal SUPERSEDES R215/R217 strips; R223 approved server mappings SUPERSEDES earlier blanket unavailable-order guards for mapped valid stock only. Required Lotus names and retained related carousel continue. Production activation, actual printing/fulfillment and hosted latency remain separately unverified.
+
 R220 (2026-10-12) CURRENT / IMPLEMENTED locally: user reports card prices disappearing in cart. Preserve the same existing displayed unit price across card/PDP/cart, quantities, printing-name saves and reload; sum inclusive amounts without extra GST/delivery. Shared display-price resolver covers all registered gift IDs/slugs; replace stale candle range and missing envelope/bookmark amounts. Do not silently assign a price to unknown/unregistered items, enable payments or rewrite orders/basePrice. SUPERSEDES R196/R213 “preview figures excluded from cart” and old range presentation only. Sources: product-pricing.ts/gift-cart-pricing.ts/GiftItem type; TESTING/API_CONTRACTS/BUSINESS_LOGIC.
 
 R219 (2026-10-12) CURRENT / IMPLEMENTED locally: latest explicit instruction makes Lotus print name compulsory, SUPERSEDING R216's initial optional/Skip implementation. Remove Optional/Skip UI, block blank PDP Add/Buy now/name save and require PRINT name before server checkout/address preparation. Existing legacy Skip is unresolved; never invent/rewrite customer names. User may close dialog and continue browsing. Sources: PrintNameField/AddGiftToCartButton/GiftCart and gifting/personalisation.js; API_CONTRACTS/TESTING.

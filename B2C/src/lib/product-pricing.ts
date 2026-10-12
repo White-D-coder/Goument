@@ -1,28 +1,14 @@
 import { money, type Product } from './types';
 
-// Display amounts only; never authority for order creation or payment.
-const temporaryPrices: Partial<Record<string, number>> = {
-  'ivory-hamper': 249900,
-  'india-hamper': 299900,
-  'india-hamper-burgundy': 299900,
-  'india-hamper-lavender': 299900,
-};
+import { envelopePackPrice } from './envelope-packs';
+import inclusivePrices from '../../backend/gifting/prices.json';
 
+// Offline display fallback; payable quotes always read the mapped Mongo SKU.
+const samplePrices: Partial<Record<string, number>> = inclusivePrices;
 export function hamperDisplayPriceMinor(slug: string): number | null {
-  return temporaryPrices[slug] ?? null;
+  return ['ivory-hamper', 'india-hamper', 'india-hamper-burgundy', 'india-hamper-lavender'].includes(slug) ? samplePrices[slug] ?? null : null;
 }
 
-// Shared storefront display figures for cards, PDPs and cart arithmetic.
-// These do not populate inventory/basePrice or authorize orders/payments.
-const samplePrices: Record<string, number> = {
-  ...temporaryPrices,
-  'shagun-envelopes': 49900,
-  bookmarks: 34900,
-  'diary-bottle-pen-set': 149900,
-  'floral-jar-candle': 34900,
-  'himalayan-dusk-candle': 49900,
-  'laddoo-candles': 29900,
-};
 const envelopeSlugs = [
   'lotus-shagun-envelope', 'green-gold-shagun-envelope', 'baraat-shagun-envelope',
   'paisley-shagun-envelope', 'vintage-car-shagun-envelope', 'botanical-shagun-envelope',
@@ -30,11 +16,12 @@ const envelopeSlugs = [
 ];
 
 export function previewProductPriceMinor(slug: string): number | null {
-  return samplePrices[slug] ?? (envelopeSlugs.includes(slug) ? 9900 : null);
+  return samplePrices[slug] ?? (envelopeSlugs.includes(slug) ? 249900 : null);
 }
 
 export function giftDisplayPriceMinor(id: string, slug?: string): number | null {
-  const envelope = /^preview-envelope-ep([1-9])$/.exec(id);
+  const envelope = /^preview-envelope-ep([1-9])(?:-pack-10)?$/.exec(id);
+  if (envelope) return envelopePackPrice(id.endsWith('-pack-10') ? 10 : 20);
   const mappedSlug = envelope ? envelopeSlugs[Number(envelope[1]) - 1]
     : id.startsWith('preview-candle-') ? id.slice('preview-candle-'.length) : id.replaceAll('_', '-');
   return previewProductPriceMinor(slug || mappedSlug);

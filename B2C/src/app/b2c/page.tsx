@@ -5,9 +5,9 @@ import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { homeFAQs } from '@/lib/home-content';
 import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
-import { productImage } from '@/lib/types';
+import { money, productImage } from '@/lib/types';
 import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
-import { productPriceLabel, sampleProductPriceLabel } from '@/lib/product-pricing';
+import { sampleProductPriceLabel } from '@/lib/product-pricing';
 import './home.css';
 
 export const metadata = homeMetadata;
@@ -15,7 +15,7 @@ const corporateUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL || 'https://theg
 const homeEnvelope = PHOTOGRAPHED_ENVELOPES[0];
 
 const homeCollections = [
-  { title: homeEnvelope.name, description: homeEnvelope.description.short || '', image: productImage(homeEnvelope), href: '/shop/envelopes', price: `From ${productPriceLabel(homeEnvelope)}` },
+  { title: homeEnvelope.name, description: homeEnvelope.description.short || '', image: productImage(homeEnvelope), href: '/shop/envelopes', price: `From ${money(149900, 'INR')}` },
   { title: 'Scented Candles', description: 'Festive candles, ready to make a moment feel special.', image: '/images/scented_candle/cn3-supplied.webp', href: '/shop/candles', price: `From ${sampleProductPriceLabel('laddoo-candles')}` },
   { title: 'Eternal Paper Co.', description: 'Bookmarks, diaries and considered stationery.', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery', price: `From ${sampleProductPriceLabel('bookmarks')}` },
 ];

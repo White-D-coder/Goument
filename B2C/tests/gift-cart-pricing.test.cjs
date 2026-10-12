@@ -10,7 +10,7 @@ function load(name) {
  const exports = {}; cache.set(name, exports);
  const source = fs.readFileSync(path.join(__dirname, `../src/lib/${name}.ts`), 'utf8');
  vm.runInNewContext(ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText,
-  { exports, require: dependency => load(dependency.replace('./','')), process: {env:{}}, Intl });
+  { exports, require: dependency => dependency.endsWith('.json') ? { default: JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/lib', dependency), 'utf8')) } : load(dependency.replace('./','')), process: {env:{}}, Intl });
  return exports;
 }
 const { estimateGiftCart: estimate, priceRangeLabel } = load('gift-cart-pricing');
@@ -56,7 +56,7 @@ test('every registered gift retains its card price in cart totals and quantity e
   }
  }
  const mixed=estimate([{id:'preview-envelope-ep1',quantity:2,personalisation:{mode:'PRINT',name:'Example'}},{id:'laddoo_candles',quantity:1},{id:'bookmarks',quantity:1}],items);
- assert.deepEqual(plain(mixed.total),{min:84600,max:84600});
+ assert.deepEqual(plain(mixed.total),{min:564600,max:564600});
 });
 
 test('empty selection totals zero and inclusive currency ranges stay explicit', () => {
@@ -64,3 +64,9 @@ test('empty selection totals zero and inclusive currency ranges stay explicit', 
  assert.equal(priceRangeLabel({min:20000,max:50000}),'₹200.00–₹500.00');
  assert.equal(priceRangeLabel({min:44982,max:44982}),'₹449.82');
 });
+
+ test('10 and 20 envelope packs keep distinct inclusive totals and Mongo prices take precedence', () => {
+  assert.equal(estimate([{id:'preview-envelope-ep1',quantity:2},{id:'preview-envelope-ep1-pack-10',quantity:1}],[]).total.min,649700);
+  const items=[{id:'preview-envelope-ep1-pack-10',category:'Shagun Envelopes',unitPriceMinor:159900}];
+  assert.equal(estimate([{id:items[0].id,quantity:2}],items).total.min,319800);
+ });

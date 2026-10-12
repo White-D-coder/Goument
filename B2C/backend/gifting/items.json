@@ -50,7 +50,7 @@
   {
     "id": "india_hamper_burgundy",
     "slug": "india-hamper-burgundy",
-    "name": "India Hamper · Burgundy",
+    "name": "India Hamper \u00b7 Burgundy",
     "image": "/images/brand/burgundy_india_hamper.webp",
     "description": "Our India Hamper, presented in a burgundy box.",
     "category": "Gift Hampers"
@@ -58,7 +58,7 @@
   {
     "id": "india_hamper_lavender",
     "slug": "india-hamper-lavender",
-    "name": "India Hamper · Lavender",
+    "name": "India Hamper \u00b7 Lavender",
     "image": "/images/brand/lavender_india_hamper.webp",
     "description": "Our India Hamper, presented in a lavender box.",
     "category": "Gift Hampers"
@@ -150,5 +150,21 @@
     "image": "/images/scented_candle/cn2.webp",
     "description": "Pine, jasmine and amber in a warm amber jar.",
     "category": "Candles"
+  },
+  {
+    "id": "vibrant_art_bookmarks",
+    "slug": "vibrant-art-bookmarks",
+    "name": "Vibrant Art Bookmarks",
+    "image": "/images/bookmarks/vibrant-art.webp",
+    "description": "Bold folk-art patterns, a peacock and lotus flowers for your next chapter.",
+    "category": "Bookmarks"
+  },
+  {
+    "id": "wanderlust_bookmarks",
+    "slug": "wanderlust-bookmarks",
+    "name": "Wanderlust Bookmarks",
+    "image": "/images/bookmarks/wanderlust-desk.webp",
+    "description": "Mountain lakes, green tea gardens and riverside evenings between the pages.",
+    "category": "Bookmarks"
   }
 ]

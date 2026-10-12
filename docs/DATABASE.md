@@ -1,3 +1,9 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: optional immutable Order.checkout embedded draftId/revision/snapshotRevision/expiresAt; optional order-item giftItemId/inclusiveUnitPriceMinor/taxRateBps/personalisation PRINT name. Inclusive money checks preserve existing net+tax line and pricing arithmetic. Two additive indexes: unique partial(checkout.draftId,checkout.revision), status+checkout.expiresAt. No collection/TTL/history rewrite:25collections,103 explicit indexes,33 explicit unique constraints.
+
+Explicit migrations/gift-checkout-v1.js --apply checks recognized Order validator and existing-document compatibility, then collMod/createIndexes only. Explicit gifting/provision-catalogue.js --apply --opening-stock=100 transaction creates mapped variants/zero inventory+RESTOCK/audit;27 SKU pools/18products (India alias shares Burgundy), nine independent10/20 variants. Existing mapped stock/admin prices are never reset; conflicting unrelated slug refuses transaction. Local recognized development DB only was migrated/provisioned. Hosted DB remains unmodified/unverified. DATA_MODELS generated reference updated.
+
 ## 2026-10-12 — GiftDraft print-name metadata (R216/R219)
 
 CURRENT / IMPLEMENTED locally: isolated B2C GiftDraft.items gains optional embedded personalisation (no subdocument _id): required mode enum PRINT/SKIP and optional bounded name. Model validation limits metadata to Lotus, enforces PRINT name1–80trimmed characters/control rejection, validates legacy Skip shape. API forbids new Skip decisions and checkout/address require PRINT; field remains schema-optional so direct-card/legacy drafts remain valid. Existing owner hash, row ID/quantity/cardinality, optimistic __v, collections25/indexes101 and unrelated order/customer models retained. Generated DATA_MODELS updated.

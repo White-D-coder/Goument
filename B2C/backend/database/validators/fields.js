@@ -25,12 +25,13 @@ const url = () => ({ ...text(false, 2048), match: /^https:\/\// });
 const address = sub({ recipientName: text(true), phone: text(), email: { type: String, required: false, trim: true, maxlength: 254, match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }, addressLine1: text(true), addressLine2: text(), landmark: text(), city: text(true), state: text(true), postalCode: text(true, 20), country: { ...text(true, 2), uppercase: true, match: /^[A-Z]{2}$/ } });
 const seo = sub({ title: text(false, 160), description: text(false, 320), keywords: list(String, 30), canonicalUrl: url() });
 const media = sub({ url: { ...text(true, 2048), match: /^(https:\/\/|\/)/ }, publicId: text(), alt: text(), type: { type: String, enum: ['IMAGE', 'VIDEO'], default: 'IMAGE' }, sortOrder: integer(true, 0, 0) });
-const orderItem = sub({ productId: ref('Product', false), variantId: ref('ProductVariant', false), sku: text(true), productName: text(true), variantName: text(), quantity: integer(true, 1), unitPriceMinor: integer(), discountMinor: integer(true, 0, 0), taxMinor: integer(true, 0, 0), lineTotalMinor: integer(), currency: currency() });
+const orderItem = sub({ giftItemId: text(false, 100), inclusiveUnitPriceMinor: integer(false), taxRateBps: { ...integer(false), max: 10000 }, personalisation: { type: sub({ mode: { type: String, enum: ['PRINT'], required: true }, name: text(true, 80) }) }, productId: ref('Product', false), variantId: ref('ProductVariant', false), sku: text(true), productName: text(true), variantName: text(), quantity: integer(true, 1), unitPriceMinor: integer(), discountMinor: integer(true, 0, 0), taxMinor: integer(true, 0, 0), lineTotalMinor: integer(), currency: currency() });
 const pricing = sub({ subtotalMinor: integer(), discountMinor: integer(true, 0, 0), shippingMinor: integer(true, 0, 0), taxMinor: integer(true, 0, 0), grandTotalMinor: integer(), currency: currency() });
 function assertTotals(items, p, lineKey = 'lineTotalMinor') {
   let subtotal = 0, discount = 0, tax = 0, total = 0;
   for (const i of items) {
     const gross = i.unitPriceMinor * i.quantity;
+    if (i.inclusiveUnitPriceMinor !== undefined && (i.taxRateBps !== 1800 || i.discountMinor !== 0 || i.unitPriceMinor !== Math.round(i.inclusiveUnitPriceMinor * 10000 / 11800) || i.taxMinor !== (i.inclusiveUnitPriceMinor - i.unitPriceMinor) * i.quantity || i[lineKey] !== i.inclusiveUnitPriceMinor * i.quantity)) throw new Error('Invalid inclusive price allocation');
     if (!Number.isSafeInteger(gross) || i.discountMinor > gross || i[lineKey] !== gross - i.discountMinor + i.taxMinor || (i.currency && i.currency !== p.currency)) throw new Error('Invalid line arithmetic/currency');
     subtotal += gross; discount += i.discountMinor; tax += i.taxMinor; total += i[lineKey];
   }

@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED R223: server-only CRON_SECRET (minimum32 characters) authenticates /api/v1/auth/gift/maintenance/expire; absent/short denies every request. Configure it in the actual backend runtime and trusted scheduler secret store, never NEXT_PUBLIC/client/chat/docs values. Existing Razorpay key ID/secret/webhook secret required together; hosted config checked false. No environment values were copied/changed by this work.
+
 ## 2026-10-12 — Local healthy, hosted temporary503 (R214)
 
 VERIFIED read-only: existing local Next3000/auth5003/Mongo27017 remain running; direct/proxied gift catalogue/count/draft200, signed-out me401/private,no-store. First configured public backend catalogue read503/no-store then count/draft200/me401; underlying hosted cause UNKNOWN without logs. No environment/config/schema/provider change, restart or deployment. Client adds bounded temporary-read retry locally; TESTING/API_CONTRACTS own limits. Temporary isolated Chrome stopped after fixture checks; user services retained.

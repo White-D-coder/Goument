@@ -1,3 +1,11 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED R222: first/third Home source PNGs2493294B/2185273B gain content-hashed1920px WebP171168B/123634B (93.1%/94.3% smaller); originals retained. Slideshow loads one alternative after first readiness+2s, honors reduced-motion/Save-Data/2g/hidden/offscreen, manual dots still request slides. Remove reveal blur; keep opacity/transform. Only new hashed paths get1-year immutable cache. Existing responsive Next image optimization means source savings do not equal whole-page transfer savings.
+
+2026-10-12 synthetic Chrome samples, auth fixtures, cold browser cache, isolated production builds phone390/desktop1440/slowphone4×CPU1.6Mbps100ms: phone LCP292→288ms, transfer507366→505313B; slowphone LCP764→692ms, transfer507367→505311B, load2487.6→2485.6ms; slowphone main-thread long task72→69ms persists. Desktop carousel changes later LCP candidate, so7764→172ms is not a valid claimed speedup.100-frame scripted scroll p95~16.7–16.8ms/max16.8ms before AND after, no>32ms samples. These are one lab sample per mode, not physical-device SLA or proof hosted lag fixed.
+
+Hosted read-only Home200 TTFB~130ms/total137ms in one curl sample; sampled scroll did not reproduce reported lag, no503 in that browser sample. Historical transient503/dependency cause remains UNKNOWN. R223 quote/public variant-stock reads batch; no broad polling/load test guarantee. FUTURE / REQUIRED physical-device/hosted follow-up and unresolved69ms task/universal20ms target.
+
 ## 2026-10-12 — Transient-read retry limit (R214)
 
 CURRENT / IMPLEMENTED locally: one503 retry on allowlisted cookie-owned bootstrap/draft GETs after default1s or finite server cooldown≤1s; healthy requests add no delay. Existing pending-read sharing/serialized draft operations retained, no settled private cache and no mutation replay. Local read smoke1–17ms in this sample; hosted catalogue503289ms followed by count200238ms/draft200418ms/me401233ms. These observations do not meet or establish requested universal20ms budget; actual hosted cause UNKNOWN, no deployment. TESTING owns reproducible fixture evidence.

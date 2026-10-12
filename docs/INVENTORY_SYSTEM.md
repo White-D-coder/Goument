@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: explicit ledger-backed100 opening product/pack units for27 mapped SKUs (18products), existing mappings never reset on rerun. Nine envelope designs have independent10/20 pack pools; generic India alias shares Burgundy. Reservation atomically reduces available/increases reserved before payment; sale on verified capture consumes reserved once; five-minute expiry releases once. Concurrent buyers, duplicate capture/webhook and capture-v-expiry are regression-tested. Expiry CLI/authenticated endpoint is bounded≤100; on-demand recovery≤20 at new checkout, own-order cleanup before payment/capture. FUTURE / REQUIRED trusted scheduler for idle holds, backlog monitoring and real deployment/load evidence; no universal zero-load guarantee.
+
 # Inventory System
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

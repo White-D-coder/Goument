@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED locally: authorized B2C draft→server-priced/reserved order bridge and 10/20 envelope variants now exist. Latest prices:10 ₹1,499;20 ₹2,499, GST18%/delivery included;100 initial stock per SKU/pack,5-minute hold. Product-only pack buttons and removal of image strips supersede R215/R217 strip presentation. Existing identity/history/B2B designs preserved. CURRENT_STATUS/PAYMENT_SYSTEM/TESTING own runtime details. CURRENT / PARTIAL deployment: no deployment or real provider charge/webhook was performed. Hosted payment config was read-only verified configured:false/draftCheckoutAvailable:false. Production migration, explicit catalogue provisioning, Razorpay test/webhook verification and a trusted expiry scheduler remain required; local success does not establish hosted readiness.
+
 # Project Context
 
 Current direction (2026-09-27): user explicitly requests B2C gifting commerce implementation in this repository. Existing public B2B inquiry journey remains the observed baseline, not the target limitation. Earlier documentation-only scope below is historical and superseded for new work by this directive. Follow [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md); do not claim unfinished commerce is live.

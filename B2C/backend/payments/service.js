@@ -19,6 +19,7 @@ async function reservationsReady(db, order) {
 }
 async function startPayment(db, gateway, customerId, orderId) {
   if(!gateway)throw failure('Razorpay is not configured yet.',503);
+  await require('../gifting/checkout').expireReservations(db,{orderId,limit:1});
   const order=await ownedOrder(db,customerId,orderId);
   if(order.status!=='PAYMENT_PENDING'||order.paymentStatus==='PAID')throw failure('This order is not awaiting payment.',409);
   if(order.pricing.currency!=='INR'||!Number.isSafeInteger(order.pricing.grandTotalMinor)||order.pricing.grandTotalMinor<100)throw failure('This order has no supported payable total.',409);
@@ -35,12 +36,16 @@ async function startPayment(db, gateway, customerId, orderId) {
     if(!/^order_[A-Za-z0-9]+$/.test(remote.id||'')||remote.amount!==payment.amountMinor||remote.currency!==payment.currency||remote.receipt!==String(payment._id))throw failure('Payment setup could not be reconciled.',503);
     payment.providerOrderId=remote.id;payment.status='PENDING';payment.metadata={initialization:'READY'};await payment.save();
   }
-  return { key:gateway.keyId,order_id:payment.providerOrderId,amount:payment.amountMinor,currency:payment.currency,orderId:String(order._id) };
+  const current = await ownedOrder(db,customerId,orderId);
+  if (current.status !== 'PAYMENT_PENDING' || (current.checkout && current.checkout.expiresAt <= new Date())) { await require('../gifting/checkout').expireReservations(db,{orderId,limit:1}); throw failure('Your stock hold expired. Return to your bag before paying.',409); }
+  return { ...(current.checkout ? { timeout: Math.max(1, Math.floor((current.checkout.expiresAt.getTime()-Date.now())/1000)) } : {}), key:gateway.keyId,order_id:payment.providerOrderId,amount:payment.amountMinor,currency:payment.currency,orderId:String(order._id) };
 }
 async function acceptCaptured(db, payment, remote) {
   if(remote.id===undefined||!/^pay_[A-Za-z0-9]+$/.test(remote.id)||remote.order_id!==payment.providerOrderId||remote.amount!==payment.amountMinor||remote.currency!==payment.currency)throw failure('Payment details do not match this order.',400);
   if(remote.status!=='captured'||remote.captured!==true)return {status:'PENDING',message:'Payment confirmation is pending. Check status again shortly.'};
-  await confirmPayment(db,{provider:'razorpay',providerEventId:`captured:${remote.id}`,paymentId:payment._id,providerPaymentId:remote.id,amountMinor:remote.amount,currency:remote.currency});
+  await require('../gifting/checkout').expireReservations(db,{orderId:payment.orderId,limit:1});
+  const event = await confirmPayment(db,{provider:'razorpay',providerEventId:`captured:${remote.id}`,paymentId:payment._id,providerPaymentId:remote.id,amountMinor:remote.amount,currency:remote.currency});
+  if (event.status !== 'PROCESSED') return {status:'REQUIRES_REVIEW',message:'Payment was received after the stock hold expired. Your order needs review; do not pay again.'};
   return {status:'PAID',message:'Payment verified. Your order is confirmed.'};
 }
 async function verifyPayment(db,gateway,customerId,body) {
@@ -60,8 +65,8 @@ async function webhook(db,gateway,raw,signature) {
   const remote=event.payload?.payment?.entity;
   if(!remote||typeof remote.order_id!=='string')throw failure('Invalid payment event');
   const payment=await db.models.Payment.findOne({provider:'razorpay',providerOrderId:remote.order_id});
-  // Non-2xx preserves provider retries for unlinked/late events; never silently drop capture.
+  // Unknown events remain retryable. Known late captures have a durable money receipt and staff review flag.
   if(!payment)throw failure('Payment requires reconciliation.',503);
-  await acceptCaptured(db,payment,remote);return {received:true};
+  const result=await acceptCaptured(db,payment,remote);return {received:true,...(result.status==='REQUIRES_REVIEW'?{reconciliationRequired:true}:{})};
 }
 module.exports={ownedOrder,startPayment,verifyPayment,webhook};

@@ -1,4 +1,4 @@
-import { BOOKMARK_PHOTOS, BOOKMARK_SHORT_DESCRIPTION, BOOKMARK_DESCRIPTION } from './bookmark-photos';
+import { BOOKMARK_PHOTOS, BOOKMARK_SHORT_DESCRIPTION, BOOKMARK_DESCRIPTION, BOOKMARK_DESIGNS } from './bookmark-photos';
 
 export interface HamperInsideItem {
   item: string;
@@ -150,5 +150,12 @@ export const HAMPERS_CATALOG: HamperData[] = [
     price: 1499,
     image: "/images/items/sustainable_diary_bottle_pen.webp",
     highlights: ["Custom Logo Branding Available", "Matte Insulated Steel Bottle", "Hardcover Executive Journal", "Precision Metal Pen", "Luxury Gift Box Presentation"]
-  }
+  },
+  ...BOOKMARK_DESIGNS.map(design => ({
+    _id: design.id, slug: design.slug, name: design.name, brand: 'Eternal Paper Co.',
+    subCopy: design.description, category: 'bookmarks', categoryLabel: 'Premium Stationery',
+    inside_items: [{ item: design.name, description: design.description }],
+    packaging_style: '', description: design.description, price: 349, image: design.image,
+    highlights: [],
+  })),
 ];

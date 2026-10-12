@@ -9,10 +9,11 @@ function mountWebhook(app,{db,gateway,express}) {
 }
 function mountPayments(app,{db,gateway,run}) {
   const base='/api/v1/auth/payments';
-  app.get(`${base}/config`,(req,res)=>res.json({provider:'razorpay',configured:Boolean(gateway),draftCheckoutAvailable:false}));
+  app.get(`${base}/config`,(req,res)=>res.json({provider:'razorpay',configured:Boolean(gateway),draftCheckoutAvailable:Boolean(gateway)}));
   app.get(`${base}/orders/:id`,run(async(req,res)=>{
     const {customer}=await auth.identity(db,req.cookies.b2c_session);const order=await service.ownedOrder(db,customer._id,req.params.id);
-    res.json({order:{id:String(order._id),number:order.orderNumber,status:order.status,paymentStatus:order.paymentStatus,pricing:order.pricing,items:order.items.map(i=>({name:i.productName,quantity:i.quantity,totalMinor:i.lineTotalMinor}))},configured:Boolean(gateway)});
+    const reconciliation = await db.models.Payment.exists({ orderId: order._id, 'metadata.reconciliationRequired': 'CAPTURE_AFTER_STOCK_EXPIRY' });
+    res.json({order:{id:String(order._id),number:order.orderNumber,status:order.status,paymentStatus:order.paymentStatus,pricing:order.pricing,expiresAt:order.checkout?.expiresAt,items:order.items.map(i=>({name:i.productName,packName:i.variantName,quantity:i.quantity,totalMinor:i.lineTotalMinor}))},configured:Boolean(gateway),reconciliationRequired:Boolean(reconciliation)});
   }));
   app.post(`${base}/razorpay/order`,run(async(req,res)=>{
     if(!req.body||Object.keys(req.body).some(k=>k!=='orderId'))throw failure('Only an existing order reference is accepted.');

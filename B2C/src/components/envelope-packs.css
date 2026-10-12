@@ -1,0 +1,10 @@
+.envelope-packs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;justify-content:center}
+.envelope-packs button{border:1px solid #d9c8bd;border-radius:9px;padding:9px 16px;background:#fffdfa;color:#4a0404;font:inherit;font-size:.9rem;cursor:pointer;min-height:40px}
+.envelope-packs button[aria-pressed=true]{background:#4a0404;color:#fff;border-color:#4a0404}
+.envelope-packs button:focus-visible{outline:2px solid #8a6650;outline-offset:3px}
+.envelope-packs button:disabled{opacity:.55;cursor:wait}
+.buy-panel .envelope-packs,.gift-cart-pricing .envelope-packs{justify-content:flex-start}
+.pdp .buy-panel.pdp-envelope-purchase{margin-top:24px;padding-top:0;display:flex;flex-direction:column;align-items:stretch;gap:0}
+.pdp .pdp-envelope-purchase .envelope-packs{margin:0 0 18px;gap:10px}
+.pdp .pdp-envelope-purchase .pdp-quote{margin:0 0 18px}
+@media(max-width:600px){.pdp .buy-panel.pdp-envelope-purchase{margin-top:18px}.pdp .pdp-envelope-purchase .envelope-packs{margin-bottom:14px}.pdp .pdp-envelope-purchase .pdp-quote{margin-bottom:16px}}

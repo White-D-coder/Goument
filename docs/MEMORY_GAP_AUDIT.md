@@ -1,3 +1,9 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED conflict resolution: latest user approves18% GST inside listed prices/no extra delivery,100 initial stock per pack/product,5-minute holds and direct payment. Earlier R192 extra GST/R220 display-only order guard are SUPERSEDED for explicitly mapped saleable B2C variants. R224 removes R215/R217 image strips and restricts10/20 buttons to PDPs; corrected prices10 ₹1,499;20 ₹2,499. Source/contract/model/UI/tests now linked in PRODUCT_REQUIREMENTS.
+
+UNKNOWN/FUTURE / REQUIRED remains: hosted migration/provisioning, real provider/webhook verification, trusted expiry scheduling, uncertain provider initialization reconciliation tooling, shipping serviceability, refund/invoice policy and real-device20ms target. Local Mongo tests and mock provider UI are not external runtime evidence. Historical/customer ownership unchanged.
+
 # Project Memory Completeness Audit
 
 Date: 2026-09-25. Scope: documentation analysis/expansion ONLY. Source issues are not reproduced incidents; no application remediation authorized.

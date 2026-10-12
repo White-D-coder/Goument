@@ -1,3 +1,11 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: nine envelope PDPs reuse EnvelopePackSelector,20 pcs/10 pcs above the listed price. Defaults20 ₹2,499;10 ₹1,499. Buttons keep burgundy/ivory theme,40px minimum height and visible keyboard focus. Selection changes price and Add item identity together. No selector on product cards/cart/Home; cards default to their existing20-pack identity, cart shows chosen pack. Both Lotus sizes require a name; independent names persist. Related carousel retained.
+
+Latest explicit user instruction removes the90%-white Pack of 20 overlay from every ProductCard, SUPERSEDING R215/R217. Paragraph→pack controls gap18px phone/24px tablet-desktop; pack→price14px/18px, price→action16px/18px. Home Lotus remains /shop/envelopes with From ₹1,499. Existing centered card text, filled images, fonts and card hover retained. GiftBuilder omits duplicate10-pack cards; PDP remains the pack-choice surface.
+
+Cart now opens delivery/review/payment directly, without final-total mailto. Review shows server total and included-charge note; gateway unavailable stays explicit. Payment screen counts down the remaining5-minute hold and never confirms from browser success alone. No fake COD/order-success fallback remains in DeliveryCheckout. TESTING owns responsive and mocked-provider checks.
+
 ## 2026-10-12 — Card/cart display-price consistency (R220)
 
 CURRENT / IMPLEMENTED locally: shared product-pricing.ts amount resolver supplies both preview card/PDP labels and gift cart unit/subtotal/total calculations. All registered envelopes retain₹99, Laddoo₹299, Floral₹349, Himalayan₹499, bookmarks₹349 and existing hamper/diary/generic historical figures. Quantity/name/reload changes cannot switch known items to Price pending or old candle ranges. Prices remain GST/delivery-inclusive; no new charge. Unknown unregistered IDs/packaging remain pending, unavailable checkout guards retained. Existing numeric figures unchanged. SUPERSEDES earlier preview-price exclusion/candle-range display only. Pack strip category predicate also falls back to envelope slug for online records lacking categories. TESTING owns evidence.

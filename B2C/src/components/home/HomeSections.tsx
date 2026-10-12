@@ -8,6 +8,7 @@ import { productPriceLabel } from '@/lib/product-pricing';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import type { Testimonial } from '@/lib/home-content';
 import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
+import { HOME_FESTIVE_PHOTO } from '@/lib/home-photos';
 
 export function SectionHeading({ kicker, title, id, href, action }: { kicker: string; title: string; id: string; href?: string; action?: string }) {
   return <div className="tgg-section-heading"><div><p className="tgg-kicker">{kicker}</p><h2 id={id}>{title}</h2></div>
@@ -18,7 +19,7 @@ export function SectionHeading({ kicker, title, id, href, action }: { kicker: st
 const mobileCategories = [
   { title: 'Envelopes', image: productImage(PHOTOGRAPHED_ENVELOPES[0]), href: '/shop/envelopes' },
   { title: 'Hampers', image: '/images/brand/ivory_hamper.webp', href: '/shop/hampers' },
-  { title: 'Candles', image: '/images/scented_candle/cn3.png', href: '/shop/candles' },
+  { title: 'Candles', image: '/images/scented_candle/cn3-supplied.webp', href: '/shop/candles' },
   { title: 'Stationery', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery' },
 ];
 
@@ -71,7 +72,7 @@ export function HomeCollectionCard({ title, description, image, href, price, gif
 export function PackagingFeature() {
   return <section className="tgg-packaging" id="packaging" aria-labelledby="packaging-heading">
     <div className="tgg-packaging-visual">
-      <ProductPhoto src="/images/brand/Festive Gourmet Gift Hamper Still Life.png" alt="An open gift hamper with curated treats nestled in satin" sizes="(max-width: 760px) 100vw, 52vw" />
+      <ProductPhoto src={HOME_FESTIVE_PHOTO} alt="An open gift hamper with curated treats nestled in satin" sizes="(max-width: 760px) 100vw, 52vw" />
     </div>
     <div className="tgg-packaging-copy">
       <p className="tgg-kicker">Because every gift tells a story</p>

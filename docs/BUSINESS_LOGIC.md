@@ -1,3 +1,9 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED approved B2C policy: listed gross INR includes18% GST and delivery, no additional charge. Envelopes10pcs₹1,499/20pcs₹2,499 per pack; quantity means pack count. All mapped initial SKU/pack stock100 via explicit ledger provisioning, not per-request seed/reset. Cart may save an unresolved name; both Lotus pack rows require their own PRINT name before payment. Generic India alias shares Burgundy physical inventory.
+
+Authoritative quote reads active mapped Mongo variants/inventory, allocates included GST per unit net=round(gross×10000/11800),tax=gross−net, multiplies quantities and sums integer paise. Shipping/discount0; separate unpriced boxes unsupported. Unknown SKU/price/serviceability policy never becomes free. Order hold5minutes; verified capture sells held stock, expiry releases once. No invented automatic refund for late captured money; staff review. This supersedes earlier display-only blanket checkout guard for mapped valid products only; existing invoices/refund/printing fulfillment remain separate.
+
 ## 2026-10-12 — Consistent display amounts through cart (R220)
 
 CURRENT / IMPLEMENTED locally: each registered gift's cart unit price uses the same existing numeric preview amount as cards/PDP, including all nine₹99 envelopes and fixed candle figures. Multiply confirmed quantities in integer paise; subtotal/total include GST/delivery without surcharge. Printing metadata does not change price or units. Supersedes prior exclusion of preview figures from cart and candle-range presentation; unknown IDs/packaging remain incomplete. This display arithmetic is not a server-owned saleable quote; order/payment/stock guards remain unchanged.

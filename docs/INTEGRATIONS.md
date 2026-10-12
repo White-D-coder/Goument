@@ -1,3 +1,7 @@
+## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
+
+CURRENT / IMPLEMENTED: existing Razorpay adapter now receives server-priced/reserved gift orders; Checkout timeout uses remaining5-minute hold seconds, while backend independently enforces deadline. Auto-capture and signed public webhook must be configured/tested externally. Known expired captures commit a durable review receipt and ACK; unknown gateway references remain retryable503. No real provider call/payment/refund was made during verification. CRON_SECRET-protected bounded expiry endpoint/CLI is implemented, but no hosted scheduler/provider configuration was installed. See DEPLOYMENT/PAYMENT_SYSTEM.
+
 # Integrations
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

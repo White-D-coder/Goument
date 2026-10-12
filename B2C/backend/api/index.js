@@ -21,7 +21,7 @@ function createHandler({ connect = connectDatabase, authFactory = createAuthApp,
         app.get('/', (req,res)=>res.json({ service: 'Gourmet B2C API', status: 'active' }));
         app.get('/healthz', (req,res)=>res.json({ ok: true }));
         app.use(authFactory({ db, origin: env.AUTH_ORIGIN || 'http://localhost:3000', clientId: env.GOOGLE_CLIENT_ID, clientSecret: env.GOOGLE_CLIENT_SECRET,
-          paymentGateway: gatewayFactory({ keyId: env.RAZORPAY_KEY_ID, keySecret: env.RAZORPAY_KEY_SECRET, webhookSecret: env.RAZORPAY_WEBHOOK_SECRET }) }));
+          maintenanceSecret: env.CRON_SECRET, paymentGateway: gatewayFactory({ keyId: env.RAZORPAY_KEY_ID, keySecret: env.RAZORPAY_KEY_SECRET, webhookSecret: env.RAZORPAY_WEBHOOK_SECRET }) }));
         mountCatalogue(app, db);
         app.use((error,req,res,next)=>{void error;void next;res.status(503).set('Cache-Control','no-store').json({ message: 'Service temporarily unavailable. Please try again.' });});
         database = db; cachedApp = app; return app;

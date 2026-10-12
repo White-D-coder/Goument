@@ -8,5 +8,5 @@ const temporaryPrices: Partial<Record<string, number>> = {
 
 export function temporaryHamperPriceLabel(product: Pick<Product, 'slug' | 'preview'>): string | null {
   const amount = temporaryPrices[product.slug];
-  return product.preview && typeof amount === 'number' ? `${money(amount, 'INR')} · Sample` : null;
+  return product.preview && typeof amount === 'number' ? money(amount, 'INR') : null;
 }

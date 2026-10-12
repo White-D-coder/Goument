@@ -19,6 +19,9 @@ export default function ProductCard({
   const isHamper = product.categories?.some(
     (category) => category.slug === 'hampers'
   );
+  const priceLabel = product.preview
+    ? temporaryHamperPriceLabel(product) || (isHamper ? 'Price on enquiry' : null)
+    : money(product.basePrice, product.currency);
 
   return (
     <article
@@ -54,20 +57,15 @@ export default function ProductCard({
         {compact && product.description.short && <p className="gift-card-description">{product.description.short}</p>}
 
         <div className="gift-card-bottom-row">
-          {/* Price / Preview Status */}
-          <div className="gift-card-price-wrap">
+          {priceLabel && <div className="gift-card-price-wrap">
             <span
               className={`gift-card-price${
                 product.preview ? ' card-preview-label' : ''
               }`}
             >
-              {product.preview
-                ? temporaryHamperPriceLabel(product) || (isHamper
-                  ? 'Price on enquiry'
-                  : 'Collection preview')
-                : money(product.basePrice, product.currency)}
+              {priceLabel}
             </span>
-          </div>
+          </div>}
 
           {/* Product Action */}
           {product.giftItemId ? (

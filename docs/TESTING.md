@@ -1,3 +1,43 @@
+## 2026-10-12 — Reverify requested hero reveal and removed details (R176)
+
+VERIFIED locally: rerun existing hero browser checks (three reloads, seven words, settled opacity1/blur0, reduced-motion no animation and responsive fit) and15 Candles/India/Ivory purchase checks, extended to assert no Good to know / The finer details in rendered main content. All pass. Source search also finds neither section label in B2C/src. Evidence: /private/tmp/gour-r175-animation.log and /private/tmp/gour-r175-purchase.{cjs,json,log}. No new UI source change, build, deployment or real cart/customer mutation for this recheck.
+
+## 2026-10-12 — Image-led shared product cards (R175)
+
+VERIFIED locally: PostCSS parses both edited stylesheets and git diff --check passes. Isolated Chrome checks six shared Shop cards at320/390/640/768/1440: image heights increase, content heights stay equal or shrink, title weight600, fitting unchanged, no page/text overflow and44px controls. At390px media grows133→208px and loose-card content drops171→115–134px; desktop media255→319px. Before/after screenshots inspected. Evidence: /private/tmp/gour-r175-cards.cjs, before/after JSON/logs/PNGs. No new tests/typecheck/build/deployment; no customer/cart mutations.
+
+## 2026-10-12 — Replay footer-style phone hero reveal (R174)
+
+CURRENT / IMPLEMENTED: apply footer wordmark’s opacity0→1, y24→0, scale.98→1 and blur10px→0 reveal to the phone hero brand and Good gifts. / Great moments. words. Reuse existing Framer Motion useAnimate/stagger primitives with matching0.7s easing and0.08s word delay; every fresh hero mount/reload starts anew, with no persistent seen flag. Inline word spans preserve readable server HTML, current fonts/spacing/two lines and R171 shadow removal. Desktop copy/footer behavior unchanged; reduced-motion skips animation and cleanup completes to readable final state. Sources: HomeSections.tsx and home.css. Typecheck/scoped ESLint/CSS parse/diff checks pass. Browser verifies all seven words on three consecutive reloads, final opacity1/blur0, reduced-motion no animation, no320/390/640/1440 overflow and no desktop hero word animation; final390px screenshot inspected. No new test suite/full build/deployment for this scoped presentation change. Temporary browser closed; TODO priorities unchanged.
+
+## 2026-10-12 — Phone purchase controls after description (R173)
+
+CURRENT / IMPLEMENTED: phone product BuyPanel is in normal document flow after the description instead of fixed to the screen bottom. Retain price/action grid and quantity/checkout handlers, remove floating background/blur/shadow and obsolete130/138px safe-area footer reserves; add18px description-to-controls gap. Ivory already inline stays inline, desktop purchase-column sticky behavior retained. Supersedes R164 fixed-phone-clearance preservation only. Source: product-detail.css. CSS parse/diff and15 isolated browser product/width checks (Candles/India/Ivory at320/390/600/640/1440) pass: normal scrolling, placement after description, no overflow or reserved bottom gap, desktop column unchanged; phone screenshot inspected. No new tests/typecheck/build or deployment for CSS-only change. Temporary browser closed; TODO priorities unchanged.
+
+## 2026-10-12 — Small brand line above phone hero title (R172)
+
+CURRENT / IMPLEMENTED: add The Gourmet Gifts above Good gifts. Great moments. on phones≤640px, centered in white11px/500 Plus Jakarta Sans using navbar’s font variable,1.5 line height/.12em tracking and8px bottom gap. Hide the new line above640px; preserve R171 larger shadow-free heading and desktop hero. Sources: HomeSections.tsx and b2c/home.css. Typecheck, scoped ESLint, CSS parse and git diff --check pass. No new tests/build/browser/deployment check for this small presentation change; TODO priorities unchanged.
+
+## 2026-10-12 — Larger phone hero title without shadow (R171)
+
+CURRENT / IMPLEMENTED: increase Good gifts. / Great moments. phone hero type from clamp(27px,7vw,32px) to clamp(34.5px,9vw,41px), approximately28%, and remove its text shadow through640px. Existing center alignment/font family/two-line copy/button/photo/desktop title retained. CSS parse/diff checks and isolated Chrome320/390/640/1440 pass: requested25–30% increase, shadow none, two lines, no text/page overflow; desktop mobile copy hidden.390px screenshot inspected. No typecheck/build/new tests or deployment for CSS-only change. Temporary browser closed; TODO priorities unchanged.
+
+## 2026-10-12 — Bold card prices (R170)
+
+CURRENT / IMPLEMENTED: shared B2C product-card price text uses700 weight at every width; centered alignment and existing amounts/actions retained. Source: product-cards.css. CSS parse and git diff --check pass; no browser/build/new test for this CSS-only weight change. TODO priorities unchanged.
+
+## 2026-10-12 — Center shared product-card copy (R169)
+
+CURRENT / IMPLEMENTED: center product-card title, inherited description and full-width price text across phone/desktop. Stack price above the centered purchase control so text aligns with the card center; preserve existing phone full-width actions, counter sizing, imagery, fonts and handlers. Source: product-cards.css. PostCSS parsing and git diff --check pass; no typecheck/build/new tests/browser check for this CSS-only alignment change. TODO priorities unchanged.
+
+## 2026-10-12 — Remove Sample wording (R168)
+
+CURRENT / IMPLEMENTED: remove the Sample suffix from shared temporary hamper price labels and Sample wording in Shop/collection preview notes at every width. Cards, related cards and purchase panel inherit the shared label change. Keep display amounts, final-price/availability confirmation copy and preview/checkout eligibility unchanged. Current user instruction supersedes R142’s visible Sample-label requirement only; temporary amounts remain display-only, never payable totals. Typecheck, scoped ESLint and git diff --check pass; no new tests/build/browser or deployment check for this copy-only change. TODO priorities unchanged.
+
+## 2026-10-12 — Remove collection-preview card label (R167)
+
+CURRENT / IMPLEMENTED: remove “Collection preview” and its empty price wrapper from shared B2C product cards at all widths. Preserve actual price/sample/enquiry labels, descriptions, quantity controls and existing preview/checkout eligibility. Source: ProductCard.tsx. Typecheck, scoped ESLint and git diff --check pass; no new tests/build/browser check or deployment for this presentation-only removal. TODO priorities unchanged.
+
 ## 2026-10-12 — Product counters, phone cart and delivery (R165/R166)
 
 VERIFIED final source: B2C npm run typecheck, npm run lint (zero warnings/errors), node --test tests/*.test.cjs44/44, PostCSS parse of card/cart/footer CSS and git diff --check pass. Isolated final production npm run build passes (no environment/customer files copied). New regressions cover12 concurrent grid reads sharing one GET, refresh after confirmed write, failed shared read clearing without cached failure, and Header cart events avoiding auth calls while auth events refresh/clear staff state. Existing mutation conflict/ownership/99/ambiguous-failure/sign-in wait tests retained. Backend/database suites not rerun: no backend/model/API/payment change.

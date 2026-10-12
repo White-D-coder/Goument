@@ -1,3 +1,21 @@
+R175 (2026-10-12) CURRENT / IMPLEMENTED locally: shared Shop/collection product cards give images more space and titles primary text emphasis. Use4:5 media, stronger centered titles and compact one-line phone descriptions; preserve purchase behavior and image fitting. Sources: product-cards.css/shop.css; responsive browser evidence: TESTING.
+
+R174 (2026-10-12) CURRENT / IMPLEMENTED: animate The Gourmet Gifts and Good gifts. Great moments. on phones with the footer wordmark reveal, replaying on every reload. Preserve final readability and reduced-motion preferences. Sources: HomeSections.tsx/home.css; three reloads and responsive/reduced-motion browser checks pass, evidence: TESTING.
+
+R173 (2026-10-12) CURRENT / IMPLEMENTED: phone product price/Add to Cart controls scroll normally below the description and no longer stay fixed at the bottom. Remove obsolete fixed-bar clearance, preserve controls/desktop behavior. Source: product-detail.css;15 browser checks pass, evidence: TESTING.
+
+R172 (2026-10-12) CURRENT / IMPLEMENTED: add a small The Gourmet Gifts line above phone hero heading using navbar’s Plus Jakarta Sans font. Centered and phone-only; R171 font increase/shadow removal retained. Sources: HomeSections.tsx/b2c/home.css; verification: TESTING.
+
+R171 (2026-10-12) CURRENT / IMPLEMENTED: enlarge Good gifts. Great moments. phone hero text25–30% and remove its text shadow. Source: b2c/home.css; CSS checks/four browser widths pass, evidence: TESTING.
+
+R170 (2026-10-12) CURRENT / IMPLEMENTED: bold shared product-card prices using700 weight on phone and desktop. Source: product-cards.css; verification: TESTING.
+
+R169 (2026-10-12) CURRENT / IMPLEMENTED: center shared product-card titles, descriptions and prices on phone/desktop, with price above centered purchase controls. Preserve established photos/type/counter behavior. Source: product-cards.css; verification: TESTING.
+
+R168 (2026-10-12) CURRENT / IMPLEMENTED: remove Sample wording from shared hamper price labels and Shop/collection notices on phone and desktop. Preserve amounts/final confirmation/preview gates. Supersedes R142 visible Sample suffix only. Sources: product-pricing.ts, ShopCollectionPage.tsx, shop/page.tsx; verification: TESTING.
+
+R167 (2026-10-12) CURRENT / IMPLEMENTED: remove “Collection preview” from shared product cards on phone and desktop, including the now-empty price wrapper; preserve real/sample/enquiry prices and existing quantity/preview/checkout behavior. Source: ProductCard.tsx; verification: TESTING.
+
 R166 (2026-10-12) CURRENT / IMPLEMENTED locally, unpublished: fix shown Add-to-Cart feedback, redesign phone cart using supplied image-left/detail-right rows and separate summary in the established theme, investigate hosted slowness and pasted signed-out me401. Mobile cart only≤640px; desktop presentation retained. Confirmed quantities, row order, preview gates and truthful unpriced totals preserved. Reduce repeated auth requests, eager wallpaper transfer and footer prefetch. Sources: GiftCart/gift-cart.css, useGiftDraft, Header/Account, Footer/home-footer.css and next.config. Traceability: UI_SYSTEM, AUTH_SYSTEM, PERFORMANCE, DEPLOYMENT, TESTING. Typecheck/lint/build/44 client tests and responsive fixture checks pass. Hosted first API~3.2s observed; no deployment or infrastructure remediation claimed.
 
 R165 (2026-10-12) CURRENT / IMPLEMENTED: product cards replace Add to Cart with saved minus/quantity/plus; zero restores Add, reload preserves quantities, pending/errors/99 limit remain. Compact shared controls and coalesced in-flight reads; no private snapshot cache or API/ownership change. Sources: ProductCard, AddGiftToCartButton, QuantityControl, product-cards.css, gift-cart.ts and tests. Verification combined with R166 in TESTING.

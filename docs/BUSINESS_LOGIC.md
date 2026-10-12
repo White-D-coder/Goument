@@ -1,3 +1,7 @@
+## 2026-10-12 — Display price wording (R168)
+
+CURRENT / IMPLEMENTED: current explicit user request removes visible Sample wording, superseding R142’s suffix requirement. Ivory/India temporary display amounts and non-saleable preview/checkout rules remain unchanged; no price authority is inferred from the shorter label. Existing final-pricing/enquiry confirmation stays. Source: shared product-pricing helper and Shop notices; checks: TESTING.
+
 ## 2026-10-12 — Truthful public fallback (R161)
 
 CURRENT / IMPLEMENTED: frontend no longer invents₹499 or50units when backend omits authoritative sale price/stock. Missing/invalid values remain zero/preview; offline catalogue uses inventory0/basePrice0/preview=true. Existing explicitly labelled Ivory/India Sample price helpers are display-only and unchanged; no commercial activation or payable-money inference. Public DTO is content-only; server gifting/checkout authority and existing unpriced-hamper guards remain. Request deadline/fanout/outage cooldown reduce backend failure cost without caching customer state. Tests cover invalid/error fallback and current item-first/cart ownership flows. Final commercial pricing/tax/delivery remains FUTURE / REQUIRED.

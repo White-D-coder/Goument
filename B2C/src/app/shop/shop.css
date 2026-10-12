@@ -161,17 +161,17 @@
  #main .shop-edit .shop-product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 14px; }
  #main .shop-edit .b2c-product-card { border:1px solid #e9e2d8; border-radius:16px; }
  #main .shop-edit .b2c-product-card:hover { transform:none; }
- #main .shop-edit .b2c-product-card .gift-card-media { aspect-ratio:1.25; border-radius:15px 15px 0 0; }
+ #main .shop-edit .b2c-product-card .gift-card-media { aspect-ratio:4 / 5; border-radius:15px 15px 0 0; }
  #main .shop-edit .b2c-product-card .gift-card-photo { border-radius:15px 15px 0 0; }
  #main .shop-edit .b2c-product-card .gift-card-photo img { object-fit:cover; transform:none !important; }
  #main .shop-edit .hamper-product-card .gift-card-photo img { object-fit:contain; }
- #main .shop-edit .b2c-product-card .gift-card-content { padding:14px 12px 12px; border-radius:0 0 15px 15px; }
+ #main .shop-edit .b2c-product-card .gift-card-content { padding:11px 10px 11px; border-radius:0 0 15px 15px; }
  #main .shop-edit .b2c-product-card .gift-card-content,
  #main .shop-edit .b2c-product-card .gift-card-title,
  #main .shop-edit .b2c-product-card .gift-card-description,
  #main .shop-edit .b2c-product-card .gift-card-price-wrap { text-align:center; }
- #main .shop-edit .b2c-product-card .gift-card-title { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; margin-bottom:7px !important; font-size:clamp(13px,3.7vw,16px); font-weight:600; line-height:1.4; text-wrap:pretty; }
- #main .shop-edit .b2c-product-card .gift-card-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; margin:0 0 14px; color:#81776b; font-size:12px; line-height:1.65; }
+ #main .shop-edit .b2c-product-card .gift-card-title { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; margin-bottom:6px !important; font-size:clamp(13px,3.7vw,16px); font-weight:600; line-height:1.3; text-wrap:pretty; }
+ #main .shop-edit .b2c-product-card .gift-card-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:1; overflow:hidden; margin:0 0 8px; color:#81776b; font-size:11px; line-height:1.5; }
  #main .shop-edit .b2c-product-card .gift-card-bottom-row { flex-direction:column; align-items:stretch; gap:10px; }
  #main .shop-edit .b2c-product-card .gift-card-price { font-size:12px; line-height:1.4; }
  #main .shop-edit .b2c-product-card .card-luxury-btn { width:100%; min-height:44px; padding:10px 6px; gap:6px; border:1px solid #4a0404; border-radius:9px; background:#4a0404; color:#fffdf8; font-size:10px; font-weight:700; line-height:1.2; letter-spacing:.04em; text-transform:uppercase; }

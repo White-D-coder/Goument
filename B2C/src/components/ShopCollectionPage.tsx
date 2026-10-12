@@ -91,7 +91,7 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
               {page < data.pages ? <Link href={pageHref(page + 1)}>Next <ArrowRight size={16} aria-hidden="true" /></Link> : <span />}
             </nav>
           )}
-          {data.preview && <p className="shop-preview-note">Sample prices shown. Final price and availability confirmed on enquiry.</p>}
+          {data.preview && <p className="shop-preview-note">Final price and availability confirmed on enquiry.</p>}
         </div>
       </div>
       <ShopMobileFilters

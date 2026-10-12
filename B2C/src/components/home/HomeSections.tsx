@@ -2,6 +2,8 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { stagger, useAnimate, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather } from 'lucide-react';
 import ProductPhoto from '@/components/ProductPhoto';
 import AddGiftToCartButton from '@/components/AddGiftToCartButton';
@@ -23,12 +25,25 @@ const heroPromises = [
 ];
 
 export function HomeHero() {
+  const [scope, animate] = useAnimate<HTMLDivElement>();
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reduceMotion || !window.matchMedia('(max-width: 640px)').matches) return;
+    // Match the footer reveal, replaying on every fresh hero mount/reload.
+    const animation = animate('[data-hero-word]', {
+      opacity: [0, 1], y: [24, 0], scale: [.98, 1], filter: ['blur(10px)', 'blur(0px)'],
+    }, { duration: .7, ease: [.22, 1, .36, 1], delay: stagger(.08) });
+    return () => animation.complete();
+  }, [animate, reduceMotion]);
+
   return <section className="tgg-hero" aria-labelledby="hero-title">
-    <div className="tgg-hero-copy">
+    <div className="tgg-hero-copy" ref={scope}>
       <p className="tgg-kicker">Thoughtful gifts<br/>for every occasion</p>
+      <p className="tgg-hero-brand"><span className="tgg-hero-word" data-hero-word>The</span>{' '}<span className="tgg-hero-word" data-hero-word>Gourmet</span>{' '}<span className="tgg-hero-word" data-hero-word>Gifts</span></p>
       <h1 id="hero-title">
         <span className="tgg-hero-title-desktop">Make everyday<br className="tgg-desktop-break"/> moments special.</span>
-        <span className="tgg-hero-title-mobile">Good gifts. <span>Great moments.</span></span>
+        <span className="tgg-hero-title-mobile"><span className="tgg-hero-word" data-hero-word>Good</span>{' '}<span className="tgg-hero-word" data-hero-word>gifts.</span><span className="tgg-hero-second-line"><span className="tgg-hero-word" data-hero-word>Great</span>{' '}<span className="tgg-hero-word" data-hero-word>moments.</span></span></span>
       </h1>
       <p className="tgg-hero-description">Curated hampers and thoughtful finds to celebrate the people and moments that matter.</p>
       <Link className="tgg-button" href="/shop">Shop now <ArrowRight size={17} aria-hidden="true"/></Link>

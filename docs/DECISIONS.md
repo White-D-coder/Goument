@@ -1,3 +1,11 @@
+## 2026-10-12 — Inline phone product purchase controls (R173)
+
+CURRENT / IMPLEMENTED: current user explicitly rejects the fixed phone purchase bar and requests it after the description. This supersedes R164’s instruction to retain fixed-bar bottom clearance; remove the fixed positioning, floating surface and130/138px page reserves together. Preserve desktop sticky purchase column, existing Ivory inline layout and commercial handlers. CSS/browser verification: TESTING.
+
+## 2026-10-12 — Display price wording (R168)
+
+CURRENT / IMPLEMENTED: current explicit user request removes visible Sample wording, superseding R142’s suffix requirement. Ivory/India temporary display amounts and non-saleable preview/checkout rules remain unchanged; no price authority is inferred from the shorter label. Existing final-pricing/enquiry confirmation stays. Source: shared product-pricing helper and Shop notices; checks: TESTING.
+
 ## 2026-10-12 — Confirmed counters and phone cart scope (R165/R166)
 
 Status: CURRENT / IMPLEMENTED locally. User rejects success-message card UI and requests a phone-only cart reference while preserving theme. Reuse existing compact purchase/QuantityControl components, saved quantities,44px touch targets and99 limit. Share only in-flight cookie-creating draft reads in the existing serialized queue; never retain private snapshots or infer success after failure. Phone cart uses existing catalogue identity/photos and honest price confirmation, because GiftCatalogue has no authoritative monetary fields. Do not turn sample hamper labels into totals or activate checkout. Preserve desktop cart and packaging/customer ownership. Existing quantity-change filter/append behavior was observed moving the edited row; replace with ordered updates. Header auth refresh belongs to successful sign-in/out events; cart events only refresh its count. Footer native lazy/responsive image replaces eager CSS background, with original artwork/40% opacity retained. Hosted first-response latency is observed; its infrastructure cause remains UNKNOWN, so no unverified DB/provider/region change. Verification: TESTING/PERFORMANCE.

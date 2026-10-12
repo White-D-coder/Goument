@@ -1,3 +1,7 @@
+## 2026-10-12 — Bounded phone hero word reveal (R174)
+
+CURRENT / IMPLEMENTED: use the already installed/footer-used Framer Motion primitives for one finite seven-word hero entrance per mount/reload. Each word0.7s with0.08s stagger, no interval/persistent storage; desktop and reduced-motion skip. Cleanup completes controls, preserving readable final styles. Browser repeated reload/reduced-motion/layout evidence is in TESTING; no new load-time/bundle/field-performance claim. Existing image/hero lifecycle optimization retained.
+
 ## 2026-10-12 — Hosted snapshot and cart/footer delivery follow-up (R165/R166)
 
 CURRENT / IMPLEMENTED locally, unpublished: card draft readers share only their in-flight promise (cookie/write queue retained, no private snapshot cache). Header cart events refresh only count; successful Account login/logout emit a separate auth event. Native lazy responsive ProductPhoto replaces eager footer CSS wallpaper, retaining original40% artwork. New footer-wallpaper-light.webp1200×675, quality72,56,136bytes versus original1672×941/145,932bytes (~62% smaller before responsive optimization); original retained. Footer category links disable speculative route prefetch. Cart row photos use optimized responsive sources with existing bounded recovery. No infrastructure/provider/DB/region settings changed.

@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const ts=require('typescript');
 
-function mount(name,{width=1440,reduced=false}={}){
+function mount(name,{width=1440,reduced=false,api}={}){
  const effects=[],states=[],events=new Map(),motionEvents=new Map(),timers=new Map(),frames=new Map();
  let id=0;
  const canvas={hidden:true,width:0,height:0,getContext:()=>new Proxy({}, {get:()=>()=>{}})};
@@ -17,7 +17,7 @@ function mount(name,{width=1440,reduced=false}={}){
  const exports={};
  const source=fs.readFileSync(`src/components/${name}.tsx`,'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
- vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='next/navigation'?{usePathname:()=>'/b2c'}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
+ vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='@/lib/api'?{api}:name==='next/navigation'?{usePathname:()=>'/b2c'}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
  exports.default();
  return {effects,states,events,motion,motionEvents,window,canvas,timers,frames,flush:()=>{const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn());}};
 }
@@ -32,6 +32,31 @@ test('header only sets React scroll state when crossing the threshold and cancel
  assert.deepEqual(app.states,[true,false]);
  app.events.get('scroll')();cleanup();
  assert.equal(app.frames.size,0);assert.equal(app.events.has('scroll'),false);
+});
+
+test('cart changes refresh the badge without repeating auth checks; sign-in/out still refresh access',async()=>{
+ const requests=[];
+ let role='owner';
+ const app=mount('Header',{api:async path=>{
+  requests.push(path);
+  if(path==='/auth/me') { if(!role)throw new Error('Signed out');return {user:{role}}; }
+  return {count:3};
+ }});
+ const cleanup=app.effects[0]();
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(requests.filter(path=>path==='/auth/me').length,1);
+ assert.ok(app.states.includes(true));
+ for(let i=0;i<5;i++)app.events.get('b2c-cart-change')();
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(requests.filter(path=>path==='/auth/me').length,1);
+ assert.equal(requests.filter(path=>path==='/auth/gift/count').length,6);
+ role=null;app.events.get('b2c-auth-change')();
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(requests.filter(path=>path==='/auth/me').length,2);
+ assert.equal(app.states.at(-1),false);
+ cleanup();
+ assert.equal(app.events.has('b2c-auth-change'),false);
+ assert.equal(app.events.has('b2c-cart-change'),false);
 });
 
 test('desktop sprinkle releases canvas memory and animation work after its timer',()=>{

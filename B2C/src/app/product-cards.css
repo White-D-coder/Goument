@@ -291,6 +291,29 @@
    CTA
    ============================================================ */
 
+#main .b2c-product-card .gift-purchase--compact {
+  width: 132px;
+  max-width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
+#main .b2c-product-card .gift-purchase-controls,
+#main .b2c-product-card .gift-purchase-controls > .card-luxury-btn {
+  width: 100%;
+}
+#main .b2c-product-card .gift-counter {
+  width: 100%;
+  border-color: var(--b2c-accent);
+  color: var(--b2c-accent);
+  background: #fffdf8;
+}
+#main .b2c-product-card .gift-counter button { flex: 0 0 44px; }
+#main .b2c-product-card .gift-counter output { flex: 1; width: auto; min-width: 0; }
+#main .b2c-product-card .cart-add-error { overflow-wrap: anywhere; font-size: 11px; }
+@media (max-width: 640px) {
+  #main .b2c-product-card .gift-purchase--compact { width: 100%; }
+}
+
 #main .b2c-product-card .card-luxury-btn {
   position: relative;
 

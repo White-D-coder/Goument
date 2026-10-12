@@ -1,3 +1,17 @@
+## 2026-10-12 — Product counters and phone gift bag (R165/R166)
+
+CURRENT / IMPLEMENTED: shared ProductCard renders compact confirmed QuantityControl after adding, without persistent success/View cart copy. Width132px desktop/full available phone width;44px buttons and positive flexible quantity output fit320px screens. Existing9px action radius/burgundy palette/title font retained. Zero restores Add; pending locks controls, errors remain inline and saved quantity survives reload. Home purchase controls use compact mode too.
+
+GiftCart≤640px: rounded ivory item panel, contained photo-left frame, title/category/price-confirmation copy and inline minus/quantity/plus at right; burgundy plus and separate rounded order summary/full-width checkout action. Actual price/tax/shipping amounts remain unknown and unpriced hamper checkout stays disabled. Desktop retains72px photos/two-column presentation; mobile additions hidden above640px. Quantity edits preserve row order. Cart images and footer reuse ProductPhoto recovery/responsive loading. Footer wallpaper remains40% opacity with unchanged artwork; lazy loading changes delivery only. Sources: shared controls/card CSS, GiftCart/gift-cart.css, useGiftDraft and Footer/home-footer.css. Verification: TESTING.
+
+## 2026-10-12 — One gap between product content sections (R164)
+
+CURRENT / IMPLEMENTED: shared `.pdp` gap token64px desktop/48px≤900px/24px≤640px replaces Ivory-only spacing after R163. Hero bottom padding0; editorial top token/bottom0; related top/bottom token; section margins remain0. Corporate coloured surface retains its own inner breathing room using the same token, distinct from related’s outside white space. Loading placeholder aligns with token. Preserve essential fixed phone purchase-bar clearance and current cards/photography/purchase geometry. Sources: product-detail.css; TESTING.
+
+## 2026-10-12 — Product pages omit finer details (R163)
+
+CURRENT / IMPLEMENTED: no B2C product renders the “Good to know / The finer details” panel or its disclosure list at any width. Remove section JSX, local content array and dedicated CSS; preserve related-section rules from shared selectors. Supersedes R151’s retention on non-Ivory products. Gallery, purchase, note, editorial, related and corporate content retain existing rendering/controls. Source: shared product route/CSS; verification: TESTING.
+
 ## 2026-10-12 — Image readiness and recovery (R162)
 
 CURRENT / IMPLEMENTED: retain established image frame dimensions, fitting, artwork and corner radii. ProductPhoto recovery resets per source; local optimizer failure tries original once, terminal failure shows a neutral accessible image placeholder in the same frame. Hero only presents loaded photos, promotes requested pending photos to eager loading, skips failed slides and recovers when its initial photo fails. Offscreen/hidden/reduced-motion pause behavior retained. Gallery displays current photo until requested photo loads, marks pending thumbnail busy and restores current selection on failure. Only current plus pending main frames mount; pending loads eagerly. Thumbnails reuse responsive ProductPhoto at150px phone/72px desktop source sizes. Gallery frames retain prior contain/cover CSS. Contents autoplay must not switch to a missing-image placeholder. TESTING owns browser evidence.

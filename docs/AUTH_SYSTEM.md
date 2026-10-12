@@ -1,3 +1,7 @@
+## 2026-10-12 — Separate account refresh from cart changes (R166)
+
+CURRENT / IMPLEMENTED client optimization: Header checks /auth/me on mount and b2c-auth-change, while b2c-cart-change updates only its bag count. Account emits auth event after confirmed password sign-in/profile read and successful logout, including return-to-admin/checkout cases; Google document navigation still mounts a fresh Header. Separate request IDs prevent stale auth/count responses winning. Endpoint, credentials, cookies, identity and server authorization unchanged. Anonymous me401 remains expected, not converted to fabricated authentication or guest200. Regression verifies cart changes avoid additional auth calls and sign-out clears staff link; hosted anonymous401 and successful gift GETs observed. TESTING owns scope; production publication not performed.
+
 ## 2026-10-12 — B2C durable OAuth and privacy (R161)
 
 CURRENT / IMPLEMENTED: replace in-process Google flow Map with OAuthFlow in the isolated B2C database. State/binding hashed; nonce/verifier private; ten-minute expiry checked at atomic findOneAndDelete before exchange, with TTL cleanup and an active-flow admission check. Two app instances/concurrent callbacks tested: exactly one exchange. Session cookie names, path, SameSite/secure/HttpOnly settings, customer ownership and session digests preserved. No role grant or password reset in this increment; retired bulk owner CLI refuses to run, existing guarded provision-owner command remains.

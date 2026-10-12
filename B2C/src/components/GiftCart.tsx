@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Existing local catalogue photography. */
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -8,6 +7,8 @@ import { api, ApiError } from '@/lib/api';
 import { giftApi, useGiftDraft } from '@/hooks/useGiftDraft';
 import { giftingEnquiry } from '@/lib/product-editorial';
 import QuantityControl from './QuantityControl';
+import ProductPhoto from './ProductPhoto';
+import './gift-cart.css';
 
 export default function GiftCart() {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function GiftCart() {
     <section className="section gift-cart">
       <p className="eyebrow">THOUGHTFULLY CHOSEN</p>
       <div className="section-heading">
-        <h1>Your gift, coming together.</h1>
+        <h1><span className="cart-desktop-only">Your gift, coming together.</span><span className="cart-phone-only">Your gift bag</span></h1>
         <Link className="text-link" href="/build">Add more items →</Link>
       </div>
 
@@ -58,16 +59,18 @@ export default function GiftCart() {
         <>
           <p className="draft-disclosure">Your selection is saved. Sign in at checkout to add your delivery details.</p>
           <div className="gift-cart-layout">
-            <div>
+            <div className="gift-cart-items">
               <h2>Your little favourites</h2>
               {draft.items.length ? (
                 draft.items.map(row => {
                   const item = catalogue.items.find(i => i.id === row.id);
                   return (
                     <article key={row.id} className="gift-cart-row">
-                      {item && <img src={item.image} alt="" />}
-                      <div>
+                      {item && <div className="gift-cart-photo"><ProductPhoto src={item.image} alt={item.name} sizes="(max-width: 640px) 112px, 72px" /></div>}
+                      <div className="gift-cart-item-info">
                         <h3>{item?.name || 'Item unavailable'}</h3>
+                        {item && <p className="cart-phone-only gift-cart-category">{item.category}</p>}
+                        <p className="cart-phone-only gift-cart-price">Price on confirmation</p>
                         <button
                           className="text-link remove-item"
                           disabled={busy}
@@ -93,14 +96,20 @@ export default function GiftCart() {
             </div>
 
             <aside className="gift-review">
-              <h2>The finishing touch</h2>
+              <h2><span className="cart-desktop-only">The finishing touch</span><span className="cart-phone-only">Order summary</span></h2>
+              <dl className="cart-phone-only gift-cart-summary">
+                <div><dt>Selected items</dt><dd>{totalItems}</dd></div>
+                <div><dt>Subtotal</dt><dd>On confirmation</dd></div>
+                <div><dt>Delivery &amp; taxes</dt><dd>At checkout</dd></div>
+                <div className="gift-cart-total"><dt>Total</dt><dd>On confirmation</dd></div>
+              </dl>
               <p aria-live="polite">
                 {enquiryHamper
                   ? 'Hamper pricing needs confirmation before checkout. Please enquire with our team.'
                   : isReady ? 'Your gift selection is ready for checkout.' : 'Add your favourites to get started.'}
               </p>
               {enquiryHamper && <Link className="text-link" href={giftingEnquiry(enquiryHamper.name)}>Enquire about this hamper →</Link>}
-              <p>{totalItems} {totalItems === 1 ? 'item' : 'items'}</p>
+              <p className="cart-desktop-only">{totalItems} {totalItems === 1 ? 'item' : 'items'}</p>
               <button
                 className="button"
                 disabled={busy || checking || !isReady || Boolean(enquiryHamper)}

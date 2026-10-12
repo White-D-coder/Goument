@@ -3,12 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
-import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, queueGiftCartWrite } from '@/lib/gift-cart';
-import { api } from '@/lib/api';
-import type { Draft } from '@/hooks/useGiftDraft';
+import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, readGiftDraft } from '@/lib/gift-cart';
 import QuantityControl from './QuantityControl';
 
-export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = false, compact = false, showCheckout = false, phoneBuyNow = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean; phoneBuyNow?: boolean }) {
+export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = true, compact = true, showCheckout = false, phoneBuyNow = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean; phoneBuyNow?: boolean }) {
  const router = useRouter();
  const [status, setStatus] = useState<'idle'|'adding'|'buying'|'added'|'error'>('idle');
  const [message, setMessage] = useState('');
@@ -23,7 +21,7 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
    if (loading || locked.current) return;
    loading = true;
    try {
-    const draft = await queueGiftCartWrite(() => api<Draft>('/auth/gift/draft'));
+    const draft = await readGiftDraft();
     if (active) setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
    } catch { /* Keep the last confirmed quantity; adding can retry the cart read. */ }
    finally { loading = false; }

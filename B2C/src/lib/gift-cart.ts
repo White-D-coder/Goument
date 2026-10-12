@@ -5,12 +5,24 @@ import type { Draft } from '@/hooks/useGiftDraft';
 // Separate cards must not overwrite one another's selection or create competing sessions.
 let pending: Promise<unknown> = Promise.resolve();
 const inFlight = new Set<Promise<unknown>>();
+let draftRead: Promise<Draft> | null = null;
 
 export function queueGiftCartWrite<T>(write: () => Promise<T>): Promise<T> {
  const task = pending.then(write);
  pending = task.catch(() => undefined);
  inFlight.add(task);
  void task.then(() => inFlight.delete(task), () => inFlight.delete(task));
+ return task;
+}
+
+// Cards share an in-flight read, never a cached cart snapshot. Keep cookie creation
+// in the same queue as writes so mounting a grid cannot create competing carts.
+export function readGiftDraft(): Promise<Draft> {
+ if (draftRead) return draftRead;
+ const task = queueGiftCartWrite(() => api<Draft>('/auth/gift/draft'));
+ draftRead = task;
+ const clear = () => { if (draftRead === task) draftRead = null; };
+ void task.then(clear, clear);
  return task;
 }
 

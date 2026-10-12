@@ -1,3 +1,19 @@
+## 2026-10-12 — Phone gift bag and measured delivery follow-up (R166)
+
+CURRENT / IMPLEMENTED locally, unpublished: phone cart uses image-left rows, category/price-confirmation copy, inline burgundy quantity controls and a separate rounded order summary. Desktop retains its existing two-column presentation. Quantity edits preserve row order; actual totals remain unconfirmed and existing preview/checkout gates remain. Header refreshes auth on sign-in/out rather than every cart change. Footer uses lazy responsive photography at40% opacity, with a56,136-byte derivative instead of eager145,932-byte artwork; footer category links opt out of speculative prefetch. Typecheck/full lint/final isolated production build and44 client tests pass; fixture browser flows/responsive checks and local slow-phone delivery pass. Hosted anonymous Home/Shop/Cart snapshot observed no500 or JS exception; first API responses~3.2s, later~0.25–0.65s. No deployment/backend/account/history/payment change. PERFORMANCE/TESTING own evidence and limits; TODO priorities retained.
+
+## 2026-10-12 — Product-card saved quantity controls (R165)
+
+CURRENT / IMPLEMENTED: shared ProductCard opts into compact saved-cart controls; Add to Cart is replaced by minus/quantity/plus after confirmation, zero restores Add and reload restores saved quantity. Shared in-flight draft reads avoid one request per card without caching customer state. Existing cookie/write queue, revision retry,99 limit and failure behavior preserved. Combined R165/R166 verification is in TESTING.
+
+## 2026-10-12 — Product section padding after removal (R164)
+
+CURRENT / IMPLEMENTED: extend Ivory’s single-gap rule to every B2C product page after R163 removal. Hero bottom/editorial bottom padding0; editorial/related own64px desktop,48px through900px,24px through640px. Corporate inner padding/loading placeholder use the same token; fixed purchase-bar clearance retained. CSS parse/diff and12 browser comparisons across Ivory/India/Candles at390/640/768/1440 pass; image/purchase dimensions unchanged, no overflow. Phone/desktop screenshots inspected. TODO priorities unchanged; TESTING owns evidence.
+
+## 2026-10-12 — Remove product finer-details section everywhere (R163)
+
+CURRENT / IMPLEMENTED: remove the entire “Good to know / The finer details” accordion section from shared B2C product rendering, all products/all widths. Delete its unused content array and dedicated CSS, preserving shared related-section styles. Supersedes R151’s Ivory-only scope. Typecheck, scoped ESLint, CSS parse/diff and local HTTP checks on Ivory/India/Shagun/Candles pass; gallery/purchase/related content remains. No new tests/build/browser viewport check or backend/deployment change. TODO priorities unchanged; evidence in TESTING.
+
 ## 2026-10-12 — B2C reliable image loading (R162)
 
 CURRENT / IMPLEMENTED locally: shared ProductPhoto resets recovery for each source, attempts original local asset after optimizer failure and shows an accessible bounded placeholder only if the original also fails. Hero chooses only loaded photos and recovers from a failed initial slide; gallery retains current photo until requested image loads and preserves it on failure. Gallery thumbnails now responsive optimized images. Existing fitting/frames/corners/content retained. All24 referenced local images exist/decode; slow-phone Home/Shop/Ivory/India and six deliberate failure/recovery scenarios pass, with phone/desktop gallery screenshots inspected. Typecheck/lint/build and41 client tests pass. No backend/account/payment/deployment change. TESTING owns limits/evidence.

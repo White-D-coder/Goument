@@ -75,6 +75,8 @@ export default function ProductCard({
               itemId={product.giftItemId}
               name={product.name}
               className="card-luxury-btn"
+              withQuantity
+              compact
             />
           ) : (
             <Link className="card-luxury-btn" href={href}>

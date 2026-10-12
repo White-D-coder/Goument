@@ -45,15 +45,6 @@ export default async function Detail({ params }: PageProps) {
   const gallery = product.images.length
     ? product.images.map(image => ({ src: productImage({ ...product, images: [image] }), alt: image.alt || product.name }))
     : [{ src: productImage(product), alt: product.name }];
-  const details = [
-    { title: "What's included", text: editorial.contents || 'Please contact our gifting team for the complete selection.' },
-    { title: 'Presentation & dimensions', text: `${editorial.packaging ? `${editorial.packaging} ` : ''}For exact product and packaging dimensions, please ask our team.` },
-    { title: 'Personalisation', text: 'Tell us about your occasion, message or branding. Our team can discuss the options and confirm availability and any additional costs before you order.' },
-    { title: 'Delivery & lead time', text: 'Share your delivery city, quantity and required date. Our team will confirm availability, delivery charges and the schedule for your gift.' },
-    { title: editorial.isHamper ? 'Shelf life & storage' : 'Care & storage', text: editorial.isHamper ? 'Refer to each food pack for ingredients, allergens, storage instructions and best-before dates. Ask our team for the product-specific details before ordering.' : 'Please follow the care instructions supplied with the product. Contact our team for material-specific guidance.' },
-    { title: 'Corporate & bulk gifting', text: 'Planning gifts for a team, clients, a wedding or an event? Share your quantity, budget and occasion with our gifting team to discuss a curation.' },
-    { title: 'Returns & replacement', text: 'Please ask our team about the terms for your selection before ordering. For an existing order, email us with your order reference and a description of the issue.' },
-  ];
 
   return <div className={`product-detail-edit pdp${isIvory ? ' pdp-ivory' : ''}`}>
     {isIvory && <Link className="pdp-mobile-back pdp-wrap" href="/shop/hampers"><span aria-hidden="true">←</span> All hampers</Link>}
@@ -99,14 +90,6 @@ export default async function Detail({ params }: PageProps) {
         <p>Every element is selected to make the gift feel considered —<br className="pdp-desktop-break"/> from what goes inside to the moment it is opened.</p>
       </div>
     </section>
-
-    {!isIvory && <section className="pdp-details pdp-wrap" id="gift-details" aria-labelledby="details-heading">
-      <div><p className="pdp-eyebrow">Good to know</p><h2 id="details-heading">The finer details.</h2><p>A little more about your gift.</p><a className="pdp-link" href={enquiry}>Ask us a question <span aria-hidden="true">→</span></a></div>
-      <div className="pdp-accordions">
-        {details.map(detail => <details key={detail.title} name="gift-details"><summary>{detail.title}<span aria-hidden="true"/></summary><div className="pdp-accordion-content"><p>{detail.text}</p>{detail.title === 'Returns & replacement' && <a className="pdp-link" href={enquiry}>Contact our team <span aria-hidden="true">→</span></a>}</div></details>)}
-        {editorial.long && !editorial.story.length && <details name="gift-details"><summary>About this gift<span aria-hidden="true"/></summary><div className="pdp-accordion-content"><p>{editorial.long}</p></div></details>}
-      </div>
-    </section>}
 
     <Suspense fallback={<div className="pdp-wrap pdp-related-loading" role="status">Finding more thoughtful gifts…</div>}><RelatedGifts slug={product.slug}/></Suspense>
 

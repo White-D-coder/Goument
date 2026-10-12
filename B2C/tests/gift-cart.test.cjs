@@ -14,8 +14,33 @@ function load(api) {
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
  vm.runInNewContext(compiled, { exports, require: name => { assert.equal(name, './api'); return { api, ApiError }; }, window: { dispatchEvent: e => events.push(e.type) }, Event });
- return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
 }
+
+test('a grid shares one cart read, then refreshes from the latest confirmed write', async () => {
+ let state = empty(), reads = 0, writes = 0, release;
+ const hold = new Promise(resolve => { release = resolve; });
+ const { read, add } = load(async (_url, method, body) => {
+  if (!method) { reads++; if (reads === 1) await hold; return plain(state); }
+  writes++; state = { ...plain(body), revision: state.revision + 1 }; return plain(state);
+ });
+ const readers = Array.from({ length: 12 }, () => read());
+ await new Promise(resolve => setImmediate(resolve));
+ assert.equal(reads, 1); release();
+ const values = await Promise.all(readers); assert.ok(values.every(value => value.items.length === 0));
+ await add('candles');
+ const refreshed = await Promise.all([read(), read()]);
+ assert.equal(reads, 3); assert.equal(writes, 1);
+ assert.deepEqual(plain(refreshed[0].items), [{ id: 'candles', quantity: 1 }]);
+});
+
+test('a rejected shared cart read clears without caching failure or publishing success', async () => {
+ let reads = 0;
+ const { read, events } = load(async () => { if (++reads === 1) throw new ApiError('Unavailable', 503); return empty(); });
+ const results = await Promise.allSettled([read(), read()]);
+ assert.ok(results.every(result => result.status === 'rejected')); assert.equal(reads, 1);
+ assert.equal((await read()).items.length, 0); assert.equal(reads, 2); assert.deepEqual(events, []);
+});
 
 test('buy now saves an absent item once, preserving packaging and other selections', async () => {
  let state = { ...empty(), revision: 3, boxes: [{ id: 'box', quantity: 2 }], items: [{ id: 'other', quantity: 4 }] }, writes = 0;

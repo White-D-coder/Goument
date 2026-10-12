@@ -1,6 +1,8 @@
 /* frontend_appview footer theme and compact typography; B2C destinations retained. */
 footer.tgg-reference-footer { position: relative; overflow: hidden; display: block; width: 100%; padding: 0; background: #fff; color: #000; border-top: 1px solid #0000001a; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
-footer.tgg-reference-footer::before { display: block; position: absolute; inset: 0; width: 100%; max-width: none; height: 100%; background: url('/images/footer-wallpaper.webp') center / cover no-repeat; filter: none; opacity: .4; pointer-events: none; content: ''; }
+footer.tgg-reference-footer::before { display: none; content: none; }
+.tgg-reference-footer .footer-wallpaper { position: absolute; inset: 0; overflow: hidden; opacity: .4; pointer-events: none; }
+.tgg-reference-footer .footer-wallpaper img { object-fit: cover; }
 .tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { position: relative; z-index: 1; width: min(100%, 1440px); margin-inline: auto; padding: 40px 48px 32px; }
 .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #0000001a; }
 .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 14px; max-width: 100%; min-height: 44px; color: #000; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 60px; font-weight: 500; letter-spacing: -.01em; line-height: 1.25; text-transform: uppercase; transition: color 200ms ease; }

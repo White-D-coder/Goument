@@ -1,0 +1,42 @@
+.cart-phone-only { display: none; }
+.gift-cart-photo { position: relative; width: 72px; height: 72px; flex-shrink: 0; overflow: hidden; }
+.gift-cart-photo img { object-fit: cover; }
+.gift-cart .gift-cart-row > .gift-cart-photo { flex: none; }
+
+/* The compact bag layout is exclusive to phones. Desktop keeps its two columns. */
+@media (max-width: 640px) {
+  #main .gift-cart { padding: 24px 16px 32px; }
+  .gift-cart .cart-phone-only { display: block; }
+  .gift-cart .cart-desktop-only { display: none; }
+  #main .gift-cart > .eyebrow { margin-bottom: 6px; font-size: 9px; }
+  #main .gift-cart .section-heading { align-items: center; gap: 12px; margin-bottom: 8px; }
+  #main .gift-cart h1 { margin: 0; font-size: 34px; line-height: 1.12; }
+  #main .gift-cart .section-heading > .text-link { flex-shrink: 0; font-size: 11px; }
+  #main .gift-cart > .draft-disclosure { margin: 0 0 18px; font-size: 11px; }
+  #main .gift-cart-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #main .gift-cart-items, #main .gift-review { min-width: 0; background: #fffdf9; border: 1px solid #e9e1d6; border-radius: 22px; padding: 16px; }
+  #main .gift-cart-items > h2 { margin: 0 0 6px; font-size: 23px; }
+  #main .gift-cart-row { display: grid; grid-template-columns: minmax(80px, 34%) minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px 14px; align-items: start; padding: 16px 0; }
+  #main .gift-cart-row + .gift-cart-row { border-top: 1px solid #f0e9df; }
+  #main .gift-cart-row:last-child { padding-bottom: 0; }
+  #main .gift-cart-row > .gift-cart-photo { grid-column: 1; grid-row: 1 / 3; width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: 15px; background: #f3eee6; }
+  #main .gift-cart-row .gift-cart-photo img { object-fit: contain; padding: 3px; }
+  #main .gift-cart-row > .gift-cart-item-info { grid-column: 2; grid-row: 1; min-width: 0; }
+  #main .gift-cart-row h3 { font-size: 20px; font-weight: 600; line-height: 1.1; margin: 0 0 5px; overflow-wrap: anywhere; }
+  #main .gift-cart-row .gift-cart-category { margin: 0 0 5px; font-size: 10px; color: #8e724f; line-height: 1.4; }
+  #main .gift-cart-row .gift-cart-price { margin: 0; font-size: 10px; color: var(--muted); line-height: 1.5; }
+  #main .gift-cart-row .remove-item { min-height: 28px; font-size: 10px; padding: 0; }
+  #main .gift-cart-row > .gift-counter { grid-column: 2; grid-row: 2; margin: 0; width: 132px; max-width: 100%; align-self: end; border-color: #ded3c4; color: var(--wine); background: #fffdf9; }
+  #main .gift-cart-row .gift-counter button { flex: 0 0 44px; width: 44px; }
+  #main .gift-cart-row .gift-counter button:last-child { background: var(--wine); color: #fffdf8; }
+  #main .gift-cart-row .gift-counter output { flex: 1; min-width: 0; width: auto; font-size: 13px; }
+  #main .gift-review h2 { font-size: 25px; margin: 0 0 14px; }
+  #main .gift-cart-summary { margin: 0 0 14px; }
+  #main .gift-cart-summary > div { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 9px; font-size: 11px; line-height: 1.5; }
+  #main .gift-cart-summary dt { color: var(--muted); }
+  #main .gift-cart-summary dd { margin: 0; text-align: right; }
+  #main .gift-cart-summary .gift-cart-total { border-top: 1px dashed #ded3c4; margin: 13px 0 0; padding-top: 13px; font-weight: 600; }
+  #main .gift-cart-total dt { color: var(--ink); }
+  #main .gift-review > .button { width: 100%; margin: 8px 0; }
+  #main .gift-review > p { font-size: 11px; line-height: 1.6; }
+}

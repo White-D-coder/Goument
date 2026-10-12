@@ -79,22 +79,6 @@
 .pdp .pdp-philosophy { padding: 0; text-align: left; }
 .pdp-philosophy h2 { font-size: clamp(38px, 4vw, 58px); line-height: 1.12; margin: 0 0 22px; }
 .pdp-philosophy > p:last-child { font-size: 14px; line-height: 1.9; max-width: 42ch; margin-bottom: 0; }
-.pdp .pdp-details { box-sizing: border-box; display: grid; grid-template-columns: .8fr 1.2fr; gap: 8%; padding: clamp(32px, 5vw, 64px); margin-block: clamp(44px, 6vw, 80px); scroll-margin-top: 110px; background: #fffdf9; border: 1px solid #eee7dd; border-radius: 12px; }
-.pdp-details h2 { font-size: clamp(34px, 3.5vw, 48px); line-height: 1.1; margin-bottom: 14px; }
-.pdp-details > div > p:not(.pdp-eyebrow) { font-size: 13px; }
-.pdp-accordions details { margin: 0; padding: 0; border: 0; border-top: 1px solid var(--pdp-line); }
-.pdp-accordions details:last-child { border-bottom: 1px solid var(--pdp-line); }
-.pdp-accordions summary { display: flex; justify-content: space-between; gap: 24px; align-items: center; min-height: 64px; padding: 18px 0; list-style: none; cursor: pointer; font-size: 13px; font-weight: 500; }
-.pdp-accordions summary > span { position: relative; flex-shrink: 0; width: 14px; height: 14px; }
-.pdp-accordions summary > span::before,.pdp-accordions summary > span::after { content: ''; position: absolute; inset: 6px 1px auto; height: 1px; background: var(--pdp-burgundy); }
-.pdp-accordions summary > span::after { transform: rotate(90deg); transition: transform 220ms ease; }
-.pdp-accordions details[open] summary > span::after { transform: rotate(0); }
-.pdp-accordion-content { padding: 0 24px 22px 0; }
-.pdp-accordion-content p { font-size: 13px; line-height: 1.9; margin-bottom: 0; }
-@supports (interpolate-size: allow-keywords) {
-  .pdp-accordions details::details-content { interpolate-size: allow-keywords; block-size: 0; overflow: clip; transition: block-size 300ms cubic-bezier(.22,1,.36,1), content-visibility 300ms; transition-behavior: allow-discrete; }
-  .pdp-accordions details[open]::details-content { block-size: auto; }
-}
 .pdp .pdp-related { border-top: 1px solid var(--pdp-line); padding-block: 70px 100px; }
 .pdp-related-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; }
 .pdp-related-grid article { min-width: 0; }
@@ -130,8 +114,7 @@
   .pdp .pdp-purchase h1 { font-size: 48px; }
   .pdp-gallery-details,.pdp-photo-caption { display: none; }
   .pdp-description { max-width: none; }
-  .pdp .pdp-details,.pdp .pdp-related { padding-block: 64px; }
-  .pdp .pdp-details { grid-template-columns: 1fr; gap: 28px; }
+  .pdp .pdp-related { padding-block: 64px; }
   .pdp-editorial { grid-template-columns: 1fr; gap: 28px; padding-block: 52px; }
   .pdp-related-grid { gap: 20px; }
 }
@@ -154,9 +137,6 @@
   .pdp-description { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 13px; line-height: 1.6; margin-bottom: 0; }
   .pdp .pdp-purchase-meta,
   .pdp .pdp-editorial { display: none; }
-  .pdp .pdp-details > div:first-child > p:not(.pdp-eyebrow),
-  .pdp .pdp-details > div:first-child > .pdp-link { display: none; }
-  .pdp .pdp-details > div:first-child > .pdp-eyebrow { margin-bottom: 4px; }
   .pdp .pdp-note { padding: 16px; }
   .pdp .pdp-note > .pdp-eyebrow,
   .pdp .pdp-note > p { display: none; }
@@ -209,7 +189,6 @@
   .pdp-philosophy h2 { font-size: 37px; }
   .pdp-philosophy > p:last-child { font-size: 13px; }
   .pdp-desktop-break { display: none; }
-  .pdp-accordions summary { font-size: 12px; }
   .pdp-related-grid { grid-template-columns: 1fr; gap: 40px; }
   .pdp-related-grid h3 { margin-top: 16px; }
   .pdp-corporate { padding-block: 54px; }
@@ -222,7 +201,7 @@
   .pdp .pdp-hero { gap: 16px; padding-bottom: 24px; }
   .pdp .pdp-purchase h1 { font-size: 25px; }
   .pdp-description { line-height: 1.6; }
-  .pdp .pdp-details,.pdp .pdp-related { padding-block: 38px; }
+  .pdp .pdp-related { padding-block: 38px; }
   .pdp-editorial { padding-block: 28px; }
   .pdp .pdp-philosophy,.pdp .pdp-corporate { display:none; }
   .pdp-related-grid {
@@ -257,7 +236,6 @@
 .pdp .buy-panel .pdp-price-label { display: block; margin-bottom: 2px; color: var(--pdp-muted); font-size: 10px; font-weight: 400; letter-spacing: .04em; }
 .pdp .button { border-radius: 999px; }
 .pdp .pdp-note { margin-top: 18px; border-radius: 14px; }
-.pdp .pdp-details { border-radius: 16px; }
 .pdp-related-photo { overflow: hidden; border: 1px solid #e8dfd3; border-radius: 14px; }
 .pdp-related-grid h3 { font-family: var(--font-cormorant); }
 
@@ -290,11 +268,6 @@
   .pdp .buy-panel.pdp-catalog-purchase { position: static; display: block; width: auto; padding: 18px 0 0; border: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
   .pdp .pdp-note { margin-top: 14px; padding: 14px; border-radius: 12px; }
   .pdp .pdp-note h2 { font-size: 19px; }
-  .pdp .pdp-details { gap: 14px; margin-block: 22px; padding: 18px 16px; border-radius: 14px; }
-  .pdp .pdp-details h2 { margin-bottom: 0; font-size: 24px; }
-  .pdp-accordions summary { min-height: 50px; padding: 12px 0; font-size: 12px; }
-  .pdp-accordion-content { padding: 0 8px 16px 0; }
-  .pdp-accordion-content p { font-size: 12px; line-height: 1.65; }
   .pdp .pdp-related { padding-block: 28px 36px; }
   .pdp-section-heading { margin-bottom: 16px; }
   .pdp-section-heading h2 { font-size: 26px; }
@@ -319,19 +292,23 @@
 
 .pdp .gift-purchase-buy-now,.pdp-buy-now-help { display:none; }
 
-/* One section owns each Ivory gap; adjacent top/bottom padding must not add up. */
-.pdp-ivory { --pdp-section-gap:64px; }
-.pdp-ivory .pdp-hero { padding-bottom:0; }
-.pdp-ivory .pdp-editorial { padding-block:var(--pdp-section-gap) 0; }
-.pdp-ivory .pdp-related { padding-block:var(--pdp-section-gap); }
+/* One section owns each product-page gap; adjacent padding must not add up. */
+.pdp { --pdp-section-gap:64px; }
+.pdp .pdp-hero { padding-bottom:0; }
+.pdp .pdp-editorial { padding-block:var(--pdp-section-gap) 0; }
+.pdp .pdp-related { padding-block:var(--pdp-section-gap); }
+.pdp .pdp-related-loading,.pdp .pdp-corporate { padding-block:var(--pdp-section-gap); }
 
 @media (max-width:900px) {
- .pdp-ivory { --pdp-section-gap:48px; }
+ .pdp { --pdp-section-gap:48px; }
+}
+@media (max-width:640px) {
+ .pdp { --pdp-section-gap:24px; }
 }
 
 /* Ivory Hamper phone detail: product information followed by purchase actions. */
 @media (max-width:640px) {
- .pdp.pdp-ivory { --pdp-section-gap:24px; padding-bottom:0; }
+ .pdp.pdp-ivory { padding-bottom:0; }
  .pdp-ivory .pdp-wrap { width:calc(100% - 32px); }
  .pdp-ivory .pdp-mobile-back { display:flex; align-items:center; gap:9px; min-height:44px; padding-block:8px; font-size:11px; color:#74645a; }
  .pdp-ivory .pdp-mobile-back > span { color:#4a0404; font-size:19px; }
@@ -362,7 +339,7 @@
  .pdp-ivory .pdp-related-grid h3 a { width:100%; min-width:0; white-space:normal; overflow-wrap:anywhere; }
  #main .pdp-ivory .pdp-related-grid p { margin:0 10px 10px; font-size:11px; text-align:center; }
  .pdp-ivory .pdp-related-grid .pdp-link { display:flex; justify-content:center; gap:6px; min-height:44px; margin:auto 10px 10px; padding:8px; border-radius:8px; background:#4a0404; color:#fffdf8; font-size:10px; }
- .pdp-ivory .pdp-corporate { padding-block:28px; text-align:center; }
+ .pdp-ivory .pdp-corporate { padding-block:var(--pdp-section-gap); text-align:center; }
  .pdp-ivory .pdp-corporate > div { flex-direction:column; align-items:center; gap:18px; }
  .pdp-ivory .pdp-corporate h2 { margin-bottom:12px; font-size:25px; }
  #main .pdp-ivory .pdp-corporate p:not(.pdp-eyebrow) { font-size:12px; line-height:1.7; }

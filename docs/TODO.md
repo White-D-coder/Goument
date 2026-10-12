@@ -47,6 +47,8 @@ Priorities below are initial engineering triage from source findings, not an app
 - [ ] B2C typography cleanup (audit2026-10-05): resolve footer h2 Jakarta/Cormorant !important conflict; agree shared heading/body/action scales, casing and tracking; assess9–11px microcopy; remove unused Cinzel/script/Momcake declarations only within approved font scope while preserving admin Pagio/brand needs. Source/runtime mapping in UI_SYSTEM; this audit did not authorize a font redesign.
 
 - [ ] B2C frontend lint debt (observed2026-10-05): types.ts explicit-any and GiftBuilder unused selection remain. GoldPopperSprinkle synchronous effect state resolved in the performance increment, with scoped/full lint evidence. Full lint remains failing.
+- [ ] B2C hosted latency follow-up (R166,2026-10-12): public anonymous first auth/draft/count responses~3.2s, later~0.25–0.65s in one slow-phone lab snapshot. Verify deployed region/runtime/DB readiness and physical-device behavior; infrastructure cause UNKNOWN. Local counter/mobile cart/lazy footer/request fixes verified but unpublished; do not mark hosted latency resolved before deployment measurement. Existing performance priorities retained.
+
 - [ ] B2C performance follow-up: measure post-change scroll cadence on the user’s device and investigate slow local webpack rebuilds. The2026-10-07 editorial experiment was rejected/reverted; prior optimized slideshow/canvas behavior is restored. Before-change jank and76–183s development compile/invalidation spans were observed; further layer-isolation diagnostic was declined2026-10-05. Smaller assets/lifecycle checks do not establish production frame-rate improvement.
 
 - [ ] Verify rendered canonicals/schema/sitemap coverage; reduced-motion and xs breakpoint behavior.

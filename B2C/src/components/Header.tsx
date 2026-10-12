@@ -20,26 +20,33 @@ export default function Header() {
  useEffect(() => {
   let active = true;
   let requestId = 0;
+  let authRequestId = 0;
   const refresh = () => {
    const currentRequest = ++requestId;
    api<{count:number}>('/auth/gift/count').then(r => {
 	if(active && currentRequest === requestId) setCount(r.count);
    }).catch(() => { /* Keep the last confirmed count when the service is unavailable. */ });
 
+  };
+  const refreshAuth = () => {
+   const currentRequest = ++authRequestId;
    api<{user:User}>('/auth/me').then(r => {
-    if(active && currentRequest === requestId) {
+    if(active && currentRequest === authRequestId) {
       const role = r.user?.role?.toLowerCase();
       setIsAdmin(role === 'admin' || role === 'owner');
     }
    }).catch(() => {
-    if(active && currentRequest === requestId) setIsAdmin(false);
+    if(active && currentRequest === authRequestId) setIsAdmin(false);
    });
   };
   refresh();
+  refreshAuth();
   window.addEventListener('b2c-cart-change', refresh);
+  window.addEventListener('b2c-auth-change', refreshAuth);
   return () => {
    active = false;
    window.removeEventListener('b2c-cart-change', refresh);
+   window.removeEventListener('b2c-auth-change', refreshAuth);
   };
  }, []);
 

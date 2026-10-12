@@ -1,3 +1,7 @@
+## 2026-10-12 — Public hosted snapshot and pending UI release (R166)
+
+CURRENT / PARTIAL: supplied https://b2c-tau-weld.vercel.app is publicly reachable; anonymous Home/Shop/Cart and gift GETs measured successfully. This supersedes wholly UNKNOWN public reachability for this specific B2C URL only. Deployment environment/region, backend cold-start cause, schema/index lifecycle, real checkout/provider health and release ownership remain UNKNOWN. R165/R166 counter/mobile cart/footer/request fixes are local and verified in an isolated production build; no Vercel deployment was performed. Hosted snapshot and local frontend-only lab conditions are separate in PERFORMANCE/TESTING. Do not claim the public site includes uncommitted local source or that the first-request API latency has been solved operationally.
+
 ## 2026-10-12 — Current B2C release requirements (R161)
 
 CURRENT / IMPLEMENTED locally, unpublished: independent npm ci installs for B2C and backend; Next16.4. Explicit `npm --prefix backend run db:install` before startup/schema upgrade, including new OAuthFlow unique/TTL indexes. Startup/serverless no longer modify validators/indexes on cold start. Production requires explicit B2C database URI/name and exact AUTH_ORIGIN; connect uses isolated naming guard. Never run the new schema installer on legacy collections. Only new OAuth schema installed locally; deployed schema remains UNKNOWN.

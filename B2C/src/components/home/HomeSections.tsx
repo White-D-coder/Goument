@@ -70,7 +70,7 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
       <h3><Link href={href}>{cardTitle}</Link></h3>
       <p><span className="tgg-hamper-description-desktop">{product.description.short}</span><span className="tgg-hamper-description-mobile">{mobileDescription || product.description.short}</span></p>
       <div className="tgg-hamper-bottom">
-        {product.giftItemId && <AddGiftToCartButton itemId={product.giftItemId} name={cardTitle} withQuantity />}
+        {product.giftItemId && <AddGiftToCartButton itemId={product.giftItemId} name={cardTitle} withQuantity compact />}
       </div>
     </div>
   </article>;

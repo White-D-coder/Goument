@@ -46,7 +46,9 @@ export function useGiftDraft(selectedBox?:string) {
  };
  const change=(kind:'boxes'|'items',id:string,quantity:number)=>{
   const value=current.current;if(!value||locked.current)return;
-  const rows=value[kind].filter(row=>row.id!==id);if(quantity>0)rows.push({id,quantity});
+  // Keep the row under the shopper's finger when its quantity changes.
+  const rows=value[kind].flatMap(row=>row.id!==id?[row]:quantity>0?[{...row,quantity}]:[]);
+  if(quantity>0&&!value[kind].some(row=>row.id===id))rows.push({id,quantity});
   return save(kind==='boxes'?rows:value.boxes,kind==='items'?rows:value.items);
  };
  return {draft,catalogue,error,busy,change,save,reload:()=>{setError('');setRetry(n=>n+1);}};

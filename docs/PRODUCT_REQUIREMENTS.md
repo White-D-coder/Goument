@@ -1,3 +1,5 @@
+R177 (2026-10-12) CURRENT / IMPLEMENTED locally: replace phone Personalise panel with inline Add to Cart / Buy now purchase UI; Add opens the saved quantity counter, no fixed bottom bar. Extend existing Ivory pattern to mapped gift product pages, preserve desktop note and existing cart review/price guards. Sources: BuyPanel.tsx/product-detail.css/storefront-ui.css; verification: TESTING.
+
 R175 (2026-10-12) CURRENT / IMPLEMENTED locally: shared Shop/collection product cards give images more space and titles primary text emphasis. Use4:5 media, stronger centered titles and compact one-line phone descriptions; preserve purchase behavior and image fitting. Sources: product-cards.css/shop.css; responsive browser evidence: TESTING.
 
 R174 (2026-10-12) CURRENT / IMPLEMENTED: animate The Gourmet Gifts and Good gifts. Great moments. on phones with the footer wordmark reveal, replaying on every reload. Preserve final readability and reduced-motion preferences. Sources: HomeSections.tsx/home.css; three reloads and responsive/reduced-motion browser checks pass, evidence: TESTING.

@@ -1,3 +1,7 @@
+## 2026-10-12 — Inline phone purchase actions replace gift note (R177)
+
+Status: CURRENT / IMPLEMENTED locally. Current explicit request replaces the phone gift-note panel with shopping actions. Extend existing Ivory controls rather than duplicate purchase handlers; keep all controls in document flow. Buy now ensures the existing gift selection and opens /cart for review, without changing server pricing, checkout or payment availability. Phone note visibility from older PDP layouts is superseded; desktop note remains. Sources: BuyPanel.tsx/product-detail.css/storefront-ui.css; verification: TESTING.
+
 ## 2026-10-12 — Inline phone product purchase controls (R173)
 
 CURRENT / IMPLEMENTED: current user explicitly rejects the fixed phone purchase bar and requests it after the description. This supersedes R164’s instruction to retain fixed-bar bottom clearance; remove the fixed positioning, floating surface and130/138px page reserves together. Preserve desktop sticky purchase column, existing Ivory inline layout and commercial handlers. CSS/browser verification: TESTING.

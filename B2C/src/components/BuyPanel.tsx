@@ -34,14 +34,14 @@ export default function BuyPanel({ product }: { product: Product }) {
     <p className="pdp-quote">{temporaryHamperPriceLabel(product) || 'Price on enquiry'}</p>
     <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>
     {product.giftItemId
-      ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow={product.slug === 'ivory-hamper'} />
+      ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow />
       : <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>}
-    {product.slug === 'ivory-hamper' && <p className="pdp-buy-now-help">Price confirmed before checkout.</p>}
+    <p className="pdp-buy-now-help">Price confirmed before checkout.</p>
   </div>;
 
   if (product.giftItemId) return <div className="buy-panel">
     <p className="price"><span className="pdp-price-label">Price</span>{money(product.basePrice, product.currency)}</p>
-    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow={product.slug === 'ivory-hamper'} />
+    <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow />
   </div>;
 
   return <div className="buy-panel pdp-catalog-purchase">

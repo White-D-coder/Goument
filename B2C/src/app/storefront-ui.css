@@ -133,7 +133,7 @@
   }
 }
 @media (max-width: 640px) {
-  #main .pdp-ivory .gift-purchase-controls > .button {
+  #main .pdp .buy-panel .gift-purchase-controls > .button {
     --action-fill: transparent;
     --action-border: #4a0404;
     --action-ink: #4a0404;

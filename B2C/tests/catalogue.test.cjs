@@ -20,13 +20,13 @@ function load(fetch, method = 'catalogue') {
   return module('catalogue')[method];
 }
 
-test('stationery includes envelopes, bookmarks and diary sets; candles remain separate offline', async () => {
+test('stationery includes bookmarks and diary sets; envelopes and candles remain separate offline', async () => {
   const catalogue = load(async () => { throw new Error('Offline'); });
   for (const search of ['stationery', 'Premium Stationeries']) {
     const data = await catalogue(search);
     assert.deepEqual(Array.from(data.products.slice(0, 2), product => product._id), ['bookmarks', 'diary_bottle_pen_set']);
-    assert.equal(data.total, 11);
-    assert.equal(data.products.filter(p => p._id.startsWith('preview-envelope-')).length, 9);
+    assert.equal(data.total, 2);
+    assert.equal(data.products.filter(p => /envelope|shagun/i.test(p.slug+' '+p.name)).length, 0);
   }
   assert.equal((await catalogue('shagun')).products.length, 9);
   assert.ok((await catalogue('shagun')).products.every(p => p.slug !== 'shagun-envelopes'));
@@ -40,14 +40,14 @@ test('merged API results include later pages, deduplicate and sort before pagina
     const query = new URL(url).searchParams;
     const term = query.get('search'), page = Number(query.get('page'));
     calls.push(`${term}:${page}`);
-    const rows = term === 'shagun' ? products.slice((page - 1) * 12, page * 12) : term === 'bookmarks' ? [products[0]] : [{ _id: 'diary', name: 'Diary', basePrice: 2000 }];
-    return { ok: true, json: async () => ({ products: rows, pages: term === 'shagun' ? 2 : 1 }) };
+    const rows = term === 'bookmarks' ? products.slice((page - 1) * 12, page * 12) : [products[0], { _id: 'diary', name: 'Diary', basePrice: 2000 }, { _id: 'envelope', slug: 'lotus-shagun-envelope', name: 'Lotus Shagun Envelope' }];
+    return { ok: true, json: async () => ({ products: rows, pages: term === 'bookmarks' ? 2 : 1 }) };
   });
   const data = await catalogue('stationery', 'price_desc', 2);
-  assert.equal(data.total, 24);
+  assert.equal(data.total, 15);
   assert.equal(data.pages, 2);
   assert.deepEqual(Array.from(data.products.slice(0, 3), product => product._id), ['item-2', 'item-1', 'item-0']);
-  assert.ok(calls.includes('shagun:2'));
+  assert.ok(calls.includes('bookmarks:2'));
   assert.ok(calls.includes('corporate:1'));
 });
 
@@ -61,7 +61,7 @@ test('ordinary searches preserve API pagination and a failed merged source uses 
   assert.equal(ordinary.total, 40);
   assert.equal(ordinary.pages, 4);
   const merged = await catalogue('stationery', 'price_asc');
-  assert.equal(merged.total, 11);
+  assert.equal(merged.total, 2);
   assert.deepEqual(Array.from(merged.products.slice(0, 2), product => product._id), ['bookmarks', 'diary_bottle_pen_set']);
 });
 
@@ -70,7 +70,7 @@ test('outages and missing commercial fields never invent saleable prices or stoc
  const result=await load(async()=>({ok:true,json:async()=>({products:[{_id:'fixture',name:'Unpriced'}],pages:1,total:1})}))('test');assert.equal(result.products[0].preview,true);assert.equal(result.products[0].basePrice,0);assert.equal(result.products[0].inventory,0);
 });
 test('stationery requests share one deadline and reject excessive page fanout',async()=>{
- const signals=[];const data=await load(async(_url,options)=>{signals.push(options.signal);return {ok:true,json:async()=>({products:[],pages:99})};})('stationery');assert.equal(data.preview,true);assert.equal(signals.length,3);assert.ok(signals.every(signal=>signal===signals[0]));
+ const signals=[];const data=await load(async(_url,options)=>{signals.push(options.signal);return {ok:true,json:async()=>({products:[],pages:99})};})('stationery');assert.equal(data.preview,true);assert.equal(signals.length,2);assert.ok(signals.every(signal=>signal===signals[0]));
 });
 
 
@@ -115,8 +115,8 @@ test('supplied envelope designs list once, preserve galleries and map distinct d
    photos.push(image.public_id);
   }
  }
- assert.equal(photos.length, 12); assert.equal(new Set(photos).size, 12);
- assert.deepEqual(Array.from((await productBySlug('lotus-shagun-envelope')).images, i => i.public_id), ['/images/envelopes/ep1.webp','/images/envelopes/ep1_1.webp','/images/envelopes/ep1_2.webp']);
+ assert.equal(photos.length, 13); assert.equal(new Set(photos).size, 13);
+ assert.deepEqual(Array.from((await productBySlug('lotus-shagun-envelope')).images, i => i.public_id), ['/images/envelopes/ep1_3.webp','/images/envelopes/ep1.webp','/images/envelopes/ep1_1.webp','/images/envelopes/ep1_2.webp']);
  assert.equal((await productBySlug('baraat-shagun-envelope')).images.length, 2);
  assert.equal((await catalogue('teddy bear')).products[0].slug, 'teddy-bear-shagun-envelope');
  const first = await catalogue(), second = await catalogue('', 'newest', 2);

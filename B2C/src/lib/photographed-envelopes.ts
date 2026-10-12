@@ -2,7 +2,7 @@ import type { Product } from './types';
 
 // Photo previews can be saved to the gift draft; selling prices/stock remain pending.
 const designs = [
-  { number: 1, title: 'Lotus Shagun Envelope', slug: 'lotus-shagun-envelope', description: 'Pink lotus flowers and a scalloped lavender flap.', views: ['ep1', 'ep1_1', 'ep1_2'] },
+  { number: 1, title: 'Lotus Shagun Envelope', slug: 'lotus-shagun-envelope', description: 'Pink lotus flowers and a scalloped lavender flap.', views: ['ep1_3', 'ep1', 'ep1_1', 'ep1_2'] },
   { number: 2, title: 'Green & Gold Shagun Envelope', slug: 'green-gold-shagun-envelope', description: 'A green and cream design with gold-toned floral details.', views: ['ep2'] },
   { number: 3, title: 'Baraat Shagun Envelope', slug: 'baraat-shagun-envelope', description: 'A festive procession illustration with red and white stripes.', views: ['ep3', 'ep3_1'] },
   { number: 4, title: 'Paisley Shagun Envelope', slug: 'paisley-shagun-envelope', description: 'A cream paisley design paired with a scalloped blue flap.', views: ['ep4'] },

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BuyPanel from '@/components/BuyPanel';
@@ -7,6 +8,7 @@ import { productBySlug } from '@/lib/catalogue';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import { productEditorial } from '@/lib/product-editorial';
+import { productPriceLabel } from '@/lib/product-pricing';
 import { productImage } from '@/lib/types';
 import './product-detail.css';
 
@@ -15,6 +17,23 @@ type PageProps = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: PageProps) {
   const product = await productBySlug((await params).slug);
   return { title: product?.name || 'Gift not found', description: product ? productEditorial(product).description : undefined };
+}
+
+async function RelatedGifts({ slug }: { slug: string }) {
+  const slugs = [...CURATED_HAMPERS.map(product => product.slug), 'lotus-shagun-envelope', 'laddoo-candles'].filter(item => item !== slug).slice(0, 3);
+  const products = (await Promise.all(slugs.map(productBySlug))).filter(product => product !== null);
+  if (!products.length) return null;
+  return <section className="pdp-related pdp-wrap" aria-labelledby="related-heading">
+    <div className="pdp-section-heading"><div><p className="pdp-eyebrow">More thoughtful gestures</p><h2 id="related-heading">You may also like</h2></div><Link className="pdp-link" href="/shop">Explore all gifts <span aria-hidden="true">→</span></Link></div>
+    <div className="pdp-related-grid">{products.map(product => <article key={product.slug}>
+      <Link href={`/products/${product.slug}`} className="pdp-related-photo" aria-label={`View ${product.name}`}>
+        <ProductPhoto src={productImage(product)} alt={product.name} sizes="(max-width: 600px) 90vw, 30vw"/>
+      </Link>
+      <h3><Link href={`/products/${product.slug}`}>{product.name}</Link></h3>
+      <p>{productPriceLabel(product)}</p>
+      <Link className="pdp-link" href={`/products/${product.slug}`}>View gift <span aria-hidden="true">→</span></Link>
+    </article>)}</div>
+  </section>;
 }
 
 export default async function Detail({ params }: PageProps) {
@@ -59,5 +78,6 @@ export default async function Detail({ params }: PageProps) {
       </div>
     </section>
 
+    <Suspense fallback={<div className="pdp-wrap pdp-related-loading" role="status">Finding more thoughtful gifts…</div>}><RelatedGifts slug={product.slug}/></Suspense>
   </div>;
 }

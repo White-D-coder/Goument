@@ -54,8 +54,8 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
   {
     id: 'stationery',
     label: 'Premium Stationery',
-    subtitle: 'Shagun envelopes, artisanal bookmarks and custom diary gift sets.',
-    image: '/images/items/shagun_envelopes.webp',
+    subtitle: 'Illustrated bookmarks and considered diary gift sets.',
+    image: BOOKMARK_PHOTOS[0].public_id,
     borderRadius: '55% 45% 60% 40% / 50% 55% 45% 50%',
     pastelActive: 'bg-[#B08968]',
     pastelHover: 'group-hover:bg-[#EDE0D4]',

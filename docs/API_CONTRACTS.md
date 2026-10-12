@@ -1,3 +1,25 @@
+## 2026-10-12 — Registered photographed draft selections (R197/R201)
+
+CURRENT / IMPLEMENTED locally: GET gift/catalogue adds preview-envelope-ep1 through preview-envelope-ep9, preview-candle-floral-jar-candle and preview-candle-himalayan-dusk-candle. IDs match existing stable local preview IDs; each selection saves independently through unchanged {revision,boxes,items:[{id,quantity}]} draft contract. Product enrichment matches registered IDs/photos without replacing remote commercial fields. Existing laddoo_candles ID now references /images/scented_candle/cn3-supplied.webp; other legacy identities retained. No amount fields, quote endpoint, database shape, customer ownership or order/payment readiness change. Orders remain409 without clearing draft; address paymentAvailable:false. Supersedes R191 no-new-public-IDs statement only for the11 registered previews. TESTING records disposable DB regressions and fixture interactions.
+
+## 2026-10-12 — Delivery presentation clarification (R193)
+
+CURRENT / IMPLEMENTED locally: no API change. Frontend retains internal delivery planning bounds but shopper total now excludes unconfirmed delivery, labeled Total before delivery; Delivery says To be confirmed. Supersedes R192 delivery-inclusive display only. Draft money remains absent; order409 and address paymentAvailable:false unchanged. See BUSINESS_LOGIC/UI_SYSTEM/TESTING.
+
+## 2026-10-12 — Gift-cart estimate and order guard (R191–R192)
+
+CURRENT / IMPLEMENTED locally: gift catalogue Laddoo entry keeps id/slug/category and uses /images/scented_candle/cn3.webp plus observed packaging copy. No new public IDs, priced draft fields, quote endpoint or browser-amount contract added. Frontend computes display-only ranges from server-confirmed rows; API payloads remain quantity/revision based.
+
+POST /api/v1/auth/gift/address still validates authenticated address ownership and saves delivery details, but paymentAvailable is now false. POST /api/v1/auth/gift/order preserves sign-in/readiness/enquiry-hamper checks, then returns409 with final-price/GST/delivery confirmation message. It cannot create an assumed-price order or clear a draft; supplied amounts are never authority. This SUPERSEDES the unsafe flat-price201 path and address paymentAvailable:true. GET checkout and checkout-check remain address-preparation/readiness responses with paymentAvailable/checkoutAvailable:false; they do not authorize an order/payment. No changes to immutable-order/payment endpoints, customer identity or database shape. Verified:15 gifting tests and TESTING browser/API evidence.
+
+## 2026-10-12 — Client cart notification payload (R189)
+
+CURRENT / IMPLEMENTED client-only: successful gift draft operations dispatch CustomEvent('b2c-cart-change',{detail:{items:[{id,quantity}]}}) from the actual server response. Mounted header/counters consume that selection immediately; pending older reads cannot overwrite it. No event payload retained as a cart cache. Bare events from login/logout/legacy cart/order flows still fetch the existing private endpoints; malformed detail falls back to fetching. Initial badge/grid reads and fresh pre-mutation GET/revision PUT remain. No HTTP, ownership, cookie, pricing or checkout contract change. Verification: TESTING.
+
+## 2026-10-12 — Separate India Hamper colour selections (R178)
+
+CURRENT / IMPLEMENTED additive catalogue entries: GET /api/v1/auth/gift/catalogue now also returns india_hamper_burgundy and india_hamper_lavender, each with its colour name/photo and category Gift Hampers. Existing draft {revision,boxes,items:[{id,quantity}]} contract unchanged; distinct IDs persist as distinct rows and fulfillment counts each hamper. Preserve legacy india_hamper acceptance/resolution for saved carts. Checkout-check/checkout/address/order confirmation guards apply to both new IDs. No new endpoint, schema or ownership rule. Disposable database tests and local proxied catalogue200 evidence: TESTING.
+
 ## 2026-10-12 — B2C hardened entrypoints and catalogue (R161)
 
 CURRENT / IMPLEMENTED: serverless init failures/readiness return generic503 JSON/no-store with Retry-After1; no raw DB messages. One coalesced initialization, successful app cache only, retry after failed initialization. Auth owns its parser:8KiB ordinary/128KiB admin; malformed JSON400 and oversized413. Signed Razorpay webhook receives raw bytes before JSON. Unsafe browser auth methods require exact Origin, including rejecting missing Origin403; auth/session/cart/order/payment responses use private,no-store, with existing admin/webhook no-store overrides.

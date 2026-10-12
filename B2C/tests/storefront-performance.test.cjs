@@ -4,21 +4,24 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const ts=require('typescript');
 
-function mount(name,{width=1440,reduced=false,api}={}){
+const eventExports={};
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('src/lib/gift-cart-events.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,{exports:eventExports});
+
+function mount(name,{width=1440,reduced=false,api,cart,props={}}={}){
  const effects=[],states=[],events=new Map(),motionEvents=new Map(),timers=new Map(),frames=new Map();
  let id=0;
  const canvas={hidden:true,width:0,height:0,getContext:()=>new Proxy({}, {get:()=>()=>{}})};
  const motion={matches:reduced,addEventListener:(type,fn)=>motionEvents.set(type,fn),removeEventListener:type=>motionEvents.delete(type)};
  const window={innerWidth:width,innerHeight:900,scrollY:0,matchMedia:()=>motion,addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)};
  const document={hidden:false,addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)};
- const react={useRef:()=>({current:canvas}),useEffect:fn=>effects.push(fn),useState:initial=>[initial,value=>states.push(value)]};
+ const react={useRef:initial=>({current:initial===null?canvas:initial}),useEffect:fn=>effects.push(fn),useState:initial=>[initial,value=>states.push(value)]};
  const requestAnimationFrame=fn=>{frames.set(++id,fn);return id;};
  window.requestAnimationFrame=requestAnimationFrame;window.cancelAnimationFrame=value=>frames.delete(value);
  const exports={};
  const source=fs.readFileSync(`src/components/${name}.tsx`,'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
- vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='@/lib/api'?{api}:name==='next/navigation'?{usePathname:()=>'/b2c'}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
- exports.default();
+ vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='@/lib/api'?{api}:name==='@/lib/gift-cart-events'?eventExports:name==='@/lib/gift-cart'?cart:name==='next/navigation'?{usePathname:()=>'/b2c',useRouter:()=>({})}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
+ exports.default(props);
  return {effects,states,events,motion,motionEvents,window,canvas,timers,frames,flush:()=>{const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn());}};
 }
 
@@ -57,6 +60,40 @@ test('cart changes refresh the badge without repeating auth checks; sign-in/out 
  cleanup();
  assert.equal(app.events.has('b2c-auth-change'),false);
  assert.equal(app.events.has('b2c-cart-change'),false);
+});
+
+test('confirmed cart event updates the badge without fetching and supersedes an older count response',async()=>{
+ let release;const requests=[];
+ const app=mount('Header',{api:path=>{requests.push(path);return path.endsWith('/count')?new Promise(resolve=>{release=resolve;}):Promise.resolve({user:null});}});
+ const cleanup=app.effects[0]();
+ app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items:[{id:'ivory',quantity:4},{id:'india',quantity:2}]}}));
+ assert.equal(app.states.at(-1),6);
+ release({count:0});await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(app.states.filter(value=>typeof value==='number').at(-1),6);
+ assert.equal(requests.filter(path=>path.endsWith('/count')).length,1);
+ app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items:[]}}));
+ assert.equal(app.states.at(-1),0);cleanup();
+});
+
+test('mounted purchase control consumes confirmed selections and ignores a stale initial read',async()=>{
+ let release,reads=0;
+ const app=mount('AddGiftToCartButton',{props:{itemId:'ivory',name:'Ivory'},cart:{readGiftDraft:()=>{reads++;return new Promise(resolve=>{release=resolve;});}}});
+ const cleanup=app.effects[0]();
+ app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items:[{id:'ivory',quantity:3},{id:'india',quantity:2}]}}));
+ assert.equal(app.states.at(-1),3);
+ release({items:[]});await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(app.states.at(-1),3);assert.equal(reads,1);
+ app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items:[]}}));
+ assert.equal(app.states.at(-1),0);
+ app.events.get('b2c-cart-change')(new Event('b2c-cart-change'));assert.equal(reads,2);
+ cleanup();release({items:[{id:'ivory',quantity:8}]});await new Promise(resolve=>setImmediate(resolve));assert.equal(app.states.at(-1),0);
+});
+
+test('malformed cart event detail falls back to a server refresh',async()=>{
+ const requests=[];const app=mount('Header',{api:async path=>{requests.push(path);return path.endsWith('/count')?{count:0}:{user:null};}});
+ const cleanup=app.effects[0]();
+ for(const items of [null,[{id:'ivory',quantity:-1}],[{id:'ivory',quantity:100}],[{id:'ivory',quantity:1.5}]])app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items}}));
+ await new Promise(resolve=>setImmediate(resolve));assert.equal(requests.filter(path=>path.endsWith('/count')).length,5);cleanup();
 });
 
 test('desktop sprinkle releases canvas memory and animation work after its timer',()=>{

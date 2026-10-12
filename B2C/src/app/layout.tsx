@@ -9,6 +9,7 @@ import './featured-edits.css';
 import './surfaces.css';
 import './navigation.css';
 import './storefront-ui.css';
+import './storefront-cards.css';
 export const metadata: Metadata = {
   title: { default: 'Gourmet — Thoughtful gifts for every little moment', template: '%s | Gourmet' },
   description: 'Explore gourmet delights, keepsakes and thoughtful gifts for the people who make life special.',

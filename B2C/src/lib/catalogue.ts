@@ -2,6 +2,9 @@ import 'server-only';
 import { HAMPERS_CATALOG } from './catalogue-preview';
 import { CURATED_HAMPERS, curatedHamperMatches } from './curated-hampers';
 import type { Product } from './types';
+import { PHOTOGRAPHED_ENVELOPES, photographedEnvelopeMatches, withEnvelopePhotos } from './photographed-envelopes';
+import { PHOTOGRAPHED_CANDLES, photographedCandleMatches, withCandlePhotos } from './photographed-candles';
+import { withBookmarkPhotos } from './bookmark-photos';
 const backend = process.env.BACKEND_URL || 'https://backendbtwoc.vercel.app';
 const isStationerySearch = (search: string) => /^(?:premium\s+)?stationer(?:y|ies)$/i.test(search.trim());
 type CatalogueApiProduct = {
@@ -43,7 +46,7 @@ async function fetchCatalogue(search: string, sort: string, page: number, signal
   return data;
 }
 
-async function stationeryMatches(search: string, sort: string, signal: AbortSignal): Promise<CatalogueApiProduct[]> {
+async function allMatchingProducts(search: string, sort: string, signal: AbortSignal): Promise<CatalogueApiProduct[]> {
   const first = await fetchCatalogue(search, sort, 1, signal, 100);
   const pages = first.pages ?? 1;
   if (!Number.isInteger(pages) || pages < 0 || pages > 20) throw new Error('Invalid catalogue pagination');
@@ -77,13 +80,24 @@ function enrichProduct(prod: CatalogueApiProduct): Product {
   };
 }
 
-function withAllGiftHamperPreviews(products: Product[], search: string, page: number) {
- if (search || page !== 1) return products;
+function isEnvelope(product: Product) {
+ return /(?:envelope|shagun)/i.test(`${product.slug} ${product.name} ${product.categoryLabel || ''}`);
+}
+function visibleProducts(products: Product[]) {
+ return products.filter(product => product.slug !== 'shagun-envelopes' && product.giftItemId !== 'shagun_envelopes' && product._id !== 'shagun_envelopes').map(withCandlePhotos).map(withBookmarkPhotos).map(withEnvelopePhotos);
+}
+function mergePreviews(products: Product[], previews: Product[]) {
+ products = visibleProducts(products);
  const existingSlugs = new Set(products.map(product => product.slug));
- return [...products, ...CURATED_HAMPERS.filter(product => !existingSlugs.has(product.slug))];
+ return [...products, ...previews.filter(product => !existingSlugs.has(product.slug))];
+}
+function pageOf(products: Product[], page: number, preview: boolean) {
+ return { products: products.slice((page - 1) * 12, page * 12), pages: Math.ceil(products.length / 12), total: products.length, preview };
 }
 
 export async function catalogue(search = '', sort = 'newest', page = 1) {
+ const envelopes = photographedEnvelopeMatches(search);
+ const candles = photographedCandleMatches(search);
  const hampers = curatedHamperMatches(search);
  if (hampers !== null) {
   return { products: hampers.slice((page - 1) * 12, page * 12), pages: Math.ceil(hampers.length / 12), total: hampers.length, preview: true };
@@ -92,40 +106,46 @@ export async function catalogue(search = '', sort = 'newest', page = 1) {
   const stationerySearch = isStationerySearch(search);
   if (stationerySearch) {
     const deadline = AbortSignal.timeout(2500);
-    const results = await Promise.all(['shagun', 'bookmarks', 'corporate'].map(term => stationeryMatches(term, sort, deadline)));
+    const results = await Promise.all(['bookmarks', 'corporate'].map(term => allMatchingProducts(term, sort, deadline)));
     const matches = [...new Map(results.flat().map(product => [product._id || product.slug || product.name || '', product])).values()];
     if (sort === 'newest') matches.sort((a, b) => (Date.parse(b.createdAt || '') || 0) - (Date.parse(a.createdAt || '') || 0));
-    const products = matches.map(enrichProduct);
+    const products = visibleProducts(matches.map(enrichProduct)).filter(product => !isEnvelope(product));
     if (sort === 'price_asc' || sort === 'price_desc') products.sort((a, b) => (sort === 'price_asc' ? 1 : -1) * (a.basePrice - b.basePrice));
    const total = products.length;
    return { products: products.slice((page - 1) * 12, page * 12), pages: Math.ceil(total / 12), total, preview: false };
   }
+  if (!search || envelopes.length || candles.length) {
+   const source = await allMatchingProducts(search, sort, AbortSignal.timeout(2500));
+   const previews = search ? [...envelopes, ...candles] : [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES];
+   return pageOf(mergePreviews(source.map(enrichProduct), previews), page, true);
+  }
   const data = await fetchCatalogue(search, sort, page);
-    const sourceProducts = data.products || [];
-    const products = withAllGiftHamperPreviews(sourceProducts.map(enrichProduct), search, page);
-    const added = products.length - sourceProducts.length;
-    return { products, pages: data.pages || 1, total: (data.total ?? (data.products || []).length) + added, preview: false };
+  const source = (data.products || []).map(enrichProduct);
+  const products = visibleProducts(source);
+  const total = (data.total ?? source.length) - (source.length - products.length);
+  return { products, pages: products.length === source.length ? data.pages || 1 : Math.ceil(total / 12), total, preview: false };
  } catch {
   const matches = HAMPERS_CATALOG.filter(p => isStationerySearch(search)
-   ? ['shagun', 'bookmarks', 'corporate'].includes(p.category)
+   ? ['bookmarks', 'corporate'].includes(p.category)
    : `${p.name} ${p.categoryLabel} ${p.category} ${p.subCopy}`.toLowerCase().includes(search.toLowerCase()));
   if (isStationerySearch(search) && (sort === 'price_asc' || sort === 'price_desc')) matches.sort((a, b) => (sort === 'price_asc' ? 1 : -1) * (a.price - b.price));
   const products = matches.map(p => ({ _id: p._id, giftItemId: p._id, slug: p.slug, name: p.name, categoryLabel: p.categoryLabel, description: { short: p.subCopy, long: p.description }, basePrice: 0, currency: 'INR', inventory: 0, variants: [], images: [{ public_id: p.image }], preview: true } as Product));
-  const allProducts = withAllGiftHamperPreviews(products, search, page);
+  const previews = isStationerySearch(search) ? [] : search ? [...envelopes, ...candles] : [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES];
+  const allProducts = mergePreviews(products, previews).filter(product => !isStationerySearch(search) || !isEnvelope(product));
   return { products: allProducts.slice((page - 1) * 12, page * 12), pages: Math.ceil(allProducts.length / 12), total: allProducts.length, preview: true };
  }
 }
 export async function productBySlug(slug: string): Promise<Product | null> {
- const hamper = CURATED_HAMPERS.find(product => product.slug === slug);
- if (hamper) return hamper;
+ const localPreview = [...CURATED_HAMPERS, ...PHOTOGRAPHED_ENVELOPES, ...PHOTOGRAPHED_CANDLES.filter(item => item.giftItemId !== 'laddoo_candles')].find(product => product.slug === (slug === 'india-hamper' ? 'india-hamper-burgundy' : slug));
+ if (localPreview) return localPreview;
  try {
   const response = await publicCatalogueRequest(`${backend}/api/v1/products/${encodeURIComponent(slug)}`, AbortSignal.timeout(2500));
-  if (response.status === 404) return null;
+  if (response.status === 404) return PHOTOGRAPHED_CANDLES.find(product => product.slug === slug) || null;
   if (!response.ok) throw new Error('Unavailable');
   const data = await response.json() as CatalogueApiProduct & { data?: CatalogueApiProduct };
-  return enrichProduct(data.data || data);
+  return withBookmarkPhotos(withCandlePhotos(enrichProduct(data.data || data)));
  } catch {
   const p = HAMPERS_CATALOG.find(p => p.slug === slug);
-  return p ? { _id: p._id, giftItemId: p._id, slug: p.slug, name: p.name, categoryLabel: p.categoryLabel, description: { short: p.subCopy, long: p.description }, basePrice: 0, currency: 'INR', inventory: 0, variants: [], images: [{ public_id: p.image }], preview: true } : null;
+  return p ? withBookmarkPhotos(withCandlePhotos({ _id: p._id, giftItemId: p._id, slug: p.slug, name: p.name, categoryLabel: p.categoryLabel, description: { short: p.subCopy, long: p.description }, basePrice: 0, currency: 'INR', inventory: 0, variants: [], images: [{ public_id: p.image }], preview: true })) : null;
  }
 }

@@ -1,3 +1,17 @@
+## 2026-10-12 — Display-price and draft-action boundary (R196–R197)
+
+CURRENT / IMPLEMENTED locally: numeric card/PDP prices without Sample suffix and new photographed-item Add/cart actions are presentation/draft behavior only. Sample figures never enter server quotes/payments; authoritative pricing/reservation bridge remains FUTURE / REQUIRED. Existing unavailable checkout/payment responses and gift-order409 retained and regression checked. No payment/provider/model change. See BUSINESS_LOGIC/API_CONTRACTS/TESTING.
+
+## 2026-10-12 — Shopper total excludes unconfirmed delivery (R193)
+
+CURRENT / IMPLEMENTED locally: user clarifies variable delivery range is internal input, not shopper copy. SUPERSEDES R192 delivery-inclusive display estimate. Cart now shows subtotal+18% extra item GST as Total before delivery, Delivery confirmed before payment, and no delivery-range/prices-vary paragraph. Internal planning range remains; exact delivery charge/tax and authoritative final quote still UNKNOWN/required. Gift-order409/paymentAvailable:false guards from R192 remain unchanged; no payment activation. Evidence: TESTING.
+
+## 2026-10-12 — Display estimates and fail-closed gift order bridge (R192)
+
+CURRENT / IMPLEMENTED locally: user approves extra18% GST on item prices, candle₹200–500 estimates and variable delivery₹100–300. Cart displays integer-paise subtotal/GST/delivery/total ranges and keeps missing prices pending. These are display estimates, not a signed/server-owned quote or accounting/invoice policy. U03/U04 partially clarified only for B2C cart estimates: shipping tax, jurisdiction/allocation, exact SKU/pack/box charges, serviceability and delivery-price selection remain UNKNOWN. Existing hamper display amounts remain unverified sale authority.
+
+Source defect corrected: gifting/routes.js no longer saves flat₹299 item orders with zero tax/delivery or clears the cart. Order bridge returns409 pending authoritative quote/reservation; address capture reports paymentAvailable:false; cart respects checkoutAvailable:false. Existing real immutable-order/Razorpay adapters remain separate/unchanged; no payment activation, charge, invoice or historical money rewrite.15 gifting tests verify rejection and draft preservation; TESTING owns remaining evidence. FUTURE / REQUIRED: implement/verify server-owned quote and atomic stock/order bridge once exact commercial rules/mappings exist.
+
 ## 2026-10-12 — B2C wrapper payment parity (R161)
 
 CURRENT / IMPLEMENTED and fixture-verified: serverless entrypoint constructs the existing Razorpay adapter from explicit provider configuration and passes it to auth/payment routes. Signed webhook is mounted before JSON; raw body/signature handling now matches standalone auth. Browser payment routes retain exact Origin/private-cache protections; generic errors conceal internals. No external provider transaction, capture, refund, order/stock mutation, or checkout activation performed. Real provider/deployed webhook verification remains FUTURE / REQUIRED; missing keys keep existing availability gates. Standalone/schema-backed tests passing do not prove production commerce readiness. Supersedes R160 wrapper-specific parser/adapter findings only; legacy Stripe/integrity debt remains separate.

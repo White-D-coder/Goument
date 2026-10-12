@@ -5,7 +5,7 @@ import ProductPhoto from '@/components/ProductPhoto';
 
 const slides = [
   {
-    src: '/images/brand/home-hero-1.webp',
+    src: '/images/brand/Festive Gourmet Gift Hamper Still Life.png',
     alt: 'The Gourmet Gifts curated boxes with gourmet treats and keepsakes',
   },
   {
@@ -13,7 +13,7 @@ const slides = [
     alt: 'The India Hamper in burgundy with regional treats',
   },
   {
-    src: '/images/brand/home-hero-3.webp',
+    src: '/images/brand/hero3.png',
     alt: 'The India Hamper in lavender with thoughtfully selected gifts',
   },
 ];
@@ -23,15 +23,24 @@ export default function HomeHeroSlideshow() {
   const [ready, setReady] = useState<number[]>([]);
   const [requested, setRequested] = useState<number | null>(null);
   const [unavailable, setUnavailable] = useState<number[]>([]);
+  const [backgroundSlides, setBackgroundSlides] = useState(false);
   const visual = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let visible = true;
     let timer: number | undefined;
+    let preload: number | undefined;
     const update = () => {
       window.clearInterval(timer);
+      window.clearTimeout(preload);
       timer = undefined;
+      preload = undefined;
+      // Hidden slides otherwise count as in-viewport lazy images and compete
+      // with the first paint. A dot click can still request one immediately.
+      if (visible && !document.hidden && !motionPreference.matches && ready.length && !backgroundSlides) {
+        preload = window.setTimeout(() => setBackgroundSlides(true), 1200);
+      }
       if (visible && !document.hidden && !motionPreference.matches && ready.length > 1 && requested === null) {
         timer = window.setInterval(() => setActiveIndex(index => {
           const order = [...ready].sort((a, b) => a - b);
@@ -44,8 +53,8 @@ export default function HomeHeroSlideshow() {
     motionPreference.addEventListener('change', update);
     document.addEventListener('visibilitychange', update);
     update();
-    return () => {window.clearInterval(timer);observer.disconnect();motionPreference.removeEventListener('change',update);document.removeEventListener('visibilitychange',update);};
-  }, [ready, requested]);
+    return () => {window.clearInterval(timer);window.clearTimeout(preload);observer.disconnect();motionPreference.removeEventListener('change',update);document.removeEventListener('visibilitychange',update);};
+  }, [ready, requested, backgroundSlides]);
 
   return (
     <div ref={visual} className="tgg-hero-visual" aria-label="Featured gifts" aria-roledescription="carousel">
@@ -55,10 +64,10 @@ export default function HomeHeroSlideshow() {
           className={`tgg-hero-slide${index === activeIndex ? ' is-active' : ''}`}
           aria-hidden={index !== activeIndex}
         >
-          <ProductPhoto
+          {(index === 0 || backgroundSlides || index === requested || ready.includes(index)) && <ProductPhoto
             src={slide.src}
             alt={slide.alt}
-            sizes="(max-width: 760px) 100vw, 54vw"
+            sizes="(max-width: 760px) 100vw, (max-width: 1488px) calc(100vw - 48px), 1440px"
             priority={index === 0 || index === requested}
             onReady={() => {
               setReady(current => current.includes(index) ? current : [...current, index]);
@@ -67,10 +76,13 @@ export default function HomeHeroSlideshow() {
             onUnavailable={() => {
               setUnavailable(current => current.includes(index) ? current : [...current, index]);
               setReady(current => current.filter(loaded => loaded !== index));
-              if (index === activeIndex && ready.length) setActiveIndex(ready[0]);
+              if (index === activeIndex) {
+                setBackgroundSlides(true);
+                if (ready.length) setActiveIndex(ready[0]);
+              }
               if (index === requested) setRequested(null);
             }}
-          />
+          />}
         </div>
       ))}
       <div className="tgg-hero-dots" role="group" aria-label="Choose a featured gift image">

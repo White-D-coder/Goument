@@ -10,7 +10,6 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   const secure = url.protocol === 'https:';
   const cookie = { httpOnly: true, secure, sameSite: 'lax', path: '/api/v1/auth' };
   const sessionName = 'b2c_session'; const flowName = 'b2c_google_flow';
-  const rates = new Map();
   const safeNext = value => typeof value === 'string' && /^(?:\/checkout(?:\?order=[a-f0-9]{24})?|\/admin)$/.test(value) ? value : '/account';
   const configured = Boolean(clientId && clientSecret);
   const google = provider || (configured ? googleProvider({ clientId, clientSecret, redirectUri: `${origin}/api/v1/auth/google/callback` }) : null);
@@ -24,13 +23,7 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   const publicJson = express.json({ limit: '8kb' });
   const adminJson = express.json({ limit: '128kb' });
   app.use((req,res,next)=>(req.path === '/api/v1/auth/admin' || req.path.startsWith('/api/v1/auth/admin/') ? adminJson : publicJson)(req,res,next));
-  app.use('/api/v1/auth', (req,res,next)=>{
-    // Operations uses persisted per-actor/IP read, write and sensitive buckets.
-    if (req.path === '/admin' || req.path.startsWith('/admin/')) return next();
-    const now=Date.now();for(const [key,value]of rates)if(value.until<now)rates.delete(key);
-    const key=req.ip;const current=rates.get(key)||{count:0,until:now+60000};current.count++;rates.set(key,current);
-    if(current.count>60||rates.size>10000)return res.status(429).json({message:'Too many requests. Please try again shortly.'});next();
-  });
+  app.use('/api/v1/auth', require('./rate-limit').createAuthRateLimit());
   const run = fn => (req,res,next) => Promise.resolve(fn(req,res)).catch(next);
   const signedIn = (res,token) => { res.cookie(sessionName,token,{...cookie,maxAge:service.SESSION_MS}); };
   app.get('/api/v1/auth/config', (req,res)=>res.json({googleEnabled:configured}));

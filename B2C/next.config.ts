@@ -8,7 +8,7 @@ const config: NextConfig = {
         { key: 'X-Content-Type-Options', value: 'nosniff' },
         { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }
       ] },
-      ...['/images/footer-wallpaper.webp', '/images/footer-wallpaper-light.webp', '/images/brand/faq-gift.webp', '/images/brand/gg-logo.webp', '/images/patterns/diwali-mandala.webp'].map(source => ({
+      ...['/images/footer-wallpaper.webp', '/images/footer-wallpaper-light.webp', '/images/brand/faq-gift.webp', '/images/brand/gg-logo.webp', '/images/patterns/diwali-mandala-light.webp'].map(source => ({
         source, headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }]
       }))
     ];

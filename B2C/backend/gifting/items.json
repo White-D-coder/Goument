@@ -27,16 +27,16 @@
     "id": "laddoo_candles",
     "slug": "laddoo-candles",
     "name": "Artisanal Laddoo Candles",
-    "image": "/images/items/laddoo_candles.webp",
-    "description": "Meticulously hand-poured festive wax candles sculpted like golden motichoor laddoos with silver foil accents in an ivory and gold gift box.",
+    "image": "/images/scented_candle/cn3-supplied.webp",
+    "description": "Laddoo-shaped festive candles in individual white presentation boxes.",
     "category": "Laddoo Candles"
   },
   {
     "id": "bookmarks",
     "slug": "bookmarks",
     "name": "Handcrafted Artisanal Bookmarks",
-    "image": "/images/items/bookmarks.webp",
-    "description": "Intricately designed keepsake bookmarks on heavy archival paper with heritage motifs, gilded edges, and braided silk tassels.",
+    "image": "/images/bookmarks/six-stories.webp",
+    "description": "Illustrated bookmarks celebrating Indian landscapes, culture and colour from Eternal Paper Co.",
     "category": "Bookmarks"
   },
   {
@@ -46,5 +46,109 @@
     "image": "/images/items/sustainable_diary_bottle_pen.webp",
     "description": "Executive corporate gifting trio featuring a hardcover journal notebook, matte temperature flask, and precision metal pen with custom brand logo personalization.",
     "category": "Executive Sets"
+  },
+  {
+    "id": "india_hamper_burgundy",
+    "slug": "india-hamper-burgundy",
+    "name": "India Hamper · Burgundy",
+    "image": "/images/brand/burgundy_india_hamper.webp",
+    "description": "Our India Hamper, presented in a burgundy box.",
+    "category": "Gift Hampers"
+  },
+  {
+    "id": "india_hamper_lavender",
+    "slug": "india-hamper-lavender",
+    "name": "India Hamper · Lavender",
+    "image": "/images/brand/lavender_india_hamper.webp",
+    "description": "Our India Hamper, presented in a lavender box.",
+    "category": "Gift Hampers"
+  },
+  {
+    "id": "preview-envelope-ep1",
+    "slug": "lotus-shagun-envelope",
+    "name": "Lotus Shagun Envelope",
+    "image": "/images/envelopes/ep1.webp",
+    "description": "Pink lotus flowers and a scalloped lavender flap.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep2",
+    "slug": "green-gold-shagun-envelope",
+    "name": "Green & Gold Shagun Envelope",
+    "image": "/images/envelopes/ep2.webp",
+    "description": "A green and cream design with gold-toned floral details.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep3",
+    "slug": "baraat-shagun-envelope",
+    "name": "Baraat Shagun Envelope",
+    "image": "/images/envelopes/ep3.webp",
+    "description": "A festive procession illustration with red and white stripes.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep4",
+    "slug": "paisley-shagun-envelope",
+    "name": "Paisley Shagun Envelope",
+    "image": "/images/envelopes/ep4.webp",
+    "description": "A cream paisley design paired with a scalloped blue flap.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep5",
+    "slug": "vintage-car-shagun-envelope",
+    "name": "Vintage Car Shagun Envelope",
+    "image": "/images/envelopes/ep5.webp",
+    "description": "A vintage car illustration with a classic checked border.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep6",
+    "slug": "botanical-shagun-envelope",
+    "name": "Botanical Shagun Envelope",
+    "image": "/images/envelopes/ep6.webp",
+    "description": "Gold-toned botanical illustrations on a deep green background.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep7",
+    "slug": "hearts-shagun-envelope",
+    "name": "Hearts Shagun Envelope",
+    "image": "/images/envelopes/ep7.webp",
+    "description": "Pink hearts and stripes for a cheerful little gesture.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep8",
+    "slug": "teddy-bear-shagun-envelope",
+    "name": "Teddy Bear Shagun Envelope",
+    "image": "/images/envelopes/ep8.webp",
+    "description": "A pink scalloped design with a playful teddy bear detail.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-envelope-ep9",
+    "slug": "celebration-shagun-envelope",
+    "name": "Celebration Shagun Envelope",
+    "image": "/images/envelopes/ep9.webp",
+    "description": "Bright florals and playful illustrations for a celebration.",
+    "category": "Shagun Envelopes"
+  },
+  {
+    "id": "preview-candle-floral-jar-candle",
+    "slug": "floral-jar-candle",
+    "name": "Floral Jar Candle",
+    "image": "/images/scented_candle/cn1.webp",
+    "description": "An ivory candle in a glass jar, finished with sculpted flowers.",
+    "category": "Candles"
+  },
+  {
+    "id": "preview-candle-himalayan-dusk-candle",
+    "slug": "himalayan-dusk-candle",
+    "name": "Himalayan Dusk Candle",
+    "image": "/images/scented_candle/cn2.webp",
+    "description": "Pine, jasmine and amber in a warm amber jar.",
+    "category": "Candles"
   }
 ]

@@ -1,5 +1,6 @@
 import { api, ApiError } from './api';
 import type { Draft } from '@/hooks/useGiftDraft';
+import { publishGiftCart } from './gift-cart-events';
 
 // Serialize the whole read/write operation, including the first cookie handshake.
 // Separate cards must not overwrite one another's selection or create competing sessions.
@@ -81,7 +82,7 @@ function updateGiftItem(id: string, change: 1 | -1 | 'ensure'): Promise<Draft> {
     if (!(error instanceof ApiError)) throw new Error('Could not confirm the cart change. Check your cart before trying again.');
     throw error;
    }
-   window.dispatchEvent(new Event('b2c-cart-change'));
+   publishGiftCart(saved);
    return saved;
   }
   throw new Error('Your cart changed. Please try again.');

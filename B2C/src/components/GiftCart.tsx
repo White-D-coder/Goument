@@ -6,9 +6,14 @@ import { useRouter } from 'next/navigation';
 import { api, ApiError } from '@/lib/api';
 import { giftApi, useGiftDraft } from '@/hooks/useGiftDraft';
 import { giftingEnquiry } from '@/lib/product-editorial';
+import { estimateGiftCart, priceRangeLabel, type PriceRange } from '@/lib/gift-cart-pricing';
 import QuantityControl from './QuantityControl';
 import ProductPhoto from './ProductPhoto';
 import './gift-cart.css';
+
+function PriceAmount({ value }: { value: PriceRange }) {
+  return <span className="gift-cart-amount"><span>{priceRangeLabel({ min: value.min, max: value.min })}</span>{value.max !== value.min && <><span>–</span><span>{priceRangeLabel({ min: value.max, max: value.max })}</span></>}</span>;
+}
 
 export default function GiftCart() {
   const router = useRouter();
@@ -35,6 +40,7 @@ export default function GiftCart() {
 
   const totalItems = draft?.items.reduce((n, i) => n + i.quantity, 0) || 0;
   const isReady = (draft?.items.length || 0) > 0;
+  const estimate = estimateGiftCart(draft?.items || [], catalogue?.items || [], draft?.boxes || []);
   const enquiryHamper = draft?.items
     .map(row => catalogue?.items.find(item => item.id === row.id))
     .find(item => item?.category === 'Gift Hampers');
@@ -64,13 +70,27 @@ export default function GiftCart() {
               {draft.items.length ? (
                 draft.items.map(row => {
                   const item = catalogue.items.find(i => i.id === row.id);
+                  const line = estimate.lines.find(line => line.id === row.id);
                   return (
                     <article key={row.id} className="gift-cart-row">
-                      {item && <div className="gift-cart-photo"><ProductPhoto src={item.image} alt={item.name} sizes="(max-width: 640px) 112px, 72px" /></div>}
+                      {item && <div className="gift-cart-photo"><ProductPhoto src={item.image} alt={item.name} sizes="(max-width: 640px) 112px, (max-width: 1000px) 180px, (max-width: 1199px) 220px, 260px" /></div>}
                       <div className="gift-cart-item-info">
                         <h3>{item?.name || 'Item unavailable'}</h3>
-                        {item && <p className="cart-phone-only gift-cart-category">{item.category}</p>}
-                        <p className="cart-phone-only gift-cart-price">Price on confirmation</p>
+                        {item && <p className="gift-cart-category">{item.category}</p>}
+                        <p className="gift-cart-price">{line?.unit ? `${priceRangeLabel(line.unit)} each · excl. GST` : 'Price pending confirmation'}</p>
+                      </div>
+                      <div className="gift-cart-line-price">
+                        <p className="gift-cart-price-label">Item total</p>
+                        <p className="gift-cart-line-total">{line?.total ? <PriceAmount value={line.total}/> : 'Price pending'}</p>
+                        <p className="gift-cart-price-detail">{row.quantity} {row.quantity === 1 ? 'item' : 'items'} · excl. GST</p>
+                      </div>
+                      <div className="gift-cart-actions">
+                        <QuantityControl
+                          name={item?.name || 'item'}
+                          value={row.quantity}
+                          disabled={busy}
+                          onChange={q => void change('items', row.id, q)}
+                        />
                         <button
                           className="text-link remove-item"
                           disabled={busy}
@@ -79,12 +99,6 @@ export default function GiftCart() {
                           Remove
                         </button>
                       </div>
-                      <QuantityControl
-                        name={item?.name || 'item'}
-                        value={row.quantity}
-                        disabled={busy}
-                        onChange={q => void change('items', row.id, q)}
-                      />
                     </article>
                   );
                 })
@@ -96,31 +110,25 @@ export default function GiftCart() {
             </div>
 
             <aside className="gift-review">
-              <h2><span className="cart-desktop-only">The finishing touch</span><span className="cart-phone-only">Order summary</span></h2>
-              <dl className="cart-phone-only gift-cart-summary">
+              <h2>Order summary</h2>
+              <dl className="gift-cart-summary" aria-live="polite" aria-busy={busy}>
                 <div><dt>Selected items</dt><dd>{totalItems}</dd></div>
-                <div><dt>Subtotal</dt><dd>On confirmation</dd></div>
-                <div><dt>Delivery &amp; taxes</dt><dd>At checkout</dd></div>
-                <div className="gift-cart-total"><dt>Total</dt><dd>On confirmation</dd></div>
+                <div><dt>{estimate.incomplete ? 'Priced items subtotal' : 'Items subtotal'}</dt><dd><PriceAmount value={estimate.subtotal}/></dd></div>
+                <div><dt>GST (18% on items)</dt><dd><PriceAmount value={estimate.gst}/></dd></div>
+                <div><dt>Delivery</dt><dd>{isReady ? 'To be confirmed' : 'Add items'}</dd></div>
+                {estimate.packagingPending && <div><dt>Packaging</dt><dd>Price pending</dd></div>}
+                <div className="gift-cart-total"><dt>Total before delivery</dt><dd>{estimate.total ? <PriceAmount value={estimate.total}/> : 'Price pending'}</dd></div>
               </dl>
-              <p aria-live="polite">
-                {enquiryHamper
-                  ? 'Hamper pricing needs confirmation before checkout. Please enquire with our team.'
-                  : isReady ? 'Your gift selection is ready for checkout.' : 'Add your favourites to get started.'}
-              </p>
-              {enquiryHamper && <Link className="text-link" href={giftingEnquiry(enquiryHamper.name)}>Enquire about this hamper →</Link>}
-              <p className="cart-desktop-only">{totalItems} {totalItems === 1 ? 'item' : 'items'}</p>
+              <p className="gift-cart-estimate-note">{estimate.incomplete ? 'Some selected prices need confirmation. ' : ''}{isReady ? 'Final pricing and delivery are confirmed before payment.' : 'Add your favourites to get started.'}</p>
+              {isReady && <Link className="text-link" href={giftingEnquiry(enquiryHamper?.name || 'my gift selection')}>Confirm final total →</Link>}
               <button
                 className="button"
-                disabled={busy || checking || !isReady || Boolean(enquiryHamper)}
+                disabled={busy || checking || !isReady || !draft.checkoutAvailable || Boolean(enquiryHamper)}
                 onClick={() => void check()}
               >
                 {checking ? 'Checking…' : 'Continue to checkout'}
                 <ArrowRight size={15} />
               </button>
-              <p className="draft-disclosure">
-                Delivery details come next. Final pricing must be confirmed before payment.
-              </p>
               {review && <p role="status">{review}</p>}
             </aside>
           </div>

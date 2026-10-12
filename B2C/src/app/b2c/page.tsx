@@ -1,23 +1,29 @@
+import HomeHero from '@/components/home/HomeHero';
 import HomeFAQ from '@/components/home/HomeFAQ';
-import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeHero, HomeMobileCategories, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
+import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeMobileCategories, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { homeFAQs } from '@/lib/home-content';
 import { homeMetadata, homeStructuredData } from '@/lib/home-seo';
+import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
+import { productImage } from '@/lib/types';
+import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
+import { productPriceLabel, sampleProductPriceLabel } from '@/lib/product-pricing';
 import './home.css';
 
 export const metadata = homeMetadata;
 const corporateUrl = process.env.NEXT_PUBLIC_CORPORATE_SITE_URL || 'https://thegourmetgifts.co/';
+const homeEnvelope = PHOTOGRAPHED_ENVELOPES[0];
 
 const homeCollections = [
-  { title: 'Luxury Shagun Envelopes', description: 'Thoughtful envelopes for meaningful celebrations.', image: '/images/items/shagun_envelopes.webp', href: '/shop/envelopes' },
-  { title: 'Scented Candles', description: 'Festive candles, ready to make a moment feel special.', image: '/images/items/laddoo_candles.webp', href: '/shop/candles' },
-  { title: 'Eternal Paper Co.', description: 'Bookmarks, diaries and considered stationery.', image: '/images/items/bookmarks.webp', href: '/shop/stationery' },
+  { title: homeEnvelope.name, description: homeEnvelope.description.short || '', image: productImage(homeEnvelope), href: `/products/${homeEnvelope.slug}`, price: productPriceLabel(homeEnvelope) },
+  { title: 'Scented Candles', description: 'Festive candles, ready to make a moment feel special.', image: '/images/scented_candle/cn3-supplied.webp', href: '/shop/candles', price: `From ${sampleProductPriceLabel('laddoo-candles')}` },
+  { title: 'Eternal Paper Co.', description: 'Bookmarks, diaries and considered stationery.', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery', price: `From ${sampleProductPriceLabel('bookmarks')}` },
 ];
 
 const hamperCards = [
   { product: CURATED_HAMPERS[0], mobileDescription: 'A thoughtful gift in ivory.' },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[0].public_id, mobileDescription: 'A little taste of India.' },
-  { product: CURATED_HAMPERS[1], image: CURATED_HAMPERS[1].images[1].public_id, mobileDescription: 'A little taste of India.' },
+  { product: CURATED_HAMPERS[1], mobileDescription: 'A little taste of India in burgundy.' },
+  { product: CURATED_HAMPERS[2], mobileDescription: 'A little taste of India in lavender.' },
 ];
 
 export default function Home() {
@@ -30,7 +36,7 @@ export default function Home() {
 
     <section className="tgg-hamper-showcase tgg-section" id="hampers" aria-labelledby="hamper-heading">
       <SectionHeading kicker="Curated hampers" title="Hampers for every occasion" id="hamper-heading" href="/shop/hampers" action="View all hampers" />
-      <div className="tgg-hamper-grid">{hamperCards.map((card, index) => <HomeHamperCard key={`${card.product._id}-${card.image || index}`} {...card} />)}</div>
+      <div className="tgg-hamper-grid">{hamperCards.map(card => <HomeHamperCard key={card.product._id} {...card} />)}</div>
     </section>
 
     <section className="tgg-favourites tgg-section" aria-labelledby="favourites-heading">

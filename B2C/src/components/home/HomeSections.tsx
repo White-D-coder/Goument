@@ -1,15 +1,13 @@
 /* eslint-disable @next/next/no-img-element -- Existing decorative SVG artwork. */
-'use client';
-
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { stagger, useAnimate, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem, Feather } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Gift, Heart, Leaf, Gem } from 'lucide-react';
 import ProductPhoto from '@/components/ProductPhoto';
 import AddGiftToCartButton from '@/components/AddGiftToCartButton';
-import HomeHeroSlideshow from '@/components/home/HomeHeroSlideshow';
 import { productImage, type Product } from '@/lib/types';
+import { productPriceLabel } from '@/lib/product-pricing';
+import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import type { Testimonial } from '@/lib/home-content';
+import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
 
 export function SectionHeading({ kicker, title, id, href, action }: { kicker: string; title: string; id: string; href?: string; action?: string }) {
   return <div className="tgg-section-heading"><div><p className="tgg-kicker">{kicker}</p><h2 id={id}>{title}</h2></div>
@@ -17,49 +15,11 @@ export function SectionHeading({ kicker, title, id, href, action }: { kicker: st
   </div>;
 }
 
-const heroPromises = [
-  { Icon: Leaf, label: 'Curated with care' },
-  { Icon: Gift, label: 'Beautifully presented' },
-  { Icon: Feather, label: 'A personal note' },
-  { Icon: Heart, label: 'For every occasion' },
-];
-
-export function HomeHero() {
-  const [scope, animate] = useAnimate<HTMLDivElement>();
-  const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reduceMotion || !window.matchMedia('(max-width: 640px)').matches) return;
-    // Match the footer reveal, replaying on every fresh hero mount/reload.
-    const animation = animate('[data-hero-word]', {
-      opacity: [0, 1], y: [24, 0], scale: [.98, 1], filter: ['blur(10px)', 'blur(0px)'],
-    }, { duration: .7, ease: [.22, 1, .36, 1], delay: stagger(.08) });
-    return () => animation.complete();
-  }, [animate, reduceMotion]);
-
-  return <section className="tgg-hero" aria-labelledby="hero-title">
-    <div className="tgg-hero-copy" ref={scope}>
-      <p className="tgg-kicker">Thoughtful gifts<br/>for every occasion</p>
-      <p className="tgg-hero-brand"><span className="tgg-hero-word" data-hero-word>The</span>{' '}<span className="tgg-hero-word" data-hero-word>Gourmet</span>{' '}<span className="tgg-hero-word" data-hero-word>Gifts</span></p>
-      <h1 id="hero-title">
-        <span className="tgg-hero-title-desktop">Make everyday<br className="tgg-desktop-break"/> moments special.</span>
-        <span className="tgg-hero-title-mobile"><span className="tgg-hero-word" data-hero-word>Good</span>{' '}<span className="tgg-hero-word" data-hero-word>gifts.</span><span className="tgg-hero-second-line"><span className="tgg-hero-word" data-hero-word>Great</span>{' '}<span className="tgg-hero-word" data-hero-word>moments.</span></span></span>
-      </h1>
-      <p className="tgg-hero-description">Curated hampers and thoughtful finds to celebrate the people and moments that matter.</p>
-      <Link className="tgg-button" href="/shop">Shop now <ArrowRight size={17} aria-hidden="true"/></Link>
-      <ul className="tgg-hero-promises" aria-label="Our approach to gifting">
-        {heroPromises.map(({ Icon, label }) => <li key={label}><span><Icon size={20} strokeWidth={1.4} aria-hidden="true"/></span><small>{label}</small></li>)}
-      </ul>
-    </div>
-    <HomeHeroSlideshow />
-  </section>;
-}
-
 const mobileCategories = [
-  { title: 'Envelopes', image: '/images/items/shagun_envelopes.webp', href: '/shop/envelopes' },
+  { title: 'Envelopes', image: productImage(PHOTOGRAPHED_ENVELOPES[0]), href: '/shop/envelopes' },
   { title: 'Hampers', image: '/images/brand/ivory_hamper.webp', href: '/shop/hampers' },
-  { title: 'Candles', image: '/images/items/laddoo_candles.webp', href: '/shop/candles' },
-  { title: 'Stationery', image: '/images/items/bookmarks.webp', href: '/shop/stationery' },
+  { title: 'Candles', image: '/images/scented_candle/cn3.png', href: '/shop/candles' },
+  { title: 'Stationery', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery' },
 ];
 
 export function HomeMobileCategories() {
@@ -77,6 +37,7 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
   const cardTitle = title || product.name;
   const cardImage = image || productImage(product);
   const cardAlt = product.images.find(item => item.public_id === cardImage)?.alt || cardTitle;
+  const price = productPriceLabel(product);
   return <article className="tgg-hamper-card">
     <Link className="tgg-hamper-photo" href={href} aria-label={`View ${cardTitle}`}>
       <ProductPhoto src={cardImage} alt={cardAlt} sizes="(max-width: 700px) 86vw, (max-width: 1100px) 45vw, 30vw" />
@@ -84,6 +45,7 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
     <div className="tgg-hamper-info">
       <h3><Link href={href}>{cardTitle}</Link></h3>
       <p><span className="tgg-hamper-description-desktop">{product.description.short}</span><span className="tgg-hamper-description-mobile">{mobileDescription || product.description.short}</span></p>
+      {price && <p className="tgg-hamper-price">{price}</p>}
       <div className="tgg-hamper-bottom">
         {product.giftItemId && <AddGiftToCartButton itemId={product.giftItemId} name={cardTitle} withQuantity compact />}
       </div>
@@ -91,8 +53,8 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
   </article>;
 }
 
-/** Home discovery cards route to their complete collection listings. */
-export function HomeCollectionCard({ title, description, image, href }: { title: string; description: string; image: string; href: string }) {
+/** Shared photo-first Home discovery cards link to a product or collection. */
+export function HomeCollectionCard({ title, description, image, href, price }: { title: string; description: string; image: string; href: string; price: string }) {
   return <article className="tgg-favourite-card tgg-collection-card">
     <Link className="tgg-favourite-photo" href={href} aria-label={`Explore ${title}`}>
       <ProductPhoto src={image} alt={title} sizes="(max-width: 600px) 44vw, (max-width: 1000px) 30vw, 24vw" />
@@ -100,6 +62,7 @@ export function HomeCollectionCard({ title, description, image, href }: { title:
     <div className="tgg-favourite-info">
       <h3><Link href={href}>{title}</Link></h3>
       <p className="tgg-collection-description">{description}</p>
+      <p className="tgg-collection-price">{price}</p>
       <Link className="tgg-collection-link" href={href} aria-label={`Shop ${title}`}><span className="tgg-collection-action-desktop">Shop now</span><span className="tgg-collection-action-mobile">Explore</span><ArrowRight size={15} aria-hidden="true" /></Link>
     </div>
   </article>;
@@ -108,7 +71,7 @@ export function HomeCollectionCard({ title, description, image, href }: { title:
 export function PackagingFeature() {
   return <section className="tgg-packaging" id="packaging" aria-labelledby="packaging-heading">
     <div className="tgg-packaging-visual">
-      <ProductPhoto src="/images/brand/cta_1_1.png" alt="An open gift hamper with curated treats nestled in satin" sizes="(max-width: 760px) 100vw, 52vw" />
+      <ProductPhoto src="/images/brand/Festive Gourmet Gift Hamper Still Life.png" alt="An open gift hamper with curated treats nestled in satin" sizes="(max-width: 760px) 100vw, 52vw" />
     </div>
     <div className="tgg-packaging-copy">
       <p className="tgg-kicker">Because every gift tells a story</p>

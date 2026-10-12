@@ -360,3 +360,27 @@
  #main .pdp .buy-panel .pdp-buy-now-help { display:block; margin:10px 0 0; color:#81756b; font-size:11px; line-height:1.5; }
  #main .pdp .buy-panel .cart-add-error { grid-column:1 / -1; margin:0; color:#8b2828; font-size:11px; line-height:1.5; }
 }
+
+/* Distinct India colour pages retain independent saved quantities. */
+.pdp-colours { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+.pdp-colours a { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 18px; border:1px solid var(--pdp-line); border-radius:999px; font-size:12px; color:var(--pdp-burgundy); }
+.pdp-colours a[aria-current] { border-color:var(--pdp-burgundy); background:#f1e8e6; font-weight:600; }
+
+/* Preserve the complete portrait photographs supplied for the envelope designs. */
+.pdp-envelope .detail-image { aspect-ratio:3 / 4; }
+.pdp-envelope .detail-image img { object-fit:contain; }
+
+/* Phone gallery: space below navigation, with 45% less frame height. */
+@media (max-width:640px) {
+ .pdp .pdp-hero { padding-top:18px; }
+ .pdp .detail-image { aspect-ratio:20 / 11; }
+ .pdp .pdp-landscape .detail-image { aspect-ratio:80 / 33; }
+ .pdp.pdp-envelope .detail-image { aspect-ratio:15 / 11; }
+ .pdp.pdp-ivory .detail-image { max-height:242px; }
+}
+
+/* Increase the rendered purchase-price role by 30%, above shared paragraph styles. */
+#main .pdp .buy-panel :is(.price, .pdp-quote) { font-size: 19.5px; }
+@media (max-width: 640px) {
+  #main .pdp .buy-panel .pdp-quote { font-size: 18.2px; }
+}

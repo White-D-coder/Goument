@@ -1,3 +1,21 @@
+## 2026-10-12 — Numeric preview cards and draft-only photo selections (R196–R197)
+
+CURRENT / IMPLEMENTED locally: current user authorizes sample display amounts on every card and removes the visible Sample/estimated suffix. Shared UI helper supplies the figures documented in UI_SYSTEM; live product amounts retain actual basePrice/currency. New display samples do not become cart calculation inputs, inventory, quote authority or order snapshots. Existing before-delivery cart calculation/18% extra GST/candle range/unpriced-item behavior retained; exact commercial pricing remains required. Nine photographed envelopes and two candles now support independent registered draft quantities using existing loose-item packing rules; no stock reservation or payment readiness implied. Orders remain fail-closed409, checkoutAvailable:false. Earlier enquiry-only UI requirements for these previews are superseded by current user card behavior. See API_CONTRACTS/TESTING.
+
+## 2026-10-12 — Delivery range is internal planning data (R193)
+
+CURRENT / IMPLEMENTED locally: latest user explicitly rejects showing the variable delivery range. SUPERSEDES R192's shopper delivery-inclusive total: display Total before delivery = item subtotal +18% extra item GST; show Delivery confirmed before payment. Keep₹100–300 bounds internal, do not add a guessed charge or shipping tax to the visible total. Unknown item/packaging prices still suppress complete item total. Exact candle prices/delivery/authoritative order quote remain pending; no model/payment activation change. Tests updated for before-delivery arithmetic; TESTING owns evidence.
+
+## 2026-10-12 — B2C cart estimate rules (R192)
+
+CURRENT / IMPLEMENTED locally: user explicitly chooses18% extra GST; estimated candle unit range₹200–500 and one delivery range₹100–300 per nonempty selection. Multiply each known unit bound by confirmed quantity, sum item bounds in paise, round18% aggregate GST bounds to nearest paise and add delivery bounds. Current Ivory₹2,499/India₹2,999 display prices are estimate inputs only. Unknown item/packaging amounts prevent a complete total; no missing price becomes free. Empty cart has₹0 total and no delivery charge. Shipping tax selection/allocation, exact SKU prices, box charges and serviceability remain UNKNOWN for authoritative checkout. Cart does not send computed money as authority.
+
+CURRENT / IMPLEMENTED safety repair: remove flat₹299-per-item gift order creation/zero-tax/zero-shipping/cart-clearing branch. Gift order returns409 without writes until a priced/reserved order bridge exists; address paymentAvailable:false. Existing ownership, revisions, snapshot history and real order/payment invariants retained. Evidence:63 client tests/15 gifting tests, TESTING.
+
+## 2026-10-12 — Separate India Hamper colour selections (R178)
+
+CURRENT / IMPLEMENTED: new India colour selections use separate gift item IDs, so re-add/count/update/Buy now operates only on the chosen colour. Both remain Gift Hampers and require price confirmation before checkout/address/order. Existing₹2,999 display amount is retained for each colour and is never an authoritative payable price. Legacy india_hamper is still accepted/resolved unchanged; its colour is UNKNOWN and is not silently reassigned. No historical customer/order/price snapshot rewrite or database schema change. Verification: TESTING.
+
 ## 2026-10-12 — Display price wording (R168)
 
 CURRENT / IMPLEMENTED: current explicit user request removes visible Sample wording, superseding R142’s suffix requirement. Ivory/India temporary display amounts and non-saleable preview/checkout rules remain unchanged; no price authority is inferred from the shorter label. Existing final-pricing/enquiry confirmation stays. Source: shared product-pricing helper and Shop notices; checks: TESTING.

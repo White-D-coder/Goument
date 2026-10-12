@@ -1,3 +1,41 @@
+## 2026-10-12 — Latest supplied Laddoo image (R201–R203)
+
+CURRENT / IMPLEMENTED locally: supplied cn3.png1448×1086 (2,266,634B) retained; optimized cn3-supplied.webp1448×1086 (139,272B),93.9% smaller. Sharp rotation/inside1600/no enlargement/quality82/effort6; output decoded. All Laddoo photo consumers use the distinct optimized URL, preserving identity and avoiding stale old-photo cache. Earlier cn3.webp was removed by the user and is not restored. Home background now uses one decorative canvas instead of duplicated header/content canvases; image hover zoom removed per user while card hover remains. No new timing benchmark or universal20ms claim; R189 limits remain.
+
+## 2026-10-12 — Bookmark photo derivatives (R195)
+
+CURRENT / IMPLEMENTED locally: preserve supplied brand PNG originals; Sharp normalized WebP quality82/effort6 with max1600px inside/no enlargement. Six Stories1024×1536 stays1024×1536,2,808,667→254,464B. Vibrant Collection1672×941 becomes1600×900,2,693,609→241,118B. Combined5,502,276→495,582B (91.0% smaller); both decode and browser main/gallery selection verified. Existing ProductPhoto responsive optimizer/lazy behavior retained; distinct filenames avoid old-image cache reuse. This is asset-byte evidence, no new latency/20ms SLA claim. TESTING owns checks.
+
+## 2026-10-12 — Supplied candle derivatives and local cart arithmetic (R191–R192)
+
+CURRENT / IMPLEMENTED / VERIFIED locally: five supplied candle originals total9,644,956B; normalized WebP web copies total353,138B (96.34% smaller). cn1/cn1.1/cn2/cn2.1 fit within1600px portrait bounds, cn3 is1600×1200. Quality82/effort6; originals retained. EXIF normalization plus cn2 upright correction verified visually; cn3 native HEIC decoding used because installed Sharp lacks HEVC decoder. Existing ProductPhoto optimizer/gallery lazy secondary loading reused. Desktop cart sizes hint220px/tablet144px replaces72px hint to match larger frames. Cart calculations are bounded local arithmetic on existing confirmed rows, with a reused currency formatter; no extra quote request/private cache. No new field-performance/LCP20ms claim; R189's unmet universal20ms limit remains.63 client tests/build and responsive/gallery browser checks pass; TESTING owns detailed evidence.
+
+## 2026-10-12 — Measured Home/cart optimization and requested20ms budget (R189)
+
+CURRENT / PARTIAL: user explicitly requests individual operations within20ms and authorizes optimization/compression. Persist this as the requested performance budget; it is not an achieved universal SLA. Target immediate local interaction feedback within20ms and measure complete rendering/network separately. Network latency, cold starts and physical-device paint cannot be guaranteed within20ms. Existing R166 hosted latency remains unresolved/unpublished.
+
+CURRENT / IMPLEMENTED: publish the just-confirmed gift response's item quantities to mounted badge/counters, removing redundant post-save count/draft reads. Keep the fresh pre-write draft, serialized cookie handshake, revision conflict guard and ambiguous-failure behavior. Generic login/logout/legacy/order events still fetch; generations invalidate older reads. No private snapshot cache or HTTP/ownership change. Home static sections render on the server; phone hero and footer preserve the existing700ms rise/blur/80ms stagger through bounded native browser animations, removing Framer Motion from this route's initial delivery. Extra hero images mount1200ms after a loaded first slide while visible, with immediate dot requests, reduced-motion suppression and failed-first recovery. Desktop image sizes now describe the actual full banner rather than54vw; this restores appropriate desktop resolution, not a claim of reduced desktop image bytes.
+
+Compression: retained original JPEG and previous WebP; new same576×1024 diwali-mandala-light.webp is54,680bytes versus96,562 (43.4% smaller), generated from the original JPEG using Sharp WebP quality45/effort6. Pattern size, opacity/mask and artwork retained in Home/header/legacy storefront CSS. Native browser animations replace the animation implementation, not the approved reveal appearance. Existing public24h/stale cache headers follow the new derivative; private API no-store remains unchanged.
+
+VERIFIED isolated production Chrome lab:390×844,DPR1, cold browser cache,4×CPU,1.6Mbps/100ms, optimized image server cache warmed, anonymous auth/cart browser fixtures. Two final before/after slow samples:
+
+| Metric | Before | After |
+| --- | --- | --- |
+| LCP | 3.096 /3.172s | 2.348 /2.268s |
+| loadEventEnd | 3.112 /3.141s | 2.528 /2.568s |
+| transferred through12s | 569,211 /569,212bytes | 505,357 /505,362bytes |
+| transferred JavaScript | 189,196bytes | 164,556bytes (~13% less) |
+| longest initial task | 80 /76ms | 106 /73ms |
+
+Normal local sample: LCP244→240ms, load226→231ms, no tasks≥50ms. Home transfer falls~11.2%; samples do not prove improved initial-task duration. Cart browser fixture first Add:4→2requests (GET+PUT only); Add/retry click-to-busy DOM feedback0.7–1.1ms after versus0.5–0.9ms before. This feedback metric excludes paint/server completion. Event Timing includes24ms interactions after (32ms before), so the universal20ms ceiling is NOT achieved. No field INP/physical-device/deployed guarantee.
+
+Separate real local read-only API sampling:5 requests/endpoint direct/proxied, anonymous and no cookie retained. Warm direct/proxy count/draft/me generally~0.3–2.5ms; first direct count24.2ms and first proxy count17.8ms. Signed-out me401 is expected. These samples exclude authenticated/remote/loaded-service behavior. Detailed artifacts and checks: TESTING.
+
+## 2026-10-12 — Supplied envelope designs and galleries (R180)
+
+CURRENT / IMPLEMENTED:12 supplied JPEG photographs preserved and converted to WebP quality82 at original1200×1600, combined3,703,890→2,895,904bytes (~22% smaller). ProductPhoto retains responsive optimizer, lazy card photos, eager PDP image and bounded fallback. Product galleries retain load-aware switching and full portrait contain fitting. For All Gifts/envelope photo queries, reuse the existing bounded multi-page fetch (limit100, max20 pages, batch3, shared2.5s deadline) before merging/paginating; Stationery keeps its existing three-source shared deadline. This bounds completeness work while retaining API/fallback cards; no measured load-time improvement or hosted field-performance claim. Local assets decode and browser loading/gallery checks pass; evidence: TESTING.
+
 ## 2026-10-12 — Bounded phone hero word reveal (R174)
 
 CURRENT / IMPLEMENTED: use the already installed/footer-used Framer Motion primitives for one finite seven-word hero entrance per mount/reload. Each word0.7s with0.08s stagger, no interval/persistent storage; desktop and reduced-motion skip. Cleanup completes controls, preserving readable final styles. Browser repeated reload/reduced-motion/layout evidence is in TESTING; no new load-time/bundle/field-performance claim. Existing image/hero lifecycle optimization retained.

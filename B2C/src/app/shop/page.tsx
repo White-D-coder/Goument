@@ -5,14 +5,15 @@ import ProductCard from '@/components/ProductCard';
 import ShopCategoryLink from '@/components/ShopCategoryLink';
 import ShopMobileFilters from '@/components/ShopMobileFilters';
 import { catalogue } from '@/lib/catalogue';
+import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
 import './shop.css';
 export const metadata = { title: 'The collection' };
 const edits = [
  { label: 'All gifts', query: '', image: '/images/brand/hero-curated-gifts.jpeg' },
  { label: 'Envelopes', query: 'envelope', image: '/images/items/shagun_envelopes.webp' },
  { label: 'Hampers', query: 'hamper', image: '/images/brand/ivory_hamper.webp' },
- { label: 'Scented Candles', query: 'candles', image: '/images/items/laddoo_candles.webp' },
- { label: 'Premium Stationery', query: 'stationery', image: '/images/items/bookmarks.webp' },
+ { label: 'Scented Candles', query: 'candles', image: '/images/scented_candle/cn3-supplied.webp' },
+ { label: 'Premium Stationery', query: 'stationery', image: BOOKMARK_PHOTOS[0].public_id },
 ] as const;
 export default async function Shop({searchParams}:{searchParams:Promise<{search?:string;sort?:string;page?:string}>}) {
  const params=await searchParams;

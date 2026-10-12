@@ -1,3 +1,23 @@
+## 2026-10-12 — Reload registered photo metadata (R197/R201)
+
+CURRENT / IMPLEMENTED locally: existing standalone auth5003 process/cwd and unchanged known loopback rs0 dev DB/localhost3000 config guarded before restart to load11 registered draft selections, then latest Laddoo image metadata. No env edits/values printed/schema installer/seed/customer mutation. Proxied catalogue/count/draft200 and signed-out me401/private,no-store retained. User Next3000/Mongo retained. Temporary browser uses fixtures for writes; no hosted deployment/autostart claim. See TESTING.
+
+## 2026-10-12 — Reload supplied bookmark metadata (R195)
+
+CURRENT / IMPLEMENTED locally: verified existing5003 process/cwd, guarded unchanged ignored configuration for known loopback rs0 dev database/currentlocalhost3000 origin, then reloaded standalone auth so cart/builder catalogue serves the new bookmark main image. Direct catalogue and proxied catalogue/count/draft200, signed-out me401; private,no-store retained. No env edits/values printed/schema install/seed/customer writes. Next3000/Mongo retained, temporary browser stopped. TESTING owns evidence; deployment/autostart health unchanged.
+
+## 2026-10-12 — Load candle metadata and gift-order guard locally (R191–R192)
+
+CURRENT / IMPLEMENTED locally: verified existing5003 process is B2C auth/server.js and guarded existing ignored configuration targets only the known loopback rs0 development database/currentlocalhost3000 origin. Restarted that process using unchanged config/ignored log so new Laddoo photo metadata and fail-closed gift-order route load. No schema install/seed/env edit/customer write. Direct catalogue200 exposes cn3.webp; proxied count/draft200 and signed-out me401 retain private,no-store. Existing Next3000/Mongo27017 retained. Isolated production preview3100/browser9337 used fixture-only checks and were stopped afterward; no env copied into preview. Deployment/autostart health UNKNOWN; see TESTING.
+
+## 2026-10-12 — Restore stopped local auth/cart services (R188)
+
+CURRENT / IMPLEMENTED locally: Next3000 was listening while Mongo27017/auth5003 were stopped, reproducing plain proxy500s and direct ECONNREFUSED. Confirmed existing ignored config targets only the known loopback rs0 development DB and current local storefront origin; no values changed or printed. Restarted installed Mongo8.0.13 using existing `B2C/backend/data/local-mongo`, loopback27017/rs0, `--fork --logpath B2C/backend/data/local-mongo.log --logappend`; verified ping and writable primary. Started existing `auth/server.js` as a detached process with ignored `B2C/backend/data/local-auth.log`, leaving Next untouched. Auth startup connects without schema installation. All three listeners remain running; direct/proxied gift count/draft200 and signed-out me401 verified. Existing sessions/data retained; no seed, schema installer or customer/cart write. Why services stopped is UNKNOWN. This restores current local availability, not automatic startup after logout/reboot or hosted health; see existing local startup instructions below.
+
+## 2026-10-12 — Separate India Hamper colour selections (R178)
+
+CURRENT / IMPLEMENTED locally: restarted the verified B2C standalone auth service on5003 using its existing ignored configuration so Node loads the two new colour entries from gifting/items.json. Existing loopback Mongo/session/customer data retained; no environment values copied/printed/edited and no schema installer/seed. Proxied catalogue HTTP200 exposes both new IDs. Frontend3000 retained; hosted deployment unchanged. Temporary browser verification uses fixture carts only.
+
 ## 2026-10-12 — Isolated B2C installs and local verification (R161)
 
 CURRENT / IMPLEMENTED: remove tracked B2C/node_modules symlink and use independent ignored installs in B2C and B2C/backend; package locks support npm ci without upgrading B2B modules. Next16.4/React19.2.4. Existing local storefront3000 and standalone auth5003 restarted with updated code; existing Mongo loopback service retained. No .env content copied/printed, credential changes or account/session revocation. Only new OAuthFlow schema installed using a guarded loopback dev/test connection. Production build/browser checks used private temporary artifacts/server/profile; checks complete and temporary services closed. Production environment/proxy/schema configuration remains UNKNOWN. See DEPLOYMENT for explicit installer before startup.

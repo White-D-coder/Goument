@@ -1,3 +1,55 @@
+R205 (2026-10-12) CURRENT / IMPLEMENTED locally: product-page purchase price font30% larger than previous at each breakpoint; existing font/weight and card/cart roles retained. Source: product-detail.css; UI_SYSTEM/TESTING.
+
+R204 (2026-10-12) CURRENT / IMPLEMENTED locally: restore horizontal line only beneath FAQ Q1–Q5, superseding R200 removal for those rows only. Source: storefront-ui.css; UI_SYSTEM/TESTING.
+
+R203 (2026-10-12) CURRENT / IMPLEMENTED locally: remove image hover zoom across B2C; preserve existing card hover and keep standalone image hover static. Sources: existing global/catalogue/Home styles; UI_SYSTEM/TESTING.
+
+R202 (2026-10-12) CURRENT / IMPLEMENTED locally: smooth Home navbar/hero wallpaper by sharing one continuous ivory/pattern canvas; remove boundary border/shadow and independent pattern restart. Sources: home.css/navigation.css; UI_SYSTEM/TESTING.
+
+R201 (2026-10-12) CURRENT / IMPLEMENTED locally: supplied scented_candle/cn3.png is Artisanal Laddoo Candles main/card/gallery image; compressed distinct WebP used throughout, original retained. Existing product/gift identity retained; PERFORMANCE/TESTING.
+
+R200 (2026-10-12) CURRENT / IMPLEMENTED locally: remove decorative horizontal margin/section/row dividers throughout B2C public storefront, preserving functional control/card borders. Latest R204 exception adds FAQ Q1–Q5 bottom lines only. Source: storefront-ui.css; UI_SYSTEM/TESTING.
+
+R199 (2026-10-12) CURRENT / IMPLEMENTED locally: phone product image gets18px top space and45% less gallery height; preserve larger layouts and filled framing. Source: product-detail.css; UI_SYSTEM/TESTING.
+
+R198 (2026-10-12) CURRENT / IMPLEMENTED locally: navbar bottom margin0, Home hero directly follows masthead. Source: navigation.css; UI_SYSTEM/TESTING.
+
+R196–R197 (2026-10-12) CURRENT / IMPLEMENTED locally: every preview card shows numeric sample display price, followed by explicit removal of Sample suffix and enquiry-only photographed PDP controls. Register nine envelopes/two candles as draft selections and reuse Add/counter/cart behavior; preserve preview commercial fields and unavailable checkout/order guard. Sources: pricing/card/PDP/Home/catalogue/gift metadata; API_CONTRACTS/BUSINESS_LOGIC/UI_SYSTEM/TESTING.
+
+R195 (2026-10-12) CURRENT / IMPLEMENTED locally: user supplies two brand PNGs for Eternal Paper Co. bookmarks. Use Six Stories in Color and Culture as main/card photo and Vibrant Indian-Inspired Bookmark Collection as second gallery view; update existing bookmark/Home/stationery/gift metadata consumers, compress web copies and retain originals. Existing product identity/commercial fields preserved. Sources: bookmark-photos.ts/catalogue and photo consumers; UI_SYSTEM/PERFORMANCE/TESTING.
+
+R194 (2026-10-12) CURRENT / IMPLEMENTED locally: fix reported footer brand stacking/spacing. Restore full-width heading/navigation/bottom rows on Home and standard footer, stack tablet tagline and retain centered phone layout. Existing design/type/links/reveal retained. Source: home-footer.css;16 responsive checks and visual evidence in UI_SYSTEM/TESTING. Earlier hero3.png404 no longer reproduced with supplied asset now in B2C/public; third slide verified.
+
+R193 (2026-10-12) CURRENT / IMPLEMENTED locally: make cart total larger; hide variable delivery range/copy (user provided it as planning input); match reference's large image/title, aligned pricing and spacing. Show Delivery confirmed before payment; prominently display item subtotal+18% GST as Total before delivery. Desktop photos260×270px, titles32px, right price column, quantity/Remove actions; tablet adapts, phone remains compact. This supersedes R192 delivery-inclusive display and R190 cart-title size above640px; other card titles unchanged. Sources: GiftCart/gift-cart.css/gift-cart-pricing.ts; UI_SYSTEM/DECISIONS/TESTING.
+
+R192 (2026-10-12) CURRENT / IMPLEMENTED locally / checkout CURRENT / PARTIAL: user requests a larger desktop cart like supplied reference and visible/calculated price, GST and delivery. Preserve theme/shared title type, enlarge desktop photos/rows, show unit/quantity amounts and summary at all widths. Explicit follow-up policy:18% GST extra on item prices; delivery₹100–300; candles₹200–500. Calculate quantities/ranges in paise and label estimated totals; unpriced items/packaging stay pending. Exact candle/delivery prices, delivery tax and authoritative quote/reservation remain required. Block placeholder-priced gift orders, retain draft on409 and respect unavailable checkout. Sources: GiftCart/gift-cart.css/gift-cart-pricing.ts/backend gifting routes; traceability: UI_SYSTEM/API_CONTRACTS/ORDER_SYSTEM/PAYMENT_SYSTEM/DECISIONS/TESTING.
+
+R191 (2026-10-12) CURRENT / IMPLEMENTED locally: supplied scented_candle images become three candle cards and corresponding sub-image galleries; cn3 is Laddoo Candles. Add cn1/cn2 previews, retain existing Laddoo ID and commercial fields; update Home/catalogue imagery, compress web copies and preserve originals. Descriptive names/unknown exact price/stock remain truthful. Sources: photographed-candles.ts/catalogue.ts and photo consumers; traceability: UI_SYSTEM/PERFORMANCE/TESTING.
+
+R190 (2026-10-12) CURRENT / IMPLEMENTED locally: slightly round cart photo corners, enlarge cart item titles, fit product photos to their frames, and use the Home Ivory Hamper card's font/size for every product card title. Latest Ivory matching requirement governs exact responsive sizes: Cormorant Garamond500,19px phone/17px tablet/clamp(19px,1.7vw,28px) desktop. Apply shared role across Home/catalogue/cart/builder/related products, keep long names wrapping, use12px cart photo corners and centered cover without image padding/stretching. Preserve existing components/commerce and decorative/hero framing. Sources: storefront-cards.css, layout.tsx, gift-cart.css; traceability: UI_SYSTEM / DECISIONS / TESTING.
+
+R189 (2026-10-12) CURRENT / PARTIAL: user requests individual operations≤20ms and authorizes optimization/compression for better UX. Preserve as requested performance budget, not an achieved universal SLA. Implemented local increment: confirmed cart event reuse, native existing word reveals, static Home server sections, deferred secondary hero photos and43.4% smaller decorative pattern. Two slow-phone LCP samples~3.1→2.3s; busy DOM feedback0.7–1.1ms, but24ms interactions and73–106ms initial tasks remain. Physical-device/hosted/network ceiling UNKNOWN/unmet. Sources: HomeHero/HomeSections/HomeHeroSlideshow, useWordReveal, gift-cart-events, cart/Header consumers, pattern CSS/config; traceability: PERFORMANCE / TESTING / API_CONTRACTS / UI_SYSTEM.
+
+R187 (2026-10-12) CURRENT / IMPLEMENTED locally: provide a purchase option directly on phone Home hamper cards. Reveal existing Add to Cart below each price; after confirmed add show the existing quantity counter and restore Add at zero. Preserve independent Ivory/Burgundy/Lavender IDs and checkout guards. Source: b2c/home.css;21 responsive card checks and browser fixture interactions pass, evidence: UI_SYSTEM / TESTING.
+
+R186 (2026-10-12) CURRENT / IMPLEMENTED locally: replace the old Luxury Shagun Envelopes card on Home too, extending R182's removal scope. Home now shows the existing Lotus photo/name/description with a working Lotus product link. Preserve other cards and established layout. Sources: b2c/page.tsx/HomeSections.tsx; typecheck/lint and five responsive Home checks plus navigation pass, evidence: UI_SYSTEM / TESTING.
+
+R185 (2026-10-12) CURRENT / IMPLEMENTED locally: on phones, move the Frequently asked questions heading slightly right toward the gift, keep the title/artwork composition centered and enlarge the gift20%. Reuse existing artwork, preserve title typography and wider layouts. Source: b2c/home.css; seven responsive browser checks pass, evidence: UI_SYSTEM / TESTING.
+
+R184 (2026-10-12) CURRENT / IMPLEMENTED locally: center all phone footer content, including brand/tagline, navigation, contact/company details and copyright, on Home and other storefront pages through640px. Retain existing columns/design and wider layouts. Source: home-footer.css;14 browser viewport checks pass, evidence: UI_SYSTEM / TESTING.
+
+R183 (2026-10-12) CURRENT / IMPLEMENTED locally: fix Home heading responsiveness on medium/large phones. Center the existing Hampers/Favourites heading groups, keep text within available width, scale titles smoothly and prevent View all/title collisions through tablet widths. Preserve established typography/design, phone carousel and desktop size. Source: b2c/home.css;26 browser heading/viewport checks pass, evidence: UI_SYSTEM / TESTING.
+
+R182 (2026-10-12) CURRENT / IMPLEMENTED locally: remove the old Luxury Shagun Envelopes product card from storefront listings/related gifts, retain the nine new photo designs. Preserve existing saved selections and direct legacy lookup. Sources: catalogue.ts/PDP; evidence: TESTING.
+
+R181 (2026-10-12) CURRENT / IMPLEMENTED locally: shorten Ivory Hamper’s card description to A thoughtful gift in ivory. to avoid the two-line sentence. Source: curated-hampers.ts; copy-only diff reviewed, layout unchanged.
+
+R180 (2026-10-12) CURRENT / IMPLEMENTED locally: add cards for supplied B2C/envelops images and attach matching sub-images to each product gallery. Nine designs/12 photos, existing responsive theme, Envelopes/Stationery/All Gifts listings and working product details. Names are descriptive pending official catalogue data; prices/stock/pack sizes UNKNOWN, existing enquiry flow used. Sources/checks: UI_SYSTEM / PERFORMANCE / TESTING.
+
+R179 (2026-10-12) CURRENT / IMPLEMENTED locally: show prices on Hampers for every occasion cards while retaining theme/layout; larger bold centered price type. Reuse existing temporary display labels for Ivory/Burgundy/Lavender, preserve checkout rules. Sources: HomeSections.tsx/home.css; verification: TESTING.
+
+R178 (2026-10-12) CURRENT / IMPLEMENTED locally: India Hamper Burgundy and Lavender are separate product/cart selections with matching photos and independent quantities across phone/desktop. Preserve existing unspecified legacy cart rows and non-saleable hamper guards. Supersedes earlier shared India identity for new selections. Sources and checks: UI_SYSTEM / API_CONTRACTS / TESTING.
+
 R177 (2026-10-12) CURRENT / IMPLEMENTED locally: replace phone Personalise panel with inline Add to Cart / Buy now purchase UI; Add opens the saved quantity counter, no fixed bottom bar. Extend existing Ivory pattern to mapped gift product pages, preserve desktop note and existing cart review/price guards. Sources: BuyPanel.tsx/product-detail.css/storefront-ui.css; verification: TESTING.
 
 R175 (2026-10-12) CURRENT / IMPLEMENTED locally: shared Shop/collection product cards give images more space and titles primary text emphasis. Use4:5 media, stronger centered titles and compact one-line phone descriptions; preserve purchase behavior and image fitting. Sources: product-cards.css/shop.css; responsive browser evidence: TESTING.
@@ -397,7 +449,7 @@ R45 (2026-10-01) CURRENT / PARTIAL overall: the user's owner/admin operations di
 Sources: `B2C/src/app/admin`, `src/components/admin`, `src/lib/admin`, `backend/admin` and existing auth/database services. Canonical UI details: UI_SYSTEM; operational/security rules: ADMIN_FLOWS, AUTH_SYSTEM, SECURITY and API_CONTRACTS. This requirement authorizes the scoped operations implementation, not invented business policies, unrelated storefront redesigns, automatic owner grants, dependency migrations or production deployment.
 # 2026-10-09 — Correct Home hamper card labels
 
-CURRENT / IMPLEMENTED: the ivory photo card uses the “Ivory Hamper” identity; both burgundy and lavender India photos use “India Hamper.” Keep each photo and its existing product destination aligned with that identity.
+SUPERSEDED by R178 for new India colour selections; historical implementation: the ivory photo card uses the “Ivory Hamper” identity; both burgundy and lavender India photos use “India Hamper.” Keep each photo and its existing product destination aligned with that identity.
 
 ## 2026-10-09 — Home collection discovery
 

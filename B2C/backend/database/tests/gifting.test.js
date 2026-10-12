@@ -25,9 +25,9 @@ test('item-first packing is calculated on the server without customer-selected b
  const loaded=await agent.get(base+'/draft');expect(loaded.body.items[0].quantity).toBe(6);expect(loaded.body.boxes).toEqual([]);
  const check=await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(200);expect(check.body.checkoutAvailable).toBe(false);expect(await db.models.Order.countDocuments()).toBe(0);
 });
-test('preview hampers save to the gift bag but cannot enter checkout with an assumed price',async()=>{
+test.each(['india_hamper','india_hamper_burgundy','india_hamper_lavender'])('preview hamper %s saves but cannot enter checkout with an assumed price',async(id)=>{
  const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
- const hamper=items.find(item=>item.id==='india_hamper');expect(hamper?.category).toBe('Gift Hampers');
+ const hamper=items.find(item=>item.id===id);expect(hamper?.category).toBe('Gift Hampers');
  const draft=(await save(agent,{revision:0,boxes:[],items:[{id:hamper.id,quantity:1}]}).expect(200)).body;
  expect(draft.packing).toBe('READY');
  await agent.post(base+'/checkout-check').set('Origin',origin).send({}).expect(409)
@@ -39,6 +39,16 @@ test('preview hampers save to the gift bag but cannot enter checkout with an ass
  expect(await db.models.CustomerAddress.countDocuments()).toBe(0);
  expect(await db.models.Order.countDocuments()).toBe(0);
 });
+test('candle estimates cannot become placeholder-priced orders or clear the saved draft',async()=>{
+ const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
+ const rows=[{id:'laddoo_candles',quantity:2}];
+ const draft=(await save(agent,{revision:0,boxes:[],items:rows}).expect(200)).body;
+ await agent.post(base+'/order').set('Origin',origin).send({paymentMethod:'UPI',subtotalMinor:40000,shippingMinor:10000,taxMinor:7200}).expect(409)
+  .expect(({body})=>expect(body.message).toMatch(/Final item prices, GST and delivery must be confirmed/));
+ expect(await db.models.Order.countDocuments()).toBe(0);
+ const loaded=(await agent.get(base+'/draft').expect(200)).body;
+ expect(loaded.items).toEqual(rows);expect(loaded.revision).toBe(draft.revision);
+});
 test('unknown IDs, duplicate entries, negative/fractional/oversized quantities and client capacities reject',async()=>{
  const agent=request.agent(app);await agent.get(base+'/draft');
  for(const quantity of [0,-1,1.5,100,'2'])await save(agent,selection(quantity)).expect(400);
@@ -47,6 +57,22 @@ test('unknown IDs, duplicate entries, negative/fractional/oversized quantities a
  await save(agent,{...selection(),items:[{id:items[0].id,quantity:1,capacity:10000}]}).expect(400);
  await save(agent,{...selection(),items:[...selection().items,...selection().items]}).expect(400);
  expect(await db.models.GiftDraft.countDocuments()).toBe(0);
+});
+test('photographed envelopes and new candles save as independent previews without enabling orders',async()=>{
+ const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
+ const previews=items.filter(item=>item.id.startsWith('preview-envelope-')||item.id.startsWith('preview-candle-'));
+ expect(previews).toHaveLength(11);expect(new Set(previews.map(item=>item.id)).size).toBe(11);
+ const rows=previews.map((item,index)=>({id:item.id,quantity:index%2+1}));
+ const saved=(await save(agent,{revision:0,boxes:[],items:rows}).expect(200)).body;
+ expect(saved.items).toEqual(rows);expect(saved.checkoutAvailable).toBe(false);
+ const changed=rows.slice(1).map((row,index)=>index===0?{...row,quantity:3}:row);
+ const updated=(await save(agent,{revision:saved.revision,boxes:[],items:changed}).expect(200)).body;
+ expect((await agent.get(base+'/draft').expect(200)).body.items).toEqual(changed);
+ expect((await request(app).get(base+'/draft').expect(200)).body.items).toEqual([]);
+ await agent.post(base+'/order').set('Origin',origin).send({subtotalMinor:9900,paymentMethod:'UPI'}).expect(409);
+ expect(await db.models.Order.countDocuments()).toBe(0);
+ const retained=(await agent.get(base+'/draft').expect(200)).body;
+ expect(retained.items).toEqual(changed);expect(retained.revision).toBe(updated.revision);
 });
 test('cross browser ownership, spoofed owner/header and cross origin requests cannot access or change another draft',async()=>{
  const a=request.agent(app),b=request.agent(app);await a.get(base+'/draft');await save(a,selection()).expect(200);
@@ -81,7 +107,9 @@ test('checkout requires sign-in, keeps guest selection after login and isolates 
  const address={recipientName:'Test Recipient',phone:'+91 9876543210',addressLine1:'Test Street',addressLine2:'',landmark:'',city:'Mumbai',state:'Maharashtra',postalCode:'400001',country:'IN'};
  for(const invalid of [{phone:'abc'},{postalCode:'123'},{recipientName:''},{customerId:'spoof'},{country:'India'}])await a.post(base+'/address').set('Origin',origin).send({...address,...invalid}).expect(400);
  await a.post(base+'/address').set('Origin','https://evil.example').send(address).expect(403);
- const saved=(await a.post(base+'/address').set('Origin',origin).send(address).expect(200)).body.address;
+ const response=await a.post(base+'/address').set('Origin',origin).send(address).expect(200);
+ expect(response.body.paymentAvailable).toBe(false);
+ const saved=response.body.address;
  expect(saved.phone).toBe('+919876543210');
  await a.post(base+'/address').set('Origin',origin).send({...saved,city:'Pune'}).expect(200);
  expect(await db.models.CustomerAddress.countDocuments()).toBe(1);
@@ -222,4 +250,18 @@ test('database failure returns a cart-specific 503 without exposing connection d
  } finally {
   read.mockRestore();
  }
+});
+
+test('India colour rows persist independently and retain unspecified legacy draft rows',async()=>{
+ const agent=request.agent(app);await agent.get(base+'/draft');
+ const rows=[{id:'india_hamper',quantity:4},{id:'india_hamper_burgundy',quantity:2},{id:'india_hamper_lavender',quantity:1}];
+ const saved=(await save(agent,{revision:0,boxes:[],items:rows}).expect(200)).body;
+ expect(saved.items).toEqual(rows);expect(saved.fulfillment.hamperBoxes).toBe(7);
+ const changed=rows.map(row=>row.id==='india_hamper_burgundy'?{...row,quantity:3}:row);
+ await save(agent,{revision:saved.revision,boxes:[],items:changed}).expect(200);
+ expect((await agent.get(base+'/draft').expect(200)).body.items).toEqual(changed);
+ expect((await agent.get(base+'/count').expect(200)).body.count).toBe(8);
+ const publicItems=(await agent.get(base+'/catalogue').expect(200)).body.items;
+ for(const colour of ['burgundy','lavender'])expect(publicItems.find(item=>item.id===`india_hamper_${colour}`)).toMatchObject({name:`India Hamper · ${colour[0].toUpperCase()+colour.slice(1)}`,image:`/images/brand/${colour}_india_hamper.webp`,category:'Gift Hampers'});
+ expect((await request.agent(app).get(base+'/draft').expect(200)).body.items).toEqual([]);
 });

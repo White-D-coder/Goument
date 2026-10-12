@@ -1,3 +1,15 @@
+## 2026-10-12 — Photographed selections do not create priced orders (R197)
+
+CURRENT / IMPLEMENTED locally:11 new registered photographed draft selections persist independently under existing revision/ownership rules. Their numeric UI sample prices are not order inputs. Disposable Mongo test verifies order409 creates no order and preserves saved draft; existing historical identities/snapshots unchanged. No order schema/payment/stock change; authoritative quote/reservation activation remains FUTURE / REQUIRED. See API_CONTRACTS/TESTING.
+
+## 2026-10-12 — Before-delivery cart total (R193)
+
+CURRENT / IMPLEMENTED locally: latest user clarification moves delivery range out of shopper UI. Visible Total before delivery includes known items+18% extra item GST and excludes unknown delivery; final charge is confirmed before payment. This supersedes R192 delivery-inclusive estimate display only. Candle/unknown-price semantics and fail-closed order bridge remain unchanged; no historical order/schema writes. See UI_SYSTEM/PAYMENT_SYSTEM/TESTING.
+
+## 2026-10-12 — Gift draft amounts remain estimates; placeholder order writes removed (R192)
+
+CURRENT / IMPLEMENTED locally: cart presents calculated item subtotal, extra18% item GST, delivery range and estimated total from confirmed quantities. Candles₹200–500 and delivery₹100–300 are current user ranges; missing item/packaging prices suppress a complete total. No draft schema/money snapshots or stock ledger changed. The former gifting/order flat₹299 pricing with zero GST/shipping and unreserved order creation was unsafe, despite earlier checkout-guard documentation. That path is removed: signed-out requests still require identity; empty/enquiry-hamper drafts retain existing409 rules; other gift drafts now409 until final prices/GST/delivery are confirmed. No order saved or draft cleared. Address capture no longer advertises payment readiness. Existing historical orders and separate immutable-order services remain unchanged. Quote/reservation/idempotent order bridge is FUTURE / REQUIRED, exact commercial terms partly UNKNOWN.15 gifting tests pass, including attempted client-money injection/no created order/retained quantity+revision. See PAYMENT_SYSTEM/API_CONTRACTS/TESTING.
+
 # Order System
 
 Last reviewed: 2026-09-25. Evidence: local source inspection; runtime/deployment not verified.

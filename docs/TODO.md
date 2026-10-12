@@ -1,3 +1,14 @@
+## 2026-10-12 — R196–R205 follow-through
+
+- [x] Numeric preview-card display prices, removal of Sample suffix, photographed-envelope/candle draft actions, phone gallery spacing/height, divider/FAQ exception, continuous Home wallpaper, static image hover and larger PDP prices implemented locally; UI_SYSTEM/TESTING own scope/evidence.
+- Existing authoritative-price/reservation/delivery/payment activation priorities below remain open. Registered draft IDs are not saleable stock mappings, and UI sample figures do not resolve commercial-price policy. No priority reordering.
+
+## 2026-10-12 — R190–R192 follow-through
+
+- [x] Shared Ivory title role, filled product-photo frames, mild cart corners, larger desktop cart, supplied candle cards/sub-images and calculated phone/desktop cart estimates implemented and verified; see UI_SYSTEM/TESTING.
+- [x] Unsafe flat-price gift-order path removed;409 preserves drafts and address capture no longer advertises payment readiness. Existing authoritative-quote/reservation activation priority below remains open.
+- [ ] Before final cart checkout: exact per-candle/per-pack prices and new candle saleable mappings/stock, confirmed hamper sale prices, delivery-price selection/serviceability and shipping-tax treatment, box/packaging charges and authoritative quote/reservation bridge. User establishes18% GST extra for item-price estimates/candles₹200–500; latest R193 keeps delivery₹100–300 internal, with shopper total before delivery and fee confirmed before payment; do not continue calling all estimate policy unknown or treat ranges as final sale prices. New candle names are descriptive/visible-label based pending official catalogue data. Direct legacy checkout form still permits address preparation; order creation safely rejects until the authoritative bridge exists. Existing P0 priorities retained.
+
 # Prioritized TODO
 
 Last reviewed: 2026-10-12 for B2C R161 fixes; other-system priorities retain their prior source evidence. Production deployment remains unverified.
@@ -30,19 +41,25 @@ Priorities below are initial engineering triage from source findings, not an app
 
 ## P2
 
+- [ ] B2C requested20ms per-operation budget (R189,2026-10-12) — CURRENT / PARTIAL: local busy DOM feedback0.7–1.1ms, but24ms Event Timing samples and73–106ms initial long tasks remain. Cart request/delivery optimizations verified in PERFORMANCE/TESTING; verify real-device interaction/scroll/startup and hosted APIs before claiming the ceiling. No universal network SLA established; existing hosted-latency/infrastructure follow-up remains open.
+
 - [x] B2C reliable image loading (R162,2026-10-12): per-source bounded recovery, load-aware hero/gallery, optimized thumbnails;24 assets decode, slow-phone/responsive and injected-failure checks pass. Deployed/physical-device image delivery remains unverified; see TESTING.
 
 - [x] B2C R160 measured delivery — R161 compressed assets/responsive images/unused font removal/streaming layout and offscreen hero fixes verified. Slow-phone Home25.55→4.07s,4.89→0.71MB; physical-device/deployed field validation remains future. PERFORMANCE owns lab conditions and historical evidence.
 - [x] B2C R160 test reliability — R161 fixtures/mocks adapted to current item-first/empty-box/Header contracts;103/103 database and41/41 client tests plus full lint pass. Ownership/cart/payment guards retained; historical failures in TESTING.
 
+- [x] Wider B2C footer layout (R194,2026-10-12): user reports broken stacked brand. Both inner wrappers now override legacy flex at every width; tablet tagline stacks, phone stays centered.16 Home/Shop responsive checks and visual inspection pass; UI_SYSTEM/TESTING own evidence. Existing wallpaper/type/navigation/reveal retained.
+
 - [ ] Home desktop slideshow dots (observed2026-10-11): at1440px the existing copy panel overlaps the centered dots, so pointer hit tests fail. Phone layering is corrected within R120; review desktop stacking separately without redesigning its hero.
 
-- [ ] Product detail commercial completion (2026-10-07): confirm Ivory/India prices, saleable product/variant mappings, final contents/pack quantities, dimensions, tax/shipping/lead-time/return terms and whether notes/branding are included or charged. Current PDP uses temporary Sample display prices (R142), final-price enquiries and photographed contents; these display constants do not establish authoritative sale prices. Hamper Add to Cart saves an enquiry-only draft selection; checkout/address/order routes reject it until pricing is confirmed. Gift-note requests compose email; no message field exists in GiftDraft and no note-to-order workflow is implemented. Confirmed commercial data and verified checkout must precede sale activation.
+- [ ] Supplied envelope catalogue (R180,2026-10-12): confirm official design names, prices, saleable mappings, stock and pack quantities for ep1–ep9 before enabling purchasing. Current nine photo previews use descriptive names and enquiry links; no invented commercial data.
+
+- [ ] Product detail commercial completion (2026-10-07): confirm Ivory/India Burgundy/India Lavender prices, saleable product/variant mappings, final contents/pack quantities, dimensions, tax/shipping/lead-time/return terms and whether notes/branding are included or charged. Current PDP uses temporary Sample display prices (R142), final-price enquiries and photographed contents; these display constants do not establish authoritative sale prices. Hamper Add to Cart saves an enquiry-only draft selection; checkout/address/order routes reject it until pricing is confirmed. Gift-note requests compose email; no message field exists in GiftDraft and no note-to-order workflow is implemented. Confirmed commercial data and verified checkout must precede sale activation.
 - [ ] Catalogue photography mismatch observed during PDP work (2026-10-07): `diary-bottle-pen-set` source describes a diary/bottle/pen trio, but its existing `sustainable_diary_bottle_pen.webp` photograph shows a desk organiser. Confirm the intended product and obtain matching photography; this UI task does not rewrite its existing identity/price/contents or pretend that photograph depicts individual included items.
 
 - [ ] No-JavaScript storefront rendering (observed2026-10-07): disabling page scripts during a product navigation leaves the inherited Next loading shell visible while product markup is streamed into a hidden boundary. Full no-JS rendering is not verified; investigate inherited loading/streaming behavior within an explicit progressive-enhancement task. Current normal/reduced-motion JavaScript flows pass.
 
-- [ ] Home tablet heading/action overlap (observed2026-10-12 at768px): the inherited `clamp(64px, 3.5vw, 46px)` keeps section headings at64px and the absolutely positioned View all gifts link overlaps the favourites title. R156 changes font family/button appearance and preserves title scales; review heading sizing/action layout separately.
+- [x] Home tablet heading/action overlap (R183,2026-10-12): corrected the inverted title clamp and stacked/centered heading actions through900px, also fixing medium/large phone hamper alignment.26 browser heading/viewport checks at320–1440px pass; see TESTING. No deployment.
 
 - [ ] B2C typography cleanup (audit2026-10-05): resolve footer h2 Jakarta/Cormorant !important conflict; agree shared heading/body/action scales, casing and tracking; assess9–11px microcopy; remove unused Cinzel/script/Momcake declarations only within approved font scope while preserving admin Pagio/brand needs. Source/runtime mapping in UI_SYSTEM; this audit did not authorize a font redesign.
 

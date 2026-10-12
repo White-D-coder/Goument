@@ -1,3 +1,5 @@
+import { BOOKMARK_PHOTOS, BOOKMARK_SHORT_DESCRIPTION, BOOKMARK_DESCRIPTION } from './bookmark-photos';
+
 export interface HamperInsideItem {
   item: string;
   weight?: string;
@@ -35,7 +37,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
     id: 'all',
     label: 'All Gifts',
     subtitle: 'Explore our complete curated gifting collection.',
-    image: '/images/items/laddoo_candles.webp',
+    image: '/images/scented_candle/cn3-supplied.webp',
     borderRadius: '42% 58% 70% 30% / 45% 45% 55% 55%',
     pastelActive: 'bg-[#B0BCA4]',
     pastelHover: 'group-hover:bg-[#EAEFE6]',
@@ -44,7 +46,7 @@ export const CATALOGUE_CATEGORIES: CatalogueCategory[] = [
     id: 'candles',
     label: 'Laddoo Candles',
     subtitle: 'Hand-sculpted festive motichoor laddoo wax candles.',
-    image: '/images/items/laddoo_candles.webp',
+    image: '/images/scented_candle/cn3-supplied.webp',
     borderRadius: '50% 50% 45% 55% / 55% 45% 55% 45%',
     pastelActive: 'bg-[#E5A87B]',
     pastelHover: 'group-hover:bg-[#FBECE2]',
@@ -91,35 +93,35 @@ export const HAMPERS_CATALOG: HamperData[] = [
     categoryLabel: "Laddoo Candles",
     inside_items: [
       {
-        item: "Motichoor Laddoo Candles (Set of 9)",
-        description: "Meticulously sculpted festive candles with realistic boondi texture, pistachio bits, and silver foil accents."
+        item: "Laddoo Candles",
+        description: "Orange laddoo-shaped candles with a textured finish."
       }
     ],
-    packaging_style: "Rigid Ivory & Gold Silk-Lined Gift Box with Tassel",
-    description: "Capturing the warmth and delight of Indian festivities, these whimsical yet regal candles are sculpted to look like freshly made golden motichoor laddoos, complete with silver vark accents and delicate wicks. Presented in an ivory and gold silk-lined gift box.",
+    packaging_style: "Individual White Presentation Boxes",
+    description: "Laddoo-shaped festive candles, photographed in individual white presentation boxes. Confirm the final quantity and price with our team.",
     price: 799,
-    image: "/images/items/laddoo_candles.webp",
-    highlights: ["Pure Soy Wax Blend", "Realistic Motichoor Texture", "Festive Gift Box Packaging", "Subtle Festive Fragrance"]
+    image: "/images/scented_candle/cn3-supplied.webp",
+    highlights: ["Laddoo-Inspired Shape", "Textured Finish", "White Presentation Boxes"]
   },
   {
     _id: "bookmarks",
     slug: "bookmarks",
     name: "Handcrafted Artisanal Bookmarks",
     brand: "Eternal Paper Co.",
-    subCopy: "Intricately illustrated keepsake bookmarks with silk tassels and gold foil details.",
+    subCopy: BOOKMARK_SHORT_DESCRIPTION,
     category: "bookmarks",
     categoryLabel: "Premium Stationery",
     inside_items: [
       {
         item: "Artisanal Keepsake Bookmarks",
-        description: "Illustrated foil-stamped bookmarks with braided silk tassels."
+        description: BOOKMARK_SHORT_DESCRIPTION
       }
     ],
     packaging_style: "Protective Keepsake Folder",
-    description: "A thoughtful companion for avid readers and thinkers. Handcrafted on heavy archival paper with heritage motifs, gilded edges, and braided silk tassels.",
+    description: BOOKMARK_DESCRIPTION,
     price: 349,
-    image: "/images/items/bookmarks.webp",
-    highlights: ["Archival Textured Board", "Handmade Silk Tassel", "Gold Gilded Accents", "Collector's Gift Edition"]
+    image: BOOKMARK_PHOTOS[0].public_id,
+    highlights: ["Rounded Bookmark Shape", "Indian Landscapes", "Heritage-Inspired Patterns", "Floral Artwork"]
   },
   {
     _id: "diary_bottle_pen_set",

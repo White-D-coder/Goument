@@ -3,7 +3,9 @@ footer.tgg-reference-footer { position: relative; overflow: hidden; display: blo
 footer.tgg-reference-footer::before { display: none; content: none; }
 .tgg-reference-footer .footer-wallpaper { position: absolute; inset: 0; overflow: hidden; opacity: .4; pointer-events: none; }
 .tgg-reference-footer .footer-wallpaper img { object-fit: cover; }
-.tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { position: relative; z-index: 1; width: min(100%, 1440px); margin-inline: auto; padding: 40px 48px 32px; }
+/* Keep the heading, navigation and bottom copy in separate full-width rows.
+   Overrides the legacy footer > div:nth-child(2) flex rule at every width. */
+.tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { display: block; position: relative; z-index: 1; width: min(100%, 1440px); margin-inline: auto; padding: 40px 48px 32px; }
 .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #0000001a; }
 .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 0 14px; max-width: 100%; min-height: 44px; color: #000; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 60px; font-weight: 500; letter-spacing: -.01em; line-height: 1.25; text-transform: uppercase; transition: color 200ms ease; }
 .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) span { display: inline-block; }
@@ -23,6 +25,7 @@ footer.tgg-reference-footer::before { display: none; content: none; }
 .tgg-reference-footer :is(.tgg-home-footer-bottom, .b2b-footer-bottom) > span:last-child { color: #8c847b; font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; }
 @media (max-width: 1023px) {
   .tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { padding-inline: 32px; }
+  .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { flex-direction: column; align-items: flex-start; gap: 8px; }
   .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { font-size: 48px; }
 }
 @media (max-width: 767px) {
@@ -31,12 +34,16 @@ footer.tgg-reference-footer::before { display: none; content: none; }
   .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { font-size: 36px; }
   .tgg-reference-footer :is(.tgg-home-footer-bottom, .b2b-footer-bottom) { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
-@media (max-width: 639px) {
-  .tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { padding: 32px 20px 24px; }
-  .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { gap: 0 8px; font-size: 24px; }
-  .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) > p { font-size: 12px; text-align: left; }
+@media (max-width: 640px) {
+  .tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { display: block; padding: 32px 20px 24px; text-align: center; }
+  .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { flex-direction: column; align-items: center; gap: 10px; }
+  .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { justify-content: center; gap: 0 8px; font-size: 24px; }
+  .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) > p { font-size: 12px; text-align: center; }
   .tgg-home-footer-grid, .tgg-reference-footer .b2b-footer-columns { padding-block: 24px; gap: 20px; }
   .tgg-reference-footer :is(.tgg-home-footer-column, .tgg-home-footer-contact, .b2b-footer-column) h2 { font-size: 19px; letter-spacing: 0; }
+  .tgg-reference-footer :is(.tgg-home-footer-column a, .tgg-home-footer-contact > a, .b2b-footer-column a) { justify-content: center; margin-inline: auto; }
+  .tgg-reference-footer :is(.tgg-home-footer-entity, .b2b-footer-entity) { align-items: center; }
+  .tgg-reference-footer :is(.tgg-home-footer-bottom, .b2b-footer-bottom) { align-items: center; }
+  .tgg-reference-footer :is(.tgg-home-footer-bottom, .b2b-footer-bottom) > span:last-child { text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) { .tgg-reference-footer a { transition: none; } }

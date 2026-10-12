@@ -10,12 +10,25 @@ class ApiError extends Error { constructor(message, status) { super(message); th
 const plain = value => JSON.parse(JSON.stringify(value));
 const empty = () => ({ revision: 0, boxes: [], items: [], packing: 'EMPTY', checkoutAvailable: false });
 function load(api) {
- const exports = {}, events = [];
+ const exports = {}, events = [], cartEvents = [];
+ const window = { dispatchEvent: e => { events.push(e.type); cartEvents.push(e); } };
+ const eventExports = {};
+ const eventSource = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart-events.ts'), 'utf8');
+ vm.runInNewContext(ts.transpileModule(eventSource, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText, { exports: eventExports, window, CustomEvent });
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
- vm.runInNewContext(compiled, { exports, require: name => { assert.equal(name, './api'); return { api, ApiError }; }, window: { dispatchEvent: e => events.push(e.type) }, Event });
- return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events };
+ vm.runInNewContext(compiled, { exports, require: name => { if (name === './gift-cart-events') return eventExports; assert.equal(name, './api'); return { api, ApiError }; }, window, Event });
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events, cartEvents };
 }
+
+test('cart listeners receive the saved server selection with no follow-up read', async () => {
+ const calls = [];
+ const confirmed = { ...empty(), revision: 8, items: [{ id: 'server-confirmed', quantity: 4 }] };
+ const { add, cartEvents } = load(async (_url, method) => { calls.push(method || 'GET'); return method ? confirmed : empty(); });
+ await add('requested');
+ assert.deepEqual(calls, ['GET', 'PUT']);
+ assert.deepEqual(plain(cartEvents[0].detail), { items: confirmed.items });
+});
 
 test('a grid shares one cart read, then refreshes from the latest confirmed write', async () => {
  let state = empty(), reads = 0, writes = 0, release;
@@ -170,16 +183,19 @@ test('preview product mapping matches the server gift catalogue exactly', () => 
   const source = fs.readFileSync(path.join(__dirname, `../src/lib/${file}.ts`), 'utf8');
   const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
   const exports = {};
-  vm.runInNewContext(compiled, { exports });
-  return Array.from(exports[key]);
+  vm.runInNewContext(compiled, { exports, require: name => catalogueData(name.replace('./', '')) });
+  return key ? Array.from(exports[key]) : exports;
  }
  const ids = [
   ...catalogueData('catalogue-preview', 'HAMPERS_CATALOG').map(item => item._id),
-  ...catalogueData('curated-hampers', 'CURATED_HAMPERS').map(item => item.giftItemId)
+  ...catalogueData('curated-hampers', 'CURATED_HAMPERS').map(item => item.giftItemId),
+  ...catalogueData('photographed-envelopes', 'PHOTOGRAPHED_ENVELOPES').map(item => item.giftItemId),
+  ...catalogueData('photographed-candles', 'PHOTOGRAPHED_CANDLES').filter(item => item.giftItemId !== 'laddoo_candles').map(item => item.giftItemId)
  ];
  const items = JSON.parse(fs.readFileSync(path.join(__dirname, '../backend/gifting/items.json'), 'utf8'));
  assert.equal(new Set(ids).size, ids.length);
- assert.deepEqual(ids.sort(), items.map(item => item.id).sort());
+ assert.deepEqual(ids.sort(), items.filter(item => item.id !== 'india_hamper').map(item => item.id).sort());
+ assert.ok(items.some(item => item.id === 'india_hamper'), 'legacy selections remain valid without guessing a colour');
 });
 
 test('new cart consumers wait until pending card additions have settled', async () => {
@@ -288,4 +304,19 @@ test('decrementing an absent item does not write or create a zero quantity', asy
  const { change, events } = load(async (_url, method) => { if (!method) return empty(); writes++; });
  const result = await change('first', -1);
  assert.equal(result.items.length, 0); assert.equal(writes, 0); assert.equal(events.length, 0);
+});
+
+test('India colour additions, Buy now and removals never combine colours or rewrite legacy selections', async () => {
+ let state = { ...empty(), items: [{id: 'india_hamper', quantity: 4}] };
+ const cart = load(async (_url, method, body) => {
+  if (!method) return plain(state);
+  assert.equal(body.revision, state.revision);
+  state = { ...plain(body), revision: state.revision + 1 }; return plain(state);
+ });
+ await Promise.all([cart.add('india_hamper_burgundy'), cart.add('india_hamper_lavender')]);
+ await cart.add('india_hamper_burgundy');
+ await cart.ensure('india_hamper_lavender');
+ assert.deepEqual(state.items, [{id:'india_hamper',quantity:4},{id:'india_hamper_burgundy',quantity:2},{id:'india_hamper_lavender',quantity:1}]);
+ await cart.change('india_hamper_lavender', -1);
+ assert.deepEqual(state.items, [{id:'india_hamper',quantity:4},{id:'india_hamper_burgundy',quantity:2}]);
 });

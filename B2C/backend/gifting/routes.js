@@ -138,7 +138,7 @@ function mountGifting(app, { db, cookie, run }) {
     if(body.id && (typeof body.id!=='string'||!/^[a-f0-9]{24}$/i.test(body.id)||!await db.models.CustomerAddress.exists({_id:body.id,customerId:customer._id}))) throw fail('Address not found.',404);
     for(const key of ['email','addressLine2','landmark']) if(!input[key]) input[key]=undefined;
     const address=await saveAddress(db,customer._id,input,body.id||undefined);
-    res.json({address:addressView(address),paymentAvailable:true});
+    res.json({address:addressView(address),paymentAvailable:false});
   }));
 
   app.post(`${base}/order`, run(async (req, res) => {
@@ -148,94 +148,9 @@ function mountGifting(app, { db, cookie, run }) {
     if (!draft || packing(draft) !== 'READY') throw fail('Your gift bag has no items. Please select items first.', 409);
     if (hasEnquiryOnlyHamper(draft)) throw fail('Hamper pricing needs confirmation. Please enquire with our team before checkout.', 409);
 
-    const addressDoc = (req.body?.addressId ? await db.models.CustomerAddress.findOne({ _id: req.body.addressId, customerId: customer._id }) : null) || await db.models.CustomerAddress.findOne({ customerId: customer._id }).sort({ updatedAt: -1 });
-    if (!addressDoc) throw fail('Please enter your delivery details first.', 400);
-
-    const paymentMethod = typeof req.body?.paymentMethod === 'string' ? req.body.paymentMethod.trim() : 'UPI';
-    const allowedMethods = ['UPI', 'CARD', 'NETBANKING', 'COD'];
-    const chosenMethod = allowedMethods.includes(paymentMethod) ? paymentMethod : 'UPI';
-
-    const orderItems = draft.items.map(row => {
-      const item = known(row.id, items);
-      const isHamper = item?.category === 'Gift Hampers' || row.id.endsWith('_hamper');
-      // Assumed internal valuation (not published individually on storefront per requirement)
-      const unitPriceMinor = isHamper ? 149900 : 29900;
-      const gross = unitPriceMinor * row.quantity;
-      return {
-        sku: (item?.slug || row.id).toUpperCase().replace(/[^A-Z0-9]/g, '-').slice(0, 50),
-        productName: item?.name || row.id,
-        quantity: row.quantity,
-        unitPriceMinor,
-        discountMinor: 0,
-        taxMinor: 0,
-        lineTotalMinor: gross,
-        currency: 'INR'
-      };
-    });
-
-    const subtotalMinor = orderItems.reduce((sum, i) => sum + i.lineTotalMinor, 0);
-    const pricing = {
-      subtotalMinor,
-      discountMinor: 0,
-      shippingMinor: 0,
-      taxMinor: 0,
-      grandTotalMinor: subtotalMinor,
-      currency: 'INR'
-    };
-
-    const addressSnapshot = {
-      recipientName: addressDoc.recipientName,
-      phone: addressDoc.phone,
-      addressLine1: addressDoc.addressLine1,
-      addressLine2: addressDoc.addressLine2,
-      landmark: addressDoc.landmark,
-      city: addressDoc.city,
-      state: addressDoc.state,
-      postalCode: addressDoc.postalCode,
-      country: addressDoc.country
-    };
-
-    const customerSnapshot = {
-      name: [customer.firstName, customer.lastName].filter(Boolean).join(' ') || addressDoc.recipientName,
-      email: customer.email,
-      phone: customer.phone || addressDoc.phone
-    };
-
-    const orderNumber = `GFT-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
-    const idempotencyKey = crypto.randomBytes(16).toString('hex');
-    const requestHash = crypto.createHash('sha256').update(JSON.stringify({ orderNumber, customerId: customer._id, items: draft.items, chosenMethod })).digest('hex');
-
-    const order = new db.models.Order({
-      orderNumber,
-      customerId: customer._id,
-      status: 'PAYMENT_PENDING',
-      paymentStatus: 'PENDING',
-      fulfillmentStatus: 'UNFULFILLED',
-      items: orderItems,
-      pricing,
-      shippingAddressSnapshot: addressSnapshot,
-      billingAddressSnapshot: addressSnapshot,
-      customerSnapshot,
-      idempotencyKey,
-      requestHash
-    });
-
-    await order.save();
-
-    // Clear cart draft after successful order creation
-    draft.items = [];
-    draft.boxes = [];
-    if (!draft.isNew) draft.increment();
-    await draft.save();
-
-    res.status(201).json({
-      success: true,
-      orderId: String(order._id),
-      orderNumber: order.orderNumber,
-      paymentMethod: chosenMethod,
-      deliveryAddress: addressSnapshot,
-      itemCount: orderItems.reduce((n, i) => n + i.quantity, 0)
-    });
+    // Cart estimates are not an authoritative, reserved order quote. Never
+    // replace the missing commercial bridge with a flat per-item valuation.
+    throw fail('Final item prices, GST and delivery must be confirmed before an order can be created.', 409);
   }));
 }
 module.exports = { mountGifting, packing, validate };

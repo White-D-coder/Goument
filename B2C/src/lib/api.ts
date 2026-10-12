@@ -7,7 +7,22 @@ export class ApiError extends Error {
  }
 }
 
-export async function api<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
+// Coalesce simultaneous bootstrap reads (including development Strict Mode).
+// No settled response is cached; draft reads/writes retain their cart queue.
+const bootstrapReads = new Map<string, Promise<unknown>>();
+export function api<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
+ if (method !== 'GET') bootstrapReads.clear();
+ const share = typeof window !== 'undefined' && method === 'GET' && body === undefined && ['/auth/me', '/auth/gift/count', '/auth/config'].includes(path);
+ if (!share) return request<T>(path, method, body);
+ const existing = bootstrapReads.get(path);
+ if (existing) return existing as Promise<T>;
+ const task = request<T>(path, method, body);
+ bootstrapReads.set(path, task);
+ const clear = () => { if (bootstrapReads.get(path) === task) bootstrapReads.delete(path); };
+ void task.then(clear, clear);
+ return task;
+}
+async function request<T>(path: string, method: string, body?: unknown): Promise<T> {
  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
  // Auth and gift drafts use HttpOnly cookies, independently of legacy cart storage.
  if (!path.startsWith('/auth/')) {

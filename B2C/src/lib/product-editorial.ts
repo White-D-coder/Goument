@@ -32,10 +32,11 @@ const photographedContentsMap: Record<string, StoryItem[]> = {
 export function productEditorial(product: Product) {
   const local = HAMPERS_CATALOG.find(item => item.slug === product.slug);
   const isHamper = product.categories?.some(category => category.slug === 'hampers') || false;
-  const isPhotographedHamper = ['ivory-hamper', 'india-hamper'].includes(product.slug);
+  const isIndia = ['india-hamper', 'india-hamper-burgundy', 'india-hamper-lavender'].includes(product.slug);
+  const isPhotographedHamper = product.slug === 'ivory-hamper' || isIndia;
   const short = typeof product.description === 'string' ? product.description : product.description?.short || '';
   const long = typeof product.description === 'string' ? '' : product.description?.long || '';
-  const story: StoryItem[] = isPhotographedHamper ? (photographedContentsMap[product.slug] || []) : (local?.inside_items.map((item, index) => ({
+  const story: StoryItem[] = isPhotographedHamper ? (photographedContentsMap[isIndia ? 'india-hamper' : product.slug] || []) : (local?.inside_items.map((item, index) => ({
     title: item.item,
     description: item.description,
     // Don't illustrate an individual item with a different product's photograph.
@@ -50,9 +51,9 @@ export function productEditorial(product: Product) {
     occasion: isHamper ? 'Festive moments · Thank-yous · Celebrations' : local?.category === 'shagun' ? 'Weddings · Festivities · Family celebrations' : local?.category === 'corporate' ? 'Teams · Clients · Milestones' : 'Little gestures · Lasting memories',
     description: product.slug === 'ivory-hamper'
       ? 'Familiar flavours and little keepsakes, brought together in an ivory box made for a thoughtful gesture.'
-      : product.slug === 'india-hamper'
+      : isIndia
         ? 'A celebration of familiar Indian flavours, in a presentation made to be remembered.'
-        : product.giftItemId === 'laddoo_candles' ? 'Hand-poured laddoo candles in an ivory and gold gift box.' : short,
+        : short,
     long,
     story,
     contents: isPhotographedHamper
@@ -61,7 +62,7 @@ export function productEditorial(product: Product) {
         : 'The photographed curation features Thekua, Chilli Cheese Bhujia, Chitale Bakarwadi, makhana, Café Niloufer tea and illustrated bookmarks. Confirm the final selection, pack sizes and quantities with our team.'
       : local?.inside_items.map(item => item.item).join(' · ') || long || short,
     packaging: isPhotographedHamper
-      ? product.slug === 'ivory-hamper' ? 'Illustrated ivory presentation box.' : 'India presentation box, photographed in burgundy and lavender. Ask us about your preferred colour.'
+      ? product.slug === 'ivory-hamper' ? 'Illustrated ivory presentation box.' : `India presentation box in ${product.slug.endsWith('lavender') ? 'lavender' : 'burgundy'}.`
       : local?.packaging_style,
   };
 }

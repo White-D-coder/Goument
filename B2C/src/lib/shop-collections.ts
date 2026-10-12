@@ -1,3 +1,5 @@
+import { BOOKMARK_PHOTOS } from './bookmark-photos';
+
 export const shopCollections = {
   envelopes: {
     title: 'Envelopes',
@@ -20,7 +22,7 @@ export const shopCollections = {
     href: '/shop/candles',
     search: 'candles',
     description: 'Discover festive, hand-finished candles made to bring a little warmth to every occasion.',
-    image: '/images/items/laddoo_candles.webp',
+    image: '/images/scented_candle/cn3-supplied.webp',
     imageAlt: 'Festive motichoor laddoo shaped candles',
   },
   stationery: {
@@ -28,7 +30,7 @@ export const shopCollections = {
     href: '/shop/stationery',
     search: 'stationery',
     description: 'Explore illustrated bookmarks, thoughtful paper details and considered desk gifts from Eternal Paper Co.',
-    image: '/images/items/bookmarks.webp',
+    image: BOOKMARK_PHOTOS[0].public_id,
     imageAlt: 'Illustrated keepsake bookmarks from Eternal Paper Co.',
   },
 } as const;

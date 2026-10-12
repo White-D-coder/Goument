@@ -141,3 +141,20 @@
     --action-hover-border: #4a0404;
   }
 }
+/* Storefront sections and rows use spacing without decorative divider lines. */
+#main :is(
+  .tgg-link, .tgg-faq-items, .tgg-faq-item, .tgg-faq details,
+  .pdp-related, .buy-panel, .shop-filter-bar, .shop-filter-sort,
+  .payment-options-section, .orders-table-header, .orders-table-row,
+  .gift-cart-total, .gift-cart-row + .gift-cart-row
+) { border-block: 0 !important; }
+footer.tgg-reference-footer,
+footer.tgg-reference-footer :is(
+  .tgg-home-footer-heading, .b2b-footer-heading,
+  .tgg-home-footer-grid, .b2b-footer-columns
+) { border-block: 0 !important; }
+.header.scrolled, .header.home-header--editorial.scrolled { border-bottom: 0 !important; }
+#main hr, footer.tgg-reference-footer hr { display: none; }
+
+/* FAQ questions are the sole decorative row-divider exception. */
+#main .tgg-faq .tgg-faq-item:nth-child(-n + 5) { border-bottom: 1px solid var(--tgg-line) !important; }

@@ -6,7 +6,7 @@ import { Minus, Plus } from 'lucide-react';
 import { cartMutation } from '@/lib/api';
 import { Product, money } from '@/lib/types';
 import { giftingEnquiry } from '@/lib/product-editorial';
-import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
+import { productPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
 
 export default function BuyPanel({ product }: { product: Product }) {
@@ -31,8 +31,8 @@ export default function BuyPanel({ product }: { product: Product }) {
   }
 
   if (product.preview) return <div className="buy-panel pdp-preview">
-    <p className="pdp-quote">{temporaryHamperPriceLabel(product) || 'Price on enquiry'}</p>
-    <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>
+    <p className="pdp-quote">{productPriceLabel(product)}</p>
+    {!product.giftItemId && <p className="pdp-purchase-help">Enquire for the final selection, availability and pricing.</p>}
     {product.giftItemId
       ? <AddGiftToCartButton itemId={product.giftItemId} name={product.name} withQuantity compact showCheckout phoneBuyNow />
       : <a className="button" href={giftingEnquiry(product.name)}>Enquire about this gift <span aria-hidden="true">↗</span></a>}

@@ -12,7 +12,7 @@ export const ivoryInside: InsideItem[] = [
   { name: 'Farmley dry fruits sachet', place: 'Farmley', why: 'Something to open, share and savour.' },
 ];
 
-// Existing India PDP observations; colour variants share one hamper identity.
+// Photographed India contents; each colour now has its own gift selection.
 const indiaInside: InsideItem[] = [
   ivoryInside[0],
   ivoryInside[1],
@@ -24,8 +24,8 @@ const indiaInside: InsideItem[] = [
 
 export const contentsSlides: ContentsSlide[] = [
   { name: 'Ivory Hamper', image: '/images/brand/ivory_hamper.webp', alt: 'Photographed Ivory Hamper with gourmet treats and keepsakes', href: '/products/ivory-hamper', items: ivoryInside },
-  { name: 'India Hamper · Burgundy', image: '/images/brand/burgundy_india_hamper.webp', alt: 'Photographed India Hamper in burgundy', href: '/products/india-hamper', items: indiaInside },
-  { name: 'India Hamper · Lavender', image: '/images/brand/lavender_india_hamper.webp', alt: 'Photographed India Hamper in lavender', href: '/products/india-hamper', items: indiaInside },
+  { name: 'India Hamper · Burgundy', image: '/images/brand/burgundy_india_hamper.webp', alt: 'Photographed India Hamper in burgundy', href: '/products/india-hamper-burgundy', items: indiaInside },
+  { name: 'India Hamper · Lavender', image: '/images/brand/lavender_india_hamper.webp', alt: 'Photographed India Hamper in lavender', href: '/products/india-hamper-lavender', items: indiaInside },
 ];
 
 // Populate only with approved endorsements; demo/Unsplash quotes are not customer proof.

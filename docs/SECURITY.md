@@ -1,3 +1,7 @@
+## 2026-10-12 — Refuse unquoted gift-order money (R192)
+
+CURRENT / IMPLEMENTED locally: observed gift/order placeholder valuation was a defect: authenticated non-hamper selections could be priced flat₹299 with zero GST/delivery and saved without authoritative quote/reservation. Removed the write/cart-clear branch, retaining identity/readiness/hamper guards and returning409 for remaining selections. Address capture now reports paymentAvailable:false; cart respects checkoutAvailable:false. Browser estimates/user ranges cannot authorize orders or payments; hostile amount fields in the regression request do not create an order/change the draft. No schema/customer/ownership/history/payment-provider changes.15 gifting tests pass; hosted behavior UNKNOWN until deployment. Existing quote/reservation and other P0 tasks remain required; see ORDER_SYSTEM/TESTING.
+
 ## 2026-10-12 — Current B2C remediation (R161)
 
 CURRENT / IMPLEMENTED and regression-verified locally; supersedes the open status of the corresponding R160 B2C findings below. Frontend Next16.4 and compatible backend/transitive updates plus removal of unused frontend runtime dependencies produce zero vulnerabilities in both `npm audit --omit=dev --json` results. This is production-dependency evidence, not an all-development-dependency or exhaustive penetration-test claim.

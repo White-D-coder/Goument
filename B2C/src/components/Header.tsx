@@ -8,6 +8,7 @@ import ShopNavigation from './ShopNavigation';
 import { api } from '@/lib/api';
 import { User } from '@/lib/types';
 import { storefrontNavigation } from '@/lib/storefront-navigation';
+import { giftCartItemsFromEvent } from '@/lib/gift-cart-events';
 export default function Header() {
  const pathname = usePathname();
  const isHome = pathname === '/' || pathname === '/b2c';
@@ -21,8 +22,13 @@ export default function Header() {
   let active = true;
   let requestId = 0;
   let authRequestId = 0;
-  const refresh = () => {
+  const refresh = (event?: Event) => {
    const currentRequest = ++requestId;
+   const items = giftCartItemsFromEvent(event);
+   if (items) {
+    setCount(items.reduce((total, item) => total + item.quantity, 0));
+    return;
+   }
    api<{count:number}>('/auth/gift/count').then(r => {
 	if(active && currentRequest === requestId) setCount(r.count);
    }).catch(() => { /* Keep the last confirmed count when the service is unavailable. */ });

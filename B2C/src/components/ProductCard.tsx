@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { ArrowUpRight, ShoppingBag } from 'lucide-react';
-import { Product, money, productImage } from '@/lib/types';
-import { temporaryHamperPriceLabel } from '@/lib/product-pricing';
+import { Product, productImage } from '@/lib/types';
+import { productPriceLabel } from '@/lib/product-pricing';
 import AddGiftToCartButton from './AddGiftToCartButton';
 import ProductPhoto from './ProductPhoto';
 
@@ -19,9 +19,7 @@ export default function ProductCard({
   const isHamper = product.categories?.some(
     (category) => category.slug === 'hampers'
   );
-  const priceLabel = product.preview
-    ? temporaryHamperPriceLabel(product) || (isHamper ? 'Price on enquiry' : null)
-    : money(product.basePrice, product.currency);
+  const priceLabel = productPriceLabel(product);
 
   return (
     <article

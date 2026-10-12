@@ -1,9 +1,53 @@
 .cart-phone-only { display: none; }
-.gift-cart-photo { position: relative; width: 72px; height: 72px; flex-shrink: 0; overflow: hidden; }
+.gift-cart-photo { position: relative; flex-shrink: 0; overflow: hidden; border-radius: 12px; background: #f3eee6; }
 .gift-cart-photo img { object-fit: cover; }
 .gift-cart .gift-cart-row > .gift-cart-photo { flex: none; }
+.gift-cart-amount { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; column-gap: 2px; }
+.gift-cart-amount > span { white-space: nowrap; }
+.gift-cart-summary { margin: 0 0 20px; }
+.gift-cart-summary > div { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 14px; font-size: 14px; line-height: 1.5; }
+.gift-cart-summary dt { color: var(--muted); }
+.gift-cart-summary dd { min-width: 0; margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.gift-cart-summary .gift-cart-total { display: block; border-top: 1px solid var(--line); padding-top: 20px; margin-top: 20px; }
+.gift-cart-total dt { color: var(--ink); font-size: 13px; font-weight: 500; }
+.gift-cart-total dd { margin-top: 8px; text-align: left; color: var(--wine); font-size: 28px; font-weight: 700; line-height: 1.3; letter-spacing: -.02em; }
+.gift-cart-total .gift-cart-amount { justify-content: flex-start; }
+.gift-cart-category { margin: 8px 0; color: var(--muted); font-size: 13px; }
+.gift-cart-price { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+.gift-cart-price-label, .gift-cart-price-detail { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+#main .gift-cart-row .gift-cart-line-total { margin: 5px 0; color: var(--wine); font-size: 26px; line-height: 1.3; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gift-cart-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
+.gift-cart-actions .gift-counter { border-radius: 24px; overflow: hidden; }
+.gift-cart-actions .remove-item { border-left: 1px solid var(--line); padding-left: 20px; }
 
-/* The compact bag layout is exclusive to phones. Desktop keeps its two columns. */
+@media (min-width: 641px) {
+  #main .gift-cart-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); align-items: start; gap: 14px 28px; padding: 30px 0; }
+  #main .gift-cart-row + .gift-cart-row { border-top: 1px solid var(--line); }
+  #main .gift-cart-row > .gift-cart-photo { grid-column: 1; grid-row: 1 / 4; width: 180px; height: 220px; }
+  #main .gift-cart-row > .gift-cart-item-info { grid-column: 2; grid-row: 1; min-width: 0; }
+  #main .gift-cart .gift-cart-items .gift-cart-row h3 { margin: 0; font-size: 26px !important; line-height: 1.2 !important; }
+  #main .gift-cart-line-price { grid-column: 2; grid-row: 2; }
+  #main .gift-cart-actions { grid-column: 2; grid-row: 3; align-self: end; }
+  #main .gift-cart-actions .gift-counter { margin: 0; }
+  #main .gift-cart-row .remove-item { font-size: 13px; }
+  #main .gift-cart .gift-review { border-radius: 18px; padding: 26px; }
+}
+@media (min-width: 641px) and (max-width: 1199px) {
+  #main .gift-cart-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+@media (min-width: 1001px) {
+  #main .gift-cart-row { grid-template-columns: 220px minmax(0, 1fr) 170px; gap: 20px 28px; padding: 32px 0; }
+  #main .gift-cart-row > .gift-cart-photo { grid-row: 1 / 3; width: 220px; height: 250px; }
+  #main .gift-cart .gift-cart-items .gift-cart-row h3 { font-size: 32px !important; }
+  #main .gift-cart-line-price { grid-column: 3; grid-row: 1; text-align: right; min-width: 0; }
+  #main .gift-cart-actions { grid-column: 2 / 4; grid-row: 2; }
+}
+@media (min-width: 1200px) {
+  #main .gift-cart-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 36px; }
+  #main .gift-cart-row { grid-template-columns: 260px minmax(0, 1fr) 150px; gap: 20px 24px; }
+  #main .gift-cart-row > .gift-cart-photo { width: 260px; height: 270px; }
+}
+
 @media (max-width: 640px) {
   #main .gift-cart { padding: 24px 16px 32px; }
   .gift-cart .cart-phone-only { display: block; }
@@ -16,27 +60,29 @@
   #main .gift-cart-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   #main .gift-cart-items, #main .gift-review { min-width: 0; background: #fffdf9; border: 1px solid #e9e1d6; border-radius: 22px; padding: 16px; }
   #main .gift-cart-items > h2 { margin: 0 0 6px; font-size: 23px; }
-  #main .gift-cart-row { display: grid; grid-template-columns: minmax(80px, 34%) minmax(0, 1fr); grid-template-rows: auto auto; gap: 8px 14px; align-items: start; padding: 16px 0; }
+  #main .gift-cart-row { display: grid; grid-template-columns: minmax(80px, 34%) minmax(0, 1fr); gap: 8px 14px; align-items: start; padding: 20px 0; }
   #main .gift-cart-row + .gift-cart-row { border-top: 1px solid #f0e9df; }
   #main .gift-cart-row:last-child { padding-bottom: 0; }
-  #main .gift-cart-row > .gift-cart-photo { grid-column: 1; grid-row: 1 / 3; width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: 15px; background: #f3eee6; }
-  #main .gift-cart-row .gift-cart-photo img { object-fit: contain; padding: 3px; }
+  #main .gift-cart-row > .gift-cart-photo { grid-column: 1; grid-row: 1 / 4; width: 100%; height: auto; aspect-ratio: 4 / 5; }
   #main .gift-cart-row > .gift-cart-item-info { grid-column: 2; grid-row: 1; min-width: 0; }
-  #main .gift-cart-row h3 { font-size: 20px; font-weight: 600; line-height: 1.1; margin: 0 0 5px; overflow-wrap: anywhere; }
+  #main .gift-cart .gift-cart-items .gift-cart-row h3 { margin: 0 0 5px; overflow-wrap: anywhere; }
   #main .gift-cart-row .gift-cart-category { margin: 0 0 5px; font-size: 10px; color: #8e724f; line-height: 1.4; }
-  #main .gift-cart-row .gift-cart-price { margin: 0; font-size: 10px; color: var(--muted); line-height: 1.5; }
-  #main .gift-cart-row .remove-item { min-height: 28px; font-size: 10px; padding: 0; }
-  #main .gift-cart-row > .gift-counter { grid-column: 2; grid-row: 2; margin: 0; width: 132px; max-width: 100%; align-self: end; border-color: #ded3c4; color: var(--wine); background: #fffdf9; }
-  #main .gift-cart-row .gift-counter button { flex: 0 0 44px; width: 44px; }
-  #main .gift-cart-row .gift-counter button:last-child { background: var(--wine); color: #fffdf8; }
-  #main .gift-cart-row .gift-counter output { flex: 1; min-width: 0; width: auto; font-size: 13px; }
-  #main .gift-review h2 { font-size: 25px; margin: 0 0 14px; }
-  #main .gift-cart-summary { margin: 0 0 14px; }
-  #main .gift-cart-summary > div { display: flex; justify-content: space-between; gap: 12px; margin: 0 0 9px; font-size: 11px; line-height: 1.5; }
-  #main .gift-cart-summary dt { color: var(--muted); }
-  #main .gift-cart-summary dd { margin: 0; text-align: right; }
-  #main .gift-cart-summary .gift-cart-total { border-top: 1px dashed #ded3c4; margin: 13px 0 0; padding-top: 13px; font-weight: 600; }
-  #main .gift-cart-total dt { color: var(--ink); }
+  #main .gift-cart-row .gift-cart-price { margin: 0; font-size: 10px; }
+  #main .gift-cart-line-price { grid-column: 2; grid-row: 2; min-width: 0; }
+  #main .gift-cart-price-label { display: none; }
+  #main .gift-cart-row .gift-cart-line-total { margin: 0; font-size: 18px; }
+  #main .gift-cart-line-total .gift-cart-amount { justify-content: flex-start; }
+  #main .gift-cart-price-detail { font-size: 10px; }
+  #main .gift-cart-actions { grid-column: 2; grid-row: 3; gap: 6px; min-width: 0; }
+  #main .gift-cart-actions .remove-item { border: 0; min-height: 32px; font-size: 11px; padding: 0 6px; }
+  #main .gift-cart-actions .gift-counter { margin: 0; width: 132px; max-width: 100%; border-color: #ded3c4; color: var(--wine); background: #fffdf9; }
+  #main .gift-cart-actions .gift-counter button { flex: 0 0 44px; width: 44px; }
+  #main .gift-cart-actions .gift-counter button:last-child { background: var(--wine); color: #fffdf8; }
+  #main .gift-cart-actions .gift-counter output { flex: 1; min-width: 0; width: auto; font-size: 13px; }
+  #main .gift-review h2 { font-size: 25px; margin: 0 0 18px; }
+  #main .gift-cart-summary > div { gap: 12px; margin-bottom: 12px; font-size: 12px; }
+  #main .gift-cart-summary .gift-cart-total { margin-top: 18px; padding-top: 18px; }
+  #main .gift-cart-total dd { font-size: 26px; }
   #main .gift-review > .button { width: 100%; margin: 8px 0; }
   #main .gift-review > p { font-size: 11px; line-height: 1.6; }
 }

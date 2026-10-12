@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
 import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, readGiftDraft } from '@/lib/gift-cart';
 import QuantityControl from './QuantityControl';
+import { giftCartItemsFromEvent } from '@/lib/gift-cart-events';
 
 export default function AddGiftToCartButton({ itemId, name, className = 'button', withQuantity = true, compact = true, showCheckout = false, phoneBuyNow = false }: { itemId: string; name: string; className?: string; withQuantity?: boolean; compact?: boolean; showCheckout?: boolean; phoneBuyNow?: boolean }) {
  const router = useRouter();
@@ -17,12 +18,20 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
   if (!withQuantity) return;
   let active = true;
   let loading = false;
-  const refresh = async () => {
+  let generation = 0;
+  const refresh = async (event?: Event) => {
+   const items = giftCartItemsFromEvent(event);
+   if (items) {
+    generation++;
+    setQuantity(items.find(item => item.id === itemId)?.quantity || 0);
+    return;
+   }
    if (loading || locked.current) return;
    loading = true;
+   const request = ++generation;
    try {
     const draft = await readGiftDraft();
-    if (active) setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
+    if (active && request === generation) setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
    } catch { /* Keep the last confirmed quantity; adding can retry the cart read. */ }
    finally { loading = false; }
   };

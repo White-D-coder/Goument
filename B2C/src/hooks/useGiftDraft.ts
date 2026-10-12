@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiError } from '@/lib/api';
 import { queueGiftCartWrite } from '@/lib/gift-cart';
+import { publishGiftCart } from '@/lib/gift-cart-events';
 export type Selection = {id:string;quantity:number};
 export type Draft = {revision:number;boxes:Selection[];items:Selection[];packing:'EMPTY'|'CHOOSE_BOX'|'NEEDS_BOXES'|'READY';checkoutAvailable:false};
 export type GiftBox = {id:string;name:string;subtitle:string;image:string};
@@ -13,7 +14,7 @@ export function useGiftDraft(selectedBox?:string) {
  const [catalogue,setCatalogue]=useState<GiftCatalogue|null>(null);
  const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [retry,setRetry]=useState(0);
  const locked=useRef(false);const current=useRef<Draft|null>(null);
- const publish=useCallback((value:Draft)=>{current.current=value;setDraft(value);window.dispatchEvent(new Event('b2c-cart-change'));},[]);
+ const publish=useCallback((value:Draft)=>{current.current=value;setDraft(value);publishGiftCart(value);},[]);
  useEffect(()=>{
   let active=true;
   async function load() {

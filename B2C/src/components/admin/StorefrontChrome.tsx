@@ -8,5 +8,5 @@ export default function StorefrontChrome({ placement }: { placement: 'header' | 
   const pathname = usePathname();
   if (pathname === '/admin' || pathname.startsWith('/admin/')) return null;
   const isHome = pathname === '/' || pathname === '/b2c';
-  return placement === 'header' ? <Header /> : <><Footer home={isHome} /><StorefrontMotion /></>;
+  return placement === 'header' ? <Header /> : <>{!pathname.startsWith('/products/') && <Footer home={isHome} />}<StorefrontMotion /></>;
 }

@@ -1,0 +1,82 @@
+/* The Home Ivory Hamper card is the shared product-title reference. */
+:root {
+  --storefront-card-title-size: clamp(19px, 1.7vw, 28px);
+  --storefront-card-title-line-height: 1.2;
+}
+@media (max-width: 900px) {
+  :root { --storefront-card-title-size: 17px; }
+}
+@media (max-width: 640px) {
+  :root {
+    --storefront-card-title-size: 19px;
+    --storefront-card-title-line-height: 1.3;
+  }
+}
+
+/* Pin the shared role across existing route-specific title overrides. */
+#main :is(
+  .tgg-home .tgg-hamper-info h3,
+  .tgg-home .tgg-favourite-info h3,
+  .shop-edit .b2c-product-card .gift-card-title,
+  .b2c-product-card .gift-card-title,
+  .gift-cart .gift-cart-row h3,
+  .builder-item h2,
+  .box-card h3,
+  .cart-box h3,
+  .cart-page .cart-row h3,
+  .pdp .pdp-related-grid h3
+) {
+  font-family: var(--font-title) !important;
+  font-size: var(--storefront-card-title-size) !important;
+  font-weight: 500 !important;
+  line-height: var(--storefront-card-title-line-height) !important;
+  letter-spacing: -.01em !important;
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  overflow-wrap: anywhere;
+}
+
+/* Product photography fills its frame while preserving the source ratio.
+   Decorative artwork, logos and the hero's chosen focal point stay separate. */
+#main :is(
+  .gift-card-photo,
+  .gift-cart-photo,
+  .product-gallery-frame,
+  .product-gallery-thumbnail-photo,
+  .pdp-detail-photo,
+  .pdp-lifestyle,
+  .pdp-related-photo,
+  .box-photo,
+  .builder-item-photo,
+  .selected-box-thumb,
+  .tgg-hamper-photo,
+  .tgg-favourite-photo,
+  .tgg-packaging-visual,
+  .tgg-inside-image
+) { overflow: hidden; }
+
+#main :is(
+  .gift-card-photo,
+  .gift-cart-photo,
+  .product-gallery-frame,
+  .product-gallery-thumbnail-photo,
+  .pdp-detail-photo,
+  .pdp-lifestyle,
+  .pdp-related-photo,
+  .box-photo,
+  .builder-item-photo,
+  .selected-box-thumb,
+  .tgg-hamper-photo,
+  .tgg-favourite-photo,
+  .tgg-packaging-visual,
+  .tgg-inside-image
+) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+  padding: 0 !important;
+}
+
+#main .cart-box > img { object-fit: cover; }

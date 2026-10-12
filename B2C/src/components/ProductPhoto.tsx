@@ -1,11 +1,12 @@
 'use client';
 
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import { useState } from 'react';
 import './product-photo.css';
 
 type PhotoProps = {
   src: string; alt: string; sizes: string; priority?: boolean; id?: string;
+  mobileSrc?: string;
   onReady?: () => void; onUnavailable?: () => void;
 };
 
@@ -14,7 +15,7 @@ export default function ProductPhoto(props: PhotoProps) {
   return <Photo key={props.src} {...props} />;
 }
 
-function Photo({ src, alt, sizes, priority = false, id, onReady, onUnavailable }: PhotoProps) {
+function Photo({ src, mobileSrc, alt, sizes, priority = false, id, onReady, onUnavailable }: PhotoProps) {
   const [useOriginalAsset, setUseOriginalAsset] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
 
@@ -22,7 +23,7 @@ function Photo({ src, alt, sizes, priority = false, id, onReady, onUnavailable }
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="m3 17 5-5 4 4 3-3 6 6M8 7h.01" /></svg>
   </span>;
 
-  return <Image id={id} src={src} alt={alt} fill sizes={sizes}
+  const photo = <Image id={id} src={src} alt={alt} fill sizes={sizes}
     unoptimized={useOriginalAsset || !src.startsWith('/')} loading={priority ? 'eager' : 'lazy'}
     fetchPriority={priority ? 'high' : 'auto'}
     onLoad={onReady}
@@ -30,4 +31,10 @@ function Photo({ src, alt, sizes, priority = false, id, onReady, onUnavailable }
       if (src.startsWith('/') && !useOriginalAsset) setUseOriginalAsset(true);
       else { setUnavailable(true); onUnavailable?.(); }
     }} />;
+  if (!mobileSrc) return photo;
+  const mobile = getImageProps({ src: mobileSrc, alt, fill: true, sizes: '100vw' }).props;
+  return <picture>
+    {!useOriginalAsset && <source media="(max-width: 640px)" srcSet={mobile.srcSet} sizes={mobile.sizes} />}
+    {photo}
+  </picture>;
 }

@@ -7,15 +7,18 @@ import { HOME_FESTIVE_PHOTO, HOME_LAVENDER_PHOTO } from '@/lib/home-photos';
 const slides = [
   {
     src: HOME_FESTIVE_PHOTO,
+    mobileSrc: '/images/brand/ivory_hamper.webp',
     alt: 'The Gourmet Gifts curated boxes with gourmet treats and keepsakes',
   },
   {
     src: '/images/brand/home-hero-2.webp',
-    alt: 'The India Hamper in burgundy with regional treats',
+    mobileSrc: '/images/brand/phone-hero.webp',
+    alt: 'The Gourmet Gifts presentation boxes',
   },
   {
     src: HOME_LAVENDER_PHOTO,
-    alt: 'The India Hamper in lavender with thoughtfully selected gifts',
+    mobileSrc: '/images/bookmarks/vibrant-collection.webp',
+    alt: 'Keepsakes and thoughtful gifts from The Gourmet Gifts',
   },
 ];
 
@@ -71,6 +74,7 @@ export default function HomeHeroSlideshow() {
         >
           {(index === 0 || index === backgroundSlide || index === requested || ready.includes(index)) && <ProductPhoto
             src={slide.src}
+            mobileSrc={slide.mobileSrc}
             alt={slide.alt}
             sizes="(max-width: 760px) 100vw, (max-width: 1488px) calc(100vw - 48px), 1440px"
             priority={index === 0 || index === requested}

@@ -1,3 +1,7 @@
+## 2026-10-13 — Compact cart/filter handoff and restored Home cards (R267–R268)
+
+CURRENT / VERIFIED locally: scoped ESLint CartTray/HomeSections and git diff --check pass. Browser fixture adds three envelope products, verifies260×50px cart bar/three photos/44px close target/no overflow at320/375/430/640 and larger desktop tray at1440. Filter bar hides while cart shown, returns after close or empty draft, and opens/closes the native filter dialog. Home at320/375/640/1440 verifies centered title before price, below-photo burgundy Explore and no overflow. Phone cart/Home screenshots inspected. No production API writes or deployment.
+
 ## 2026-10-13 — Center phone catalogue actions below titles (R266)
 
 CURRENT / VERIFIED locally: Chrome fixture checks Shop/Envelopes/Home at320/375/640/1440px. Phone catalogue descriptions hidden,44px actions below title with exact horizontal centering and no overflow; Home overlay actions/descriptions and desktop descriptions preserved. Envelope Add/increment succeeds and resulting quantity control remains centered below title.375px envelope screenshot inspected. git diff --check passes; no production API writes or deployment.

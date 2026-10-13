@@ -1,3 +1,7 @@
+## 2026-10-13 — Compact cart/filter handoff and restored Home cards (R267–R268)
+
+CURRENT / IMPLEMENTED locally: R267 phone cart bar shrinks to260px max width/50px measured height,32px thumbnails and13px/10px text, retaining44px link/close targets and existing animations. While a visible nonempty bar is open, hide the phone bottom Filter bar; restore it on dismissal or empty selection. Filter dialog remains functional. R268 removes compact-phone marker from HomeCollectionCard and deletes its now-unused joined-frame override, restoring original centered title/description/From price and below-photo burgundy Explore button. Home hampers and compact Shop/category cards remain as previously specified. SUPERSEDES R261/R263/R265 Home collection presentation only. Scoped lint, responsive fixture checks and git diff --check pass; no deployment.
+
 ## 2026-10-13 — Center phone catalogue actions below titles (R266)
 
 CURRENT / IMPLEMENTED locally: on phone Shop/collection ProductCards, hide the short description and move the existing Add/quantity control from the photo into that row, centered below the title. Keep burgundy Add/white border, price/title/image styling, cart behavior and current Home collection/hamper treatment. Desktop descriptions/actions retained. CSS-only change in storefront-cards.css. Responsive fixture checks and git diff --check pass; no deployment.

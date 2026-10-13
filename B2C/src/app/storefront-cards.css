@@ -211,9 +211,9 @@
     display: grid !important; grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto auto auto; align-content: start; gap: 0;
     min-width: 0; height: auto; padding: 0;
-    border: 0 !important; border-radius: 12px !important;
-    background: #fff !important; box-shadow: none !important;
-    overflow: hidden; transform: none !important;
+    border: 0 !important; border-radius: 0 !important;
+    background: transparent !important; box-shadow: none !important;
+    overflow: visible; transform: none !important;
     --storefront-card-title-size: 17px;
     --storefront-card-title-line-height: 1.2;
 
@@ -223,10 +223,10 @@
     }
     & :is(.gift-card-media, .tgg-hamper-photo) {
       grid-area: 1 / 1; width: 100%; aspect-ratio: 1 !important;
-      margin: 0; border: 0; border-radius: 12px 12px 0 0 !important;
+      margin: 0; border: 1px solid #e7dfd5; border-radius: 12px !important;
       overflow: hidden; min-height: 0;
     }
-    & .gift-card-photo { height: 100%; border-radius: 12px 12px 0 0 !important; }
+    & .gift-card-photo { height: 100%; border-radius: 12px !important; }
     & :is(.gift-card-photo, .tgg-hamper-photo)::before { display: none; }
     & :is(.gift-purchase-controls, .tgg-collection-link, .gift-card-bottom-row > .card-luxury-btn) {
       grid-area: 1 / 1; align-self: end; justify-self: end; z-index: 2;
@@ -251,24 +251,36 @@
     & :is(.tgg-collection-link, .gift-card-bottom-row > .card-luxury-btn) svg { display: none; }
     & :is(.gift-card-price, .tgg-hamper-price) {
       grid-area: 2 / 1; justify-self: start; display: block;
-      margin: 6px 0 6px !important; padding: 0 8px;
+      margin: 10px 0 6px !important; padding: 0;
       font-size: 18px !important; line-height: 1.3 !important;
       text-align: left !important; letter-spacing: -.025em;
     }
     & .tgg-collection-price-prefix { display: inline; margin-right: 4px; font-size: 10px; }
     & :is(.gift-card-title, .tgg-hamper-info h3) {
       grid-area: 3 / 1; min-height: 2.4em !important;
-      margin: 0 !important; padding: 0 8px; text-align: left !important; text-wrap: wrap;
+      margin: 0 0 4px !important; text-align: left !important; text-wrap: wrap;
       font-family: var(--font-title) !important;
       font-size: 17px !important; line-height: 1.2 !important;
     }
     & :is(.gift-card-description, .tgg-hamper-info > p:not(.tgg-hamper-price)) {
-      grid-area: 4 / 1; margin: 0 !important; padding: 0 8px 8px; font-size: 11px !important;
+      grid-area: 4 / 1; margin: 0 !important; font-size: 11px !important;
       text-align: left !important; line-height: 1.4 !important;
     }
     & .cart-add-error { grid-area: 5 / 1; margin: 6px 0 0; font-size: 11px; }
   }
+  /* On collection pages, the phone action replaces the description. */
+  #main .shop-edit article.phone-gift-card.b2c-product-card {
+    & .gift-card-content .gift-card-description { display: none !important; }
+    & .gift-card-bottom-row .gift-purchase-controls,
+    & .gift-card-bottom-row > .card-luxury-btn {
+      grid-area: 4 / 1; justify-self: center; align-self: start;
+      margin: 4px 0 0 !important;
+    }
+  }
   #main article:is(.b2c-product-card, .tgg-hamper-card) .gift-purchase--compact .gift-purchase-controls > button {
+    --action-fill: #4a0404 !important;
+    --action-ink: #fff !important;
+    --action-hover: #650c0c !important;
     --action-border: #fff !important;
     --action-hover-border: #fff !important;
     border-color: #fff !important;

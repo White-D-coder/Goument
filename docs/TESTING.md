@@ -1,3 +1,15 @@
+## 2026-10-13 — Center phone catalogue actions below titles (R266)
+
+CURRENT / VERIFIED locally: Chrome fixture checks Shop/Envelopes/Home at320/375/640/1440px. Phone catalogue descriptions hidden,44px actions below title with exact horizontal centering and no overflow; Home overlay actions/descriptions and desktop descriptions preserved. Envelope Add/increment succeeds and resulting quantity control remains centered below title.375px envelope screenshot inspected. git diff --check passes; no production API writes or deployment.
+
+## 2026-10-13 — White frame scoped to Home (R265)
+
+CURRENT / VERIFIED locally: fixture Chrome checks Home/Shop/Envelopes at320/375/1440px. Home phone collections retain white background/12px bottom corners and dimensions; catalogue/category phone bodies are transparent with0px body corners, square photos and existing inset actions; desktop layouts retained. No horizontal overflow. CSS-only; git diff --check passes. No production API writes or deployment.
+
+## 2026-10-13 — Joined white phone cards and burgundy Add (R263–R264)
+
+CURRENT / VERIFIED locally: R263 fixture browser verifies Home/Shop/Envelopes at320/375/430/640/768/1440: white phone surface,12px bottom corners, square photos, contained actions, price-before-title and no overflow. Catalogue first-card dimensions match R261 measurements. Home phone screenshot inspected. R264 final Home/Shop checks at320/375/640/1440 confirm phone Add fill rgb(74,4,4), border/text rgb(255,255,255), original desktop treatment, retained Home hamper layout and no overflow. CSS-only; git diff --check passes. No production API writes or deployment.
+
 ## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
 
 CURRENT / VERIFIED locally: scoped HomeSections ESLint and git diff --check pass. Home/Shop browser fixtures at320/375/640/1440 verify original Home hamper marker/layout, controls below photos, preserved compact collections/catalogue and no overflow. Computed phone Add borders are white; desktop retains burgundy. Initial border assertion exposed higher-specificity action-variable override; corrected variables. A subsequent premature page-style read was fixed by waiting for document load completion; final eight checks pass. No production API writes or deployment.

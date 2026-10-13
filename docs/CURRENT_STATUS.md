@@ -1,3 +1,15 @@
+## 2026-10-13 — Center phone catalogue actions below titles (R266)
+
+CURRENT / IMPLEMENTED locally: on phone Shop/collection ProductCards, hide the short description and move the existing Add/quantity control from the photo into that row, centered below the title. Keep burgundy Add/white border, price/title/image styling, cart behavior and current Home collection/hamper treatment. Desktop descriptions/actions retained. CSS-only change in storefront-cards.css. Responsive fixture checks and git diff --check pass; no deployment.
+
+## 2026-10-13 — White frame scoped to Home (R265)
+
+CURRENT / IMPLEMENTED locally: user clarified R263 joined white image/text frame applies only to Home. Scope white background,12px lower corners, square lower photo corners and inset text to Home collection cards. Restore catalogue/category phone cards to R261 transparent body, individually rounded photo and preceding copy spacing. Preserve R264 burgundy Add with white text/border, original Home hamper layout and desktop styling. SUPERSEDES R263 catalogue white-frame scope, which was too broad. Local browser checks and git diff --check pass; no deployment.
+
+## 2026-10-13 — Joined white phone cards and burgundy Add (R263–R264)
+
+CURRENT / IMPLEMENTED locally: compact phone Home collection/catalogue cards now join square photo and copy on one white surface with12px outer/bottom corners and square lower photo corners. Text receives8px horizontal inset; vertical spacing is redistributed to retain compact frame height. Home hampers retain R262 layout. R264 corrects the earlier inverse Add interpretation: phone Add fill is burgundy #4a0404, text/border white, hover dark burgundy. Existing action variables carry the correction through the shared theme layer; Explore links and quantity controls retain their existing treatments. Responsive browser checks and git diff --check pass; no deployment.
+
 ## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
 
 CURRENT / IMPLEMENTED locally: latest correction removes the compact-phone marker from HomeHamperCard and removes R261 Home hamper grid override, restoring its preceding layout and below-photo purchase controls. Compact Home collection/catalogue cards remain. Phone card Add buttons use white border/hover-border via shared action variables; fill, text, quantity controls and desktop borders unchanged. SUPERSEDES R261 Home hamper redesign only. Scoped HomeSections lint and responsive browser checks pass; no deployment.

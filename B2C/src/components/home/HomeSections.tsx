@@ -56,7 +56,7 @@ export function HomeHamperCard({ product, image, title, mobileDescription }: { p
 
 /** Shared photo-first Home discovery cards link to a product or collection. */
 export function HomeCollectionCard({ title, description, image, href, price, giftItemId }: { title: string; description: string; image: string; href: string; price: string; giftItemId?: string }) {
-  return <article className="tgg-hamper-card tgg-collection-card phone-gift-card">
+  return <article className="tgg-hamper-card tgg-collection-card">
     <Link className="tgg-hamper-photo" href={href} aria-label={`Explore ${title}`}>
       <ProductPhoto src={image} alt={title} sizes="(max-width: 600px) 44vw, (max-width: 1000px) 30vw, 24vw" />
     </Link>

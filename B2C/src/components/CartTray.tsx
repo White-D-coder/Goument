@@ -142,7 +142,7 @@ export default function CartTray() {
       {source === 'gift' && rows.length ? rows.slice(-3).reverse().map(row => {
        const item = catalogue.find(item => item.id === row.id);
        return <span className="cart-tray-mobile-photo" key={row.id}>
-        {item ? <ProductPhoto src={item.image} alt="" sizes="38px" /> : <ShoppingBag size={18} />}
+        {item ? <ProductPhoto src={item.image} alt="" sizes="32px" /> : <ShoppingBag size={18} />}
        </span>;
       }) : <span className="cart-tray-mobile-photo"><ShoppingBag size={20} /></span>}
      </span>

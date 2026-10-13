@@ -12,7 +12,7 @@ function mount(name,{width=1440,reduced=false,api,cart,props={}}={}){
  let id=0;
  const canvas={hidden:true,width:0,height:0,getContext:()=>new Proxy({}, {get:()=>()=>{}})};
  const motion={matches:reduced,addEventListener:(type,fn)=>motionEvents.set(type,fn),removeEventListener:type=>motionEvents.delete(type)};
- const window={innerWidth:width,innerHeight:900,scrollY:0,matchMedia:()=>motion,addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)};
+ const window={location:{pathname:'/b2c'},innerWidth:width,innerHeight:900,scrollY:0,matchMedia:()=>motion,addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)};
  const document={hidden:false,addEventListener:(type,fn)=>events.set(type,fn),removeEventListener:type=>events.delete(type)};
  const react={useRef:initial=>({current:initial===null?canvas:initial}),useEffect:fn=>effects.push(fn),useState:initial=>[initial,value=>states.push(value)]};
  const requestAnimationFrame=fn=>{frames.set(++id,fn);return id;};
@@ -20,7 +20,7 @@ function mount(name,{width=1440,reduced=false,api,cart,props={}}={}){
  const exports={};
  const source=fs.readFileSync(`src/components/${name}.tsx`,'utf8');
  const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText;
- vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='@/lib/api'?{api}:name==='@/lib/gift-cart-events'?eventExports:name==='@/lib/gift-cart'?cart:name==='next/navigation'?{usePathname:()=>'/b2c',useRouter:()=>({})}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
+ vm.runInNewContext(compiled,{exports,require:name=>name==='react'?react:name==='react/jsx-runtime'?{jsx:()=>null,jsxs:()=>null}:name.includes('storefront-navigation')?{storefrontNavigation:()=>[]}:name==='@/lib/api'?{api}:name==='@/lib/gift-cart-events'?eventExports:name==='@/lib/gift-cart'?(cart||{readGiftCount:()=>api('/auth/gift/count')}):name==='next/navigation'?{usePathname:()=>'/b2c',useRouter:()=>({})}:{},window,document,process:{env:{}},setTimeout:fn=>{timers.set(++id,fn);return id;},clearTimeout:value=>timers.delete(value),requestAnimationFrame,cancelAnimationFrame:value=>frames.delete(value)});
  exports.default(props);
  return {effects,states,events,motion,motionEvents,window,canvas,timers,frames,flush:()=>{const queued=[...frames.values()];frames.clear();queued.forEach(fn=>fn());}};
 }
@@ -73,6 +73,16 @@ test('confirmed cart event updates the badge without fetching and supersedes an 
  assert.equal(requests.filter(path=>path.endsWith('/count')).length,1);
  app.events.get('b2c-cart-change')(new CustomEvent('b2c-cart-change',{detail:{items:[]}}));
  assert.equal(app.states.at(-1),0);cleanup();
+});
+
+test('shopping routes request the shared draft while account and cart keep the count-only fallback',async()=>{
+ for(const [path,expected] of [['/',true],['/b2c',true],['/shop/envelopes',true],['/products/ivory-hamper',true],['/account',false],['/cart',false]]){
+  const choices=[];
+  const app=mount('Header',{api:async()=>({user:null}),cart:{readGiftCount:async preferDraft=>{choices.push(preferDraft);return {count:4};}}});
+  app.window.location.pathname=path;
+  const cleanup=app.effects[0]();await new Promise(resolve=>setImmediate(resolve));
+  assert.deepEqual(choices,[expected],path);assert.ok(app.states.includes(4));cleanup();
+ }
 });
 
 test('mounted purchase control consumes confirmed selections and ignores a stale initial read',async()=>{

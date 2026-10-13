@@ -1,3 +1,23 @@
+## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
+
+CURRENT / IMPLEMENTED: shared useTwoRowScroll measures only first two DOM rows and list padding through ResizeObserver while full-cart containment is active or tray visible; disconnects on update/unmount. Native overflow scrolling has no scroll handler or React updates. Phone gallery visibility changes reuse existing responsive/lazy ProductPhoto assets; no new fetch loop, eager hero source, dependency or timing SLA. Final fixtures confirm tray keeps one public metadata read and zero count GETs during additions. Short-viewport product area is bounded to keep checkout visible. Hosted latency/physical-device performance remain unverified; no deployment.
+
+## 2026-10-13 — Ivory close-up photos and packaging panel opacity (R231–R233)
+
+CURRENT / IMPLEMENTED Farmley supplied PNG1,991,078B/1254×1254 retains original and gains same-size quality82 WebP120,732B (93.9% smaller). Existing responsive/lazy ProductPhoto serves new close-up; Laddoo reuses already-compressed139,272B cn3-supplied.webp. No new eager hero image, dependency, API call or performance SLA. Home alpha change only updates background rgba, not whole-panel opacity or existing blur.
+
+## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
+
+CURRENT / IMPLEMENTED: CartTray mount has no network request, and successful gift additions provide their confirmed response directly. First gift opening reads public catalogue once per mounted tray; later additions/quantity changes do not trigger tray cart/count refetches. Existing mandatory serialized versioned cart operations remain. Public fallback metadata reuses existing photographed items and same price resolver; no new image assets, dependency or settled private request cache. Small80px responsive thumbnails, row DOM omitted while closed.
+
+Animate only transform240ms; desktop main reflows once when opening/closing, no continuous width animation. No backdrop blur/body scroll lock/polling/per-scroll React updates. Two-row height observer attaches to first two items only while visible and disconnects on updates/close/unmount. List scroll is independently contained; heading/summary stay still. Existing hosted latency/universal20ms and physical-device performance limitations remain; no new timing SLA or deployment.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+CURRENT / PARTIAL hosted evidence: user count timing459.92ms total,458.04ms waiting,0.33ms download. Long React initiator stack alone is not evidence of a request loop. Read-only curl against b2c-tau-weld.vercel.app: Home200 TTFB74ms/total81ms; first anonymous count503 TTFB284ms, draft200576ms, next count200273ms. Separate warm anonymous samples: configured backend count320/274ms; storefront rewrite288/260ms. These samples do not isolate cold start, database, routing or region costs; exact503/latency cause UNKNOWN. No private customer cookie or response data inspected.
+
+CURRENT / IMPLEMENTED locally: Header starts/joins existing queued draft on Home/Shop/product routes so streamed controls can join it. Shared response supplies quantities; other pages use count-only endpoint, no settled private cache/timer/debounce delay. Backend count uses indexed owner lookup with items.quantity-only projection and lean(), avoiding other fields/document hydration. Production browser fixture shows one draft and zero count calls on Home/Envelopes/PDP, accurate badge and confirmed mutation update. No claim that every delayed mount avoids an additional fresh draft, nor that remote network response becomes20ms. Hosted verification after deployment remains required.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 CURRENT / IMPLEMENTED assets: new bookmark originals2,601,835B +2,780,213B retain full originals and gain1024×1536 WebP253,412B +245,182B (90.7% combined reduction). Supplied phone_hero.png340,493B gains788×1400 phone-hero.webp79,154B (76.8% smaller). Reuse existing compressed vibrant-collection.webp for third phone slide, original Ivory WebP for first. Native picture media≤640px selects responsive optimized phone sources; existing deferred alternatives/manual dots/reduced-motion/data-saving behavior retained. Separate packaging imagery may still request the desktop festive source; do not claim no such asset downloads anywhere on mobile.

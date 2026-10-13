@@ -28,6 +28,18 @@ export function readGiftDraft(): Promise<Draft> {
  return task;
 }
 
+// Let cards mounted in the same effect flush register their existing draft read.
+// Reuse only a pending response; never retain a shopper's settled cart in memory.
+export async function readGiftCount(preferDraft = false): Promise<{ count: number }> {
+ await Promise.resolve();
+ const shared = draftRead || (preferDraft ? readGiftDraft() : null);
+ if (shared) {
+  const draft = await shared;
+  return { count: draft.items.reduce((total, item) => total + item.quantity, 0) };
+ }
+ return api<{ count: number }>('/auth/gift/count');
+}
+
 async function settleGiftCartWrites(): Promise<boolean> {
  let failed = false;
  // Include writes queued while waiting, not only the initial snapshot.

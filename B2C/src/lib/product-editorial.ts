@@ -15,9 +15,9 @@ const photographedContentsMap: Record<string, StoryItem[]> = {
   'ivory-hamper': [
     { title: 'The 1970 Shop Thekua', description: 'A Bihari favourite. For a familiar flavour with a little nostalgia.', image: '/images/pics/thekuap.webp', alt: 'The 1970 Shop Thekua tin beside a bowl of thekua' },
     { title: 'Chilli Cheese Bhujia', description: 'Bombay Sweet Shop. A playful, savoury counterpoint.', image: '/images/pics/bhujia.webp', alt: 'Bombay Sweet Shop Chilli Cheese Bhujia' },
-    { title: 'Laddoo candles', description: 'The Gourmet Gifts. A festive favourite, reimagined as a keepsake.' },
+    { title: 'Laddoo candles', description: 'The Gourmet Gifts. A festive favourite, reimagined as a keepsake.', image: '/images/scented_candle/cn3-supplied.webp', alt: 'The Gourmet Gifts laddoo candles in white presentation boxes' },
     { title: 'Illustrated bookmarks', description: 'Eternal Paper Co. A small detail they can come back to.' },
-    { title: 'Farmley dry fruits sachet', description: 'Farmley. Something to open, share and savour.' },
+    { title: 'Farmley Panchmeva', description: 'Farmley. Something to open, share and savour.', image: '/images/pics/farmley-panchmeva.webp', alt: 'Farmley All Natural Panchmeva snack pouch' },
   ],
   'india-hamper': [
     { title: 'The 1970 Shop Thekua', description: 'A Bihari favourite. For a familiar flavour with a little nostalgia.', image: '/images/pics/thekuap.webp', alt: 'The 1970 Shop Thekua tin beside a bowl of thekua' },

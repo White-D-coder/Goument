@@ -18,31 +18,32 @@ export default function ProductGallery({ images, name, contain = false }: {
   if (!current) return null;
 
   return (
-    <div className={`product-gallery${contain ? ' product-gallery-contain' : ''}`}>
+    <div className={`product-gallery${contain ? ' product-gallery-contain' : ''}${images.length === 1 ? ' product-gallery--single' : ''}`}>
       <div className="detail-image">
         {[...new Set([selected, requested])].map(index => {
           const image = images[index];
           if (!image) return null;
           return <div key={image.src} className="product-gallery-frame" style={{ visibility: index === selected ? 'visible' : 'hidden' }} aria-hidden={index !== selected}>
-            <ProductPhoto id={index === selected ? imageId : undefined} src={image.src} alt={image.alt} sizes="(max-width: 900px) 100vw, 58vw" priority
+            <ProductPhoto id={index === selected ? imageId : undefined} src={image.src} alt={image.alt} sizes="(max-width: 900px) 85vw, 52vw" priority
               onReady={() => { if (index === requested) setSelected(index); }}
               onUnavailable={() => { if (index === requested) setRequested(selected); }} />
           </div>;
         })}
       </div>
-      {images.length > 0 && (
-        <div className={`product-gallery-thumbnails${images.length === 1 ? ' product-gallery-thumbnails--single' : ''}`} role="group" aria-label={`${name} photos`}>
+      {images.length > 1 && (
+        <div className="product-gallery-thumbnails" role="group" aria-label={`${name} photos`}>
           {images.map((image, index) => (
             <button
               key={image.src}
               type="button"
               aria-label={`View ${image.alt}`}
+              title={image.alt}
               aria-pressed={requested === index}
               aria-busy={requested === index && selected !== requested}
               aria-controls={imageId}
               onClick={() => setRequested(index)}
             >
-              <span className="product-gallery-thumbnail-photo"><ProductPhoto src={image.src} alt="" sizes="(max-width: 640px) 150px, 72px" /></span>
+              <span className="product-gallery-thumbnail-photo"><ProductPhoto src={image.src} alt="" sizes="(max-width: 640px) 44px, 64px" /></span>
             </button>
           ))}
         </div>

@@ -53,7 +53,7 @@ function mountGifting(app, { db, cookie, run, gateway = null }) {
     res.json({ boxes: publicBoxes, items: priced, mode: 'DRAFT' });
   }));
   app.get(`${base}/count`, run(async (req, res) => {
-    const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key });
+    const key = owner(req); const draft = key && await db.models.GiftDraft.findOne({ ownerHash: key }).select({ _id: 0, 'items.quantity': 1 }).lean();
     res.json({ count: draft ? draft.items.reduce((n, i) => n + i.quantity, 0) : 0 });
   }));
   app.get(`${base}/draft`, run(async (req, res) => {

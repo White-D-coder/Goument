@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { api, ApiError } from '@/lib/api';
 import { giftApi, useGiftDraft, type Draft } from '@/hooks/useGiftDraft';
+import { useTwoRowScroll } from '@/hooks/useTwoRowScroll';
 import { envelopePack, isEnvelopeGift } from '@/lib/envelope-packs';
 import { estimateGiftCart, priceRangeLabel, type PriceRange } from '@/lib/gift-cart-pricing';
 import QuantityControl from './QuantityControl';
@@ -20,6 +21,8 @@ function PriceAmount({ value }: { value: PriceRange }) {
 export default function GiftCart() {
   const router = useRouter();
   const { draft, catalogue, error, busy, change, personalise, reload } = useGiftDraft();
+  const contained = Boolean(catalogue && draft && draft.items.length > 2);
+  const productList = useTwoRowScroll(contained, (draft?.items || []).slice(0, 2).map(row => row.id).join('|'), '.gift-cart-row');
   const [review, setReview] = useState('');
   const [checking, setChecking] = useState(false);
   const nameDialog = useRef<HTMLDialogElement>(null);
@@ -78,7 +81,7 @@ export default function GiftCart() {
     } finally { setSavingName(false); }
   }
   return (
-    <section className="section gift-cart">
+    <section className={`section gift-cart${contained ? ' gift-cart--contained' : ''}`}>
       <p className="eyebrow">THOUGHTFULLY CHOSEN</p>
       <div className="section-heading">
         <h1><span className="cart-desktop-only">Your gift, coming together.</span><span className="cart-phone-only">Your gift bag</span></h1>
@@ -99,6 +102,7 @@ export default function GiftCart() {
           <div className="gift-cart-layout">
             <div className="gift-cart-items">
               <h2>Your little favourites</h2>
+              <div ref={productList} className="gift-cart-scroll">
               {draft.items.length ? (
                 draft.items.map(row => {
                   const item = catalogue.items.find(i => i.id === row.id);
@@ -144,6 +148,7 @@ export default function GiftCart() {
                   Your gift is waiting for its favourites. <Link className="text-link" href="/build">Choose items →</Link>
                 </p>
               )}
+              </div>
             </div>
 
             <aside className="gift-review">

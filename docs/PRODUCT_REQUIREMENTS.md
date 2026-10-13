@@ -1,3 +1,61 @@
+## 2026-10-13 — Vertical product thumbnail gallery (R249)
+
+R249 CURRENT / IMPLEMENTED locally: product-page thumbnails must be smaller and vertical to the main image’s left; selecting one displays that photo in the main frame. Sources ProductGallery.tsx, products/[slug]/page.tsx and product-detail.css. Existing hamper detail photos are selectable gallery entries, including all four Ivory close-ups. Browser verification at1440/1024/768/375/320px confirms layout, all image selections, desktop height alignment and no horizontal overflow; single-photo behavior verified at1440/375px. No deployment.
+
+## 2026-10-13 — Compact Ivory product layout (R248)
+
+CURRENT / IMPLEMENTED locally: above900px, Ivory’s four existing photographed close-ups span both hero columns in one row, replacing the left-only2×2 supplement that left the purchase-column bottom empty. Main gallery/purchase heights remain aligned. Reduce hero bottom padding and related-section top padding to32px each; no added copy/content. Phone retains all four close-ups in2×2 and related carousel. Source products/[slug]/product-detail.css. Browser at1440/1024px verifies full-width supplement, single-row figures,18px panel-to-photos gap and32px supplement-to-related section gap;375/320px preserve2×2,three related cards and no overflow. Desktop screenshot inspected; git diff --check passes. No deployment.
+
+## 2026-10-13 — Match philosophy heading to packaging heading (R245)
+
+CURRENT / IMPLEMENTED locally: Gifting made easy uses the same responsive font-size rule as Beautifully packaged / Thoughtfully curated:clamp34px/4vw/48px,31px at641–700px,34px <=640px. Shared selector in home.css prevents heading-size drift. Supersedes only R242 philosophy heading reduction; smaller paragraph/value text retained. Browser verified equal computed sizes/no horizontal overflow at1440/1024/768/700/640/375/320px. git diff --check passes; no deployment.
+
+## 2026-10-13 — Match collection card widths to hampers (R244)
+
+CURRENT / IMPLEMENTED locally: remove the Home collection grid1020px desktop cap and match hamper gaps/columns above640px (3 columns/18px gap above900px;2 columns/16px at641–900px). This completes R243 width matching; previous work matched card internals but retained narrower collection grid. Existing phone two-column grid/fourth Explore tile preserved. Browser at1440/1024/950/900/768/641px verifies equal card widths within fractional rounding (1440:392px each, previously collection326.66px);375px phone regression passes; no overflow. CSS/diff checks pass; no deployment.
+
+## 2026-10-13 — Collection cards match hamper layout (R243)
+
+R243 CURRENT / IMPLEMENTED: pictured Home Envelopes/Candles/Stationery cards match hamper layout while retaining collection navigation and From prices. Sources HomeSections.tsx/storefront-cards.css/storefront-ui.css. Browser checks1440/768/375/320px compare matching corners/borders/photo ratios/content padding/title size, flush photographs and full-width actions; no overflow, correct collection links and phone Explore tile preserved. Scoped lint/typecheck pass; no deployment.
+
+## 2026-10-13 — Four FAQs followed by dropdown (R241)
+
+R241 CURRENT / IMPLEMENTED: show first4 Home FAQs and put all remaining questions in an expandable dropdown immediately after question4. Sources HomeFAQ.tsx/home.css/storefront-ui.css. Supersedes earlier3-row scroll instruction. Browser verifies4→6→4 visible questions, Space-key expansion, nested answer opening and no horizontal overflow at1440/375/320px; scoped lint/typecheck pass.
+
+## 2026-10-13 — Phone Explore all gifts card (R237)
+
+R237 CURRENT / IMPLEMENTED: phone Home collection grid gets a white-text/burgundy Explore card opening All gifts (/shop). Sources b2c/page.tsx and home.css. Local browser verified320/375/430px visibility, adjacent equal height, no overflow;768/1440px hidden; navigation to /shop succeeds. Scoped lint/typecheck pass; no deployment.
+
+## 2026-10-13 — Compact Home card title spacing (R236)
+
+R236 CURRENT / IMPLEMENTED: reduce pictured Home collection title/paragraph gap. Source storefront-cards.css; reserve two title lines only on phone. Local browser verifies8px element gap at1440/1024/375px, natural one-line desktop titles, aligned phone titles and no horizontal overflow. No deployment.
+
+## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
+
+| Requirement | Current status and traceability |
+| --- | --- |
+| R234 /cart fixed after two products; scroll products only | CURRENT / IMPLEMENTED: GiftCart.tsx/gift-cart.css/useTwoRowScroll.ts; >2 distinct rows enable viewport containment; heading/summary/checkout fixed; <=2 restores ordinary scroll/footer. Clarifies R230 applies to full cart, beyond earlier tray-only interpretation. |
+| R235 all product-page thumbnails visible on phone | CURRENT / IMPLEMENTED: product-detail.css wraps all gallery views and unhides real photographed close-ups, preserving empty-block hiding and related carousel. |
+
+TESTING owns responsive/browser evidence. Existing pricing, required Lotus names, customer ownership, stock/payment authority and included charges remain unchanged; no deployment claimed.
+
+## 2026-10-13 — Ivory close-up photos and packaging panel opacity (R231–R233)
+
+R231 CURRENT / IMPLEMENTED: supplied Farmley Panchmeva pouch appears beside existing Ivory Thekua/Chilli close-ups. R232 CURRENT / IMPLEMENTED: Laddoo candles joins the same area via existing approved photo. Sources product-editorial.ts, products/[slug]/page.tsx, supplied/compressed public asset; no new product/SKU. R233 CURRENT / IMPLEMENTED: pictured Home packaging-copy background90% opacity, copy/actions fully opaque; home.css. PERFORMANCE/TESTING own asset and browser checks.
+
+## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
+
+| Requirement | Current status and traceability |
+| --- | --- |
+| R229 Add opens closable right tray; keep adding with it open | CURRENT / IMPLEMENTED: CartTray/cart-tray.css/StorefrontChrome; successful Add/builder/legacy additions → gift-cart-events; existing quantity/cart pricing; tests/browser evidence in TESTING |
+| R230 two options then fixed tray with list-only scrolling | CURRENT / IMPLEMENTED: first-two-row cap, fixed heading/summary/action, viewport-bound flex list and limited ResizeObserver; responsive browser evidence in TESTING |
+
+Existing prices/included GST-delivery/stock reservations/customer identity/required Lotus names/payment authorization unchanged. No hosted deployment claimed.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+R228 CURRENT / IMPLEMENTED locally: investigate user-reported hosted gift/count wait and reduce duplicate requests without corrupting badge/session ownership. Header/gift-cart share pending shopping draft; routes.js projects count quantities; tests cover freshness/failure/owners/streamed hydration. CURRENT / PARTIAL hosted: warm samples260–320ms and initial503; no deployment or20ms guarantee. PERFORMANCE/TESTING own measurements and limitations.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 | Requirement | Status and traceability |

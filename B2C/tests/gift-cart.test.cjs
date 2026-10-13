@@ -18,8 +18,74 @@ function load(api) {
  const source = fs.readFileSync(path.join(__dirname, '../src/lib/gift-cart.ts'), 'utf8');
  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
  vm.runInNewContext(compiled, { exports, require: name => { if (name === './gift-cart-events') return eventExports; assert.equal(name, './api'); return { api, ApiError }; }, window, Event });
- return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, personalise: exports.saveGiftPersonalisation, read: exports.readGiftDraft, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events, cartEvents };
+ return { add: exports.addGiftItem, change: exports.changeGiftItemQuantity, ensure: exports.ensureGiftItem, personalise: exports.saveGiftPersonalisation, read: exports.readGiftDraft, count: exports.readGiftCount, waitForAdditions: exports.waitForGiftCartAdditions, beforeSignIn: exports.waitForGiftCartBeforeSignIn, queueWrite: exports.queueGiftCartWrite, events, cartEvents };
 }
+
+test('badge joins a same-mount draft read instead of making a separate count request', async () => {
+ const calls = [];
+ let release;
+ const cart = load(url => { calls.push(url); return new Promise(resolve => { release = resolve; }); });
+ const count = cart.count();
+ const draft = cart.read();
+ await new Promise(resolve => setImmediate(resolve));
+ assert.deepEqual(calls, ['/auth/gift/draft']);
+ release({ ...empty(), items: [{ id: 'first', quantity: 99 }, { id: 'second', quantity: 2 }] });
+ assert.equal((await count).count, 101);
+ await draft;
+});
+
+test('badge shares a queued draft after an earlier write, not an older selection', async () => {
+ let release;
+ const hold = new Promise(resolve => { release = resolve; });
+ const calls = [], cart = load(async url => { calls.push(url); return { ...empty(), items: [{ id: 'latest', quantity: 7 }] }; });
+ const write = cart.queueWrite(() => hold);
+ const draft = cart.read(), count = cart.count();
+ await new Promise(resolve => setImmediate(resolve));
+ assert.equal(calls.length, 0);
+ release(); await write;
+ assert.equal((await count).count, 7); await draft;
+ assert.deepEqual(calls, ['/auth/gift/draft']);
+});
+
+test('shopping badge starts one shared read before streamed controls mount', async () => {
+ const calls = [];
+ let release;
+ const cart = load(url => { calls.push(url); return new Promise(resolve => { release = resolve; }); });
+ const count = cart.count(true);
+ await new Promise(resolve => setImmediate(resolve));
+ const draft = cart.read();
+ assert.deepEqual(calls, ['/auth/gift/draft']);
+ release({ ...empty(), items: [{ id: 'latest', quantity: 3 }] });
+ assert.equal((await count).count, 3); await draft;
+});
+
+test('badge keeps a fresh count-only fallback without creating or caching draft sessions', async () => {
+ const calls = [];
+ const cart = load(async url => { calls.push(url); return { count: calls.length }; });
+ assert.equal((await cart.count()).count, 1);
+ assert.equal((await cart.count()).count, 2);
+ assert.deepEqual(calls, ['/auth/gift/count', '/auth/gift/count']);
+ assert.deepEqual(cart.events, []);
+});
+
+test('badge does not cache settled selections or add a count request after draft failure', async () => {
+ const calls = [];
+ let fail = true;
+ const cart = load(async url => {
+  calls.push(url);
+  if (url.endsWith('/count')) return { count: 8 };
+  if (fail) throw new ApiError('Unavailable', 503);
+  return empty();
+ });
+ const first = cart.read(), count = cart.count();
+ const failures = await Promise.allSettled([first, count]);
+ assert.ok(failures.every(result => result.status === 'rejected'));
+ assert.deepEqual(calls, ['/auth/gift/draft']);
+ fail = false;
+ await cart.read();
+ assert.equal((await cart.count()).count, 8);
+ assert.deepEqual(calls, ['/auth/gift/draft', '/auth/gift/draft', '/auth/gift/count']);
+});
 
 test('cart listeners receive the saved server selection with no follow-up read', async () => {
  const calls = [];
@@ -27,7 +93,7 @@ test('cart listeners receive the saved server selection with no follow-up read',
  const { add, cartEvents } = load(async (_url, method) => { calls.push(method || 'GET'); return method ? confirmed : empty(); });
  await add('requested');
  assert.deepEqual(calls, ['GET', 'PUT']);
- assert.deepEqual(plain(cartEvents[0].detail), { items: confirmed.items });
+ assert.deepEqual(plain(cartEvents[0].detail), { items: confirmed.items, draft: confirmed });
 });
 
 test('a grid shares one cart read, then refreshes from the latest confirmed write', async () => {

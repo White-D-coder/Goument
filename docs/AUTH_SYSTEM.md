@@ -1,3 +1,7 @@
+## 2026-10-12 — Hosted count request optimization (R228)
+
+CURRENT / IMPLEMENTED client only: shopping navbar badge joins/starts pending browser-owned gift draft read; account/non-shopping uses count-only fallback. Auth/me refresh remains independent from cart updates and all server identity/Origin/rate/no-store rules remain. No settled private cart/auth cache or guest/account ownership merge. See API_CONTRACTS/TESTING.
+
 ## 2026-10-12 — Bounded temporary bootstrap failure recovery (R214)
 
 CURRENT / IMPLEMENTED locally: allowlisted me/config/gift-count/catalogue/draft GETs retry a503 once after a finite server cooldown≤1s (default1s); credentials/cookies/auth ownership unchanged.401/429 and all auth/cart/order mutations are never auto replayed. Existing concurrent bootstrap sharing and draft read/write queue retained; no settled private cache or permission fabrication. Persistent failures remain errors/manual Retry. TESTING/API_CONTRACTS own exact boundaries and evidence; hosted failure cause UNKNOWN.

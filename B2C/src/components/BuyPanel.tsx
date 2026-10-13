@@ -4,6 +4,7 @@ import { useId, useState } from 'react';
 import Link from 'next/link';
 import { Minus, Plus } from 'lucide-react';
 import { cartMutation } from '@/lib/api';
+import { announceCartAddition } from '@/lib/gift-cart-events';
 import { Product, money } from '@/lib/types';
 import { giftingEnquiry } from '@/lib/product-editorial';
 import { productPriceLabel } from '@/lib/product-pricing';
@@ -27,6 +28,7 @@ export default function BuyPanel({ product }: { product: Product }) {
     setBusy(true); setAdded(false); setMessage('');
     try {
       await cartMutation('POST', '/cart/items', { productId: product._id, variantSku: sku || undefined, quantity });
+      announceCartAddition({ source: 'store' });
       setAdded(true); setMessage('Added to your bag.');
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Could not add this gift.');

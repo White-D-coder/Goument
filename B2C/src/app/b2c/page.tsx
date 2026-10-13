@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import HomeHero from '@/components/home/HomeHero';
 import HomeFAQ from '@/components/home/HomeFAQ';
 import { BrandPhilosophy, CorporateBand, HomeCollectionCard, HomeHamperCard, HomeMobileCategories, PackagingFeature, SectionHeading } from '@/components/home/HomeSections';
@@ -41,7 +43,14 @@ export default function Home() {
 
     <section className="tgg-favourites tgg-section" aria-labelledby="favourites-heading">
       <SectionHeading kicker="Our favourites" title="Thoughtful picks just for you" id="favourites-heading" href="/shop" action="View all gifts" />
-      <div className="tgg-favourite-grid tgg-collection-grid">{homeCollections.map(collection => <HomeCollectionCard key={collection.href} {...collection} />)}</div>
+      <div className="tgg-favourite-grid tgg-collection-grid">
+        {homeCollections.map(collection => <HomeCollectionCard key={collection.href} {...collection} />)}
+        <Link className="tgg-explore-all-card" href="/shop" aria-label="Explore all gifts">
+          <span className="tgg-explore-all-title">Explore</span>
+          <span>All gifts</span>
+          <ArrowRight size={28} aria-hidden="true" />
+        </Link>
+      </div>
     </section>
 
     <PackagingFeature />

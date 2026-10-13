@@ -112,10 +112,10 @@
   --action-hover-border: #ded7cc;
 }
 
-/* Replace the old tablet arrow circle with the same labelled card action. */
+/* Collection actions span the content width, like hamper purchase actions. */
 #main .tgg-home .tgg-collection-card .tgg-collection-link {
   width: 100%;
-  max-width: 180px;
+  max-width: none;
   height: auto;
   align-self: center;
   margin-top: auto;
@@ -157,4 +157,4 @@ footer.tgg-reference-footer :is(
 #main hr, footer.tgg-reference-footer hr { display: none; }
 
 /* FAQ questions are the sole decorative row-divider exception. */
-#main .tgg-faq .tgg-faq-item:nth-child(-n + 5) { border-bottom: 1px solid var(--tgg-line) !important; }
+#main .tgg-faq .tgg-faq-item--divided { border-bottom: 1px solid var(--tgg-line) !important; }

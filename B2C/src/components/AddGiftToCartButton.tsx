@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
 import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, readGiftDraft, saveGiftPersonalisation } from '@/lib/gift-cart';
 import QuantityControl from './QuantityControl';
-import { giftCartItemsFromEvent } from '@/lib/gift-cart-events';
+import { announceCartAddition, giftCartItemsFromEvent } from '@/lib/gift-cart-events';
 import { printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
 import PrintNameField from './PrintNameField';
 
@@ -70,6 +70,7 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
   try {
    const draft = await (change === 1 ? addGiftItem(itemId, nameChoice()) : changeGiftItemQuantity(itemId, change));
    setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
+   if (change === 1) announceCartAddition({ source: 'gift', draft });
    if (change === 1) { nameEdited.current = false; setNameDirty(false); }
    setStatus(withQuantity ? 'idle' : 'added');
    setMessage(withQuantity ? '' : 'Added to your cart.');

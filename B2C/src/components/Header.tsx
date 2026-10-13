@@ -9,6 +9,7 @@ import { api } from '@/lib/api';
 import { User } from '@/lib/types';
 import { storefrontNavigation } from '@/lib/storefront-navigation';
 import { giftCartItemsFromEvent } from '@/lib/gift-cart-events';
+import { readGiftCount } from '@/lib/gift-cart';
 export default function Header() {
  const pathname = usePathname();
  const isHome = pathname === '/' || pathname === '/b2c';
@@ -29,7 +30,10 @@ export default function Header() {
     setCount(items.reduce((total, item) => total + item.quantity, 0));
     return;
    }
-   api<{count:number}>('/auth/gift/count').then(r => {
+   // Start the shared read before streamed shopping controls hydrate. Pages
+   // without those controls keep the smaller, non-cookie-creating count read.
+   const shoppingPage = /^(?:\/$|\/b2c\/?$|\/shop(?:\/|$)|\/products\/)/.test(window.location.pathname);
+   readGiftCount(shoppingPage).then(r => {
 	if(active && currentRequest === requestId) setCount(r.count);
    }).catch(() => { /* Keep the last confirmed count when the service is unavailable. */ });
 

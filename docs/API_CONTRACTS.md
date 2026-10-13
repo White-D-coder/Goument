@@ -1,3 +1,11 @@
+## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
+
+CURRENT / IMPLEMENTED internal browser events only: b2c-cart-change detail now {items,draft}; existing items-only consumers remain compatible. Full draft includes revision, boxes, pack IDs and print metadata; mounted hook/tray validate shape before adopting it. b2c-cart-added detail is {source:gift,draft} or {source:store}, emitted by successful Add UI, not initial reads, failed saves, name-only edits or Buy now redirects. This is a UI notification, not a server authority/ownership change. Gift tray consumes confirmed draft with no count/draft fetch; first opening reads existing public gift/catalogue once for current display metadata/prices. Legacy tray uses existing /cart DTO independently. HTTP contracts unchanged; View Cart preserves full review/name/checkout checks.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+CURRENT / IMPLEMENTED /auth/gift/count response remains {count:number}, cookie-owned/private,no-store and non-cookie-creating; invalid/missing cookie returns0 without lookup. Existing valid-owner query projects only items.quantity via lean(), no response/model change. Browser shopping Header obtains count from its shared pending /gift/draft read instead of separate count call; other pages retain endpoint fallback. Draft first-cookie handshake/read/write serialization, revisions, auth/write/rate contracts unchanged.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 CURRENT / IMPLEMENTED gift/catalogue has30 registered IDs after adding vibrant_art_bookmarks (vibrant-art-bookmarks) and wanderlust_bookmarks (wanderlust-bookmarks). Each has approved display34900paise; payable quote still reads mapped active Mongo variants. Existing catalogue fields, draft revisions/ownership, payment/order contracts unchanged. Distinct IDs remain distinct rows/stock pools; original bookmarks retained.

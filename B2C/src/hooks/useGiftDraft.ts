@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { api, ApiError } from '@/lib/api';
 import { queueGiftCartWrite } from '@/lib/gift-cart';
-import { publishGiftCart } from '@/lib/gift-cart-events';
+import { announceCartAddition, giftCartDraftFromEvent, publishGiftCart } from '@/lib/gift-cart-events';
 import type { GiftPersonalisation } from '@/lib/gift-personalisation';
 export type Selection = {id:string;quantity:number;personalisation?:GiftPersonalisation};
 export type Draft = {revision:number;boxes:Selection[];items:Selection[];packing:'EMPTY'|'CHOOSE_BOX'|'NEEDS_BOXES'|'READY';checkoutAvailable:boolean};
@@ -16,6 +16,11 @@ export function useGiftDraft(selectedBox?:string) {
  const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [retry,setRetry]=useState(0);
  const locked=useRef(false);const current=useRef<Draft|null>(null);
  const publish=useCallback((value:Draft)=>{current.current=value;setDraft(value);publishGiftCart(value);},[]);
+ useEffect(()=>{
+  const confirmed=(event:Event)=>{const value=giftCartDraftFromEvent(event);if(value){current.current=value;setDraft(value);}};
+  window.addEventListener('b2c-cart-change',confirmed);
+  return()=>window.removeEventListener('b2c-cart-change',confirmed);
+ },[]);
  useEffect(()=>{
   let active=true;
   async function load() {
@@ -51,7 +56,11 @@ export function useGiftDraft(selectedBox?:string) {
   // Keep the row under the shopper's finger when its quantity changes.
   const rows=value[kind].flatMap(row=>row.id!==id?[row]:quantity>0?[{...row,quantity}]:[]);
   if(quantity>0&&!value[kind].some(row=>row.id===id))rows.push({id,quantity});
-  return save(kind==='boxes'?rows:value.boxes,kind==='items'?rows:value.items);
+  const adding = kind==='items' && quantity > (value.items.find(row=>row.id===id)?.quantity || 0);
+  return save(kind==='boxes'?rows:value.boxes,kind==='items'?rows:value.items).then(saved=>{
+   if(saved && adding)announceCartAddition({source:'gift',draft:saved});
+   return saved;
+  });
  };
  const personalise=(id:string,personalisation:GiftPersonalisation)=>{
   const value=current.current;if(!value||!value.items.some(row=>row.id===id))return Promise.resolve(undefined);

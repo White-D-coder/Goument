@@ -1,3 +1,22 @@
+## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
+
+- [x] R234 implement corrected full /cart two-row scrolling requirement: >2 rows fixed viewport/summary, independent product scrolling; <=2 restores page/footer. Preserve required-name dialog and price calculations.
+- [x] R235 show all phone product gallery thumbnails and photographed close-ups, without empty blocks; shared tray sizing regression checked.84 frontend tests/typecheck/lint/final build and responsive browser checks pass; TESTING owns evidence/limits. Existing deployment/performance/commerce priorities remain unchanged.
+
+## 2026-10-13 — Ivory close-up photos and packaging panel opacity (R231–R233)
+
+- [x] R231–R233 supplied Farmley pouch + existing Laddoo photo on Ivory close-ups; background90% alpha on Home packaging copy, text/actions opaque. Typecheck/scoped lint/build/photo/viewport checks pass; TESTING owns evidence. Existing deployment/performance/commercial priorities unchanged.
+
+## 2026-10-13 — Cart tray complete locally (R229–R230)
+
+- [x] Non-modal right cart tray after confirmed Add; desktop reflow/phone compact layout; keep shopping while open; X/Escape; accurate quantities/inclusive subtotal/pack/name display and full-cart review route. Separate legacy cart retained.
+- [x] Latest two-item cap with list-only scrolling and stationary heading/subtotal/action; responsive real-pointer checks and84 client regressions/build/lint/typecheck pass. TESTING owns evidence/limits. Existing hosted deployment/physical-device performance priorities remain open and unchanged.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+- [x] R228 source/UI count optimization: shopping badge and cards share pending draft; count fallback projects quantities/lean and retains privacy/freshness.81 client/21 gifting regressions and production browser checks pass.
+- [ ] R228 hosted follow-up within existing performance priority: deploy reviewed frontend/backend changes through normal release flow, verify count/draft behavior with real storefront, inspect hosting/dependency logs for transient503 and measure actual region/cold-start/database latency. Existing20ms/physical-device target remains open; no infrastructure cause established or deployment performed.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 Completed within current authorized scope; existing priorities unchanged:

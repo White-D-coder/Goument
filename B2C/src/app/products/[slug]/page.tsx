@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import BuyPanel from '@/components/BuyPanel';
 import ProductGallery from '@/components/ProductGallery';
-import ProductPhoto from '@/components/ProductPhoto';
 import { productBySlug } from '@/lib/catalogue';
 import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
@@ -35,9 +34,13 @@ export default async function Detail({ params }: PageProps) {
   const editorial = productEditorial(product);
   const isIvory = product.slug === 'ivory-hamper';
   const isEnvelope = PHOTOGRAPHED_ENVELOPES.some(item => item.slug === product.slug);
-  const gallery = product.images.length
+  const productPhotos = product.images.length
     ? product.images.map(image => ({ src: productImage({ ...product, images: [image] }), alt: image.alt || product.name }))
     : [{ src: productImage(product), alt: product.name }];
+  const closeUps = editorial.isPhotographedHamper
+    ? editorial.story.flatMap(item => item.image ? [{ src: item.image, alt: item.alt || item.title }] : [])
+    : [];
+  const gallery = [...productPhotos, ...closeUps].filter((image, index, images) => images.findIndex(other => other.src === image.src) === index);
 
   return <div className={`product-detail-edit pdp${isIvory ? ' pdp-ivory' : ''}${isEnvelope ? ' pdp-envelope' : ''}`}>
     {isIvory && <Link className="pdp-mobile-back pdp-wrap" href="/shop/hampers"><span aria-hidden="true">←</span> All hampers</Link>}
@@ -61,15 +64,6 @@ export default async function Detail({ params }: PageProps) {
           {CURATED_HAMPERS.filter(item => item.slug.startsWith('india-hamper')).map(item => <Link key={item.slug} href={`/products/${item.slug}`} aria-current={item.slug === product.slug ? 'page' : undefined}>{item.slug.endsWith('lavender') ? 'Lavender' : 'Burgundy'}</Link>)}
         </nav>}
         <BuyPanel key={`purchase-${product.slug}`} product={product}/>
-      </div>
-      <div className="pdp-gallery-supplement">
-        {editorial.isPhotographedHamper && <div className="pdp-gallery-details">
-          {editorial.story.slice(0, 2).map(item => <figure key={item.title}>
-            <div className="pdp-detail-photo"><ProductPhoto src={item.image!} alt={item.alt!} sizes="(max-width: 600px) 45vw, 28vw"/></div>
-            <figcaption>{item.title}</figcaption>
-          </figure>)}
-        </div>}
-        <p className="pdp-photo-caption">{editorial.isPhotographedHamper ? 'A closer look at the photographed curation.' : 'The details make the gesture.'}</p>
       </div>
     </section>
 

@@ -18,6 +18,26 @@ test('catalogue hides server capacities and browser cookie is opaque, HttpOnly; 
  const count=await request(app).get(base+'/count');expect(count.headers['set-cookie']).toBeUndefined();
  const start=await request(app).get(base+'/draft');expect(start.headers['set-cookie'][0]).toMatch(/HttpOnly/);expect(start.headers['set-cookie'][0]).toMatch(/SameSite=Lax/);
 });
+test('count reads only the cookie-owned quantity total and stays fresh after edits',async()=>{
+ const a=request.agent(app),b=request.agent(app);
+ const lookup=jest.spyOn(db.models.GiftDraft,'findOne');
+ try {
+  for(const cookie of [null,'b2c_gift=invalid']){
+   const query=request(app).get(base+'/count');if(cookie)query.set('Cookie',cookie);
+   const result=await query.expect(200);expect(result.body).toEqual({count:0});expect(result.headers['set-cookie']).toBeUndefined();
+  }
+  expect(lookup).not.toHaveBeenCalled();
+ }finally{lookup.mockRestore();}
+ await a.get(base+'/draft');await b.get(base+'/draft');
+ const rows=[{id:'ivory_hamper',quantity:99},{id:'india_hamper_burgundy',quantity:2}];
+ let draft=(await save(a,{revision:0,boxes:[],items:rows}).expect(200)).body;
+ const counted=await a.get(base+'/count').expect(200);expect(counted.body).toEqual({count:101});expect(counted.headers['cache-control']).toBe('private, no-store');
+ expect((await b.get(base+'/count').expect(200)).body).toEqual({count:0});
+ draft=(await save(a,{revision:draft.revision,boxes:[],items:[{id:'ivory_hamper',quantity:3}]}).expect(200)).body;
+ expect((await a.get(base+'/count').expect(200)).body).toEqual({count:3});
+ await save(a,{revision:draft.revision,boxes:[],items:[]}).expect(200);
+ expect((await a.get(base+'/count').expect(200)).body).toEqual({count:0});
+});
 test('item-first packing is calculated on the server without customer-selected boxes',async()=>{
  const agent=request.agent(app);await login(agent);await agent.get(base+'/draft');
  let r=await save(agent,selection(4)).expect(200);expect(r.body.packing).toBe('READY');expect(r.body.fulfillment.looseBoxes).toBe(1);

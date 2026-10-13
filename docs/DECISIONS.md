@@ -1,3 +1,23 @@
+## 2026-10-13 — Compact Home card title spacing (R236)
+
+CURRENT / IMPLEMENTED: R236 narrows R227 two-line collection-title reservation to phone widths <=640px. At desktop/tablet, its empty second line caused the reported large title/paragraph gap. Preserve existing8px margin and phone alignment; no component or unrelated card redesign.
+
+## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
+
+CURRENT / IMPLEMENTED: the explicit /cart URL correction establishes that R230's two-product scroll requirement applies to the full cart. Prior tray-only interpretation was incomplete; retain that useful cap and implement full-page containment for >2 distinct rows. Use a measured two-row maximum bounded by viewport space, with a fixed visible summary/checkout. Short phones may show fewer than two complete rows so controls remain reachable. Hide footer only during contained mode and release automatically on removal/navigation, with no imperative global scroll lock.
+
+CURRENT / IMPLEMENTED: latest phone request SUPERSEDES hidden hamper supplement rules. Wrap all selectable gallery thumbnails and show all image-backed close-ups. Unhide only actual details to avoid blank grid gaps on non-hamper pages. Reuse shared limited ResizeObserver sizing for cart/tray, preserving finance/name/identity invariants. No deployment authorized or performed.
+
+## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
+
+CURRENT / IMPLEMENTED R229: user explicitly requires a right cart tray that can remain open while shopping. Choose non-modal aside and desktop main reflow, with compact viewport-limited lower-right presentation on phone/tablet; preserve full cart as review/checkout rather than bypass required printing-name/payment checks. Emit opening only after successful Add; carry confirmed full draft in existing change event so tray edits cannot leave builder on a stale revision. Keep legacy cart separate under its established route and subtotal.
+
+R230 latest user steer fixes heading/subtotal/action and caps list at two actual item row heights, constrained by available phone viewport. Observe two rows only instead of scrolling the whole panel or continuously measuring page scroll. Initial real-click test found disabled/replaced Add could not receive focus on close; use connected focusable control, containing purchase control or header bag fallback. No financial policy/model/deployment change.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+CURRENT / IMPLEMENTED R228: reported count delay is response waiting, not image-transfer cost; avoid redundant count fetch where storefront already needs the draft. Initial microtask-only reuse failed to remove the request on streamed Shop hydration, so shopping Header explicitly starts the same queued pending draft; non-shopping keeps lighter count-only behavior. Retain no settled private cache, no optimistic/fabricated count, no mutation retries. Quantity-only lean count query is a separate bounded optimization. Exact hosted503/latency cause remains UNKNOWN; code/browser improvements do not establish a20ms hosted SLA or authorize deployment.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 CURRENT / IMPLEMENTED decision: user explicitly approves both newly supplied bookmark designs at ₹349 each; preserve independent products/cart IDs and existing bookmark. Reuse current catalogue/admin stock provisioning, initial100 each per existing approval; no reset of existing stock or historical snapshots.

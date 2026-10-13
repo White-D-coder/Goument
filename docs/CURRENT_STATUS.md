@@ -1,3 +1,73 @@
+## 2026-10-13 — Vertical product thumbnail gallery (R249)
+
+CURRENT / IMPLEMENTED locally: product pages use compact left-side thumbnail rails (64px desktop/tablet,44px phone); clicking a thumbnail replaces the main photo after loading. Photographed hamper close-ups join the selectable gallery, including Ivory’s Thekua, Chilli Cheese, Laddoo and Farmley pouch. Single-photo products reserve no empty rail. Phone main frame has244px minimum height, showing all five current Ivory thumbnails. Main/purchase desktop heights and related carousel retained. Scoped ESLint/typecheck and local browser checks pass; TESTING owns evidence. No deployment.
+
+## 2026-10-13 — Compact Ivory product layout (R248)
+
+CURRENT / IMPLEMENTED locally: above900px, Ivory’s four existing photographed close-ups span both hero columns in one row, replacing the left-only2×2 supplement that left the purchase-column bottom empty. Main gallery/purchase heights remain aligned. Reduce hero bottom padding and related-section top padding to32px each; no added copy/content. Phone retains all four close-ups in2×2 and related carousel. Source products/[slug]/product-detail.css. Browser at1440/1024px verifies full-width supplement, single-row figures,18px panel-to-photos gap and32px supplement-to-related section gap;375/320px preserve2×2,three related cards and no overflow. Desktop screenshot inspected; git diff --check passes. No deployment.
+
+## 2026-10-13 — Restore value-strip captions (R247)
+
+CURRENT / IMPLEMENTED locally: user clarified that the four icon/value-strip captions must remain. Restore all four original sentences in HomeSections.tsx; keep the shortened introductory paragraph. SUPERSEDES only R246 caption removal, which was an over-broad interpretation. Existing typography/phone visibility rules retained. Scoped ESLint and git diff --check pass; no browser rerun or deployment for this text restoration.
+
+## 2026-10-13 — Shorter philosophy copy (R246)
+
+CURRENT / IMPLEMENTED locally: shorten philosophy intro to “Thoughtful gifts, chosen with care.” and remove the four redundant caption sentences below the value titles. Keep icons, value titles, packaging-matched heading size and layout. Source HomeSections.tsx. Scoped ESLint and git diff --check pass; no browser rerun or deployment for this copy reduction.
+
+## 2026-10-13 — Match philosophy heading to packaging heading (R245)
+
+CURRENT / IMPLEMENTED locally: Gifting made easy uses the same responsive font-size rule as Beautifully packaged / Thoughtfully curated:clamp34px/4vw/48px,31px at641–700px,34px <=640px. Shared selector in home.css prevents heading-size drift. Supersedes only R242 philosophy heading reduction; smaller paragraph/value text retained. Browser verified equal computed sizes/no horizontal overflow at1440/1024/768/700/640/375/320px. git diff --check passes; no deployment.
+
+## 2026-10-13 — Match collection card widths to hampers (R244)
+
+CURRENT / IMPLEMENTED locally: remove the Home collection grid1020px desktop cap and match hamper gaps/columns above640px (3 columns/18px gap above900px;2 columns/16px at641–900px). This completes R243 width matching; previous work matched card internals but retained narrower collection grid. Existing phone two-column grid/fourth Explore tile preserved. Browser at1440/1024/950/900/768/641px verifies equal card widths within fractional rounding (1440:392px each, previously collection326.66px);375px phone regression passes; no overflow. CSS/diff checks pass; no deployment.
+
+## 2026-10-13 — Collection cards match hamper layout (R243)
+
+CURRENT / IMPLEMENTED locally: three Home collection cards reuse hamper card/photo/content/price/action layout, with edge-to-edge photographs, matching corners and content padding, centered typography and full-width collection buttons. Retain collection destinations, From prices, phone two-column grid and fourth Explore tile. Scoped lint/typecheck and four-viewport comparison pass; no deployment.
+
+## 2026-10-13 — Smaller philosophy-section typography (R242)
+
+CURRENT / IMPLEMENTED locally: reduce pictured Gifting made easy section typography slightly: desktop heading clamp28px/3.2vw/40px (previous30px/3.5vw/44px), value labels15px (previous16px), introductory paragraph/captions14px (previous rendered15px global paragraph rule). Existing phone heading/labels/layout retained. Source home.css. Browser verified1440/1024/375px rendered sizes and no horizontal overflow; git diff --check passes. No deployment.
+
+## 2026-10-13 — Four FAQs followed by dropdown (R241)
+
+CURRENT / IMPLEMENTED locally: Home initially displays four FAQ questions, followed by native More questions disclosure for remaining entries. Expand changes label to Fewer questions; each answer retains existing accordion behavior. Latest instruction supersedes the interrupted R239 three-row scroll approach. Scoped lint/typecheck and browser checks at1440/375/320px pass. No deployment.
+
+## 2026-10-13 — Explore card matches button burgundy (R240)
+
+CURRENT / IMPLEMENTED locally: phone Explore All gifts card uses solid #4a0404 background/border, matching the adjacent Explore button. Supersedes R237 gradient only; white text/link/layout retained. Source home.css. CSS comparison and git diff --check verified; no deployment.
+
+## 2026-10-13 — More visible Home watermark (R238)
+
+CURRENT / IMPLEMENTED locally: increase the active Home body mandala watermark opacity from20% to25% for greater visibility on desktop and phone. User referenced15%; actual active source was20%. Existing mask, continuous header/Home background and foreground opacity retained. Source: B2C/src/app/b2c/home.css. CSS value and git diff --check verified; no browser rerun or deployment for this single-value change.
+
+## 2026-10-13 — Phone Explore all gifts card (R237)
+
+CURRENT / IMPLEMENTED locally: fourth Home collection-grid slot on phones is an Explore / All gifts link to /shop, with white text and burgundy gradient, matching the adjacent stationery card height. Hidden above640px. Scoped lint/typecheck and local browser checks pass; no deployment.
+
+## 2026-10-13 — Compact Home card title spacing (R236)
+
+CURRENT / IMPLEMENTED locally: Home collection titles no longer reserve a blank second line above640px; existing8px title-to-description margin retained. Phone two-line title reservation still aligns adjacent copy/prices. Browser checks at1440/1024/375px pass; no deployment.
+
+## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
+
+CURRENT / IMPLEMENTED locally: R234 corrects the earlier tray-only interpretation of R230. On /cart with more than two distinct product rows, viewport stays fixed; only the product list scrolls, capped by the first two measured rows and available height. Heading/order summary/checkout remain visible. Removing down to two rows restores ordinary page/footer scrolling. R235 shows every main-gallery thumbnail in wrapping phone rows and unhides actual photographed hamper close-ups (Ivory4/India2); empty supplements stay hidden. Shared useTwoRowScroll preserves tray behavior. TESTING owns verified evidence. No financial/API/model change or deployment.
+
+## 2026-10-13 — Ivory close-up photos and packaging panel opacity (R231–R233)
+
+CURRENT / IMPLEMENTED locally: Ivory product page adds supplied Farmley Panchmeva pouch and existing approved Laddoo candles photo alongside Thekua/Chilli Cheese in the established two-column close-up area. Render photographed story entries with images instead of hard limit2; India retains2. User supplied exact local pouch path after existing jar photo was found to differ; compressed web copy retains original. Home Beautifully packaged panel background now90% alpha at desktop/mobile, text/button opacity1. TESTING owns evidence; no commerce/model/deployment change.
+
+## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
+
+CURRENT / IMPLEMENTED locally: successful Home/catalogue/PDP/builder Add opens a right-side cart tray, showing confirmed items/photos/pack/print names, quantities and the existing inclusive subtotal. Further additions remain possible. Desktop browsing area reflows alongside it; smaller screens use a compact lower-right tray without backdrop/body scroll lock. Close/Escape dismiss it; full cart remains the review/required-name/checkout surface. Latest follow-up caps visible list to two measured rows, subject to viewport height; only the list scrolls while heading/subtotal/View Cart remain fixed. TESTING owns validation and limits; no deployment or financial/backend model change.
+
+## 2026-10-12 — Hosted count request optimization (R228)
+
+CURRENT / IMPLEMENTED locally: shopping Header uses the same pending cookie-owned draft read as Home/catalogue/PDP purchase controls, avoiding a separate count request. Non-shopping pages retain count-only fallback; confirmed mutation events still update the badge immediately and stale responses cannot replace them. Count query now projects only quantities and uses lean(), preserving ownership/private no-store/freshness. Browser and regression evidence in TESTING.
+
+CURRENT / PARTIAL hosted: user screenshot459.92ms total/458.04ms waiting. Public hosted read-only sample observed initial count503, later200~273ms; subsequent warm direct/proxied samples~260–320ms. Underlying transient failure/hosting dependency cause UNKNOWN. No deployment performed; hosted20ms target remains unverified.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 CURRENT / IMPLEMENTED locally: two distinct new bookmark cards/PDPs, Vibrant Art Bookmarks and Wanderlust Bookmarks, use the supplied compressed photographs and explicitly approved ₹349 each. Existing bookmark remains. Catalogue/cart/server mappings keep distinct identities; guarded local provisioning created only two new 100-unit stock pools without resetting existing inventory. Current mapped catalogue:20 products/29 SKU pools,30 registered gift IDs. Hosted provisioning/deployment remains unverified.

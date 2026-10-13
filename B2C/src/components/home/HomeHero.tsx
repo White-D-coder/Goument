@@ -21,7 +21,7 @@ export default function HomeHero() {
       <p className="tgg-hero-brand"><span className="tgg-hero-word" data-hero-word>The</span>{' '}<span className="tgg-hero-word" data-hero-word>Gourmet</span>{' '}<span className="tgg-hero-word" data-hero-word>Gifts</span></p>
       <h1 id="hero-title">
         <span className="tgg-hero-title-desktop">Make everyday<br className="tgg-desktop-break"/> moments special.</span>
-        <span className="tgg-hero-title-mobile"><span className="tgg-hero-word" data-hero-word>Good</span>{' '}<span className="tgg-hero-word" data-hero-word>gifts.</span><span className="tgg-hero-second-line"><span className="tgg-hero-word" data-hero-word>Great</span>{' '}<span className="tgg-hero-word" data-hero-word>moments.</span></span></span>
+        <span className="tgg-hero-title-mobile"><span className="tgg-hero-word" data-hero-word>Fine</span>{' '}<span className="tgg-hero-word" data-hero-word>gifts.</span><span className="tgg-hero-second-line"><span className="tgg-hero-word" data-hero-word>Lasting</span>{' '}<span className="tgg-hero-word" data-hero-word>joy.</span></span></span>
       </h1>
       <p className="tgg-hero-description">Curated hampers and thoughtful finds to celebrate the people and moments that matter.</p>
       <Link className="tgg-button" href="/shop">Shop now <ArrowRight size={17} aria-hidden="true"/></Link>

@@ -1,3 +1,23 @@
+## 2026-10-13 — Compact desktop catalogue frames (R254)
+
+CURRENT / IMPLEMENTED locally: latest reference specifies compact card frame size with only existing contents. Replace R253 oversized desktop tracks with equal300px-minimum auto-fill tracks, landscape4:3 media and19–22px desktop Shop titles. This yields three columns at1280/1440/1920px and two at1024px. Preserve centered copy, description, price, cart controls, theme and phone layout; no reference-only wishlist/badges/image arrows added. Source storefront-cards.css. Local browser verifies all12 shown titles remain single-line and cards equal width with no overflow at1024/1280/1440/1920px; first-card heights approximately471/433/474/464px.375px phone regression unchanged. Desktop screenshot inspected; git diff --check passes. CSS-only; no deployment.
+
+## 2026-10-13 — Wider desktop catalogue cards (R253)
+
+CURRENT / IMPLEMENTED locally: widen desktop (>900px) Shop catalogue tracks using equal auto-fill columns with a responsive320–420px minimum. This gives the shown Diary/Laddoo/Bookmarks titles sufficient space without truncating or shrinking their shared typography. Existing phone/tablet grid, card styling and interactions remain. Source storefront-cards.css. Local browser at1024/1280/1440/1920px verifies all12 displayed catalogue titles on one line and equal card widths (approximately349/464/536/512px);375px retains two phone columns and no page overflow. git diff --check passes. CSS-only change; no deployment.
+
+## 2026-10-13 — Phone thumbnail carousel (R252)
+
+CURRENT / IMPLEMENTED locally: phone product thumbnails now form one horizontally scrollable, snap-aligned row beneath the main image. Each preview takes44% of the rail, showing two photos plus a next-photo peek. Native overflow scrolling replaces R250 two-column wrapping; existing click-to-select, full-width phone main photo, desktop/tablet vertical rail and single-image layout remain. CSS-only change in products/[slug]/product-detail.css; no timer, dependency or scroll-event JavaScript. Local browser checks at1440/1024/768/375/320px verify Ivory/India/Lotus layout and all photo selections, last thumbnail reachable through horizontal scrolling, no page overflow, and single-photo pages at1440/375px. Phone screenshot inspected and git diff --check passes. No deployment or physical-device swipe test.
+
+## 2026-10-13 — Refined phone hero headline (R251)
+
+CURRENT / IMPLEMENTED locally: replace phone hero Good gifts / Great moments with “Fine gifts. Lasting joy.” Retain four words/two lines; increase responsive heading from clamp34.5px/9vw/41px to36px/9.6vw/44px and explicitly use pure white #FFFFFF. Desktop headline, light dark photo shade, slideshow and CTA retained. Sources HomeHero.tsx/home.css. Scoped ESLint and local browser checks at320/375/430/640px verify two lines,36–44px text, computed white on every word and no overflow;768/1440px retain desktop headline mode. No deployment.
+
+## 2026-10-13 — Restore phone product gallery layout (R250)
+
+CURRENT / IMPLEMENTED locally: latest user correction supersedes R249 phone left rail only. At <=640px the main photo fills the available width with its earlier shortened aspect ratio; remove244px minimum and restore two-column thumbnail rows beneath it. All supplied gallery views remain selectable; desktop/tablet64px left rail remains. Responsive image sizes now match the wider phone main/thumbnail frames. Sources ProductGallery.tsx and product-detail.css. Scoped ESLint and local browser checks at1440/1024/768/375/320px verify Ivory/India/Lotus geometry, all thumbnail selections and no overflow; single-photo behavior checked at1440/375px. Phone screenshot inspected. No deployment or commerce changes.
+
 ## 2026-10-13 — Vertical product thumbnail gallery (R249)
 
 CURRENT / IMPLEMENTED locally: product pages use compact left-side thumbnail rails (64px desktop/tablet,44px phone); clicking a thumbnail replaces the main photo after loading. Photographed hamper close-ups join the selectable gallery, including Ivory’s Thekua, Chilli Cheese, Laddoo and Farmley pouch. Single-photo products reserve no empty rail. Phone main frame has244px minimum height, showing all five current Ivory thumbnails. Main/purchase desktop heights and related carousel retained. Scoped ESLint/typecheck and local browser checks pass; TESTING owns evidence. No deployment.

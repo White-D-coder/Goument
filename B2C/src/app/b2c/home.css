@@ -1348,7 +1348,7 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
   .tgg-hero-description,
   .tgg-hero-promises { display: none; }
   .tgg-hero-copy .tgg-hero-brand { display: block; margin: 0 0 8px; color: #fff; font-family: var(--font-jakarta); font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: .12em; }
-  #main .tgg-home .tgg-hero-copy h1 { max-width: none; color: #fff; font-family: var(--tgg-sans) !important; font-size: clamp(34.5px,9vw,41px); font-weight: 600; line-height: 1.16; letter-spacing: -.025em; text-shadow: none; }
+  #main .tgg-home .tgg-hero-copy h1 { max-width: none; color: #ffffff; font-family: var(--tgg-sans) !important; font-size: clamp(36px,9.6vw,44px); font-weight: 600; line-height: 1.16; letter-spacing: -.025em; text-shadow: none; }
   .tgg-hero-title-desktop { display: none; }
   .tgg-hero-title-mobile { display: block; }
   .tgg-hero-title-mobile > .tgg-hero-second-line { display: block; margin-top: 4px; color: inherit; font-weight: 500; }

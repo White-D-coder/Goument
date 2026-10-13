@@ -24,7 +24,7 @@ export default function ProductGallery({ images, name, contain = false }: {
           const image = images[index];
           if (!image) return null;
           return <div key={image.src} className="product-gallery-frame" style={{ visibility: index === selected ? 'visible' : 'hidden' }} aria-hidden={index !== selected}>
-            <ProductPhoto id={index === selected ? imageId : undefined} src={image.src} alt={image.alt} sizes="(max-width: 900px) 85vw, 52vw" priority
+            <ProductPhoto id={index === selected ? imageId : undefined} src={image.src} alt={image.alt} sizes="(max-width: 640px) 100vw, (max-width: 900px) 85vw, 52vw" priority
               onReady={() => { if (index === requested) setSelected(index); }}
               onUnavailable={() => { if (index === requested) setRequested(selected); }} />
           </div>;
@@ -43,7 +43,7 @@ export default function ProductGallery({ images, name, contain = false }: {
               aria-controls={imageId}
               onClick={() => setRequested(index)}
             >
-              <span className="product-gallery-thumbnail-photo"><ProductPhoto src={image.src} alt="" sizes="(max-width: 640px) 44px, 64px" /></span>
+              <span className="product-gallery-thumbnail-photo"><ProductPhoto src={image.src} alt="" sizes="(max-width: 640px) 45vw, 64px" /></span>
             </button>
           ))}
         </div>

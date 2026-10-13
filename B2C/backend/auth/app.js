@@ -55,11 +55,11 @@ function createAuthApp({ db, origin, clientId, clientSecret, provider, paymentGa
   }));
   app.post('/api/v1/auth/logout',run(async(req,res)=>{await service.logout(db,req.cookies[sessionName]);res.clearCookie(sessionName,cookie);res.json({success:true});}));
   app.get('/api/v1/auth/me',run(async(req,res)=>{
-    const user=await service.sessionUser(db,req.cookies[sessionName]);
-    const staff=user.roles.some(role=>['OWNER','ADMIN'].includes(role));
-    const customer=await db.models.Customer.findOne({userId:user._id,status:'ACTIVE'});
-    if(!customer&&!staff)throw service.failure('Customer account unavailable');
-    res.json({user:{id:String(user._id),...(customer?{customerId:String(customer._id)}:{}),email:user.email,name:customer?[customer.firstName,customer.lastName].filter(Boolean).join(' '):user.email,role:user.roles.includes('OWNER')?'owner':user.roles.includes('ADMIN')?'admin':'customer'}});
+    const started = performance.now();
+    let user;
+    try { user = await service.sessionProfile(db,req.cookies[sessionName]); }
+    finally { res.append('Server-Timing', `profile;dur=${(performance.now()-started).toFixed(1)}`); }
+    res.json({user});
   }));
   app.get('/api/v1/auth/orders',run(async(req,res)=>{
     const {customer}=await service.identity(db,req.cookies[sessionName]);

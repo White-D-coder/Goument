@@ -1,3 +1,7 @@
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED: /me delegates to sessionProfile, matching the same validated token digest, ACTIVE User and unexpired session as sessionUser, then joining Customer by userId with ACTIVE status. One aggregate returns only user ID/email/roles and customer ID/name for the unchanged DTO. CUSTOMER without an active owned Customer rejects401; ADMIN/OWNER without Customer retains email fallback. Shared sessionUser still returns hydrated documents for existing downstream consumers. No settled auth cache, cookie/schema/identity change or relaxed logout/revocation behavior.40 scoped regressions pass; hosted latency unverified.
+
 ## 2026-10-12 — Hosted count request optimization (R228)
 
 CURRENT / IMPLEMENTED client only: shopping navbar badge joins/starts pending browser-owned gift draft read; account/non-shopping uses count-only fallback. Auth/me refresh remains independent from cart updates and all server identity/Origin/rate/no-store rules remain. No settled private cart/auth cache or guest/account ownership merge. See API_CONTRACTS/TESTING.

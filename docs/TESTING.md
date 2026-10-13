@@ -1,3 +1,31 @@
+## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
+
+CURRENT / VERIFIED locally: scoped HomeSections ESLint and git diff --check pass. Home/Shop browser fixtures at320/375/640/1440 verify original Home hamper marker/layout, controls below photos, preserved compact collections/catalogue and no overflow. Computed phone Add borders are white; desktop retains burgundy. Initial border assertion exposed higher-specificity action-variable override; corrected variables. A subsequent premature page-style read was fixed by waiting for document load completion; final eight checks pass. No production API writes or deployment.
+
+## 2026-10-13 — Compact phone product cards (R261)
+
+R261 CURRENT / VERIFIED locally: B2C npm run typecheck and scoped ESLint ProductCard/HomeSections/AddGiftToCartButton pass; git diff --check passes. Local Chrome fixtures check Home/Shop/Envelopes at320/375/430/640/768/1440px: square phone photos, action bounds inside photo, price before title, no horizontal overflow; larger viewport retains prior block/flex layout. Home Add/increment/decrement and compact bar count pass. Final phone Shop screenshot inspected with cream/burgundy actions. Initial typecheck was invoked from repository root without that script; rerun from B2C succeeds. Browser assertion initially assumed desktop Home uses flex; source uses block, corrected assertion and reran successfully. All browser API traffic intercepted; no production cart writes, deployment or physical-device testing.
+
+## 2026-10-13 — Latest-three phone cart thumbnails (R260)
+
+CURRENT / VERIFIED locally: scoped CartTray ESLint and git diff --check pass. Five-product browser fixture verifies thumbnail sources equal products5/4/3 while full tray still renders1/2/3/4/5 and draft quantities/order remain unchanged. Responsive320/375/430/640/768/1440 checks, Add/increment, close/reopen and pointer cart navigation pass. No production API writes or deployment.
+
+## 2026-10-13 — Smaller animated phone cart bar (R259)
+
+CURRENT / VERIFIED locally: typecheck/scoped CartTray ESLint and git diff --check pass. Fixture Chrome at320/375/430/640 verifies58px height/max300px width,3 photos and no overflow;768/1440 full tray retained. Add/increment, count, close/reopen and pointer cart navigation pass. Computed entrance/count animation names verified; emulated reduced-motion produces animation:none and zero transition duration.375px screenshot inspected. No production API writes, deployment or physical-device motion test.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+R258 CURRENT / VERIFIED locally: npm run typecheck and scoped ESLint CartTray.tsx pass; git diff --check passes. Local Chrome fixture at320/375/430/640px verifies70px bar, burgundy background,3 photos, hidden expanded rows and no overflow;768/1440px preserve full tray. Real product Add and increment update1 item to2 items; supplied confirmed fixture with3 distinct items shows4 total. Close/reopen and pointer View cart navigation to/cart pass; bar hidden on cart route. Phone screenshot visually inspected. All API traffic intercepted with fixtures; no production cart writes or deployment. Physical-device testing remains unverified.
+
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / VERIFIED locally: npm test -- --runTestsByPath database/tests/auth.test.js database/tests/serverless.test.js database/tests/auth-rate-limit.test.js database/tests/admin-security.test.js:4 suites/40 tests pass using isolated MongoMemoryReplSet databases. Added /me checks verify one aggregate/no separate user/customer read, exact owned safe DTO, no-store, timing headers, malformed input without DB query, forged/expired/revoked/disabled sessions, inactive/missing customer and ADMIN/OWNER fallback. Wrapper tests verify combined init/profile and generic failure timing. Both Vercel configs parse with bom1; git diff --check passes. Existing Node punycode deprecation warning observed. No live signed-in replay, production DB mutation, deploy or post-deploy latency benchmark.
+
+## 2026-10-13 — Image-only linked phone hero (R256)
+
+CURRENT / IMPLEMENTED locally: at <=640px hide Home hero copy/brand/Shop now CTA, remove image blur and dark tint, and expose a full-frame accessible link to the same /shop destination. Keep the260px compact frame and existing responsive slideshow photographs. Slideshow dots stay above the link and switch slides independently; larger viewport copy/CTA remains. Sources HomeHeroSlideshow.tsx/home.css. SUPERSEDES R251 visible phone headline and R227 phone blur/shade only. Scoped ESLint/typecheck and local browser checks at320/375/430/640/768/1440px pass: hidden phone copy, no filter/tint, exact full-frame link, no overflow; real pointer dot selection stays on Home and image click navigates to /shop. Phone screenshot inspected; git diff --check passes. No deployment.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 R255 CURRENT / VERIFIED locally: node --test tests/*.test.cjs88/88 pass; npm run typecheck and scoped ESLint pass;git diff --check passes. Four added cases cover one-PUT confirmed selection preserving boxes/print names, concurrent stale snapshots without lost/doubled items, ambiguous-save refusal and latest other-tab name/quantity recovery. Initial optional-event call failed tests/typecheck; guarded absent event and reran cleanly. Browser fixtures on local Ivory PDP verify initial Add and subsequent increment each make only one draft PUT, no me reread, and simulated other-tab edit produces PUT409→GET→PUT preserving unrelated items. Fixture harness initially looked for Add after its replacement with quantity controls; corrected selector and reran successfully. Browser may make two streamed bootstrap GETs; not claimed eliminated. No actual backend cart/customer mutation, provider call, production build or deployment. Anonymous hosted read-only timings recorded in PERFORMANCE; exact infrastructure cause UNKNOWN.

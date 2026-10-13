@@ -1,3 +1,9 @@
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / PARTIAL evidence: user reports signed-in GET auth/me200 taking4s; supplied x-vercel-id has bom1 ingress and iad1 execution. User confirms Atlas Mumbai. This establishes a cross-region route, not the exact fraction of4s caused by it. Anonymous read-only samples (no customer cookies) observed proxy me503~554ms, direct backend me503~528ms, later proxy me401~281ms; Home200~81ms/count200~261ms. Intermittent503 cause remains UNKNOWN. Public deployed JS includes R255 confirmed-draft save shortcut, so stale frontend is not established as this cause.
+
+CURRENT / IMPLEMENTED locally: both Vercel configs set regions:[bom1]. Auth bootstrap uses indexed user/session match plus owned active-customer lookup in one aggregate with safe projection and5s maxTimeMS. Server-Timing init measures handler initialization/connect wait (not platform scheduling/module loading/network); profile measures token validation and aggregate await. Metrics survive errors and combine through wrapper. No identity caching, extra retries or authentication shortcut.40 regressions pass; no deployment or claimed hosted speedup.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 CURRENT / IMPLEMENTED: normal mounted-card Add uses one PUT instead of GET→PUT, with no added debounce, optimistic success or global/private settled cache. Multiple queued stale snapshots can require409→GET→PUT; initial cookie handshake remains serialized. Existing Header me runs independently on mount/auth events and is not an Add dependency; long React initiator stack does not establish duplicate requests. CURRENT / PARTIAL measurements: read-only anonymous hosted me401 TTFB0.363139s/total0.363262s;count200 TTFB0.282883s/total0.283455s. No customer cookies used and no hosted draft write. Exact region/cold-start/database contribution UNKNOWN; no claim that this frontend change reduces me latency or has been deployed.

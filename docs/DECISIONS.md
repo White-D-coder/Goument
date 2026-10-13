@@ -1,3 +1,15 @@
+## 2026-10-13 — Compact phone product cards (R261)
+
+CURRENT / IMPLEMENTED R261: latest phone reference supersedes centered phone Home/catalogue card presentation. Flatten existing layout-only wrappers via responsive display:contents and grid placement to reuse a single real purchase control, preserving draft subscription/write behavior. Keep serif brand titles and cream/burgundy actions through existing theme variables. Do not add reference-only wishlist/discount/MRP content; no product/payment/cart contract changes.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+CURRENT / IMPLEMENTED R258: latest compact phone-cart reference supersedes expanded phone tray only. Reuse existing event-driven tray state and cart route with responsive presentation; keep a separate close control to preserve the earlier explicit dismissal requirement. No mobile subtotal/quantity editors in the compact bar; those remain on full cart and larger-screen tray. No financial or API contract change.
+
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED: colocate B2C functions with user-confirmed Mumbai Atlas, based on supplied iad1 response execution hop. Collapse /me sequential ownership lookups rather than caching private authentication or bypassing live session checks. Anonymous fast-path idea considered after503 samples was not implemented: user clarified the slow request is signed-in200, so that would not address it. R255 frontend shortcut remains and was observed in public deployed JS. SUPERSEDES earlier region-UNKNOWN statement only for this evidence; exact4s attribution/rollout results remain UNKNOWN. Affected systems: B2C hosting/auth diagnostics/profile query.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 CURRENT / IMPLEMENTED: use the draft already held by a mounted purchase control to remove a normal pre-save network round trip, relying on the existing server revision fence rather than caching responses globally. R228/R229 no-global-settled-private-cache invariant remains; component state is not checkout or ownership authority. Retry only explicit409, preserve unknown-write errors and first-cookie queue. No auth shortcut or server/hosting configuration change; measured hosted latency cause remains UNKNOWN.

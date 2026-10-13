@@ -112,7 +112,8 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
  if (withQuantity) return <div className={`gift-purchase${compact ? ' gift-purchase--compact' : ''}${personalise ? ' gift-purchase--personalised' : ''}`}>
   <div className="gift-purchase-controls">
    {(!compact || quantity === 0) && <button type="button" className={className} disabled={busy || quantity >= 99} aria-busy={busy} aria-label={`Add ${name} to cart`} onClick={() => void add()}>
-    <span>{status === 'adding' ? quantity ? 'Updating…' : 'Adding…' : 'Add to Cart'}</span>
+    <span className="gift-add-label">{status === 'adding' ? quantity ? 'Updating…' : 'Adding…' : 'Add to Cart'}</span>
+    <span className="gift-add-label-short">{status === 'adding' ? 'Adding…' : 'Add'}</span>
     <ShoppingBag size={18} strokeWidth={1.7} aria-hidden="true"/>
    </button>}
   {quantity > 0 && <QuantityControl name={name} value={quantity} disabled={busy} onChange={next => void add(next > quantity ? 1 : -1)}/>}

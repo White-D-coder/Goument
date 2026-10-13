@@ -30,11 +30,14 @@ function createHandler({ connect = connectDatabase, authFactory = createAuthApp,
     return initializing;
   }
   return async (req,res) => {
+    const started = performance.now();
     try {
       const app = await initialize();
+      res.setHeader('Server-Timing', `init;dur=${(performance.now()-started).toFixed(1)}`);
       if (database.connection.readyState !== 1) throw new Error('Service unavailable');
       return app(req,res);
     } catch {
+      res.setHeader('Server-Timing', `init;dur=${(performance.now()-started).toFixed(1)}`);
       res.statusCode = 503; res.setHeader('Content-Type','application/json'); res.setHeader('Cache-Control','no-store'); res.setHeader('Retry-After','1');
       return res.end(JSON.stringify({ message: 'Service temporarily unavailable. Please try again.' }));
     }

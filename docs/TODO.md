@@ -15,7 +15,7 @@
 ## 2026-10-12 — Hosted count request optimization (R228)
 
 - [x] R228 source/UI count optimization: shopping badge and cards share pending draft; count fallback projects quantities/lean and retains privacy/freshness.81 client/21 gifting regressions and production browser checks pass.
-- [ ] R228 hosted follow-up within existing performance priority: deploy reviewed frontend/backend changes through normal release flow, verify count/draft behavior with real storefront, inspect hosting/dependency logs for transient503 and measure actual region/cold-start/database latency. Existing20ms/physical-device target remains open; no infrastructure cause established or deployment performed.
+- [ ] R228 hosted follow-up within existing performance priority: deploy reviewed frontend/backend changes through normal release flow, verify count/draft behavior with real storefront, inspect hosting/dependency logs for transient503 and measure actual region/cold-start/database latency. R257 now confirms user-reported Mumbai Atlas versus supplied iad1 execution hop; local bom1 configs, one-query me and init/profile diagnostics pass40 regressions. Redeploy both projects and measure signed-in cold/warm me; exact4s attribution and intermittent503 cause remain UNKNOWN. Existing20ms/physical-device target remains open; no deployment performed.
 
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 

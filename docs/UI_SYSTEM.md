@@ -1,3 +1,27 @@
+## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
+
+CURRENT / IMPLEMENTED locally: latest correction removes the compact-phone marker from HomeHamperCard and removes R261 Home hamper grid override, restoring its preceding layout and below-photo purchase controls. Compact Home collection/catalogue cards remain. Phone card Add buttons use white border/hover-border via shared action variables; fill, text, quantity controls and desktop borders unchanged. SUPERSEDES R261 Home hamper redesign only. Scoped HomeSections lint and responsive browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone product cards (R261)
+
+CURRENT / IMPLEMENTED R261: <=640px marked Home/catalogue cards use transparent unframed card bodies,1:1 photos with12px corners,108px-wide44px-high inset cream/burgundy Add controls (or existing Explore link), then18px burgundy price,17px serif title with two-line minimum,11px one-line description. Home hamper grid becomes two columns. Actual quantity controls occupy the same image position; errors render beneath copy. From prices remain for collection cards. Reuse CSS action custom properties so shared important action layer remains authoritative. SUPERSEDES earlier centered phone card layout only; desktop and product-detail purchase panel unaffected.
+
+## 2026-10-13 — Latest-three phone cart thumbnails (R260)
+
+CURRENT / IMPLEMENTED locally: phone cart photo stack renders a reversed copy of the final three gift rows, so newly appended products appear first and older thumbnails leave the three-photo preview. Latest photo layers above overlapping older photos. Only presentation changes: original row order, quantities, full tray/cart, checkout and API payloads retained. No in-place reverse of draft items; repeat quantity increments do not reorder distinct product rows. Scoped lint and local browser fixture pass; no deployment.
+
+## 2026-10-13 — Smaller animated phone cart bar (R259)
+
+CURRENT / IMPLEMENTED locally: reduce phone cart pill from360px maximum width/70px measured height to300px/58px, with38px overlapping photos and14px/11px label/count. Retain44px link/close touch targets. Add360ms slide/fade entrance and short photo/count update animation using transform/opacity only; count animation restarts on confirmed quantity change. Reduced-motion disables animations/transitions. Theme, routing and larger-screen tray retained. Scoped lint/typecheck and six-width local browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+CURRENT / IMPLEMENTED R258: <=640px cart tray becomes a bottom-centered burgundy #4a0404 pill, max360px wide with12px minimum side inset and safe-area-aware bottom offset;70px observed height. Up to3 decorative44px circular photos overlap; white15px View cart and cream12px summed quantity; chevron plus separate44px close target. Link opens existing /cart (legacy /cart/store), closes tray, and exposes visible label/count. No backdrop/scroll lock; empty cart hidden on phone. >640px existing full tray and two-row scroll remain. SUPERSEDES R229/R230 expanded phone tray presentation only, not full /cart behavior.
+
+## 2026-10-13 — Image-only linked phone hero (R256)
+
+CURRENT / IMPLEMENTED locally: at <=640px hide Home hero copy/brand/Shop now CTA, remove image blur and dark tint, and expose a full-frame accessible link to the same /shop destination. Keep the260px compact frame and existing responsive slideshow photographs. Slideshow dots stay above the link and switch slides independently; larger viewport copy/CTA remains. Sources HomeHeroSlideshow.tsx/home.css. SUPERSEDES R251 visible phone headline and R227 phone blur/shade only. Scoped ESLint/typecheck and local browser checks at320/375/430/640/768/1440px pass: hidden phone copy, no filter/tint, exact full-frame link, no overflow; real pointer dot selection stays on Home and image click navigates to /shop. Phone screenshot inspected; git diff --check passes. No deployment.
+
 ## 2026-10-13 — Compact desktop catalogue frames (R254)
 
 CURRENT / IMPLEMENTED locally: latest reference specifies compact card frame size with only existing contents. Replace R253 oversized desktop tracks with equal300px-minimum auto-fill tracks, landscape4:3 media and19–22px desktop Shop titles. This yields three columns at1280/1440/1920px and two at1024px. Preserve centered copy, description, price, cart controls, theme and phone layout; no reference-only wishlist/badges/image arrows added. Source storefront-cards.css. Local browser verifies all12 shown titles remain single-line and cards equal width with no overflow at1024/1280/1440/1920px; first-card heights approximately471/433/474/464px.375px phone regression unchanged. Desktop screenshot inspected; git diff --check passes. CSS-only; no deployment.

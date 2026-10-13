@@ -39,6 +39,7 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
 .tgg-hero-copy h1 { max-width: 14ch; font-size: clamp(40px,4.5vw,62px); line-height: .99; letter-spacing: -.04em; }
 .tgg-hero-title-mobile { display: none; }
 .tgg-hero-brand { display: none; }
+.tgg-hero-mobile-link { display: none; }
 .tgg-hero-word { display: inline-block; }
 .tgg-hero-description { max-width: 42ch; margin-top: 18px !important; font-size: 15px; line-height: 1.65; }
 .tgg-hero-copy > .tgg-button { min-width: 150px; margin-top: 22px; }
@@ -1341,9 +1342,11 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
   .tgg-section-heading h2 { font-size: 27px; }
   .tgg-section-heading > .tgg-link { position: static; gap: 6px; margin-top: 3px; font-size: 10px; }
   .tgg-section-subtitle { margin: 6px 0 16px !important; font-size: 11px; }
-  /* One compact photo-backed frame; content can grow with larger accessibility text. */
+  /* Phone hero is an unshaded photo link; carousel controls remain independent. */
   .tgg-hero { display: block; isolation: isolate; width: calc(100% - 28px); min-height: 260px; margin-top: 0; border-radius: 16px; }
-  .tgg-hero-copy { z-index: 3; align-items: center; min-height: 260px; padding: 24px 24px 44px; background: transparent; text-align: center; }
+  .tgg-hero-copy { display: none; }
+  .tgg-hero-mobile-link { display: block; position: absolute; inset: 0; z-index: 3; }
+  .tgg-hero-mobile-link:focus-visible { outline: 3px solid #fff; outline-offset: -5px; border-radius: 16px; }
   .tgg-hero-copy .tgg-kicker,
   .tgg-hero-description,
   .tgg-hero-promises { display: none; }
@@ -1356,8 +1359,8 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
   .tgg-hero-copy > .tgg-button:hover { border-color: #eee7db; background: #eee7db; }
   .tgg-hero-copy > .tgg-button:focus-visible { outline-color: #fffdf8; }
   .tgg-hero-visual { position: absolute; z-index: auto; inset: 0; width: 100%; min-height: 0; aspect-ratio: auto; }
-  .tgg-hero-visual::after { background: rgba(25, 12, 10, .32); }
-  .tgg-hero-visual img { object-fit: cover; object-position: center; filter: blur(1px); }
+  .tgg-hero-visual::after { background: transparent; }
+  .tgg-hero-visual img { object-fit: cover; object-position: center; filter: none; }
   .tgg-hero-dots { z-index: 4; bottom: 8px; }
   .tgg-hamper-showcase { padding-top: 28px; padding-bottom: 26px; }
   .tgg-hamper-grid { display: flex; gap: 12px; margin-right: -18px; padding-right: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }

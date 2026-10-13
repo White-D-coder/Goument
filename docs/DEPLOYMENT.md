@@ -1,3 +1,9 @@
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED locally: B2C/vercel.json and B2C/backend/vercel.json explicitly set regions:[bom1]. User confirmed Atlas Mumbai; supplied authenticated response identifies an iad1 execution hop. This updates the earlier wholly-UNKNOWN region status for this request only. Both separate Vercel projects require new deployments; deploying only the storefront does not move its external auth backend. No database/provider migration or deployment performed.
+
+FUTURE / REQUIRED in existing release follow-up: deploy reviewed backend and frontend, verify function execution in bom1 and inspect signed-in /me Server-Timing init/profile on cold and warm requests, plus cart interactions. Metrics omit network/platform scheduling overhead; no guaranteed latency threshold. Keep private/no-store and inspect backend logs if503 recurs. [Vercel region configuration](https://vercel.com/docs/functions/configuring-functions/region) and [region identifiers](https://vercel.com/docs/regions).
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 FUTURE / REQUIRED before enabling hosted B2C paid gift checkout (not deployed in R223): review intended transaction-ready B2C Mongo DB/backups, apply additive orders validator/index migration, explicitly provision approved catalogue mapping/opening100 stock only where not already mapped, configure Razorpay test keys/automatic capture and public signed webhook, then verify real test payment/order/stock/history across instances. Never run schema/provision from cold starts. Commands and recovery in B2C/README.md.

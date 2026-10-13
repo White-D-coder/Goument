@@ -16,8 +16,17 @@ test('initialization is shared, temporary failures are generic and retryable, re
  const connect=jest.fn().mockRejectedValueOnce(Error('private mongodb://fixture:secret@invalid')).mockResolvedValue(connected);
  const app=handler({connect,retryDelayMs:0});
  const failed=await request(app).get('/healthz').expect(503);expect(failed.text).not.toMatch(/mongodb|fixture|secret/);expect(failed.headers['cache-control']).toBe('no-store');
+ expect(failed.headers['server-timing']).toMatch(/^init;dur=\d+\.\d$/);
  await Promise.all([request(app).get('/healthz').expect(200),request(app).get('/api/v1/auth/config').expect(200)]);expect(connect).toHaveBeenCalledTimes(2);
  readiness=0;await request(app).get('/healthz').expect(503);
+});
+test('wrapper retains initialization and profile timings together without caching the identity response',async()=>{
+ const app=handler();
+ const response=await request(app).get('/api/v1/auth/me').expect(401);
+ expect(response.headers['server-timing']).toMatch(/^init;dur=\d+\.\d, profile;dur=\d+\.\d$/);
+ expect(response.headers['cache-control']).toMatch(/private.*no-store/);
+ const warm=await request(app).get('/healthz').expect(200);
+ expect(warm.headers['server-timing']).toMatch(/^init;dur=\d+\.\d$/);
 });
 test('wrapper preserves raw webhook signature verification, parser caps and generic errors',async()=>{
  const verifyWebhook=jest.fn((raw,signature)=>Buffer.isBuffer(raw)&&signature==='fixture-signature');const gatewayFactory=jest.fn(()=>({verifyWebhook}));const app=handler({gatewayFactory});

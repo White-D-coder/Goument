@@ -1,3 +1,31 @@
+## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
+
+CURRENT / IMPLEMENTED locally: latest correction removes the compact-phone marker from HomeHamperCard and removes R261 Home hamper grid override, restoring its preceding layout and below-photo purchase controls. Compact Home collection/catalogue cards remain. Phone card Add buttons use white border/hover-border via shared action variables; fill, text, quantity controls and desktop borders unchanged. SUPERSEDES R261 Home hamper redesign only. Scoped HomeSections lint and responsive browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone product cards (R261)
+
+CURRENT / IMPLEMENTED locally: <=640px Home hamper/collection and shared catalogue cards use square rounded photos with inset cream/burgundy Add or Explore controls, followed by left-aligned price, serif title and short description. Home hampers now use two columns on phones. Existing quantity controls replace Add in place; desktop/tablet layout and commerce state retained. Scoped lint/typecheck and18 route/viewport browser checks plus Add/increment/decrement pass. No deployment.
+
+## 2026-10-13 — Latest-three phone cart thumbnails (R260)
+
+CURRENT / IMPLEMENTED locally: phone cart photo stack renders a reversed copy of the final three gift rows, so newly appended products appear first and older thumbnails leave the three-photo preview. Latest photo layers above overlapping older photos. Only presentation changes: original row order, quantities, full tray/cart, checkout and API payloads retained. No in-place reverse of draft items; repeat quantity increments do not reorder distinct product rows. Scoped lint and local browser fixture pass; no deployment.
+
+## 2026-10-13 — Smaller animated phone cart bar (R259)
+
+CURRENT / IMPLEMENTED locally: reduce phone cart pill from360px maximum width/70px measured height to300px/58px, with38px overlapping photos and14px/11px label/count. Retain44px link/close touch targets. Add360ms slide/fade entrance and short photo/count update animation using transform/opacity only; count animation restarts on confirmed quantity change. Reduced-motion disables animations/transitions. Theme, routing and larger-screen tray retained. Scoped lint/typecheck and six-width local browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+CURRENT / IMPLEMENTED locally: <=640px replaces the open cart tray with a centered70px burgundy pill, up to three overlapping product thumbnails, white View cart label, quantity count, chevron and close control. Uses confirmed cart state and existing cart destination; further shopping/additions remain available. Desktop/tablet full tray retained; phone empty selection hidden. Scoped lint/typecheck and six-width fixture browser checks pass; no deployment.
+
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED locally: set both B2C Vercel projects to bom1; GET auth/me verifies the active unexpired session and joins its owned active customer in one aggregate instead of two sequential reads. Existing profile DTO, staff-without-customer access, private/no-store and revocation remain. Add Server-Timing init/profile metrics.40 targeted backend regressions pass; both config files parse and git diff --check passes. CURRENT / PARTIAL hosted: user confirmed Mumbai Atlas and supplied a signed-in200 response with iad1 execution hop; no authenticated replay or deployment performed. Exact contribution to reported4s remains UNKNOWN until both projects redeploy and timings are measured.
+
+## 2026-10-13 — Image-only linked phone hero (R256)
+
+CURRENT / IMPLEMENTED locally: at <=640px hide Home hero copy/brand/Shop now CTA, remove image blur and dark tint, and expose a full-frame accessible link to the same /shop destination. Keep the260px compact frame and existing responsive slideshow photographs. Slideshow dots stay above the link and switch slides independently; larger viewport copy/CTA remains. Sources HomeHeroSlideshow.tsx/home.css. SUPERSEDES R251 visible phone headline and R227 phone blur/shade only. Scoped ESLint/typecheck and local browser checks at320/375/430/640/768/1440px pass: hidden phone copy, no filter/tint, exact full-frame link, no overflow; real pointer dot selection stays on Home and image click navigates to /shop. Phone screenshot inspected; git diff --check passes. No deployment.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 CURRENT / IMPLEMENTED locally: mounted AddGiftToCartButton passes its existing server-confirmed draft to the versioned save, removing the preliminary GET for ordinary Add/quantity operations. Missing/invalidated state retains GET→PUT;409 reloads latest draft before one retry; ambiguous writes never replay. Header me remains an independent mount/auth-change read.88 frontend tests, scoped lint/typecheck and fixture browser checks pass. CURRENT / PARTIAL hosted: anonymous me401 TTFB363ms and count200 TTFB283ms measured once; reported me600ms/draft400ms cannot identify hosting/DB cause. No deployment.

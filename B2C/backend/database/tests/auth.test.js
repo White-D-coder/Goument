@@ -12,9 +12,51 @@ const origin='http://localhost:3001';
 const claims={sub:'google-user-123',email:'google@example.test',email_verified:true,given_name:'Google Customer'};
 beforeAll(async()=>{mongo=await MongoMemoryReplSet.create({replSet:{storageEngine:'wiredTiger'}});db=await connectDatabase({uri:mongo.getUri(),dbName:'gourmet_b2c_schema_test_auth'});await installSchema(db);});
 beforeEach(()=>{provider={authorization:({state})=>`https://accounts.google.com/o/oauth2/v2/auth?state=${state}`,exchange:jest.fn(async()=>claims)};app=createAuthApp({db,origin,clientId:'test-client',clientSecret:'test-secret',provider});});
-afterEach(async()=>{for(const model of Object.values(db.models))await model.collection.deleteMany({});});
+afterEach(async()=>{jest.restoreAllMocks();for(const model of Object.values(db.models))await model.collection.deleteMany({});});
 afterAll(async()=>{if(db)await db.connection.close();if(mongo)await mongo.stop();});
 async function googleStart(agent){const r=await agent.get('/api/v1/auth/google');return new URL(r.headers.location).searchParams.get('state');}
+test('profile bootstrap makes one database round trip and exposes only the owned safe profile',async()=>{
+ const token=await auth.googleLogin(db,claims);
+ const {user,customer}=await auth.identity(db,token);
+ await auth.googleLogin(db,{...claims,sub:'another-subject',email:'another@example.test',given_name:'Another customer'});
+ const aggregate=jest.spyOn(db.models.User.collection,'aggregate');
+ const userRead=jest.spyOn(db.models.User.collection,'findOne');
+ const customerRead=jest.spyOn(db.models.Customer.collection,'findOne');
+ const me=await request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${token}`).expect(200);
+ expect(me.body).toEqual({user:{id:String(user._id),customerId:String(customer._id),email:claims.email,name:claims.given_name,role:'customer'}});
+ expect(aggregate).toHaveBeenCalledTimes(1);expect(userRead).not.toHaveBeenCalled();expect(customerRead).not.toHaveBeenCalled();
+ expect(me.headers['cache-control']).toMatch(/private.*no-store/);
+ expect(me.headers['server-timing']).toMatch(/^profile;dur=\d+\.\d$/);
+});
+test('profile rejects malformed, forged, expired, revoked and disabled sessions without caching identity',async()=>{
+ const aggregate=jest.spyOn(db.models.User.collection,'aggregate');
+ for(const token of ['invalid', 'not-an-id.'+'a'.repeat(43)])await request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${token}`).expect(401);
+ expect(aggregate).not.toHaveBeenCalled();
+ const token=await auth.googleLogin(db,claims);const {user}=await auth.identity(db,token);
+ const get=value=>request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${value}`);
+ await get(`${user._id}.${'a'.repeat(43)}`).expect(401);
+ await get(token).expect(200);await auth.logout(db,token);await get(token).expect(401);
+ const expired=await auth.issueSession(db,user._id);
+ const stored=await db.models.User.findById(user._id).select('+authSessions');
+ stored.authSessions=stored.authSessions.map(s=>({digest:s.digest,expiresAt:new Date(0)}));await stored.save();
+ await get(expired).expect(401);
+ const active=await auth.issueSession(db,user._id);await get(active).expect(200);
+ const disabled=await db.models.User.findById(user._id);disabled.status='DISABLED';await disabled.save();
+ await get(active).expect(401);
+});
+test('profile requires an active owned customer but preserves staff profiles without a customer',async()=>{
+ const token=await auth.googleLogin(db,claims);const {customer}=await auth.identity(db,token);
+ customer.status='INACTIVE';await customer.save();
+ await request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${token}`).expect(401);
+ await db.models.Customer.collection.deleteOne({_id:customer._id});
+ await request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${token}`).expect(401);
+ for(const role of ['ADMIN','OWNER']){
+  const user=await db.models.User.create({email:`${role.toLowerCase()}@example.test`,roles:[role]});
+  const session=await auth.issueSession(db,user._id);
+  const me=await request(app).get('/api/v1/auth/me').set('Cookie',`b2c_session=${session}`).expect(200);
+  expect(me.body.user).toEqual({id:String(user._id),email:user.email,name:user.email,role:role.toLowerCase()});
+ }
+});
 test('Google callback persists one user/customer, cookie session survives bootstrap, logout revokes it',async()=>{
  const agent=request.agent(app);const state=await googleStart(agent);const callback=await agent.get(`/api/v1/auth/google/callback?code=ok&state=${state}`);expect(callback.status).toBe(302);expect(callback.headers.location).toBe(origin+'/account');
  const cookies=callback.headers['set-cookie'];expect(cookies.join(';')).toContain('HttpOnly');expect(cookies.join(';')).toContain('SameSite=Lax');

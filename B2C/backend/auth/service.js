@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { Types } = require('mongoose');
 const { transaction } = require('../database/transactions/common');
 const { registerCustomer } = require('../database/repositories');
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
@@ -17,11 +18,32 @@ async function issueSession(db, id) {
   });
   return token;
 }
-async function sessionUser(db, token, session) {
+function sessionFilter(token) {
   if (typeof token !== 'string' || !/^[a-f0-9]{24}\.[A-Za-z0-9_-]{43}$/.test(token)) throw failure('Please sign in');
-  const user = await db.models.User.findOne({ _id: token.split('.')[0], status: 'ACTIVE', authSessions: { $elemMatch: { digest: digest(token), expiresAt: { $gt: new Date() } } } }).session(session || null).maxTimeMS(5000);
+  return { _id: token.split('.')[0], status: 'ACTIVE', authSessions: { $elemMatch: { digest: digest(token), expiresAt: { $gt: new Date() } } } };
+}
+async function sessionUser(db, token, session) {
+  const user = await db.models.User.findOne(sessionFilter(token)).session(session || null).maxTimeMS(5000);
   if (!user) throw failure('Session expired. Please sign in again');
   return user;
+}
+// Bootstrap needs only a safe profile, not hydrated account documents. Match
+// the same live session first, then join its owned customer in one round trip.
+async function sessionProfile(db, token) {
+  const filter = sessionFilter(token);
+  const [user] = await db.models.User.aggregate([
+    { $match: { ...filter, _id: new Types.ObjectId(filter._id) } },
+    { $project: { email: 1, roles: 1 } },
+    { $lookup: { from: db.models.Customer.collection.name, localField: '_id', foreignField: 'userId',
+      pipeline: [{ $match: { status: 'ACTIVE' } }, { $project: { firstName: 1, lastName: 1 } }, { $limit: 1 }], as: 'customers' } }
+  ]).option({ maxTimeMS: 5000 });
+  if (!user) throw failure('Session expired. Please sign in again');
+  const customer = user.customers[0];
+  const staff = user.roles.some(role => ['OWNER', 'ADMIN'].includes(role));
+  if (!customer && !staff) throw failure('Customer account unavailable');
+  return { id: String(user._id), ...(customer ? { customerId: String(customer._id) } : {}), email: user.email,
+    name: customer ? [customer.firstName, customer.lastName].filter(Boolean).join(' ') : user.email,
+    role: user.roles.includes('OWNER') ? 'owner' : user.roles.includes('ADMIN') ? 'admin' : 'customer' };
 }
 async function identity(db, token) {
   const user = await sessionUser(db, token);
@@ -76,4 +98,4 @@ async function register(db, body) {
   try { const result = await registerCustomer(db, { email: body.email, password: body.password, firstName: body.name.trim() }); return issueSession(db, result.userId); }
   catch(error) { if(error.code===11000)throw failure('Unable to create account. Try signing in with your existing method.',409);throw error; }
 }
-module.exports = { random, digest, SESSION_MS, failure, issueSession, sessionUser, identity, logout, googleLogin, passwordLogin, register };
+module.exports = { random, digest, SESSION_MS, failure, issueSession, sessionUser, sessionProfile, identity, logout, googleLogin, passwordLogin, register };

@@ -1,3 +1,7 @@
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED: GET /api/v1/auth/me response DTO/status/ownership and private,no-store policy unchanged. Auth app adds Server-Timing profile;dur=<milliseconds>; Vercel wrapper adds init;dur=<milliseconds> and preserves both. Initializer failures remain generic503 with no-store/Retry-After1 and numeric init timing. Timings are diagnostics, not service-level guarantees.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 CURRENT / IMPLEMENTED internal TypeScript API only: addGiftItem(id,personalisation?,confirmedDraft?) and changeGiftItemQuantity(id,delta,confirmedDraft?) accept the mounted control’s confirmed state. Existing PUT gift/draft revision validation rejects stale state;409 alone triggers fresh GET and one retry. Calls without a snapshot and Buy now/name-save retain current read flow. HTTP response/body, owner cookie and server revision contracts unchanged.

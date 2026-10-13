@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowRight, ShoppingBag, X } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShoppingBag, X } from 'lucide-react';
 import { api } from '@/lib/api';
 import { cartAdditionFromEvent, giftCartDraftFromEvent, giftCartItemsFromEvent } from '@/lib/gift-cart-events';
 import { changeGiftItemQuantity } from '@/lib/gift-cart';
@@ -129,13 +129,28 @@ export default function CartTray() {
  const total = source === 'gift' ? estimate.total && priceRangeLabel(estimate.total) : storeTotal !== null ? money(storeTotal) : null;
  const cartHref = source === 'gift' ? '/cart' : '/cart/store';
 
- return <aside ref={panel} className="cart-tray" data-open={visible} aria-labelledby="cart-tray-title" aria-hidden={!visible} inert={!visible}>
+ return <aside ref={panel} className="cart-tray" data-open={visible} data-empty={count === 0 && !loading} aria-label="Your bag" aria-hidden={!visible} inert={!visible}>
   <div className="cart-tray-heading">
    <div><p>Your thoughtful picks</p><h2 id="cart-tray-title">Your bag <span>{count}</span></h2></div>
    <button type="button" className="cart-tray-close" aria-label="Close cart tray" onClick={close}><X size={21} aria-hidden="true" /></button>
   </div>
   {visible && <>
    <p className="cart-tray-announcement" role="status">{count} {count === 1 ? 'item' : 'items'} in your bag. You can keep shopping.</p>
+   <div className="cart-tray-mobile">
+    <Link className="cart-tray-mobile-link" href={cartHref} onClick={close}>
+     <span className="cart-tray-mobile-photos" aria-hidden="true">
+      {source === 'gift' && rows.length ? rows.slice(-3).reverse().map(row => {
+       const item = catalogue.find(item => item.id === row.id);
+       return <span className="cart-tray-mobile-photo" key={row.id}>
+        {item ? <ProductPhoto src={item.image} alt="" sizes="38px" /> : <ShoppingBag size={18} />}
+       </span>;
+      }) : <span className="cart-tray-mobile-photo"><ShoppingBag size={20} /></span>}
+     </span>
+     <span className="cart-tray-mobile-copy"><strong>View cart</strong><span key={count}>{loading ? 'Updating…' : `${count} ${count === 1 ? 'item' : 'items'}`}</span></span>
+     <ChevronRight size={22} aria-hidden="true" />
+    </Link>
+    <button type="button" className="cart-tray-mobile-close" aria-label="Close cart bar" onClick={close}><X size={18} aria-hidden="true" /></button>
+   </div>
    <div ref={itemList} className="cart-tray-items" aria-busy={(source === 'store' && loading) || busy !== null}>
     {error && <p className="cart-tray-error" role="alert">{error}</p>}
     {source === 'store' && loading && <p role="status">Loading your bag…</p>}

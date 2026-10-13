@@ -1,3 +1,31 @@
+## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
+
+CURRENT / IMPLEMENTED locally: latest correction removes the compact-phone marker from HomeHamperCard and removes R261 Home hamper grid override, restoring its preceding layout and below-photo purchase controls. Compact Home collection/catalogue cards remain. Phone card Add buttons use white border/hover-border via shared action variables; fill, text, quantity controls and desktop borders unchanged. SUPERSEDES R261 Home hamper redesign only. Scoped HomeSections lint and responsive browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone product cards (R261)
+
+CURRENT / IMPLEMENTED R261: phone-gift-card marker on shared ProductCard/Home cards, scoped CSS grid presentation using existing wrappers/controls, short phone Add label and established action color variables. No duplicate purchase component, new API call, discount/wishlist/rating content or commerce logic. Preserve From collection prices and Explore destinations; >640px unchanged.
+
+## 2026-10-13 — Latest-three phone cart thumbnails (R260)
+
+CURRENT / IMPLEMENTED locally: phone cart photo stack renders a reversed copy of the final three gift rows, so newly appended products appear first and older thumbnails leave the three-photo preview. Latest photo layers above overlapping older photos. Only presentation changes: original row order, quantities, full tray/cart, checkout and API payloads retained. No in-place reverse of draft items; repeat quantity increments do not reorder distinct product rows. Scoped lint and local browser fixture pass; no deployment.
+
+## 2026-10-13 — Smaller animated phone cart bar (R259)
+
+CURRENT / IMPLEMENTED locally: reduce phone cart pill from360px maximum width/70px measured height to300px/58px, with38px overlapping photos and14px/11px label/count. Retain44px link/close touch targets. Add360ms slide/fade entrance and short photo/count update animation using transform/opacity only; count animation restarts on confirmed quantity change. Reduced-motion disables animations/transitions. Theme, routing and larger-screen tray retained. Scoped lint/typecheck and six-width local browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+CURRENT / IMPLEMENTED: R258 renders a phone-only compact cart bar using existing CartTray state, ProductPhoto and Link. Burgundy/cream palette retained; no price/cart/API changes or new fetches. Close/Escape behavior and full-cart navigation retained; larger-screen tray unchanged. Source: CartTray.tsx/cart-tray.css.
+
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+CURRENT / IMPLEMENTED: R257 places frontend/backend Vercel functions in Mumbai alongside user-confirmed Mumbai Atlas, combines /me session/customer reads into one safely projected aggregate, and exposes numeric init/profile Server-Timing durations.40 auth/serverless/rate-limit/admin-security tests pass. No schema, commerce or session-cache changes; no deployment. Region placement and signed-in latency still require hosted verification.
+
+## 2026-10-13 — Image-only linked phone hero (R256)
+
+CURRENT / IMPLEMENTED locally: at <=640px hide Home hero copy/brand/Shop now CTA, remove image blur and dark tint, and expose a full-frame accessible link to the same /shop destination. Keep the260px compact frame and existing responsive slideshow photographs. Slideshow dots stay above the link and switch slides independently; larger viewport copy/CTA remains. Sources HomeHeroSlideshow.tsx/home.css. SUPERSEDES R251 visible phone headline and R227 phone blur/shade only. Scoped ESLint/typecheck and local browser checks at320/375/430/640/768/1440px pass: hidden phone copy, no filter/tint, exact full-frame link, no overflow; real pointer dot selection stays on Home and image click navigates to /shop. Phone screenshot inspected; git diff --check passes. No deployment.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 CURRENT / IMPLEMENTED locally: optional confirmedDraft input on addGiftItem/changeGiftItemQuantity and component-scoped confirmed snapshot avoid redundant read-before-write during normal card additions. Ref populated only from completed reads/full confirmed events, invalidated on generic events/errors; server revisions remain authoritative. No HTTP/schema/auth/payment/stock change. Unit/concurrency/failure tests and browser one-PUT/stale-conflict behavior pass. No deployment.

@@ -1,3 +1,31 @@
+## 2026-10-13 — Preserve Home hampers and white Add borders (R262)
+
+CURRENT / IMPLEMENTED locally: latest correction removes the compact-phone marker from HomeHamperCard and removes R261 Home hamper grid override, restoring its preceding layout and below-photo purchase controls. Compact Home collection/catalogue cards remain. Phone card Add buttons use white border/hover-border via shared action variables; fill, text, quantity controls and desktop borders unchanged. SUPERSEDES R261 Home hamper redesign only. Scoped HomeSections lint and responsive browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone product cards (R261)
+
+R261 CURRENT / IMPLEMENTED locally: requested compact phone reference structure with existing brand theme and contents. Scope Home hamper/collection and shared catalogue cards; image-overlay Add/quantity control, price before title/description, two phone columns. Keep collection navigation, underlying prices, cart/checkout data and desktop design. Scoped lint/typecheck and responsive interaction checks pass; no deployment.
+
+## 2026-10-13 — Latest-three phone cart thumbnails (R260)
+
+CURRENT / IMPLEMENTED locally: phone cart photo stack renders a reversed copy of the final three gift rows, so newly appended products appear first and older thumbnails leave the three-photo preview. Latest photo layers above overlapping older photos. Only presentation changes: original row order, quantities, full tray/cart, checkout and API payloads retained. No in-place reverse of draft items; repeat quantity increments do not reorder distinct product rows. Scoped lint and local browser fixture pass; no deployment.
+
+## 2026-10-13 — Smaller animated phone cart bar (R259)
+
+CURRENT / IMPLEMENTED locally: reduce phone cart pill from360px maximum width/70px measured height to300px/58px, with38px overlapping photos and14px/11px label/count. Retain44px link/close touch targets. Add360ms slide/fade entrance and short photo/count update animation using transform/opacity only; count animation restarts on confirmed quantity change. Reduced-motion disables animations/transitions. Theme, routing and larger-screen tray retained. Scoped lint/typecheck and six-width local browser checks pass; no deployment.
+
+## 2026-10-13 — Compact phone cart bar (R258)
+
+R258 CURRENT / IMPLEMENTED locally: latest supplied compact-cart reference replaces expanded phone tray with themed thumbnail/count/View cart bar while shopping remains possible. Reuses confirmed event state, closes on navigation/dismissal and retains desktop tray. Six-width browser verification and scoped lint/typecheck pass; no deployment.
+
+## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
+
+R257 CURRENT / IMPLEMENTED locally: address reported signed-in /me4s latency via Mumbai function configuration, one-query safe profile and initializer/query timing diagnostics. Existing auth/admin ownership/privacy preserved;40 targeted regressions pass. CURRENT / PARTIAL: user confirms Mumbai DB and request shows US execution; both-project deployment and measured signed-in improvement remain outstanding. No universal latency promise or unrelated commerce changes.
+
+## 2026-10-13 — Image-only linked phone hero (R256)
+
+CURRENT / IMPLEMENTED locally: at <=640px hide Home hero copy/brand/Shop now CTA, remove image blur and dark tint, and expose a full-frame accessible link to the same /shop destination. Keep the260px compact frame and existing responsive slideshow photographs. Slideshow dots stay above the link and switch slides independently; larger viewport copy/CTA remains. Sources HomeHeroSlideshow.tsx/home.css. SUPERSEDES R251 visible phone headline and R227 phone blur/shade only. Scoped ESLint/typecheck and local browser checks at320/375/430/640/768/1440px pass: hidden phone copy, no filter/tint, exact full-frame link, no overflow; real pointer dot selection stays on Home and image click navigates to /shop. Phone screenshot inspected; git diff --check passes. No deployment.
+
 ## 2026-10-13 — Remove redundant pre-add draft read (R255)
 
 R255 CURRENT / IMPLEMENTED locally: address reported me600ms/draft400ms adding delay by removing redundant GET before normal mounted-card Add/quantity saves. Keep price/name/cart correctness and concurrent-edit protection. Sources gift-cart.ts/AddGiftToCartButton.tsx and gift-cart tests.88 client regressions, typecheck/scoped lint and fixture browser one-PUT additions/409 recovery pass. Actual hosted improvement requires deployment and measurement; no latency SLA claimed.

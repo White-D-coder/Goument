@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import ProductPhoto from '@/components/ProductPhoto';
 import { HOME_FESTIVE_PHOTO, HOME_LAVENDER_PHOTO } from '@/lib/home-photos';
 
@@ -94,6 +95,7 @@ export default function HomeHeroSlideshow() {
           />}
         </div>
       ))}
+      <Link className="tgg-hero-mobile-link" href="/shop" aria-label="Shop all gifts" />
       <div className="tgg-hero-dots" role="group" aria-label="Choose a featured gift image">
         {slides.map((slide, index) => (
           <button

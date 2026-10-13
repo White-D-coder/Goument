@@ -417,3 +417,50 @@ test('name writes do not resurrect removed items or replay uncertain saves; expl
  const conflict=load(async(_url,method,body)=>{if(!method)return plain(state);writes++;if(writes===1){state={...state,revision:1,items:[{id:'preview-envelope-ep1',quantity:4},{id:'other',quantity:1}]};throw new ApiError('Conflict',409);}assert.equal(body.revision,1);state={...plain(body),revision:2};return plain(state);});
  await conflict.personalise('preview-envelope-ep1',{mode:'PRINT',name:'Confirmed'});assert.equal(writes,2);assert.equal(state.items[0].quantity,4);assert.equal(state.items[0].personalisation.name,'Confirmed');assert.deepEqual(state.items[1],{id:'other',quantity:1});
 });
+
+test('confirmed card saves with one request and preserves boxes and other print names', async () => {
+ const snapshot = { ...empty(), revision: 7, boxes: [{ id: 'box', quantity: 1 }], items: [{ id: 'envelope', quantity: 2, personalisation: { mode: 'PRINT', name: 'Example' } }] };
+ const calls = [];
+ const { add, events } = load(async (_url, method, body) => {
+  calls.push(method || 'GET'); assert.equal(method, 'PUT'); assert.equal(body.revision, 7);
+  assert.deepEqual(plain(body.boxes), snapshot.boxes); assert.deepEqual(plain(body.items[0]), snapshot.items[0]);
+  return { ...plain(body), revision: 8 };
+ });
+ const result = await add('candles', undefined, snapshot);
+ assert.deepEqual(calls, ['PUT']); assert.deepEqual(plain(result.items), [...snapshot.items, { id: 'candles', quantity: 1 }]);
+ assert.equal(snapshot.items.length, 1); assert.deepEqual(events, ['b2c-cart-change']);
+});
+
+test('concurrent confirmed revisions recover without losing or doubling items', async () => {
+ let state = empty(); const calls = [];
+ const { add } = load(async (_url, method, body) => {
+  calls.push(method || 'GET'); if (!method) return plain(state);
+  if (body.revision !== state.revision) throw new ApiError('Revision changed', 409);
+  state = { ...plain(body), revision: state.revision + 1 }; return plain(state);
+ });
+ const snapshot = plain(state);
+ await Promise.all([add('first', undefined, snapshot), add('second', undefined, snapshot)]);
+ assert.deepEqual(calls, ['PUT', 'PUT', 'GET', 'PUT']);
+ assert.deepEqual(state.items, [{ id: 'first', quantity: 1 }, { id: 'second', quantity: 1 }]);
+});
+
+test('confirmed snapshot never retries an ambiguous save or fabricates success', async () => {
+ const calls = [];
+ const { add, events } = load(async (_url, method) => { calls.push(method); throw new Error('Response lost'); });
+ await assert.rejects(add('first', undefined, empty()), /Check your cart/);
+ assert.deepEqual(calls, ['PUT']); assert.deepEqual(events, []);
+});
+
+test('stale confirmed selection retries against the other tab latest quantity and name', async () => {
+ const stale = { ...empty(), revision: 1, items: [{ id: 'envelope', quantity: 1 }] };
+ const latest = { ...empty(), revision: 2, items: [{ id: 'envelope', quantity: 4, personalisation: { mode: 'PRINT', name: 'Latest' } }] };
+ const calls = [];
+ const { change } = load(async (_url, method, body) => {
+  calls.push(method || 'GET'); if (!method) return latest;
+  if (body.revision === 1) throw new ApiError('Changed', 409);
+  return { ...plain(body), revision: 3 };
+ });
+ const result = await change('envelope', -1, stale);
+ assert.deepEqual(calls, ['PUT', 'GET', 'PUT']);
+ assert.deepEqual(plain(result.items), [{ ...latest.items[0], quantity: 3 }]);
+});

@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+R255 CURRENT / IMPLEMENTED locally: address reported me600ms/draft400ms adding delay by removing redundant GET before normal mounted-card Add/quantity saves. Keep price/name/cart correctness and concurrent-edit protection. Sources gift-cart.ts/AddGiftToCartButton.tsx and gift-cart tests.88 client regressions, typecheck/scoped lint and fixture browser one-PUT additions/409 recovery pass. Actual hosted improvement requires deployment and measurement; no latency SLA claimed.
+
 ## 2026-10-13 — Compact desktop catalogue frames (R254)
 
 CURRENT / IMPLEMENTED locally: latest reference specifies compact card frame size with only existing contents. Replace R253 oversized desktop tracks with equal300px-minimum auto-fill tracks, landscape4:3 media and19–22px desktop Shop titles. This yields three columns at1280/1440/1920px and two at1024px. Preserve centered copy, description, price, cart controls, theme and phone layout; no reference-only wishlist/badges/image arrows added. Source storefront-cards.css. Local browser verifies all12 shown titles remain single-line and cards equal width with no overflow at1024/1280/1440/1920px; first-card heights approximately471/433/474/464px.375px phone regression unchanged. Desktop screenshot inspected; git diff --check passes. CSS-only; no deployment.

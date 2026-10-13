@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react';
 import { addGiftItem, changeGiftItemQuantity, ensureGiftItem, readGiftDraft, saveGiftPersonalisation } from '@/lib/gift-cart';
 import QuantityControl from './QuantityControl';
-import { announceCartAddition, giftCartItemsFromEvent } from '@/lib/gift-cart-events';
+import { announceCartAddition, giftCartDraftFromEvent, giftCartItemsFromEvent } from '@/lib/gift-cart-events';
+import type { Draft } from '@/hooks/useGiftDraft';
 import { printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
 import PrintNameField from './PrintNameField';
 
@@ -14,6 +15,7 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
  const [status, setStatus] = useState<'idle'|'adding'|'buying'|'added'|'error'>('idle');
  const [message, setMessage] = useState('');
  const locked = useRef(false);
+ const confirmedDraft = useRef<Draft | undefined>(undefined);
  const [quantity, setQuantity] = useState(0);
  const [printName, setPrintName] = useState('');
  const [nameDirty, setNameDirty] = useState(false);
@@ -26,6 +28,8 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
   let loading = false;
   let generation = 0;
   const refresh = async (event?: Event) => {
+   // An event without a complete confirmed snapshot invalidates the shortcut.
+   confirmedDraft.current = event ? giftCartDraftFromEvent(event) || undefined : undefined;
    const items = giftCartItemsFromEvent(event);
    if (items) {
     generation++;
@@ -40,6 +44,7 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
    try {
     const draft = await readGiftDraft();
     if (active && request === generation) {
+     confirmedDraft.current = draft;
      const row = draft.items.find(item => item.id === itemId);
      setQuantity(row?.quantity || 0);
      if (personalise && !nameEdited.current) setPrintName(row?.personalisation?.mode === 'PRINT' ? row.personalisation.name : '');
@@ -68,13 +73,15 @@ export default function AddGiftToCartButton({ itemId, name, className = 'button'
   locked.current = true;
   setStatus('adding'); setMessage('');
   try {
-   const draft = await (change === 1 ? addGiftItem(itemId, nameChoice()) : changeGiftItemQuantity(itemId, change));
+   const draft = await (change === 1 ? addGiftItem(itemId, nameChoice(), confirmedDraft.current) : changeGiftItemQuantity(itemId, change, confirmedDraft.current));
+   confirmedDraft.current = draft;
    setQuantity(draft.items.find(item => item.id === itemId)?.quantity || 0);
    if (change === 1) announceCartAddition({ source: 'gift', draft });
    if (change === 1) { nameEdited.current = false; setNameDirty(false); }
    setStatus(withQuantity ? 'idle' : 'added');
    setMessage(withQuantity ? '' : 'Added to your cart.');
   } catch (error) {
+   confirmedDraft.current = undefined;
    setStatus('error'); setMessage(error instanceof Error ? error.message : 'Unable to update your cart. Please try again.');
   } finally { locked.current = false; }
  }

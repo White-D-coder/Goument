@@ -60,12 +60,12 @@ export async function waitForGiftCartBeforeSignIn(): Promise<void> {
  }
 }
 
-export function addGiftItem(id: string, personalisation?: GiftPersonalisation | null): Promise<Draft> {
- return updateGiftItem(id, 1, personalisation);
+export function addGiftItem(id: string, personalisation?: GiftPersonalisation | null, confirmedDraft?: Draft): Promise<Draft> {
+ return updateGiftItem(id, 1, personalisation, confirmedDraft);
 }
 
-export function changeGiftItemQuantity(id: string, change: 1 | -1): Promise<Draft> {
- return updateGiftItem(id, change);
+export function changeGiftItemQuantity(id: string, change: 1 | -1, confirmedDraft?: Draft): Promise<Draft> {
+ return updateGiftItem(id, change, undefined, confirmedDraft);
 }
 
 // Buy now keeps the selected quantity, adding one only when it is absent.
@@ -77,11 +77,13 @@ export function saveGiftPersonalisation(id: string, personalisation: GiftPersona
  return updateGiftItem(id, 'personalise', personalisation);
 }
 
-function updateGiftItem(id: string, change: 1 | -1 | 'ensure' | 'personalise', personalisation?: GiftPersonalisation | null): Promise<Draft> {
+function updateGiftItem(id: string, change: 1 | -1 | 'ensure' | 'personalise', personalisation?: GiftPersonalisation | null, confirmedDraft?: Draft): Promise<Draft> {
  return queueGiftCartWrite(async () => {
   if (change !== 1 && change !== -1 && change !== 'ensure' && change !== 'personalise') throw new Error('Invalid quantity change.');
   for (let attempt = 0; attempt < 2; attempt++) {
-   const draft = await api<Draft>('/auth/gift/draft');
+   // A mounted card already holds a server-confirmed selection. Its revision is
+   // checked by PUT; a conflict reloads before retrying. No global draft cache.
+   const draft = attempt === 0 && confirmedDraft ? confirmedDraft : await api<Draft>('/auth/gift/draft');
    const existing = draft.items.find(item => item.id === id);
    if (change === 'personalise' && !existing) throw new Error('This item is no longer in your bag. Add it again before saving a name.');
    if (change === 'ensure' && existing?.quantity && personalisation === undefined) return draft;

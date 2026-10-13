@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+CURRENT / IMPLEMENTED: normal mounted-card Add uses one PUT instead of GET→PUT, with no added debounce, optimistic success or global/private settled cache. Multiple queued stale snapshots can require409→GET→PUT; initial cookie handshake remains serialized. Existing Header me runs independently on mount/auth events and is not an Add dependency; long React initiator stack does not establish duplicate requests. CURRENT / PARTIAL measurements: read-only anonymous hosted me401 TTFB0.363139s/total0.363262s;count200 TTFB0.282883s/total0.283455s. No customer cookies used and no hosted draft write. Exact region/cold-start/database contribution UNKNOWN; no claim that this frontend change reduces me latency or has been deployed.
+
 ## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
 
 CURRENT / IMPLEMENTED: shared useTwoRowScroll measures only first two DOM rows and list padding through ResizeObserver while full-cart containment is active or tray visible; disconnects on update/unmount. Native overflow scrolling has no scroll handler or React updates. Phone gallery visibility changes reuse existing responsive/lazy ProductPhoto assets; no new fetch loop, eager hero source, dependency or timing SLA. Final fixtures confirm tray keeps one public metadata read and zero count GETs during additions. Short-viewport product area is bounded to keep checkout visible. Hosted latency/physical-device performance remain unverified; no deployment.

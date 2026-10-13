@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+CURRENT / IMPLEMENTED: use the draft already held by a mounted purchase control to remove a normal pre-save network round trip, relying on the existing server revision fence rather than caching responses globally. R228/R229 no-global-settled-private-cache invariant remains; component state is not checkout or ownership authority. Retry only explicit409, preserve unknown-write errors and first-cookie queue. No auth shortcut or server/hosting configuration change; measured hosted latency cause remains UNKNOWN.
+
 ## 2026-10-13 — Compact Home card title spacing (R236)
 
 CURRENT / IMPLEMENTED: R236 narrows R227 two-line collection-title reservation to phone widths <=640px. At desktop/tablet, its empty second line caused the reported large title/paragraph gap. Preserve existing8px margin and phone alignment; no component or unrelated card redesign.

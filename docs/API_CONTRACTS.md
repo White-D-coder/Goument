@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+CURRENT / IMPLEMENTED internal TypeScript API only: addGiftItem(id,personalisation?,confirmedDraft?) and changeGiftItemQuantity(id,delta,confirmedDraft?) accept the mounted control’s confirmed state. Existing PUT gift/draft revision validation rejects stale state;409 alone triggers fresh GET and one retry. Calls without a snapshot and Buy now/name-save retain current read flow. HTTP response/body, owner cookie and server revision contracts unchanged.
+
 ## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
 
 CURRENT / IMPLEMENTED internal browser events only: b2c-cart-change detail now {items,draft}; existing items-only consumers remain compatible. Full draft includes revision, boxes, pack IDs and print metadata; mounted hook/tray validate shape before adopting it. b2c-cart-added detail is {source:gift,draft} or {source:store}, emitted by successful Add UI, not initial reads, failed saves, name-only edits or Buy now redirects. This is a UI notification, not a server authority/ownership change. Gift tray consumes confirmed draft with no count/draft fetch; first opening reads existing public gift/catalogue once for current display metadata/prices. Legacy tray uses existing /cart DTO independently. HTTP contracts unchanged; View Cart preserves full review/name/checkout checks.

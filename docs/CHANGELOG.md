@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+CURRENT / IMPLEMENTED locally: optional confirmedDraft input on addGiftItem/changeGiftItemQuantity and component-scoped confirmed snapshot avoid redundant read-before-write during normal card additions. Ref populated only from completed reads/full confirmed events, invalidated on generic events/errors; server revisions remain authoritative. No HTTP/schema/auth/payment/stock change. Unit/concurrency/failure tests and browser one-PUT/stale-conflict behavior pass. No deployment.
+
 ## 2026-10-13 — Compact desktop catalogue frames (R254)
 
 CURRENT / IMPLEMENTED locally: latest reference specifies compact card frame size with only existing contents. Replace R253 oversized desktop tracks with equal300px-minimum auto-fill tracks, landscape4:3 media and19–22px desktop Shop titles. This yields three columns at1280/1440/1920px and two at1024px. Preserve centered copy, description, price, cart controls, theme and phone layout; no reference-only wishlist/badges/image arrows added. Source storefront-cards.css. Local browser verifies all12 shown titles remain single-line and cards equal width with no overflow at1024/1280/1440/1920px; first-card heights approximately471/433/474/464px.375px phone regression unchanged. Desktop screenshot inspected; git diff --check passes. CSS-only; no deployment.

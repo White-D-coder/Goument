@@ -1,3 +1,7 @@
+## 2026-10-13 — Remove redundant pre-add draft read (R255)
+
+CURRENT / IMPLEMENTED locally: mounted AddGiftToCartButton passes its existing server-confirmed draft to the versioned save, removing the preliminary GET for ordinary Add/quantity operations. Missing/invalidated state retains GET→PUT;409 reloads latest draft before one retry; ambiguous writes never replay. Header me remains an independent mount/auth-change read.88 frontend tests, scoped lint/typecheck and fixture browser checks pass. CURRENT / PARTIAL hosted: anonymous me401 TTFB363ms and count200 TTFB283ms measured once; reported me600ms/draft400ms cannot identify hosting/DB cause. No deployment.
+
 ## 2026-10-13 — Compact desktop catalogue frames (R254)
 
 CURRENT / IMPLEMENTED locally: latest reference specifies compact card frame size with only existing contents. Replace R253 oversized desktop tracks with equal300px-minimum auto-fill tracks, landscape4:3 media and19–22px desktop Shop titles. This yields three columns at1280/1440/1920px and two at1024px. Preserve centered copy, description, price, cart controls, theme and phone layout; no reference-only wishlist/badges/image arrows added. Source storefront-cards.css. Local browser verifies all12 shown titles remain single-line and cards equal width with no overflow at1024/1280/1440/1920px; first-card heights approximately471/433/474/464px.375px phone regression unchanged. Desktop screenshot inspected; git diff --check passes. CSS-only; no deployment.

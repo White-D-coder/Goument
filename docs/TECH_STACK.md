@@ -1,3 +1,9 @@
+## 2026-10-18 — Original dependency hardening (DEC-003)
+
+CURRENT / IMPLEMENTED locally: main frontend_appview and alternate frontend_responsive now resolve Next/eslint-config-next16.4.2; main Nodemailer10.1.2. Original backend compatible dependency locks updated and unused direct UUID removed after whole-backend consumer search. B2C retains its independent16.4.0 stack/locks unchanged. No new dependency/provider/ORM introduced. Existing Next docs read before framework-route changes.
+
+VERIFIED: all three builds and separate TypeScript checks; original admin/mail and backend regressions; production audits0 in four scopes, original main1 high XLSX/no registry fix. Dev advisories remain. Actual local audit Node22.12.0/npm10.9.0; production runtime UNKNOWN. A transitive ESLint package warned it requires a newer supported Node patch (22.13+ on22.x); tests/lint ran, but operational toolchain alignment remains follow-up. Older version bullets below are historical2026-09-25 snapshots, superseded only for these scoped updates. See audit/dependency-audit.json and TESTING.
+
 ## 2026-10-12 — B2C dependency isolation/update (R161)
 
 CURRENT / IMPLEMENTED B2C only: Next/eslint-config-next16.4.0 pinned, React/ReactDOM19.2.4 retained. Frontend runtime dependencies reduced to Next, React/ReactDOM, Framer Motion and Lucide after import inspection; unused Axios, XLSX, mail/query/state/animation/cache packages removed from this storefront, not other apps. Compatible backend Express4.22.3/Joi17.13.8/uuid11.1.1 and transitives updated. Both production audits zero vulnerabilities; dev-only packages not certified. B2C frontend/backend independent npm installs replace local shared symlinks. Mongoose8 retained, new OAuthFlow model uses existing Mongo/crypto, no extra service/provider introduced. Original main/alternate stack inventory below remains separate and unchanged. Build/typecheck/lint and103 backend/41 client tests pass.

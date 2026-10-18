@@ -1,3 +1,30 @@
+## 2026-10-18 — Full repository audit/security verification (DEC-001–004)
+
+VERIFIED locally, Node22.12.0/npm10.9.0. Commands executed from the indicated app; no historical pass substituted for a current failure. [Audit report](audit/REPOSITORY_AUDIT.md), [root decisions](../DECISION.md), [flows](../FLOW.md) and [sanitized npm evidence](audit/dependency-audit.json).
+
+| Scope | Actual command | Final result |
+| --- | --- | --- |
+| B2C | node --test tests/*.test.cjs |88/88 pass |
+| B2C | npm run lint; npm run typecheck; npm run build | All pass; final typecheck after restoring audit-generated next-env-only build edits also passes |
+| B2C/backend | NODE_ENV=test npm test -- --silent |17 suites177/177 pass (151 existing +26 new legacy security cases), final full run116.506s |
+| backend | NODE_ENV=test npm test -- --silent |6 suites40/40 pass after unused UUID removal (14 existing +26 new), final run9.868s |
+| frontend_appview | node --test tests/*.test.cjs |7/7 pass; configured/missing-config/malformed-token/body/rate/login/logout + two real enquiry/MIME compatibility cases |
+| frontend_appview | npm run build; ./node_modules/.bin/tsc --noEmit --incremental false | Both pass after Next16.4.2/Nodemailer10.1.2 |
+| frontend_appview | eslint src/lib/security/adminAuth.ts src/app/api/admin/auth/route.ts tests/*.test.cjs | Pass (audit-owned files) |
+| frontend_appview | npm run lint | FAIL:57 errors/108 warnings; baseline58/108; remaining existing any/effect/ref/impurity debt not fixed or globally suppressed |
+| frontend_responsive | npm run build; tsc --noEmit --incremental false; npm run lint | Build/types pass; lint0 errors/2 existing warnings |
+| All five package scopes | npm audit --omit=dev --ignore-scripts --json | B2C/B2C-backend/backend/alternate0; main1 high XLSX/no registry fix |
+| All five package scopes | npm audit --ignore-scripts --json | Development advisories remain; exact counts in audit evidence |
+| Root | node scripts/audit-repository.cjs --write |870 media/font files,42 pages, six Next handlers,116 backend declarations,25 disconnected schemas |
+
+Pre-fix reproduction: original socket regressions14/14 fail; CORS10 cases has6 hostile-origin failures and4 valid-origin passes. Both copies had the same inspected defect; full baseline including these added tests failed20/24 while existing14(original)/151(B2C) passed. DEC-002 final security regressions add adapter-failure and spoofed-role cases,26/26 in each copy. Original admin regressions fail4/5 before DEC-004, then pass5/5; mail compatibility2/2 before and after Nodemailer major update. Mail tests use the actual handler plus real streamTransport MIME entirely in memory, with fake geo/vault and synthetic .test recipients; no network/mail/vault side effects.
+
+Initial sandbox DB/HTTP tests failed listen EPERM; registry lookups ENOTFOUND and original/alternate Turbopack worker bind failures. Retried approved local listener/registry operations; passed results above are from permitted reruns. One alternate concurrent build hit its normal build lock; waited for prior process to exit and reran successfully. Installs use --ignore-scripts/no --force; transitive ESLint engine warning (local22.12 versus supported22.13+ on22.x) remains a toolchain limitation.
+
+Disposable MongoMemoryReplSet fixtures/URIs reviewed before execution; Redis/providers mocked. No configured Atlas/install/seed/provision, real OAuth/payment/SMTP, deployment, customer/vault record read/write, secret rotation, browser/device visual benchmark or production backup/restore check. Selected512 tracked source-text secret-pattern scan found only two synthetic URI test fixtures; filename-only history scan found no matching committed env/key paths; no exhaustive history-content secret claim. Root inventory reports no-static-match as UNKNOWN usage, never deletion proof. Final diff/documentation checks recorded in the root register.
+
+Final audit-document verification: git diff --check clean; inventory/socket JavaScript syntax checks pass; mirrored security implementation/test files match; dry-run inventory matches stored counts and all asset/page paths exist; audit-local Markdown links resolve; root DECISION/FLOW required sections and21-field templates for all four decisions checked. Build-only B2C next-env edits restored; no deployment/asset/env/customer-data change in final Git diff.
+
 ## 2026-10-13 — Compact cart/filter handoff and restored Home cards (R267–R268)
 
 CURRENT / VERIFIED locally: scoped ESLint CartTray/HomeSections and git diff --check pass. Browser fixture adds three envelope products, verifies260×50px cart bar/three photos/44px close target/no overflow at320/375/430/640 and larger desktop tray at1440. Filter bar hides while cart shown, returns after close or empty draft, and opens/closes the native filter dialog. Home at320/375/640/1440 verifies centered title before price, below-photo burgundy Explore and no overflow. Phone cart/Home screenshots inspected. No production API writes or deployment.

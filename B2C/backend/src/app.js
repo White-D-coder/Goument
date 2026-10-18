@@ -38,25 +38,11 @@ app.use(helmet({
   }
 }));
 
-const allowedOrigins = [
-  'https://www.gourmetgem.com',
-  'https://m.gourmetgem.com',
-  'http://localhost:3000',
-  'http://127.0.0.1:3000'
-];
+const { isAllowedOrigin } = require('./shared/config/origins');
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (
-      allowedOrigins.indexOf(origin) !== -1 ||
-      origin.startsWith('http://localhost') ||
-      origin.startsWith('http://127.0.0.1') ||
-      origin.startsWith('http://192.168.')
-    ) {
-      return callback(null, true);
-    }
-    return callback(null, true);
+    return callback(null, isAllowedOrigin(origin));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],

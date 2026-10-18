@@ -1,3 +1,11 @@
+## 2026-10-18 — Legacy security boundary changes (DEC-002/004)
+
+CURRENT / IMPLEMENTED locally: both legacy Express trees only emit credentialed CORS for exact pre-existing official/local origins; unlisted/prefix-lookalike origins receive no CORS authorization. This does not reject every nonbrowser HTTP request or replace endpoint auth/CSRF. WebSocket handshake allowRequest uses the same list; missing-Origin nonbrowser clients still require persisted admin authorization.
+
+join_admins retains its event name and accepts the existing cookie/Bearer access JWT or Socket.IO auth.token. Membership and each subsequent admin event require current DB admin role/valid token. An optional callback receives {success:boolean}; no mandatory new frontend payload. new_order event payload remains unchanged. Failed room update returns unsuccessful acknowledgement; notification failures are handled internally. Both legacy copies verified; new B2C database-backed service does not initialize these sockets.
+
+Original Next admin login without explicit PIN/session settings now503, malformed JSON/object/action/PIN400, wrong PIN401/existing lockout429; configured success/cookie and logout retained. GET auth status/login/logout use private,no-store. Private data/export handlers share fail-closed verification; data cache-policy follow-up remains. All other business/API/model/payment contracts unchanged. Full route/declaration inventory: audit/ROUTE_INVENTORY.md and root FLOW sections5–8; evidence TESTING.
+
 ## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
 
 CURRENT / IMPLEMENTED: GET /api/v1/auth/me response DTO/status/ownership and private,no-store policy unchanged. Auth app adds Server-Timing profile;dur=<milliseconds>; Vercel wrapper adds init;dur=<milliseconds> and preserves both. Initializer failures remain generic503 with no-store/Retry-After1 and numeric init timing. Timings are diagnostics, not service-level guarantees.

@@ -1,9 +1,20 @@
 import crypto from 'crypto';
 import { NextRequest } from 'next/server';
 
-const AUTH_SECRET = process.env.ADMIN_SESSION_SECRET || 'the_gourmet_gifts_luxury_portal_auth_secret_key_2026';
-export const ADMIN_PIN = process.env.ADMIN_PORTAL_PIN || 'gourmet2026';
+const AUTH_SECRET = process.env.ADMIN_SESSION_SECRET || '';
+const ADMIN_PIN = (process.env.ADMIN_PORTAL_PIN || '').trim();
 export const ADMIN_COOKIE_NAME = 'gourmet_admin_session';
+
+export function isAdminAuthConfigured(): boolean {
+  return Boolean(AUTH_SECRET.trim() && ADMIN_PIN);
+}
+
+export function verifyAdminPin(pin: string): boolean {
+  if (!isAdminAuthConfigured()) return false;
+  const supplied = crypto.createHash('sha256').update(pin.trim()).digest();
+  const expected = crypto.createHash('sha256').update(ADMIN_PIN).digest();
+  return crypto.timingSafeEqual(supplied, expected);
+}
 
 // Rate Limiter tracking: IP -> { attempts: number, lockUntil: number }
 const rateLimitMap = new Map<string, { attempts: number; lockUntil: number }>();
@@ -51,6 +62,7 @@ export function resetRateLimit(ip: string): void {
 }
 
 export function createSessionToken(): string {
+  if (!isAdminAuthConfigured()) throw new Error('Admin authentication unavailable.');
   const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days session
   const payload = `gourmet_admin:${expiresAt}`;
   const hmac = crypto.createHmac('sha256', AUTH_SECRET).update(payload).digest('hex');
@@ -58,15 +70,16 @@ export function createSessionToken(): string {
 }
 
 export function verifySessionToken(token: string | undefined): boolean {
-  if (!token) return false;
+  if (!isAdminAuthConfigured() || !token) return false;
   const parts = token.split(':');
   if (parts.length !== 3) return false;
 
   const [role, expiresAtStr, signature] = parts;
   if (role !== 'gourmet_admin') return false;
 
-  const expiresAt = parseInt(expiresAtStr, 10);
-  if (isNaN(expiresAt) || Date.now() > expiresAt) return false;
+  if (!/^[1-9]\d*$/.test(expiresAtStr) || !/^[a-f0-9]{64}$/.test(signature)) return false;
+  const expiresAt = Number(expiresAtStr);
+  if (!Number.isSafeInteger(expiresAt) || Date.now() >= expiresAt) return false;
 
   const expectedPayload = `${role}:${expiresAtStr}`;
   const expectedHmac = crypto.createHmac('sha256', AUTH_SECRET).update(expectedPayload).digest('hex');

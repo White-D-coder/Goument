@@ -1,3 +1,7 @@
+## 2026-10-18 — Source schema audit; no migration
+
+CURRENT / IMPLEMENTED source inventory matches25 B2C collections/103 explicit indexes/33 unique constraints. Disconnected generated metadata and supporting current/target/relationship/index/migration/rollback/validation references live in database/ and link this canonical domain file/DATA_MODELS. No fields, validators, indexes, customer links, historical snapshots or data changed. Full isolated backend tests verify existing integrity/ownership/concurrency, not configured Atlas privileges/load/backups. UNKNOWN: deployed schema/index state and exercised restore. No seed/provision/install/migration run on configured databases.
+
 ## 2026-10-12 — New bookmarks and responsive Home polish (R225–R227)
 
 CURRENT / IMPLEMENTED locally: two new catalogue products/variants/inventory pools for vibrant-art-bookmarks and wanderlust-bookmarks, approved gross34900paise each. Guarded recognized local development provisioning actually created only these two100-unit pools with ledger/audit entries, no existing stock reset. Current totals20 mapped products/29 SKU pools (India alias shared),30 registered gift IDs. No schema/index/model/history change in R225; hosted database untouched/unverified.

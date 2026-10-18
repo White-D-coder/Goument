@@ -3,6 +3,33 @@ const { createAdapter } = require('@socket.io/redis-adapter');
 const Redis = require('ioredis');
 const config = require('../config');
 const logger = require('./logger');
+const cookieParser = require('cookie-parser');
+const { auth } = require('../middleware/auth.middleware');
+const { allowedOrigins, isAllowedOrigin } = require('../config/origins');
+
+// Reuse HTTP JWT verification and persisted role authorization. RemoteSocket
+// exposes handshake too, so Redis-adapter broadcasts obey the same checks.
+const adminAuth = auth('admin');
+const parseCookies = cookieParser();
+const authorized = socket => new Promise(resolve => {
+  const handshake = socket.handshake || {};
+  const headers = { ...handshake.headers };
+  if (!isAllowedOrigin(headers.origin)) return resolve(false);
+  if (typeof handshake.auth?.token === 'string') {
+    headers.authorization = `Bearer ${handshake.auth.token}`;
+  }
+  const request = { headers };
+  const response = { status() { return this; }, json() { resolve(false); } };
+  try {
+    parseCookies(request, response, error => {
+      if (error) return resolve(false);
+      Promise.resolve(adminAuth(request, response, error => resolve(!error && Boolean(request.user))))
+        .catch(() => resolve(false));
+    });
+  } catch {
+    resolve(false);
+  }
+});
 
 let io;
 
@@ -14,10 +41,12 @@ let io;
 const initSocket = (server) => {
   io = new Server(server, {
     cors: {
-      origin: ['https://www.gourmetgem.com', 'https://m.gourmetgem.com', 'http://localhost:3000'],
+      origin: allowedOrigins,
       methods: ['GET', 'POST'],
       credentials: true
-    }
+    },
+    // Enforce the same browser-origin policy for WebSocket handshakes too.
+    allowRequest: (request, callback) => callback(null, isAllowedOrigin(request.headers.origin))
   });
 
   if (config.env !== 'test') {
@@ -30,10 +59,21 @@ const initSocket = (server) => {
   io.on('connection', (socket) => {
     logger.debug(`Socket client connected: ${socket.id}`);
 
-    // Join room if the user is verified as admin
-    socket.on('join_admins', () => {
-      socket.join('admins');
-      logger.info(`Socket client ${socket.id} joined 'admins' room.`);
+    socket.on('join_admins', async (ack) => {
+      let allowed = false;
+      try {
+        allowed = await authorized(socket);
+        if (allowed) {
+          await socket.join('admins');
+          logger.info(`Socket client ${socket.id} joined 'admins' room.`);
+        } else {
+          await socket.leave('admins');
+        }
+      } catch {
+        allowed = false;
+        logger.error('Socket admin room update unavailable.');
+      }
+      if (typeof ack === 'function') ack({ success: allowed });
     });
 
     socket.on('disconnect', () => {
@@ -56,10 +96,16 @@ const getIO = () => {
  * @param {string} event - Name of the event
  * @param {Object} data - Payload
  */
-const notifyAdmins = (event, data) => {
+const notifyAdmins = async (event, data) => {
   try {
     const ioServer = getIO();
-    ioServer.to('admins').emit(event, data);
+    const recipients = await ioServer.in('admins').fetchSockets();
+    await Promise.all(recipients.map(async socket => {
+      // Expired tokens, deleted users, demotion and DB errors fail closed even
+      // after admission. Never trust the JWT role or a previously joined room.
+      if (await authorized(socket)) socket.emit(event, data);
+      else await socket.leave('admins');
+    }));
   } catch (error) {
     logger.error('Failed to dispatch socket notification to admins:', error);
   }

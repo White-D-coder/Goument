@@ -1,3 +1,7 @@
+## 2026-10-18 — Audit entry points and current boundaries
+
+CURRENT / IMPLEMENTED: root FLOW.md maps actual independent apps/stores/routes and source/local-tested sequences; canonical architecture/history remains here. No architecture/schema/provider/design migration. DEC-002 secures both legacy socket admission/delivery and exact CORS using existing identity semantics; the B2C serverless api/index.js/auth/dB-backed operations remain a separate service. DEC-004 removes original Next admin credential fallbacks without changing its separate vault key or opening its disabled page. DEC-003 dependency updates preserve application boundaries. Local verification and remaining deployment/financial/storage risks: audit/REPOSITORY_AUDIT.md; no hosted health claim.
+
 ## 2026-10-13 — Non-blocking cart tray and two-item scroll cap (R229–R230)
 
 CURRENT / IMPLEMENTED public UI only: StorefrontChrome mounts CartTray outside main and after existing footer/motion, preserving header+main adjacency and admin isolation. No global request cache/provider or localStorage cart snapshot. b2c-cart-change adds confirmed full draft alongside existing items for mounted UI synchronization; separate b2c-cart-added triggers opening only for explicit successful additions. Tray gets confirmed gift snapshot directly; public metadata refreshes once on first opening. Legacy Add separately requests existing /cart display data with overlapping reads coalesced, never converts/merges cart identities. Full cart is still checkout entry. No backend/API response/model/payment/stock change.

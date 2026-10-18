@@ -1,3 +1,7 @@
+## 2026-10-18 — Audit measurements and limits
+
+CURRENT / IMPLEMENTED: source inventory870 media/font files,439,924,613 total repository bytes/202 duplicate groups,42 page entries and25 schemas. These are storage/source counts, not page-transfer or runtime metrics. No new image/cache/query optimization, indexes or performance benchmark; no LCP/INP/CLS/latency/throughput improvement claim. Existing historical lab results remain dated below. Root FLOW sections11–15 records actual cache/timeout/fanout/retry paths; hosted/device/load/explain-plan measurements remain required before optimization or capacity estimates.
+
 ## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
 
 CURRENT / PARTIAL evidence: user reports signed-in GET auth/me200 taking4s; supplied x-vercel-id has bom1 ingress and iad1 execution. User confirms Atlas Mumbai. This establishes a cross-region route, not the exact fraction of4s caused by it. Anonymous read-only samples (no customer cookies) observed proxy me503~554ms, direct backend me503~528ms, later proxy me401~281ms; Home200~81ms/count200~261ms. Intermittent503 cause remains UNKNOWN. Public deployed JS includes R255 confirmed-draft save shortcut, so stale frontend is not established as this cause.

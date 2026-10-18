@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  ADMIN_PIN,
+  isAdminAuthConfigured,
+  verifyAdminPin,
   ADMIN_COOKIE_NAME,
   createSessionToken,
   verifyAdminRequest,
@@ -12,9 +13,14 @@ import { extractClientIp } from '@/lib/geo/ipGeo';
 
 export const dynamic = 'force-dynamic';
 
+const privateJson = (body: unknown, status = 200) => NextResponse.json(body, {
+  status,
+  headers: { 'Cache-Control': 'private, no-store' },
+});
+
 export async function GET(req: NextRequest) {
   const isAuth = verifyAdminRequest(req);
-  return NextResponse.json({ authenticated: isAuth });
+  return privateJson({ authenticated: isAuth });
 }
 
 export async function POST(req: NextRequest) {
@@ -22,44 +28,51 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body) ||
+        (body.action !== undefined && typeof body.action !== 'string') ||
+        (body.pin !== undefined && typeof body.pin !== 'string')) {
+      return privateJson({ success: false, error: 'Invalid authentication request.' }, 400);
+    }
     const action = body.action || 'login';
 
     if (action === 'logout') {
-      const response = NextResponse.json({ success: true, message: 'Logged out.' });
+      const response = privateJson({ success: true, message: 'Logged out.' });
       response.cookies.delete(ADMIN_COOKIE_NAME);
       return response;
     }
 
     if (action === 'login') {
+      if (!isAdminAuthConfigured()) {
+        return privateJson({ success: false, error: 'Admin authentication unavailable.' }, 503);
+      }
       // 1. Check Rate Limit
       const rateCheck = checkRateLimit(ip);
       if (!rateCheck.allowed) {
-        return NextResponse.json(
+        return privateJson(
           {
             success: false,
             error: `Security Alert: Too many failed attempts. Access locked for ${rateCheck.remainingMinutes} minutes.`,
           },
-          { status: 429 }
+          429
         );
       }
 
       const pin = (body.pin || '').trim();
-      const expectedPin = (process.env.ADMIN_PORTAL_PIN || ADMIN_PIN).trim();
 
-      if (!pin || pin !== expectedPin) {
+      if (!pin || !verifyAdminPin(pin)) {
         const failStatus = registerFailedAttempt(ip);
         if (failStatus.locked) {
-          return NextResponse.json(
+          return privateJson(
             {
               success: false,
               error: `Security Alert: 5 consecutive failed attempts. Portal locked for 15 minutes.`,
             },
-            { status: 429 }
+            429
           );
         }
-        return NextResponse.json(
+        return privateJson(
           { success: false, error: 'Invalid security PIN. Access denied.' },
-          { status: 401 }
+          401
         );
       }
 
@@ -67,7 +80,7 @@ export async function POST(req: NextRequest) {
       resetRateLimit(ip);
 
       const token = createSessionToken();
-      const response = NextResponse.json({
+      const response = privateJson({
         success: true,
         message: 'Authenticated successfully.',
       });
@@ -85,11 +98,8 @@ export async function POST(req: NextRequest) {
       return response;
     }
 
-    return NextResponse.json({ success: false, error: 'Unknown action.' }, { status: 400 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Authentication error.' },
-      { status: 500 }
-    );
+    return privateJson({ success: false, error: 'Unknown action.' }, 400);
+  } catch {
+    return privateJson({ success: false, error: 'Invalid authentication request.' }, 400);
   }
 }

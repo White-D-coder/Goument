@@ -1,0 +1,5113 @@
+{
+  "verification": "disconnected source schema metadata only; no live database inspection",
+  "schemas": [
+    {
+      "model": "User",
+      "collection": "users",
+      "fields": [
+        {
+          "field": "googleSubject",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": true,
+          "enum": []
+        },
+        {
+          "field": "authSessions",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": true,
+          "enum": []
+        },
+        {
+          "field": "authSessions[].digest",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "authSessions[].expiresAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "email",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "emailNormalized",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phoneNormalized",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "passwordHash",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": true,
+          "enum": []
+        },
+        {
+          "field": "roles",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "permissions",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "accessVersion",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "adminCommandVersion",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ACTIVE",
+            "SUSPENDED",
+            "DISABLED"
+          ]
+        },
+        {
+          "field": "emailVerifiedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phoneVerifiedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "lastLoginAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "googleSubject": 1
+          },
+          "name": "user_google_identity",
+          "unique": true,
+          "partialFilterExpression": {
+            "googleSubject": {
+              "$type": "string"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "emailNormalized": 1
+          },
+          "name": "user_email_identity",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "phoneNormalized": 1
+          },
+          "name": "user_phone_lookup",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "users_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "googleSubject"
+      ],
+      "states": {
+        "status": "UserStatus"
+      }
+    },
+    {
+      "model": "OAuthFlow",
+      "collection": "oauth_flows",
+      "fields": [
+        {
+          "field": "stateHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "bindingHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "nonce",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": true,
+          "enum": []
+        },
+        {
+          "field": "verifier",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": true,
+          "enum": []
+        },
+        {
+          "field": "next",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "expiresAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "stateHash": 1
+          },
+          "name": "oauth_state_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "expiresAt": 1
+          },
+          "name": "oauth_flow_expiry",
+          "expireAfterSeconds": 0,
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "Customer",
+      "collection": "customers",
+      "fields": [
+        {
+          "field": "userId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "firstName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "lastName",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "email",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "emailNormalized",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phoneNormalized",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "BLOCKED"
+          ]
+        },
+        {
+          "field": "avatarUrl",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dateOfBirth",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "marketingConsent",
+          "type": "Boolean",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "lastOrderAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "totalOrders",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "totalSpentMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "totalsCurrency",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "userId": 1
+          },
+          "name": "customer_user_identity",
+          "unique": true,
+          "partialFilterExpression": {
+            "userId": {
+              "$type": "objectId"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "emailNormalized": 1
+          },
+          "name": "customer_email_lookup",
+          "background": true
+        },
+        {
+          "keys": {
+            "phoneNormalized": 1
+          },
+          "name": "customer_phone_lookup",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_status_history",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customers_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {
+        "status": "CustomerStatus"
+      }
+    },
+    {
+      "model": "CustomerAddress",
+      "collection": "customer_addresses",
+      "fields": [
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "recipientName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "addressLine1",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "addressLine2",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "landmark",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "city",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "state",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "postalCode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "country",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "label",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "isDefaultShipping",
+          "type": "Boolean",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "isDefaultBilling",
+          "type": "Boolean",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "addresses_by_customer",
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "isDefaultShipping": 1
+          },
+          "name": "one_default_shipping",
+          "unique": true,
+          "partialFilterExpression": {
+            "isDefaultShipping": true
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "isDefaultBilling": 1
+          },
+          "name": "one_default_billing",
+          "unique": true,
+          "partialFilterExpression": {
+            "isDefaultBilling": true
+          },
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "Category",
+      "collection": "categories",
+      "fields": [
+        {
+          "field": "name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "slug",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "description",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "parentId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Category",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "imageUrl",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ACTIVE",
+            "INACTIVE"
+          ]
+        },
+        {
+          "field": "sortOrder",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.title",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.description",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.keywords",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.canonicalUrl",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "slug": 1
+          },
+          "name": "category_slug",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "parentId": 1
+          },
+          "name": "category_children",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "sortOrder": 1
+          },
+          "name": "category_navigation",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "categories_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "parentId"
+      ],
+      "states": {
+        "status": "CategoryStatus"
+      }
+    },
+    {
+      "model": "Product",
+      "collection": "products",
+      "fields": [
+        {
+          "field": "name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "slug",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shortDescription",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "description",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "categoryIds",
+          "type": "Array",
+          "required": false,
+          "ref": "Category",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "brand",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "DRAFT",
+            "ACTIVE",
+            "ARCHIVED"
+          ]
+        },
+        {
+          "field": "media",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].url",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].publicId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].alt",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].type",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ]
+        },
+        {
+          "field": "media[].sortOrder",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.title",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.description",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.keywords",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "seo.canonicalUrl",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "tags",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "slug": 1
+          },
+          "name": "product_slug",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "categoryIds": 1,
+            "status": 1,
+            "createdAt": -1
+          },
+          "name": "catalogue_category_status",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "catalogue_newest",
+          "background": true
+        },
+        {
+          "keys": {
+            "name": "text",
+            "shortDescription": "text",
+            "tags": "text"
+          },
+          "name": "catalogue_text",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {
+        "status": "ProductStatus"
+      }
+    },
+    {
+      "model": "ProductVariant",
+      "collection": "product_variants",
+      "fields": [
+        {
+          "field": "productId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Product",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sku",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "name",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "attributes",
+          "type": "Map",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "attributes.$*",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "priceMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "compareAtPriceMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ACTIVE",
+            "INACTIVE"
+          ]
+        },
+        {
+          "field": "weightGrams",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dimensions",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dimensions.lengthCm",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dimensions.widthCm",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dimensions.heightCm",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].url",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].publicId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].alt",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "media[].type",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ]
+        },
+        {
+          "field": "media[].sortOrder",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "sku": 1
+          },
+          "name": "variant_global_sku",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "productId": 1,
+            "status": 1
+          },
+          "name": "product_variants",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "product_variants_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "productId",
+        "sku"
+      ],
+      "states": {
+        "status": "VariantStatus"
+      }
+    },
+    {
+      "model": "Inventory",
+      "collection": "inventory",
+      "fields": [
+        {
+          "field": "variantId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "ProductVariant",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sku",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "availableQuantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "reservedQuantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "lowStockThreshold",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "IN_STOCK",
+            "LOW_STOCK",
+            "OUT_OF_STOCK",
+            "DISABLED"
+          ]
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "version",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "variantId": 1
+          },
+          "name": "one_inventory_per_variant",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "sku": 1
+          },
+          "name": "inventory_sku",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1
+          },
+          "name": "stock_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "inventory_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "variantId",
+        "sku"
+      ],
+      "states": {}
+    },
+    {
+      "model": "InventoryTransaction",
+      "collection": "inventory_transactions",
+      "fields": [
+        {
+          "field": "inventoryId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Inventory",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "variantId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "ProductVariant",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sku",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "type",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "RESTOCK",
+            "SALE",
+            "RESERVATION",
+            "RELEASE",
+            "RETURN",
+            "ADJUSTMENT"
+          ]
+        },
+        {
+          "field": "quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "referenceType",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ORDER",
+            "RETURN",
+            "MANUAL",
+            "SYSTEM"
+          ]
+        },
+        {
+          "field": "referenceId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "actorId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "reason",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "operationKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "operationKey": 1
+          },
+          "name": "stock_operation_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "variantId": 1,
+            "createdAt": -1
+          },
+          "name": "variant_movements",
+          "background": true
+        },
+        {
+          "keys": {
+            "inventoryId": 1,
+            "createdAt": -1
+          },
+          "name": "inventory_movements",
+          "background": true
+        },
+        {
+          "keys": {
+            "referenceId": 1
+          },
+          "name": "reference_movements",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1
+          },
+          "name": "recent_movements",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "Cart",
+      "collection": "carts",
+      "fields": [
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sessionId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].variantId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "ProductVariant",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "expiresAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "customerId": 1
+          },
+          "name": "customer_cart",
+          "unique": true,
+          "partialFilterExpression": {
+            "customerId": {
+              "$type": "objectId"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "sessionId": 1
+          },
+          "name": "guest_cart",
+          "unique": true,
+          "partialFilterExpression": {
+            "sessionId": {
+              "$type": "string"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "expiresAt": 1
+          },
+          "name": "cart_expiry",
+          "expireAfterSeconds": 0,
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "GiftDraft",
+      "collection": "gift_drafts",
+      "fields": [
+        {
+          "field": "ownerHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "boxes",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "boxes[].id",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "boxes[].quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].id",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].personalisation",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].personalisation.mode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PRINT",
+            "SKIP"
+          ]
+        },
+        {
+          "field": "items[].personalisation.name",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "ownerHash": 1
+          },
+          "name": "one_gift_draft_per_browser",
+          "unique": true,
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "ownerHash"
+      ],
+      "states": {}
+    },
+    {
+      "model": "Order",
+      "collection": "orders",
+      "fields": [
+        {
+          "field": "checkout",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "checkout.draftId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "GiftDraft",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "checkout.revision",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "checkout.snapshotRevision",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "checkout.expiresAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "orderNumber",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "CREATED",
+            "PAYMENT_PENDING",
+            "CONFIRMED",
+            "PROCESSING",
+            "SHIPPED",
+            "DELIVERED",
+            "CANCELLED",
+            "REFUNDED"
+          ]
+        },
+        {
+          "field": "paymentStatus",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PENDING",
+            "FAILED",
+            "PAID",
+            "PARTIALLY_REFUNDED",
+            "REFUNDED"
+          ]
+        },
+        {
+          "field": "fulfillmentStatus",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "UNFULFILLED",
+            "PROCESSING",
+            "SHIPPED",
+            "DELIVERED",
+            "CANCELLED"
+          ]
+        },
+        {
+          "field": "items",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].giftItemId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].inclusiveUnitPriceMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].taxRateBps",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].personalisation",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].personalisation.mode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PRINT"
+          ]
+        },
+        {
+          "field": "items[].personalisation.name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].productId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Product",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].variantId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "ProductVariant",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].sku",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].productName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].variantName",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].unitPriceMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].taxMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].lineTotalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.subtotalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.shippingMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.taxMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.grandTotalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "pricing.currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "coupon",
+          "type": "Embedded",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "coupon.couponId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Coupon",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "coupon.code",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "coupon.discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.recipientName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.addressLine1",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.addressLine2",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.landmark",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.city",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.state",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.postalCode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingAddressSnapshot.country",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.recipientName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.addressLine1",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.addressLine2",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.landmark",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.city",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.state",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.postalCode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "billingAddressSnapshot.country",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.email",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "idempotencyKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "confirmedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "deliveredAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "cancelledAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "orderNumber": 1
+          },
+          "name": "order_number",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "idempotencyKey": 1
+          },
+          "name": "customer_order_request",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_order_history",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1
+          },
+          "name": "order_status_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "paymentStatus": 1,
+            "createdAt": -1
+          },
+          "name": "order_paymentStatus_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "fulfillmentStatus": 1,
+            "createdAt": -1
+          },
+          "name": "order_fulfillmentStatus_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1
+          },
+          "name": "orders_by_date",
+          "background": true
+        },
+        {
+          "keys": {
+            "pricing.currency": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "orders_by_currency_date",
+          "background": true
+        },
+        {
+          "keys": {
+            "checkout.draftId": 1,
+            "checkout.revision": 1
+          },
+          "name": "gift_checkout_once",
+          "unique": true,
+          "partialFilterExpression": {
+            "checkout.draftId": {
+              "$type": "objectId"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "checkout.expiresAt": 1
+          },
+          "name": "gift_checkout_expiry",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "order_status_admin_cursor",
+          "background": true
+        },
+        {
+          "keys": {
+            "paymentStatus": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "order_paymentStatus_admin_cursor",
+          "background": true
+        },
+        {
+          "keys": {
+            "fulfillmentStatus": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "order_fulfillmentStatus_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "orderNumber",
+        "customerId",
+        "items",
+        "pricing",
+        "checkout",
+        "coupon",
+        "shippingAddressSnapshot",
+        "billingAddressSnapshot",
+        "customerSnapshot",
+        "idempotencyKey",
+        "requestHash"
+      ],
+      "states": {
+        "status": "OrderStatus",
+        "paymentStatus": "OrderPaymentStatus",
+        "fulfillmentStatus": "FulfillmentStatus"
+      }
+    },
+    {
+      "model": "Payment",
+      "collection": "payments",
+      "fields": [
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "provider",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "providerOrderId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "providerPaymentId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "amountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "CREATED",
+            "PENDING",
+            "AUTHORIZED",
+            "CAPTURED",
+            "FAILED",
+            "CANCELLED",
+            "PARTIALLY_REFUNDED",
+            "REFUNDED"
+          ]
+        },
+        {
+          "field": "idempotencyKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "failureCode",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "failureMessage",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "paidAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "refundVersion",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "orderId": 1,
+            "createdAt": -1
+          },
+          "name": "order_payment_attempts",
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_payments",
+          "background": true
+        },
+        {
+          "keys": {
+            "orderId": 1,
+            "idempotencyKey": 1
+          },
+          "name": "payment_creation_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "provider": 1,
+            "providerPaymentId": 1
+          },
+          "name": "provider_payment_once",
+          "unique": true,
+          "partialFilterExpression": {
+            "providerPaymentId": {
+              "$type": "string"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "provider": 1,
+            "providerOrderId": 1
+          },
+          "name": "provider_order_lookup",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1
+          },
+          "name": "payment_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "currency": 1,
+            "paidAt": 1,
+            "status": 1
+          },
+          "name": "captured_reporting",
+          "background": true
+        },
+        {
+          "keys": {
+            "currency": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "recent_payments_by_currency",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "orderId",
+        "customerId",
+        "provider",
+        "amountMinor",
+        "currency",
+        "idempotencyKey",
+        "requestHash"
+      ],
+      "states": {
+        "status": "PaymentStatus"
+      }
+    },
+    {
+      "model": "PaymentEvent",
+      "collection": "payment_events",
+      "fields": [
+        {
+          "field": "provider",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "providerEventId",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "eventType",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "paymentId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Payment",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "RECEIVED",
+            "PROCESSING",
+            "FAILED",
+            "PROCESSED"
+          ]
+        },
+        {
+          "field": "payloadHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "errorMessage",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "receivedAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "processedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "provider": 1,
+            "providerEventId": 1
+          },
+          "name": "gateway_event_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "receivedAt": 1
+          },
+          "name": "event_recovery_queue",
+          "background": true
+        },
+        {
+          "keys": {
+            "paymentId": 1,
+            "receivedAt": -1
+          },
+          "name": "payment_event_history",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "provider",
+        "providerEventId",
+        "eventType",
+        "payloadHash",
+        "receivedAt",
+        "paymentId",
+        "orderId"
+      ],
+      "states": {
+        "status": "PaymentEventStatus"
+      }
+    },
+    {
+      "model": "Coupon",
+      "collection": "coupons",
+      "fields": [
+        {
+          "field": "code",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "codeNormalized",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "discountType",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PERCENTAGE",
+            "FIXED_AMOUNT"
+          ]
+        },
+        {
+          "field": "percentageBps",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "fixedAmountMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "minimumOrderMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "maximumDiscountMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "usageLimit",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "perCustomerLimit",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "totalUsed",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "startsAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "expiresAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "ACTIVE",
+            "INACTIVE",
+            "EXPIRED"
+          ]
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "codeNormalized": 1
+          },
+          "name": "coupon_code",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "startsAt": 1,
+            "expiresAt": 1
+          },
+          "name": "coupon_validity",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "coupons_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {
+        "status": "CouponStatus"
+      }
+    },
+    {
+      "model": "CouponRedemption",
+      "collection": "coupon_redemptions",
+      "fields": [
+        {
+          "field": "couponId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Coupon",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "APPLIED",
+            "REVERSED"
+          ]
+        },
+        {
+          "field": "reversedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "orderId": 1
+          },
+          "name": "one_coupon_per_order",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "couponId": 1,
+            "customerId": 1,
+            "status": 1
+          },
+          "name": "customer_coupon_limit",
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_coupon_history",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "couponId",
+        "customerId",
+        "orderId",
+        "discountMinor"
+      ],
+      "states": {
+        "status": "RedemptionStatus"
+      }
+    },
+    {
+      "model": "Shipment",
+      "collection": "shipments",
+      "fields": [
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "carrier",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "trackingNumber",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PENDING",
+            "PROCESSING",
+            "SHIPPED",
+            "IN_TRANSIT",
+            "OUT_FOR_DELIVERY",
+            "DELIVERED",
+            "FAILED",
+            "RETURNED"
+          ]
+        },
+        {
+          "field": "shippingCostMinor",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "estimatedDeliveryAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "deliveredAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "orderId": 1
+          },
+          "name": "order_shipments",
+          "background": true
+        },
+        {
+          "keys": {
+            "carrier": 1,
+            "trackingNumber": 1
+          },
+          "name": "shipment_tracking",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1
+          },
+          "name": "shipment_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "shipments_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "orderId",
+        "customerId"
+      ],
+      "states": {
+        "status": "ShipmentStatus"
+      }
+    },
+    {
+      "model": "Invoice",
+      "collection": "invoices",
+      "fields": [
+        {
+          "field": "invoiceNumber",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "DRAFT",
+            "ISSUED",
+            "VOID"
+          ]
+        },
+        {
+          "field": "sellerSnapshot",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sellerSnapshot.name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sellerSnapshot.address",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sellerSnapshot.email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sellerSnapshot.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sellerSnapshot.taxId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.name",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress",
+          "type": "Embedded",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.recipientName",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.phone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.email",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.addressLine1",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.addressLine2",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.landmark",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.city",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.state",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.postalCode",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerSnapshot.billingAddress.country",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items",
+          "type": "Array",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].description",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].sku",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].quantity",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].unitPriceMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].taxMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "items[].totalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "subtotalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "discountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "shippingMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "taxMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "grandTotalMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "documentUrl",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "issuedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "invoiceNumber": 1
+          },
+          "name": "invoice_number",
+          "unique": true,
+          "partialFilterExpression": {
+            "invoiceNumber": {
+              "$type": "string"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "orderId": 1
+          },
+          "name": "one_invoice_per_order",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_invoices",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "invoices_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "orderId",
+        "customerId",
+        "sellerSnapshot",
+        "customerSnapshot",
+        "items",
+        "subtotalMinor",
+        "discountMinor",
+        "shippingMinor",
+        "taxMinor",
+        "grandTotalMinor",
+        "currency"
+      ],
+      "states": {
+        "status": "InvoiceStatus"
+      }
+    },
+    {
+      "model": "Refund",
+      "collection": "refunds",
+      "fields": [
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "paymentId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Payment",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "amountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "reason",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "provider",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "providerRefundId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "REQUESTED",
+            "PROCESSING",
+            "FAILED",
+            "CANCELLED",
+            "COMPLETED"
+          ]
+        },
+        {
+          "field": "requestedBy",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestedAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "completedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "idempotencyKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "paymentId": 1,
+            "idempotencyKey": 1
+          },
+          "name": "refund_request_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "provider": 1,
+            "providerRefundId": 1
+          },
+          "name": "gateway_refund_once",
+          "unique": true,
+          "partialFilterExpression": {
+            "providerRefundId": {
+              "$type": "string"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "orderId": 1,
+            "createdAt": -1
+          },
+          "name": "order_refunds",
+          "background": true
+        },
+        {
+          "keys": {
+            "paymentId": 1,
+            "createdAt": -1
+          },
+          "name": "payment_refund_history",
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_refunds",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": -1
+          },
+          "name": "refund_dashboard",
+          "background": true
+        },
+        {
+          "keys": {
+            "currency": 1,
+            "completedAt": 1,
+            "status": 1
+          },
+          "name": "refund_reporting",
+          "background": true
+        },
+        {
+          "keys": {
+            "currency": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "recent_refunds_by_currency",
+          "background": true
+        }
+      ],
+      "frozenPaths": [
+        "orderId",
+        "paymentId",
+        "customerId",
+        "amountMinor",
+        "currency",
+        "provider",
+        "requestedAt",
+        "idempotencyKey",
+        "requestHash"
+      ],
+      "states": {
+        "status": "RefundStatus"
+      }
+    },
+    {
+      "model": "FinanceEvent",
+      "collection": "finance_events",
+      "fields": [
+        {
+          "field": "type",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PAYMENT",
+            "REFUND",
+            "DISCOUNT",
+            "SHIPPING",
+            "TAX",
+            "ADJUSTMENT"
+          ]
+        },
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "paymentId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Payment",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "refundId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Refund",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "amountMinor",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "direction",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "CREDIT",
+            "DEBIT"
+          ]
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "POSTED",
+            "REVERSED"
+          ]
+        },
+        {
+          "field": "reversesEventId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "FinanceEvent",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "referenceId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "eventKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "eventKey": 1
+          },
+          "name": "finance_effect_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "reversesEventId": 1
+          },
+          "name": "finance_reverse_once",
+          "unique": true,
+          "partialFilterExpression": {
+            "reversesEventId": {
+              "$type": "objectId"
+            }
+          },
+          "background": true
+        },
+        {
+          "keys": {
+            "orderId": 1,
+            "createdAt": -1
+          },
+          "name": "order_finance",
+          "background": true
+        },
+        {
+          "keys": {
+            "type": 1,
+            "createdAt": -1
+          },
+          "name": "finance_reporting",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "Notification",
+      "collection": "notifications",
+      "fields": [
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "orderId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Order",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "type",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "channel",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "EMAIL",
+            "SMS",
+            "WHATSAPP",
+            "PUSH"
+          ]
+        },
+        {
+          "field": "status",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "PENDING",
+            "FAILED",
+            "SENT"
+          ]
+        },
+        {
+          "field": "providerMessageId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "attempts",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "lastError",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "sentAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "dedupeKey",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "dedupeKey": 1
+          },
+          "name": "notification_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_notifications",
+          "background": true
+        },
+        {
+          "keys": {
+            "orderId": 1,
+            "createdAt": -1
+          },
+          "name": "order_notifications",
+          "background": true
+        },
+        {
+          "keys": {
+            "status": 1,
+            "createdAt": 1
+          },
+          "name": "notification_retry",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "notifications_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {
+        "status": "NotificationStatus"
+      }
+    },
+    {
+      "model": "AuditLog",
+      "collection": "audit_logs",
+      "fields": [
+        {
+          "field": "actorId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "actorRole",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "CUSTOMER",
+            "ADMIN",
+            "OWNER",
+            "SYSTEM"
+          ]
+        },
+        {
+          "field": "action",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "entityType",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "entityId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "customerId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "Customer",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "previousState",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "newState",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "ipAddress",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "userAgent",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "metadata",
+          "type": "Mixed",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "entityType": 1,
+            "entityId": 1,
+            "createdAt": -1
+          },
+          "name": "entity_audit",
+          "background": true
+        },
+        {
+          "keys": {
+            "actorId": 1,
+            "createdAt": -1
+          },
+          "name": "actor_audit",
+          "background": true
+        },
+        {
+          "keys": {
+            "customerId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "customer_activity",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1
+          },
+          "name": "recent_audit",
+          "background": true
+        },
+        {
+          "keys": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "audit_logs_admin_cursor",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "AdminSetting",
+      "collection": "admin_settings",
+      "fields": [
+        {
+          "field": "key",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": [
+            "operations"
+          ]
+        },
+        {
+          "field": "timezone",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "currency",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "revision",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "bootstrapOwnerId",
+          "type": "ObjectId",
+          "required": false,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "bootstrapCompletedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "key": 1
+          },
+          "name": "one_operations_setting",
+          "unique": true,
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "AdminCommand",
+      "collection": "admin_commands",
+      "fields": [
+        {
+          "field": "actorId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": "User",
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "key",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "action",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestHash",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "resource",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "resourceId",
+          "type": "ObjectId",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "resourceVersion",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "requestId",
+          "type": "String",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "actorId": 1,
+            "key": 1
+          },
+          "name": "admin_command_once",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "actorId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "name": "admin_command_history",
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    },
+    {
+      "model": "AdminRate",
+      "collection": "admin_rate_limits",
+      "fields": [
+        {
+          "field": "key",
+          "type": "String",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "count",
+          "type": "Number",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "expiresAt",
+          "type": "Date",
+          "required": true,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "_id",
+          "type": "ObjectId",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "createdAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "updatedAt",
+          "type": "Date",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        },
+        {
+          "field": "__v",
+          "type": "Number",
+          "required": false,
+          "ref": null,
+          "excludedByDefault": false,
+          "enum": []
+        }
+      ],
+      "indexes": [
+        {
+          "keys": {
+            "key": 1
+          },
+          "name": "admin_rate_bucket",
+          "unique": true,
+          "background": true
+        },
+        {
+          "keys": {
+            "expiresAt": 1
+          },
+          "name": "admin_rate_expiry",
+          "expireAfterSeconds": 0,
+          "background": true
+        }
+      ],
+      "frozenPaths": [],
+      "states": {}
+    }
+  ]
+}

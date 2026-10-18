@@ -1,3 +1,7 @@
+## 2026-10-18 — Original admin fail-closed settings
+
+CURRENT / IMPLEMENTED source: original frontend_appview admin requires existing ADMIN_SESSION_SECRET and ADMIN_PORTAL_PIN, with no source default. Missing configuration leaves public module loading/build available but rejects token checks/creation and returns login503. Supply settings through operator-managed environment before a separately approved release. No actual env values read/copied/changed, no rotation performed. B2C session/provider variables and the separate vault encryption configuration unchanged. Local audit Node22.12.0/npm10.9.0; transitive ESLint dependency warns about Node22.13+ support; hosted runtime remains UNKNOWN.
+
 ## 2026-10-12 — Inclusive checkout, envelope packs and spacing (R222–R224)
 
 CURRENT / IMPLEMENTED R223: server-only CRON_SECRET (minimum32 characters) authenticates /api/v1/auth/gift/maintenance/expire; absent/short denies every request. Configure it in the actual backend runtime and trusted scheduler secret store, never NEXT_PUBLIC/client/chat/docs values. Existing Razorpay key ID/secret/webhook secret required together; hosted config checked false. No environment values were copied/changed by this work.

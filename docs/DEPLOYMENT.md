@@ -1,3 +1,9 @@
+## 2026-10-18 — Audit release boundary
+
+CURRENT / IMPLEMENTED locally: three builds/types and scoped security regressions pass after dependency/auth/origin hardening. No deploy/configured DB install/credential rotation or scheduler/provider operation. Existing Vercel configs/regions unchanged. Original Next admin now needs explicit existing ADMIN_SESSION_SECRET and ADMIN_PORTAL_PIN; missing settings deny access. Legacy cross-origin clients must use exact established origins. Confirm environment/configuration before any separately authorized release; do not restore source credential fallbacks.
+
+CURRENT / PARTIAL: original whole-app lint57 errors/108 warnings; XLSX high and development advisory debt remain. Local Node22.12.0 produced transitive ESLint engine warnings (22.13+ supported patch needed on22.x). Actual hosting/proxy topology, original loopback rewrites, worker/cron operation, provider verification and backups/restoration remain UNKNOWN. Root FLOW17 is a proposed release/rollback process, not existing automated CI. DECISION records pre-execution intent/actual outcomes; no production-readiness claim.
+
 ## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
 
 CURRENT / IMPLEMENTED locally: B2C/vercel.json and B2C/backend/vercel.json explicitly set regions:[bom1]. User confirmed Atlas Mumbai; supplied authenticated response identifies an iad1 execution hop. This updates the earlier wholly-UNKNOWN region status for this request only. Both separate Vercel projects require new deployments; deploying only the storefront does not move its external auth backend. No database/provider migration or deployment performed.

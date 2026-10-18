@@ -1,3 +1,11 @@
+## 2026-10-18 — DEC-001–004 repository audit decisions
+
+CURRENT / IMPLEMENTED, locally verified: the explicit current request adds [root DECISION.md](../DECISION.md) (pre-execution intent/alternatives/risk/authorization/commands/results) and [FLOW.md](../FLOW.md) (source/local-tested flows). Canonical domain docs and historical decisions remain here; the root files are audit entry points, not competing schema/business-policy owners. Root AGENTS memory-only initialization restriction is historical and does not override this explicit authorized audit/hardening task.
+
+DEC-002 reuses existing legacy JWT/persisted-user authorization and exact established origins in both copies; revalidate each notification recipient so expiry/demotion cannot rely on prior room membership. DEC-003 uses explicit patched Next/compatible fixes; follow-on source evidence justified unused UUID removal and a separately recorded Nodemailer major migration with real in-memory MIME tests. No force fix/Excel removal. DEC-004 fails closed at original admin operations rather than module import, preserving public builds/configured cookie format and leaving the separate vault key untouched. Alternatives and actual rejected/failed attempts recorded in the root register.
+
+VERIFIED scope/evidence: TESTING and audit/REPOSITORY_AUDIT. Known money/vault/deployment findings remain open. No provider migration, hash/schema change, production action, asset move or invented policy.
+
 ## 2026-10-13 — Compact phone product cards (R261)
 
 CURRENT / IMPLEMENTED R261: latest phone reference supersedes centered phone Home/catalogue card presentation. Flatten existing layout-only wrappers via responsive display:contents and grid placement to reuse a single real purchase control, preserving draft subscription/write behavior. Keep serif brand titles and cream/burgundy actions through existing theme variables. Do not add reference-only wishlist/discount/MRP content; no product/payment/cart contract changes.

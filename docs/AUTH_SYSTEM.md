@@ -1,3 +1,9 @@
+## 2026-10-18 — Legacy socket and original admin hardening
+
+CURRENT / IMPLEMENTED locally (DEC-002/004): legacy socket join_admins now reuses existing auth('admin') for cookie/Bearer/handshake auth.token, and every notification revalidates signature/expiry/current User role. Demotion/deletion/storage failures deny delivery and remove membership. Exact established origins cover REST and socket handshake; no client socket consumers were found in repository source. No JWT lifetime/hash/role/model change; legacy access-token logout limitation remains.
+
+Original Next admin now requires explicit ADMIN_SESSION_SECRET and ADMIN_PORTAL_PIN; absent config fails closed at API operations, while public modules/build still load. Configured HMAC/cookie format preserved; malformed expiry/signature/body and unsafe config defaults rejected; PIN digest comparison constant time; auth responses private,no-store. Existing rate limit retained. Five Node helper/route regressions pass; no existing account/session data or vault key changed. B2C opaque sessions/Google/customer ownership remain separate and unchanged. Source/local tests do not verify hosted configuration; closed studio-admin page remains closed.
+
 ## 2026-10-13 — Mumbai auth placement and single-query profile (R257)
 
 CURRENT / IMPLEMENTED: /me delegates to sessionProfile, matching the same validated token digest, ACTIVE User and unexpired session as sessionUser, then joining Customer by userId with ACTIVE status. One aggregate returns only user ID/email/roles and customer ID/name for the unchanged DTO. CUSTOMER without an active owned Customer rejects401; ADMIN/OWNER without Customer retains email fallback. Shared sessionUser still returns hydrated documents for existing downstream consumers. No settled auth cache, cookie/schema/identity change or relaxed logout/revocation behavior.40 scoped regressions pass; hosted latency unverified.

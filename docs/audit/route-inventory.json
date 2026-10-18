@@ -1,0 +1,1637 @@
+{
+  "scope": "Page and route entry points from source, not deployed reachability; imports may transitively own data and auth",
+  "pages": [
+    {
+      "app": "B2C",
+      "route": "/account",
+      "file": "B2C/src/app/account/page.tsx",
+      "imports": [
+        "next/link",
+        "next/navigation",
+        "react",
+        "lucide-react",
+        "@/lib/api",
+        "@/lib/gift-cart",
+        "@/lib/types"
+      ],
+      "directApiReferences": [
+        "/auth/logout"
+      ],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/admin/[[...segments]]",
+      "file": "B2C/src/app/admin/[[...segments]]/page.tsx",
+      "imports": [
+        "react",
+        "next/navigation",
+        "@/components/admin/AdminPage",
+        "@/lib/admin/resources"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "[...segments"
+      ]
+    },
+    {
+      "app": "B2C",
+      "route": "/b2c",
+      "file": "B2C/src/app/b2c/page.tsx",
+      "imports": [
+        "next/link",
+        "lucide-react",
+        "@/components/home/HomeHero",
+        "@/components/home/HomeFAQ",
+        "@/components/home/HomeSections",
+        "@/lib/curated-hampers",
+        "@/lib/home-content",
+        "@/lib/home-seo",
+        "@/lib/photographed-envelopes",
+        "@/lib/types",
+        "@/lib/bookmark-photos",
+        "@/lib/product-pricing",
+        "./home.css"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/boxes",
+      "file": "B2C/src/app/boxes/page.tsx",
+      "imports": [
+        "next/navigation"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/build",
+      "file": "B2C/src/app/build/page.tsx",
+      "imports": [
+        "@/components/GiftBuilder"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/cart",
+      "file": "B2C/src/app/cart/page.tsx",
+      "imports": [
+        "@/components/GiftCart"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/cart/store",
+      "file": "B2C/src/app/cart/store/page.tsx",
+      "imports": [
+        "@/components/LegacyCart"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/checkout",
+      "file": "B2C/src/app/checkout/page.tsx",
+      "imports": [
+        "@/components/DeliveryCheckout",
+        "@/components/RazorpayCheckout"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/",
+      "file": "B2C/src/app/page.tsx",
+      "imports": [
+        "next/navigation"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "error.tsx",
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/products/[slug]",
+      "file": "B2C/src/app/products/[slug]/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "next/navigation",
+        "@/components/BuyPanel",
+        "@/components/ProductGallery",
+        "@/lib/catalogue",
+        "@/lib/curated-hampers",
+        "@/lib/photographed-envelopes",
+        "@/lib/product-editorial",
+        "@/components/ProductCard",
+        "@/lib/types",
+        "./product-detail.css"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "slug"
+      ]
+    },
+    {
+      "app": "B2C",
+      "route": "/shop/candles",
+      "file": "B2C/src/app/shop/candles/page.tsx",
+      "imports": [
+        "@/components/ShopCollectionPage"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/shop/envelopes",
+      "file": "B2C/src/app/shop/envelopes/page.tsx",
+      "imports": [
+        "@/components/ShopCollectionPage"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/shop/hampers",
+      "file": "B2C/src/app/shop/hampers/page.tsx",
+      "imports": [
+        "@/components/ShopCollectionPage"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/shop",
+      "file": "B2C/src/app/shop/page.tsx",
+      "imports": [
+        "next/link",
+        "lucide-react",
+        "@/components/ProductCard",
+        "@/components/ShopCategoryLink",
+        "@/components/ShopMobileFilters",
+        "@/lib/catalogue",
+        "@/lib/bookmark-photos",
+        "./shop.css"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "loading.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "B2C",
+      "route": "/shop/stationery",
+      "file": "B2C/src/app/shop/stationery/page.tsx",
+      "imports": [
+        "@/components/ShopCollectionPage"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/account",
+      "file": "frontend_appview/src/app/account/page.tsx",
+      "imports": [
+        "react",
+        "lucide-react",
+        "@/shared/api/client",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/cart",
+      "file": "frontend_appview/src/app/cart/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "next/navigation",
+        "lucide-react",
+        "@/hooks/useCart",
+        "@/shared/api/endpoints",
+        "@/shared/ImageWithShimmer",
+        "@/utils/format",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/checkout",
+      "file": "frontend_appview/src/app/checkout/page.tsx",
+      "imports": [
+        "react",
+        "next/navigation",
+        "lucide-react",
+        "@/hooks/useCart",
+        "@/shared/api/endpoints",
+        "canvas-confetti",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/collections/[category]",
+      "file": "frontend_appview/src/app/collections/[category]/page.tsx",
+      "imports": [
+        "next",
+        "next/navigation",
+        "../CollectionsClientView",
+        "@/data/hampersData",
+        "@/data/catalogueSeoData",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "category"
+      ]
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/collections",
+      "file": "frontend_appview/src/app/collections/page.tsx",
+      "imports": [
+        "next",
+        "./CollectionsClientView",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/contact",
+      "file": "frontend_appview/src/app/contact/page.tsx",
+      "imports": [
+        "next",
+        "./ContactClientView",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/corporate",
+      "file": "frontend_appview/src/app/corporate/page.tsx",
+      "imports": [
+        "react",
+        "@/features/corporate/CorporateArchitecturalCatalogue",
+        "@/components/motion/AnimatedHeading",
+        "@/components/motion/ScrollReveal"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/customize",
+      "file": "frontend_appview/src/app/customize/page.tsx",
+      "imports": [
+        "next/navigation"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/employee-gifting",
+      "file": "frontend_appview/src/app/employee-gifting/page.tsx",
+      "imports": [
+        "next",
+        "@/features/occasions/OccasionPageTemplate",
+        "@/data/occasionsData",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/gift-boxing/[type]",
+      "file": "frontend_appview/src/app/gift-boxing/[type]/page.tsx",
+      "imports": [
+        "react",
+        "next/navigation",
+        "lucide-react",
+        "@/utils/constants",
+        "@/utils/format",
+        "@/hooks/useCart",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "type"
+      ]
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/gift-boxing",
+      "file": "frontend_appview/src/app/gift-boxing/page.tsx",
+      "imports": [
+        "react",
+        "lucide-react",
+        "@/utils/constants",
+        "@/utils/format",
+        "@/hooks/useCart",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/gourmet-gifts/[slug]",
+      "file": "frontend_appview/src/app/gourmet-gifts/[slug]/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "next/image",
+        "next/navigation",
+        "lucide-react",
+        "@/data/hampersData",
+        "@/hooks/useCart",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "slug"
+      ]
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/gourmet-gifts",
+      "file": "frontend_appview/src/app/gourmet-gifts/page.tsx",
+      "imports": [
+        "next/navigation"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/gourmet",
+      "file": "frontend_appview/src/app/gourmet/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "lucide-react",
+        "@/features/gourmet/PrivateCatalogueModal",
+        "@/features/gourmet/EditionDetailModal"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/hampers",
+      "file": "frontend_appview/src/app/hampers/page.tsx",
+      "imports": [
+        "next",
+        "@/features/hampers/HampersEcomView",
+        "@/components/JsonLd",
+        "@/data/hampersEcomData"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/house-of-satra",
+      "file": "frontend_appview/src/app/house-of-satra/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "next/image",
+        "framer-motion",
+        "@/components/motion/ScrollReveal",
+        "lucide-react",
+        "@/hooks/useCart"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/inquire",
+      "file": "frontend_appview/src/app/inquire/page.tsx",
+      "imports": [
+        "react",
+        "lucide-react",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/milestones-recognition",
+      "file": "frontend_appview/src/app/milestones-recognition/page.tsx",
+      "imports": [
+        "next",
+        "@/features/occasions/OccasionPageTemplate",
+        "@/data/occasionsData",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/occasions/[slug]",
+      "file": "frontend_appview/src/app/occasions/[slug]/page.tsx",
+      "imports": [
+        "next",
+        "next/navigation",
+        "@/features/occasions/OccasionPageTemplate",
+        "@/data/occasionsData",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": [
+        "slug"
+      ]
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/occasions",
+      "file": "frontend_appview/src/app/occasions/page.tsx",
+      "imports": [
+        "next",
+        "./OccasionsIndexView",
+        "@/components/JsonLd"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/offline",
+      "file": "frontend_appview/src/app/offline/page.tsx",
+      "imports": [
+        "react",
+        "next/navigation",
+        "lucide-react",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/",
+      "file": "frontend_appview/src/app/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "lucide-react",
+        "gsap",
+        "gsap/ScrollTrigger",
+        "@/components/motion/ScrollReveal",
+        "@/components/motion/TextReveal",
+        "@/components/editorial/EditorialCTA",
+        "next/image",
+        "@/components/ImageTypography",
+        "@/components/OccasionGiftingCarousel",
+        "@/features/brand/WhyChooseSection",
+        "@/features/brand/IndustriesSection",
+        "@/features/brand/PackagingExperienceSection",
+        "@/features/brand/GiftingProcessSection",
+        "@/features/brand/FaqSection",
+        "@/features/ecommerce/KeepsakeEcommerceSection",
+        "@/features/ecommerce/CustomGiftBoxesSection",
+        "@/features/inquiry/CuratedInquirySection",
+        "@/hooks/useInquiryModal"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/privacy",
+      "file": "frontend_appview/src/app/privacy/page.tsx",
+      "imports": [
+        "react",
+        "next/link",
+        "next",
+        "lucide-react"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/story",
+      "file": "frontend_appview/src/app/story/page.tsx",
+      "imports": [
+        "react",
+        "@/components/motion/ScrollReveal",
+        "@/components/motion/TextReveal",
+        "@/components/motion/ParallaxImage",
+        "@/components/motion/ImageReveal"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/studio-admin",
+      "file": "frontend_appview/src/app/studio-admin/page.tsx",
+      "imports": [
+        "react",
+        "next/image",
+        "lucide-react",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [
+        "/api/admin/auth",
+        "/api/admin/data",
+        "/api/admin/auth",
+        "/api/admin/auth",
+        "/api/admin/export"
+      ],
+      "localBoundaries": [
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_appview",
+      "route": "/test-layout",
+      "file": "frontend_appview/src/app/test-layout/page.tsx",
+      "imports": [
+        "react",
+        "next/image",
+        "next/link",
+        "framer-motion",
+        "lucide-react",
+        "@/data/hampersData",
+        "@/hooks/useCart",
+        "react-hot-toast"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [],
+      "dynamicParameters": []
+    },
+    {
+      "app": "frontend_responsive",
+      "route": "/",
+      "file": "frontend_responsive/src/app/page.tsx",
+      "imports": [
+        "react",
+        "@/components/ResponsiveHero",
+        "@/components/ResponsiveProductGrid"
+      ],
+      "directApiReferences": [],
+      "localBoundaries": [
+        "layout.tsx"
+      ],
+      "dynamicParameters": []
+    }
+  ],
+  "internalApiHandlers": [
+    "frontend_appview/src/app/api/admin/auth/route.ts",
+    "frontend_appview/src/app/api/admin/data/route.ts",
+    "frontend_appview/src/app/api/admin/export/route.ts",
+    "frontend_appview/src/app/api/geo/detect/route.ts",
+    "frontend_appview/src/app/api/send-inquiry/route.ts",
+    "frontend_appview/src/app/api/telemetry/collect/route.ts"
+  ],
+  "backendRouteModules": [
+    "B2C/backend/admin/routes.js",
+    "B2C/backend/auth/app.js",
+    "B2C/backend/catalogue/routes.js",
+    "B2C/backend/gifting/maintenance.js",
+    "B2C/backend/gifting/routes.js",
+    "B2C/backend/payments/routes.js",
+    "B2C/backend/src/features/admin/admin.routes.js",
+    "B2C/backend/src/features/auth/auth.routes.js",
+    "B2C/backend/src/features/cart/cart.routes.js",
+    "B2C/backend/src/features/category/category.routes.js",
+    "B2C/backend/src/features/coupon/coupon.routes.js",
+    "B2C/backend/src/features/giftBoxing/giftBoxing.routes.js",
+    "B2C/backend/src/features/health/health.routes.js",
+    "B2C/backend/src/features/order/order.routes.js",
+    "B2C/backend/src/features/product/product.routes.js",
+    "B2C/backend/src/features/review/review.routes.js",
+    "B2C/backend/src/features/upload/upload.routes.js",
+    "B2C/backend/src/features/user/user.routes.js",
+    "backend/src/features/admin/admin.routes.js",
+    "backend/src/features/auth/auth.routes.js",
+    "backend/src/features/cart/cart.routes.js",
+    "backend/src/features/category/category.routes.js",
+    "backend/src/features/coupon/coupon.routes.js",
+    "backend/src/features/giftBoxing/giftBoxing.routes.js",
+    "backend/src/features/health/health.routes.js",
+    "backend/src/features/order/order.routes.js",
+    "backend/src/features/product/product.routes.js",
+    "backend/src/features/review/review.routes.js",
+    "backend/src/features/upload/upload.routes.js",
+    "backend/src/features/user/user.routes.js"
+  ],
+  "apiEndpoints": [
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/session",
+      "line": 22,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/${route}",
+      "line": 27,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/settings",
+      "line": 28,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/staff",
+      "line": 29,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/staff/:id",
+      "line": 30,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/:resource/:id/related/:section",
+      "line": 49,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/:resource/:id",
+      "line": 50,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/admin/routes.js",
+      "method": "GET",
+      "declaredPattern": "/:resource",
+      "line": 58,
+      "scope": "relative to /api/v1/auth/admin",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/config",
+      "line": 29,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/google",
+      "line": 30,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/google/callback",
+      "line": 37,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/register",
+      "line": 51,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/login",
+      "line": 52,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/logout",
+      "line": 56,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/me",
+      "line": 57,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/auth/app.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/orders",
+      "line": 64,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/catalogue/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/products",
+      "line": 24,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/catalogue/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/products/:slug",
+      "line": 41,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/maintenance.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/gift/maintenance/expire",
+      "line": 5,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/gift/catalogue",
+      "line": 50,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/gift/count",
+      "line": 55,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/gift/draft",
+      "line": 59,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "PUT",
+      "declaredPattern": "/api/v1/auth/gift/draft",
+      "line": 68,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/gift/checkout-check",
+      "line": 81,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/gift/checkout",
+      "line": 95,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/gift/address",
+      "line": 115,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/gifting/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/gift/order",
+      "line": 154,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/payments/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/payments/razorpay/webhook",
+      "line": 5,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/payments/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/payments/config",
+      "line": 12,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/payments/routes.js",
+      "method": "GET",
+      "declaredPattern": "/api/v1/auth/payments/orders/:id",
+      "line": 13,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/payments/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/payments/razorpay/order",
+      "line": 18,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/payments/routes.js",
+      "method": "POST",
+      "declaredPattern": "/api/v1/auth/payments/razorpay/verify",
+      "line": 23,
+      "scope": "absolute",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/admin/admin.routes.js",
+      "method": "GET",
+      "declaredPattern": "/stats",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/admin/admin.routes.js",
+      "method": "GET",
+      "declaredPattern": "/orders",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/register",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/login",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/refresh-token",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/logout",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/auth/auth.routes.js",
+      "method": "GET",
+      "declaredPattern": "/me",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "POST",
+      "declaredPattern": "/items",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/items/:itemId",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/items/:itemId",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/",
+      "line": 16,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/cart/cart.routes.js",
+      "method": "POST",
+      "declaredPattern": "/sync",
+      "line": 17,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/category/category.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/category/category.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:slug",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/category/category.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/category/category.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/:id",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/coupon/coupon.routes.js",
+      "method": "GET",
+      "declaredPattern": "/validate",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/coupon/coupon.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/coupon/coupon.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/giftBoxing/giftBoxing.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 6,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/giftBoxing/giftBoxing.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:type/products",
+      "line": 7,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/health/health.routes.js",
+      "method": "GET",
+      "declaredPattern": "/healthz",
+      "line": 6,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/order/order.routes.js",
+      "method": "POST",
+      "declaredPattern": "/webhook",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/order/order.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 20,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/order/order.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 27,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/order/order.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:id",
+      "line": 28,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/search/suggestions",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:slug",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/:id",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/:id",
+      "line": 16,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/product/product.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/:id/images",
+      "line": 17,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/review/review.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:productId",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/review/review.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/review/review.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/:id/approve",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/upload/upload.routes.js",
+      "method": "POST",
+      "declaredPattern": "/sign",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/user/user.routes.js",
+      "method": "GET",
+      "declaredPattern": "/profile",
+      "line": 22,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/user/user.routes.js",
+      "method": "POST",
+      "declaredPattern": "/addresses",
+      "line": 23,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/user/user.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/addresses/:addressId",
+      "line": 24,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "B2C/backend/src/features/user/user.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/addresses/:addressId",
+      "line": 25,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/admin/admin.routes.js",
+      "method": "GET",
+      "declaredPattern": "/stats",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/admin/admin.routes.js",
+      "method": "GET",
+      "declaredPattern": "/orders",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/register",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/login",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/refresh-token",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/auth/auth.routes.js",
+      "method": "POST",
+      "declaredPattern": "/logout",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/auth/auth.routes.js",
+      "method": "GET",
+      "declaredPattern": "/me",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "POST",
+      "declaredPattern": "/items",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/items/:itemId",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/items/:itemId",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/",
+      "line": 16,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/cart/cart.routes.js",
+      "method": "POST",
+      "declaredPattern": "/sync",
+      "line": 17,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/category/category.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/category/category.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:slug",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/category/category.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/category/category.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/:id",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/coupon/coupon.routes.js",
+      "method": "GET",
+      "declaredPattern": "/validate",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/coupon/coupon.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/coupon/coupon.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 13,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/giftBoxing/giftBoxing.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 6,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/giftBoxing/giftBoxing.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:type/products",
+      "line": 7,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/health/health.routes.js",
+      "method": "GET",
+      "declaredPattern": "/healthz",
+      "line": 6,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/order/order.routes.js",
+      "method": "POST",
+      "declaredPattern": "/webhook",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/order/order.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 20,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/order/order.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 27,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/order/order.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:id",
+      "line": 28,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/search/suggestions",
+      "line": 10,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:slug",
+      "line": 11,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 14,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/:id",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/:id",
+      "line": 16,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/product/product.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/:id/images",
+      "line": 17,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/review/review.routes.js",
+      "method": "GET",
+      "declaredPattern": "/:productId",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/review/review.routes.js",
+      "method": "POST",
+      "declaredPattern": "/",
+      "line": 12,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/review/review.routes.js",
+      "method": "PATCH",
+      "declaredPattern": "/:id/approve",
+      "line": 15,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/upload/upload.routes.js",
+      "method": "POST",
+      "declaredPattern": "/sign",
+      "line": 9,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/user/user.routes.js",
+      "method": "GET",
+      "declaredPattern": "/profile",
+      "line": 22,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/user/user.routes.js",
+      "method": "POST",
+      "declaredPattern": "/addresses",
+      "line": 23,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/user/user.routes.js",
+      "method": "PUT",
+      "declaredPattern": "/addresses/:addressId",
+      "line": 24,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    },
+    {
+      "file": "backend/src/features/user/user.routes.js",
+      "method": "DELETE",
+      "declaredPattern": "/addresses/:addressId",
+      "line": 25,
+      "scope": "relative to app.js router mount; see FLOW",
+      "verification": "source declaration only; loop-generated patterns and inherited middleware require module review"
+    }
+  ]
+}

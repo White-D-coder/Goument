@@ -1,3 +1,17 @@
+## 2026-10-18 — Repository audit follow-through (DEC-001–004)
+
+CURRENT / IMPLEMENTED locally: root DECISION/FLOW and linked audit/route/schema/asset/dependency inventories; both legacy socket/current-role/exact-origin boundaries, original B2B configured admin auth and bounded dependency fixes. Canonical TESTING/audit report own passing checks and explicit failures. No production/schema/payment/key/asset operation.
+
+- [x] S02 socket authorization and S04 exact-origin subfinding corrected/tested in both legacy copies.
+- [x] Source-default original admin PIN/HMAC removed and malformed token/body handling fixed; S03 vault key/recovery remains open.
+- [x] Original dependency security batch: Next16.4.2/Nodemailer10.1.2/compatible fixes/unused backend UUID removal. Four package scopes production audits0; original main retains1 high XLSX.
+- [ ] P1: review XLSX replacement/update with authenticated export compatibility; development tool advisories across all apps and supported Node patch (22.13+ on22.x). No --force/feature removal.
+- [ ] P1: original Next admin data explicit private/no-store; public enquiry contextual escaping/validation/PII-safe logs/truthful delivery and shared/distributed abuse controls remain open.
+- [ ] P2: original frontend_appview whole lint57 errors/108 warnings; alternate2 warnings. Audit-owned production/tests scoped lint clean; do not confuse this with B2C full lint passing.
+- [ ] P2: dormant OtherProductsSection missing Classics/thumb.jpeg literal; no importer found. Confirm photo identity before substitution; no active-page failure or asset deletion authorization.
+
+Existing P0/P1 financial, vault, ownership, provider/scheduler/deployment/backup priorities retain their ordering. Source/current-test evidence resolves the stale B2C fake-price/stock and lint entries below; it does not resolve legacy payment or hosted readiness.
+
 ## 2026-10-13 — Fixed full cart and complete phone thumbnails (R234–R235)
 
 - [x] R234 implement corrected full /cart two-row scrolling requirement: >2 rows fixed viewport/summary, independent product scrolling; <=2 restores page/footer. Preserve required-name dialog and price calculations.
@@ -78,7 +92,8 @@ Priorities below are initial engineering triage from source findings, not an app
 - [x] B2C R160 dependency security review — R161 corrected2026-10-12: independent B2C installs, Next16.4/compatible updates and unused frontend dependency removal; both production audits0, build/typecheck/lint/regressions pass. Historical baseline and advisory limits retained in SECURITY.
 
 - [x] S01: public registration assigns customer server-side; malicious-role and existing-admin regression tests added (2026-09-27).
-- [ ] S02/S03: authorize socket admin membership and remove reliance on source fallback admin/encryption credentials; establish required configuration.
+- [x] S02: legacy socket admission/delivery now checks current admin identity in both copies (DEC-002,2026-10-18).
+- [ ] S03: original PIN/HMAC source fallbacks corrected (DEC-004); separate vault encryption fallback/key custody/recoverable rekeying remain unresolved. Establish restoration before any key/data operation.
 - [ ] E01/S05: atomic user/payload-bound idempotency plus provider request idempotency and duplicate webhook handling.
 - [ ] E02–E04: variant stock guard, atomic payment/expiry/release transitions and recovery across DB/Stripe/Redis failures.
 - [ ] E05–E07: validate authoritative shipping/boxing totals; fix coupon shape mismatch; resolve tax policy/fallback conflict before commerce activation.
@@ -91,7 +106,7 @@ Priorities below are initial engineering triage from source findings, not an app
 
 - [x] B2C owner setup CLI security — R161 retired unsafe bulk/default-password CLI; guarded explicit-user-ID operator command retained. Regression proves retired script cannot touch DB; no account mutation. R159 approved local owner remains. Historical finding in SECURITY; no credential values recorded.
 
-- [ ] S04/S06: restrictive credentialed CORS, public endpoint validation/abuse controls, template/PII exposure review.
+- [ ] S04/S06: exact legacy credentialed CORS corrected/tested (DEC-002); public endpoint validation/abuse controls, template/PII exposure and broader CSRF/trusted-proxy review remain.
 - [ ] E08/S07/S08: complete historical data/identity strategy, durable vault storage, retention and concurrent-write handling.
 - [ ] Align effective page controls and health path; preserve current availability until explicitly changed.
 - [ ] Establish runtime/deployment ownership, transaction-ready DB, backups and integration verification evidence. B2C R161 additionally requires explicit OAuthFlow schema/index installation before release and real provider webhook verification; local tests do not establish production readiness.
@@ -121,7 +136,7 @@ Priorities below are initial engineering triage from source findings, not an app
 
 - [ ] B2C typography cleanup (audit2026-10-05): resolve footer h2 Jakarta/Cormorant !important conflict; agree shared heading/body/action scales, casing and tracking; assess9–11px microcopy; remove unused Cinzel/script/Momcake declarations only within approved font scope while preserving admin Pagio/brand needs. Source/runtime mapping in UI_SYSTEM; this audit did not authorize a font redesign.
 
-- [ ] B2C frontend lint debt (observed2026-10-05): types.ts explicit-any and GiftBuilder unused selection remain. GoldPopperSprinkle synchronous effect state resolved in the performance increment, with scoped/full lint evidence. Full lint remains failing.
+- [x] B2C frontend lint debt historical2026-10-05 claim superseded by R161 and fresh2026-10-18 full lint passing. Original frontend_appview is a separate scope and still has57 errors/108 warnings; see audit/TESTING.
 - [ ] B2C hosted latency follow-up (R166,2026-10-12): public anonymous first auth/draft/count responses~3.2s, later~0.25–0.65s in one slow-phone lab snapshot. Verify deployed region/runtime/DB readiness and physical-device behavior; infrastructure cause UNKNOWN. Local counter/mobile cart/lazy footer/request fixes verified but unpublished; do not mark hosted latency resolved before deployment measurement. Existing performance priorities retained.
 
 - [ ] B2C performance follow-up: measure post-change scroll cadence on the user’s device and investigate slow local webpack rebuilds. The2026-10-07 editorial experiment was rejected/reverted; prior optimized slideshow/canvas behavior is restored. Before-change jank and76–183s development compile/invalidation spans were observed; further layer-isolation diagnostic was declined2026-10-05. Smaller assets/lifecycle checks do not establish production frame-rate improvement.
@@ -131,7 +146,7 @@ Priorities below are initial engineering triage from source findings, not an app
 - [ ] Resolve template README font claims and catalogue local-data/backend divergence.
 - [ ] B2C collection data/search integrity (source inspection2026-10-07): populate actual hamper products; local HAMPERS_CATALOG currently contains only individual gifts. Existing product.service Atlas totals count all active products instead of search matches, and an unknown category silently removes the filter. Establish explicit category membership and correct search counts before relying on category IDs or pagination totals. New Shop collection pages reuse existing search/fallback; this UI change does not fix these backend issues.
 
-- [ ] B2C catalogue fallback integrity (observed2026-10-11): `catalogue.ts` synthesizes a `(match.price || 499) * 100` amount and inventory50 when API fields are absent; its offline branch also supplies inventory50. Treat these as source defects requiring authoritative pricing/availability or explicit unavailable states before commerce activation. R127 changes presentation only and does not verify these amounts or stock.
+- [x] B2C catalogue fallback integrity historical2026-10-11 finding superseded by R161;2026-10-18 source recheck confirms missing/offline price/stock become0 with preview/unavailable status, matching existing client tests. No invented inventory50 or499 fallback remains in catalogue.ts. This does not establish real saleable data/hosted availability.
 
 ## P3
 

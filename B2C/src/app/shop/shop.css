@@ -102,7 +102,8 @@
 
 /* Phone collection reference: photo filters, two columns and clear full-width actions. */
 @media (max-width:640px) {
- .shop-edit .shop-breadcrumb { display:none; }
+ .shop-edit .shop-breadcrumb { display:flex; flex-wrap:wrap; min-height:44px; margin-bottom:12px; font-size:11px; }
+ .shop-edit .shop-breadcrumb a { display:inline-flex; align-items:center; min-height:44px; color:var(--wine); }
  .shop-edit .shop-intro { background:transparent; }
  .shop-edit .shop-intro-copy { padding:4px 0 0; text-align:center; }
  .shop-edit .shop-intro h1 { font-size:28px; line-height:1.15; }
@@ -180,22 +181,18 @@
  #main .shop-edit .b2c-product-card .cart-add-feedback { width:100%; font-size:11px; text-transform:none; }
 }
 
-/* Keep phone filters within reach while leaving room below the page content. */
+/* Phone filters live beside the result count, above the product grid. */
 @media (max-width:640px) {
- body:has(.shop-mobile-filters) { padding-bottom:calc(65px + env(safe-area-inset-bottom)); }
  body:has(.shop-filter-sheet[open]) { overflow:hidden; }
  .shop-edit:not(.shop-collection-page) .shop-toolbar,
  .shop-edit .shop-toolbar .shop-sort { display:none; }
  .shop-mobile-filters { display:block; }
- .shop-filter-bar {
-  position:fixed;
-  z-index:25;
-  inset:auto 0 0;
-  padding:10px 5% calc(10px + env(safe-area-inset-bottom));
-  border-top:1px solid #e9e2d8;
-  background:#fffdf8;
-  box-shadow:0 -4px 18px #302b270c;
- }
+ .shop-edit .shop-results-meta { width:100%; gap:8px 12px; }
+ .shop-results-meta > p { flex:1; min-width:0; }
+ .shop-results-meta > .shop-mobile-filters { margin-left:auto; order:2; flex-shrink:0; }
+ .shop-results-meta > span { flex-basis:100%; order:3; margin-left:0; }
+ .shop-results-meta > .shop-clear { order:4; }
+ .shop-filter-bar { position:static; padding:0; border:0; background:transparent; box-shadow:none; }
  .shop-filter-bar > button,
  .shop-filter-sort > button {
   display:flex;
@@ -212,6 +209,7 @@
   font-size:12px;
   font-weight:600;
  }
+ .shop-filter-bar > button { width:auto; border-radius:9px; }
  .shop-filter-sheet {
   position:fixed;
   inset:auto 0 0;

@@ -1,3 +1,57 @@
+## 2026-10-21 — Account introduction verification (R280)
+
+VERIFIED locally: scoped Account page ESLint and `git diff --check` pass. Mocked-API headless browser at320/375/640px confirms centered title/paragraph, visible short phone copy with measured single-line height19.19px/line-height19.2px, and no horizontal overflow. At768/1440px original paragraph remains visible, phone copy hidden and original heading alignment retained.375px screenshot inspected; browser closed. No sign-in, real account data operation, physical-device check or deployment.
+
+## 2026-10-21 — Center phone cart introduction (R279)
+
+CURRENT / IMPLEMENTED locally: hide the heading's “Add more items” link at <=640px and center the gift-cart title group and saved-selection paragraph. Desktop link and layout retained; no cart-data or checkout changes. Source: gift-cart.css. Phone-scoped selectors inspected and `git diff --check` passes; no browser/test-suite rerun, commit, push or deployment for this CSS-only correction.
+
+## 2026-10-21 — Remove enquiry-price label beside results (R278)
+
+CURRENT / IMPLEMENTED locally: remove the “Final pricing on enquiry” label from the Shop result-count/Filter row, as requested. Count, inline Filter, catalogue prices, preview availability behavior and other page content retained. Source: B2C/src/app/shop/page.tsx. Targeted source check and `git diff --check` pass; no browser/test-suite rerun, commit, push or deployment for this text deletion. Supersedes R277's inline preview-note rendering only.
+
+## 2026-10-21 — Inline phone Filter verification (R277)
+
+VERIFIED locally: scoped ESLint for shop/page.tsx and ShopCollectionPage.tsx, typecheck and `git diff --check` pass. Mocked-API headless Chrome checks on Shop/hamper collection at320/375/430/640/768/1440px (12 cases): one Filter control, static placement and identical count/button vertical centers on phones,44px button above grid, hidden above640px, no horizontal overflow, bottom padding98px instead of filter-only162px. Native dialog opens; Shop envelope query and collection All gifts navigation work and close it. Inline Filter remains visible with the cart popup open. Screenshot inspected; browser closed. Temporary fixture's duplicate draft declaration was corrected before successful execution. No real data writes, actual sort submission (preview catalogue), zero-result runtime fixture, physical-device or deployment verification.
+
+## 2026-10-21 — Phone intro alignment verification (R276)
+
+VERIFIED locally: headless Chrome with customer API requests intercepted, Account (signed-out), Cart, Shop and hamper collection at320/375/430/640/768/1440px (24 route/viewport checks). All16 phone cases have lead row top16px, height44px, left20px and heading top72px relative to masthead; no horizontal overflow at any width. Initial Cart rule was overridden by route styles (heading66px); adding shared `.section` specificity corrected it. Populated three-row cart at375×812 retains aligned heading,130px scrolling list and checkout bottom702px above dock top726px. Account screenshot inspected. `git diff --check` passes. Browser closed, existing server preserved. CSS-only work; no broad tests/build, signed-in account runtime, physical-device or deployment checks claimed.
+
+## 2026-10-21 — Verified Home-only phone footer (R275)
+
+VERIFIED locally: headless Chrome with `/api/v1/*` intercepted on Home, Shop, hamper collection, Cart, Account and Ivory product routes at375/640/641/1440px (24 route/viewport checks). At375/640px only Home's footer is visible; inner-page footers compute `display:none`; product page continues to omit the footer. At641/1440px existing non-product footers remain visible. Bottom dock breakpoint and no horizontal overflow verified. Client navigation Home → Shop → Home correctly hides/restores the footer. `git diff --check` passes. Temporary browser closed; existing dev server preserved. No deployment, real customer-data operation, physical-device check or broad test-suite rerun.
+
+Root cause of prior unsuccessful change: globals.css forces `.b2b-store-footer` to display with important declarations; R273/R274 inspected the selector but did not check computed browser visibility. R275's scoped important hide rule resolves that observed cascade conflict.
+
+## 2026-10-21 — Home-only phone footer (R274)
+
+CURRENT / IMPLEMENTED locally: latest user correction restores the Home footer on phones while keeping inner-page storefront footers hidden at <=640px. Narrow the R273 hiding selector to `footer.tgg-reference-footer:not(.tgg-home-footer)` in home-footer.css. Home routing already selects this variant for / and /b2c. Bottom navigation and tablet/desktop behavior retained. Supersedes R273 Home footer hiding only. Footer variants and selector inspected; `git diff --check` passes. No browser/test-suite rerun, commit, push or deployment for this CSS-only scope correction.
+
+## 2026-10-21 — Hide storefront footer on phones (R273)
+
+CURRENT / IMPLEMENTED locally: hide both Home and inner-page storefront footers at <=640px using their shared `footer.tgg-reference-footer` selector in home-footer.css. Phone bottom navigation and its content clearance remain; tablet/desktop footer styles are retained. Explicit user request supersedes previous phone footer visibility. Verified both Footer.tsx variants share the selector, inspected the media rule, and `git diff --check` passes. No browser/test-suite rerun, commit, push or deployment for this CSS-only visibility change.
+
+## 2026-10-21 — Flat selected phone navigation tab (R272)
+
+CURRENT / IMPLEMENTED locally: per user correction, remove the selected bottom-navigation tab's inset/3D shadow (`box-shadow: none`). Keep its flat warm background and burgundy icon/label, dock surface, dimensions and navigation behavior. Supersedes R271 active-tab relief only. Source: B2C/src/app/navigation.css. CSS rule inspected and `git diff --check` passed; no browser/test-suite rerun, commit, push or deployment for this one-property visual change.
+
+## 2026-10-21 — Matte dock visual check (R271)
+
+VERIFIED locally: Home at375×812 in headless Chrome with API requests intercepted; screenshot inspected. Dock computed background rgb(245,240,232), single brown outer shadow at0.08 alpha, warm active insets with no white highlight,74px height and no horizontal overflow. `git diff --check` passes. CSS-color/shadow-only change; R270 interaction checks were not rerun. Temporary browser closed; no hosted deployment or physical-device check.
+
+## 2026-10-21 — Neumorphic mobile dock verification (R270)
+
+VERIFIED locally: scoped ESLint (Header.tsx/CartTray.tsx), `npm run typecheck`, and `git diff --check` pass. Headless Chrome with customer API requests intercepted: Home, hamper collection and Ivory PDP at320/375/430/640/768/1440px (18 route/viewport checks). Dock is74px high with56px link targets on phones, absent above640px, no horizontal overflow, old top strip absent and original header heights restored. Verified all four client-navigation destinations and selected tabs, Filter dialog opening/closing, confirmed cart badge update to3, popup above dock, Filter hidden/restored with popup, and reduced-motion transition disabled. Screenshot inspected.
+
+A three-row cart fixture at375×812 retains contained scrolling and checkout above the dock (list171px, review bottom702px, dock top726px). Short viewport checks initially exposed26px and0px product lists at375×667/320×568; the <=740px height fallback now provides267px/227px independently scrollable lists plus page scrolling. At320×568 after scrolling to the end, review bottom457.7px stays above dock top482px with no horizontal overflow. Existing local dev server preserved; temporary test browser closed. No real account/cart writes, payment, physical-device or hosted verification, production build or deployment performed.
+
+## 2026-10-21 — Phone navigation verification (R269)
+
+VERIFIED locally: `npm run typecheck`, scoped ESLint for Header.tsx/products/[slug]/page.tsx and `git diff --check` pass. Headless Chrome against the existing local development app with `/api/v1/*` intercepted: Home, hamper collection, Ivory and Lotus PDPs at320/375/640/768/1440px (20 route/viewport checks); cart/account/checkout at320/375px (six additional checks). Phone quick links are visible with44px targets; larger-screen quick row is hidden; product/collection breadcrumbs visible; no horizontal overflow. Menu Home/Your account visibility, menu placement below header, menu Home and quick All gifts client navigation, and Escape closing/restoring trigger focus pass. Phone PDP screenshot inspected. Existing user server preserved; temporary Chrome closed afterward.
+
+Limits: fixture navigation/UI checks only; no real customer/cart/payment writes, physical-device test, production build, hosted verification or deployment. Initial attempt to start a separate local dev server hit occupied port3000; verification used the existing server. No live latency claim or full populated-cart regression asserted.
+
 ## 2026-10-18 — Full repository audit/security verification (DEC-001–004)
 
 VERIFIED locally, Node22.12.0/npm10.9.0. Commands executed from the indicated app; no historical pass substituted for a current failure. [Audit report](audit/REPOSITORY_AUDIT.md), [root decisions](../DECISION.md), [flows](../FLOW.md) and [sanitized npm evidence](audit/dependency-audit.json).

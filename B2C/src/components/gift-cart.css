@@ -69,10 +69,10 @@ body:has(.gift-cart--contained) > footer { display: none !important; }
   .gift-cart .cart-phone-only { display: block; }
   .gift-cart .cart-desktop-only { display: none; }
   #main .gift-cart > .eyebrow { margin-bottom: 6px; font-size: 9px; }
-  #main .gift-cart .section-heading { align-items: center; gap: 12px; margin-bottom: 8px; }
+  #main .gift-cart .section-heading { align-items: center; justify-content: center; text-align: center; gap: 12px; margin-bottom: 8px; }
   #main .gift-cart h1 { margin: 0; font-size: 34px; line-height: 1.12; }
-  #main .gift-cart .section-heading > .text-link { flex-shrink: 0; font-size: 11px; }
-  #main .gift-cart > .draft-disclosure { margin: 0 0 18px; font-size: 11px; }
+  #main .gift-cart .section-heading > .text-link { display: none; }
+  #main .gift-cart > .draft-disclosure { margin: 0 0 18px; font-size: 11px; text-align: center; }
   #main .gift-cart-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
   #main .gift-cart-items, #main .gift-review { min-width: 0; background: #fffdf9; border: 1px solid #e9e1d6; border-radius: 22px; padding: 16px; }
   #main .gift-cart-items > h2 { margin: 0 0 6px; font-size: 23px; }
@@ -129,4 +129,14 @@ body:has(.gift-cart--contained) > footer { display: none !important; }
  #main .gift-cart--contained .gift-cart-row { padding-block: 12px; }
  #main .gift-cart--contained .gift-cart-scroll { padding-right: 4px; }
  #main .gift-cart--contained .gift-review { padding: 12px; }
+}
+
+/* Short phones need page scrolling as well as a usable product-list viewport. */
+@media (max-width:640px) and (max-height:740px) {
+ body:has(.mobile-bottom-nav):has(.gift-cart--contained) { display:block; height:auto; min-height:100dvh; overflow:visible; }
+ body:has(.mobile-bottom-nav):has(.gift-cart--contained) > #main { overflow:visible; }
+ body:has(.mobile-bottom-nav) #main .gift-cart--contained { height:auto; }
+ body:has(.mobile-bottom-nav) #main .gift-cart--contained .gift-cart-scroll {
+  flex:none; height:min(40dvh, var(--cart-list-height, 400px)); min-height:140px;
+ }
 }

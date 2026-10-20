@@ -1,3 +1,57 @@
+## 2026-10-21 — Center phone account heading and add one-line copy (R280)
+
+CURRENT / IMPLEMENTED locally: center the signed-out phone Account eyebrow/title and show “Your gifts, all in one place.” below the heading. Use10px title-to-paragraph margin and12px/1.6 muted body copy. Explicit phone paragraph styling overrides the legacy hidden introductory-paragraph rule. Above640px retain the original left-aligned heading and order-history sentence. Sources: account/page.tsx and storefront-ui.css. No auth/data behavior change, commit, push or deployment.
+
+## 2026-10-21 — Center phone cart introduction (R279)
+
+CURRENT / IMPLEMENTED locally: hide the heading's “Add more items” link at <=640px and center the gift-cart title group and saved-selection paragraph. Desktop link and layout retained; no cart-data or checkout changes. Source: gift-cart.css. Phone-scoped selectors inspected and `git diff --check` passes; no browser/test-suite rerun, commit, push or deployment for this CSS-only correction.
+
+## 2026-10-21 — Remove enquiry-price label beside results (R278)
+
+CURRENT / IMPLEMENTED locally: remove the “Final pricing on enquiry” label from the Shop result-count/Filter row, as requested. Count, inline Filter, catalogue prices, preview availability behavior and other page content retained. Source: B2C/src/app/shop/page.tsx. Targeted source check and `git diff --check` pass; no browser/test-suite rerun, commit, push or deployment for this text deletion. Supersedes R277's inline preview-note rendering only.
+
+## 2026-10-21 — Filter beside phone result count (R277)
+
+CURRENT / IMPLEMENTED locally: relocate the single ShopMobileFilters instance into the result-count row on Shop and collection pages. At <=640px, the44px burgundy Filter button aligns to the right of the count above product cards; the preview pricing note wraps below that row. Collection toolbar remains available with zero results so filters remain reachable. Native category/sort dialog and its destinations retained. Remove fixed-bottom filter styling, extra filter-only bottom clearance and cart-popup-driven hiding, since the inline control no longer overlaps the dock/popup. Supersedes R267/R270 floating filter placement/hide coordination only; cart popup and bottom navbar remain as specified. Sources: shop/page.tsx, ShopCollectionPage.tsx, shop.css, navigation.css, cart-tray.css. No commit, push or deployment.
+
+## 2026-10-21 — Consistent phone page-intro spacing (R276)
+
+CURRENT / IMPLEMENTED locally: Account, GiftCart and Shop/collection sections now share16px top/20px side padding at <=640px. Their leading eyebrow/breadcrumb rows share44px height,11px type/1.5 line-height and12px following gap; remove Account heading's extra top margin and Shop intro's4px top padding. This aligns heading tops72px below the masthead. Shared rules live in storefront-ui.css, with `.section` specificity to beat later cart route styles (initial browser pass caught Cart's6px margin/9px font override). Account layout's min-height is reset across the full phone breakpoint. Desktop/tablet typography and alignment retained; no commerce changes. No commit/push/deployment.
+
+## 2026-10-21 — Correct phone footer cascade conflict (R275)
+
+CURRENT / IMPLEMENTED locally: R273/R274's normal-priority hide declaration was overridden by existing `display:block !important` rules on `.b2b-store-footer` in globals.css (base and <=760px). Their source-only checks missed this runtime conflict. Add a scoped important override to `footer.tgg-reference-footer:not(.tgg-home-footer)` at <=640px in home-footer.css. Home remains visible; inner-page footers hide; existing product-page omission and tablet/desktop footers remain. R274 behavior was CURRENT / BROKEN until this correction. TESTING records actual browser checks for R275. No commit, push or deployment.
+
+## 2026-10-21 — Home-only phone footer (R274)
+
+CURRENT / IMPLEMENTED locally: latest user correction restores the Home footer on phones while keeping inner-page storefront footers hidden at <=640px. Narrow the R273 hiding selector to `footer.tgg-reference-footer:not(.tgg-home-footer)` in home-footer.css. Home routing already selects this variant for / and /b2c. Bottom navigation and tablet/desktop behavior retained. Supersedes R273 Home footer hiding only. Footer variants and selector inspected; `git diff --check` passes. No browser/test-suite rerun, commit, push or deployment for this CSS-only scope correction.
+
+## 2026-10-21 — Hide storefront footer on phones (R273)
+
+CURRENT / IMPLEMENTED locally: hide both Home and inner-page storefront footers at <=640px using their shared `footer.tgg-reference-footer` selector in home-footer.css. Phone bottom navigation and its content clearance remain; tablet/desktop footer styles are retained. Explicit user request supersedes previous phone footer visibility. Verified both Footer.tsx variants share the selector, inspected the media rule, and `git diff --check` passes. No browser/test-suite rerun, commit, push or deployment for this CSS-only visibility change.
+
+## 2026-10-21 — Flat selected phone navigation tab (R272)
+
+CURRENT / IMPLEMENTED locally: per user correction, remove the selected bottom-navigation tab's inset/3D shadow (`box-shadow: none`). Keep its flat warm background and burgundy icon/label, dock surface, dimensions and navigation behavior. Supersedes R271 active-tab relief only. Source: B2C/src/app/navigation.css. CSS rule inspected and `git diff --check` passed; no browser/test-suite rerun, commit, push or deployment for this one-property visual change.
+
+## 2026-10-21 — Matte phone dock finish (R271)
+
+CURRENT / IMPLEMENTED locally: user rejected the bright glow in R270. Remove the white outer highlight and white active inset; use warm ivory #f5f0e8, a muted beige border, one low-opacity brown drop shadow and shallow warm inset relief for the active burgundy icon/label. Badge rim matches the dock. Supersedes R270 shadow/color treatment only; dimensions, navigation, safe-area spacing and cart/filter positioning retained. Source: B2C/src/app/navigation.css. No commit, push or deployment.
+
+## 2026-10-21 — Neumorphic phone bottom navigation (R270)
+
+CURRENT / IMPLEMENTED locally: replaces R269's top quick-navigation strip with a phone-only (<=640px) floating bottom dock: Home, Shop, Cart and Account. Ivory raised surface, paired soft shadows, inset active tab, burgundy accents,56px link targets, focus outlines, reduced-motion support and safe-area spacing. Shop remains selected for collection/product routes; Cart for cart/checkout; Account for account routes. Cart badge reuses Header's confirmed count/events without another API subscription. Phone header returns to its preceding height and hides duplicate cart/account icons; its menu and R269 parent breadcrumbs remain. Admin chrome and tablet/desktop navigation are retained.
+
+Cart popup and compact Filter button sit above the dock with shared clearance; Filter still yields to an open cart popup. Body end spacing keeps content reachable. Cart dismissal's focus fallback now targets the visible phone Cart link. At <=740px viewport height on phones, a cart with >2 rows allows page scrolling while retaining an independently scrollable product list (minimum140px), since a fixed whole-page layout otherwise collapsed the list to0–26px after adding the dock. Taller-phone/desktop contained-cart behavior remains. This explicitly supersedes the all-phone fixed-page constraint only for these short viewports, to keep products and checkout usable.
+
+R270 supersedes R269's top strip presentation. Existing gift prices, quantities, payment/auth behavior and product/gallery designs retained. No commit, push or deployment for R270; TESTING records local verification and limits.
+
+## 2026-10-21 — Visible phone navigation and parent links (R269)
+
+CURRENT / IMPLEMENTED locally: phone storefront header (<=640px) now includes a 44px quick-navigation row with explicit Home and All gifts links, burgundy icons/text and an active-page underline. The mobile/tablet menu includes Home and Your account on every public route, scrolls within the available viewport, and Escape restores focus to its trigger on inner pages as well as Home. Account remains accessible through the menu on phones. Admin chrome remains excluded; desktop masthead layout is retained.
+
+Product and collection breadcrumbs are visible on phones again, with 44px link targets. Product names truncate in the breadcrumb instead of widening the viewport. The Ivory-only All hampers shortcut is replaced by the shared Home / Hampers / product trail. Existing destinations, product/card/gallery design, cart state, auth requests and commerce contracts are retained. Sources: Header.tsx, navigation.css, shop.css, products/[slug]/page.tsx and product-detail.css. No commit, push or deployment performed for R269. Typecheck, scoped lint, 26 responsive route checks, menu navigation/Escape checks and git diff --check pass; TESTING records scope and limits.
+
 ## 2026-10-18 — Full-repository audit and bounded security remediation (DEC-001–004)
 
 CURRENT / IMPLEMENTED locally: created root DECISION.md/FLOW.md and reproducible route/asset/disconnected-schema inventories; secured both legacy admin socket boundaries and exact CORS; removed original B2B PIN/session fallback credentials, hardened tokens/body validation and set auth private/no-store; patched original Next/dependencies/Nodemailer and removed an unused vulnerable backend UUID dependency. Existing B2C commerce/designs, customer history, schemas, prices, assets and deployment configuration preserved.

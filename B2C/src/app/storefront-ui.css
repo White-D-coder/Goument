@@ -158,3 +158,43 @@ footer.tgg-reference-footer :is(
 
 /* FAQ questions are the sole decorative row-divider exception. */
 #main .tgg-faq .tgg-faq-item--divided { border-bottom: 1px solid var(--tgg-line) !important; }
+
+/* Keep phone page introductions aligned below the shared masthead. */
+@media (max-width: 640px) {
+  #main .section:is(.account-page, .gift-cart, .shop-edit) {
+    padding-top: 16px;
+    padding-inline: 20px;
+  }
+  #main .section.account-page .auth-layout { min-height: 0; align-items: start; }
+  #main .section.account-page .auth-intro-text > .eyebrow,
+  #main .section.account-page > .section-heading .eyebrow,
+  #main .section.gift-cart > .eyebrow,
+  #main .section.shop-edit > .shop-breadcrumb {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  #main .section.account-page .auth-intro-text h1,
+  #main .section.account-page > .section-heading h1 { margin-top: 0; }
+  #main .section.shop-edit > .shop-intro,
+  #main .section.shop-edit > .shop-intro .shop-intro-copy { padding-top: 0; }
+}
+
+.account-intro-phone { display: none; }
+@media (max-width: 640px) {
+  #main .section.account-page .auth-intro-text { text-align: center; }
+  #main .section.account-page .auth-intro-text > .eyebrow { justify-content: center; }
+  #main .section.account-page .auth-intro-text h1 { margin-bottom: 10px; }
+  #main .section.account-page .auth-intro-text > .account-intro-desktop { display: none; }
+  #main .section.account-page .auth-intro-text > .account-intro-phone {
+    display: block;
+    margin: 0 0 8px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}

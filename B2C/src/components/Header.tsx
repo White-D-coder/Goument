@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { ShoppingBag, UserRound, Menu, X, Search, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, UserRound, Menu, X, Search, ShieldCheck, House, LayoutGrid } from 'lucide-react';
 import Brand from './Brand';
 import ShopNavigation from './ShopNavigation';
 import { api } from '@/lib/api';
@@ -86,5 +86,19 @@ export default function Header() {
  const solidHeader = !isHome || isScrolled;
  const navLeft = storefrontNavigation();
 
-  return <header className={`header${isHome ? ' home-header home-header--editorial' : ''}${solidHeader ? ' scrolled' : ' hero-transparent'}`}><div className="header-inner"><Brand scrolled={solidHeader}/><nav id="store-navigation" className={open?'nav nav-left open':'nav nav-left'} onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();setOpen(false);if(isHome)menuTrigger.current?.focus();}}}><ShopNavigation key={pathname} onNavigate={()=>setOpen(false)}/>{navLeft.map(([title,href])=><Link key={title} href={href} onClick={()=>setOpen(false)}>{title}</Link>)}{isHome&&<Link href="/account" className="home-account-mobile" onClick={()=>setOpen(false)}>Your account</Link>}{isAdmin&&<Link href="/admin" className="admin-nav-mobile" onClick={()=>setOpen(false)}><ShieldCheck size={14} aria-hidden="true"/><span>Admin Operations</span></Link>}</nav><div className="nav-actions">{isAdmin&&<Link className="admin-nav-button" href="/admin" aria-label="Admin Operations Portal" title="Operations Admin Portal"><ShieldCheck size={13} aria-hidden="true"/><span>Admin</span></Link>}<Link className="icon" href="/shop#gift-search" aria-label="Search gifts"><Search size={19}/></Link><Link className="icon account-icon" href="/account" aria-label="Your account"><UserRound size={19}/></Link><Link className="icon bag" href="/cart" aria-label={`Shopping bag, ${count} items`}><ShoppingBag size={19}/>{count>0&&<span>{count}</span>}</Link><button ref={menuTrigger} className="icon mobile" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="store-navigation" onClick={()=>setOpen(!open)}>{open?<X size={20}/>:<Menu size={20}/>}</button></div></div></header>;
+  return <><header className={`header${isHome ? ' home-header home-header--editorial' : ''}${solidHeader ? ' scrolled' : ' hero-transparent'}`}><div className="header-inner"><Brand scrolled={solidHeader}/><nav aria-label="Main navigation" id="store-navigation" className={open?'nav nav-left open':'nav nav-left'} onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();setOpen(false);menuTrigger.current?.focus();}}}><Link className="mobile-home-link" href="/b2c" aria-current={isHome ? 'page' : undefined} onClick={()=>setOpen(false)}>Home</Link><ShopNavigation key={pathname} onNavigate={()=>setOpen(false)}/>{navLeft.map(([title,href])=><Link key={title} href={href} onClick={()=>setOpen(false)}>{title}</Link>)}<Link href="/account" className="home-account-mobile" onClick={()=>setOpen(false)}>Your account</Link>{isAdmin&&<Link href="/admin" className="admin-nav-mobile" onClick={()=>setOpen(false)}><ShieldCheck size={14} aria-hidden="true"/><span>Admin Operations</span></Link>}</nav><div className="nav-actions">{isAdmin&&<Link className="admin-nav-button" href="/admin" aria-label="Admin Operations Portal" title="Operations Admin Portal"><ShieldCheck size={13} aria-hidden="true"/><span>Admin</span></Link>}<Link className="icon" href="/shop#gift-search" aria-label="Search gifts"><Search size={19}/></Link><Link className="icon account-icon" href="/account" aria-label="Your account"><UserRound size={19}/></Link><Link className="icon bag" href="/cart" aria-label={`Shopping bag, ${count} items`}><ShoppingBag size={19}/>{count>0&&<span>{count}</span>}</Link><button ref={menuTrigger} className="icon mobile" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="store-navigation" onClick={()=>setOpen(!open)}>{open?<X size={20}/>:<Menu size={20}/>}</button></div></div></header>
+  <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
+    <Link href="/b2c" aria-current={isHome ? 'page' : undefined} onClick={()=>setOpen(false)}>
+      <span className="mobile-bottom-nav-icon"><House size={21} aria-hidden="true"/></span><span>Home</span>
+    </Link>
+    <Link href="/shop" aria-current={pathname === '/shop' || pathname.startsWith('/shop/') || pathname.startsWith('/products/') ? 'page' : undefined} onClick={()=>setOpen(false)}>
+      <span className="mobile-bottom-nav-icon"><LayoutGrid size={21} aria-hidden="true"/></span><span>Shop</span>
+    </Link>
+    <Link href="/cart" aria-current={pathname === '/cart' || pathname.startsWith('/cart/') || pathname === '/checkout' ? 'page' : undefined} aria-label={`Cart, ${count} items`} onClick={()=>setOpen(false)}>
+      <span className="mobile-bottom-nav-icon"><ShoppingBag size={21} aria-hidden="true"/>{count > 0 && <span className="mobile-bottom-nav-count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}</span><span>Cart</span>
+    </Link>
+    <Link href="/account" aria-current={pathname === '/account' || pathname.startsWith('/account/') ? 'page' : undefined} onClick={()=>setOpen(false)}>
+      <span className="mobile-bottom-nav-icon"><UserRound size={21} aria-hidden="true"/></span><span>Account</span>
+    </Link>
+  </nav></>;
 }

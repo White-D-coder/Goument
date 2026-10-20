@@ -43,7 +43,6 @@ export default async function Detail({ params }: PageProps) {
   const gallery = [...productPhotos, ...closeUps].filter((image, index, images) => images.findIndex(other => other.src === image.src) === index);
 
   return <div className={`product-detail-edit pdp${isIvory ? ' pdp-ivory' : ''}${isEnvelope ? ' pdp-envelope' : ''}`}>
-    {isIvory && <Link className="pdp-mobile-back pdp-wrap" href="/shop/hampers"><span aria-hidden="true">←</span> All hampers</Link>}
     <nav className="pdp-breadcrumb pdp-wrap" aria-label="Breadcrumb">
       <Link href="/b2c">Home</Link><span aria-hidden="true">/</span>
       <Link href={editorial.isHamper ? '/shop/hampers' : '/shop'}>{editorial.isHamper ? 'Hampers' : 'Gifts'}</Link><span aria-hidden="true">/</span>

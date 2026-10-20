@@ -35,6 +35,8 @@ footer.tgg-reference-footer::before { display: none; content: none; }
   .tgg-reference-footer :is(.tgg-home-footer-bottom, .b2b-footer-bottom) { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 @media (max-width: 640px) {
+  /* Override the legacy forced-visible .b2b-store-footer rules in globals.css. */
+  footer.tgg-reference-footer:not(.tgg-home-footer) { display: none !important; }
   .tgg-reference-footer :is(.tgg-home-footer-inner, .b2b-footer-inner) { display: block; padding: 32px 20px 24px; text-align: center; }
   .tgg-reference-footer :is(.tgg-home-footer-heading, .b2b-footer-heading) { flex-direction: column; align-items: center; gap: 10px; }
   .tgg-reference-footer :is(.tgg-home-footer-wordmark, .b2b-footer-wordmark) { justify-content: center; gap: 0 8px; font-size: 24px; }

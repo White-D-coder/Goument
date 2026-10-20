@@ -1,6 +1,6 @@
 /* Product detail only: photography, restrained type and a quiet purchase column. */
 .pdp { --pdp-ivory: #faf7f1; --pdp-stone: #efe9df; --pdp-burgundy: #4a1624; --pdp-muted: #6d645f; --pdp-line: #dcd3c6; background: var(--pdp-ivory); color: #302922; }
-.pdp-mobile-back,.pdp-description-phone { display:none; }
+.pdp-description-phone { display:none; }
 .pdp .pdp-wrap { width: calc(100% - 96px); max-width: 1320px; margin-inline: auto; }
 .pdp p { color: var(--pdp-muted); }
 .pdp h1,.pdp h2,.pdp h3 { color: var(--pdp-burgundy); text-wrap: balance; }
@@ -120,7 +120,7 @@
 }
 @media (max-width: 600px) {
   .pdp .pdp-wrap { width: calc(100% - 32px); }
-  .pdp .pdp-breadcrumb { display: none; }
+  .pdp .pdp-breadcrumb { display: flex; }
   .pdp .pdp-hero { gap: 16px; padding-bottom: 32px; }
   .pdp .pdp-photography { margin-inline: 0; }
   .pdp .detail-image { aspect-ratio: 1; border-radius: 20px; }
@@ -304,9 +304,7 @@
 @media (max-width:640px) {
  .pdp.pdp-ivory { padding-bottom:0; }
  .pdp-ivory .pdp-wrap { width:calc(100% - 32px); }
- .pdp-ivory .pdp-mobile-back { display:flex; align-items:center; gap:9px; min-height:44px; padding-block:8px; font-size:11px; color:#74645a; }
- .pdp-ivory .pdp-mobile-back > span { color:#4a0404; font-size:19px; }
- .pdp-ivory .pdp-breadcrumb { display:none; }
+ .pdp-ivory .pdp-breadcrumb { display:flex; }
  .pdp-ivory .pdp-hero { gap:18px; padding-bottom:0; }
  .pdp-ivory .detail-image { max-height:440px; border:1px solid #e9e2d8; border-radius:20px; background:#f0e9dd; }
  .pdp-ivory .detail-image img { object-fit:contain; border-radius:19px; }
@@ -439,4 +437,11 @@
  }
  .pdp .product-gallery .product-gallery-thumbnails button { flex:0 0 44%; width:44%; height:auto; aspect-ratio:2.1; padding:2px; border-radius:13px; }
  .pdp .product-gallery .product-gallery-thumbnails img { border-radius:10px; }
+}
+
+/* Keep parent destinations usable when a product is opened directly on a phone. */
+@media (max-width:640px) {
+ .pdp .pdp-breadcrumb { display:flex; align-items:center; gap:8px; padding-block:6px; font-size:11px; }
+ .pdp .pdp-breadcrumb a { display:inline-flex; align-items:center; min-height:44px; color:var(--pdp-burgundy); }
+ .pdp .pdp-breadcrumb [aria-current] { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 }

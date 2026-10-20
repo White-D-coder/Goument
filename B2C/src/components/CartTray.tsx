@@ -50,7 +50,8 @@ export default function CartTray() {
  const close = useCallback(() => {
   if (panel.current?.contains(document.activeElement)) {
    const target = trigger.current?.isConnected && trigger.current.matches('a[href], button:not([disabled]), input:not([disabled]), [tabindex]') ? trigger.current
-    : triggerArea.current?.querySelector<HTMLElement>('button:not([disabled])') || document.querySelector<HTMLElement>('.header .bag');
+    : triggerArea.current?.querySelector<HTMLElement>('button:not([disabled])')
+      || document.querySelector<HTMLElement>(window.matchMedia('(max-width: 640px)').matches ? '.mobile-bottom-nav a[href="/cart"]' : '.header .bag');
    target?.focus({ preventScroll: true });
   }
   setOpen(false);

@@ -54,26 +54,33 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
           <Link className="shop-all-boxes" href="/build">Curate your gift <ArrowRight size={14} aria-hidden="true" /></Link>
         </aside>
         <div className="shop-results">
+          <div className="shop-toolbar">
+            <div className="shop-results-meta">
+              <p>{data.total} {data.total === 1 ? 'find' : 'finds'}</p>
+              <ShopMobileFilters
+                categories={[
+                  { label: 'All gifts', href: '/shop', active: false },
+                  ...Object.values(shopCollections).map(item => ({ label: item.title, href: item.href, active: item.href === edit.href })),
+                ]}
+                action={edit.href} sort={sort} showSort={!data.preview && data.products.length > 0}
+              />
+            </div>
+            {!data.preview && data.products.length > 0 && (
+              <form className="shop-sort" action={edit.href}>
+                <label htmlFor="collection-sort" className="collection-sort-label">Sort by</label>
+                <select id="collection-sort" name="sort" defaultValue={sort} aria-label="Sort collection">
+                  <option value="newest">Latest additions</option>
+                  <option value="price_asc">Price: low to high</option>
+                  <option value="price_desc">Price: high to low</option>
+                </select>
+                <button type="submit" className="text-link">Apply</button>
+              </form>
+            )}
+          </div>
           {data.products.length > 0 ? (
-            <>
-              <div className="shop-toolbar">
-                <div className="shop-results-meta"><p>{data.total} {data.total === 1 ? 'find' : 'finds'}</p></div>
-                {!data.preview && (
-                  <form className="shop-sort" action={edit.href}>
-                    <label htmlFor="collection-sort" className="collection-sort-label">Sort by</label>
-                    <select id="collection-sort" name="sort" defaultValue={sort} aria-label="Sort collection">
-                      <option value="newest">Latest additions</option>
-                      <option value="price_asc">Price: low to high</option>
-                      <option value="price_desc">Price: high to low</option>
-                    </select>
-                    <button type="submit" className="text-link">Apply</button>
-                  </form>
-                )}
-              </div>
-              <div className="product-grid shop-product-grid">
-                {data.products.map(product => <ProductCard key={product._id} product={product} compact />)}
-              </div>
-            </>
+            <div className="product-grid shop-product-grid">
+              {data.products.map(product => <ProductCard key={product._id} product={product} compact />)}
+            </div>
           ) : (
             <div className="shop-empty">
               <p className="eyebrow">{edit.title}</p>
@@ -94,13 +101,7 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
           {data.preview && <p className="shop-preview-note">Final price and availability confirmed on enquiry.</p>}
         </div>
       </div>
-      <ShopMobileFilters
-        categories={[
-          { label: 'All gifts', href: '/shop', active: false },
-          ...Object.values(shopCollections).map(item => ({ label: item.title, href: item.href, active: item.href === edit.href })),
-        ]}
-        action={edit.href} sort={sort} showSort={!data.preview && data.products.length > 0}
-      />
+
     </section>
   );
 }

@@ -41,9 +41,9 @@
  .cart-tray { top: auto; max-height: min(60dvh, 520px); bottom: max(12px, env(safe-area-inset-bottom)); }
 }
 @media (max-width: 640px) {
- body:has(.cart-tray[data-open="true"][data-empty="false"]) .shop-filter-bar { display: none; }
  .cart-tray {
   right: 0; left: 0; margin-inline: auto; width: min(260px, calc(100% - 24px));
+  bottom: var(--mobile-nav-clearance, max(12px, env(safe-area-inset-bottom)));
   border-radius: 999px; border-color: #6b2929; background: #4a0404; color: #fff;
   box-shadow: 0 6px 20px #4a040433; transform: translateY(calc(100% + 32px));
   transition: transform 360ms cubic-bezier(.22,1,.36,1), visibility 0s 360ms;

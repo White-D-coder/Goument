@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- Pre-sized local WebP decoration, loaded lazily. */
-import { ChevronDown, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import HomeFAQMore from './HomeFAQMore';
 
 type FAQItem = { question: string; answer: string; contactEmail?: string };
 
@@ -62,14 +63,9 @@ export default function HomeFAQ({ items }: { items: FAQItem[] }) {
       <div className="tgg-faq-items">
         {items.slice(0, 4).map(renderQuestion)}
         {items.length > 4 && (
-          <details className="tgg-faq-more">
-            <summary className="tgg-faq-more-summary">
-              <span className="tgg-faq-more-label">More questions</span>
-              <span className="tgg-faq-less-label">Fewer questions</span>
-              <ChevronDown size={18} aria-hidden="true" />
-            </summary>
+          <HomeFAQMore>
             {items.slice(4).map((item, index) => renderQuestion(item, index + 4))}
-          </details>
+          </HomeFAQMore>
         )}
       </div>
     </section>

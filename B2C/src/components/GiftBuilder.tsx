@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useGiftDraft } from '@/hooks/useGiftDraft';
 import QuantityControl from './QuantityControl';
+import RouteLoading from './RouteLoading';
 export default function GiftBuilder({selectedBox}:{selectedBox?:string}) {
  const {draft,catalogue,error,busy,change,reload}=useGiftDraft(selectedBox);
  const [search,setSearch]=useState('');const [category,setCategory]=useState('All');
@@ -13,7 +14,7 @@ export default function GiftBuilder({selectedBox}:{selectedBox?:string}) {
  const items=curatableItems.filter(i=>(category==='All'||i.category===category)&&`${i.name} ${i.description}`.toLowerCase().includes(search.toLowerCase()));
  return <section className="section gift-builder"><p className="eyebrow">MAKE IT PERSONAL</p><h1>Little things. All their favourites.</h1><p className="section-intro">Select what you love from our master catalogue of gourmet treats, artisanal beverages, stationery, and handcrafted keepsakes.</p>
  {error&&<div className="notice" role="alert">{error} <button className="text-link" onClick={reload}>Retry</button></div>}
- {!draft||!catalogue?<p role="status">{error?'Your selection could not be loaded.':'Loading your gift…'}</p>:<>
+ {!draft||!catalogue?error?<p role="status">Your selection could not be loaded.</p>:<RouteLoading variant="builder" embedded />:<>
  <div className="builder-context"><div><span className="eyebrow">CURATE YOUR GIFTS</span><p>Add your favourite individual master items directly to your gift draft below.</p></div></div>
  <p className="draft-disclosure">Review your selection and total before payment.</p>
  <div className="builder-filters"><label>Find something lovely<input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search treats, candles, keepsakes…"/></label><label>Collection<select value={category} onChange={e=>setCategory(e.target.value)}>{['All',...new Set(curatableItems.map(i=>i.category))].map(c=><option key={c}>{c}</option>)}</select></label></div>

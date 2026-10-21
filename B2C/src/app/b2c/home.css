@@ -1496,11 +1496,8 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
 
 .tgg-home .tgg-faq-more { padding:0; }
 .tgg-home .tgg-faq-more > summary { justify-content:center; gap:10px; min-height:48px; padding:14px 0; color:var(--tgg-burgundy); font-size:13px; font-weight:600; }
-.tgg-faq-less-label { display:none; }
-.tgg-faq-more[open] > summary .tgg-faq-more-label { display:none; }
-.tgg-faq-more[open] > summary .tgg-faq-less-label { display:inline; }
+.tgg-home .tgg-faq-more[open] > summary { display:none; }
 .tgg-home .tgg-faq-more > summary svg { transform:none; }
-.tgg-home .tgg-faq-more[open] > summary svg { transform:rotate(180deg); }
 
 /* Question row */
 .tgg-home .tgg-faq-item summary {

@@ -1,3 +1,7 @@
+## 2026-10-21 — Account form presentation only (R282)
+
+CURRENT / IMPLEMENTED locally: Account adds a type=button password visibility control, associated signup guidance for the existing12-character minimum, phone input legibility and focus on an existing API-error alert. Native required/minLength/autocomplete, request bodies/endpoints, provider/session/role behavior and cart-before-sign-in synchronization remain unchanged. Delayed profile loads show an accessible skeleton;401 still yields signed-out form, never fabricated success. Browser checks use one synthetic failed login; existing88 client tests/lint/typecheck/build pass. No real login/account mutation, password reset, private cache or provider activation. UI_SYSTEM/TESTING own exact evidence and limits.
+
 ## 2026-10-18 — Legacy socket and original admin hardening
 
 CURRENT / IMPLEMENTED locally (DEC-002/004): legacy socket join_admins now reuses existing auth('admin') for cookie/Bearer/handshake auth.token, and every notification revalidates signature/expiry/current User role. Demotion/deletion/storage failures deny delivery and remove membership. Exact established origins cover REST and socket handshake; no client socket consumers were found in repository source. No JWT lifetime/hash/role/model change; legacy access-token logout limitation remains.

@@ -1,3 +1,9 @@
+## 2026-10-21 — Bounded frontend delivery and feedback (R282)
+
+CURRENT / IMPLEMENTED locally: only the first Shop/collection ProductCard uses existing eager/high photo loading; all subsequent/related photos retain lazy loading. Existing responsive picture gains a positioned full-size wrapper; sources/crops/quality/cache/slideshow preloading retained. Static skeletons add no requests, timers or animations; gallery spinner exists only while requested differs from selected and is static under reduced motion. Current main image stays until readiness; original-image fallback remains bounded. No new dependency, auth cache or request replay.
+
+VERIFIED source/image geometry equality across Home/Shop/Ivory at375/768/1440px and first-only priority at runtime; loading/form/gallery fault checks and isolated production build pass (TESTING). This task did not measure production LCP/INP/CLS or establish a20ms/network budget. A dev LCP warning remains for a shared Lotus main/thumbnail source during the image-failure fixture despite eager main rendering; real-device/deployed measurement and diagnostic remain open. No blanket eager-image change or unsupported speedup claim.
+
 ## 2026-10-18 — Audit measurements and limits
 
 CURRENT / IMPLEMENTED: source inventory870 media/font files,439,924,613 total repository bytes/202 duplicate groups,42 page entries and25 schemas. These are storage/source counts, not page-transfer or runtime metrics. No new image/cache/query optimization, indexes or performance benchmark; no LCP/INP/CLS/latency/throughput improvement claim. Existing historical lab results remain dated below. Root FLOW sections11–15 records actual cache/timeout/fanout/retry paths; hosted/device/load/explain-plan measurements remain required before optimization or capacity estimates.

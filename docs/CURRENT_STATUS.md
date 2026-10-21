@@ -1,3 +1,11 @@
+## 2026-10-21 — Remove FAQ collapse row; phone scroll controls (R283)
+
+CURRENT / IMPLEMENTED locally: expanded FAQ group has no Fewer questions/chevron row. Phones<=640px auto-reveal extra questions when scrolling down to the group and collapse on upward scroll while its start is visible; desktop/tablet>640px keep manual expansion. Initialfour/native answer toggles/theme/images/commerce retained. Seven-width native wheel/click, reduced-motion and keyboard-focus checks pass; typecheck/scoped lint/diff pass. UI_SYSTEM/TESTING/evidence own scope and limits. No commit/push/deployment; previous R282 work retained.
+
+## 2026-10-21 — Frontend loading/forms/gallery batch (R282)
+
+CURRENT / IMPLEMENTED locally: page-specific static placeholders and real client-read loading states, password Show/Hide + signup guidance + error focus,16px phone Account/delivery inputs, pending/error/retry gallery feedback, positioned responsive picture wrapper and first-only catalogue image priority. Images/theme/normal image geometry and existing shopping/auth/checkout contracts preserved. Nine image-baseline comparisons,16 loading cases, form/gallery fault checks, isolated production build, full lint/typecheck and88 client tests pass; UI_SYSTEM/TESTING/evidence own exact scope/limits. No measured hosted speedup, real customer/payment operation, commit, push or deployment. Existing preview process retained.
+
 ## 2026-10-21 — First four UX audit fixes (R281)
 
 CURRENT / IMPLEMENTED locally: user-approved fixes restore desktop hero-dot clicks, correct gift-note FAQ guidance to the existing email, use the existing muted description colour and expose the phone Home H1 without visible hero copy. Images/layout/theme/shopping flow preserved. Before/after geometry/image-source checks atnine widths320–1920px,27 pointer dot selections, accessible heading/FAQ checks and synthetic native phone shopping/desktop CTA navigation pass; typecheck/scoped lint/diff checks pass. UI_SYSTEM/TESTING contain detail and limits. UX01–UX04 audit findings resolved locally; remaining audit proposals unchanged. No backend/schema/financial changes or deployment.

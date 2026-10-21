@@ -1,12 +1,13 @@
 'use client';
 import Link from 'next/link';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { api, ApiError } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { money } from '@/lib/types';
 import type { GiftPersonalisation } from '@/lib/gift-personalisation';
 import './envelope-personalisation.css';
+import RouteLoading from './RouteLoading';
 
 type Address = {
   id?: string;
@@ -76,6 +77,8 @@ export default function DeliveryCheckout() {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
+  const errorMessage = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (error && !busy && !placing) errorMessage.current?.focus(); }, [error, busy, placing]);
 
   function failure(e: unknown) {
     if (e instanceof ApiError && e.status === 401) {
@@ -155,15 +158,14 @@ export default function DeliveryCheckout() {
       </p>
 
       {error && (
-        <div className="notice" role="alert">
+        <div ref={errorMessage} tabIndex={-1} className="notice" role="alert">
           {error} <button className="text-link" onClick={() => { setError(''); setRetry(n => n + 1); }}>Retry</button>
         </div>
       )}
 
       {!view ? (
-        <p role="status">
-          {error ? 'Checkout could not be loaded.' : 'Checking your account and gift…'} <Link href="/cart">Back to bag</Link>
-        </p>
+        error ? <p role="status">Checkout could not be loaded. <Link href="/cart">Back to bag</Link></p>
+          : <RouteLoading variant="checkout" embedded />
       ) : (
         <div className="delivery-layout">
           <div>

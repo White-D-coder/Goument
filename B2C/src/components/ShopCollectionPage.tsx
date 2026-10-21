@@ -79,7 +79,7 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
           </div>
           {data.products.length > 0 ? (
             <div className="product-grid shop-product-grid">
-              {data.products.map(product => <ProductCard key={product._id} product={product} compact />)}
+              {data.products.map((product, index) => <ProductCard key={product._id} product={product} compact priority={index === 0} />)}
             </div>
           ) : (
             <div className="shop-empty">

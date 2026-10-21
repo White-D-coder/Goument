@@ -185,7 +185,14 @@ footer.tgg-reference-footer :is(
 }
 
 .account-intro-phone { display: none; }
+.auth-password-field { display: grid; gap: 8px; }
+.auth-password-input { position: relative; }
+.auth-password-input input { width: 100%; padding-right: 72px; }
+.auth-password-toggle { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); min-width: 60px; min-height: 44px; padding: 6px 10px; border: 0; border-radius: 5px; background: transparent; color: var(--wine); font-size: 12px; }
+#main .auth-form .password-help { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; letter-spacing: normal; }
 @media (max-width: 640px) {
+  #main .account-page .auth-form input { font-size: 16px; line-height: 1.5; min-height: 52px; }
+  #main .delivery-form :is(input, select) { font-size: 16px; line-height: 1.25; }
   #main .section.account-page .auth-intro-text { text-align: center; }
   #main .section.account-page .auth-intro-text > .eyebrow { justify-content: center; }
   #main .section.account-page .auth-intro-text h1 { margin-bottom: 10px; }

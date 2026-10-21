@@ -10,9 +10,11 @@ import ProductPhoto from './ProductPhoto';
 export default function ProductCard({
   product,
   compact = false,
+  priority = false,
 }: {
   product: Product;
   compact?: boolean;
+  priority?: boolean;
 }) {
   const href = `/products/${product.slug}`;
 
@@ -37,6 +39,7 @@ export default function ProductCard({
           tabIndex={-1}
         >
           <ProductPhoto
+            priority={priority}
             src={productImage(product)}
             alt={
               (Array.isArray(product.images) && product.images[0]?.alt) ||

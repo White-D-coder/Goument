@@ -13,6 +13,7 @@ import ProductPhoto from './ProductPhoto';
 import PrintNameField from './PrintNameField';
 import { isLotusGift, printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
 import './gift-cart.css';
+import RouteLoading from './RouteLoading';
 
 function PriceAmount({ value }: { value: PriceRange }) {
   return <span className="gift-cart-amount"><span>{priceRangeLabel({ min: value.min, max: value.min })}</span>{value.max !== value.min && <><span>–</span><span>{priceRangeLabel({ min: value.max, max: value.max })}</span></>}</span>;
@@ -95,7 +96,7 @@ export default function GiftCart() {
       )}
 
       {!draft || !catalogue ? (
-        <p role="status">{error ? 'Your gift could not be loaded.' : 'Loading your gift…'}</p>
+        error ? <p role="status">Your gift could not be loaded.</p> : <RouteLoading variant="cart" embedded />
       ) : (
         <>
           <p className="draft-disclosure">Your selection is saved. Sign in at checkout to add your delivery details.</p>

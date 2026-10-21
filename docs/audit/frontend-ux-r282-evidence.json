@@ -1,0 +1,330 @@
+{
+  "geometry": [
+    {
+      "width": 375,
+      "path": "/b2c",
+      "equal": true
+    },
+    {
+      "width": 375,
+      "path": "/shop",
+      "equal": true
+    },
+    {
+      "width": 375,
+      "path": "/products/ivory-hamper",
+      "equal": true
+    },
+    {
+      "width": 768,
+      "path": "/b2c",
+      "equal": true
+    },
+    {
+      "width": 768,
+      "path": "/shop",
+      "equal": true
+    },
+    {
+      "width": 768,
+      "path": "/products/ivory-hamper",
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "path": "/b2c",
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "path": "/shop",
+      "equal": true
+    },
+    {
+      "width": 1440,
+      "path": "/products/ivory-hamper",
+      "equal": true
+    }
+  ],
+  "loaders": [
+    {
+      "path": "/account",
+      "variant": "route-loading route-loading--account section",
+      "role": "status",
+      "interactive": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/cart",
+      "variant": "route-loading route-loading--cart route-loading--embedded",
+      "role": "status",
+      "interactive": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/build",
+      "variant": "route-loading route-loading--builder route-loading--embedded",
+      "role": "status",
+      "interactive": 0,
+      "overflow": 0
+    },
+    {
+      "path": "/checkout",
+      "variant": "route-loading route-loading--checkout route-loading--embedded",
+      "role": "status",
+      "interactive": 0,
+      "overflow": 0
+    },
+    {
+      "variant": "catalogue",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 0
+    },
+    {
+      "variant": "product",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 1
+    },
+    {
+      "variant": "cart",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 2
+    },
+    {
+      "variant": "account",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 1
+    },
+    {
+      "variant": "checkout",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 2
+    },
+    {
+      "variant": "builder",
+      "width": 320,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 0
+    },
+    {
+      "variant": "catalogue",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 0
+    },
+    {
+      "variant": "product",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 1
+    },
+    {
+      "variant": "cart",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 2
+    },
+    {
+      "variant": "account",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 1
+    },
+    {
+      "variant": "checkout",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 2
+    },
+    {
+      "variant": "builder",
+      "width": 1440,
+      "overflow": 0,
+      "controls": 0,
+      "panels": 0
+    }
+  ],
+  "forms": [
+    {
+      "width": 320,
+      "font": "16px",
+      "overflow": 0
+    },
+    {
+      "width": 375,
+      "font": "16px",
+      "overflow": 0
+    },
+    {
+      "width": 640,
+      "font": "16px",
+      "overflow": 0
+    },
+    {
+      "width": 768,
+      "font": "15px",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "font": "15px",
+      "overflow": 0
+    }
+  ],
+  "gallery": {
+    "pendingKeepsCurrent": true,
+    "reducedMotionStatic": true,
+    "readySwitches": true,
+    "failedKeepsCurrent": true,
+    "retryRecovers": true
+  },
+  "images": {
+    "shopPriority": [
+      {
+        "loading": "eager",
+        "priority": "high"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      }
+    ],
+    "collectionPriority": [
+      {
+        "loading": "eager",
+        "priority": "high"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      },
+      {
+        "loading": "lazy",
+        "priority": "auto"
+      }
+    ],
+    "warnings": [
+      "Image with src \"/images/envelopes/ep1_3.webp\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+    ]
+  },
+  "formBehavior": {
+    "instruction": {
+      "min": 12,
+      "help": "Use at least 12 characters.",
+      "autocomplete": "new-password"
+    },
+    "nativeRequiredFocus": true,
+    "revealPreservesValue": true,
+    "noSubmitOnReveal": true,
+    "serverErrorFocus": true,
+    "syntheticAuthPosts": 1,
+    "deliveryFont16": true,
+    "deliveryNativeValidation": true
+  },
+  "date": "2026-10-21",
+  "requirement": "R282",
+  "environment": "Existing local Next16.4 dev server preserved; isolated Chrome156/CDP, synthetic browser APIs. Production build in separate /tmp copy with existing node_modules/public symlinked and no .env files; backend URLs pointed at closed loopback port for build.",
+  "checks": {
+    "typecheck": "passed",
+    "fullFrontendLint": "passed",
+    "existingFrontendTests": {
+      "passed": 88,
+      "failed": 0
+    },
+    "isolatedProductionBuild": "passed",
+    "diffCheck": "passed"
+  },
+  "limits": [
+    "No real login/registration/cart/address/order/payment operation",
+    "No physical Safari/Android/soft-keyboard/screen-reader speech verification",
+    "No deployment or measured production LCP/INP/CLS speedup",
+    "Standalone skeleton variants rendered from actual component and injected for responsive inspection; four client-data loading states exercised through delayed APIs"
+  ],
+  "fixtureCorrections": [
+    "Source-edit helper expected a multiline collection map, found a one-line map and applied the same presentation change directly.",
+    "Temporary skeleton render initially resolved TypeScript from repository root; rerun from B2C succeeded.",
+    "Initial image delay targeted 640px then384px requests after images were already decoded; pending indicator could not be held.",
+    "Fresh browser context held the alternate photo from first thumbnail request and failed another alternate from the start; pending/failure/retry then passed.",
+    "A malformed temporary diagnostic expression was corrected; no application failure was inferred from it."
+  ]
+}

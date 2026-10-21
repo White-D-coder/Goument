@@ -33,7 +33,7 @@ function Photo({ src, mobileSrc, alt, sizes, priority = false, id, onReady, onUn
     }} />;
   if (!mobileSrc) return photo;
   const mobile = getImageProps({ src: mobileSrc, alt, fill: true, sizes: '100vw' }).props;
-  return <picture>
+  return <picture className="product-photo-picture">
     {!useOriginalAsset && <source media="(max-width: 640px)" srcSet={mobile.srcSet} sizes={mobile.sizes} />}
     {photo}
   </picture>;

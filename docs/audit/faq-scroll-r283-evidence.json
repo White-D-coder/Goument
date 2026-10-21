@@ -1,0 +1,150 @@
+{
+  "rows": [
+    {
+      "width": 320,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 571.0625,
+        "focus": "",
+        "overflow": 0
+      },
+      "closed": {
+        "open": false,
+        "visible": 4,
+        "summary": "flex",
+        "fewer": false,
+        "top": 392.0625,
+        "focus": "tgg-faq-more-summary",
+        "overflow": 0
+      },
+      "reopened": true
+    },
+    {
+      "width": 375,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 571.296875,
+        "focus": "",
+        "overflow": 0
+      },
+      "closed": {
+        "open": false,
+        "visible": 4,
+        "summary": "flex",
+        "fewer": false,
+        "top": 392.296875,
+        "focus": "tgg-faq-more-summary",
+        "overflow": 0
+      },
+      "reopened": true
+    },
+    {
+      "width": 430,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 571.171875,
+        "focus": "",
+        "overflow": 0
+      },
+      "closed": {
+        "open": false,
+        "visible": 4,
+        "summary": "flex",
+        "fewer": false,
+        "top": 397.171875,
+        "focus": "tgg-faq-more-summary",
+        "overflow": 0
+      },
+      "reopened": true
+    },
+    {
+      "width": 640,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 571.15625,
+        "focus": "",
+        "overflow": 0
+      },
+      "closed": {
+        "open": false,
+        "visible": 4,
+        "summary": "flex",
+        "fewer": false,
+        "top": 397.15625,
+        "focus": "tgg-faq-more-summary",
+        "overflow": 0
+      },
+      "reopened": true
+    },
+    {
+      "width": 641,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 396.203125,
+        "focus": "",
+        "overflow": 0
+      },
+      "manualOnly": true
+    },
+    {
+      "width": 768,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 396.3125,
+        "focus": "",
+        "overflow": 0
+      },
+      "manualOnly": true
+    },
+    {
+      "width": 1440,
+      "opened": {
+        "open": true,
+        "visible": 6,
+        "summary": "none",
+        "fewer": false,
+        "top": 395.890625,
+        "focus": "",
+        "overflow": 0
+      },
+      "manualOnly": true
+    }
+  ],
+  "reducedMotion": true,
+  "keyboard": true,
+  "date": "2026-10-21",
+  "requirement": "R283",
+  "environment": "Local existing Next16.4 preview, isolated Chrome156; synthetic client APIs; native wheel/click/Space events",
+  "checks": {
+    "typecheck": "passed",
+    "scopedESLint": "passed",
+    "gitDiffCheck": "passed"
+  },
+  "limits": [
+    "No physical phone/Safari check",
+    "No production build or deployment for this bounded FAQ change",
+    "No backend/auth/payment or real customer operation"
+  ],
+  "iterations": [
+    "Initial shared75%-viewport condition prevented closing after an immediate reverse scroll moved the marker lower. Opening retains75% threshold; closing allows the visible marker anywhere in the viewport.",
+    "Keyboard check initially read focus before the native toggle event completed; awaited the visible question focus and passed."
+  ]
+}

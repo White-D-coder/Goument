@@ -1,3 +1,11 @@
+## 2026-10-21 — Scroll-aware phone FAQ extras (R283)
+
+CURRENT / IMPLEMENTED locally: replace the expanded Fewer questions row with hidden summary; enhance extra-question disclosure with phone down/open and up/close behavior. Server FAQ content/native answer interaction and larger-screen manual expansion retained. Scoped client wrapper/CSS only, no image/theme/backend change. Seven-width wheel/click, reduced-motion and keyboard checks, typecheck/scoped lint/diff pass; no deploy.
+
+## 2026-10-21 — Better frontend loading and interaction feedback (R282)
+
+CURRENT / IMPLEMENTED locally: shared route-specific skeletons, password guidance/visibility/error focus, phone input readability, gallery pending/failure/retry status and bounded first-image priority. Reuse existing palette/components/photos and preserve requests/ownership/prices/payment flow. Nine source/image-geometry baseline comparisons and loading/form/gallery browser checks pass;88 client tests, full lint/typecheck and isolated production build pass. Build used a temporary source copy without.env, preserving the user's running dev server. Remaining device/hosted-performance evidence is separate; no deployment.
+
 ## 2026-10-21 — Apply bounded Home UX corrections (R281)
 
 CURRENT / IMPLEMENTED locally: hero copy padding no longer blocks slideshow dots; phone image-only hero retains an accessible existing H1; Home descriptions reuse darker muted theme colour; FAQ personal-message answer has a working email destination. Three application files changed, no assets or commerce behavior. Nine-width before/after geometry/image-source equality,27 pointer slide checks and synthetic shopping navigation pass; typecheck/scoped lint/diff pass. Existing R256/R207/search/autoplay/dock/footer directions retained. No commit, push or deployment.

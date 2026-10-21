@@ -1,3 +1,11 @@
+## 2026-10-21 — FAQ phone-scroll follow-through (R283)
+
+CURRENT / IMPLEMENTED locally: remove expanded Fewer questions row; phone down/up reveal/collapse and desktop manual opening verified. R241 interaction scope superseded as recorded in UI_SYSTEM/PRODUCT_REQUIREMENTS/DECISIONS. Physical-phone/Safari gesture check remains unverified; no deployment. Existing performance/security/financial priorities and optional UX proposals unchanged.
+
+## 2026-10-21 — Frontend UX batch follow-through (R282)
+
+CURRENT / IMPLEMENTED locally: route/client-read placeholders, phone input sizing, password instructions/visibility/error focus, gallery pending/failure/retry feedback and first-only catalogue-photo priority. Verified by UI_SYSTEM/TESTING and audit/frontend-ux-r282-evidence.json. UX06/UX07 partially addressed; broader text scale, Lotus field order, next-step labels, empty-cart redesign/search/navigation/autoplay remain optional and are not silently activated. Keep real-device/keyboard and deployed LCP/INP/CLS measurement open. Remaining development LCP warning for an eager-main/lazy-thumbnail shared Lotus source requires measured follow-up, not blanket eager loading. Existing P0/P1 ordering unchanged; no production speedup/deployment claim.
+
 ## 2026-10-21 — UX01–UX04 completed locally (R281)
 
 CURRENT / IMPLEMENTED: desktop hero dots, stale personal-message FAQ, phone/desktop Home description contrast and phone H1 corrected and locally verified. UI_SYSTEM/TESTING and audit/ui-ux-fixes-2026-10-21.json record evidence/limits. Existing security/financial priorities unchanged. UX05–UX15 remain optional, including intentional phone search/autoplay decisions; physical-device/soft-keyboard and hosted performance checks remain open. No images/theme/layout/shopping-flow change or deployment.

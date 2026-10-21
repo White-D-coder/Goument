@@ -1,0 +1,774 @@
+{
+  "date": "2026-10-21",
+  "scope": "Local B2C UI audit; no application changes, actual customer records or real commerce writes",
+  "environment": "Headless Chrome 156, local Next 16.4 development preview; browser /api/v1/* intercepted with synthetic data; server public catalogue normal read/fallback",
+  "sampleCount": 40,
+  "samples": [
+    {
+      "path": "/b2c",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        0
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        64.375
+      ],
+      "searchInputDimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop/envelopes",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        32.1875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/products/ivory-hamper",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        32.5
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/products/lotus-shagun-envelope",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        26.546875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "16px"
+      ]
+    },
+    {
+      "path": "/cart",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        38.078125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/account",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        73.4375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/checkout",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        37.796875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "13px"
+      ]
+    },
+    {
+      "path": "/build",
+      "width": 375,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        73.4375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "16px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        122.75
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        128.9375
+      ],
+      "searchInputDimensions": {
+        "width": 1017,
+        "height": 40.390625
+      },
+      "inputFontSizes": [
+        "12px"
+      ]
+    },
+    {
+      "path": "/shop/envelopes",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        64.46875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/products/ivory-hamper",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        61.40625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/products/lotus-shagun-envelope",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        122.8125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "16px"
+      ]
+    },
+    {
+      "path": "/cart",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        71.390625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/account",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        183.03125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/checkout",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        71.390625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "13px"
+      ]
+    },
+    {
+      "path": "/build",
+      "width": 1440,
+      "height": 900,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        71.390625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 320,
+      "height": 667,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        0
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 320,
+      "height": 667,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        64.375
+      ],
+      "searchInputDimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "inputFontSizes": []
+    },
+    {
+      "path": "/account",
+      "width": 320,
+      "height": 667,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        73.4375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 430,
+      "height": 932,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        0
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 430,
+      "height": 932,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        64.375
+      ],
+      "searchInputDimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "inputFontSizes": []
+    },
+    {
+      "path": "/account",
+      "width": 430,
+      "height": 932,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        73.4375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 640,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        0
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 640,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        64.375
+      ],
+      "searchInputDimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "inputFontSizes": []
+    },
+    {
+      "path": "/account",
+      "width": 640,
+      "height": 812,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        124.375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 768,
+      "height": 1024,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        79.1875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 768,
+      "height": 1024,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        83.1875
+      ],
+      "searchInputDimensions": {
+        "width": 442.21875,
+        "height": 40.390625
+      },
+      "inputFontSizes": [
+        "12px"
+      ]
+    },
+    {
+      "path": "/account",
+      "width": 768,
+      "height": 1024,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        160.40625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 1024,
+      "height": 768,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        91.21875
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 1024,
+      "height": 768,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        95.8125
+      ],
+      "searchInputDimensions": {
+        "width": 642.625,
+        "height": 40.390625
+      },
+      "inputFontSizes": [
+        "12px"
+      ]
+    },
+    {
+      "path": "/account",
+      "width": 1024,
+      "height": 768,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        213.890625
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/b2c",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        122.75
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/shop",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        128.9375
+      ],
+      "searchInputDimensions": {
+        "width": 969,
+        "height": 40.390625
+      },
+      "inputFontSizes": [
+        "12px"
+      ]
+    },
+    {
+      "path": "/account",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "signed-out/empty draft; synthetic checkout view where applicable",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        183.03125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": [
+        "15px"
+      ]
+    },
+    {
+      "path": "/cart",
+      "width": 320,
+      "height": 667,
+      "scenario": "three-item-cart",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        38.078125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/cart",
+      "width": 375,
+      "height": 812,
+      "scenario": "three-item-cart",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        38.078125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/cart",
+      "width": 430,
+      "height": 932,
+      "scenario": "three-item-cart",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        38.078125
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    },
+    {
+      "path": "/cart",
+      "width": 1440,
+      "height": 900,
+      "scenario": "three-item-cart",
+      "horizontalOverflowPx": 0,
+      "h1Heights": [
+        50.59375
+      ],
+      "searchInputDimensions": null,
+      "inputFontSizes": []
+    }
+  ],
+  "mobileSearch": {
+    "hash": "#gift-search",
+    "inputVisible": false,
+    "activeTag": "BODY",
+    "activeName": null,
+    "headerSearchVisible": false
+  },
+  "heroDotHitTests": {
+    "hero-375": {
+      "dots": [
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": "is-active"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        }
+      ],
+      "pauseControl": false
+    },
+    "hero-768": {
+      "dots": [
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": "is-active"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        }
+      ],
+      "pauseControl": false
+    },
+    "hero-1024": {
+      "dots": [
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": "is-active"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": true,
+          "hitClass": ""
+        }
+      ],
+      "pauseControl": false
+    },
+    "hero-1440": {
+      "dots": [
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        }
+      ],
+      "pauseControl": false
+    },
+    "hero-1920": {
+      "dots": [
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        },
+        {
+          "w": 24,
+          "h": 24,
+          "hit": false,
+          "hitClass": "tgg-hero-copy"
+        }
+      ],
+      "pauseControl": false
+    }
+  },
+  "phoneHomeHeadingLevels": [
+    2,
+    3
+  ],
+  "signup": {
+    "minLength": 12,
+    "passwordHelp": null,
+    "showPassword": false
+  },
+  "productNote": {
+    "giftNote": false,
+    "headings": [
+      "You may also like"
+    ]
+  },
+  "reducedMotion": {
+    "before": "false:0",
+    "after": "false:0"
+  },
+  "filterOpen": true,
+  "filterEscape": {
+    "closed": true,
+    "focusReturned": true
+  },
+  "menuOpen": {
+    "expanded": "true",
+    "home": true,
+    "account": true
+  },
+  "menuEscape": {
+    "expanded": "false",
+    "focusReturned": true
+  },
+  "cartFeedbackProgrammaticAddWithSyntheticAPI": {
+    "pill": "true",
+    "count": "1",
+    "quantity": "1"
+  },
+  "cartFeedbackEscape": {
+    "open": "false"
+  },
+  "contrast": {
+    "element": ".tgg-collection-description",
+    "viewportWidth": 375,
+    "foreground": "#81776b",
+    "opaqueAncestorBackground": "#ffffff",
+    "fontSizePx": 12,
+    "ratio": 4.39,
+    "method": "WCAG relative-luminance formula; computed color/opaque ancestor inspected"
+  },
+  "settledShortPhoneCart": {
+    "scrollY": 254,
+    "docHeight": 921,
+    "scrollingElement": "HTML",
+    "bodyOverflow": "visible",
+    "htmlOverflow": "visible",
+    "checkoutBottom": 544.34375,
+    "dockTop": 581,
+    "checkoutAboveDock": true
+  },
+  "tallerPhoneCart": {
+    "cartReach-375": {
+      "scrollY": 0,
+      "docHeight": 812,
+      "bodyHeight": 812,
+      "listHeight": 157,
+      "listMaxScroll": 565,
+      "listScrollTop": 565,
+      "checkoutAboveDock": true,
+      "checkoutBottom": 689,
+      "dockTop": 726
+    },
+    "cartReach-430": {
+      "scrollY": 0,
+      "docHeight": 932,
+      "bodyHeight": 932,
+      "listHeight": 295,
+      "listMaxScroll": 288,
+      "listScrollTop": 288,
+      "checkoutAboveDock": true,
+      "checkoutBottom": 809,
+      "dockTop": 846
+    }
+  },
+  "unverified": [
+    "Physical Safari/Android",
+    "Soft keyboard",
+    "Screen-reader speech",
+    "Text zoom",
+    "Real signed-in history",
+    "Real auth/address/order/provider operations",
+    "Live sorting",
+    "Hosted availability/latency/Core Web Vitals",
+    "Comprehensive accessibility conformance"
+  ],
+  "harnessCorrections": [
+    "Initial Add selector targeted a details link.",
+    "Initial Escape events lacked native key codes; false failures discarded.",
+    "Focused filter trigger and corrected key codes passed Escape/focus return.",
+    "Add handler verified programmatically after failed pointer attempts; not pointer purchase evidence.",
+    "Short-phone scrolling first sampled too early; fresh instant-scroll check verified checkout above dock."
+  ]
+}

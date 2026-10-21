@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-21",
+  "requirement": "R281; four approved Home UX fixes with images/theme/layout/shopping flow preserved",
+  "environment": "Local Next16.4 preview, isolated headless Chrome156; synthetic browser API responses; reduced-motion media used for stable baseline/manual slide checks",
+  "viewports": [
+    {
+      "width": 320,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Fine gifts. Lasting joy.",
+      "phoneHeadingSize": {
+        "width": 1,
+        "height": 1
+      },
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 375,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Fine gifts. Lasting joy.",
+      "phoneHeadingSize": {
+        "width": 1,
+        "height": 1
+      },
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 430,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Fine gifts. Lasting joy.",
+      "phoneHeadingSize": {
+        "width": 1,
+        "height": 1
+      },
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 640,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Fine gifts. Lasting joy.",
+      "phoneHeadingSize": {
+        "width": 1,
+        "height": 1
+      },
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 641,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Make everyday moments special.",
+      "phoneHeadingSize": null,
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(117, 111, 105)"
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Make everyday moments special.",
+      "phoneHeadingSize": null,
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(117, 111, 105)"
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Make everyday moments special.",
+      "phoneHeadingSize": null,
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Make everyday moments special.",
+      "phoneHeadingSize": null,
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    },
+    {
+      "width": 1920,
+      "height": 900,
+      "geometryAndImageSourcesMatchBaseline": true,
+      "documentOverflowPx": 0,
+      "accessibleH1": "Make everyday moments special.",
+      "phoneHeadingSize": null,
+      "pointerSelectedSlides": [
+        0,
+        1,
+        2
+      ],
+      "descriptionColor": "rgb(112, 102, 94)"
+    }
+  ],
+  "descriptionContrastOnWhite": {
+    "phoneAndDesktop": 5.6,
+    "foreground": "#70665e",
+    "background": "#ffffff"
+  },
+  "faq": {
+    "open": true,
+    "text": "03\nCan I include a personal message?\n\nEmail our team with your chosen gift and message. We\u2019ll confirm the available options and any charges. hello@thegourmetgifts.co",
+    "href": "mailto:hello@thegourmetgifts.co",
+    "schema": "Email our team with your chosen gift and message. We\u2019ll confirm the available options and any charges."
+  },
+  "syntheticCartFeedback": {
+    "badge": "1",
+    "tray": "true"
+  },
+  "nativePhoneImageShopHomeAddCartFlow": true,
+  "nativeDesktopShopCTA": true,
+  "checks": {
+    "typescript": "passed",
+    "scopedESLint": "passed",
+    "gitDiffCheck": "passed"
+  },
+  "limits": [
+    "No physical-device/Safari or screen-reader speech check",
+    "No real customer/account/address/order/payment operation",
+    "No production build/deployment",
+    "No full accessibility certification"
+  ]
+}

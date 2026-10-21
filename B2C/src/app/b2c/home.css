@@ -33,6 +33,9 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
 /* Editorial hero */
 .tgg-hero { position: relative; display: block; width: min(calc(100% - 48px), 1440px); aspect-ratio: 2129 / 739; margin: 0 auto; overflow: hidden; border-radius: 22px; background: #f3e7dc; }
 .tgg-hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: min(54%, 760px); height: 100%; margin: 0; padding: clamp(30px,3.2vw,48px) clamp(30px,4vw,58px); }
+/* Empty copy-panel space must not intercept the slideshow controls beneath it. */
+.tgg-hero-copy { pointer-events: none; }
+.tgg-hero-copy > * { pointer-events: auto; }
 .tgg-hero-copy .tgg-kicker,
 .tgg-hero-copy h1,
 .tgg-hero-description { color: #fff; }
@@ -1344,7 +1347,20 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
   .tgg-section-subtitle { margin: 6px 0 16px !important; font-size: 11px; }
   /* Phone hero is an unshaded photo link; carousel controls remain independent. */
   .tgg-hero { display: block; isolation: isolate; width: calc(100% - 28px); min-height: 260px; margin-top: 0; border-radius: 16px; }
-  .tgg-hero-copy { display: none; }
+  /* Keep the existing H1 accessible while retaining the image-only phone hero. */
+  .tgg-hero-copy { display: contents; }
+  .tgg-home .tgg-hero-copy > :not(h1) { display: none; }
+  #main .tgg-home .tgg-hero-copy h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
   .tgg-hero-mobile-link { display: block; position: absolute; inset: 0; z-index: 3; }
   .tgg-hero-mobile-link:focus-visible { outline: 3px solid #fff; outline-offset: -5px; border-radius: 16px; }
   .tgg-hero-copy .tgg-kicker,
@@ -1556,6 +1572,7 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
 }
 
 /* Answer */
+.tgg-home .tgg-faq-answer a { text-decoration: underline; text-underline-offset: 3px; }
 .tgg-home .tgg-faq-answer {
   padding: 0 48px 22px 42px;
 }
@@ -2136,7 +2153,7 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
  .tgg-home .tgg-collection-card h3 { min-height:0; margin:0 0 10px; color:#262321; font-family:var(--font-jakarta); font-size:clamp(18px,1.4vw,20px); font-weight:700; line-height:1.35; text-align:center; text-wrap:pretty; }
  #main .tgg-home .tgg-collection-card h3 { font-family:var(--font-jakarta) !important; }
  .tgg-home .tgg-collection-card h3 a { color:inherit; }
- #main .tgg-home .tgg-collection-card .tgg-collection-description { min-height:3.2em; margin:0 0 18px; color:#817b72; font-size:13px; line-height:1.6; text-align:center; }
+ #main .tgg-home .tgg-collection-card .tgg-collection-description { min-height:3.2em; margin:0 0 18px; color:var(--tgg-muted); font-size:13px; line-height:1.6; text-align:center; }
  .tgg-home .tgg-collection-card .tgg-collection-link { display:flex; align-items:center; justify-content:center; align-self:center; gap:8px; width:100%; max-width:180px; height:auto; min-height:44px; margin:auto 0 0; padding:10px 16px; border:1px solid #4a0404; border-radius:9px; background:#4a0404; color:#fffdf8; font-size:12px; font-weight:700; line-height:1.4; letter-spacing:.04em; text-transform:uppercase; }
  .tgg-home .tgg-collection-card .tgg-collection-link:hover { transform:none; border-color:#650c0c; background:#650c0c; }
 }
@@ -2164,7 +2181,7 @@ body:has(.tgg-home)::before { content: ''; position: absolute; z-index: -1; inse
  .tgg-home .tgg-collection-card .tgg-favourite-photo img { transform:none; }
  .tgg-home .tgg-collection-card .tgg-favourite-info { display:flex; flex:1; flex-direction:column; align-items:stretch; gap:0; padding:14px 12px 12px; text-align:center; }
  .tgg-home .tgg-collection-card h3 { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; min-height:2.8em; margin:0 0 7px; font-size:clamp(13px,3.7vw,16px); font-weight:600; line-height:1.4; text-align:center; text-wrap:pretty; }
- #main .tgg-home .tgg-collection-card .tgg-collection-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; min-height:3.3em; margin:0 0 14px; color:#81776b; font-size:12px; line-height:1.65; text-align:center; }
+ #main .tgg-home .tgg-collection-card .tgg-collection-description { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; min-height:3.3em; margin:0 0 14px; color:var(--tgg-muted); font-size:12px; line-height:1.65; text-align:center; }
  .tgg-home .tgg-collection-card .tgg-collection-link { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; height:auto; min-height:44px; margin-top:auto; padding:10px 6px; border:1px solid #4a0404; border-radius:9px; background:#4a0404; color:#fffdf8; font-size:10px; font-weight:700; line-height:1.2; letter-spacing:.04em; text-transform:uppercase; }
  .tgg-home .tgg-collection-card .tgg-collection-link:hover { transform:none; border-color:#650c0c; background:#650c0c; }
  .tgg-home .tgg-collection-link svg { width:13px; height:13px; flex-shrink:0; }

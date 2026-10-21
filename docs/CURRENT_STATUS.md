@@ -1,3 +1,11 @@
+## 2026-10-21 — First four UX audit fixes (R281)
+
+CURRENT / IMPLEMENTED locally: user-approved fixes restore desktop hero-dot clicks, correct gift-note FAQ guidance to the existing email, use the existing muted description colour and expose the phone Home H1 without visible hero copy. Images/layout/theme/shopping flow preserved. Before/after geometry/image-source checks atnine widths320–1920px,27 pointer dot selections, accessible heading/FAQ checks and synthetic native phone shopping/desktop CTA navigation pass; typecheck/scoped lint/diff checks pass. UI_SYSTEM/TESTING contain detail and limits. UX01–UX04 audit findings resolved locally; remaining audit proposals unchanged. No backend/schema/financial changes or deployment.
+
+## 2026-10-21 — B2C UX audit (no UI changes)
+
+CURRENT / IMPLEMENTED audit only: source/history review and 40 local route/viewport samples across 320–1920px, with synthetic customer APIs. All samples have zero horizontal page overflow. Reproduced desktop hero-dot interception at1440/1920px; confirmed stale gift-note FAQ guidance, phone Home H1 hidden from accessibility tree and a4.39:1 description contrast sample. Phone search removal and autoplay without pause are intentional R128/R131/R70 decisions to revisit, not silently reverse. Fifteen prioritized theme-preserving recommendations/evidence/limits live in UI_SYSTEM; checks in TESTING. No UI/backend/schema/commerce behavior, commit or deployment changed; findings remain open.
+
 ## 2026-10-21 — Center phone account heading and add one-line copy (R280)
 
 CURRENT / IMPLEMENTED locally: center the signed-out phone Account eyebrow/title and show “Your gifts, all in one place.” below the heading. Use10px title-to-paragraph margin and12px/1.6 muted body copy. Explicit phone paragraph styling overrides the legacy hidden introductory-paragraph rule. Above640px retain the original left-aligned heading and order-history sentence. Sources: account/page.tsx and storefront-ui.css. No auth/data behavior change, commit, push or deployment.

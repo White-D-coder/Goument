@@ -1,3 +1,7 @@
+## 2026-10-21 — Preserve images/theme/flow while fixing Home UX (R281)
+
+CURRENT / IMPLEMENTED locally: current user accepts the recommended UX01–UX04 increment and explicitly requires no effect on images, theme or flow. Fix hero-dot pointer interception; correct personal-message FAQ to the existing email; improve Home collection-description contrast with the existing muted token; keep a single accessible phone Home H1 while retaining its image-only appearance. Sources: b2c/home.css, HomeFAQ.tsx and lib/home-content.ts. Traceability: UI_SYSTEM/DECISIONS; verification: TESTING and audit/ui-ux-fixes-2026-10-21.json. Nine-width geometry/image-source equality,27 pointer selections, heading/FAQ and synthetic shopping navigation checks pass; no asset, backend/API/model/payment change or deployment. All other audit proposals remain optional.
+
 ## 2026-10-21 — Center phone account heading and add one-line copy (R280)
 
 CURRENT / IMPLEMENTED locally: center the signed-out phone Account eyebrow/title and show “Your gifts, all in one place.” below the heading. Use10px title-to-paragraph margin and12px/1.6 muted body copy. Explicit phone paragraph styling overrides the legacy hidden introductory-paragraph rule. Above640px retain the original left-aligned heading and order-history sentence. Sources: account/page.tsx and storefront-ui.css. No auth/data behavior change, commit, push or deployment.

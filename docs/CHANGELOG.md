@@ -1,3 +1,11 @@
+## 2026-10-21 — Apply bounded Home UX corrections (R281)
+
+CURRENT / IMPLEMENTED locally: hero copy padding no longer blocks slideshow dots; phone image-only hero retains an accessible existing H1; Home descriptions reuse darker muted theme colour; FAQ personal-message answer has a working email destination. Three application files changed, no assets or commerce behavior. Nine-width before/after geometry/image-source equality,27 pointer slide checks and synthetic shopping navigation pass; typecheck/scoped lint/diff pass. Existing R256/R207/search/autoplay/dock/footer directions retained. No commit, push or deployment.
+
+## 2026-10-21 — Theme-preserving B2C usability review
+
+CURRENT / IMPLEMENTED documentation/evidence only: added fifteen source/browser-backed UX findings and a staged recommendation sequence to UI_SYSTEM, with compact evidence under docs/audit. Preserved current palette, typography, card/dock/footer/hero directions and earlier search/autoplay/product-content decisions. Confirmed desktop hero click obstruction, stale FAQ note direction, low description contrast and phone heading accessibility gap; no application fixes claimed. TESTING records40 responsive samples, interaction checks and fixture corrections/verification limits. Existing business/security priorities unchanged; no deploy or real customer/payment operation.
+
 ## 2026-10-21 — Center phone account heading and add one-line copy (R280)
 
 CURRENT / IMPLEMENTED locally: center the signed-out phone Account eyebrow/title and show “Your gifts, all in one place.” below the heading. Use10px title-to-paragraph margin and12px/1.6 muted body copy. Explicit phone paragraph styling overrides the legacy hidden introductory-paragraph rule. Above640px retain the original left-aligned heading and order-history sentence. Sources: account/page.tsx and storefront-ui.css. No auth/data behavior change, commit, push or deployment.

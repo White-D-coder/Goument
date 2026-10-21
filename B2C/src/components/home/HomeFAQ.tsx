@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element -- Pre-sized local WebP decoration, loaded lazily. */
 import { ChevronDown, Plus } from 'lucide-react';
 
-type FAQItem = { question: string; answer: string };
+type FAQItem = { question: string; answer: string; contactEmail?: string };
 
 export default function HomeFAQ({ items }: { items: FAQItem[] }) {
-  const renderQuestion = ({ question, answer }: FAQItem, index: number) => (
+  const renderQuestion = ({ question, answer, contactEmail }: FAQItem, index: number) => (
     <details
       className={`tgg-faq-item${index < 5 ? ' tgg-faq-item--divided' : ''}`}
       key={question}
@@ -23,7 +23,7 @@ export default function HomeFAQ({ items }: { items: FAQItem[] }) {
       </summary>
 
       <div className="tgg-faq-answer">
-        <p>{answer}</p>
+        <p>{answer}{contactEmail && <> <a href={`mailto:${contactEmail}`}>{contactEmail}</a></>}</p>
       </div>
     </details>
   );

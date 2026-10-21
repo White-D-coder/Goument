@@ -1,3 +1,11 @@
+## 2026-10-21 — UX01–UX04 completed locally (R281)
+
+CURRENT / IMPLEMENTED: desktop hero dots, stale personal-message FAQ, phone/desktop Home description contrast and phone H1 corrected and locally verified. UI_SYSTEM/TESTING and audit/ui-ux-fixes-2026-10-21.json record evidence/limits. Existing security/financial priorities unchanged. UX05–UX15 remain optional, including intentional phone search/autoplay decisions; physical-device/soft-keyboard and hosted performance checks remain open. No images/theme/layout/shopping-flow change or deployment.
+
+## 2026-10-21 — B2C UX audit follow-through
+
+FUTURE / OPTIONAL implementation proposals, not a reprioritization of P0/P1 security/financial work: see UI_SYSTEM's dated UX01–UX15 audit. Existing desktop slideshow-dot TODO is reproduced at1440/1920px. Additional open corrections: stale gift-note FAQ after R207, measured Home description contrast4.39:1 and hidden phone Home H1. Consider form legibility/password instructions, Lotus field order, next-step wording and empty-cart recovery next. Phone search/autoplay changes must explicitly revisit R128/R131/R70; preserve R207 removed content, R256 image-only hero and R275 footer scope. No findings fixed in this audit; physical-device/soft-keyboard and hosted performance checks remain open.
+
 ## 2026-10-18 — Repository audit follow-through (DEC-001–004)
 
 CURRENT / IMPLEMENTED locally: root DECISION/FLOW and linked audit/route/schema/asset/dependency inventories; both legacy socket/current-role/exact-origin boundaries, original B2B configured admin auth and bounded dependency fixes. Canonical TESTING/audit report own passing checks and explicit failures. No production/schema/payment/key/asset operation.
@@ -123,7 +131,7 @@ Priorities below are initial engineering triage from source findings, not an app
 
 - [x] Wider B2C footer layout (R194,2026-10-12): user reports broken stacked brand. Both inner wrappers now override legacy flex at every width; tablet tagline stacks, phone stays centered.16 Home/Shop responsive checks and visual inspection pass; UI_SYSTEM/TESTING own evidence. Existing wallpaper/type/navigation/reveal retained.
 
-- [ ] Home desktop slideshow dots (observed2026-10-11): at1440px the existing copy panel overlaps the centered dots, so pointer hit tests fail. Phone layering is corrected within R120; review desktop stacking separately without redesigning its hero.
+- [x] Home desktop slideshow dots (observed2026-10-11; corrected locally R281,2026-10-21): hero-copy whitespace no longer intercepts dots. All27 native pointer slide selections pass acrossnine widths including1440/1920px; geometry/photos/CTA retained. TESTING owns evidence and physical-device/deployment limits.
 
 - [ ] Supplied envelope catalogue (R180,2026-10-12): confirm official design names, prices, saleable mappings, stock and pack quantities for ep1–ep9 before enabling purchasing. Current nine photo previews use descriptive names and enquiry links; no invented commercial data.
 

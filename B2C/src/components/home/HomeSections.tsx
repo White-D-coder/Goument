@@ -7,7 +7,7 @@ import { productImage, type Product } from '@/lib/types';
 import { productPriceLabel } from '@/lib/product-pricing';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import type { Testimonial } from '@/lib/home-content';
-import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
+import { shopCollections } from '@/lib/shop-collections';
 import { HOME_FESTIVE_PHOTO } from '@/lib/home-photos';
 
 export function SectionHeading({ kicker, title, id, href, action }: { kicker: string; title: string; id: string; href?: string; action?: string }) {
@@ -17,10 +17,10 @@ export function SectionHeading({ kicker, title, id, href, action }: { kicker: st
 }
 
 const mobileCategories = [
-  { title: 'Envelopes', image: productImage(PHOTOGRAPHED_ENVELOPES[0]), href: '/shop/envelopes' },
-  { title: 'Hampers', image: '/images/brand/ivory_hamper.webp', href: '/shop/hampers' },
-  { title: 'Candles', image: '/images/scented_candle/cn3-supplied.webp', href: '/shop/candles' },
-  { title: 'Stationery', image: BOOKMARK_PHOTOS[0].public_id, href: '/shop/stationery' },
+  { ...shopCollections.envelopes, image: productImage(PHOTOGRAPHED_ENVELOPES[0]) },
+  shopCollections.hampers,
+  shopCollections.candles,
+  shopCollections.stationery,
 ];
 
 export function HomeMobileCategories() {

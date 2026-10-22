@@ -1,4 +1,27 @@
 .cart-phone-only { display: none; }
+.gift-cart-empty { max-width: 940px; margin: 32px auto 0; padding: 40px 28px; text-align: center; }
+.gift-cart-empty-icon { display: grid; place-items: center; width: 68px; height: 68px; margin: 0 auto 22px; border-radius: 50%; background: #f0e8dc; color: var(--wine); }
+#main .gift-cart-empty h2 { margin: 0 0 12px; font-size: clamp(30px, 3vw, 40px); line-height: 1.15; }
+.gift-cart-empty > p { max-width: 44ch; margin: 0 auto; font-size: 14px; line-height: 1.7; color: var(--muted); }
+.gift-cart-empty-actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 24px; margin: 26px 0 32px; }
+.gift-cart-empty-actions .text-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.gift-cart-empty-collections { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.gift-cart-empty-collections > a { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px; border-radius: 12px; background: #f3eee6; color: var(--wine); text-align: left; font-size: 12px; line-height: 1.5; }
+.gift-cart-empty-collections > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.gift-cart-empty-photo { position: relative; display: block; flex: 0 0 52px; height: 52px; overflow: hidden; border-radius: 9px; }
+.gift-cart-empty :is(a, button):focus-visible { outline: 2px solid var(--wine); outline-offset: 4px; }
+@media (max-width: 900px) {
+  .gift-cart-empty-collections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .gift-cart-empty { margin-top: 20px; padding: 24px 0; }
+  .gift-cart-empty > p { font-size: 13px; }
+  .gift-cart-empty-actions { flex-direction: column; gap: 8px; margin-block: 22px 24px; }
+  .gift-cart-empty-actions .button { width: 100%; max-width: 300px; }
+  .gift-cart-empty-collections { gap: 10px; }
+  .gift-cart-empty-collections > a { gap: 8px; padding: 10px; }
+  .gift-cart-empty-photo { flex-basis: 40px; height: 40px; }
+}
 .gift-cart-photo { position: relative; flex-shrink: 0; overflow: hidden; border-radius: 12px; background: #f3eee6; }
 .gift-cart-photo img { object-fit: cover; }
 .gift-cart .gift-cart-row > .gift-cart-photo { flex: none; }

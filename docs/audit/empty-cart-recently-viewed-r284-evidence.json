@@ -1,0 +1,372 @@
+{
+  "emptyCart": [
+    {
+      "width": 320,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 375,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 430,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 640,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 641,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 768,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    },
+    {
+      "width": 1440,
+      "overflow": 0,
+      "summary": false,
+      "disabled": 0,
+      "heading": "Your next thoughtful gift starts here.",
+      "primary": "/shop",
+      "collections": [
+        "/shop/envelopes",
+        "/shop/hampers",
+        "/shop/candles",
+        "/shop/stationery"
+      ],
+      "minTarget": 44
+    }
+  ],
+  "populatedCart": [
+    {
+      "width": 375,
+      "rows": 3,
+      "summary": true,
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "rows": 3,
+      "summary": true,
+      "overflow": 0
+    }
+  ],
+  "history": {
+    "320": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "375": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "640": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "641": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "768": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "1440": {
+      "overflow": 0,
+      "cards": 4,
+      "images": [
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        },
+        {
+          "loading": "lazy",
+          "priority": "auto"
+        }
+      ],
+      "clearHeight": 44
+    },
+    "firstVisitHasNoSectionOrLookup": true,
+    "nativeProductNavigation": true,
+    "currentProductExcluded": true,
+    "lookupDeferredUntilNearby": true,
+    "orderAndFourCardLimit": [
+      "/products/ivory-hamper",
+      "/products/bookmarks",
+      "/products/laddoo-candles",
+      "/products/lotus-shagun-envelope"
+    ],
+    "reloadPersistence": [
+      "ivory-hamper",
+      "bookmarks",
+      "laddoo-candles",
+      "lotus-shagun-envelope",
+      "india-hamper-burgundy"
+    ],
+    "sharedCardEquality": [
+      {
+        "href": "/products/ivory-hamper",
+        "priceEqual": true,
+        "imageEqual": true
+      },
+      {
+        "href": "/products/bookmarks",
+        "priceEqual": true,
+        "imageEqual": true
+      },
+      {
+        "href": "/products/laddoo-candles",
+        "priceEqual": true,
+        "imageEqual": true
+      },
+      {
+        "href": "/products/lotus-shagun-envelope",
+        "priceEqual": true,
+        "imageEqual": true
+      }
+    ],
+    "realCrossTabSync": true,
+    "collectionSection": true,
+    "clearAndFocus": true,
+    "failureAndRetry": true,
+    "timeoutAndRetry": true,
+    "unavailableHidden": true,
+    "clearDuringPending": true,
+    "corruptStorageSafe": true,
+    "blockedStorageSafe": true
+  },
+  "endpoint": [
+    {
+      "slugs": "",
+      "status": 400,
+      "cache": "private, no-store",
+      "products": 0
+    },
+    {
+      "slugs": "../account",
+      "status": 400,
+      "cache": "private, no-store",
+      "products": 0
+    },
+    {
+      "slugs": "gift-0,gift-1,gift-2,gift-3,gift-4,gift-5,gift-6",
+      "status": 400,
+      "cache": "private, no-store",
+      "products": 0
+    },
+    {
+      "slugs": "ivory-hamper,bookmarks",
+      "status": 200,
+      "cache": "private, no-store",
+      "products": 2
+    }
+  ],
+  "consoleErrors": [],
+  "emptyCartNavigation": {
+    "browse": true,
+    "collection": true
+  },
+  "lastItemRemoval": {
+    "failurePreservesRow": true,
+    "successShowsEmpty": true,
+    "mutations": 2
+  },
+  "failedReadDoesNotBecomeEmpty": true,
+  "date": "2026-10-22",
+  "scope": "B2C empty cart and device-local recently viewed only (R284)",
+  "environment": "Isolated headless Chrome against existing Next16.4 preview; all browser /api/v1 reads/writes intercepted with synthetic fixtures. Public catalogue resolver uses normal read/fallback. No real customer/provider writes.",
+  "checks": {
+    "frontendTests": {
+      "command": "node --test tests/*.test.cjs",
+      "passed": 93,
+      "failed": 0
+    },
+    "focusedHistoryTests": {
+      "command": "node --test tests/recently-viewed.test.cjs",
+      "passed": 5
+    },
+    "lint": "npm run lint passed; final RecentlyViewed.tsx scoped lint passed",
+    "types": "npm run typecheck passed on final source",
+    "build": "Final source isolated next build --webpack passed; no .env copied, public/dependencies symlinked, loopback unavailable backend exercised existing fallbacks",
+    "diff": "git diff --check passed"
+  },
+  "limits": [
+    "No physical Safari/Android or screen-reader speech check",
+    "No deployed performance/hosted verification",
+    "No real account/address/order/payment/stock mutation",
+    "No commit, push or deployment"
+  ]
+}

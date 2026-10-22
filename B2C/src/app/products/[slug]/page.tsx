@@ -8,6 +8,7 @@ import { CURATED_HAMPERS } from '@/lib/curated-hampers';
 import { PHOTOGRAPHED_ENVELOPES } from '@/lib/photographed-envelopes';
 import { productEditorial } from '@/lib/product-editorial';
 import ProductCard from '@/components/ProductCard';
+import RecentlyViewed, { RememberProduct } from '@/components/RecentlyViewed';
 import { productImage } from '@/lib/types';
 import './product-detail.css';
 
@@ -43,6 +44,7 @@ export default async function Detail({ params }: PageProps) {
   const gallery = [...productPhotos, ...closeUps].filter((image, index, images) => images.findIndex(other => other.src === image.src) === index);
 
   return <div className={`product-detail-edit pdp${isIvory ? ' pdp-ivory' : ''}${isEnvelope ? ' pdp-envelope' : ''}`}>
+    <RememberProduct slug={product.slug} />
     <nav className="pdp-breadcrumb pdp-wrap" aria-label="Breadcrumb">
       <Link href="/b2c">Home</Link><span aria-hidden="true">/</span>
       <Link href={editorial.isHamper ? '/shop/hampers' : '/shop'}>{editorial.isHamper ? 'Hampers' : 'Gifts'}</Link><span aria-hidden="true">/</span>
@@ -67,5 +69,6 @@ export default async function Detail({ params }: PageProps) {
     </section>
 
     <Suspense fallback={<div className="pdp-wrap pdp-related-loading" role="status">Finding more thoughtful gifts…</div>}><RelatedGifts slug={product.slug}/></Suspense>
+    <RecentlyViewed key={product.slug} currentSlug={product.slug} className="pdp-wrap" />
   </div>;
 }

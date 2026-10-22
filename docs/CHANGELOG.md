@@ -1,3 +1,11 @@
+## 2026-10-22 — Collection names, phone labels and spacing (R285)
+
+CURRENT / IMPLEMENTED locally: reuse existing collection labels across Home/Shop/navigation/footer while retaining brand/product names and all destinations. Increase phone category labels10→12px, remove uppercase/wide tracking, reserve consistent wrapping space and make result text12px. Tighten gaps below Shop intro/category rail/result row; preserve existing image/frame/crop, heading alignment, actions and larger-screen layout. Eight-width before/after comparisons,26 final page samples, native navigation/filter checks,93 tests, lint/typecheck and diff pass; UI_SYSTEM/TESTING/evidence own scope/limits. Earlier R284 work preserved; no asset/backend/commerce change or deployment.
+
+## 2026-10-22 — Empty-cart recovery and recently viewed (R284)
+
+CURRENT / IMPLEMENTED locally: clearer empty gift bag with Browse gifts/Build your gift and four existing collection/photo shortcuts; omit empty-cart summary and disabled checkout. Add device-local newest-first recently viewed to Shop, collections and PDP, reusing product cards/photos and resolving public data near the viewport. Bounded slug storage, current-product exclusion, clear/focus feedback, cross-tab updates, blocked/corrupt-storage recovery, cancellable12s timeout/retry and validated no-store public resolver. No new asset/dependency, backend/schema/commerce change or deployment. UI_SYSTEM/DECISIONS/API_CONTRACTS own implementation; TESTING owns verification and limits. Only the user's selected two-feature scope implemented.
+
 ## 2026-10-21 — Scroll-aware phone FAQ extras (R283)
 
 CURRENT / IMPLEMENTED locally: replace the expanded Fewer questions row with hidden summary; enhance extra-question disclosure with phone down/open and up/close behavior. Server FAQ content/native answer interaction and larger-screen manual expansion retained. Scoped client wrapper/CSS only, no image/theme/backend change. Seven-width wheel/click, reduced-motion and keyboard checks, typecheck/scoped lint/diff pass; no deploy.

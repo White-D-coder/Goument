@@ -14,6 +14,7 @@ import PrintNameField from './PrintNameField';
 import { isLotusGift, printNameError, type GiftPersonalisation } from '@/lib/gift-personalisation';
 import './gift-cart.css';
 import RouteLoading from './RouteLoading';
+import EmptyGiftCart from './EmptyGiftCart';
 
 function PriceAmount({ value }: { value: PriceRange }) {
   return <span className="gift-cart-amount"><span>{priceRangeLabel({ min: value.min, max: value.min })}</span>{value.max !== value.min && <><span>–</span><span>{priceRangeLabel({ min: value.max, max: value.max })}</span></>}</span>;
@@ -86,7 +87,7 @@ export default function GiftCart() {
       <p className="eyebrow">THOUGHTFULLY CHOSEN</p>
       <div className="section-heading">
         <h1><span className="cart-desktop-only">Your gift, coming together.</span><span className="cart-phone-only">Your gift bag</span></h1>
-        <Link className="text-link" href="/build">Add more items →</Link>
+        {isReady && <Link className="text-link" href="/build">Add more items →</Link>}
       </div>
 
       {error && (
@@ -97,15 +98,14 @@ export default function GiftCart() {
 
       {!draft || !catalogue ? (
         error ? <p role="status">Your gift could not be loaded.</p> : <RouteLoading variant="cart" embedded />
-      ) : (
+      ) : !isReady ? <EmptyGiftCart /> : (
         <>
           <p className="draft-disclosure">Your selection is saved. Sign in at checkout to add your delivery details.</p>
           <div className="gift-cart-layout">
             <div className="gift-cart-items">
               <h2>Your little favourites</h2>
               <div ref={productList} className="gift-cart-scroll">
-              {draft.items.length ? (
-                draft.items.map(row => {
+              {draft.items.map(row => {
                   const item = catalogue.items.find(i => i.id === row.id);
                   const line = estimate.lines.find(line => line.id === row.id);
                   const rowNeedsName = row.personalisation?.mode !== 'PRINT' || printNameError(row.personalisation.name);
@@ -143,12 +143,7 @@ export default function GiftCart() {
                       </div>
                     </article>
                   );
-                })
-              ) : (
-                <p>
-                  Your gift is waiting for its favourites. <Link className="text-link" href="/build">Choose items →</Link>
-                </p>
-              )}
+                })}
               </div>
             </div>
 

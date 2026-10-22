@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import ShopCategoryLink from '@/components/ShopCategoryLink';
 import ShopMobileFilters from '@/components/ShopMobileFilters';
 import { catalogue } from '@/lib/catalogue';
@@ -101,7 +102,7 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
           {data.preview && <p className="shop-preview-note">Final price and availability confirmed on enquiry.</p>}
         </div>
       </div>
-
+      <RecentlyViewed />
     </section>
   );
 }

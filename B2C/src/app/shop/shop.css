@@ -109,10 +109,10 @@
  .shop-edit .shop-intro h1 { font-size:28px; line-height:1.15; }
  #main .shop-edit .shop-intro-description { display:block; max-width:32ch; margin:9px auto 0; font-size:12px; line-height:1.6; }
  .shop-edit .shop-intro-visual { display:none; }
- .shop-edit .shop-catalogue-layout { padding-top:24px; }
+ .shop-edit .shop-catalogue-layout { padding-top:16px; }
  .shop-edit .shop-collections nav {
   gap:18px;
-  margin:0 -4px 18px;
+  margin:0 -4px 12px;
   padding:6px 4px 4px;
   overflow-x:auto;
   scrollbar-width:none;
@@ -123,7 +123,7 @@
   flex:0 0 86px;
   flex-direction:column;
   justify-content:flex-start;
-  gap:10px;
+  gap:8px;
   padding:0 0 4px;
   white-space:normal;
   text-align:center;
@@ -155,10 +155,10 @@
   color:#fffdf8;
  }
  .shop-edit .shop-category-check svg { display:block; visibility:visible; }
- .shop-edit .shop-category-label { font-size:10px; font-weight:600; line-height:1.5; letter-spacing:.09em; text-transform:uppercase; }
+ .shop-edit .shop-category-label { min-height:2.8em; font-size:12px; font-weight:600; line-height:1.4; letter-spacing:0; text-transform:none; }
  .shop-edit .shop-search { display:none; }
  body:has(.shop-edit) .header .nav-actions > a[href="/shop#gift-search"] { display:none; }
- .shop-edit .shop-results-meta { margin:12px 0 16px; }
+ .shop-edit .shop-results-meta { margin:8px 0 12px; font-size:12px; line-height:1.5; }
  #main .shop-edit .shop-product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 14px; }
  #main .shop-edit .b2c-product-card { border:1px solid #e9e2d8; border-radius:16px; }
  #main .shop-edit .b2c-product-card:hover { transform:none; }

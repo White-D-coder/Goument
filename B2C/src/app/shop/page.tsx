@@ -2,19 +2,17 @@
 import Link from 'next/link';
 import { ArrowRight, ArrowLeft, Search, X } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
+import RecentlyViewed from '@/components/RecentlyViewed';
 import ShopCategoryLink from '@/components/ShopCategoryLink';
 import ShopMobileFilters from '@/components/ShopMobileFilters';
 import { catalogue } from '@/lib/catalogue';
-import { BOOKMARK_PHOTOS } from '@/lib/bookmark-photos';
+import { shopCollections } from '@/lib/shop-collections';
 import './shop.css';
 export const metadata = { title: 'The collection' };
 const edits = [
  { label: 'All gifts', query: '', image: '/images/brand/hero-curated-gifts.jpeg' },
- { label: 'Envelopes', query: 'envelope', image: '/images/items/shagun_envelopes.webp' },
- { label: 'Hampers', query: 'hamper', image: '/images/brand/ivory_hamper.webp' },
- { label: 'Scented Candles', query: 'candles', image: '/images/scented_candle/cn3-supplied.webp' },
- { label: 'Premium Stationery', query: 'stationery', image: BOOKMARK_PHOTOS[0].public_id },
-] as const;
+ ...Object.values(shopCollections).map(({ title, search, image }) => ({ label: title, query: search, image })),
+];
 export default async function Shop({searchParams}:{searchParams:Promise<{search?:string;sort?:string;page?:string}>}) {
  const params=await searchParams;
  const search=typeof params.search==='string'?params.search.trim():'';
@@ -42,5 +40,6 @@ export default async function Shop({searchParams}:{searchParams:Promise<{search?
   {data.pages>1&&<nav className="shop-pagination" aria-label="Catalogue pages">{page>1?<Link href={href(page-1)}><ArrowLeft size={16}/> Previous</Link>:<span/>}<span>{page} / {data.pages}</span>{page<data.pages?<Link href={href(page+1)}>Next <ArrowRight size={16}/></Link>:<span/>}</nav>}
   {data.preview&&<p className="shop-preview-note">You can save a personal gift draft by <Link href="/build">curating your gift</Link>. Final pricing, availability and online ordering require confirmation.</p>}
   </div></div>
+  <RecentlyViewed />
  </section>;
 }

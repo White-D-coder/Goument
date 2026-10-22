@@ -1,0 +1,232 @@
+{
+  "date": "2026-10-22",
+  "scope": "R285 collection-label consistency, phone category readability and Shop spacing",
+  "environment": "Isolated headless Chrome against existing Next16.4 preview; synthetic browser auth/cart API fixtures, normal public catalogue reads/fallback.",
+  "baselineComparisons": [
+    {
+      "width": 320,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 320,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 16.41,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 375,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 375,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 16.41,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 430,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 430,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 16.41,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 640,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 640,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 16.41,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 641,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 641,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 0.0,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 768,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 768,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 0.0,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 1024,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 1024,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 0.0,
+      "categoryFont": "12px"
+    },
+    {
+      "width": 1440,
+      "path": "/b2c",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": null,
+      "categoryFont": null
+    },
+    {
+      "width": 1440,
+      "path": "/shop",
+      "imageSourcesFramesAndCropsEqual": true,
+      "overflow": 0,
+      "headingTopEqual": true,
+      "gridEarlierPx": 0.0,
+      "categoryFont": "12px"
+    }
+  ],
+  "additionalPages": [
+    {
+      "width": 375,
+      "path": "/shop/envelopes",
+      "overflow": 0
+    },
+    {
+      "width": 375,
+      "path": "/shop/hampers",
+      "overflow": 0
+    },
+    {
+      "width": 375,
+      "path": "/shop/candles",
+      "overflow": 0
+    },
+    {
+      "width": 375,
+      "path": "/shop/stationery",
+      "overflow": 0
+    },
+    {
+      "width": 375,
+      "path": "/cart",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "path": "/shop/envelopes",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "path": "/shop/hampers",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "path": "/shop/candles",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "path": "/shop/stationery",
+      "overflow": 0
+    },
+    {
+      "width": 1440,
+      "path": "/cart",
+      "overflow": 0
+    }
+  ],
+  "navigation": {
+    "menuLabels": [
+      "Envelopes",
+      "Hampers",
+      "Scented Candles",
+      "Premium Stationery"
+    ],
+    "menuCandlesNativePointerPreservesSearchDestination": true,
+    "railStationeryNativePointerPreservesSearchDestination": true,
+    "filterLabelsConsistent": true,
+    "filterNativeEscapeCloses": true,
+    "footerLabelsConsistentInAllSampledPages": true
+  },
+  "checks": {
+    "frontendTests": {
+      "passed": 93,
+      "failed": 0
+    },
+    "lint": "npm run lint passed",
+    "types": "npm run typecheck passed",
+    "diff": "git diff --check passed",
+    "runtimeExceptions": [],
+    "screenshots": "Before/after Shop phone and after Home collections/Stationery phone inspected; desktop Home/Shop captured."
+  },
+  "limits": [
+    "No production build rerun for this bounded CSS/text/shared-label increment; R284 build remains historical evidence",
+    "No real customer/provider mutation or deployment",
+    "Physical phones/Safari and hosted performance unverified"
+  ]
+}

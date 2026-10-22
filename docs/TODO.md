@@ -1,3 +1,11 @@
+## 2026-10-22 — Three UI polish items completed (R285)
+
+CURRENT / IMPLEMENTED locally: scoped phone category readability, collection display naming and mobile Shop spacing are complete for the accepted recommendation. UI_SYSTEM/TESTING/audit/ui-polish-r285-evidence.json record measured photo/frame/crop preservation, earlier product start and responsive/native navigation verification. This is not completion of the wider historical typography audit or proof of physical-device/hosted performance. Keep existing P0/P1 priorities, R284 device/hosted follow-up and separately excluded budget/password/tracking proposals unchanged.
+
+## 2026-10-22 — Empty cart and recently viewed follow-through (R284)
+
+CURRENT / IMPLEMENTED locally: requested two-feature scope now exists; see UI_SYSTEM/API_CONTRACTS/TESTING. Empty-cart recovery is complete for this scope, superseding the earlier optional generic empty-cart redesign item. Device-local history is separate from account history/wishlist and uses existing public catalogue/preview semantics. Physical Safari/Android and deployed performance remain UNKNOWN; no hosted verification/deployment. Budget filters, password recovery and customer shipment tracking remain FUTURE / OPTIONAL, explicitly excluded by the user's scope selection. Existing P0/P1 security/financial priorities unchanged.
+
 ## 2026-10-21 — FAQ phone-scroll follow-through (R283)
 
 CURRENT / IMPLEMENTED locally: remove expanded Fewer questions row; phone down/up reveal/collapse and desktop manual opening verified. R241 interaction scope superseded as recorded in UI_SYSTEM/PRODUCT_REQUIREMENTS/DECISIONS. Physical-phone/Safari gesture check remains unverified; no deployment. Existing performance/security/financial priorities and optional UX proposals unchanged.

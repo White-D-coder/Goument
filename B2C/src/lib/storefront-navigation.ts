@@ -1,10 +1,7 @@
-/** Public storefront destinations shared by the navbar and footer. */
-export const shopCategories = [
-  { title: 'Envelopes', search: 'envelope' },
-  { title: 'Hampers', search: 'hamper' },
-  { title: 'Laddoo Candles', search: 'candles' },
-  { title: 'Premium Stationery', search: 'stationery' },
-] as const;
+import { shopCollections } from './shop-collections';
+
+/** Reuse collection labels while retaining existing navbar/footer search destinations. */
+export const shopCategories = Object.values(shopCollections).map(({ title, search }) => ({ title, search }));
 
 export const shopCategoryLinks = shopCategories.map(({ title, search }) =>
   [title, `/shop?search=${encodeURIComponent(search)}`] as const);

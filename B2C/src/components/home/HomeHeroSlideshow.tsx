@@ -95,7 +95,7 @@ export default function HomeHeroSlideshow() {
           />}
         </div>
       ))}
-      <Link className="tgg-hero-mobile-link" href="/shop" aria-label="Shop all gifts" />
+      <Link className="tgg-hero-mobile-link" href="/shop" prefetch aria-label="Shop all gifts" />
       <div className="tgg-hero-dots" role="group" aria-label="Choose a featured gift image">
         {slides.map((slide, index) => (
           <button

@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element -- Reuse existing local collection photography. */
 import Link from 'next/link';
+import { Suspense } from 'react';
+import RouteLoading from '@/components/RouteLoading';
+import ShopCollectionRail from '@/components/ShopCollectionRail';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import RecentlyViewed from '@/components/RecentlyViewed';
@@ -8,6 +11,60 @@ import ShopMobileFilters from '@/components/ShopMobileFilters';
 import { catalogue } from '@/lib/catalogue';
 import { shopCollections, type ShopCollection } from '@/lib/shop-collections';
 import '@/app/shop/shop.css';
+
+async function CollectionResults({ edit, sort, page }: { edit: (typeof shopCollections)[ShopCollection]; sort: string; page: number }) {
+  const data = await catalogue(edit.search, sort, page);
+  const pageHref = (number: number) => `${edit.href}?${new URLSearchParams({ sort, page: String(number) })}`;
+  return (
+    <div className="shop-results">
+      <div className="shop-toolbar">
+        <div className="shop-results-meta">
+          <p>{data.total} {data.total === 1 ? 'find' : 'finds'}</p>
+          <ShopMobileFilters
+            categories={[
+              { label: 'All gifts', href: '/shop', active: false },
+              ...Object.values(shopCollections).map(item => ({ label: item.title, href: item.href, active: item.href === edit.href })),
+            ]}
+            action={edit.href} sort={sort} showSort={!data.preview && data.products.length > 0}
+          />
+        </div>
+        {!data.preview && data.products.length > 0 && (
+          <form className="shop-sort" action={edit.href}>
+            <label htmlFor="collection-sort" className="collection-sort-label">Sort by</label>
+            <select id="collection-sort" name="sort" defaultValue={sort} aria-label="Sort collection">
+              <option value="newest">Latest additions</option>
+              <option value="price_asc">Price: low to high</option>
+              <option value="price_desc">Price: high to low</option>
+            </select>
+            <button type="submit" className="text-link">Apply</button>
+          </form>
+        )}
+      </div>
+      {data.products.length > 0 ? (
+        <div className="product-grid shop-product-grid">
+          {data.products.map((product, index) => <ProductCard key={product._id} product={product} compact priority={index === 0} />)}
+        </div>
+      ) : (
+        <div className="shop-empty">
+          <p className="eyebrow">{edit.title}</p>
+          <h2>{page > 1 ? 'Nothing on this page.' : 'More lovely things to come.'}</h2>
+          <p>{page > 1 ? 'Return to the beginning of this collection.' : `No ${edit.title.toLowerCase()} to show right now. Explore all gifts or curate your own.`}</p>
+          <Link href={page > 1 ? edit.href : '/shop'} className="text-link">
+            {page > 1 ? `Back to ${edit.title.toLowerCase()}` : 'Explore all gifts'} <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+        </div>
+      )}
+      {data.pages > 1 && data.products.length > 0 && (
+        <nav className="shop-pagination" aria-label={`${edit.title} pages`}>
+          {page > 1 ? <Link href={pageHref(page - 1)}><ArrowLeft size={16} aria-hidden="true" /> Previous</Link> : <span />}
+          <span>{page} / {data.pages}</span>
+          {page < data.pages ? <Link href={pageHref(page + 1)}>Next <ArrowRight size={16} aria-hidden="true" /></Link> : <span />}
+        </nav>
+      )}
+      {data.preview && <p className="shop-preview-note">Final price and availability confirmed on enquiry.</p>}
+    </div>
+  );
+}
 
 export type CollectionSearchParams = Promise<{ sort?: string; page?: string }>;
 
@@ -20,8 +77,7 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
   const sort = typeof params.sort === 'string' && ['newest', 'price_asc', 'price_desc'].includes(params.sort)
     ? params.sort : 'newest';
   const page = Math.max(1, Number.parseInt(typeof params.page === 'string' ? params.page : '1', 10) || 1);
-  const data = await catalogue(edit.search, sort, page);
-  const pageHref = (number: number) => `${edit.href}?${new URLSearchParams({ sort, page: String(number) })}`;
+  const browseKey = `${edit.href}?${new URLSearchParams({ sort, page: String(page) })}`;
 
   return (
     <section className="section shop shop-edit shop-collection-page" data-collection={collection}>
@@ -46,61 +102,17 @@ export default async function ShopCollectionPage({ collection, searchParams }: {
       <div className="shop-catalogue-layout">
         <aside className="shop-collections">
           <p className="eyebrow">EXPLORE THE EDIT</p>
-          <nav aria-label="Explore collections">
+          <ShopCollectionRail cacheKey={browseKey}>
             <ShopCategoryLink href="/shop" label="All gifts" image="/images/brand/hero-curated-gifts.jpeg" />
             {Object.values(shopCollections).map(item => (
               <ShopCategoryLink key={item.href} href={item.href} label={item.title} image={item.image} active={item.href === edit.href} />
             ))}
-          </nav>
+          </ShopCollectionRail>
           <Link className="shop-all-boxes" href="/build">Curate your gift <ArrowRight size={14} aria-hidden="true" /></Link>
         </aside>
-        <div className="shop-results">
-          <div className="shop-toolbar">
-            <div className="shop-results-meta">
-              <p>{data.total} {data.total === 1 ? 'find' : 'finds'}</p>
-              <ShopMobileFilters
-                categories={[
-                  { label: 'All gifts', href: '/shop', active: false },
-                  ...Object.values(shopCollections).map(item => ({ label: item.title, href: item.href, active: item.href === edit.href })),
-                ]}
-                action={edit.href} sort={sort} showSort={!data.preview && data.products.length > 0}
-              />
-            </div>
-            {!data.preview && data.products.length > 0 && (
-              <form className="shop-sort" action={edit.href}>
-                <label htmlFor="collection-sort" className="collection-sort-label">Sort by</label>
-                <select id="collection-sort" name="sort" defaultValue={sort} aria-label="Sort collection">
-                  <option value="newest">Latest additions</option>
-                  <option value="price_asc">Price: low to high</option>
-                  <option value="price_desc">Price: high to low</option>
-                </select>
-                <button type="submit" className="text-link">Apply</button>
-              </form>
-            )}
-          </div>
-          {data.products.length > 0 ? (
-            <div className="product-grid shop-product-grid">
-              {data.products.map((product, index) => <ProductCard key={product._id} product={product} compact priority={index === 0} />)}
-            </div>
-          ) : (
-            <div className="shop-empty">
-              <p className="eyebrow">{edit.title}</p>
-              <h2>{page > 1 ? 'Nothing on this page.' : 'More lovely things to come.'}</h2>
-              <p>{page > 1 ? 'Return to the beginning of this collection.' : `No ${edit.title.toLowerCase()} to show right now. Explore all gifts or curate your own.`}</p>
-              <Link href={page > 1 ? edit.href : '/shop'} className="text-link">
-                {page > 1 ? `Back to ${edit.title.toLowerCase()}` : 'Explore all gifts'} <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-          )}
-          {data.pages > 1 && data.products.length > 0 && (
-            <nav className="shop-pagination" aria-label={`${edit.title} pages`}>
-              {page > 1 ? <Link href={pageHref(page - 1)}><ArrowLeft size={16} aria-hidden="true" /> Previous</Link> : <span />}
-              <span>{page} / {data.pages}</span>
-              {page < data.pages ? <Link href={pageHref(page + 1)}>Next <ArrowRight size={16} aria-hidden="true" /></Link> : <span />}
-            </nav>
-          )}
-          {data.preview && <p className="shop-preview-note">Final price and availability confirmed on enquiry.</p>}
-        </div>
+        <Suspense key={browseKey} fallback={<div className="shop-results"><RouteLoading variant="catalogue" embedded /></div>}>
+          <CollectionResults edit={edit} sort={sort} page={page} />
+        </Suspense>
       </div>
       <RecentlyViewed />
     </section>

@@ -1,3 +1,11 @@
+## 2026-10-23 — B2C security upgrade follow-through (R287)
+
+CURRENT / IMPLEMENTED locally: requested Next security patch16.4.2 and reminder policy verified; preserve R286 work. FUTURE / REQUIRED: deploy the patched B2C build through the normal release process and verify the hosted version before claiming deployed remediation; deployment was not requested/performed. Existing Node22.12.0 emits a pre-existing nested ESLint visitor-keys engine warning (22.x requires>=22.13); schedule a supported local/CI runtime patch separately, with no engine-strict bypass or lock downgrade. Physical-device/Safari verification, development dependency advisories and existing security/financial priorities remain open; local production audit0 is not a full security assessment.
+
+## 2026-10-22 — Shop speed and mobile browse follow-through (R286)
+
+CURRENT / IMPLEMENTED locally: streaming Shop/collection shell, targeted production Shop prefetch, longer local webpack route retention and reproduced phone-rail return defect corrected/verified. Existing native vertical/URL/sort/page behavior retained. CURRENT / PARTIAL requested device verification: eight Chrome viewport/short-screen samples, three keyboard cases, three query/collection Back/Forward cases, slow-network lab and photo comparisons completed; actual Android/iPhone/Safari remains a required external-device check. Local cold compilation and real hosted CWV remain separate from measured production-prefetch benefits; no universal load-time ceiling promised. Existing financial/security priorities and excluded button wording/help/account/shipping feature scope unchanged.
+
 ## 2026-10-22 — Three UI polish items completed (R285)
 
 CURRENT / IMPLEMENTED locally: scoped phone category readability, collection display naming and mobile Shop spacing are complete for the accepted recommendation. UI_SYSTEM/TESTING/audit/ui-polish-r285-evidence.json record measured photo/frame/crop preservation, earlier product start and responsive/native navigation verification. This is not completion of the wider historical typography audit or proof of physical-device/hosted performance. Keep existing P0/P1 priorities, R284 device/hosted follow-up and separately excluded budget/password/tracking proposals unchanged.

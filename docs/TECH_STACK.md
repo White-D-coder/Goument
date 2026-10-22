@@ -1,3 +1,11 @@
+## 2026-10-23 — B2C Next.js security target16.4.2 (R287)
+
+CURRENT / IMPLEMENTED locally: B2C Next/eslint-config-next16.4.2, matching @next env/SWC/plugin packages; React/ReactDOM19.2.4 retained. Sharp resolves0.35.5 and patched Next now requires^0.35.5. Only12 framework-related lockfile package versions changed; npm scripts/bundler and other dependency versions retained. experimental.agentUpgrade:'security' records the CLI-selected policy without suppressing reminders or adopting Future Defaults. Installed upgrade/config docs read. Supersedes earlier entries describing B2C16.4.0 as current; their dated historical evidence remains. Local Node22.12.0/npm10.9.0 observed; existing nested eslint-visitor-keys5.0.1 requests Node>=22.13 on the22.x line and still emits an engine warning. No runtime/toolchain migration attempted; lint/build/tests pass. Hosted Node/framework versions remain UNKNOWN.
+
+## 2026-10-22 — Local development route retention (R286)
+
+CURRENT / IMPLEMENTED locally: B2C keeps `next dev --webpack` and existing production webpack build. next.config.ts sets `onDemandEntries: {maxInactiveAge:300000, pagesBufferLength:8}` to keep recently visited development routes warm longer; these options do not change production data caching or remove first-route compilation. Main public Shop Link prefetch is a production framework feature, separate from this local dev setting. Shop results use React Suspense and a client rail uses useLayoutEffect/passive listeners/module memory; no dependency or bundler migration. Installed Next16.4 Link/loading/fetch/prefetch/onDemandEntries/local-development documentation read; PERFORMANCE/TESTING own measured limits.
+
 ## 2026-10-18 — Original dependency hardening (DEC-003)
 
 CURRENT / IMPLEMENTED locally: main frontend_appview and alternate frontend_responsive now resolve Next/eslint-config-next16.4.2; main Nodemailer10.1.2. Original backend compatible dependency locks updated and unused direct UUID removed after whole-backend consumer search. B2C retains its independent16.4.0 stack/locks unchanged. No new dependency/provider/ORM introduced. Existing Next docs read before framework-route changes.

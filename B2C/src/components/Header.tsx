@@ -91,7 +91,7 @@ export default function Header() {
     <Link href="/b2c" aria-current={isHome ? 'page' : undefined} onClick={()=>setOpen(false)}>
       <span className="mobile-bottom-nav-icon"><House size={21} aria-hidden="true"/></span><span>Home</span>
     </Link>
-    <Link href="/shop" aria-current={pathname === '/shop' || pathname.startsWith('/shop/') || pathname.startsWith('/products/') ? 'page' : undefined} onClick={()=>setOpen(false)}>
+    <Link href="/shop" prefetch aria-current={pathname === '/shop' || pathname.startsWith('/shop/') || pathname.startsWith('/products/') ? 'page' : undefined} onClick={()=>setOpen(false)}>
       <span className="mobile-bottom-nav-icon"><LayoutGrid size={21} aria-hidden="true"/></span><span>Shop</span>
     </Link>
     <Link href="/cart" aria-current={pathname === '/cart' || pathname.startsWith('/cart/') || pathname === '/checkout' ? 'page' : undefined} aria-label={`Cart, ${count} items`} onClick={()=>setOpen(false)}>

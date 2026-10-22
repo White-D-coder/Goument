@@ -1,3 +1,7 @@
+## 2026-10-22 — Shop browsing return and pending results (R286)
+
+CURRENT / IMPLEMENTED locally: enter Shop or a collection → existing intro/category rail becomes available while the result column loads → choose a product → browser Back returns to the original URL/filter/sort/page and vertical scroll, plus the new retained horizontal category position. Forward/Back cycles retain context. Changing category while results are pending interrupts the navigation; late old results do not replace the selected route. Fresh offscreen active categories are revealed within the rail. Native browser/Next history semantics and current cart/auth/checkout destinations remain; no separate saved-product/price/account snapshot. Primary Shop-link prefetch affects production navigation only; local development keeps visited routes warm. UI_SYSTEM/TESTING/PERFORMANCE own precise behavior and verification limits.
+
 # User Flows
 
 ## 2026-10-07 — Consumer-first Home discovery (R58)

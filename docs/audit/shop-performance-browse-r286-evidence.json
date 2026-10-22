@@ -1,0 +1,357 @@
+{
+  "date": "2026-10-22",
+  "scope": "R286 Shop loading, browse return and mobile/short-screen verification; user reports local laptop preview slowness",
+  "baseline": {
+    "back": [
+      {
+        "width": 375,
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167,
+          "href": "/products/vibrant-art-bookmarks"
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 4,
+          "active": "Premium Stationery"
+        }
+      },
+      {
+        "width": 1440,
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 427,
+          "rail": 0,
+          "href": "/products/vibrant-art-bookmarks"
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 427,
+          "rail": 0,
+          "active": "Premium Stationery"
+        }
+      }
+    ],
+    "timing": [
+      {
+        "timing": {
+          "intro": 1182.0999999642372,
+          "products": 1182.199999988079
+        },
+        "lcp": 1544,
+        "nav": [
+          {
+            "ttfb": 132,
+            "total": 21868.19999998808
+          }
+        ],
+        "bytes": 4108051,
+        "overflow": 0
+      }
+    ]
+  },
+  "productionBefore": {
+    "requestsBeforeClick": {
+      "requests": [
+        "/api/v1/products/ivory-hamper"
+      ]
+    },
+    "fromHome": {
+      "introMs": 1906.0999999642372,
+      "productsMs": 1906.0999999642372
+    },
+    "coldQuery": {
+      "introMs": 1915.5999999642372,
+      "productsMs": 1926.800000011921,
+      "ttfb": 100.09999996423721,
+      "overflow": 0
+    }
+  },
+  "productionAfter": {
+    "requestsBeforeClick": {
+      "requests": [
+        "/api/v1/products?search=&sort=newest&page=1&limit=100",
+        "/api/v1/products/ivory-hamper"
+      ]
+    },
+    "fromHome": {
+      "introMs": 410.0999999642372,
+      "productsMs": 410.19999998807907
+    },
+    "coldQuery": {
+      "introMs": 981.3999999761581,
+      "productsMs": 2120.199999988079,
+      "ttfb": 280.19999998807907,
+      "overflow": 0
+    }
+  },
+  "backAfter": {
+    "back": [
+      {
+        "width": 375,
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167,
+          "href": "/products/vibrant-art-bookmarks"
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167,
+          "active": "Premium Stationery"
+        }
+      },
+      {
+        "width": 1440,
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 427,
+          "rail": 0,
+          "href": "/products/vibrant-art-bookmarks"
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 427,
+          "rail": 0,
+          "active": "Premium Stationery"
+        }
+      }
+    ],
+    "timing": []
+  },
+  "mobileAndBrowse": {
+    "layouts": [
+      {
+        "width": 320,
+        "height": 568,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 430,
+        "height": 932,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 640,
+        "height": 500,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 768,
+        "height": 900,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": 0,
+        "products": 18,
+        "longNameNoOverflow": true
+      }
+    ],
+    "back": [
+      {
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167
+        },
+        "forwardBack": true
+      },
+      {
+        "saved": {
+          "url": "/shop?page=2&sort=newest",
+          "y": 592,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop?page=2&sort=newest",
+          "y": 592,
+          "rail": 167
+        },
+        "forwardBack": true
+      },
+      {
+        "saved": {
+          "url": "/shop/stationery?sort=price_asc",
+          "y": 298,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop/stationery?sort=price_asc",
+          "y": 298,
+          "rail": 167
+        },
+        "forwardBack": true
+      }
+    ],
+    "geometry": [
+      {
+        "width": 375,
+        "path": "/shop",
+        "equal": true
+      },
+      {
+        "width": 375,
+        "path": "/shop/stationery",
+        "equal": true
+      },
+      {
+        "width": 1440,
+        "path": "/shop",
+        "equal": true
+      },
+      {
+        "width": 1440,
+        "path": "/shop/stationery",
+        "equal": true
+      }
+    ],
+    "forms": [
+      {
+        "width": 320,
+        "height": 500,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 500,
+        "nativeValidationAndKeyboardInput": true
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 640,
+        "nativeValidationAndKeyboardInput": true
+      },
+      {
+        "width": 390,
+        "height": 600,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 600,
+        "nativeValidationAndKeyboardInput": true
+      }
+    ],
+    "errors": []
+  },
+  "streaming": {
+    "introAndCategoriesBeforeProducts": true,
+    "placeholderHasNoControls": true,
+    "navigateWhilePending": true,
+    "staleResultsDoNotReplaceNewRoute": true
+  },
+  "httpBefore": [
+    {
+      "name": "local-shop",
+      "status": 200,
+      "responseStartMs": 1550,
+      "totalMs": 1563,
+      "bytes": 93163
+    },
+    {
+      "name": "local-shop-repeat",
+      "status": 200,
+      "responseStartMs": 143,
+      "totalMs": 143,
+      "bytes": 93163
+    },
+    {
+      "name": "public-catalogue",
+      "status": 200,
+      "responseStartMs": 163,
+      "totalMs": 163,
+      "bytes": 1918,
+      "products": 4,
+      "pages": 1,
+      "total": 4
+    },
+    {
+      "name": "local-stationery",
+      "status": 200,
+      "responseStartMs": 97,
+      "totalMs": 100,
+      "bytes": 65583
+    }
+  ],
+  "httpAfter": [
+    {
+      "path": "/shop",
+      "status": 200,
+      "responseStartMs": 574,
+      "totalMs": 638
+    },
+    {
+      "path": "/shop",
+      "status": 200,
+      "responseStartMs": 78,
+      "totalMs": 99
+    },
+    {
+      "path": "/shop/stationery",
+      "status": 200,
+      "responseStartMs": 1752,
+      "totalMs": 1774
+    }
+  ],
+  "checks": {
+    "frontendTests": {
+      "command": "node --test tests/*.test.cjs",
+      "passed": 96,
+      "failed": 0
+    },
+    "lint": "npm run lint passed",
+    "types": "npm run typecheck passed",
+    "productionBuild": "Before/after production builds and final-source webpack build including onDemandEntries passed; no .env copied",
+    "diff": "git diff --check passed"
+  },
+  "measurementLimits": [
+    "Production timings are one controlled local sample per scenario using synthetic 1800ms public catalogue, not live site or local-dev speed guarantees",
+    "Main Shop prefetch is production-only; local improvement includes streaming UI and longer webpack entry retention",
+    "Slow-phone cold-query product completion was about1927ms before/2120ms after, so no cold catalogue completion speedup claimed",
+    "Browser private API reads/writes use synthetic fixtures; no real auth/cart/order/provider writes",
+    "Phone checks use Chrome device emulation/short viewports, not physical Android/iPhone or Safari",
+    "No deployment or .env copying"
+  ],
+  "harnessCorrections": [
+    "Initial query navigation wait compared pathname with a query-bearing string; corrected to pathname only",
+    "Image comparison normalized separate local preview origins and required target origin/path; then ran with healthy identical fixture data after cooldown, since delayed fixture runs had produced different existing fallback/catalogue orderings"
+  ]
+}

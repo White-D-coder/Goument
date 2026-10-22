@@ -1,5 +1,13 @@
 # Gourmet B2C application
 
+## Security patch — 2026-10-23 (R287)
+
+CURRENT / IMPLEMENTED locally: Next.js and eslint-config-next16.4.2, selected by `next upgrade --agent=security`; reminders remain enabled. React19.2.4, webpack, existing assets/theme/Shop flow retained. Build, lint/typecheck,96 frontend tests and scoped responsive/navigation/image comparisons pass. Root SECURITY/TESTING contain evidence and limits; deployed version remains unverified.
+
+## Local Shop responsiveness — 2026-10-22 (R286)
+
+CURRENT / IMPLEMENTED locally: `npm run dev` retains webpack and keeps an eight-page route buffer with a five-minute inactivity window. First visits/edits can still compile; development requests are not production speed measurements. Shop/collection introductions and category rails stream while results load, and browser Back preserves query/page/vertical position plus tab-local horizontal rail position. Primary Shop links preload in production only. Existing images/theme/auth/cart/checkout contracts remain. Root PERFORMANCE/TESTING contain controlled timings and mobile emulation limits; physical phones/Safari remain unverified.
+
 ## Current B2C checkout — 2026-10-12 (R223–R224)
 
 This section supersedes historical unavailable-commerce descriptions below for the new database-backed B2C auth service only. Local gift checkout uses mapped Mongo prices, owned address/order snapshots,5-minute atomic stock reservations and verified Razorpay capture. Listed prices include18% GST/delivery. Envelopes offer10pcs ₹1,499 or20pcs ₹2,499 inside the product page; Lotus requires a print name. Cart has direct checkout without a final-total email. Original backend/B2B frontends remain separate.

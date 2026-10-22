@@ -24,7 +24,7 @@ export default function HomeHero() {
         <span className="tgg-hero-title-mobile"><span className="tgg-hero-word" data-hero-word>Fine</span>{' '}<span className="tgg-hero-word" data-hero-word>gifts.</span><span className="tgg-hero-second-line"><span className="tgg-hero-word" data-hero-word>Lasting</span>{' '}<span className="tgg-hero-word" data-hero-word>joy.</span></span></span>
       </h1>
       <p className="tgg-hero-description">Curated hampers and thoughtful finds to celebrate the people and moments that matter.</p>
-      <Link className="tgg-button" href="/shop">Shop now <ArrowRight size={17} aria-hidden="true"/></Link>
+      <Link className="tgg-button" href="/shop" prefetch>Shop now <ArrowRight size={17} aria-hidden="true"/></Link>
       <ul className="tgg-hero-promises" aria-label="Our approach to gifting">
         {heroPromises.map(({ Icon, label }) => <li key={label}><span><Icon size={20} strokeWidth={1.4} aria-hidden="true"/></span><small>{label}</small></li>)}
       </ul>

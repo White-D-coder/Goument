@@ -1,7 +1,10 @@
 import type { NextConfig } from 'next';
 const config: NextConfig = {
   agentRules: false,
+  experimental: { agentUpgrade: 'security' },
   outputFileTracingRoot: process.cwd(),
+  // Keep recently visited routes warm while browsing in local webpack development.
+  onDemandEntries: { maxInactiveAge: 5 * 60 * 1000, pagesBufferLength: 8 },
   async headers() {
     return [
       { source: '/:path*', headers: [

@@ -1,3 +1,11 @@
+## 2026-10-23 — B2C Next.js security upgrade (R287)
+
+CURRENT / IMPLEMENTED locally: execute requested security-upgrade handoff, patch Next/eslint-config-next16.4.0→16.4.2 with matching locks/framework packages, persist security reminder policy. Existing Shop changes, React, webpack, assets/theme and commerce source retained.96 frontend tests, lint/typecheck, isolated production builds, zero-production-advisory audit, repeat security selector and mobile/navigation/image checks pass. Local preview automatically restarts into16.4.2; Shop200. Narrow upgrade commit lives on a separate local branch; applied working-folder changes remain reviewable alongside existing work. No push/PR/deployment; hosted patch verification remains open.
+
+## 2026-10-22 — Shop streaming, main-link prefetch and browse restoration (R286)
+
+CURRENT / IMPLEMENTED locally: show existing Shop/collection intro/category UI while async catalogue results load; preserve established placeholders and settled card/layout. Prefetch main public Shop links in production. Add a bounded tab-local horizontal rail cache to complement existing native Back/Forward URL/filter/sort/page-scroll restoration. Increase local webpack entry inactivity window to five minutes and page buffer to eight.96 frontend tests, lint/typecheck, isolated builds and responsive/native navigation/photo checks pass. PERFORMANCE/TESTING/audit/shop-performance-browse-r286-evidence.json distinguish controlled production timings, local preview samples and physical-device limits. No asset/data/API/model/payment change, real customer/provider write or deployment.
+
 ## 2026-10-22 — Collection names, phone labels and spacing (R285)
 
 CURRENT / IMPLEMENTED locally: reuse existing collection labels across Home/Shop/navigation/footer while retaining brand/product names and all destinations. Increase phone category labels10→12px, remove uppercase/wide tracking, reserve consistent wrapping space and make result text12px. Tighten gaps below Shop intro/category rail/result row; preserve existing image/frame/crop, heading alignment, actions and larger-screen layout. Eight-width before/after comparisons,26 final page samples, native navigation/filter checks,93 tests, lint/typecheck and diff pass; UI_SYSTEM/TESTING/evidence own scope/limits. Earlier R284 work preserved; no asset/backend/commerce change or deployment.

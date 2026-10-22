@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element -- Existing signature box asset. */
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { ArrowRight, ArrowLeft, Search, X } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import ShopCategoryLink from '@/components/ShopCategoryLink';
 import ShopMobileFilters from '@/components/ShopMobileFilters';
+import ShopCollectionRail from '@/components/ShopCollectionRail';
+import RouteLoading from '@/components/RouteLoading';
 import { catalogue } from '@/lib/catalogue';
 import { shopCollections } from '@/lib/shop-collections';
 import './shop.css';
@@ -13,13 +16,23 @@ const edits = [
  { label: 'All gifts', query: '', image: '/images/brand/hero-curated-gifts.jpeg' },
  ...Object.values(shopCollections).map(({ title, search, image }) => ({ label: title, query: search, image })),
 ];
+async function ShopResults({ search, sort, page }: { search: string; sort: string; page: number }) {
+ const data=await catalogue(search,sort,page);
+ const href=(p:number)=>`/shop?${new URLSearchParams({search,sort:data.preview?'newest':sort,page:String(p)})}`;
+ return <div className="shop-results"><form id="gift-search" className="shop-toolbar" action="/shop"><label className="shop-search"><Search size={17} strokeWidth={1.4}/><span className="shop-sr-only">Search the collection</span><input type="search" name="search" defaultValue={search} placeholder="Find something lovely…"/><button type="submit" aria-label="Search gifts"><ArrowRight size={18}/></button></label>{!data.preview&&<div className="shop-sort"><label htmlFor="shop-sort">Sort by</label><select id="shop-sort" name="sort" defaultValue={data.preview?'newest':sort} disabled={data.preview}><option value="newest">Latest additions</option><option value="price_asc">Price: low to high</option><option value="price_desc">Price: high to low</option></select>{!data.preview&&<button type="submit" className="text-link">Apply</button>}</div>}</form>
+  <div className="shop-results-meta"><p>{data.total} {data.total===1?'find':'finds'}{search&&<> for <strong>“{search}”</strong></>}</p>{search&&<Link href="/shop" className="shop-clear">Clear search <X size={13}/></Link>}<ShopMobileFilters categories={edits.map(({label,query})=>({label,href:query?`/shop?search=${encodeURIComponent(query)}`:'/shop',active:search===query}))} action="/shop" search={search} sort={sort} showSort={!data.preview}/></div>
+  {data.products.length?<div className="product-grid shop-product-grid">{data.products.map((p,index)=><ProductCard key={p._id} product={p} compact priority={index===0}/>)}</div>:<div className="shop-empty"><p className="eyebrow">A DIFFERENT LITTLE SOMETHING</p><h2>No matches this time.</h2><p>Try another search, or take a look through the full collection.</p><Link href="/shop" className="text-link">Explore all gifts <ArrowRight size={16}/></Link></div>}
+  {data.pages>1&&<nav className="shop-pagination" aria-label="Catalogue pages">{page>1?<Link href={href(page-1)}><ArrowLeft size={16}/> Previous</Link>:<span/>}<span>{page} / {data.pages}</span>{page<data.pages?<Link href={href(page+1)}>Next <ArrowRight size={16}/></Link>:<span/>}</nav>}
+  {data.preview&&<p className="shop-preview-note">You can save a personal gift draft by <Link href="/build">curating your gift</Link>. Final pricing, availability and online ordering require confirmation.</p>}
+ </div>;
+}
+
 export default async function Shop({searchParams}:{searchParams:Promise<{search?:string;sort?:string;page?:string}>}) {
  const params=await searchParams;
  const search=typeof params.search==='string'?params.search.trim():'';
  const sort=['newest','price_asc','price_desc'].includes(params.sort||'')?params.sort!:'newest';
  const page=Math.max(1,Number.parseInt(params.page||'1',10)||1);
- const data=await catalogue(search,sort,page);
- const href=(p:number)=>`/shop?${new URLSearchParams({search,sort:data.preview?'newest':sort,page:String(p)})}`;
+ const browseKey=`/shop?${new URLSearchParams({search,sort,page:String(page)})}`;
  return <section className="section shop shop-edit">
   <nav className="shop-breadcrumb" aria-label="Breadcrumb"><Link href="/b2c">Home</Link><span>/</span><span aria-current="page">The collection</span></nav>
   <header className="shop-intro" data-reveal>
@@ -33,13 +46,9 @@ export default async function Shop({searchParams}:{searchParams:Promise<{search?
     <img src="/images/brand/hero-curated-gifts.jpeg" alt="The Gourmet Gifts Co. curated artisanal collection" width={1254} height={1254}/>
    </div>
   </header>
-  <div className="shop-catalogue-layout"><aside className="shop-collections"><p className="eyebrow">EXPLORE THE EDIT</p><nav aria-label="Explore collections">{edits.map(({label,query,image})=><ShopCategoryLink key={label} href={query?`/shop?search=${encodeURIComponent(query)}`:'/shop'} label={label} image={image} active={search===query}/>)}</nav><Link className="shop-all-boxes" href="/build">Curate your gift <ArrowRight size={14}/></Link></aside>
-  <div className="shop-results"><form id="gift-search" className="shop-toolbar" action="/shop"><label className="shop-search"><Search size={17} strokeWidth={1.4}/><span className="shop-sr-only">Search the collection</span><input type="search" name="search" defaultValue={search} placeholder="Find something lovely…"/><button type="submit" aria-label="Search gifts"><ArrowRight size={18}/></button></label>{!data.preview&&<div className="shop-sort"><label htmlFor="shop-sort">Sort by</label><select id="shop-sort" name="sort" defaultValue={data.preview?'newest':sort} disabled={data.preview}><option value="newest">Latest additions</option><option value="price_asc">Price: low to high</option><option value="price_desc">Price: high to low</option></select>{!data.preview&&<button type="submit" className="text-link">Apply</button>}</div>}</form>
-  <div className="shop-results-meta"><p>{data.total} {data.total===1?'find':'finds'}{search&&<> for <strong>“{search}”</strong></>}</p>{search&&<Link href="/shop" className="shop-clear">Clear search <X size={13}/></Link>}<ShopMobileFilters categories={edits.map(({label,query})=>({label,href:query?`/shop?search=${encodeURIComponent(query)}`:'/shop',active:search===query}))} action="/shop" search={search} sort={sort} showSort={!data.preview}/></div>
-  {data.products.length?<div className="product-grid shop-product-grid">{data.products.map((p,index)=><ProductCard key={p._id} product={p} compact priority={index===0}/>)}</div>:<div className="shop-empty"><p className="eyebrow">A DIFFERENT LITTLE SOMETHING</p><h2>No matches this time.</h2><p>Try another search, or take a look through the full collection.</p><Link href="/shop" className="text-link">Explore all gifts <ArrowRight size={16}/></Link></div>}
-  {data.pages>1&&<nav className="shop-pagination" aria-label="Catalogue pages">{page>1?<Link href={href(page-1)}><ArrowLeft size={16}/> Previous</Link>:<span/>}<span>{page} / {data.pages}</span>{page<data.pages?<Link href={href(page+1)}>Next <ArrowRight size={16}/></Link>:<span/>}</nav>}
-  {data.preview&&<p className="shop-preview-note">You can save a personal gift draft by <Link href="/build">curating your gift</Link>. Final pricing, availability and online ordering require confirmation.</p>}
-  </div></div>
+  <div className="shop-catalogue-layout"><aside className="shop-collections"><p className="eyebrow">EXPLORE THE EDIT</p><ShopCollectionRail cacheKey={browseKey}>{edits.map(({label,query,image})=><ShopCategoryLink key={label} href={query?`/shop?search=${encodeURIComponent(query)}`:'/shop'} label={label} image={image} active={search===query}/>)}</ShopCollectionRail><Link className="shop-all-boxes" href="/build">Curate your gift <ArrowRight size={14}/></Link></aside>
+  <Suspense key={browseKey} fallback={<div className="shop-results"><RouteLoading variant="catalogue" embedded /></div>}><ShopResults search={search} sort={sort} page={page} /></Suspense>
+  </div>
   <RecentlyViewed />
  </section>;
 }

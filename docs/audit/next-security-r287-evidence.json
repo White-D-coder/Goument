@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-23",
+  "scope": "B2C security patch; local only",
+  "versions": {
+    "before": "16.4.0",
+    "target": "16.4.2",
+    "installed": "16.4.2",
+    "eslintConfigNext": "16.4.2",
+    "react": "19.2.4",
+    "sharp": "0.35.5"
+  },
+  "checks": {
+    "frontendTests": 96,
+    "lint": "pass",
+    "typecheck": "pass",
+    "productionBuild": "pass",
+    "productionAuditTotal": 0,
+    "repeatSelector": "No security update is needed for Next.js 16.4.2.",
+    "imageOptimizerHTTP": 200,
+    "localPreviewVersion": "16.4.2",
+    "localShopHTTP": 200,
+    "upgradeSuccessReportExitCode": 0,
+    "finalConfigProductionBuild": "pass"
+  },
+  "browser": {
+    "layouts": [
+      {
+        "width": 320,
+        "height": 568,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 375,
+        "height": 667,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 430,
+        "height": 932,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 640,
+        "height": 500,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 768,
+        "height": 900,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "overflow": 0,
+        "longNameNoOverflow": true,
+        "mainImages": 18
+      }
+    ],
+    "back": [
+      {
+        "saved": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop?search=stationery&sort=price_desc",
+          "y": 304,
+          "rail": 167
+        },
+        "forwardBack": true
+      },
+      {
+        "saved": {
+          "url": "/shop?page=2&sort=newest",
+          "y": 592,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop?page=2&sort=newest",
+          "y": 592,
+          "rail": 167
+        },
+        "forwardBack": true
+      },
+      {
+        "saved": {
+          "url": "/shop/stationery?sort=price_asc",
+          "y": 298,
+          "rail": 167
+        },
+        "returned": {
+          "url": "/shop/stationery?sort=price_asc",
+          "y": 298,
+          "rail": 167
+        },
+        "forwardBack": true
+      }
+    ],
+    "geometry": [
+      {
+        "width": 375,
+        "path": "/shop",
+        "equal": true
+      },
+      {
+        "width": 375,
+        "path": "/shop/stationery",
+        "equal": true
+      },
+      {
+        "width": 1440,
+        "path": "/shop",
+        "equal": true
+      },
+      {
+        "width": 1440,
+        "path": "/shop/stationery",
+        "equal": true
+      },
+      {
+        "width": 375,
+        "path": "/b2c",
+        "equal": true
+      },
+      {
+        "width": 1440,
+        "path": "/b2c",
+        "equal": true
+      }
+    ],
+    "forms": [
+      {
+        "width": 320,
+        "height": 500,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 500,
+        "nativeValidationAndKeyboardInput": true
+      },
+      {
+        "width": 360,
+        "height": 640,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 640,
+        "nativeValidationAndKeyboardInput": true
+      },
+      {
+        "width": 390,
+        "height": 600,
+        "font": "16px",
+        "overflow": 0,
+        "viewport": 600,
+        "nativeValidationAndKeyboardInput": true
+      }
+    ],
+    "errors": []
+  },
+  "limits": [
+    "Chrome emulation, not physical phones/Safari",
+    "Synthetic private APIs; public preview/fallback catalogue",
+    "No real customer/provider write or deployment",
+    "Pre-existing nested ESLint Node engine warning remains"
+  ]
+}
